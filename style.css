@@ -1,0 +1,367 @@
+/* style.css - обновленный современный стиль с учетом акцентного цвета #ca1212 и смены темы */
+
+/* Импорт шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Переменные для светлой темы */
+:root {
+  --primary-color: #ca1212; /* акцентный красный */
+  --primary-hover: #a11010;
+  --text-color: #222222;
+  --bg-color: #fbfdfd;
+  --card-bg: #ffffff;
+  --shadow-light: rgba(202, 18, 18, 0.3);
+}
+
+/* Переменные для темной темы */
+body.dark-theme {
+  --primary-color: #ff5c5c;
+  --primary-hover: #e04d4d;
+  --text-color: #e0e0e0;
+  --bg-color: #121212;
+  --card-bg: #1f1f1f;
+  --shadow-light: rgba(255, 92, 92, 0.4);
+}
+
+/* Общие стили */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+.container {
+  max-width: 1140px;
+  width: 90%;
+  margin: 0 auto;
+  flex-grow: 1;
+  padding: 2rem 0;
+}
+
+header.header {
+  padding: 1.5rem 3rem;
+  background: var(--card-bg);
+  box-shadow: 0 8px 24px var(--shadow-light);
+  backdrop-filter: saturate(180%) blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border-radius: 0 0 15px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  user-select: none;
+  color: var(--primary-color);
+}
+
+header .logo {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  letter-spacing: 0.1em;
+}
+
+nav.nav a {
+  margin-left: 2rem;
+  color: var(--text-color);
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+
+nav.nav a:first-child {
+  margin-left: 0;
+}
+
+nav.nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+nav.nav a:hover::after {
+  width: 100%;
+}
+
+button.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.75rem;
+  cursor: pointer;
+  margin-left: 2rem;
+  transition: color 0.3s ease;
+}
+
+button.theme-toggle:hover {
+  color: var(--primary-hover);
+}
+
+/* Hero section */
+
+.hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 3rem 1rem 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  text-shadow: 0 2px 8px var(--shadow-light);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--text-color);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: #fff; /* Яркий белый, чтобы текст был читаем */
+  border-radius: 12px;
+  padding: 1rem 3rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 20px var(--shadow-light);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  user-select: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 10px 28px var(--shadow-light);
+  color: #fff; /* Текст остаётся белым для контраста */
+  text-decoration: none;
+}
+
+
+/* Features section */
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background-color: var(--card-bg);
+  box-shadow: 0 8px 24px var(--shadow-light);
+  border-radius: 20px;
+  flex: 1 1 280px;
+  max-width: 320px;
+  padding: 2rem;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+  cursor: default;
+  user-select: none;
+  color: var(--text-color);
+}
+
+.feature-card:hover {
+  box-shadow: 0 12px 30px var(--shadow-light);
+}
+
+.feature-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+  color: var(--primary-color);
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/* Footer */
+
+footer.footer {
+  background-color: var(--card-bg);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+  user-select: none;
+  border-top: 1px solid var(--shadow-light);
+}
+
+footer.footer a {
+  color: var(--primary-color);
+  margin: 0 0.8rem;
+  transition: color 0.25s ease;
+}
+
+footer.footer a:hover {
+  color: var(--primary-hover);
+}
+
+/* Метатег viewport должен быть в HTML:
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+*/
+
+/* Скрываем меню навигации на маленьких экранах, показываем гамбургер */
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+/* Адаптив для экранов <= 768px */
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* высота шапки */
+    right: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px var(--shadow-light);
+    padding: 1rem 2rem;
+    width: 200px;
+  }
+  .nav.nav-open {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  nav.nav a {
+    margin: 1rem 0;
+  }
+}
+
+.catalog-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 2rem;
+}
+
+.catalog-card {
+  background-color: var(--card-bg);
+  box-shadow: 0 8px 24px var(--shadow-light);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.catalog-card:hover {
+  box-shadow: 0 12px 30px var(--shadow-light);
+}
+
+.catalog-card h2 {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.catalog-card p {
+  flex-grow: 1;
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.catalog-card .btn {
+  width: 100%;
+  text-align: center;
+}
+
+/* Мобильное меню и адаптивность уже реализованы в основном style.css */
+
+/* Добавляем стили для категорий (кнопок выбора типа предложения) */
+
+.category-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0 3rem;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  background-color: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.6rem 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+  user-select: none;
+  box-shadow: 0 4px 12px rgba(202, 18, 18, 0.15);
+}
+
+.category-btn.active,
+.category-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 6px 18px var(--shadow-light);
+}
+
+/* Мобильное выравнивание и прокрутка для большого количества категорий */
+
+@media (max-width: 480px) {
+  .category-nav {
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .category-btn {
+    flex: 0 0 auto;
+  }
+}

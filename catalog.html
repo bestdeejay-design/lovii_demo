@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Каталог предложений — Лови</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Важные стили для фиксированной шапки и отступов */
+    .header {
+      position: fixed;
+      top: 0; left: 0; width: 100%; z-index: 1000;
+      background-color: var(--card-bg);
+      box-shadow: 0 8px 24px var(--shadow-light);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-radius: 0 0 15px 15px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 3rem;
+      font-weight: 700; font-size: 1.125rem;
+      user-select: none;
+    }
+    .container {
+      max-width: 1140px; width: 90%; margin: 0 auto;
+      flex-grow: 1; padding: 6rem 0 2rem;
+      scroll-margin-top: 120px;
+    }
+
+    /* Категории */
+    .category-nav {
+      display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 3rem;
+      flex-wrap: wrap; scroll-margin-top: 100px;
+    }
+    .category-btn {
+      background-color: var(--card-bg);
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 0.6rem 1.5rem;
+      font-weight: 700; font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      box-shadow: 0 4px 12px rgba(202,18,18,0.15);
+    }
+    .category-btn.active, .category-btn:hover {
+      background-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 6px 18px var(--shadow-light);
+    }
+    @media (max-width: 480px) {
+      .category-nav {
+        overflow-x: auto; gap: 1rem; padding-bottom: 0.5rem;
+      }
+      .category-btn {
+        flex: 0 0 auto;
+      }
+    }
+
+    /* Сетка карточек */
+    .catalog-grid {
+      display: grid; gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 2rem;
+    }
+    .catalog-card {
+      background-color: var(--card-bg);
+      box-shadow: 0 8px 24px var(--shadow-light);
+      border-radius: 20px; padding: 1.8rem 1.5rem;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+      cursor: default; user-select: none;
+      color: var(--text-color);
+    }
+    .catalog-card:hover {
+      box-shadow: 0 12px 30px var(--shadow-light);
+    }
+    .catalog-card h3 {
+      color: var(--primary-color);
+      font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .catalog-card p {
+      flex-grow: 1; color: var(--text-color);
+      font-size: 1rem; line-height: 1.4; margin-bottom: 1rem;
+    }
+    .catalog-card .btn {
+      width: 100%; box-sizing: border-box; text-align: center;
+    }
+
+    /* Мобильное меню */
+    .menu-toggle {
+      display: none; background: none; border: none;
+      font-size: 1.8rem; cursor: pointer; color: var(--primary-color);
+    }
+    @media (max-width: 768px) {
+      nav.nav {
+        display: none; flex-direction: column;
+        position: absolute; top: 70px; right: 20px;
+        background-color: var(--card-bg);
+        border-radius: 10px; box-shadow: 0 8px 24px var(--shadow-light);
+        padding: 1rem 2rem; width: 200px; z-index: 1010;
+      }
+      nav.nav.nav-open { display: flex; }
+      .menu-toggle { display: block; }
+      nav.nav a { margin: 1rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Лови</div>
+  <nav class="nav" id="navMenu">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html" class="active">Каталог</a>
+    <a href="profile.html">Кабинет</a>
+    <a href="document.html">Информация</a>
+  </nav>
+  <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+  <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+</header>
+
+<main class="container">
+  <h1>Каталог предложений</h1>
+  <section class="top-offers">
+    <h2>Топ предложений</h2>
+    <div class="catalog-grid" id="topOffersContainer"></div>
+  </section>
+
+  <section class="categories">
+    <h2>Категории</h2>
+    <nav class="category-nav" id="categoryNav">
+      <button class="category-btn active" data-cat="all">Все предложения</button>
+      <button class="category-btn" data-cat="restaurants">Рестораны</button>
+      <button class="category-btn" data-cat="services">Услуги</button>
+      <button class="category-btn" data-cat="education">Образование</button>
+      <button class="category-btn" data-cat="finance">Финансовые офферы</button>
+    </nav>
+  </section>
+
+  <section id="category-content" class="catalog-grid"></section>
+</main>
+
+<footer class="footer">
+  <nav>
+    <a href="document.html#terms">Правила</a>
+    <a href="document.html#faq">FAQ</a>
+    <a href="document.html#contacts">Контакты</a>
+  </nav>
+  <p>© 2025 Лови. Все права защищены.</p>
+</footer>
+
+<script src="js/common.js"></script>
+<script src="js/catalog.js"></script>
+
+</body>
+</html>

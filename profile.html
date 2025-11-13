@@ -1,0 +1,223 @@
+<!-- user-cabinet.html с адаптивным дизайном, меню в шапке, карточкой лояльности и историей под картой -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Личный кабинет — Лови</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0; padding: 0; background: #f9f9f9; color: #333;
+    }
+    .header {
+      position: fixed;
+      top: 0; left: 0; width: 100%; z-index: 1000;
+      background: var(--card-bg, #fff);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .header nav.nav {
+      display: flex; gap: 15px;
+    }
+    .header nav.nav a {
+      color: var(--primary-color, #ca1212);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .header nav.nav a.active,
+    .header nav.nav a:hover {
+      background-color: var(--primary-color, #ca1212);
+      color: white;
+    }
+    .header #logoutBtn {
+      background: transparent;
+      border: 2px solid var(--primary-color, #ca1212);
+      color: var(--primary-color, #ca1212);
+      font-weight: 700;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .header #logoutBtn:hover {
+      background-color: var(--primary-color, #ca1212);
+      color: white;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 90px auto 30px;
+      padding: 0 20px;
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      color: var(--primary-color, #ca1212);
+    }
+
+    .loyalty-card {
+      max-width: 400px;
+      height: 220px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ca1212, #ff5f5f);
+      color: white;
+      padding: 25px 30px;
+      box-shadow: 0 10px 30px rgba(202,18,18,0.4);
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+    .loyalty-card .card-number {
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+    }
+    .loyalty-card .card-holder {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid var(--primary-color, #ca1212);
+      padding-bottom: 0.3rem;
+    }
+
+    select#filterPeriod {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary-color, #ca1212);
+      border: 2px solid var(--primary-color, #ca1212);
+      border-radius: 8px;
+      padding: 6px 12px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      width: max-content;
+    }
+
+    .list, ul {
+      list-style: none;
+      margin: 0; padding: 0;
+      max-width: 400px;
+    }
+    .list-item, li {
+      background: #fafafa;
+      padding: 10px 15px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      cursor: default;
+      box-shadow: 0 2px 10px rgba(202,18,18,0.1);
+    }
+    .promo-code {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      max-width: 400px;
+    }
+    .promo-code input {
+      flex-grow: 1;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 2px solid var(--primary-color, #ca1212);
+      background: #fff;
+      user-select: all;
+    }
+    .promo-code button {
+      padding: 8px 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      border: none;
+      background-color: var(--primary-color, #ca1212);
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .promo-code button:hover {
+      background-color: #ff4545;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+      .header nav.nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 0;
+        flex-wrap: wrap;
+      }
+      .loyalty-card {
+        max-width: 100%;
+        height: auto;
+        padding: 20px;
+      }
+      select#filterPeriod,
+      .promo-code {
+        max-width: 100%;
+        width: 100%;
+      }
+      .list, ul {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Лови - Кабинет</div>
+  <nav class="nav" role="navigation" aria-label="Основное меню кабинета">
+    <a href="#" class="active">Баланс</a>
+    <a href="#">История</a>
+    <a href="#">Рефералы</a>
+    <a href="#">Баллы других программ</a>
+    <a href="#">Пополнение</a>
+    <a href="#">Сертификаты</a>
+  </nav>
+  <button id="logoutBtn">Выйти</button>
+</header>
+
+<main class="container">
+  <h1>Личный кабинет</h1>
+
+  <div class="loyalty-card" role="region" aria-label="Карта лояльности">
+    <div class="card-number" aria-label="Номер карты">1234 5678 9012 3456</div>
+    <div class="card-holder" aria-label="Владелец карты">Владимир И.</div>
+  </div>
+
+  <section aria-label="История операций">
+    <div class="section-title">История операций</div>
+    <label for="filterPeriod">Сортировать по:</label>
+    <select id="filterPeriod" aria-controls="operationsList">
+      <option value="week">По неделям</option>
+      <option value="month">По месяцам</option>
+    </select>
+    <ul class="list" id="operationsList" tabindex="0">
+      <!-- сюда подгрузится история -->
+    </ul>
+  </section>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/user-cabinet.js"></script>
+
+</body>
+</html>
