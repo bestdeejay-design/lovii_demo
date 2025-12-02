@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Партнерам — Лови - Программа лояльности</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Лови</div>
+    <nav class="nav" id="navMenu">
+      <a href="/" class="nav-link">Главная</a>
+      <a href="/catalog.html" class="nav-link">Каталог</a>
+      <a href="/partners.html" class="nav-link active">Партнерам</a>
+      <a href="/login.html" class="nav-link">Войти</a>
+    </nav>
+    <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+    <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+  </header>
+
+  <main class="container">
+    <section class="partners-hero">
+      <div class="section-header">
+        <h1>Станьте нашим партнёром</h1>
+        <p>Присоединяйтесь к крупнейшей программе лояльности в регионе</p>
+      </div>
+      <div class="partners-content">
+        <div class="partners-info">
+          <h2>Преимущества для партнёров</h2>
+          <ul class="advantages-list">
+            <li class="advantage-item">
+              <div class="advantage-icon">📈</div>
+              <div class="advantage-content">
+                <h3>Рост продаж</h3>
+                <p>Увеличьте количество повторных покупок на 30-40%</p>
+              </div>
+            </li>
+            <li class="advantage-item">
+              <div class="advantage-icon">👥</div>
+              <div class="advantage-content">
+                <h3>Новая аудитория</h3>
+                <p>Доступ к базе из более чем 50 000 клиентов</p>
+              </div>
+            </li>
+            <li class="advantage-item">
+              <div class="advantage-icon">📊</div>
+              <div class="advantage-content">
+                <h3>Аналитика</h3>
+                <p>Подробная статистика по клиентам и продажам</p>
+              </div>
+            </li>
+            <li class="advantage-item">
+              <div class="advantage-icon">💰</div>
+              <div class="advantage-content">
+                <h3>Экономия на рекламе</h3>
+                <p>Снижение CAC за счёт вовлечённой аудитории</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="partners-form">
+          <h2>Оставить заявку</h2>
+          <form class="partner-application">
+            <div class="form-group">
+              <label for="companyName">Название компании</label>
+              <input type="text" id="companyName" name="companyName" required>
+            </div>
+            <div class="form-group">
+              <label for="contactPerson">Контактное лицо</label>
+              <input type="text" id="contactPerson" name="contactPerson" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+              <label for="businessType">Тип бизнеса</label>
+              <select id="businessType" name="businessType" required>
+                <option value="">Выберите тип</option>
+                <option value="retail">Розничная торговля</option>
+                <option value="food">Общественное питание</option>
+                <option value="services">Услуги</option>
+                <option value="education">Образование</option>
+                <option value="health">Здоровье и красота</option>
+                <option value="other">Другое</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить заявку</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <div class="section-header">
+        <h2>Как стать партнёром</h2>
+        <p>Всего 4 простых шага к подключению</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Заявка</h3>
+          <p>Оставьте заявку на сайте или свяжитесь с нами</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Обсуждение</h3>
+          <p>Наш менеджер свяжется с вами для обсуждения условий</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Подключение</h3>
+          <p>Техническая интеграция с вашей системой</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Запуск</h3>
+          <p>Активация программы лояльности и начало работы</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="partner-examples">
+      <div class="section-header">
+        <h2>Наши партнёры</h2>
+        <p>Компании, которые уже с нами</p>
+      </div>
+      <div class="partners-grid">
+        <div class="partner-card">
+          <div class="partner-icon">🛒</div>
+          <h3>Ритейл</h3>
+          <p>Сети магазинов, супермаркеты</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon">🍽️</div>
+          <h3>Рестораны</h3>
+          <p>Кафе, рестораны, доставка еды</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon">🚗</div>
+          <h3>Транспорт</h3>
+          <p>Такси, каршеринг, транспортные услуги</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon">📱</div>
+          <h3>Электроника</h3>
+          <p>Магазины техники и электроники</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon">📚</div>
+          <h3>Образование</h3>
+          <p>Курсы, школы, онлайн-обучение</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon">🏥</div>
+          <h3>Медицина</h3>
+          <p>Клиники, салоны красоты, фитнес</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Лови</h3>
+        <p>Программа лояльности нового поколения</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/catalog.html">Каталог</a></li>
+          <li><a href="/partners.html">Партнерам</a></li>
+          <li><a href="/about.html">О нас</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="/contacts.html">Контактная информация</a></li>
+          <li><a href="/support.html">Поддержка</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Лови. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('.partner-application');
+      if(form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Спасибо за заявку! Наш менеджер свяжется с вами в ближайшее время.');
+          form.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

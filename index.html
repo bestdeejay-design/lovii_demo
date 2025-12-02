@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Главная — Лови</title>
+  <title>Главная — Лови - Программа лояльности</title>
   <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <header class="header">
     <div class="logo">Лови</div>
     <nav class="nav" id="navMenu">
-      <a href="index.html" class="active">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="profile.html">Кабинет</a>
-      <a href="document.html">Информация</a>
+      <a href="/" class="nav-link active">Главная</a>
+      <a href="/catalog.html" class="nav-link">Каталог</a>
+      <a href="/partners.html" class="nav-link">Партнерам</a>
+      <a href="/login.html" class="nav-link">Войти</a>
     </nav>
     <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
     <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
@@ -22,19 +22,92 @@
 
   <main class="container">
     <section class="hero">
-      <h1>Лови — кэшбэк сервис нового уровня</h1>
-      <p>Получи кэшбэк от покупок у партнеров, копи баллы ЛОВИ и трать их с выгодой</p>
-      <a href="catalog.html" class="btn">Перейти в каталог предложений</a>
+      <div class="hero-content">
+        <h1>Программа лояльности нового уровня</h1>
+        <p>Получайте кэшбэк за покупки у наших партнеров, копите баллы и тратите их с выгодой</p>
+        <div class="hero-buttons">
+          <a href="/catalog.html" class="btn btn-primary">Перейти в каталог</a>
+          <a href="/partners.html" class="btn btn-secondary">Стать партнером</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="loyalty-card-preview">
+          <div class="card-front">
+            <h3>Карта лояльности</h3>
+            <div class="card-number">1234 5678 9012 3456</div>
+            <div class="card-points">15,000 баллов</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="section-header">
+        <h2>Как это работает</h2>
+        <p>Простая и понятная система лояльности</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🛒</div>
+          <h3>Покупайте</h3>
+          <p>Делайте покупки у наших партнеров и получайте кэшбэк</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💎</div>
+          <h3>Копите</h3>
+          <p>Накапливайте баллы ЛОВИ за каждую покупку</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎁</div>
+          <h3>Тратьте</h3>
+          <p>Используйте баллы для получения скидок и подарков</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-preview">
+      <div class="section-header">
+        <h2>Наши партнёры</h2>
+        <p>Более 500 компаний уже с нами</p>
+      </div>
+      <div class="partners-grid">
+        <div class="partner-logo">🛒 Ритейл</div>
+        <div class="partner-logo">🍽️ Рестораны</div>
+        <div class="partner-logo">🚗 Транспорт</div>
+        <div class="partner-logo">📱 Техника</div>
+        <div class="partner-logo">📚 Образование</div>
+        <div class="partner-logo">🏥 Медицина</div>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <nav>
-      <a href="document.html#terms">Правила</a>
-      <a href="document.html#faq">FAQ</a>
-      <a href="document.html#contacts">Контакты</a>
-    </nav>
-    <p>© 2025 Лови. Все права защищены.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Лови</h3>
+        <p>Программа лояльности нового поколения</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/catalog.html">Каталог</a></li>
+          <li><a href="/partners.html">Партнерам</a></li>
+          <li><a href="/about.html">О нас</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="/contacts.html">Контактная информация</a></li>
+          <li><a href="/support.html">Поддержка</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Лови. Все права защищены.</p>
+    </div>
   </footer>
 
   <script src="js/common.js"></script>

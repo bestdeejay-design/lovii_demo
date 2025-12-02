@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Контакты — Лови - Программа лояльности</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Лови</div>
+    <nav class="nav" id="navMenu">
+      <a href="/" class="nav-link">Главная</a>
+      <a href="/catalog.html" class="nav-link">Каталог</a>
+      <a href="/partners.html" class="nav-link">Партнерам</a>
+      <a href="/login.html" class="nav-link">Войти</a>
+    </nav>
+    <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+    <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+  </header>
+
+  <main class="container">
+    <section class="section-header">
+      <h1>Контактная информация</h1>
+      <p>Свяжитесь с нами любым удобным способом</p>
+    </section>
+
+    <section class="contact-content">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <h3>Email</h3>
+          <p>support@loviprogram.com</p>
+          <p>partners@loviprogram.com</p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">📱</div>
+          <h3>Телефон</h3>
+          <p>+7 (495) 123-45-67</p>
+          <p>+7 (495) 765-43-21</p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">🏢</div>
+          <h3>Адрес</h3>
+          <p>г. Москва, ул. Примерная, д. 15</p>
+          <p>офис 305</p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">🕒</div>
+          <h3>Время работы</h3>
+          <p>Пн-Пт: 9:00 - 18:00</p>
+          <p>Сб-Вс: 10:00 - 16:00</p>
+        </div>
+      </div>
+
+      <div class="contact-form-section">
+        <h2>Написать нам</h2>
+        <form class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Имя</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">Тема сообщения</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Лови</h3>
+        <p>Программа лояльности нового поколения</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/catalog.html">Каталог</a></li>
+          <li><a href="/partners.html">Партнерам</a></li>
+          <li><a href="/about.html">О нас</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="/contacts.html">Контактная информация</a></li>
+          <li><a href="/support.html">Поддержка</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Лови. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.querySelector('.contact-form');
+      if(contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+          contactForm.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

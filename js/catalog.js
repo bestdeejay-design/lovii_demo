@@ -1,118 +1,92 @@
-const offersData = {
-  // ... (данные категории ресторанов, услуг, образования, финансов аналогично ранее)
+// catalog.js - функции для каталога предложений
+
+// Пример данных для каталога
+const catalogData = {
+  all: [
+    { id: 1, title: "Скидка 20% на ужины", description: "Получите скидку 20% на все ужины в ресторанах-партнерах", category: "restaurants", cashback: "до 10% ЛОВИ", partner: "Ресторан У моря", rating: 4.8 },
+    { id: 2, title: "Бесплатная доставка", description: "Бесплатная доставка при заказе от 1000 рублей", category: "services", cashback: "до 5% ЛОВИ", partner: "Доставка Plus", rating: 4.5 },
+    { id: 3, title: "Скидка на курсы", description: "Скидка 15% на все онлайн-курсы", category: "education", cashback: "до 20% ЛОВИ", partner: "Школа программирования", rating: 4.9 },
+    { id: 4, title: "Кэшбэк на топливо", description: "Кэшбэк до 7% на заправках партнеров", category: "services", cashback: "до 7% ЛОВИ", partner: "АЗС Network", rating: 4.6 },
+    { id: 5, title: "Подарочная карта", description: "Подарочная карта 1000 рублей за 800", category: "finance", cashback: "до 15% ЛОВИ", partner: "Финансовый сервис", rating: 4.7 },
+    { id: 6, title: "Скидка на кофе", description: "Вторая чашка кофе в подарок", category: "restaurants", cashback: "до 8% ЛОВИ", partner: "Кофейня на углу", rating: 4.4 },
+    { id: 7, title: "Фитнес-программа", description: "Скидка 25% на абонемент в фитнес-клуб", category: "services", cashback: "до 12% ЛОВИ", partner: "Фитнес-центр Active", rating: 4.7 },
+    { id: 8, title: "Медицинская страховка", description: "Скидка на полис медицинского страхования", category: "finance", cashback: "до 18% ЛОВИ", partner: "МедСтрах", rating: 4.6 }
+  ],
   restaurants: [
-    {title: "Скидка 20% в ресторане «Итальянская кухня»", desc: "Скидка 20% на все пиццы и пасту в ресторане.", linkText: "Получить купон"},
-    {title: "Бесплатный десерт в «Французской булочной»", desc: "Подарок — десерт при заказе от 1000 р.", linkText: "Получить подарок"},
-    {title: "Кэшбек 10% в «Гриль ресторане»", desc: "Вернем 10% с каждого заказа на гриль-меню.", linkText: "Получить кэшбек"},
-    {title: "Скидка на бизнес-ланч в «Суши-баре»", desc: "Скидка 15% на бизнес-ланчи с 12 до 15 часов.", linkText: "Получить скидку"},
-    {title: "Акция в «Вегетарианском кафе»", desc: "При заказе от 800 рублей коктейль в подарок.", linkText: "Получить акцию"},
-    {title: "Подарочный сертификат в «Ресторан сыров»", desc: "Сертификат на 500 рублей в подарок.", linkText: "Получить сертификат"},
-    {title: "Кэшбек 5% в «Барбекю кафе»", desc: "Возврат 5% со всех оплат на мясные блюда.", linkText: "Получить кэшбек"},
-    {title: "Скидка 10% в «Кофейне»", desc: "Скидка на все напитки и десерты.", linkText: "Получить скидку"},
-    {title: "Бесплатная доставка в «Пицца экспресс»", desc: "Доставка бесплатно при заказе от 1500 р.", linkText: "Заказать"},
-    {title: "Скидка на наборы в «Суши-клубе»", desc: "Скидка 12% на все наборы сегодня.", linkText: "Получить скидку"},
-    {title: "Акция «Семейный вечер» в «Ресторане Пиццы»", desc: "Детям мороженое бесплатно.", linkText: "Подробнее"},
-    {title: "Скидка 15% на завтраки в «Бранч кафе»", desc: "Скидка на все завтраки с 8 до 11 утра.", linkText: "Получить скидку"},
-    {title: "Подарок при заказе в «Мексиканском ресторане»", desc: "При заказе коктейля — бесплатная закуска.", linkText: "Получить подарок"},
-    {title: "Кэшбек 8% в «Американском баре»", desc: "Возврат с каждого заказа напитков.", linkText: "Получить кэшбек"},
-    {title: "Скидка 10% при бронировании в «Ресторане у озера»", desc: "10% снижения цены при онлайн-бронировании.", linkText: "Забронировать"}
+    { id: 1, title: "Скидка 20% на ужины", description: "Получите скидку 20% на все ужины в ресторанах-партнерах", category: "restaurants", cashback: "до 10% ЛОВИ", partner: "Ресторан У моря", rating: 4.8 },
+    { id: 6, title: "Скидка на кофе", description: "Вторая чашка кофе в подарок", category: "restaurants", cashback: "до 8% ЛОВИ", partner: "Кофейня на углу", rating: 4.4 }
   ],
   services: [
-    {title: "Уборка квартиры", desc: "Профессиональная уборка с кэшбеком 5%.", linkText: "Заказать"},
-    {title: "Доставка продуктов", desc: "Бесплатная доставка при заказе от 2000 р.", linkText: "Заказать"},
-    {title: "Курсы английского языка", desc: "Онлайн-курсы со скидкой 30%.", linkText: "Записаться"},
-    {title: "Ремонт бытовой техники", desc: "Скидка до 15% на ремонт.", linkText: "Вызвать мастера"},
-    {title: "Услуги такси", desc: "Кэшбек 7% на поездки по городу.", linkText: "Вызвать такси"},
-    {title: "Перевозки грузов", desc: "Скидка 10% на услуги грузоперевозок.", linkText: "Оформить заказ"},
-    {title: "Ремонт обуви", desc: "Скидка 10% и бонусы.", linkText: "Заказать ремонт"},
-    {title: "Обучение вождению", desc: "Курс с кэшбеком до 20%.", linkText: "Записаться"},
-    {title: "Онлайн-курсы программирования", desc: "Скидка до 25% на курсы.", linkText: "Начать обучение"},
-    {title: "Доставка цветов", desc: "Скидка 15% на букеты при первом заказе.", linkText: "Заказать"},
-    {title: "Спортивные секции", desc: "Пробные занятия бесплатно.", linkText: "Записаться"},
-    {title: "Фотоуслуги", desc: "Кэшбек 5% на фотосессии.", linkText: "Забронировать"},
-    {title: "Ремонт компьютеров", desc: "Скидка 15% на услуги ремонта.", linkText: "Заказать"},
-    {title: "Услуги визажа", desc: "Скидка 10% при первом визите.", linkText: "Записаться"},
-    {title: "Наставничество и коучинг", desc: "Скидка 20% на первую консультацию.", linkText: "Получить консультацию"}
+    { id: 2, title: "Бесплатная доставка", description: "Бесплатная доставка при заказе от 1000 рублей", category: "services", cashback: "до 5% ЛОВИ", partner: "Доставка Plus", rating: 4.5 },
+    { id: 4, title: "Кэшбэк на топливо", description: "Кэшбэк до 7% на заправках партнеров", category: "services", cashback: "до 7% ЛОВИ", partner: "АЗС Network", rating: 4.6 },
+    { id: 7, title: "Фитнес-программа", description: "Скидка 25% на абонемент в фитнес-клуб", category: "services", cashback: "до 12% ЛОВИ", partner: "Фитнес-центр Active", rating: 4.7 }
   ],
   education: [
-    {title: "Курс по маркетингу", desc: "Обучение со скидкой 30% на онлайн-курсы.", linkText: "Записаться"},
-    {title: "Курс по дизайну", desc: "Интенсив с обратной связью от экспертов.", linkText: "Начать обучение"},
-    {title: "Изучение языков", desc: "Языковые курсы со скидкой до 25%.", linkText: "Записаться"},
-    {title: "Курс развития навыков", desc: "Скидка 20% на тренинги и мастер-классы.", linkText: "Узнать детали"},
-    {title: "Курс программирования для начинающих", desc: "Обучение с практическими заданиями.", linkText: "Начать"}
+    { id: 3, title: "Скидка на курсы", description: "Скидка 15% на все онлайн-курсы", category: "education", cashback: "до 20% ЛОВИ", partner: "Школа программирования", rating: 4.9 }
   ],
   finance: [
-    {title: "Кредитная карта Альфа-Банк", desc: "Кэшбек 1000 руб при оформлении карты.", linkText: "Оформить карту"},
-    {title: "Дебетовая карта Сбербанк", desc: "Бонусы и кешбек на покупки.", linkText: "Оформить карту"},
-    {title: "Кредитная карта Тинькофф", desc: "Кэшбек до 5% на все покупки.", linkText: "Подать заявку"},
-    {title: "Вклады в ВТБ", desc: "Высокий процент и бонусы новым клиентам.", linkText: "Открыть вклад"},
-    {title: "Ипотека Газпромбанк", desc: "Низкая ставка и рассрочка.", linkText: "Узнать условия"},
-    {title: "Кэшбек по карте Райффайзен", desc: "До 10000 руб в подарок.", linkText: "Получить"},
-    {title: "Преимум-карта Русский Стандарт", desc: "Максимальный кэшбек на все категории.", linkText: "Оформить"},
-    {title: "Кредит на авто в Сетелем", desc: "Выгодные ставки на заем.", linkText: "Подать заявку"},
-    {title: "Карты рассрочки в Хоум Кредит", desc: "Покупки в рассрочку без комиссий.", linkText: "Оформить карту"},
-    {title: "Кэшбек от Почта Банка", desc: "Особые условия по кэшбеку.", linkText: "Получить"}
+    { id: 5, title: "Подарочная карта", description: "Подарочная карта 1000 рублей за 800", category: "finance", cashback: "до 15% ЛОВИ", partner: "Финансовый сервис", rating: 4.7 },
+    { id: 8, title: "Медицинская страховка", description: "Скидка на полис медицинского страхования", category: "finance", cashback: "до 18% ЛОВИ", partner: "МедСтрах", rating: 4.6 }
   ]
 };
 
-const topOffersData = [
-  // ... (топ предложения, как было)
-    {title: 'Кэшбек 1000 руб за карту банка', desc: 'Оформи карту и получи кэшбек 1000 рублей на счёт.', linkText: 'Получить предложение'},
-    {title: 'Скидка на доставку еды', desc: 'Скидка 15% на доставку в ресторанах-партнёрах.', linkText: 'Получить скидку'},
-    {title: 'Купон на услугу уборки', desc: 'Скидка 10% и кэшбек 5% на уборку квартиры.', linkText: 'Получить купон'},
-    {title: 'Обучающий онлайн-курс', desc: 'Скидка 30% на курс по маркетингу.', linkText: 'Записаться'},
-    {title: 'Бонус при оформлении карты', desc: 'Кэшбек 1500 рублей за новую карту.', linkText: 'Оформить карту'},
-  ];
+// Функция для отображения карточек предложений
+function displayOffers(offers, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
+  container.innerHTML = '';
 
-
-  function renderCards(container, items) {
-    container.innerHTML = '';
-    items.forEach(item => {
-      const card = document.createElement('article');
-      card.className = 'catalog-card';
-      card.innerHTML = `
-        <h3>${item.title}</h3>
-        <p>${item.desc}</p>
-        <a href="#" class="btn">${item.linkText}</a>
-      `;
-      container.appendChild(card);
-    });
+  if (offers.length === 0) {
+    container.innerHTML = '<p class="no-offers">Предложений в данной категории пока нет.</p>';
+    return;
   }
 
-  const topOffersContainer = document.getElementById('topOffersContainer');
+  offers.forEach(offer => {
+    const card = document.createElement('div');
+    card.className = 'catalog-card';
+    card.innerHTML = `
+      <div class="offer-header">
+        <h3>${offer.title}</h3>
+        <div class="rating">⭐ ${offer.rating}</div>
+      </div>
+      <p>${offer.description}</p>
+      <div class="offer-details">
+        <div class="partner">Партнер: ${offer.partner}</div>
+        <div class="cashback-info">${offer.cashback}</div>
+      </div>
+      <button class="btn btn-primary">Получить предложение</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// Инициализация каталога
+document.addEventListener('DOMContentLoaded', function() {
+  // Отображаем топ предложения
+  displayOffers(catalogData.all.slice(0, 6), 'topOffersContainer');
+
+  // Отображаем все предложения по умолчанию
+  displayOffers(catalogData.all, 'category-content');
+
+  // Обработчики кнопок категорий
   const categoryButtons = document.querySelectorAll('.category-btn');
-  const categoryContent = document.getElementById('category-content');
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Убираем активный класс у всех кнопок
+      categoryButtons.forEach(btn => btn.classList.remove('active'));
+      // Добавляем активный класс к нажатой кнопке
+      this.classList.add('active');
 
-  if (topOffersContainer) {
-    renderCards(topOffersContainer, topOffersData);
-  }
+      // Получаем категорию
+      const category = this.getAttribute('data-cat');
 
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  categoryButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      categoryButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const cat = btn.getAttribute('data-cat');
-      let offersToShow;
-      if (cat === 'all') offersToShow = [].concat(...Object.values(offersData));
-      else offersToShow = [...offersData[cat]];
-
-      shuffleArray(offersToShow);
-
-      if (categoryContent) {
-        renderCards(categoryContent, offersToShow);
-        const categoryNav = document.getElementById('categoryNav');
-        if (categoryNav) categoryNav.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // Отображаем соответствующие предложения
+      if (category === 'all') {
+        displayOffers(catalogData.all, 'category-content');
+      } else {
+        displayOffers(catalogData[category], 'category-content');
       }
     });
   });
-
-  if (categoryButtons.length) categoryButtons[0].click();
+});
