@@ -1,13 +1,16 @@
 // header.js
 document.getElementById('header').innerHTML = `
   <header class="header">
-    <div class="logo">Лови</div>
-    <nav class="nav">
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="profile.html">Кабинет</a>
-      <a href="document.html">Информация</a>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+    <div class="header-container">
+      <div class="logo">Лови</div>
+      <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+      <nav class="nav" id="navMenu">
+        <a href="/" class="nav-link">Главная</a>
+        <a href="/catalog.html" class="nav-link">Каталог</a>
+        <a href="/partners.html" class="nav-link">Партнерам</a>
+        <a href="/login.html" class="nav-link">Войти</a>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+    </div>
   </header>
 `;

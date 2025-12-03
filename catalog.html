@@ -8,17 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">Лови</div>
-    <nav class="nav" id="navMenu">
-      <a href="/" class="nav-link">Главная</a>
-      <a href="/catalog.html" class="nav-link active">Каталог</a>
-      <a href="/partners.html" class="nav-link">Партнерам</a>
-      <a href="/login.html" class="nav-link">Войти</a>
-    </nav>
-    <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
-    <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
-  </header>
+  <div id="header"></div>
 
   <main class="container">
     <section class="section-header">
@@ -45,35 +35,11 @@
     <section id="category-content" class="catalog-grid"></section>
   </main>
 
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Лови</h3>
-        <p>Программа лояльности нового поколения</p>
-      </div>
-      <div class="footer-section">
-        <h4>Навигация</h4>
-        <ul>
-          <li><a href="/">Главная</a></li>
-          <li><a href="/catalog.html">Каталог</a></li>
-          <li><a href="/partners.html">Партнерам</a></li>
-          <li><a href="/about.html">О нас</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Контакты</h4>
-        <ul>
-          <li><a href="/contacts.html">Контактная информация</a></li>
-          <li><a href="/support.html">Поддержка</a></li>
-          <li><a href="/faq.html">FAQ</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Лови. Все права защищены.</p>
-    </div>
-  </footer>
+  <div id="footer"></div>
 
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  <script src="themeSwitcher.js"></script>
   <script src="js/common.js"></script>
   <script src="js/catalog.js"></script>
 </body>
