@@ -4,6 +4,8 @@
 __pycache__/
 *.o
 *.obj
+dist/
+build/
 *.class
 *.exe
 *.dll
@@ -12,44 +14,49 @@ __pycache__/
 *.out
 
 # Dependencies
-node_modules/
-venv/
 .venv/
-.env
-.env.local
-.env.*
+venv/
+node_modules/
+target/
+.gradle/
+.mypy_cache/
+.pytest_cache/
+.julia/
+zig*/
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
 *.swo
+*.bak
+*.~*
+
+# Environment
+.env
+.env.local
+.env.*
 
 # Editors
 .vscode/
 .idea/
 *.swp
+*.swo
 
-# System files
+# System
 .DS_Store
 Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Icon?
+Network Trash Folder
+Temporary Items
+VolumeIcon.icns
 
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Build directories
-dist/
-build/
-target/
-.gradle/
-
-# Python specific
-.mypy_cache/
-.pytest_cache/
-
-# Compressed files
+# Common compressed files
 *.zip
 *.gz
 *.tar
@@ -72,4 +79,25 @@ target/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Documentation
+docs/_build/
+*.rst~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Icon?
+Network Trash Folder
+Temporary Items
+VolumeIcon.icns
 ```
