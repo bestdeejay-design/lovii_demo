@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Главная — Лови - Программа лояльности</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      color: #333;
+    }
+
+    .modern-landing {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .svg-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80vh;
+      padding: 4rem 0;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #3498db;
+      border: 2px solid #3498db;
+    }
+
+    .btn-secondary:hover {
+      background: #3498db;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .hero-visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .floating-card {
+      width: 300px;
+      height: 200px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+
+    .card-content {
+      text-align: center;
+      z-index: 2;
+      padding: 2rem;
+    }
+
+    .card-content h3 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .card-content .points {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3498db;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes shine {
+      0% {
+        transform: rotate(45deg) translateX(-100%);
+      }
+      100% {
+        transform: rotate(45deg) translateX(100%);
+      }
+    }
+
+    .features-section {
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: #7f8c8d;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(52, 152, 219, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+      opacity: 0.1;
+      animation: floatShape 15s infinite linear;
+    }
+
+    .shape:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      top: 20%;
+      left: 10%;
+      animation-duration: 20s;
+    }
+
+    .shape:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      top: 60%;
+      right: 15%;
+      animation-duration: 25s;
+    }
+
+    .shape:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      bottom: 20%;
+      left: 20%;
+      animation-duration: 18s;
+    }
+
+    @keyframes floatShape {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(20px, 30px) rotate(90deg);
+      }
+      50% {
+        transform: translate(40px, 10px) rotate(180deg);
+      }
+      75% {
+        transform: translate(10px, 40px) rotate(270deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .hero-content {
+        margin-bottom: 3rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .cta-buttons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="modern-landing">
+    <svg class="svg-background" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3498db" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#9b59b6" stop-opacity="0.1"/>
+        </linearGradient>
+        <filter id="noise" x="0" y="0">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#bg-gradient)" />
+      <rect width="100%" height="100%" filter="url(#noise)" opacity="0.05"/>
+    </svg>
+    
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    
+    <div class="content-wrapper">
+      <header class="header">
+        <div class="logo">Лови</div>
+        <nav class="nav" id="navMenu">
+          <a href="/" class="nav-link">Главная</a>
+          <a href="/catalog.html" class="nav-link">Каталог</a>
+          <a href="/partners.html" class="nav-link">Партнерам</a>
+          <a href="/login.html" class="nav-link">Войти</a>
+        </nav>
+        <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+        <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+      </header>
+      
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1>Современная программа лояльности</h1>
+          <p>Присоединяйтесь к инновационной системе вознаграждений, где каждый ваш шаг приносит выгоду. Получайте кэшбэк, копите баллы и расплачивайтесь ими за покупки у наших партнеров.</p>
+          <div class="cta-buttons">
+            <a href="/catalog.html" class="btn btn-primary">Начать экономить</a>
+            <a href="/partners.html" class="btn btn-secondary">Стать партнером</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="floating-card">
+            <div class="card-content">
+              <h3>Ваша карта</h3>
+              <div class="points">15,000 баллов</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <section class="features-section">
+      <div class="content-wrapper">
+        <h2 class="section-title">Как это работает</h2>
+        <p class="section-subtitle">Простая и понятная система лояльности, разработанная с учетом современных тенденций UX-дизайна</p>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🛒</div>
+            <h3>Покупайте</h3>
+            <p>Делайте покупки у наших проверенных партнеров и автоматически получайте кэшбэк на ваш счет</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">💎</div>
+            <h3>Копите</h3>
+            <p>Накапливайте баллы ЛОВИ за каждую покупку, без сложных условий и ограничений</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎁</div>
+            <h3>Тратьте</h3>
+            <p>Используйте накопленные баллы для получения скидок и эксклюзивных подарков</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Лови</h3>
+          <p>Программа лояльности нового поколения</p>
+        </div>
+        <div class="footer-section">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/catalog.html">Каталог</a></li>
+            <li><a href="/partners.html">Партнерам</a></li>
+            <li><a href="/about.html">О нас</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Контакты</h4>
+          <ul>
+            <li><a href="/contacts.html">Контактная информация</a></li>
+            <li><a href="/support.html">Поддержка</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Лови. Все права защищены.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Анимация для плавающих элементов
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      
+      // Переключение темы
+      themeToggle?.addEventListener('click', function() {
+        body.classList.toggle('dark-theme');
+        this.textContent = body.classList.contains('dark-theme') ? '☀️' : '🌙';
+      });
+      
+      // Анимация при скролле
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      
+      // Наблюдение за карточками функций
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    });
+  </script>
+</body>
+</html>
