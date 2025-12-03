@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Контакты — Лови - Программа лояльности</title>
+  <title>Часто задаваемые вопросы — Лови - Программа лояльности</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -328,8 +328,8 @@
       }
     }
     
-    /* Специфические стили для страницы контактов */
-    .contact-content {
+    /* Специфические стили для страницы FAQ */
+    .faq-content {
       padding: 6rem 0;
     }
     
@@ -351,121 +351,117 @@
       margin: 0 auto;
     }
     
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto 4rem;
+    .faq-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
     }
     
-    .contact-card {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      text-align: center;
+    .faq-category {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      background: #e1f0fa;
+      color: #3498db;
+      font-weight: 600;
+      cursor: pointer;
       transition: all 0.3s ease;
     }
     
-    .contact-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(52, 152, 219, 0.15);
+    .faq-category.active,
+    .faq-category:hover {
+      background: #3498db;
+      color: white;
     }
     
-    .contact-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .contact-card h3 {
-      font-size: 1.3rem;
-      color: #2c3e50;
-      margin-bottom: 1rem;
-    }
-    
-    .contact-card p {
-      color: #7f8c8d;
-      line-height: 1.6;
-      margin-bottom: 0.5rem;
-    }
-    
-    .contact-card p:last-child {
-      margin-bottom: 0;
-    }
-    
-    .contact-form-section {
-      max-width: 600px;
+    .faq-list {
+      max-width: 800px;
       margin: 0 auto;
+    }
+    
+    .faq-item {
       background: white;
-      padding: 3rem;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
     }
     
-    .contact-form-section h2 {
-      text-align: center;
-      color: #2c3e50;
-      margin-bottom: 2rem;
-    }
-    
-    .contact-form .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .contact-form .form-group {
-      margin-bottom: 1.5rem;
-    }
-    
-    .contact-form .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
+    .faq-question {
+      padding: 1.5rem;
       font-weight: 600;
       color: #2c3e50;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+      transition: background-color 0.3s ease;
     }
     
-    .contact-form .form-group input,
-    .contact-form .form-group textarea {
-      width: 100%;
+    .faq-question:hover {
+      background: #f8f9fa;
+    }
+    
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+    
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+    
+    .faq-item.active .faq-answer {
+      padding: 0 1.5rem 1.5rem;
+      max-height: 500px;
+    }
+    
+    .search-section {
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+    
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .search-box input {
+      flex: 1;
       padding: 0.8rem 1rem;
       border: 2px solid #e0e0e0;
       border-radius: 10px;
       font-size: 1rem;
-      transition: border-color 0.3s ease;
     }
     
-    .contact-form .form-group input:focus,
-    .contact-form .form-group textarea:focus {
-      outline: none;
-      border-color: #3498db;
+    .search-box button {
+      padding: 0.8rem 1.5rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
     
-    .contact-form .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-    
-    .contact-form .btn {
-      width: 100%;
-    }
-    
-    .map-section {
-      margin: 4rem 0;
-      text-align: center;
-    }
-    
-    .map-placeholder {
-      background: #e0e0e0;
-      height: 300px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7f8c8d;
-      font-size: 1.2rem;
+    .search-box button:hover {
+      background: #2980b9;
     }
   </style>
 </head>
@@ -511,65 +507,83 @@
         </div>
       </header>
       
-      <section class="contact-content">
+      <section class="faq-content">
         <div class="section-header">
-          <h1>Контактная информация</h1>
-          <p>Свяжитесь с нами любым удобным способом</p>
+          <h1>Часто задаваемые вопросы</h1>
+          <p>Ответы на наиболее популярные вопросы о программе лояльности</p>
         </div>
 
-        <div class="contact-grid">
-          <div class="contact-card">
-            <div class="contact-icon">📧</div>
-            <h3>Email</h3>
-            <p>support@loviprogram.com</p>
-            <p>partners@loviprogram.com</p>
-          </div>
-          
-          <div class="contact-card">
-            <div class="contact-icon">📱</div>
-            <h3>Телефон</h3>
-            <p>+7 (495) 123-45-67</p>
-            <p>+7 (495) 765-43-21</p>
-          </div>
-          
-          <div class="contact-card">
-            <div class="contact-icon">🏢</div>
-            <h3>Адрес</h3>
-            <p>г. Москва, ул. Примерная, д. 15</p>
-            <p>офис 305</p>
-          </div>
-          
-          <div class="contact-card">
-            <div class="contact-icon">🕒</div>
-            <h3>Время работы</h3>
-            <p>Пн-Пт: 9:00 - 18:00</p>
-            <p>Сб-Вс: 10:00 - 16:00</p>
+        <div class="search-section">
+          <div class="search-box">
+            <input type="text" id="faqSearch" placeholder="Поиск по вопросам...">
+            <button id="searchBtn">Найти</button>
           </div>
         </div>
 
-        <div class="contact-form-section">
-          <h2>Написать нам</h2>
-          <form class="contact-form" id="contactForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Имя</label>
-                <input type="text" id="name" name="name" required>
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-              </div>
+        <div class="faq-categories">
+          <div class="faq-category active">Все</div>
+          <div class="faq-category">Регистрация</div>
+          <div class="faq-category">Баллы</div>
+          <div class="faq-category">Партнеры</div>
+          <div class="faq-category">Технические</div>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">Как зарегистрироваться в программе лояльности?</button>
+            <div class="faq-answer">
+              <p>Чтобы зарегистрироваться в программе лояльности "Лови", перейдите на страницу регистрации и заполните необходимые данные. После этого вы получите доступ к личному кабинету и сможете начать накапливать баллы.</p>
             </div>
-            <div class="form-group">
-              <label for="subject">Тема сообщения</label>
-              <input type="text" id="subject" name="subject" required>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">Как начисляются баллы?</button>
+            <div class="faq-answer">
+              <p>Баллы начисляются за покупки у участников программы. Размер кэшбэка зависит от конкретного партнера и может варьироваться от 1% до 20%. Информация о начислениях отображается в личном кабинете.</p>
             </div>
-            <div class="form-group">
-              <label for="message">Сообщение</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">Как использовать накопленные баллы?</button>
+            <div class="faq-answer">
+              <p>Накопленные баллы можно использовать для получения скидок у участников программы. Для этого при оплате покупки сообщите номер вашей карты лояльности или используйте промокод из личного кабинета.</p>
             </div>
-            <button type="submit" class="btn btn-primary">Отправить сообщение</button>
-          </form>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">Какие документы требуются для участия?</button>
+            <div class="faq-answer">
+              <p>Для участия в программе лояльности "Лови" не требуется никаких документов. Достаточно зарегистрироваться на сайте или получить карту лояльности в одном из наших партнёров.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">Можно ли объединить баллы с другим аккаунтом?</button>
+            <div class="faq-answer">
+              <p>Нет, объединение баллов между разными аккаунтами запрещено правилами программы. Каждый аккаунт является персональным и не подлежит объединению с другими.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">Сколько действуют накопленные баллы?</button>
+            <div class="faq-answer">
+              <p>Баллы действуют в течение 12 месяцев с момента начисления. Если баллы не были использованы в течение этого срока, они аннулируются. Информация о сроках действия отображается в личном кабинете.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">Как стать партнёром программы?</button>
+            <div class="faq-answer">
+              <p>Чтобы стать партнёром программы лояльности "Лови", заполните анкету на странице "Партнерам". После рассмотрения вашей заявки наш менеджер свяжется с вами для обсуждения условий сотрудничества.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">Как связаться со службой поддержки?</button>
+            <div class="faq-answer">
+              <p>Вы можете связаться с нашей службой поддержки через чат на сайте, по email support@loviprogram.com или по телефону +7 (495) 123-45-67. Мы работаем ежедневно с 9:00 до 21:00.</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -653,38 +667,59 @@
       const savedTheme = localStorage.getItem('theme') || 'light';
       setTheme(savedTheme);
       
-      // Анимация при скролле
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-      
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
+      // FAQ accordion functionality
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+          // Закрываем все остальные элементы
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+            }
+          });
+          // Переключаем текущий элемент
+          item.classList.toggle('active');
         });
-      }, observerOptions);
-      
-      // Наблюдение за карточками функций
-      document.querySelectorAll('.contact-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
       });
       
-      // Обработчик формы
-      const contactForm = document.getElementById('contactForm');
-      if(contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-          contactForm.reset();
+      // Категории FAQ
+      const categories = document.querySelectorAll('.faq-category');
+      categories.forEach(category => {
+        category.addEventListener('click', () => {
+          // Убираем активный класс у всех категорий
+          categories.forEach(cat => cat.classList.remove('active'));
+          // Добавляем активный класс к текущей категории
+          category.classList.add('active');
+        });
+      });
+      
+      // Поиск по FAQ
+      const searchInput = document.getElementById('faqSearch');
+      const searchBtn = document.getElementById('searchBtn');
+      
+      function searchFAQ() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+          const question = item.querySelector('.faq-question').textContent.toLowerCase();
+          const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+          
+          if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
         });
       }
+      
+      searchBtn.addEventListener('click', searchFAQ);
+      searchInput.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') {
+          searchFAQ();
+        }
+      });
     });
   </script>
 </body>

@@ -202,6 +202,12 @@ a:hover {
   background: var(--primary-hover);
 }
 
+.theme-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .theme-toggle {
   background: none;
   border: none;
@@ -210,10 +216,62 @@ a:hover {
   cursor: pointer;
   margin-left: var(--spacing-lg);
   transition: color 0.3s ease;
+  position: relative;
+  z-index: 1001;
 }
 
 .theme-toggle:hover {
   color: var(--primary-hover);
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px var(--shadow-medium);
+  padding: var(--spacing-md);
+  display: none;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  z-index: 1000;
+  border: 1px solid var(--card-border);
+}
+
+.theme-switcher:hover .theme-dropdown {
+  display: flex;
+}
+
+.theme-option {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.theme-option:hover {
+  background-color: var(--card-border);
+}
+
+/* Яркая тема */
+body.bright-theme {
+  --primary-color: #ff6b00;
+  --primary-hover: #e05a00;
+  --primary-light: #ff9800;
+  --text-color: #1a1a1a;
+  --text-secondary: #444444;
+  --bg-color: #ffffff;
+  --card-bg: #ffffff;
+  --card-border: #cccccc;
+  --shadow-light: rgba(255, 107, 0, 0.4);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-heavy: rgba(0, 0, 0, 0.25);
 }
 
 .menu-toggle {
