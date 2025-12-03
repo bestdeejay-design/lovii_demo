@@ -1,217 +1,812 @@
-<!-- user-cabinet.html с адаптивным дизайном, меню в шапке, карточкой лояльности и историей под картой -->
-
-<!DOCTYPE html>     
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Личный кабинет — Лови</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Личный кабинет — Лови - Программа лояльности</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Montserrat', sans-serif;
-      margin: 0; padding: 0; background: #f9f9f9; color: #333;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      color: #333;
     }
-    .header {
-      position: fixed;
-      top: 0; left: 0; width: 100%; z-index: 1000;
-      background: var(--card-bg, #fff);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      padding: 1rem 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      user-select: none;
+
+    .modern-landing {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
     }
-    .header nav.nav {
-      display: flex; gap: 15px;
+
+    .svg-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
     }
-    .header nav.nav a {
-      color: var(--primary-color, #ca1212);
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 80vh;
+      padding: 4rem 0;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
       font-weight: 600;
       text-decoration: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .header nav.nav a.active,
-    .header nav.nav a:hover {
-      background-color: var(--primary-color, #ca1212);
-      color: white;
-    }
-    .header #logoutBtn {
-      background: transparent;
-      border: 2px solid var(--primary-color, #ca1212);
-      color: var(--primary-color, #ca1212);
-      font-weight: 700;
-      padding: 0.4rem 1rem;
-      border-radius: 30px;
+      transition: all 0.3s ease;
       cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      border: none;
+      font-size: 1rem;
     }
-    .header #logoutBtn:hover {
-      background-color: var(--primary-color, #ca1212);
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
       color: white;
     }
 
-    .container {
-      max-width: 1140px;
-      margin: 90px auto 30px;
-      padding: 0 20px;
-    }
-    h1 {
-      margin-bottom: 1.5rem;
-      color: var(--primary-color, #ca1212);
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
     }
 
+    .btn-secondary {
+      background: transparent;
+      color: #3498db;
+      border: 2px solid #3498db;
+    }
+
+    .btn-secondary:hover {
+      background: #3498db;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .hero-visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .floating-card {
+      width: 300px;
+      height: 200px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+
+    .card-content {
+      text-align: center;
+      z-index: 2;
+      padding: 2rem;
+    }
+
+    .card-content h3 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .card-content .points {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3498db;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes shine {
+      0% {
+        transform: rotate(45deg) translateX(-100%);
+      }
+      100% {
+        transform: rotate(45deg) translateX(100%);
+      }
+    }
+
+    .features-section {
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: #7f8c8d;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(52, 152, 219, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+      opacity: 0.1;
+      animation: floatShape 15s infinite linear;
+    }
+
+    .shape:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      top: 20%;
+      left: 10%;
+      animation-duration: 20s;
+    }
+
+    .shape:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      top: 60%;
+      right: 15%;
+      animation-duration: 25s;
+    }
+
+    .shape:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      bottom: 20%;
+      left: 20%;
+      animation-duration: 18s;
+    }
+
+    @keyframes floatShape {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(20px, 30px) rotate(90deg);
+      }
+      50% {
+        transform: translate(40px, 10px) rotate(180deg);
+      }
+      75% {
+        transform: translate(10px, 40px) rotate(270deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .hero-content {
+        margin-bottom: 3rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .cta-buttons {
+        justify-content: center;
+      }
+    }
+    
+    /* Специфические стили для личного кабинета */
+    .cabinet-content {
+      padding: 6rem 0;
+    }
+    
+    .cabinet-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .cabinet-header h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+    
+    .cabinet-header p {
+      font-size: 1.2rem;
+      color: #7f8c8d;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
     .loyalty-card {
       max-width: 400px;
       height: 220px;
       border-radius: 20px;
-      background: linear-gradient(135deg, #ca1212, #ff5f5f);
+      background: linear-gradient(135deg, #3498db, #2c3e50);
       color: white;
       padding: 25px 30px;
-      box-shadow: 0 10px 30px rgba(202,18,18,0.4);
+      box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
       font-family: 'Courier New', monospace;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      margin-bottom: 25px;
+      margin: 0 auto 3rem;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .loyalty-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+    
     .loyalty-card .card-number {
       font-size: 1.5rem;
       letter-spacing: 4px;
+      position: relative;
+      z-index: 2;
     }
+    
     .loyalty-card .card-holder {
       font-size: 1.1rem;
       text-transform: uppercase;
       opacity: 0.9;
+      position: relative;
+      z-index: 2;
     }
-
+    
+    .cabinet-sections {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
     .section-title {
-      font-weight: 700;
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      border-bottom: 3px solid var(--primary-color, #ca1212);
-      padding-bottom: 0.3rem;
+      font-size: 1.8rem;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 0.5rem;
     }
-
-    select#filterPeriod {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--primary-color, #ca1212);
-      border: 2px solid var(--primary-color, #ca1212);
-      border-radius: 8px;
-      padding: 6px 12px;
-      margin-bottom: 15px;
-      cursor: pointer;
-      width: max-content;
-    }
-
-    .list, ul {
-      list-style: none;
-      margin: 0; padding: 0;
-      max-width: 400px;
-    }
-    .list-item, li {
-      background: #fafafa;
-      padding: 10px 15px;
-      border-radius: 12px;
-      margin-bottom: 8px;
-      font-weight: 600;
-      cursor: default;
-      box-shadow: 0 2px 10px rgba(202,18,18,0.1);
-    }
-    .promo-code {
+    
+    .balance-info {
       display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      max-width: 400px;
+      justify-content: space-around;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
-    .promo-code input {
-      flex-grow: 1;
+    
+    .balance-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .balance-value {
+      font-size: 2rem;
       font-weight: 700;
-      font-size: 1rem;
-      padding: 8px 12px;
+      color: #3498db;
+      margin: 0.5rem 0;
+    }
+    
+    .balance-label {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+    
+    .history-section {
+      margin-top: 3rem;
+    }
+    
+    .filter-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .filter-period {
+      padding: 0.5rem 1rem;
+      border: 2px solid #3498db;
       border-radius: 10px;
-      border: 2px solid var(--primary-color, #ca1212);
-      background: #fff;
-      user-select: all;
+      font-size: 1rem;
+      color: #2c3e50;
+      background: white;
     }
-    .promo-code button {
-      padding: 8px 16px;
+    
+    .history-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .history-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .history-item.income {
+      border-left: 4px solid #2ecc71;
+    }
+    
+    .history-item.expense {
+      border-left: 4px solid #e74c3c;
+    }
+    
+    .history-details {
+      flex: 1;
+    }
+    
+    .history-merchant {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    .history-date {
+      font-size: 0.8rem;
+      color: #7f8c8d;
+    }
+    
+    .history-amount {
       font-weight: 700;
-      border-radius: 12px;
-      border: none;
-      background-color: var(--primary-color, #ca1212);
+    }
+    
+    .history-amount.income {
+      color: #2ecc71;
+    }
+    
+    .history-amount.expense {
+      color: #e74c3c;
+    }
+    
+    .promo-section {
+      margin: 3rem 0;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .promo-form {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .promo-input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      min-width: 200px;
+    }
+    
+    .promo-button {
+      padding: 0.8rem 1.5rem;
+      background: #3498db;
       color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s ease;
     }
-    .promo-code button:hover {
-      background-color: #ff4545;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.6rem;
-      }
-      .header nav.nav {
-        width: 100%;
-        justify-content: space-around;
-        gap: 0;
-        flex-wrap: wrap;
-      }
-      .loyalty-card {
-        max-width: 100%;
-        height: auto;
-        padding: 20px;
-      }
-      select#filterPeriod,
-      .promo-code {
-        max-width: 100%;
-        width: 100%;
-      }
-      .list, ul {
-        max-width: 100%;
-      }
+    
+    .promo-button:hover {
+      background: #2980b9;
     }
   </style>
 </head>
 <body>
+  <div class="modern-landing">
+    <svg class="svg-background" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3498db" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#9b59b6" stop-opacity="0.1"/>
+        </linearGradient>
+        <filter id="noise" x="0" y="0">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#bg-gradient)"/>
+      <rect width="100%" height="100%" filter="url(#noise)" opacity="0.05"/>
+    </svg>
+    
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    
+    <div class="content-wrapper">
+      <header class="header">
+        <div class="logo">Лови</div>
+        <nav class="nav" id="navMenu">
+          <a href="/" class="nav-link">Главная</a>
+          <a href="/catalog.html" class="nav-link">Каталог</a>
+          <a href="/partners.html" class="nav-link">Партнерам</a>
+          <a href="/user-cabinet.html" class="nav-link active">Кабинет</a>
+        </nav>
+        <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+        <div class="theme-switcher">
+          <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+          <div class="theme-dropdown" id="themeDropdown">
+            <button class="theme-option light-theme" data-theme="light" aria-label="Светлая тема">☀️</button>
+            <button class="theme-option dark-theme" data-theme="dark" aria-label="Темная тема">🌙</button>
+            <button class="theme-option bright-theme" data-theme="bright" aria-label="Яркая тема">💡</button>
+          </div>
+        </div>
+      </header>
+      
+      <section class="cabinet-content">
+        <div class="cabinet-header">
+          <h1>Личный кабинет</h1>
+          <p>Управление вашей картой лояльности и историей покупок</p>
+        </div>
 
-  <div id="header"></div>
+        <div class="loyalty-card" role="region" aria-label="Карта лояльности">
+          <div class="card-number" aria-label="Номер карты">1234 5678 9012 3456</div>
+          <div class="card-holder" aria-label="Владелец карты">Владимир И.</div>
+        </div>
 
-<main class="container">
-  <h1>Личный кабинет</h1>
+        <div class="cabinet-sections">
+          <div class="balance-info">
+            <div class="balance-card">
+              <div class="balance-label">Баланс</div>
+              <div class="balance-value">15,000</div>
+              <div class="balance-label">баллов</div>
+            </div>
+            <div class="balance-card">
+              <div class="balance-label">До следующего уровня</div>
+              <div class="balance-value">2,500</div>
+              <div class="balance-label">баллов</div>
+            </div>
+            <div class="balance-card">
+              <div class="balance-label">Кэшбэк в этом месяце</div>
+              <div class="balance-value">1,200</div>
+              <div class="balance-label">баллов</div>
+            </div>
+          </div>
 
-  <div class="loyalty-card" role="region" aria-label="Карта лояльности">
-    <div class="card-number" aria-label="Номер карты">1234 5678 9012 3456</div>
-    <div class="card-holder" aria-label="Владелец карты">Владимир И.</div>
+          <div class="promo-section">
+            <h2 class="section-title">Активировать промокод</h2>
+            <p>Введите промокод, чтобы получить дополнительные баллы</p>
+            <div class="promo-form">
+              <input type="text" class="promo-input" placeholder="Введите промокод">
+              <button class="promo-button">Активировать</button>
+            </div>
+          </div>
+
+          <section class="history-section" aria-label="История операций">
+            <h2 class="section-title">История операций</h2>
+            <div class="filter-controls">
+              <label for="filterPeriod">Сортировать по:</label>
+              <select id="filterPeriod" class="filter-period" aria-controls="operationsList">
+                <option value="week">По неделям</option>
+                <option value="month" selected>По месяцам</option>
+              </select>
+            </div>
+            <ul class="history-list" id="operationsList">
+              <li class="history-item income">
+                <div class="history-details">
+                  <div class="history-merchant">Ресторан "Море вкуса"</div>
+                  <div class="history-date">15.11.2023, 19:45</div>
+                </div>
+                <div class="history-amount income">+150 баллов</div>
+              </li>
+              <li class="history-item expense">
+                <div class="history-details">
+                  <div class="history-merchant">Скидка на покупку</div>
+                  <div class="history-date">14.11.2023, 16:20</div>
+                </div>
+                <div class="history-amount expense">-1,000 баллов</div>
+              </li>
+              <li class="history-item income">
+                <div class="history-details">
+                  <div class="history-merchant">Магазин "Свежий урожай"</div>
+                  <div class="history-date">13.11.2023, 12:30</div>
+                </div>
+                <div class="history-amount income">+200 баллов</div>
+              </li>
+              <li class="history-item income">
+                <div class="history-details">
+                  <div class="history-merchant">Промокод "НОВЫЙ2023"</div>
+                  <div class="history-date">12.11.2023, 10:15</div>
+                </div>
+                <div class="history-amount income">+500 баллов</div>
+              </li>
+              <li class="history-item income">
+                <div class="history-details">
+                  <div class="history-merchant">Такси "Быстрое"</div>
+                  <div class="history-date">10.11.2023, 18:40</div>
+                </div>
+                <div class="history-amount income">+100 баллов</div>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </div>
+    
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Лови</h3>
+          <p>Программа лояльности нового поколения</p>
+        </div>
+        <div class="footer-section">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/catalog.html">Каталог</a></li>
+            <li><a href="/partners.html">Партнерам</a></li>
+            <li><a href="/about.html">О нас</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Контакты</h4>
+          <ul>
+            <li><a href="/contacts.html">Контактная информация</a></li>
+            <li><a href="/support.html">Поддержка</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Лови. Все права защищены.</p>
+      </div>
+    </footer>
   </div>
 
-  <section aria-label="История операций">
-    <div class="section-title">История операций</div>
-    <label for="filterPeriod">Сортировать по:</label>
-    <select id="filterPeriod" aria-controls="operationsList">
-      <option value="week">По неделям</option>
-      <option value="month">По месяцам</option>
-    </select>
-    <ul class="list" id="operationsList" tabindex="0">
-      <!-- сюда подгрузится история -->
-    </ul>
-  </section>
-</main>
-
-<div id="footer"></div>
-
-<script src="header.js"></script>
-<script src="footer.js"></script>
-<script src="themeSwitcher.js"></script>
-<script src="js/common.js"></script>
-<script src="js/user-cabinet.js"></script>
-
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      
+      // Переключение темы
+      themeToggle?.addEventListener('click', function(e) {
+        e.stopPropagation(); // Останавливаем всплытие, чтобы дропдаун открылся
+        // Просто открываем/закрываем дропдаун, без переключения темы
+      });
+      
+      // Обработчики для каждой темы
+      document.querySelectorAll('.theme-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const theme = e.target.getAttribute('data-theme');
+          setTheme(theme);
+        });
+      });
+      
+      // При клике вне дропдауна - закрываем его
+      document.addEventListener('click', () => {
+        document.querySelector('.theme-dropdown').style.display = 'none';
+      });
+      
+      function setTheme(theme) {
+        // Удаляем все классы тем
+        body.classList.remove('dark-theme', 'bright-theme');
+        
+        if (theme === 'dark') {
+          body.classList.add('dark-theme');
+          localStorage.setItem('theme', 'dark');
+          document.getElementById('themeToggle').textContent = '💡';
+        } else if (theme === 'bright') {
+          body.classList.add('bright-theme');
+          localStorage.setItem('theme', 'bright');
+          document.getElementById('themeToggle').textContent = '☀️';
+        } else {
+          // Светлая тема по умолчанию
+          body.classList.remove('dark-theme', 'bright-theme');
+          localStorage.setItem('theme', 'light');
+          document.getElementById('themeToggle').textContent = '🌙';
+        }
+      }
+      
+      // При загрузке страницы, устанавливаем тему из localStorage (если была)
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+      
+      // Анимация при скролле
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      
+      // Наблюдение за карточками функций
+      document.querySelectorAll('.balance-card, .history-item').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+      
+      // Обработчик промокода
+      const promoButton = document.querySelector('.promo-button');
+      if(promoButton) {
+        promoButton.addEventListener('click', function() {
+          const promoInput = document.querySelector('.promo-input');
+          if(promoInput && promoInput.value.trim() !== '') {
+            alert('Промокод "' + promoInput.value + '" успешно активирован!');
+            promoInput.value = '';
+          } else {
+            alert('Пожалуйста, введите промокод');
+          }
+        });
+      }
+      
+      // Обработчик селекта фильтра
+      const filterSelect = document.getElementById('filterPeriod');
+      if(filterSelect) {
+        filterSelect.addEventListener('change', function() {
+          // Здесь будет логика фильтрации истории операций
+          console.log('Фильтр изменен на:', this.value);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

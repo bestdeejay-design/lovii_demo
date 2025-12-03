@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Контакты — Лови - Программа лояльности</title>
+  <title>Поддержка — Лови - Программа лояльности</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -328,8 +328,8 @@
       }
     }
     
-    /* Специфические стили для страницы контактов */
-    .contact-content {
+    /* Специфические стили для страницы поддержки */
+    .support-content {
       padding: 6rem 0;
     }
     
@@ -351,15 +351,14 @@
       margin: 0 auto;
     }
     
-    .contact-grid {
+    .support-options {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto 4rem;
+      margin: 4rem 0;
     }
     
-    .contact-card {
+    .support-option {
       background: white;
       border-radius: 15px;
       padding: 2rem;
@@ -368,30 +367,72 @@
       transition: all 0.3s ease;
     }
     
-    .contact-card:hover {
+    .support-option:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 40px rgba(52, 152, 219, 0.15);
     }
     
-    .contact-icon {
+    .support-icon {
       font-size: 3rem;
       margin-bottom: 1.5rem;
     }
     
-    .contact-card h3 {
+    .support-option h3 {
       font-size: 1.3rem;
       color: #2c3e50;
       margin-bottom: 1rem;
     }
     
-    .contact-card p {
+    .support-option p {
       color: #7f8c8d;
       line-height: 1.6;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
     }
     
-    .contact-card p:last-child {
-      margin-bottom: 0;
+    .faq-section {
+      max-width: 800px;
+      margin: 6rem auto;
+    }
+    
+    .faq-item {
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .faq-question {
+      padding: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+    
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+    
+    .faq-item.active .faq-answer {
+      padding: 0 1.5rem 1.5rem;
+      max-height: 500px;
     }
     
     .contact-form-section {
@@ -409,13 +450,6 @@
       margin-bottom: 2rem;
     }
     
-    .contact-form .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
     .contact-form .form-group {
       margin-bottom: 1.5rem;
     }
@@ -428,7 +462,8 @@
     }
     
     .contact-form .form-group input,
-    .contact-form .form-group textarea {
+    .contact-form .form-group textarea,
+    .contact-form .form-group select {
       width: 100%;
       padding: 0.8rem 1rem;
       border: 2px solid #e0e0e0;
@@ -438,7 +473,8 @@
     }
     
     .contact-form .form-group input:focus,
-    .contact-form .form-group textarea:focus {
+    .contact-form .form-group textarea:focus,
+    .contact-form .form-group select:focus {
       outline: none;
       border-color: #3498db;
     }
@@ -450,22 +486,6 @@
     
     .contact-form .btn {
       width: 100%;
-    }
-    
-    .map-section {
-      margin: 4rem 0;
-      text-align: center;
-    }
-    
-    .map-placeholder {
-      background: #e0e0e0;
-      height: 300px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7f8c8d;
-      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -511,64 +531,99 @@
         </div>
       </header>
       
-      <section class="contact-content">
+      <section class="support-content">
         <div class="section-header">
-          <h1>Контактная информация</h1>
-          <p>Свяжитесь с нами любым удобным способом</p>
+          <h1>Центр поддержки</h1>
+          <p>Мы всегда готовы помочь вам с любыми вопросами</p>
         </div>
 
-        <div class="contact-grid">
-          <div class="contact-card">
-            <div class="contact-icon">📧</div>
-            <h3>Email</h3>
-            <p>support@loviprogram.com</p>
-            <p>partners@loviprogram.com</p>
+        <div class="support-options">
+          <div class="support-option">
+            <div class="support-icon">💬</div>
+            <h3>Чат поддержки</h3>
+            <p>Общайтесь с нашими специалистами в реальном времени</p>
+            <a href="#" class="btn btn-primary">Начать чат</a>
           </div>
           
-          <div class="contact-card">
-            <div class="contact-icon">📱</div>
-            <h3>Телефон</h3>
-            <p>+7 (495) 123-45-67</p>
-            <p>+7 (495) 765-43-21</p>
+          <div class="support-option">
+            <div class="support-icon">📧</div>
+            <h3>Email поддержка</h3>
+            <p>Отправьте нам письмо, и мы ответим в течение 24 часов</p>
+            <a href="mailto:support@loviprogram.com" class="btn btn-primary">Написать письмо</a>
           </div>
           
-          <div class="contact-card">
-            <div class="contact-icon">🏢</div>
-            <h3>Адрес</h3>
-            <p>г. Москва, ул. Примерная, д. 15</p>
-            <p>офис 305</p>
+          <div class="support-option">
+            <div class="support-icon">📞</div>
+            <h3>Телефонная поддержка</h3>
+            <p>Позвоните нам для получения мгновенной помощи</p>
+            <a href="tel:+74951234567" class="btn btn-primary">Позвонить</a>
+          </div>
+        </div>
+
+        <div class="faq-section">
+          <div class="section-header">
+            <h2>Часто задаваемые вопросы</h2>
+            <p>Ответы на наиболее популярные вопросы</p>
           </div>
           
-          <div class="contact-card">
-            <div class="contact-icon">🕒</div>
-            <h3>Время работы</h3>
-            <p>Пн-Пт: 9:00 - 18:00</p>
-            <p>Сб-Вс: 10:00 - 16:00</p>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question">Как зарегистрироваться в программе лояльности?</div>
+              <div class="faq-answer">
+                <p>Чтобы зарегистрироваться в программе лояльности "Лови", перейдите на страницу регистрации и заполните необходимые данные. После этого вы получите доступ к личному кабинету и сможете начать накапливать баллы.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question">Как начисляются баллы?</div>
+              <div class="faq-answer">
+                <p>Баллы начисляются за покупки у участников программы. Размер кэшбэка зависит от конкретного партнера и может варьироваться от 1% до 20%. Информация о начислениях отображается в личном кабинете.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question">Как использовать накопленные баллы?</div>
+              <div class="faq-answer">
+                <p>Накопленные баллы можно использовать для получения скидок у участников программы. Для этого при оплате покупки сообщите номер вашей карты лояльности или используйте промокод из личного кабинета.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question">Какие документы требуются для участия?</div>
+              <div class="faq-answer">
+                <p>Для участия в программе лояльности "Лови" не требуется никаких документов. Достаточно зарегистрироваться на сайте или получить карту лояльности в одном из наших партнёров.</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="contact-form-section">
-          <h2>Написать нам</h2>
-          <form class="contact-form" id="contactForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Имя</label>
-                <input type="text" id="name" name="name" required>
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-              </div>
+          <h2>Связаться с нами</h2>
+          <form class="contact-form" id="supportForm">
+            <div class="form-group">
+              <label for="supportName">Имя</label>
+              <input type="text" id="supportName" name="supportName" required>
             </div>
             <div class="form-group">
-              <label for="subject">Тема сообщения</label>
-              <input type="text" id="subject" name="subject" required>
+              <label for="supportEmail">Email</label>
+              <input type="email" id="supportEmail" name="supportEmail" required>
             </div>
             <div class="form-group">
-              <label for="message">Сообщение</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
+              <label for="supportCategory">Категория вопроса</label>
+              <select id="supportCategory" name="supportCategory" required>
+                <option value="">Выберите категорию</option>
+                <option value="registration">Регистрация и аккаунт</option>
+                <option value="points">Начисление и списание баллов</option>
+                <option value="partners">Партнёры и предложения</option>
+                <option value="technical">Технические вопросы</option>
+                <option value="other">Другое</option>
+              </select>
             </div>
-            <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+            <div class="form-group">
+              <label for="supportMessage">Сообщение</label>
+              <textarea id="supportMessage" name="supportMessage" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить запрос</button>
           </form>
         </div>
       </section>
@@ -669,20 +724,36 @@
       }, observerOptions);
       
       // Наблюдение за карточками функций
-      document.querySelectorAll('.contact-card').forEach(card => {
+      document.querySelectorAll('.support-option').forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
       });
       
-      // Обработчик формы
-      const contactForm = document.getElementById('contactForm');
-      if(contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+      // FAQ accordion functionality
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+          // Закрываем все остальные элементы
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+            }
+          });
+          // Переключаем текущий элемент
+          item.classList.toggle('active');
+        });
+      });
+      
+      // Обработчик формы поддержки
+      const supportForm = document.getElementById('supportForm');
+      if(supportForm) {
+        supportForm.addEventListener('submit', function(e) {
           e.preventDefault();
-          alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-          contactForm.reset();
+          alert('Ваш запрос успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+          supportForm.reset();
         });
       }
     });

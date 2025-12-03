@@ -10,7 +10,14 @@ document.getElementById('header').innerHTML = `
         <a href="/partners.html" class="nav-link">Партнерам</a>
         <a href="/login.html" class="nav-link">Войти</a>
       </nav>
-      <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+      <div class="theme-switcher">
+        <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+        <div class="theme-dropdown" id="themeDropdown">
+          <button class="theme-option light-theme" data-theme="light" aria-label="Светлая тема">☀️</button>
+          <button class="theme-option dark-theme" data-theme="dark" aria-label="Темная тема">🌙</button>
+          <button class="theme-option bright-theme" data-theme="bright" aria-label="Яркая тема">💡</button>
+        </div>
+      </div>
     </div>
   </header>
 `;
