@@ -1,11 +1,31 @@
 // footer.js
 document.getElementById('footer').innerHTML = `
   <footer class="footer">
-    <nav class="footer-nav">
-      <a href="document.html#terms">Правила</a>
-      <a href="document.html#faq">FAQ</a>
-      <a href="document.html#contacts">Контакты</a>
-    </nav>
-    <p>&copy; 2025 Лови. Все права защищены.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Лови</h3>
+        <p>Программа лояльности нового поколения</p>
+      </div>
+      <div class="footer-section">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/catalog.html">Каталог</a></li>
+          <li><a href="/partners.html">Партнерам</a></li>
+          <li><a href="/about.html">О нас</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="/contacts.html">Контактная информация</a></li>
+          <li><a href="/support.html">Поддержка</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Лови. Все права защищены.</p>
+    </div>
   </footer>
 `;
