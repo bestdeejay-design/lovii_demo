@@ -1,525 +1,483 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Главная — Лови - Программа лояльности</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Витрина — цифровая полка для малого бизнеса</title>
   <style>
+    :root {
+      --bg: #0f0f0f;
+      --text: #f0f0f0;
+      --text-secondary: #aaa;
+      --accent: #4cc9f0;
+      --border: #2a2a2a;
+      --card: #1a1a1a;
+      --shadow: rgba(0,0,0,0.4);
+    }
+
+    .theme-forest {
+      --bg: #f0f5f0;
+      --text: #2a3a2a;
+      --text-secondary: #4a5a4a;
+      --accent: #3a6b4f;
+      --border: #dbe5db;
+      --card: #ffffff;
+      --shadow: rgba(58, 107, 79, 0.12);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Montserrat', sans-serif;
+    html, body {
       overflow-x: hidden;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-      color: #333;
     }
 
-    .modern-landing {
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      transition: background-color 0.4s, color 0.4s;
       min-height: 100vh;
       position: relative;
-      overflow: hidden;
     }
 
-    .svg-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.1;
-    }
-
-    .content-wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .hero-section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 80vh;
-      padding: 4rem 0;
-    }
-
-    .hero-content {
-      flex: 1;
-      max-width: 600px;
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .hero-content h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      color: #555;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: none;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: #3498db;
-      border: 2px solid #3498db;
-    }
-
-    .btn-secondary:hover {
-      background: #3498db;
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    .hero-visual {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .floating-card {
-      width: 300px;
-      height: 200px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .floating-card::before {
-      content: '';
-      position: absolute;
+    /* SVG Background */
+    .svg-bg {
+      position: fixed;
       top: -50%;
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(52, 152, 219, 0.1), transparent);
-      transform: rotate(45deg);
-      animation: shine 3s infinite;
+      z-index: -1;
+      opacity: 0.06;
+      pointer-events: none;
     }
 
-    .card-content {
-      text-align: center;
-      z-index: 2;
-      padding: 2rem;
+    .svg-bg path {
+      fill: var(--accent);
+      animation: rotateSvg 100s linear infinite;
+      transform-origin: center;
     }
 
-    .card-content h3 {
-      color: #2c3e50;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
+    @keyframes rotateSvg {
+      to { transform: rotate(360deg); }
     }
 
-    .card-content .points {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #3498db;
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* HEADER */
+    header {
+      background: var(--card);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-decoration: none;
     }
 
-    @keyframes shine {
-      0% {
-        transform: rotate(45deg) translateX(-100%);
-      }
-      100% {
-        transform: rotate(45deg) translateX(100%);
-      }
+    .logo span {
+      background: linear-gradient(90deg, var(--accent), #a0d2eb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .features-section {
-      padding: 6rem 0;
-      text-align: center;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      color: #2c3e50;
-    }
-
-    .section-subtitle {
-      font-size: 1.2rem;
-      color: #7f8c8d;
-      max-width: 600px;
-      margin: 0 auto 3rem;
-      line-height: 1.6;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
+    .desktop-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
       margin: 0 auto;
     }
 
-    .feature-card {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
+    .desktop-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
     }
 
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(52, 152, 219, 0.15);
+    .desktop-nav a:hover {
+      color: var(--accent);
     }
 
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
+    .theme-toggle {
+      width: 42px;
+      height: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow);
     }
 
-    .feature-card h3 {
+    .toggle-knob {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #4cc9f0;
+      transition: transform 0.3s;
+    }
+
+    .theme-forest .toggle-knob {
+      background: #3a6b4f;
+      transform: translateX(18px);
+    }
+
+    /* OFF-CANVAS MENU */
+    .overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .offcanvas-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80%;
+      max-width: 320px;
+      height: 100%;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      box-shadow: -6px 0 20px rgba(0, 0, 0, 0.4);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.6, 0.04, 0.98, 0.34);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      color: var(--text);
+    }
+
+    .offcanvas-menu.active {
+      transform: translateX(0);
+    }
+
+    .close-menu {
+      background: none;
+      border: none;
       font-size: 1.5rem;
-      color: #2c3e50;
+      color: var(--text);
+      cursor: pointer;
+      align-self: flex-end;
+    }
+
+    .offcanvas-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .offcanvas-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      padding: 0.5rem 0;
+      transition: color 0.2s;
+    }
+
+    .offcanvas-nav a:hover {
+      color: var(--accent);
+    }
+
+    .offcanvas-theme {
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* FAB MENU BUTTON */
+    .menu-fab {
+      display: none;
+      position: fixed;
+      bottom: 25vh;
+      right: 1.25rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* MAIN */
+    main {
+      padding: 4rem 0 3rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
       margin-bottom: 1rem;
     }
 
-    .feature-card p {
-      color: #7f8c8d;
-      line-height: 1.6;
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto 1.75rem;
     }
 
-    .floating-shapes {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
+    .cta-button {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
     }
 
-    .shape {
-      position: absolute;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
-      opacity: 0.1;
-      animation: floatShape 15s infinite linear;
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
     }
 
-    .shape:nth-child(1) {
-      width: 100px;
-      height: 100px;
-      top: 20%;
-      left: 10%;
-      animation-duration: 20s;
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px var(--shadow);
     }
 
-    .shape:nth-child(2) {
-      width: 150px;
-      height: 150px;
-      top: 60%;
-      right: 15%;
-      animation-duration: 25s;
+    footer {
+      background: var(--card);
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
     }
 
-    .shape:nth-child(3) {
-      width: 80px;
-      height: 80px;
-      bottom: 20%;
-      left: 20%;
-      animation-duration: 18s;
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 1rem;
     }
 
-    @keyframes floatShape {
-      0%, 100% {
-        transform: translate(0, 0) rotate(0deg);
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none !important;
       }
-      25% {
-        transform: translate(20px, 30px) rotate(90deg);
+
+      .menu-fab {
+        display: flex;
       }
-      50% {
-        transform: translate(40px, 10px) rotate(180deg);
-      }
-      75% {
-        transform: translate(10px, 40px) rotate(270deg);
+
+      .hero h1 {
+        font-size: 1.8rem;
       }
     }
 
-    @media (max-width: 900px) {
-      .hero-section {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .hero-content {
-        margin-bottom: 3rem;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      
-      .cta-buttons {
-        justify-content: center;
+    @media (min-width: 769px) {
+      .menu-fab {
+        display: none !important;
       }
     }
   </style>
 </head>
-<body>
-  <div class="modern-landing">
-    <svg class="svg-background" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#3498db" stop-opacity="0.1"/>
-          <stop offset="100%" stop-color="#9b59b6" stop-opacity="0.1"/>
-        </linearGradient>
-        <filter id="noise" x="0" y="0">
-          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-        </filter>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#bg-gradient)" />
-      <rect width="100%" height="100%" filter="url(#noise)" opacity="0.05"/>
-    </svg>
-    
-    <div class="floating-shapes">
-      <div class="shape"></div>
-      <div class="shape"></div>
-      <div class="shape"></div>
+<body class="theme-dark">
+  <!-- SVG -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-40Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="#catalog">Каталог</a></li>
+        <li><a href="#how-it-works">Как это работает</a></li>
+        <li><a href="#contacts">Для бизнеса</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
     </div>
-    
-    <div class="content-wrapper">
-      <header class="header">
-        <div class="logo">Лови</div>
-        <nav class="nav" id="navMenu">
-          <a href="/" class="nav-link">Главная</a>
-          <a href="/catalog.html" class="nav-link">Каталог</a>
-          <a href="/partners.html" class="nav-link">Партнерам</a>
-          <a href="/login.html" class="nav-link">Войти</a>
-        </nav>
-        <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
-        <div class="theme-switcher">
-          <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
-          <div class="theme-dropdown" id="themeDropdown">
-            <button class="theme-option light-theme" data-theme="light" aria-label="Светлая тема">☀️</button>
-            <button class="theme-option dark-theme" data-theme="dark" aria-label="Темная тема">🌙</button>
-            <button class="theme-option bright-theme" data-theme="bright" aria-label="Яркая тема">💡</button>
-          </div>
-        </div>
-      </header>
-      
-      <section class="hero-section">
-        <div class="hero-content">
-          <h1>Современная программа лояльности</h1>
-          <p>Присоединяйтесь к инновационной системе вознаграждений, где каждый ваш шаг приносит выгоду. Получайте кэшбэк, копите баллы и расплачивайтесь ими за покупки у наших партнеров.</p>
-          <div class="cta-buttons">
-            <a href="/catalog.html" class="btn btn-primary">Начать экономить</a>
-            <a href="/partners.html" class="btn btn-secondary">Стать партнером</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="floating-card">
-            <div class="card-content">
-              <h3>Ваша карта</h3>
-              <div class="points">15,000 баллов</div>
-            </div>
-          </div>
-        </div>
-      </section>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="#catalog">Каталог</a></li>
+        <li><a href="#how-it-works">Как это работает</a></li>
+        <li><a href="#contacts">Для бизнеса</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
     </div>
-    
-    <section class="features-section">
-      <div class="content-wrapper">
-        <h2 class="section-title">Как это работает</h2>
-        <p class="section-subtitle">Простая и понятная система лояльности, разработанная с учетом современных тенденций UX-дизайна</p>
-        
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🛒</div>
-            <h3>Покупайте</h3>
-            <p>Делайте покупки у наших проверенных партнеров и автоматически получайте кэшбэк на ваш счет</p>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon">💎</div>
-            <h3>Копите</h3>
-            <p>Накапливайте баллы ЛОВИ за каждую покупку, без сложных условий и ограничений</p>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon">🎁</div>
-            <h3>Тратьте</h3>
-            <p>Используйте накопленные баллы для получения скидок и эксклюзивных подарков</p>
-          </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Ваша цифровая полка — в миллионах корзин</h1>
+      <p>«Витрина» даёт самозанятым и ИП мгновенный доступ к покупателям через действующий сервис доставки. Без логистики, без маркетинга — просто добавьте товары.</p>
+      <a href="#catalog" class="cta-button">Подключить бизнес</a>
+    </section>
+
+    <section class="audience">
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">Кто уже продаёт</h2>
+      <div class="audience-grid">
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Фермеры и производители</h3>
+          <p>Свежие продукты, сыры, выпечка — напрямую в корзину покупателя.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Ремесленники</h3>
+          <p>Хендмейд, керамика, натуральная косметика — без посредников.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Местные бренды</h3>
+          <p>Крафтовые напитки, специи, текстиль — ваше производство на виду.</p>
         </div>
       </div>
     </section>
-    
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Лови</h3>
-          <p>Программа лояльности нового поколения</p>
-        </div>
-        <div class="footer-section">
-          <h4>Навигация</h4>
-          <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/catalog.html">Каталог</a></li>
-            <li><a href="/partners.html">Партнерам</a></li>
-            <li><a href="/about.html">О нас</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>Контакты</h4>
-          <ul>
-            <li><a href="/contacts.html">Контактная информация</a></li>
-            <li><a href="/support.html">Поддержка</a></li>
-            <li><a href="/faq.html">FAQ</a></li>
-          </ul>
-        </div>
+
+    <section class="contacts" id="contacts" style="text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+      <p>Готовы начать? Напишите: business@vitrina.example</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links">
+        <a href="#">Условия</a>
+        <a href="#">Конфиденциальность</a>
+        <a href="#">Помощь</a>
       </div>
-      <div class="footer-bottom">
-        <p>© 2025 Лови. Все права защищены.</p>
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   <script>
-    // Анимация для плавающих элементов
-    document.addEventListener('DOMContentLoaded', function() {
-      const themeToggle = document.getElementById('themeToggle');
-      const body = document.body;
-      
-      // Переключение темы
-      themeToggle?.addEventListener('click', function(e) {
-        e.stopPropagation(); // Останавливаем всплытие, чтобы дропдаун открылся
-        // Просто открываем/закрываем дропдаун, без переключения темы
-      });
-      
-      // Обработчики для каждой темы
-      document.querySelectorAll('.theme-option').forEach(option => {
-        option.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const theme = e.target.getAttribute('data-theme');
-          setTheme(theme);
+    // Theme
+    const body = document.body;
+    const savedTheme = localStorage.getItem('vitrina-theme') || 'dark';
+    body.className = `theme-${savedTheme}`;
+
+    const toggleKnobs = document.querySelectorAll('.toggle-knob');
+    const isForest = savedTheme === 'forest';
+    toggleKnobs.forEach(knob => {
+      knob.style.transform = isForest ? 'translateX(18px)' : 'translateX(0)';
+    });
+
+    const toggleButtons = document.querySelectorAll('.theme-toggle');
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isNowForest = body.classList.contains('theme-forest');
+        const newTheme = isNowForest ? 'dark' : 'forest';
+        body.className = `theme-${newTheme}`;
+        localStorage.setItem('vitrina-theme', newTheme);
+        toggleKnobs.forEach(k => {
+          k.style.transform = newTheme === 'forest' ? 'translateX(18px)' : 'translateX(0)';
         });
       });
-      
-      // При клике вне дропдауна - закрываем его
-      document.addEventListener('click', () => {
-        document.querySelector('.theme-dropdown').style.display = 'none';
-      });
-      
-      function setTheme(theme) {
-        // Удаляем все классы тем
-        body.classList.remove('dark-theme', 'bright-theme');
-        
-        if (theme === 'dark') {
-          body.classList.add('dark-theme');
-          localStorage.setItem('theme', 'dark');
-          document.getElementById('themeToggle').textContent = '💡';
-        } else if (theme === 'bright') {
-          body.classList.add('bright-theme');
-          localStorage.setItem('theme', 'bright');
-          document.getElementById('themeToggle').textContent = '☀️';
-        } else {
-          // Светлая тема по умолчанию
-          body.classList.remove('dark-theme', 'bright-theme');
-          localStorage.setItem('theme', 'light');
-          document.getElementById('themeToggle').textContent = '🌙';
-        }
-      }
-      
-      // При загрузке страницы, устанавливаем тему из localStorage (если была)
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      setTheme(savedTheme);
-      
-      // Анимация при скролле
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-      
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, observerOptions);
-      
-      // Наблюдение за карточками функций
-      document.querySelectorAll('.feature-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-      });
+    });
+
+    // Mobile menu
+    const menuFab = document.getElementById('menuFab');
+    const closeMenu = document.getElementById('closeMenu');
+    const overlay = document.getElementById('overlay');
+    const offcanvasMenu = document.getElementById('offcanvasMenu');
+
+    const openMenu = () => {
+      offcanvasMenu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenuHandler = () => {
+      offcanvasMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    // ОБЯЗАТЕЛЬНО: обработчик клика на FAB-кнопку
+    menuFab.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', closeMenuHandler);
+    overlay.addEventListener('click', closeMenuHandler);
+
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('.offcanvas-nav a').forEach(link => {
+      link.addEventListener('click', closeMenuHandler);
     });
   </script>
 </body>
