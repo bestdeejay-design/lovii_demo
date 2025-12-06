@@ -344,7 +344,7 @@
     }
   </style>
 </head>
-<body class="theme-dark">
+<body>
   <!-- SVG -->
   <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-40Z" transform="translate(100,100)"/>
@@ -431,24 +431,39 @@
     // Theme
     const body = document.body;
     const savedTheme = localStorage.getItem('vitrina-theme') || 'dark';
-    body.className = `theme-${savedTheme}`;
+    
+    // Apply saved theme on load
+    body.classList.remove('theme-dark', 'theme-forest'); // Remove any existing theme classes
+    body.classList.add(`theme-${savedTheme}`);
 
-    const toggleKnobs = document.querySelectorAll('.toggle-knob');
-    const isForest = savedTheme === 'forest';
-    toggleKnobs.forEach(knob => {
-      knob.style.transform = isForest ? 'translateX(18px)' : 'translateX(0)';
-    });
+    // Update toggle knobs based on saved theme
+    const updateToggleKnobs = (isForest) => {
+      const toggleKnobs = document.querySelectorAll('.toggle-knob');
+      toggleKnobs.forEach(knob => {
+        knob.style.transform = isForest ? 'translateX(18px)' : 'translateX(0)';
+      });
+    };
+
+    // Set initial state for toggle knobs
+    updateToggleKnobs(savedTheme === 'forest');
 
     const toggleButtons = document.querySelectorAll('.theme-toggle');
     toggleButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
         const isNowForest = body.classList.contains('theme-forest');
         const newTheme = isNowForest ? 'dark' : 'forest';
-        body.className = `theme-${newTheme}`;
+        
+        // Remove old theme classes and add new one
+        body.classList.remove('theme-dark', 'theme-forest');
+        body.classList.add(`theme-${newTheme}`);
+        
         localStorage.setItem('vitrina-theme', newTheme);
-        toggleKnobs.forEach(k => {
-          k.style.transform = newTheme === 'forest' ? 'translateX(18px)' : 'translateX(0)';
-        });
+        
+        // Update all toggle knobs
+        updateToggleKnobs(newTheme === 'forest');
       });
     });
 
