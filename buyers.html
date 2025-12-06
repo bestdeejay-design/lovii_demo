@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Витрина — цифровая полка для малого бизнеса</title>
+  <title>Для покупателей — Витрина</title>
   <style>
     :root {
       --bg: #0f0f0f;
@@ -280,6 +280,42 @@
       transition: all 0.2s;
     }
 
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .auth-section {
+      text-align: center;
+      padding: 3rem 0;
+      margin: 2rem 0;
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .auth-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .auth-buttons a {
+      text-decoration: none;
+    }
+
     .btn-secondary {
       background: transparent;
       color: var(--accent);
@@ -294,21 +330,6 @@
     .btn-secondary:hover {
       background: var(--accent);
       color: var(--bg);
-    }
-
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px var(--shadow);
     }
 
     footer {
@@ -351,6 +372,11 @@
       .hero h1 {
         font-size: 1.8rem;
       }
+
+      .auth-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
     }
 
     @media (min-width: 769px) {
@@ -363,7 +389,7 @@
 <body>
   <!-- SVG -->
   <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-40Z" transform="translate(100,100)"/>
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
   </svg>
 
   <!-- Off-canvas elements -->
@@ -372,9 +398,12 @@
     <button class="close-menu" id="closeMenu">×</button>
     <nav class="offcanvas-nav">
       <ul>
+        <li><a href="/">Главная</a></li>
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -390,9 +419,12 @@
     <a href="/" class="logo"><span>Витрина</span></a>
     <nav class="desktop-nav">
       <ul>
+        <li><a href="/">Главная</a></li>
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -406,74 +438,60 @@
 
   <main class="container">
     <section class="hero">
-      <h1>Ваша цифровая полка — в миллионах корзин</h1>
-      <p>«Витрина» даёт самозанятым и ИП мгновенный доступ к покупателям через действующий сервис доставки. Без логистики, без маркетинга — просто добавьте товары.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
-        <a href="/business.html" class="cta-button">Подключить бизнес</a>
-        <a href="/register-partner.html" class="btn-secondary">Регистрация партнёра</a>
-        <a href="/register-customer.html" class="btn-secondary">Регистрация покупателя</a>
-      </div>
+      <h1>Для покупателей</h1>
+      <p>Найдите уникальные товары от местных производителей и ремесленников. Поддержите самозанятых и малый бизнес в вашем регионе.</p>
     </section>
 
-    <section class="project-info" style="text-align: center; margin: 3rem 0; padding: 2rem; background: var(--card); border-radius: 14px; border: 1px solid var(--border);">
-      <h2 style="margin-bottom: 1rem;">О проекте "Витрина"</h2>
-      <p style="max-width: 800px; margin: 0 auto 1.5rem; color: var(--text-secondary);">
-        "Витрина" — это инновационная платформа, которая соединяет местных производителей и ремесленников с покупателями через 
-        существующие сервисы доставки. Мы создаём цифровое пространство, где самозанятые и малый бизнес могут легко и быстро 
-        получить доступ к широкой аудитории без необходимости создавать собственные интернет-магазины и решать логистические вопросы.
-      </p>
-      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-        <div style="text-align: center; min-width: 200px;">
-          <h3 style="color: var(--accent); margin-bottom: 0.5rem;">1000+</h3>
-          <p style="color: var(--text-secondary);">Продавцов</p>
-        </div>
-        <div style="text-align: center; min-width: 200px;">
-          <h3 style="color: var(--accent); margin-bottom: 0.5rem;">10M+</h3>
-          <p style="color: var(--text-secondary);">Покупателей</p>
-        </div>
-        <div style="text-align: center; min-width: 200px;">
-          <h3 style="color: var(--accent); margin-bottom: 0.5rem;">50+</h3>
-          <p style="color: var(--text-secondary);">Городов</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="audience">
-      <h2 style="text-align: center; margin-bottom: 1.5rem;">Кто уже продаёт</h2>
-      <div class="audience-grid">
+    <section class="features">
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">Почему стоит покупать через "Витрина"</h2>
+      <div class="features-grid">
         <div class="card">
-          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Фермеры и производители</h3>
-          <p>Свежие продукты, сыры, выпечка — напрямую в корзину покупателя.</p>
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Местные товары</h3>
+          <p>Откройте для себя уникальные продукты от местных производителей: от свежих фермерских продуктов до авторских вещей ручной работы.</p>
         </div>
         <div class="card">
-          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Ремесленники</h3>
-          <p>Хендмейд, керамика, натуральная косметика — без посредников.</p>
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Удобная доставка</h3>
+          <p>Товары доставляются через проверенные сервисы доставки, которые вы уже используете — без необходимости регистрироваться на новых платформах.</p>
         </div>
         <div class="card">
-          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Местные бренды</h3>
-          <p>Крафтовые напитки, специи, текстиль — ваше производство на виду.</p>
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Поддержка сообщества</h3>
+          <p>Ваши покупки напрямую помогают самозанятым и малым предприятиям, укрепляя экономику вашего региона.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Высокое качество</h3>
+          <p>Тщательно отобранные продавцы с проверенными сертификатами и положительными отзывами.</p>
         </div>
       </div>
     </section>
 
-    <section class="business-info" style="text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
-      <h2>Готовы начать?</h2>
-      <p>Присоединяйтесь к "Витрине" и начните продавать через сервисы доставки</p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
-        <a href="/business.html" class="cta-button">Подключить бизнес</a>
-        <a href="/login-partner.html" class="btn-secondary">Войти как партнёр</a>
+    <section class="auth-section">
+      <h2>Начните покупать</h2>
+      <p>Войдите в систему или зарегистрируйтесь, чтобы получить доступ к эксклюзивным предложениям от местных производителей</p>
+      <div class="auth-buttons">
+        <a href="/login-customer.html" class="cta-button">Войти</a>
+        <a href="/register-customer.html" class="btn-secondary">Регистрация</a>
       </div>
     </section>
 
-    <section class="customer-info" style="text-align: center; margin: 3rem 0; padding: 2rem; background: var(--card); border-radius: 14px; border: 1px solid var(--border);">
-      <h2 style="margin-bottom: 1rem;">Для покупателей</h2>
-      <p style="max-width: 800px; margin: 0 auto 1.5rem; color: var(--text-secondary);">
-        Откройте для себя уникальные товары от местных производителей. Поддержите самозанятых и малый бизнес в вашем регионе, 
-        получая качественные товары с удобной доставкой через привычные сервисы.
-      </p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="/buyers.html" class="cta-button">Подробнее</a>
-        <a href="/login-customer.html" class="btn-secondary">Войти как покупатель</a>
+    <section class="benefits" style="text-align: center; margin-top: 2.5rem;">
+      <h2>Как это работает</h2>
+      <div class="features-grid">
+        <div class="card">
+          <h3 style="color: var(--accent);">1. Просмотр</h3>
+          <p>Изучайте каталог товаров от местных производителей в вашем регионе</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent);">2. Выбор</h3>
+          <p>Добавляйте понравившиеся товары в корзину</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent);">3. Заказ</h3>
+          <p>Оформляйте заказ через привычные сервисы доставки</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent);">4. Поддержка</h3>
+          <p>Поддерживайте местных предпринимателей с каждой покупкой</p>
+        </div>
       </div>
     </section>
   </main>
@@ -482,6 +500,8 @@
     <div class="footer-content">
       <a href="/" class="logo"><span>Витрина</span></a>
       <div class="footer-links">
+        <a href="/buyers.html">Для покупателей</a>
+        <a href="/partners.html">Для партнёров</a>
         <a href="/terms.html">Условия</a>
         <a href="/privacy.html">Конфиденциальность</a>
         <a href="/help.html">Помощь</a>
