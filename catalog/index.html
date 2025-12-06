@@ -90,6 +90,59 @@
       <!-- Сюда подгружаем карточки -->
     </div>
     
+    <script>
+      // Демо-данные с реальными изображениями продуктов
+      const demoProducts = [
+        { id: 1, name: "Сыр крафтовый 'Деревенский'", price: 450, img: "https://images.unsplash.com/photo-1603064752734-4c48eff53d05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Зелёный луг'", category: "ferm" },
+        { id: 2, name: "Мыло ручной работы 'Лаванда'", price: 280, img: "https://images.unsplash.com/photo-1590491416154-3e55c2d8a224?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Мастерская 'Аромат природы'", category: "beauty" },
+        { id: 3, name: "Мед дикий с лугов", price: 650, img: "https://images.unsplash.com/photo-1626814029240-89bde2a1fad7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Пасека 'Солнечный бор'", category: "ferm" },
+        { id: 4, name: "Керамическая кружка 'Осенняя'", price: 750, img: "https://images.unsplash.com/photo-1597345270105-5a50de5277b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Студия гончара", category: "handmade" },
+        { id: 5, name: "Чайный гриб 'Домашний'", price: 320, img: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферментариум", category: "drinks" },
+        { id: 6, name: "Смесь специй 'Северная'", price: 180, img: "https://images.unsplash.com/photo-1625938140774-7da26eaa1bae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Специи от бабушки", category: "spices" },
+        { id: 7, name: "Свечи восковые 'Тёплый вечер'", price: 420, img: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Свеча-мастер", category: "handmade" },
+        { id: 8, name: "Квас крафтовый 'Домашний'", price: 120, img: "https://images.unsplash.com/photo-1626492407605-0d8d4762d493?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Пивоварня 'Северяночка'", category: "drinks" },
+        { id: 9, name: "Сыр 'Крепыш' твёрдый", price: 580, img: "https://images.unsplash.com/photo-1585317609233-8c0b63270c6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Зелёный луг'", category: "ferm" },
+        { id: 10, name: "Крем для рук 'Малина'", price: 350, img: "https://images.unsplash.com/photo-1584442965411-1e41c07bdda2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Мастерская 'Аромат природы'", category: "beauty" },
+        { id: 11, name: "Шапка вязаная 'Зимняя'", price: 890, img: "https://images.unsplash.com/photo-1591047101833-802a2b7ab4f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Рукодельница Мария", category: "handmade" },
+        { id: 12, name: "Клюквенный морс", price: 220, img: "https://images.unsplash.com/photo-1626492407605-0d8d4762d493?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Ягодный край'", category: "drinks" }
+      ];
+
+      function renderCatalog(products) {
+        const grid = document.getElementById('catalogGrid');
+        grid.innerHTML = products.map(p => `
+          <div class="product-card">
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p class="vendor">${p.vendor}</p>
+            <div class="price">${p.price} ₽</div>
+            <a href="/product.html?id=${p.id}" class="cta-button" style="width: 100%; margin-top: 0.75rem; display: block; text-align: center; text-decoration: none;">Подробнее</a>
+          </div>
+        `).join('');
+      }
+
+      // Инициализация
+      renderCatalog(demoProducts);
+
+      // Обработчики фильтров
+      document.getElementById('price-min').addEventListener('input', function() {
+        document.getElementById('min-value').textContent = this.value + ' ₽';
+      });
+      
+      document.getElementById('price-max').addEventListener('input', function() {
+        document.getElementById('max-value').textContent = this.value + ' ₽';
+      });
+      
+      document.getElementById('apply-filters').addEventListener('click', function() {
+        // Здесь будет логика фильтрации
+        alert('Фильтры применены! (Демо-функция)');
+      });
+      
+      document.getElementById('load-more').addEventListener('click', function() {
+        // Здесь будет логика загрузки ещё товаров
+        alert('Загружаем ещё товары! (Демо-функция)');
+      });
+    </script>
+    
     <div class="pagination" style="text-align: center; margin-top: 2rem;">
       <button id="load-more" class="cta-button">Загрузить ещё</button>
     </div>

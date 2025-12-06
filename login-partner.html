@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Вход для партнёров — Витрина</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/forms.css">
+</head>
+<body>
+  <!-- SVG фон -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <main class="container">
+    <div class="form-container">
+      <div class="form-card">
+        <h2 class="form-title">Вход для партнёров</h2>
+        
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          
+          <button type="submit" class="form-button">Войти</button>
+        </form>
+        
+        <div class="form-footer">
+          <p>Нет аккаунта? <a href="/register-partner.html" style="color: var(--accent); text-decoration: none;">Зарегистрироваться</a></p>
+          <p><a href="/login-customer.html" style="color: var(--accent); text-decoration: none;">Войти как покупатель</a></p>
+        </div>
+        
+        <div class="social-login">
+          <button class="social-btn vk" title="Войти через ВКонтакте">В</button>
+          <button class="social-btn yandex" title="Войти через Яндекс">Я</button>
+          <button class="social-btn google" title="Войти через Google">G</button>
+          <button class="social-btn mailru" title="Войти через Mail.ru">M</button>
+          <button class="social-btn apple" title="Войти через Apple">A</button>
+          <button class="social-btn github" title="Войти через GitHub">G</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links">
+        <a href="/terms.html">Условия</a>
+        <a href="/privacy.html">Конфиденциальность</a>
+        <a href="/help.html">Помощь</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+  <script src="./js/forms.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Валидация формы
+      let isValid = true;
+      
+      if (!validateEmail(email)) {
+        showError(document.getElementById('email'), 'Пожалуйста, введите корректный email');
+        isValid = false;
+      }
+      
+      if (!isValid) return;
+      
+      // В реальной реализации здесь будет отправка данных на сервер
+      alert(`Вход партнёра с email: ${email}`);
+      
+      // После успешного входа перенаправляем на панель управления партнёра
+      // window.location.href = '/partner-dashboard.html';
+    });
+    
+    // Обработчики для социальных кнопок
+    document.querySelectorAll('.social-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const service = this.classList[1];
+        alert(`Вход через ${getSocialServiceName(service)}`);
+        // В реальной реализации здесь будет OAuth авторизация
+      });
+    });
+    
+    function getSocialServiceName(service) {
+      const services = {
+        'vk': 'ВКонтакте',
+        'yandex': 'Яндекс',
+        'google': 'Google',
+        'mailru': 'Mail.ru',
+        'apple': 'Apple',
+        'github': 'GitHub'
+      };
+      return services[service] || service;
+    }
+  </script>
+</body>
+</html>
