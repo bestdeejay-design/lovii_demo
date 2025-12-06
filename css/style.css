@@ -367,6 +367,24 @@
       color: var(--accent);
     }
 
+    /* Product page styles */
+    .product-page {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-page .card {
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .product-page img {
+      width: 100%;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
     /* MOBILE */
     @media (max-width: 768px) {
       .desktop-nav {
