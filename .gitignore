@@ -1,1 +1,13 @@
-Nothing should be ignored based on the provided file changes, as they consist only of HTML, JavaScript, and CSS source files.
+```
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Dependencies
+node_modules/
+```
