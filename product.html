@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Название товара — Витрина</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="theme-dark">
+  <!-- SVG фон -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <!-- Страница товара -->
+  <main class="container">
+    <div class="product-page">
+      <div class="card" style="padding: 2rem; margin: 2rem 0;">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <div style="flex: 1; min-width: 300px;">
+            <img id="product-image" src="https://picsum.photos/400/400?random=1" alt="Название товара" style="width: 100%; border-radius: 8px;">
+          </div>
+          
+          <div style="flex: 1; min-width: 300px;">
+            <h1 id="product-name">Название товара</h1>
+            <p id="vendor-name" style="color: var(--text-secondary); margin: 0.5rem 0 1rem;">Продавец: Название магазина</p>
+            
+            <div id="product-price" style="font-size: 1.8rem; font-weight: bold; color: var(--accent); margin: 1rem 0;">0 ₽</div>
+            
+            <div id="product-description" style="margin: 1.5rem 0; line-height: 1.6;">
+              <p>Описание товара будет отображаться здесь. Это может быть подробное описание характеристик, состава, размеров и других важных деталей.</p>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+              <button id="add-to-cart" class="cta-button" style="flex: 1;">Добавить в корзину</button>
+              <button id="buy-now" class="cta-button" style="background: #f0932c; flex: 1;">Купить сейчас</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links">
+        <a href="/terms.html">Условия</a>
+        <a href="/privacy.html">Конфиденциальность</a>
+        <a href="/help.html">Помощь</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+  <script>
+    // Пример функционала для страницы товара
+    document.addEventListener('DOMContentLoaded', function() {
+      // В реальной реализации здесь будет код для загрузки информации о товаре
+      // Пока что просто пример возможного функционала
+      
+      // Получаем ID товара из URL параметров (если есть)
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+      
+      // В реальной реализации здесь будет запрос к API за информацией о товаре
+      // Пока что используем демо-данные
+      const product = {
+        id: 1,
+        name: "Сыр крафтовый 'Деревенский'",
+        price: 450,
+        vendor: "Ферма 'Зелёный луг'",
+        description: "Натуральный крафтовый сыр из коровьего молока, выдержанный в традиционных условиях. Имеет насыщенный вкус и аромат, идеально подходит для дегустации и использования в кулинарии.",
+        image: "https://picsum.photos/400/400?random=1"
+      };
+      
+      // Обновляем информацию на странице
+      document.getElementById('product-name').textContent = product.name;
+      document.getElementById('vendor-name').textContent = `Продавец: ${product.vendor}`;
+      document.getElementById('product-price').textContent = product.price + ' ₽';
+      document.getElementById('product-description').innerHTML = `<p>${product.description}</p>`;
+      document.getElementById('product-image').src = product.image;
+      
+      // Обработчик для кнопки "Добавить в корзину"
+      document.getElementById('add-to-cart').addEventListener('click', function() {
+        alert(`Товар "${product.name}" добавлен в корзину`);
+        
+        // В реальной реализации добавляем товар в корзину
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Проверяем, есть ли уже такой товар в корзине
+        const existingItemIndex = cart.findIndex(item => item.id === product.id);
+        
+        if(existingItemIndex > -1) {
+          // Если товар уже есть, увеличиваем количество
+          cart[existingItemIndex].quantity = (cart[existingItemIndex].quantity || 1) + 1;
+        } else {
+          // Если товара нет, добавляем его
+          cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            vendor: product.vendor,
+            quantity: 1
+          });
+        }
+        
+        // Сохраняем обновленную корзину
+        localStorage.setItem('cart', JSON.stringify(cart));
+      });
+      
+      // Обработчик для кнопки "Купить сейчас"
+      document.getElementById('buy-now').addEventListener('click', function() {
+        alert(`Переход к оформлению заказа для "${product.name}"`);
+        // В реальной реализации перенаправляем на страницу оформления заказа
+        window.location.href = '/cart.html';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -4,42 +4,41 @@
 __pycache__/
 *.o
 *.obj
-dist/
-build/
-target/
+*.exe
+*.dll
+*.so
+*.class
+*.out
 
 # Dependencies
-.venv/
-venv/
 node_modules/
-.julia/
-zig*/
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
-
-# Environment
+venv/
+.venv/
 .env
 .env.local
 .env.*
 
-# Editors
+# Build directories
+dist/
+build/
+target/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
+
+# Editors and IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
+*.tmp
 
-# System
+# System files
 .DS_Store
 Thumbs.db
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
+*.log
 
 # Compressed files
 *.zip
