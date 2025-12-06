@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Каталог — Витрина</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="theme-dark">
+  <!-- SVG фон -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="#how-it-works">Как это работает</a></li>
+        <li><a href="#contacts">Для бизнеса</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="#how-it-works">Как это работает</a></li>
+        <li><a href="#contacts">Для бизнеса</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <!-- Каталог -->
+  <main class="container">
+    <h1 class="page-title">Товары от местных производителей</h1>
+    
+    <div class="location-info" style="text-align: center; margin-bottom: 1.5rem; color: var(--text-secondary);">
+      <p>Показываем товары в Санкт-Петербурге</p>
+    </div>
+    
+    <div class="filters">
+      <select id="category">
+        <option value="">Все категории</option>
+        <option value="ferm">Фермерские продукты</option>
+        <option value="handmade">Ремесло</option>
+        <option value="beauty">Косметика</option>
+        <option value="drinks">Напитки</option>
+        <option value="spices">Специи и приправы</option>
+      </select>
+      <select id="sort">
+        <option value="newest">Новинки</option>
+        <option value="popular">Популярные</option>
+        <option value="price-low">Цена: дешевые</option>
+        <option value="price-high">Цена: дорогие</option>
+      </select>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span>Цена:</span>
+        <input type="range" id="price-min" min="0" max="5000" value="0" style="width: 100px;">
+        <span id="min-value">0 ₽</span>
+        <span>-</span>
+        <input type="range" id="price-max" min="0" max="5000" value="5000" style="width: 100px;">
+        <span id="max-value">5000 ₽</span>
+      </div>
+      <button id="apply-filters" class="cta-button">Применить</button>
+    </div>
+
+    <div class="catalog-grid" id="catalogGrid">
+      <!-- Сюда подгружаем карточки -->
+    </div>
+    
+    <div class="pagination" style="text-align: center; margin-top: 2rem;">
+      <button id="load-more" class="cta-button">Загрузить ещё</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links">
+        <a href="#">Условия</a>
+        <a href="#">Конфиденциальность</a>
+        <a href="#">Помощь</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Демо-данные (пока статика)
+    const demoProducts = [
+      { id: 1, name: "Сыр крафтовый 'Деревенский'", price: 450, img: "https://picsum.photos/300/300?random=1", vendor: "Ферма 'Зелёный луг'", category: "ferm" },
+      { id: 2, name: "Мыло ручной работы 'Лаванда'", price: 280, img: "https://picsum.photos/300/300?random=2", vendor: "Мастерская 'Аромат природы'", category: "beauty" },
+      { id: 3, name: "Мед дикий с лугов", price: 650, img: "https://picsum.photos/300/300?random=3", vendor: "Пасека 'Солнечный бор'", category: "ferm" },
+      { id: 4, name: "Керамическая кружка 'Осенняя'", price: 750, img: "https://picsum.photos/300/300?random=4", vendor: "Студия гончара", category: "handmade" },
+      { id: 5, name: "Чайный гриб 'Домашний'", price: 320, img: "https://picsum.photos/300/300?random=5", vendor: "Ферментариум", category: "drinks" },
+      { id: 6, name: "Смесь специй 'Северная'", price: 180, img: "https://picsum.photos/300/300?random=6", vendor: "Специи от бабушки", category: "spices" },
+      { id: 7, name: "Свечи восковые 'Тёплый вечер'", price: 420, img: "https://picsum.photos/300/300?random=7", vendor: "Свеча-мастер", category: "handmade" },
+      { id: 8, name: "Квас крафтовый 'Домашний'", price: 120, img: "https://picsum.photos/300/300?random=8", vendor: "Пивоварня 'Северяночка'", category: "drinks" },
+      { id: 9, name: "Сыр 'Крепыш' твёрдый", price: 580, img: "https://picsum.photos/300/300?random=9", vendor: "Ферма 'Зелёный луг'", category: "ferm" },
+      { id: 10, name: "Крем для рук 'Малина'", price: 350, img: "https://picsum.photos/300/300?random=10", vendor: "Мастерская 'Аромат природы'", category: "beauty" },
+      { id: 11, name: "Шапка вязаная 'Зимняя'", price: 890, img: "https://picsum.photos/300/300?random=11", vendor: "Рукодельница Мария", category: "handmade" },
+      { id: 12, name: "Клюквенный морс", price: 220, img: "https://picsum.photos/300/300?random=12", vendor: "Ферма 'Ягодный край'", category: "drinks" }
+    ];
+
+    function renderCatalog(products) {
+      const grid = document.getElementById('catalogGrid');
+      grid.innerHTML = products.map(p => `
+        <div class="product-card">
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p class="vendor">${p.vendor}</p>
+          <div class="price">${p.price} ₽</div>
+          <button class="cta-button" style="width: 100%; margin-top: 0.75rem;">В корзину</button>
+        </div>
+      `).join('');
+    }
+
+    // Инициализация
+    renderCatalog(demoProducts);
+
+    // Обработчики фильтров
+    document.getElementById('price-min').addEventListener('input', function() {
+      document.getElementById('min-value').textContent = this.value + ' ₽';
+    });
+    
+    document.getElementById('price-max').addEventListener('input', function() {
+      document.getElementById('max-value').textContent = this.value + ' ₽';
+    });
+    
+    document.getElementById('apply-filters').addEventListener('click', function() {
+      // Здесь будет логика фильтрации
+      alert('Фильтры применены! (Демо-функция)');
+    });
+    
+    document.getElementById('load-more').addEventListener('click', function() {
+      // Здесь будет логика загрузки ещё товаров
+      alert('Загружаем ещё товары! (Демо-функция)');
+    });
+  </script>
+</body>
+</html>
