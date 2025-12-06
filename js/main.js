@@ -4,11 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const savedTheme = localStorage.getItem('vitrina-theme') || 'dark';
   
   // Apply saved theme on load
-  body.classList.remove('theme-forest'); // Only remove the alternative theme class
   if (savedTheme === 'forest') {
     body.classList.add('theme-forest');
   } else {
-    // Default theme is dark, so no class needed
     body.classList.remove('theme-forest');
   }
 

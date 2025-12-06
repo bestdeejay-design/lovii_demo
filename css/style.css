@@ -273,6 +273,23 @@
       transition: all 0.2s;
     }
 
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
     .audience-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
