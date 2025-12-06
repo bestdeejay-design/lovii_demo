@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Помощь — Витрина</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="theme-dark">
+  <!-- SVG фон -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <!-- Помощь -->
+  <main class="container">
+    <h1 class="page-title">Помощь</h1>
+    
+    <section class="help-content" style="max-width: 800px; margin: 0 auto;">
+      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
+        <h2 style="color: var(--accent); margin-bottom: 1rem;">Как начать продавать через "Витрину"</h2>
+        <p>Чтобы начать продавать через нашу платформу, следуйте этим шагам:</p>
+        <ol style="margin: 1rem 0 1rem 2rem; list-style: decimal;">
+          <li>Зарегистрируйтесь как самозанятый или ИП</li>
+          <li>Перейдите на страницу "Для бизнеса" и заполните анкету</li>
+          <li>Добавьте информацию о ваших товарах</li>
+          <li>Установите цены и настройте условия доставки</li>
+          <li>После одобрения модерацией товары появятся в каталоге</li>
+        </ol>
+      </div>
+      
+      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
+        <h2 style="color: var(--accent); margin-bottom: 1rem;">Как покупать товары</h2>
+        <p>Процесс покупки товаров через "Витрину" прост:</p>
+        <ol style="margin: 1rem 0 1rem 2rem; list-style: decimal;">
+          <li>Просмотрите каталог и выберите интересующие товары</li>
+          <li>Добавьте товары в корзину</li>
+          <li>Выберите удобный способ доставки</li>
+          <li>Оформите заказ</li>
+          <li>Товары будут доставлены через выбранный сервис доставки</li>
+        </ol>
+      </div>
+      
+      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
+        <h2 style="color: var(--accent); margin-bottom: 1rem;">Часто задаваемые вопросы</h2>
+        <h3 style="margin: 1rem 0 0.5rem;">Какие товары можно продавать?</h3>
+        <p>Мы поддерживаем продажу продуктов питания, товаров ручной работы, косметики, напитков и других товаров местного производства.</p>
+        
+        <h3 style="margin: 1rem 0 0.5rem;">Сколько стоит продажа через "Витрину"?</h3>
+        <p>Комиссия платформы составляет 5% от стоимости проданных товаров. За доставку отвечает выбранный вами сервис доставки.</p>
+        
+        <h3 style="margin: 1rem 0 0.5rem;">Как часто обновляется каталог?</h3>
+        <p>Каталог обновляется в реальном времени по мере добавления новых товаров продавцами.</p>
+      </div>
+      
+      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
+        <h2 style="color: var(--accent); margin-bottom: 1rem;">Нужна дополнительная помощь?</h2>
+        <p>Если у вас остались вопросы, свяжитесь с нами:</p>
+        <p style="margin-top: 1rem;"><strong>Email:</strong> <a href="mailto:support@vitrina.example" style="color: var(--accent);">support@vitrina.example</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links">
+        <a href="/terms.html">Условия</a>
+        <a href="/privacy.html">Конфиденциальность</a>
+        <a href="/help.html">Помощь</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>

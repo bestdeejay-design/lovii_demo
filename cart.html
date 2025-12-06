@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Корзина — Витрина</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="theme-dark">
+  <!-- SVG фон -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <!-- Корзина -->
+  <main class="container">
+    <h1 class="page-title">Ваша корзина</h1>
+    
+    <section class="cart-content">
+      <div class="card" style="padding: 2rem;">
+        <div id="cart-items">
+          <!-- Здесь будут отображаться товары в корзине -->
+          <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+            <p>Ваша корзина пуста</p>
+            <a href="/catalog/" class="cta-button" style="margin-top: 1rem;">Перейти к каталогу</a>
+          </div>
+        </div>
+        
+        <div id="cart-summary" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+            <span>Сумма:</span>
+            <span id="total-price" style="font-weight: bold; color: var(--accent);">0 ₽</span>
+          </div>
+          
+          <button id="checkout-btn" class="cta-button" style="width: 100%; opacity: 0.6; cursor: not-allowed;" disabled>
+            Оформить заказ
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links">
+        <a href="/terms.html">Условия</a>
+        <a href="/privacy.html">Конфиденциальность</a>
+        <a href="/help.html">Помощь</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+  <script>
+    // Простая демонстрация функционала корзины
+    document.addEventListener('DOMContentLoaded', function() {
+      // В реальной реализации здесь будет код для работы с корзиной
+      // Пока что просто пример возможного функционала
+      
+      // Пример добавления товаров в корзину (для демонстрации)
+      // В реальной реализации товары будут загружаться из localStorage или API
+      
+      const cartItems = document.getElementById('cart-items');
+      const totalPrice = document.getElementById('total-price');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      
+      // Проверяем, есть ли товары в корзине (демо-данные)
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if(cart.length > 0) {
+        // Если есть товары в корзине, отображаем их
+        cartItems.innerHTML = cart.map(item => `
+          <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border);">
+            <div style="flex: 1;">
+              <h3>${item.name}</h3>
+              <p style="color: var(--text-secondary); font-size: 0.9rem;">${item.vendor}</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <span style="font-weight: bold; color: var(--accent);">${item.price} ₽</span>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <button class="quantity-btn" data-id="${item.id}" data-action="decrease" style="padding: 0.25rem 0.5rem; background: var(--border); border: none; border-radius: 4px;">-</button>
+                <span>${item.quantity || 1}</span>
+                <button class="quantity-btn" data-id="${item.id}" data-action="increase" style="padding: 0.25rem 0.5rem; background: var(--border); border: none; border-radius: 4px;">+</button>
+              </div>
+              <button class="remove-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: #ff4757; color: white; border: none; border-radius: 4px; cursor: pointer;">Удалить</button>
+            </div>
+          </div>
+        `).join('');
+        
+        // Вычисляем общую сумму
+        const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+        totalPrice.textContent = total + ' ₽';
+        
+        // Активируем кнопку оформления заказа
+        checkoutBtn.style.opacity = '1';
+        checkoutBtn.style.cursor = 'pointer';
+        checkoutBtn.disabled = false;
+        
+        // Добавляем обработчики для кнопок изменения количества
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const action = this.getAttribute('data-action');
+            
+            // В реальной реализации обновляем корзину
+            alert(`Изменение количества товара с ID: ${id}, действие: ${action}`);
+          });
+        });
+        
+        // Добавляем обработчики для кнопок удаления
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            
+            // В реальной реализации удаляем товар из корзины
+            alert(`Удаление товара с ID: ${id}`);
+          });
+        });
+      }
+      
+      // Обработчик для кнопки оформления заказа
+      checkoutBtn.addEventListener('click', function() {
+        alert('Переход к оформлению заказа (демо-функция)');
+      });
+    });
+  </script>
+</body>
+</html>
