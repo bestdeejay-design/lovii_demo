@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Название товара — Витрина</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <title>Товар — Витрина — Витрина</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <!-- SVG фон -->
@@ -22,6 +22,8 @@
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -41,6 +43,8 @@
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -52,7 +56,6 @@
   <!-- FAB Menu Button -->
   <button class="menu-fab" id="menuFab">≡</button>
 
-  <!-- Страница товара -->
   <main class="container">
     <div class="product-page">
       <div class="card" style="padding: 2rem; margin: 2rem 0;">
@@ -84,78 +87,33 @@
   <footer>
     <div class="footer-content">
       <a href="/" class="logo"><span>Витрина</span></a>
-      <div class="footer-links">
+      <div class="footer-links desktop-links">
+        <a href="/buyers.html">Для покупателей</a>
+        <a href="/partners.html">Для партнёров</a>
+        <a href="/business.html">Для бизнеса</a>
+        <a href="/contacts.html">Контакты</a>
         <a href="/terms.html">Условия</a>
         <a href="/privacy.html">Конфиденциальность</a>
         <a href="/help.html">Помощь</a>
       </div>
+      <div class="footer-mobile-menu">
+        <details class="mobile-dropdown">
+          <summary>Разделы</summary>
+          <div class="mobile-links">
+            <a href="/buyers.html">Для покупателей</a>
+            <a href="/partners.html">Для партнёров</a>
+            <a href="/business.html">Для бизнеса</a>
+            <a href="/contacts.html">Контакты</a>
+            <a href="/terms.html">Условия</a>
+            <a href="/privacy.html">Конфиденциальность</a>
+            <a href="/help.html">Помощь</a>
+          </div>
+        </details>
+      </div>
     </div>
   </footer>
 
-  <script src="./js/main.js"></script>
-  <script>
-    // Пример функционала для страницы товара
-    document.addEventListener('DOMContentLoaded', function() {
-      // В реальной реализации здесь будет код для загрузки информации о товаре
-      // Пока что просто пример возможного функционала
-      
-      // Получаем ID товара из URL параметров (если есть)
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get('id');
-      
-      // В реальной реализации здесь будет запрос к API за информацией о товаре
-      // Пока что используем демо-данные
-      const product = {
-        id: 1,
-        name: "Сыр крафтовый 'Деревенский'",
-        price: 450,
-        vendor: "Ферма 'Зелёный луг'",
-        description: "Натуральный крафтовый сыр из коровьего молока, выдержанный в традиционных условиях. Имеет насыщенный вкус и аромат, идеально подходит для дегустации и использования в кулинарии.",
-        image: "https://picsum.photos/400/400?random=1"
-      };
-      
-      // Обновляем информацию на странице
-      document.getElementById('product-name').textContent = product.name;
-      document.getElementById('vendor-name').textContent = `Продавец: ${product.vendor}`;
-      document.getElementById('product-price').textContent = product.price + ' ₽';
-      document.getElementById('product-description').innerHTML = `<p>${product.description}</p>`;
-      document.getElementById('product-image').src = product.image;
-      
-      // Обработчик для кнопки "Добавить в корзину"
-      document.getElementById('add-to-cart').addEventListener('click', function() {
-        alert(`Товар "${product.name}" добавлен в корзину`);
-        
-        // В реальной реализации добавляем товар в корзину
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        
-        // Проверяем, есть ли уже такой товар в корзине
-        const existingItemIndex = cart.findIndex(item => item.id === product.id);
-        
-        if(existingItemIndex > -1) {
-          // Если товар уже есть, увеличиваем количество
-          cart[existingItemIndex].quantity = (cart[existingItemIndex].quantity || 1) + 1;
-        } else {
-          // Если товара нет, добавляем его
-          cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            vendor: product.vendor,
-            quantity: 1
-          });
-        }
-        
-        // Сохраняем обновленную корзину
-        localStorage.setItem('cart', JSON.stringify(cart));
-      });
-      
-      // Обработчик для кнопки "Купить сейчас"
-      document.getElementById('buy-now').addEventListener('click', function() {
-        alert(`Переход к оформлению заказа для "${product.name}"`);
-        // В реальной реализации перенаправляем на страницу оформления заказа
-        window.location.href = '/cart.html';
-      });
-    });
-  </script>
+  <script src="/js/main.js"></script>
+  
 </body>
 </html>

@@ -66,19 +66,100 @@ def main():
     """Main function to render all pages using templates."""
     print("Rendering website pages using template system...")
     
-    # Read the content for the index page
-    with open("index_content.html", "r", encoding="utf-8") as f:
-        index_content = f.read()
+    # Define all pages to render
+    pages = [
+        {
+            "output_path": "index.html",
+            "title": "Витрина — цифровая полка для малого бизнеса",
+            "content_file": "index_content.html"
+        },
+        {
+            "output_path": "about.html",
+            "title": "О нас — Витрина",
+            "content_file": "about_content.html"
+        },
+        {
+            "output_path": "business.html",
+            "title": "Для бизнеса — Витрина",
+            "content_file": "business_content.html"
+        },
+        {
+            "output_path": "buyers.html",
+            "title": "Для покупателей — Витрина",
+            "content_file": "buyers_content.html"
+        },
+        {
+            "output_path": "cart.html",
+            "title": "Корзина — Витрина",
+            "content_file": "cart_content.html"
+        },
+        {
+            "output_path": "contacts.html",
+            "title": "Контакты — Витрина",
+            "content_file": "contacts_content.html"
+        },
+        {
+            "output_path": "help.html",
+            "title": "Помощь — Витрина",
+            "content_file": "help_content.html"
+        },
+        {
+            "output_path": "login-customer.html",
+            "title": "Вход для покупателя — Витрина",
+            "content_file": "login_customer_content.html"
+        },
+        {
+            "output_path": "login-partner.html",
+            "title": "Вход для партнёра — Витрина",
+            "content_file": "login_partner_content.html"
+        },
+        {
+            "output_path": "partners.html",
+            "title": "Для партнёров — Витрина",
+            "content_file": "partners_content.html"
+        },
+        {
+            "output_path": "privacy.html",
+            "title": "Политика конфиденциальности — Витрина",
+            "content_file": "privacy_content.html"
+        },
+        {
+            "output_path": "product.html",
+            "title": "Товар — Витрина",
+            "content_file": "product_content.html"
+        },
+        {
+            "output_path": "register-customer.html",
+            "title": "Регистрация покупателя — Витрина",
+            "content_file": "register_customer_content.html"
+        },
+        {
+            "output_path": "register-partner.html",
+            "title": "Регистрация партнёра — Витрина",
+            "content_file": "register_partner_content.html"
+        },
+        {
+            "output_path": "terms.html",
+            "title": "Условия использования — Витрина",
+            "content_file": "terms_content.html"
+        },
+        {
+            "output_path": "catalog/index.html",
+            "title": "Каталог — Витрина",
+            "content_file": "catalog_index_content.html"
+        }
+    ]
     
-    # Render the index page
-    render_page(
-        output_path="index.html",
-        title="Витрина — цифровая полка для малого бизнеса",
-        content=index_content
-    )
-    
-    # For other pages, you would create similar content files and render them
-    # This is just an example for the main page
+    # Render all pages
+    for page in pages:
+        with open(page["content_file"], "r", encoding="utf-8") as f:
+            content = f.read()
+        
+        render_page(
+            output_path=page["output_path"],
+            title=page["title"],
+            content=content
+        )
     
     print("Template rendering completed!")
 

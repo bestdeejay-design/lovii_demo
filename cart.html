@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Корзина — Витрина</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <title>Корзина — Витрина — Витрина</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <!-- SVG фон -->
@@ -22,6 +22,8 @@
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -41,6 +43,8 @@
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -52,7 +56,6 @@
   <!-- FAB Menu Button -->
   <button class="menu-fab" id="menuFab">≡</button>
 
-  <!-- Корзина -->
   <main class="container">
     <h1 class="page-title">Ваша корзина</h1>
     
@@ -83,87 +86,33 @@
   <footer>
     <div class="footer-content">
       <a href="/" class="logo"><span>Витрина</span></a>
-      <div class="footer-links">
+      <div class="footer-links desktop-links">
+        <a href="/buyers.html">Для покупателей</a>
+        <a href="/partners.html">Для партнёров</a>
+        <a href="/business.html">Для бизнеса</a>
+        <a href="/contacts.html">Контакты</a>
         <a href="/terms.html">Условия</a>
         <a href="/privacy.html">Конфиденциальность</a>
         <a href="/help.html">Помощь</a>
       </div>
+      <div class="footer-mobile-menu">
+        <details class="mobile-dropdown">
+          <summary>Разделы</summary>
+          <div class="mobile-links">
+            <a href="/buyers.html">Для покупателей</a>
+            <a href="/partners.html">Для партнёров</a>
+            <a href="/business.html">Для бизнеса</a>
+            <a href="/contacts.html">Контакты</a>
+            <a href="/terms.html">Условия</a>
+            <a href="/privacy.html">Конфиденциальность</a>
+            <a href="/help.html">Помощь</a>
+          </div>
+        </details>
+      </div>
     </div>
   </footer>
 
-  <script src="./js/main.js"></script>
-  <script>
-    // Простая демонстрация функционала корзины
-    document.addEventListener('DOMContentLoaded', function() {
-      // В реальной реализации здесь будет код для работы с корзиной
-      // Пока что просто пример возможного функционала
-      
-      // Пример добавления товаров в корзину (для демонстрации)
-      // В реальной реализации товары будут загружаться из localStorage или API
-      
-      const cartItems = document.getElementById('cart-items');
-      const totalPrice = document.getElementById('total-price');
-      const checkoutBtn = document.getElementById('checkout-btn');
-      
-      // Проверяем, есть ли товары в корзине (демо-данные)
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      
-      if(cart.length > 0) {
-        // Если есть товары в корзине, отображаем их
-        cartItems.innerHTML = cart.map(item => `
-          <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border);">
-            <div style="flex: 1;">
-              <h3>${item.name}</h3>
-              <p style="color: var(--text-secondary); font-size: 0.9rem;">${item.vendor}</p>
-            </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <span style="font-weight: bold; color: var(--accent);">${item.price} ₽</span>
-              <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <button class="quantity-btn" data-id="${item.id}" data-action="decrease" style="padding: 0.25rem 0.5rem; background: var(--border); border: none; border-radius: 4px;">-</button>
-                <span>${item.quantity || 1}</span>
-                <button class="quantity-btn" data-id="${item.id}" data-action="increase" style="padding: 0.25rem 0.5rem; background: var(--border); border: none; border-radius: 4px;">+</button>
-              </div>
-              <button class="remove-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: #ff4757; color: white; border: none; border-radius: 4px; cursor: pointer;">Удалить</button>
-            </div>
-          </div>
-        `).join('');
-        
-        // Вычисляем общую сумму
-        const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
-        totalPrice.textContent = total + ' ₽';
-        
-        // Активируем кнопку оформления заказа
-        checkoutBtn.style.opacity = '1';
-        checkoutBtn.style.cursor = 'pointer';
-        checkoutBtn.disabled = false;
-        
-        // Добавляем обработчики для кнопок изменения количества
-        document.querySelectorAll('.quantity-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            const action = this.getAttribute('data-action');
-            
-            // В реальной реализации обновляем корзину
-            alert(`Изменение количества товара с ID: ${id}, действие: ${action}`);
-          });
-        });
-        
-        // Добавляем обработчики для кнопок удаления
-        document.querySelectorAll('.remove-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            
-            // В реальной реализации удаляем товар из корзины
-            alert(`Удаление товара с ID: ${id}`);
-          });
-        });
-      }
-      
-      // Обработчик для кнопки оформления заказа
-      checkoutBtn.addEventListener('click', function() {
-        alert('Переход к оформлению заказа (демо-функция)');
-      });
-    });
-  </script>
+  <script src="/js/main.js"></script>
+  
 </body>
 </html>
