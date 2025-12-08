@@ -331,6 +331,49 @@
       text-decoration: none;
       font-size: 0.9rem;
     }
+    
+    .desktop-links {
+      display: flex;
+    }
+    
+    .footer-mobile-menu {
+      display: none;
+    }
+    
+    .mobile-dropdown {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+    
+    .mobile-dropdown summary {
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      list-style: none;
+    }
+    
+    .mobile-dropdown summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    .mobile-dropdown[open] summary {
+      margin-bottom: 0.5rem;
+    }
+    
+    .mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.5rem 0 0 0.5rem;
+    }
+    
+    .mobile-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
 
     /* Additional styles for catalog page */
     .page-title {
@@ -410,6 +453,14 @@
 
       .menu-fab {
         display: flex;
+      }
+
+      .desktop-links {
+        display: none !important;
+      }
+      
+      .footer-mobile-menu {
+        display: block !important;
       }
 
       .hero h1 {

@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Регистрация партнёров — Витрина</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/forms.css">
+  <title>Регистрация партнёра — Витрина — Витрина</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <!-- SVG фон -->
@@ -23,6 +22,8 @@
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -42,6 +43,8 @@
         <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/about.html">О нас</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
         <li><a href="/contacts.html">Контакты</a></li>
       </ul>
     </nav>
@@ -112,72 +115,33 @@
   <footer>
     <div class="footer-content">
       <a href="/" class="logo"><span>Витрина</span></a>
-      <div class="footer-links">
+      <div class="footer-links desktop-links">
+        <a href="/buyers.html">Для покупателей</a>
+        <a href="/partners.html">Для партнёров</a>
+        <a href="/business.html">Для бизнеса</a>
+        <a href="/contacts.html">Контакты</a>
         <a href="/terms.html">Условия</a>
         <a href="/privacy.html">Конфиденциальность</a>
         <a href="/help.html">Помощь</a>
       </div>
+      <div class="footer-mobile-menu">
+        <details class="mobile-dropdown">
+          <summary>Разделы</summary>
+          <div class="mobile-links">
+            <a href="/buyers.html">Для покупателей</a>
+            <a href="/partners.html">Для партнёров</a>
+            <a href="/business.html">Для бизнеса</a>
+            <a href="/contacts.html">Контакты</a>
+            <a href="/terms.html">Условия</a>
+            <a href="/privacy.html">Конфиденциальность</a>
+            <a href="/help.html">Помощь</a>
+          </div>
+        </details>
+      </div>
     </div>
   </footer>
 
-  <script src="./js/main.js"></script>
-  <script src="./js/forms.js"></script>
-  <script>
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const companyName = document.getElementById('companyName').value;
-      const email = document.getElementById('email').value;
-      
-      // Валидация формы
-      let isValid = true;
-      
-      if (!validateEmail(email)) {
-        showError(document.getElementById('email'), 'Пожалуйста, введите корректный email');
-        isValid = false;
-      }
-      
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
-      
-      if (!validatePassword(password)) {
-        showError(document.getElementById('password'), 'Пароль должен содержать минимум 8 символов, включая буквы и цифры');
-        isValid = false;
-      }
-      
-      if (password !== confirmPassword) {
-        showError(document.getElementById('confirmPassword'), 'Пароли не совпадают');
-        isValid = false;
-      }
-      
-      if (!isValid) return;
-      
-      // В реальной реализации здесь будет отправка данных на сервер
-      alert(`Регистрация партнёра: ${companyName} (${email})`);
-      
-      // После успешной регистрации перенаправляем на страницу подтверждения
-      // window.location.href = '/verification.html';
-    });
-    
-    // Обработчики для социальных кнопок
-    document.querySelectorAll('.social-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const service = this.classList[1];
-        alert(`Регистрация через ${getSocialServiceName(service)}`);
-        // В реальной реализации здесь будет OAuth регистрация
-      });
-    });
-    
-    function getSocialServiceName(service) {
-      const services = {
-        'vk': 'ВКонтакте',
-        'yandex': 'Яндекс',
-        'google': 'Google',
-        'mailru': 'Mail.ru',
-        'apple': 'Apple',
-        'github': 'GitHub'
-      };
-      return services[service] || service;
-    }
-  </script>
+  <script src="/js/main.js"></script>
+  
 </body>
 </html>
