@@ -140,6 +140,11 @@
       background: #3a6b4f;
       transform: translateX(18px);
     }
+    
+    .theme-toggle.theme-forest .toggle-knob {
+      background: #3a6b4f;
+      transform: translateX(18px);
+    }
 
     /* OFF-CANVAS MENU */
     .overlay {
