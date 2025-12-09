@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     body.classList.remove('theme-forest');
   }
+  
+  // Force re-render to ensure initial theme applies immediately
+  void body.offsetWidth;
 
   // Update toggle knobs based on saved theme
   const updateToggleKnobs = (isForest) => {
@@ -44,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Update all toggle knobs
       updateToggleKnobs(newTheme === 'forest');
+      
+      // Force re-render to ensure theme changes apply immediately
+      void body.offsetWidth;
     });
   });
 
