@@ -12,9 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Update toggle knobs based on saved theme
   const updateToggleKnobs = (isForest) => {
-    const toggleKnobs = document.querySelectorAll('.toggle-knob');
-    toggleKnobs.forEach(knob => {
-      knob.style.transform = isForest ? 'translateX(18px)' : 'translateX(0)';
+    const toggleButtons = document.querySelectorAll('.theme-toggle');
+    toggleButtons.forEach(toggleBtn => {
+      if (isForest) {
+        toggleBtn.classList.add('theme-forest');
+      } else {
+        toggleBtn.classList.remove('theme-forest');
+      }
     });
   };
 
