@@ -6,6 +6,7 @@
       --border: #2a2a2a;
       --card: #1a1a1a;
       --shadow: rgba(0,0,0,0.4);
+      --toggle-knob: #4cc9f0;
     }
 
     .theme-forest {
@@ -16,6 +17,7 @@
       --border: #dbe5db;
       --card: #ffffff;
       --shadow: rgba(58, 107, 79, 0.12);
+      --toggle-knob: #3a6b4f;
     }
 
     * {
@@ -90,7 +92,7 @@
     }
 
     .logo span {
-      background: linear-gradient(90deg, var(--accent), #a0d2eb);
+      background: linear-gradient(90deg, var(--accent), var(--accent));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -132,17 +134,15 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #4cc9f0;
+      background: var(--toggle-knob);
       transition: transform 0.3s;
     }
 
     .theme-forest .toggle-knob {
-      background: #3a6b4f;
       transform: translateX(18px);
     }
     
     .theme-toggle.theme-forest .toggle-knob {
-      background: #3a6b4f;
       transform: translateX(18px);
     }
 
