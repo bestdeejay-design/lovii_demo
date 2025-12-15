@@ -108,16 +108,13 @@
       
       <div class="card" style="padding: 2rem; margin: 2rem 0;">
         <h2 style="margin-bottom: 1.5rem;">Меню заведения</h2>
-        <div class="filters">
-          <select id="menu-category">
-            <option value="">Все категории</option>
-            <option value="appetizers">Закуски</option>
-            <option value="mains">Основные блюда</option>
-            <option value="desserts">Десерты</option>
-            <option value="drinks">Напитки</option>
-            <option value="delivery">Только с доставкой</option>
-          </select>
-          <button id="apply-menu-filters" class="cta-button">Фильтровать</button>
+        <div class="category-pills" style="margin-bottom: 1.5rem;">
+          <button class="pill-btn active" data-category="">Все категории</button>
+          <button class="pill-btn" data-category="appetizers">Закуски</button>
+          <button class="pill-btn" data-category="mains">Основные блюда</button>
+          <button class="pill-btn" data-category="desserts">Десерты</button>
+          <button class="pill-btn" data-category="drinks">Напитки</button>
+          <button class="pill-btn" data-category="delivery">Только с доставкой</button>
         </div>
         
         <div id="menu-grid" class="catalog-grid" style="margin-top: 1.5rem;">
@@ -250,6 +247,106 @@
         description: "Классический чизкейк с ванильной подливкой",
         availableForDelivery: true,
         img: "https://images.unsplash.com/photo-1578926375602-e5f1b0b1c3d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 6,
+        establishmentId: 1,
+        name: "Латте",
+        category: "drinks",
+        price: 200,
+        description: "Ароматный кофе с молоком",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 7,
+        establishmentId: 1,
+        name: "Блинчики с ветчиной и сыром",
+        category: "mains",
+        price: 270,
+        description: "Тонкие блинчики с начинкой из ветчины и сыра",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 8,
+        establishmentId: 1,
+        name: "Завтрак 'По-французски'",
+        category: "mains",
+        price: 320,
+        description: "Тосты с яйцом, ветчиной и сыром",
+        availableForDelivery: false,
+        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 9,
+        establishmentId: 2,
+        name: "Латте",
+        category: "drinks",
+        price: 180,
+        description: "Ароматный кофе с молоком",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 10,
+        establishmentId: 2,
+        name: "Блинчики с творогом",
+        category: "desserts",
+        price: 190,
+        description: "Тонкие блинчики с домашним творогом",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 11,
+        establishmentId: 2,
+        name: "Завтрак 'Бизнес-ланч'",
+        category: "mains",
+        price: 290,
+        description: "Комплексный завтрак с яйцом, беконом и тостами",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 12,
+        establishmentId: 1,
+        name: "Холодный цыпленок на вертеле",
+        category: "mains",
+        price: 450,
+        description: "Сочный цыпленок с пряными травами",
+        availableForDelivery: false,
+        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 13,
+        establishmentId: 2,
+        name: "Фреш апельсиновый",
+        category: "drinks",
+        price: 150,
+        description: "Свежевыжатый апельсиновый сок",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 14,
+        establishmentId: 1,
+        name: "Салат 'Греческий'",
+        category: "appetizers",
+        price: 260,
+        description: "Салат с овощами, оливками и фетой",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 15,
+        establishmentId: 2,
+        name: "Маффин 'Шоколадный'",
+        category: "desserts",
+        price: 160,
+        description: "Воздушный маффин с кусочками шоколада",
+        availableForDelivery: true,
+        img: "https://images.unsplash.com/photo-1578926375602-e5f1b0b1c3d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
       }
     ];
     
@@ -337,23 +434,31 @@
     document.addEventListener('DOMContentLoaded', function() {
       displayEstablishmentInfo();
       
-      // Добавляем обработчик для фильтрации меню
-      document.getElementById('apply-menu-filters').addEventListener('click', function() {
-        const category = document.getElementById('menu-category').value;
-        const establishment = demoEstablishments.find(est => est.id === establishmentId);
-        if (establishment) {
-          let filteredMenu = demoMenu.filter(item => item.establishmentId === establishmentId);
+      // Добавляем обработчики для кнопок-фильтров меню
+      const categoryButtons = document.querySelectorAll('.category-pills .pill-btn');
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Обновляем активную кнопку
+          categoryButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
           
-          if (category) {
-            if (category === 'delivery') {
-              filteredMenu = filteredMenu.filter(item => item.availableForDelivery);
-            } else {
-              filteredMenu = filteredMenu.filter(item => item.category === category);
+          // Фильтруем меню
+          const category = this.getAttribute('data-category');
+          const establishment = demoEstablishments.find(est => est.id === establishmentId);
+          if (establishment) {
+            let filteredMenu = demoMenu.filter(item => item.establishmentId === establishmentId);
+            
+            if (category) {
+              if (category === 'delivery') {
+                filteredMenu = filteredMenu.filter(item => item.availableForDelivery);
+              } else {
+                filteredMenu = filteredMenu.filter(item => item.category === category);
+              }
             }
+            
+            renderMenu(filteredMenu);
           }
-          
-          renderMenu(filteredMenu);
-        }
+        });
       });
       
       // Обработчик кнопки "В избранное"
