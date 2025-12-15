@@ -1,0 +1,63 @@
+<div class="establishment-page">
+  <div class="card" style="padding: 2rem; margin: 2rem 0;">
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+      <div style="flex: 1; min-width: 300px;">
+        <img id="establishment-image" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Название заведения" style="width: 100%; border-radius: 8px;">
+      </div>
+      
+      <div style="flex: 1; min-width: 300px;">
+        <h1 id="establishment-name">Название заведения</h1>
+        <p id="establishment-type" style="color: var(--text-secondary); margin: 0.5rem 0 1rem;">Тип: Ресторан</p>
+        
+        <div id="establishment-rating" style="font-size: 1.2rem; margin: 1rem 0;">
+          <span style="color: var(--accent);">★</span> Рейтинг: <span id="rating-value">0.0</span> (<span id="review-count">0</span> отзывов)
+        </div>
+        
+        <div id="establishment-info" style="margin: 1.5rem 0; line-height: 1.6;">
+          <p id="establishment-description">Описание заведения будет отображаться здесь. Это может быть подробное описание концепции, особенностей, истории и других важных деталей.</p>
+          
+          <div style="margin-top: 1rem;">
+            <h3>Контактная информация</h3>
+            <p id="establishment-address">Адрес: не указан</p>
+            <p id="establishment-phone">Телефон: не указан</p>
+            <p id="establishment-email">Email: не указан</p>
+          </div>
+          
+          <div style="margin-top: 1rem;">
+            <h3>Время работы</h3>
+            <p id="establishment-hours">Время работы: не указано</p>
+          </div>
+          
+          <div style="margin-top: 1rem;">
+            <h3>Доставка</h3>
+            <p id="establishment-delivery">Доставка: <span id="delivery-status">не указана</span></p>
+            <p id="delivery-area">Зона доставки: не указана</p>
+            <p id="delivery-time">Время доставки: не указано</p>
+            <p id="delivery-cost">Стоимость доставки: не указана</p>
+          </div>
+        </div>
+        
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <button id="add-to-favorites" class="cta-button" style="background: #6c757d; flex: 1;">В избранное</button>
+          <button id="visit-website" class="cta-button" style="background: #28a745; flex: 1;">Перейти на сайт</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card" style="padding: 2rem; margin: 2rem 0;">
+    <h2 style="margin-bottom: 1.5rem;">Меню заведения</h2>
+    <div class="category-pills" style="margin-bottom: 1.5rem;">
+      <button class="pill-btn active" data-category="">Все категории</button>
+      <button class="pill-btn" data-category="appetizers">Закуски</button>
+      <button class="pill-btn" data-category="mains">Основные блюда</button>
+      <button class="pill-btn" data-category="desserts">Десерты</button>
+      <button class="pill-btn" data-category="drinks">Напитки</button>
+      <button class="pill-btn" data-category="delivery">Только с доставкой</button>
+    </div>
+    
+    <div id="menu-grid" class="catalog-grid" style="margin-top: 1.5rem;">
+      <!-- Сюда будут загружаться позиции меню -->
+    </div>
+  </div>
+</div>

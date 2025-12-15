@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Для партнёров — Витрина — Витрина</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- SVG фон -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог товаров</a></li>
+        <li><a href="/food-delivery/">Еда и доставка</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/catalog/">Каталог товаров</a></li>
+        <li><a href="/food-delivery/">Еда и доставка</a></li>
+        <li><a href="/about.html">О нас</a></li>
+        <li><a href="/business.html">Для бизнеса</a></li>
+        <li><a href="/buyers.html">Для покупателей</a></li>
+        <li><a href="/partners.html">Для партнёров</a></li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Для партнёров</h1>
+      <p>Присоединяйтесь к "Витрина" и получите доступ к миллионам покупателей через сервисы доставки. Продавайте без логистики и маркетинга.</p>
+    </section>
+
+    <section class="features">
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">Преимущества для партнёров</h2>
+      <div class="features-grid">
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Доступ к покупателям</h3>
+          <p>Мгновенный доступ к миллионам пользователей сервисов доставки без необходимости создавать собственную платформу.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Без логистики</h3>
+          <p>Мы используем существующие каналы доставки — вы сосредоточены на производстве, а мы на доставке.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Простая интеграция</h3>
+          <p>Добавьте свои товары в наш каталог за несколько минут, без сложных технических интеграций.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Поддержка</h3>
+          <p>Полная поддержка на всех этапах — от регистрации до масштабирования вашего бизнеса.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-section">
+      <h2>Стать партнёром</h2>
+      <p>Войдите в систему или зарегистрируйтесь, чтобы начать продавать через "Витрина"</p>
+      <div class="auth-buttons">
+        <a href="/login-partner.html" class="cta-button">Войти</a>
+        <a href="/register-partner.html" class="btn-secondary">Регистрация</a>
+      </div>
+    </section>
+
+    <section class="benefits" style="text-align: center; margin-top: 2.5rem;">
+      <h2>Как стать партнёром</h2>
+      <div class="features-grid">
+        <div class="card">
+          <h3 style="color: var(--accent);">1. Регистрация</h3>
+          <p>Создайте аккаунт партнёра и подтвердите ваш бизнес</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent);">2. Добавление товаров</h3>
+          <p>Загрузите информацию о ваших товарах в наш каталог</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent);">3. Продажи</h3>
+          <p>Начните получать заказы от покупателей через сервисы доставки</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--accent);">4. Рост</h3>
+          <p>Масштабируйте ваш бизнес с нашей поддержкой</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links desktop-links">
+        <a href="/buyers.html">Для покупателей</a>
+        <a href="/partners.html">Для партнёров</a>
+        <a href="/business.html">Для бизнеса</a>
+        <a href="/contacts.html">Контакты</a>
+        <a href="/terms.html">Условия</a>
+        <a href="/privacy.html">Конфиденциальность</a>
+        <a href="/help.html">Помощь</a>
+      </div>
+      <div class="footer-mobile-menu">
+        <details class="mobile-dropdown">
+          <summary>Разделы</summary>
+          <div class="mobile-links">
+            <a href="/buyers.html">Для покупателей</a>
+            <a href="/partners.html">Для партнёров</a>
+            <a href="/business.html">Для бизнеса</a>
+            <a href="/contacts.html">Контакты</a>
+            <a href="/terms.html">Условия</a>
+            <a href="/privacy.html">Конфиденциальность</a>
+            <a href="/help.html">Помощь</a>
+          </div>
+        </details>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  
+</body>
+</html>
