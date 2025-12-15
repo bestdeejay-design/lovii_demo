@@ -67,30 +67,42 @@
       </div>
     </div>
     
-    <div class="filters">
-      <select id="category">
-        <option value="">Все категории</option>
-        <option value="ferm">Фермерские продукты</option>
-        <option value="handmade">Ремесло</option>
-        <option value="beauty">Косметика</option>
-        <option value="drinks">Напитки</option>
-        <option value="spices">Специи и приправы</option>
-      </select>
-      <select id="sort">
-        <option value="newest">Новинки</option>
-        <option value="popular">Популярные</option>
-        <option value="price-low">Цена: дешевые</option>
-        <option value="price-high">Цена: дорогие</option>
-      </select>
-      <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <span>Цена:</span>
-        <input type="range" id="price-min" min="0" max="5000" value="0" style="width: 100px;">
-        <span id="min-value">0 ₽</span>
-        <span>-</span>
-        <input type="range" id="price-max" min="0" max="5000" value="5000" style="width: 100px;">
-        <span id="max-value">5000 ₽</span>
+    <div class="filters-container">
+      <div class="filters">
+        <select id="category">
+          <option value="">Все категории</option>
+          <option value="ferm">Фермерские продукты</option>
+          <option value="handmade">Ремесло</option>
+          <option value="beauty">Косметика</option>
+          <option value="drinks">Напитки</option>
+          <option value="spices">Специи и приправы</option>
+        </select>
+        <select id="sort">
+          <option value="random">Случайные</option>
+          <option value="newest">Новинки</option>
+          <option value="popular">Популярные</option>
+          <option value="price-low">Цена: дешевые</option>
+          <option value="price-high">Цена: дорогие</option>
+        </select>
+        <div class="price-filter">
+          <span>Цена:</span>
+          <input type="range" id="price-min" min="0" max="5000" value="0">
+          <span id="min-value">0 ₽</span>
+          <span>-</span>
+          <input type="range" id="price-max" min="0" max="5000" value="5000">
+          <span id="max-value">5000 ₽</span>
+        </div>
+        <button id="apply-filters" class="cta-button">Применить</button>
       </div>
-      <button id="apply-filters" class="cta-button">Применить</button>
+      
+      <div class="category-pills">
+        <button class="pill-btn active" data-category="">Все</button>
+        <button class="pill-btn" data-category="ferm">Фермерские</button>
+        <button class="pill-btn" data-category="handmade">Ремесло</button>
+        <button class="pill-btn" data-category="beauty">Косметика</button>
+        <button class="pill-btn" data-category="drinks">Напитки</button>
+        <button class="pill-btn" data-category="spices">Специи</button>
+      </div>
     </div>
 
     <div class="catalog-grid" id="catalogGrid">
@@ -111,9 +123,159 @@
         { id: 9, name: "Сыр 'Крепыш' твёрдый", price: 580, img: "https://images.unsplash.com/photo-1585317609233-8c0b63270c6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Зелёный луг'", category: "ferm" },
         { id: 10, name: "Крем для рук 'Малина'", price: 350, img: "https://images.unsplash.com/photo-1584442965411-1e41c07bdda2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Мастерская 'Аромат природы'", category: "beauty" },
         { id: 11, name: "Шапка вязаная 'Зимняя'", price: 890, img: "https://images.unsplash.com/photo-1591047101833-802a2b7ab4f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Рукодельница Мария", category: "handmade" },
-        { id: 12, name: "Клюквенный морс", price: 220, img: "https://images.unsplash.com/photo-1626492407605-0d8d4762d493?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Ягодный край'", category: "drinks" }
+        { id: 12, name: "Клюквенный морс", price: 220, img: "https://images.unsplash.com/photo-1626492407605-0d8d4762d493?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Ягодный край'", category: "drinks" },
+        { id: 13, name: "Оливковое масло 'Экстра'", price: 750, img: "https://images.unsplash.com/photo-1622240506921-042a4e3b9e7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Оливковая ферма", category: "ferm" },
+        { id: 14, name: "Масло ши натуральное", price: 520, img: "https://images.unsplash.com/photo-1598605272254-16f0f9daa6d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Косметика природы", category: "beauty" },
+        { id: 15, name: "Сахарный песок ручной работы", price: 150, img: "https://images.unsplash.com/photo-1603532648955-a039f2e365cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Сладкая жизнь'", category: "ferm" },
+        { id: 16, name: "Ковер ручной работы 'Горный узор'", price: 2500, img: "https://images.unsplash.com/photo-1578926375602-e5f1b0b1c3d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Мастерская 'Традиции'", category: "handmade" },
+        { id: 17, name: "Компот из яблок и груш", price: 180, img: "https://images.unsplash.com/photo-1603532648955-a039f2e365cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Фруктовая лавка", category: "drinks" },
+        { id: 18, name: "Смесь перцев 'Острых'", price: 220, img: "https://images.unsplash.com/photo-1625938140774-7da26eaa1bae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Специи от бабушки", category: "spices" },
+        { id: 19, name: "Конопляное масло", price: 450, img: "https://images.unsplash.com/photo-1622240506921-042a4e3b9e7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Эко-ферма", category: "ferm" },
+        { id: 20, name: "Лосьон после бритья 'Хвойный'", price: 680, img: "https://images.unsplash.com/photo-1598605272254-16f0f9daa6d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Мужской уход", category: "beauty" },
+        { id: 21, name: "Вязаный свитер 'Теплый'", price: 1500, img: "https://images.unsplash.com/photo-1591047101833-802a2b7ab4f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Рукодельница Мария", category: "handmade" },
+        { id: 22, name: "Смузи 'Тропик'", price: 280, img: "https://images.unsplash.com/photo-1626492407605-0d8d4762d493?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Смузи-бар", category: "drinks" },
+        { id: 23, name: "Соль морская с травами", price: 180, img: "https://images.unsplash.com/photo-1625938140774-7da26eaa1bae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Специи от бабушки", category: "spices" },
+        { id: 24, name: "Сыр 'Бри' с плесенью", price: 850, img: "https://images.unsplash.com/photo-1603064752734-4c48eff53d05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80", vendor: "Ферма 'Зелёный луг'", category: "ferm" }
       ];
 
+      // Current state
+      let currentPage = 1;
+      const itemsPerPage = 12;
+      let filteredProducts = [...demoProducts];
+      let allProducts = [...demoProducts];
+
+      // DOM Elements
+      const categorySelect = document.getElementById('category');
+      const sortSelect = document.getElementById('sort');
+      const priceMinInput = document.getElementById('price-min');
+      const priceMaxInput = document.getElementById('price-max');
+      const minValueSpan = document.getElementById('min-value');
+      const maxValueSpan = document.getElementById('max-value');
+      const applyFiltersBtn = document.getElementById('apply-filters');
+      const catalogGrid = document.getElementById('catalogGrid');
+      const loadMoreBtn = document.getElementById('load-more');
+      const pillButtons = document.querySelectorAll('.pill-btn');
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        updatePriceLabels();
+        setupEventListeners();
+        
+        // Randomize initial display when page loads
+        setTimeout(() => {
+          applyFilters();
+        }, 100);
+      });
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // Price range inputs
+        priceMinInput.addEventListener('input', updatePriceLabels);
+        priceMaxInput.addEventListener('input', updatePriceLabels);
+        
+        // Filter button
+        applyFiltersBtn.addEventListener('click', applyFilters);
+        
+        // Category select dropdown
+        categorySelect.addEventListener('change', applyFilters);
+        
+        // Sort select dropdown
+        sortSelect.addEventListener('change', applyFilters);
+        
+        // Category pill buttons
+        pillButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            // Update active pill
+            pillButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update category dropdown
+            const category = this.getAttribute('data-category');
+            categorySelect.value = category;
+            
+            applyFilters();
+          });
+        });
+        
+        // Load more button
+        if (loadMoreBtn) {
+          loadMoreBtn.addEventListener('click', loadMoreProducts);
+        }
+        
+        // Infinite scroll
+        window.addEventListener('scroll', handleInfiniteScroll);
+      }
+
+      // Update price labels
+      function updatePriceLabels() {
+        minValueSpan.textContent = priceMinInput.value + ' ₽';
+        maxValueSpan.textContent = priceMaxInput.value + ' ₽';
+      }
+
+      // Apply filters and sorting
+      function applyFilters() {
+        const category = categorySelect.value;
+        const sort = sortSelect.value;
+        const minPrice = parseInt(priceMinInput.value);
+        const maxPrice = parseInt(priceMaxInput.value);
+        
+        // Filter products
+        let filtered = allProducts.filter(product => {
+          const matchesCategory = !category || product.category === category;
+          const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+          return matchesCategory && matchesPrice;
+        });
+        
+        // Sort products
+        switch(sort) {
+          case 'random':
+            filtered = shuffleArray([...filtered]);
+            break;
+          case 'newest':
+            filtered.sort((a, b) => b.id - a.id);
+            break;
+          case 'popular':
+            // For demo purposes, we'll just randomize
+            filtered = shuffleArray([...filtered]);
+            break;
+          case 'price-low':
+            filtered.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-high':
+            filtered.sort((a, b) => b.price - a.price);
+            break;
+          default:
+            filtered = shuffleArray([...filtered]);
+        }
+        
+        filteredProducts = filtered;
+        currentPage = 1;
+        
+        // Render first page
+        renderCatalog(getCurrentPageItems());
+        
+        // Reset pagination controls
+        updatePaginationControls();
+      }
+
+      // Shuffle array (Fisher-Yates algorithm)
+      function shuffleArray(array) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+      }
+
+      // Get current page items
+      function getCurrentPageItems() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return filteredProducts.slice(startIndex, endIndex);
+      }
+
+      // Render products
       function renderCatalog(products) {
         const grid = document.getElementById('catalogGrid');
         grid.innerHTML = products.map(p => `
@@ -127,27 +289,56 @@
         `).join('');
       }
 
-      // Инициализация
-      renderCatalog(demoProducts);
+      // Load more products
+      function loadMoreProducts() {
+        currentPage++;
+        const newProducts = getCurrentPageItems();
+        
+        if (newProducts.length > 0) {
+          const grid = document.getElementById('catalogGrid');
+          
+          // Append new products instead of replacing
+          const newProductHTML = newProducts.map(p => `
+            <div class="product-card">
+              <img src="${p.img}" alt="${p.name}">
+              <h3>${p.name}</h3>
+              <p class="vendor">${p.vendor}</p>
+              <div class="price">${p.price} ₽</div>
+              <a href="/product.html?id=${p.id}" class="cta-button" style="width: 100%; margin-top: 0.75rem; display: block; text-align: center; text-decoration: none;">Подробнее</a>
+            </div>
+          `).join('');
+          
+          grid.insertAdjacentHTML('beforeend', newProductHTML);
+        }
+        
+        updatePaginationControls();
+      }
 
-      // Обработчики фильтров
-      document.getElementById('price-min').addEventListener('input', function() {
-        document.getElementById('min-value').textContent = this.value + ' ₽';
-      });
-      
-      document.getElementById('price-max').addEventListener('input', function() {
-        document.getElementById('max-value').textContent = this.value + ' ₽';
-      });
-      
-      document.getElementById('apply-filters').addEventListener('click', function() {
-        // Здесь будет логика фильтрации
-        alert('Фильтры применены! (Демо-функция)');
-      });
-      
-      document.getElementById('load-more').addEventListener('click', function() {
-        // Здесь будет логика загрузки ещё товаров
-        alert('Загружаем ещё товары! (Демо-функция)');
-      });
+      // Handle infinite scroll
+      function handleInfiniteScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const threshold = 100; // pixels from bottom
+        
+        if (scrollTop + windowHeight >= documentHeight - threshold) {
+          // Check if we still have more products to load
+          const totalLoaded = currentPage * itemsPerPage;
+          if (totalLoaded < filteredProducts.length) {
+            loadMoreProducts();
+          }
+        }
+      }
+
+      // Update pagination controls
+      function updatePaginationControls() {
+        const totalLoaded = currentPage * itemsPerPage;
+        const hasMore = totalLoaded < filteredProducts.length;
+        
+        if (loadMoreBtn) {
+          loadMoreBtn.style.display = hasMore ? 'block' : 'none';
+        }
+      }
     </script>
     
     <div class="pagination" style="text-align: center; margin-top: 2rem;">
