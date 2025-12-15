@@ -336,8 +336,8 @@
       // Render products
       function renderCatalog(products) {
         const grid = document.getElementById('catalogGrid');
-        grid.innerHTML = products.map(p => `
-          <div class="product-card">
+        grid.innerHTML = products.map((p, index) => `
+          <div class="product-card" style="animation-delay: ${index * 0.1}s;">
             <img src="${p.img}" alt="${p.name}">
             <h3>${p.name}</h3>
             <p class="vendor">${p.vendor}</p>
@@ -356,8 +356,8 @@
           const grid = document.getElementById('catalogGrid');
           
           // Append new products instead of replacing
-          const newProductHTML = newProducts.map(p => `
-            <div class="product-card">
+          const newProductHTML = newProducts.map((p, index) => `
+            <div class="product-card" style="animation-delay: ${(grid.children.length + index) * 0.1}s;">
               <img src="${p.img}" alt="${p.name}">
               <h3>${p.name}</h3>
               <p class="vendor">${p.vendor}</p>

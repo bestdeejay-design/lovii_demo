@@ -147,6 +147,11 @@ def main():
             "output_path": "catalog/index.html",
             "title": "Каталог — Витрина",
             "content_file": "catalog_index_content.html"
+        },
+        {
+            "output_path": "establishment.html",
+            "title": "Заведение — Витрина",
+            "content_file": "establishment_content.html"
         }
     ]
     

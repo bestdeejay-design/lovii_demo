@@ -12,14 +12,14 @@ target/
 .venv/
 venv/
 node_modules/
-.julia/
-zig*/
+.mypy_cache/
+.pytest_cache/
+.gradle/
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-*.swo
 
 # Environment
 .env
@@ -29,8 +29,6 @@ zig*/
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # OS specific
 .DS_Store
@@ -40,16 +38,6 @@ Thumbs.db
 coverage/
 htmlcov/
 .coverage
-
-# Python specific
-*.pyc
-__pycache__/
-*.pyo
-*.pyd
-.Python
-*.so
-*.egg-info/
-.eggs/
 
 # Compressed files
 *.zip
@@ -74,9 +62,4 @@ __pycache__/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
-
-# Cache directories
-.mypy_cache/
-.pytest_cache/
-.gradle/
 ```
