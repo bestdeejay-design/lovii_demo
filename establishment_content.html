@@ -47,16 +47,13 @@
   
   <div class="card" style="padding: 2rem; margin: 2rem 0;">
     <h2 style="margin-bottom: 1.5rem;">Меню заведения</h2>
-    <div class="filters">
-      <select id="menu-category">
-        <option value="">Все категории</option>
-        <option value="appetizers">Закуски</option>
-        <option value="mains">Основные блюда</option>
-        <option value="desserts">Десерты</option>
-        <option value="drinks">Напитки</option>
-        <option value="delivery">Только с доставкой</option>
-      </select>
-      <button id="apply-menu-filters" class="cta-button">Фильтровать</button>
+    <div class="category-pills" style="margin-bottom: 1.5rem;">
+      <button class="pill-btn active" data-category="">Все категории</button>
+      <button class="pill-btn" data-category="appetizers">Закуски</button>
+      <button class="pill-btn" data-category="mains">Основные блюда</button>
+      <button class="pill-btn" data-category="desserts">Десерты</button>
+      <button class="pill-btn" data-category="drinks">Напитки</button>
+      <button class="pill-btn" data-category="delivery">Только с доставкой</button>
     </div>
     
     <div id="menu-grid" class="catalog-grid" style="margin-top: 1.5rem;">

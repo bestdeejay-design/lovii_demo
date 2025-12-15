@@ -459,6 +459,13 @@
       color: var(--bg);
       border-color: var(--accent);
     }
+    
+    /* Стили для кнопок фильтров в меню заведения */
+    .establishment-page .category-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
 
     .catalog-grid {
       display: grid;
