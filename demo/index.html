@@ -161,24 +161,26 @@
   </div>
 
   <main class="container">
-    <section class="hero">
-      <h1>Демонстрационная версия сайта</h1>
-      <p>Это экспериментальная версия с современным дизайном меню. Здесь мы тестируем новые функции перед внедрением на основном сайте.</p>
-      <div style="background: var(--card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
-        <h2>Новое современное меню</h2>
-        <p>Вот основные улучшения в новом дизайне меню:</p>
-        <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-          <li>Плавные анимации при наведении</li>
-          <li>Улучшенная адаптивность для мобильных устройств</li>
-          <li>Поддержка выпадающих меню</li>
-          <li>Индикатор активной страницы</li>
-          <li>Поисковая строка в шапке</li>
-          <li>Корзина с отображением количества товаров</li>
-          <li>Улучшенная доступность и навигация с клавиатуры</li>
-        </ul>
-        <p>Протестируйте меню на разных устройствах и размерах экрана!</p>
-      </div>
-    </section>
+    <div id="dynamic-content">
+      <section class="hero">
+        <h1>Демонстрационная версия сайта</h1>
+        <p>Это экспериментальная версия с современным дизайном меню. Здесь мы тестируем новые функции перед внедрением на основном сайте.</p>
+        <div style="background: var(--card); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+          <h2>Новое современное меню</h2>
+          <p>Вот основные улучшения в новом дизайне меню:</p>
+          <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+            <li>Плавные анимации при наведении</li>
+            <li>Улучшенная адаптивность для мобильных устройств</li>
+            <li>Поддержка выпадающих меню</li>
+            <li>Индикатор активной страницы</li>
+            <li>Поисковая строка в шапке</li>
+            <li>Корзина с отображением количества товаров</li>
+            <li>Улучшенная доступность и навигация с клавиатуры</li>
+          </ul>
+          <p>Протестируйте меню на разных устройствах и размерах экрана!</p>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer>
@@ -211,5 +213,67 @@
   </footer>
 
   <script src="./js/modern-menu.js"></script>
+  <script>
+    // Dynamic navigation functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Function to show dynamic content based on link clicked
+      function showDynamicContent(title) {
+        const contentContainer = document.getElementById('dynamic-content');
+        contentContainer.innerHTML = `
+          <section class="hero">
+            <h1>${title}</h1>
+            <div style="background: var(--card); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+              <h2>Содержимое страницы: ${title}</h2>
+              <p>Это демонстрационная страница "${title}". В реальной реализации здесь будет соответствующий контент.</p>
+              <p>Текущая страница отображается динамически без перезагрузки основного HTML.</p>
+              <div style="margin-top: 1.5rem;">
+                <button onclick="history.back()" style="background: var(--accent); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer;">Назад</button>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      // Add click handlers to all navigation links
+      const allLinks = document.querySelectorAll('a');
+      allLinks.forEach(link => {
+        // Skip links that are for external navigation or special functionality
+        if (!link.href || link.href.includes('mailto:') || link.href.includes('tel:')) {
+          return;
+        }
+
+        // Extract page title from the link text
+        const linkText = link.textContent.trim();
+        if (linkText && link.href !== window.location.href && !link.classList.contains('modern-logo')) {
+          link.addEventListener('click', function(e) {
+            // Don't intercept main navigation links that should go to index
+            if (link.href.includes('index.html') || link.href.endsWith('/') || link.href === window.location.origin + '/') {
+              return; // Allow normal navigation for home page
+            }
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Show the dynamic content with the link text as title
+            showDynamicContent(linkText);
+            
+            // Update the URL in the address bar without reloading
+            const url = new URL(link.href);
+            history.pushState({page: linkText}, linkText, url.pathname);
+          });
+        }
+      });
+
+      // Handle browser back/forward buttons
+      window.addEventListener('popstate', function(e) {
+        if (e.state && e.state.page) {
+          showDynamicContent(e.state.page);
+        } else {
+          // If no state, reload the main content
+          location.reload();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
