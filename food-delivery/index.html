@@ -261,8 +261,8 @@
       // Render establishments
       function renderCatalog(est) {
         const grid = document.getElementById('catalogGrid');
-        grid.innerHTML = est.map(e => `
-          <div class="product-card">
+        grid.innerHTML = est.map((e, index) => `
+          <div class="product-card" style="animation-delay: ${index * 0.1}s;" onclick="goToEstablishment(${e.id})" style="cursor: pointer;">
             <img src="${e.img}" alt="${e.name}">
             <h3>${e.name}</h3>
             <p class="vendor">${getEstablishmentTypeName(e.type)}</p>
@@ -272,7 +272,7 @@
               Город: ${getCityName(e.city)}<br>
               ${e.delivery ? 'Доставка доступна' : 'Доставка недоступна'}
             </div>
-            <a href="#" class="cta-button" style="width: 100%; margin-top: 0.75rem; display: block; text-align: center; text-decoration: none;">Заказать</a>
+            <a href="/establishment.html?id=${e.id}" class="cta-button" style="width: 100%; margin-top: 0.75rem; display: block; text-align: center; text-decoration: none;">Подробнее</a>
           </div>
         `).join('');
       }
@@ -305,6 +305,11 @@
           'sam': 'Самара'
         };
         return names[cityCode] || cityCode;
+      }
+      
+      // Function to navigate to establishment page
+      function goToEstablishment(id) {
+        window.location.href = `/establishment.html?id=${id}`;
       }
     </script>
 

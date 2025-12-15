@@ -472,18 +472,47 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 12px var(--shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px var(--shadow);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px var(--shadow);
+      border-color: var(--accent);
+    }
+    
+    /* Эффекты для карточек при загрузке */
+    .product-card {
+      opacity: 0;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Эффекты для изображений в карточках */
+    .product-card img {
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover img {
+      transform: scale(1.03);
     }
 
     .product-card img {
       width: 100%;
       height: 180px;
       object-fit: cover;
+      loading: lazy;
     }
 
     .product-card h3 {
