@@ -170,7 +170,6 @@
       const maxValueSpan = document.getElementById('max-value');
       const applyFiltersBtn = document.getElementById('apply-filters');
       const catalogGrid = document.getElementById('catalogGrid');
-      const loadMoreBtn = document.getElementById('load-more');
       const pillButtons = document.querySelectorAll('.pill-btn');
 
       // Initialize
@@ -213,11 +212,6 @@
             applyFilters();
           });
         });
-        
-        // Load more button
-        if (loadMoreBtn) {
-          loadMoreBtn.addEventListener('click', loadMoreProducts);
-        }
         
         // Infinite scroll
         window.addEventListener('scroll', handleInfiniteScroll);
@@ -390,17 +384,14 @@
 
       // Update pagination controls
       function updatePaginationControls() {
+        // Removed button visibility control - only infinite scroll is used
         const totalLoaded = currentPage * itemsPerPage;
         const hasMore = totalLoaded < filteredProducts.length;
-        
-        if (loadMoreBtn) {
-          loadMoreBtn.style.display = hasMore ? 'block' : 'none';
-        }
       }
     </script>
     
     <div class="pagination" style="text-align: center; margin-top: 2rem;">
-      <button id="load-more" class="cta-button">Загрузить ещё</button>
+      <button id="load-more" class="cta-button" style="display:none;">Загрузить ещё</button>
     </div>
   </main>
 
