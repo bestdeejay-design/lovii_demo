@@ -406,7 +406,8 @@
       border: 1px solid var(--border);
       background: var(--card);
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 1rem;
+      font-weight: 500;
     }
 
     .filters select {
@@ -418,10 +419,17 @@
       align-items: center;
       gap: 0.5rem;
       flex-wrap: wrap;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
 
     .price-filter input[type="range"] {
       width: 100px;
+    }
+
+    .price-filter span {
+      color: var(--text);
+      font-weight: 500;
     }
 
     .category-pills {
