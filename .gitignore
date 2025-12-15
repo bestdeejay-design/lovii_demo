@@ -1,11 +1,8 @@
-```gitignore
 # Compiled and build artifacts
 *.pyc
 __pycache__/
 *.o
 *.obj
-dist/
-build/
 *.class
 *.exe
 *.dll
@@ -14,40 +11,38 @@ build/
 *.out
 
 # Dependencies
-.venv/
-venv/
 node_modules/
-.julia/
-zig-cache/
-target/
-.gradle/
-.mypy_cache/
-.pytest_cache/
+venv/
+.venv/
+.env
+.env.local
+*.env.*
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
 *.swo
-*.bak
-*.~*
-
-# Environment
-.env
-.env.local
-.env.*
 
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # System files
 .DS_Store
 Thumbs.db
-```
 
-Wait, let me reconsider. The modified files are only `catalog/index.html` and `css/style.css` - these are source files, not build artifacts or dependencies. There are no compiled files, dependency directories, or temporary files in the changes shown.
+# Coverage
+coverage/
+htmlcov/
+.coverage
 
-(empty)
+# Build directories
+dist/
+build/
+target/
+.gradle/
+
+# Cache directories
+.mypy_cache/
+.pytest_cache/
