@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ title }} — Витрина</title>
+  <title>Еда и доставка — Витрина</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="{{ theme_class|default('dark-theme') }}">
@@ -59,7 +59,12 @@
   <button class="menu-fab" id="menuFab">≡</button>
 
   <main class="container">
-    {{ content }}
+    <section class="food-delivery">
+    <div class="container">
+        <h1>Еда и доставка</h1>
+        <p>Лучшие рестораны, кафе и службы доставки еды для вашего бизнеса и личных нужд.</p>
+    </div>
+</section>
   </main>
 
   <footer>
@@ -92,6 +97,6 @@
   </footer>
 
   <script src="/js/main.js"></script>
-  {{ scripts }}
+  
 </body>
 </html>
