@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Theme Toggle</title>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .light-theme {
+            background-color: white;
+            color: black;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+        #themeToggle {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeToggle">
+            <span class="sun-icon">☀️</span>
+            <span class="moon-icon">🌙</span>
+        </button>
+    </div>
+    
+    <div class="container">
+        <h1>Тестирование переключения темы</h1>
+        <p>Эта страница используется для проверки работы переключения темы.</p>
+        <p>Нажмите на значок ☀️/🌙 в правом верхнем углу для переключения темы.</p>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // После загрузки скрипта инициализируем переключатель темы
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeThemeToggle();
+        });
+    </script>
+</body>
+</html>
