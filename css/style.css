@@ -46,26 +46,39 @@ body.light-theme {
 }
 
 /* Header Styles */
-.header {
+header {
     background-color: var(--dark-surface);
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
     transition: var(--transition);
-}
-
-body.light-theme .header {
-    background-color: var(--light-surface);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
     position: relative;
+}
+
+body.light-theme header {
+    background-color: var(--light-surface);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.desktop-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    position: static;
+}
+
+.desktop-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
 
 .logo {
@@ -80,7 +93,7 @@ body.light-theme .logo {
 }
 
 /* Navigation Menu */
-.nav-menu {
+.desktop-nav ul {
     display: flex;
     list-style: none;
     margin: 0;
@@ -88,12 +101,12 @@ body.light-theme .logo {
     align-items: center;
 }
 
-.nav-item {
+.desktop-nav > ul > li {
     position: relative;
     margin: 0 0.75rem;
 }
 
-.nav-link {
+.desktop-nav a {
     text-decoration: none;
     color: var(--dark-on-surface);
     padding: 0.5rem 0.75rem;
@@ -103,16 +116,161 @@ body.light-theme .logo {
     position: relative;
 }
 
-body.light-theme .nav-link {
+body.light-theme .desktop-nav a {
     color: var(--light-on-surface);
 }
 
-.nav-link:hover {
+.desktop-nav a:hover {
     background-color: rgba(255, 107, 53, 0.1);
 }
 
-body.light-theme .nav-link:hover {
+body.light-theme .desktop-nav a:hover {
     background-color: rgba(42, 92, 52, 0.1);
+}
+
+/* Mobile Menu FAB Button */
+.menu-fab {
+    display: none; /* Will be shown on smaller screens */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--dark-accent-orange);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+body.light-theme .menu-fab {
+    background-color: var(--light-accent-green);
+}
+
+.menu-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Off-canvas menu styles */
+.offcanvas-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--dark-surface);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    z-index: 1001;
+    transition: var(--transition);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+body.light-theme .offcanvas-menu {
+    background-color: var(--light-surface);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+.offcanvas-menu.active {
+    right: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.close-menu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--dark-on-surface);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+body.light-theme .close-menu {
+    color: var(--light-on-surface);
+}
+
+.close-menu:hover {
+    background-color: rgba(255, 107, 53, 0.1);
+}
+
+body.light-theme .close-menu:hover {
+    background-color: rgba(42, 92, 52, 0.1);
+}
+
+.offcanvas-nav {
+    flex: 1;
+    padding: 3rem 1rem 1rem;
+}
+
+.offcanvas-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.offcanvas-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.offcanvas-nav a {
+    display: block;
+    padding: 0.75rem;
+    text-decoration: none;
+    color: var(--dark-on-surface);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+body.light-theme .offcanvas-nav a {
+    color: var(--light-on-surface);
+}
+
+.offcanvas-nav a:hover {
+    background-color: rgba(255, 107, 53, 0.1);
+}
+
+body.light-theme .offcanvas-nav a:hover {
+    background-color: rgba(42, 92, 52, 0.1);
+}
+
+.offcanvas-theme {
+    padding: 1rem;
+    border-top: 1px solid var(--dark-border);
+    display: flex;
+    justify-content: center;
+}
+
+body.light-theme .offcanvas-theme {
+    border-top: 1px solid var(--light-border);
 }
 
 /* Dropdown Menu */
@@ -258,7 +416,7 @@ body.light-theme #search-btn {
 }
 
 /* Mobile Menu Button */
-.mobile-menu-btn {
+\1.menu-fab {
     display: none;
     flex-direction: column;
     background: none;
@@ -267,7 +425,7 @@ body.light-theme #search-btn {
     padding: 0.5rem;
 }
 
-.mobile-menu-btn span {
+\1.menu-fab span {
     width: 25px;
     height: 3px;
     background-color: var(--dark-on-surface);
@@ -275,12 +433,12 @@ body.light-theme #search-btn {
     transition: var(--transition);
 }
 
-body.light-theme .mobile-menu-btn span {
+body.light-theme .menu-fab span {
     background-color: var(--light-on-surface);
 }
 
 /* Mobile Drawer */
-.mobile-drawer {
+\1.offcanvas-menu {
     position: fixed;
     top: 0;
     right: -300px;
@@ -293,12 +451,12 @@ body.light-theme .mobile-menu-btn span {
     overflow-y: auto;
 }
 
-body.light-theme .mobile-drawer {
+body.light-theme .offcanvas-menu {
     background-color: var(--light-surface);
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
 }
 
-.mobile-drawer.active {
+\1.offcanvas-menu.active {
     right: 0;
 }
 
@@ -743,7 +901,7 @@ body.light-theme .review-author {
 }
 
 /* Footer */
-.footer {
+footer {
     background-color: var(--dark-surface);
     color: var(--dark-on-surface);
     padding: 4rem 0 2rem;
@@ -751,7 +909,7 @@ body.light-theme .review-author {
     transition: var(--transition);
 }
 
-body.light-theme .footer {
+body.light-theme footer {
     background-color: var(--light-surface);
     color: var(--light-on-surface);
 }
@@ -831,11 +989,11 @@ body.light-theme .footer-dropdown .dropdown-content {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .nav-menu {
+\1.desktop-nav {
         display: none;
     }
     
-    .mobile-menu-btn {
+\1.menu-fab {
         display: flex;
     }
     
@@ -870,7 +1028,7 @@ body.light-theme .footer-dropdown .dropdown-content {
 }
 
 @media (min-width: 769px) {
-    .mobile-drawer {
+\1.offcanvas-menu {
         display: none;
     }
 }
