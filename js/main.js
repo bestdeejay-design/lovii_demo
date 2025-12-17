@@ -172,3 +172,13 @@ function initializeContactForm() {
         contactForm.reset();
     });
 }
+
+// Экспортируем функции для использования в других частях приложения
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        initializeThemeToggle,
+        initializeMobileMenu,
+        initializeNewMobileNavigation,
+        initializeContactForm
+    };
+}
