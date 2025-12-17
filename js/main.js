@@ -62,6 +62,48 @@ function initializeMobileMenu() {
             });
         });
     }
+    
+    // Initialize the new mobile navigation
+    initializeNewMobileNavigation();
+}
+
+function initializeNewMobileNavigation() {
+    const mobileNavButton = document.getElementById('mobileNavButton');
+    const mobileNavMenu = document.getElementById('mobileNavMenu');
+    const closeMobileMenu = document.getElementById('closeMobileMenu');
+    
+    if (mobileNavButton && mobileNavMenu) {
+        // Toggle mobile navigation menu
+        mobileNavButton.addEventListener('click', function() {
+            mobileNavMenu.classList.toggle('active');
+        });
+        
+        // Close mobile navigation menu
+        if (closeMobileMenu) {
+            closeMobileMenu.addEventListener('click', function() {
+                mobileNavMenu.classList.remove('active');
+            });
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileNavMenu.contains(event.target) && 
+                !mobileNavButton.contains(event.target) &&
+                mobileNavMenu.classList.contains('active')) {
+                mobileNavMenu.classList.remove('active');
+            }
+        });
+        
+        // Handle submenu toggling
+        const submenuItems = document.querySelectorAll('.has-submenu > .nav-link');
+        submenuItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parentItem = this.parentElement;
+                parentItem.classList.toggle('active');
+            });
+        });
+    }
 }
 
 // Дополнительная функция для плавного перехода между секциями
