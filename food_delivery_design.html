@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vitrina - Еда и доставка</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    :root {
+      /* Forest theme colors */
+      --forest-primary: #1A2E20;
+      --forest-secondary: #2A3A2A;
+      --forest-accent: #FF6B35;
+      --forest-light: #F5F0E6;
+      --forest-text: #333333;
+      --forest-text-light: #666666;
+      
+      /* Glassmorphism effect */
+      --glass-bg: rgba(245, 240, 230, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+    body.forest-theme {
+      background-color: var(--forest-primary);
+      color: var(--forest-text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* Header styles */
+    .header-forest {
+      background: rgba(26, 46, 32, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Hero section */
+    .hero-food {
+      position: relative;
+      padding: 6rem 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--forest-primary) 0%, var(--forest-secondary) 100%);
+      overflow: hidden;
+    }
+    
+    .hero-food::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center;
+      background-size: cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+    
+    .discount-tag {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: var(--forest-accent);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: bold;
+      z-index: 2;
+    }
+    
+    .hero-food h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--forest-light);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero-food p {
+      font-size: 1.2rem;
+      color: var(--forest-light);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .cta-button-orange {
+      background: var(--forest-accent);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+      border: none;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    }
+    
+    .cta-button-orange:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+    }
+    
+    /* Features section */
+    .features-section {
+      padding: 4rem 1rem;
+      background: var(--forest-light);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .feature-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: var(--glass-shadow);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--forest-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+    
+    .feature-card h3 {
+      color: var(--forest-text);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .feature-card p {
+      color: var(--forest-text-light);
+      line-height: 1.6;
+    }
+    
+    /* Stats section */
+    .stats-section {
+      padding: 3rem 1rem;
+      background: var(--forest-secondary);
+      color: var(--forest-light);
+      text-align: center;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .stat-item h3 {
+      font-size: 2.5rem;
+      color: var(--forest-accent);
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-item p {
+      font-size: 1.1rem;
+      color: var(--forest-light);
+    }
+    
+    /* Partners section */
+    .partners-section {
+      padding: 4rem 1rem;
+      background: var(--forest-light);
+    }
+    
+    .partners-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--forest-text);
+    }
+    
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .partner-logo {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--forest-primary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    /* Reviews section */
+    .reviews-section {
+      padding: 4rem 1rem;
+      background: var(--forest-primary);
+      color: var(--forest-light);
+    }
+    
+    .reviews-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--forest-light);
+    }
+    
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .review-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--glass-shadow);
+    }
+    
+    .review-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .review-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--forest-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 1rem;
+    }
+    
+    .review-rating {
+      color: gold;
+      margin-top: 0.5rem;
+    }
+    
+    /* Mobile app section */
+    .app-section {
+      padding: 4rem 1rem;
+      background: var(--forest-light);
+      text-align: center;
+    }
+    
+    .app-title {
+      font-size: 2rem;
+      color: var(--forest-text);
+      margin-bottom: 1rem;
+    }
+    
+    .app-description {
+      color: var(--forest-text-light);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    
+    .app-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .app-badge {
+      background: var(--forest-primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s ease;
+    }
+    
+    .app-badge:hover {
+      transform: translateY(-3px);
+    }
+    
+    /* Footer */
+    .footer-forest {
+      background: var(--forest-secondary);
+      color: var(--forest-light);
+      padding: 3rem 1rem 1rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .footer-column h3 {
+      color: var(--forest-light);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--forest-accent);
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--forest-light);
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: var(--forest-accent);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .hero-food {
+        padding: 4rem 1rem;
+      }
+      
+      .hero-food h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-food p {
+        font-size: 1rem;
+      }
+      
+      .features-grid,
+      .stats-grid,
+      .partners-grid,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .app-badges {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .discount-tag {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 1rem auto;
+      }
+    }
+  </style>
+</head>
+<body class="forest-theme">
+  <!-- Header -->
+  <header class="header-forest">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem;">
+      <a href="/" class="logo"><span>Vitrina</span></a>
+      <nav class="desktop-nav">
+        <ul style="display: flex; list-style: none; gap: 1.5rem; margin: 0;">
+          <li><a href="/">Главная</a></li>
+          <li class="dropdown">
+            <a href="/catalog/">Каталог</a>
+            <div class="dropdown-content">
+              <a href="/catalog/categories">Товары по категориям</a>
+              <a href="/catalog/new-arrivals">Новые поступления</a>
+              <a href="/catalog/popular">Популярные товары</a>
+              <a href="/catalog/sales">Акции и кэшбэк</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="/food-delivery/" style="color: var(--forest-accent); font-weight: bold;">Еда и доставка</a>
+            <div class="dropdown-content">
+              <a href="/food-delivery/restaurants">Рестораны</a>
+              <a href="/food-delivery/cafe">Кафе</a>
+              <a href="/food-delivery/dark-kitchen">Dark Kitchen</a>
+              <a href="/food-delivery/delivery">Доставка еды</a>
+              <a href="/food-delivery/establishments-sales">Акции у заведений</a>
+            </div>
+          </li>
+          <li><a href="/business.html">Для бизнеса</a></li>
+          <li><a href="/buyers.html">Для покупателей</a></li>
+          <li><a href="/partners.html">Для партнёров</a></li>
+          <li><a href="/contacts.html">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-food">
+    <div class="discount-tag">UPTO 40% DISCOUNT</div>
+    <h1>Get Fresh Food in a Easy Way</h1>
+    <p>Найдите идеальное место за 3 клика. Получайте кэшбэк на каждую доставку. Быстрая и надежная доставка прямо к вам домой.</p>
+    <a href="/food-delivery/restaurants" class="cta-button-orange">Найти рестораны</a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Easy to Order</h3>
+        <p>Простой и интуитивный интерфейс позволяет легко находить и заказывать любимые блюда за несколько кликов.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Fast Delivery</h3>
+        <p>Наши курьеры обеспечивают быструю и надежную доставку в течение 30-45 минут по всему городу.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secured Payment</h3>
+        <p>Безопасные платежи с поддержкой всех популярных методов оплаты и защитой ваших данных.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>+1200</h3>
+        <p>ресторанов</p>
+      </div>
+      <div class="stat-item">
+        <h3>98%</h3>
+        <p>удовлетворенности клиентов</p>
+      </div>
+      <div class="stat-item">
+        <h3>30-45 мин</h3>
+        <p>среднее время доставки</p>
+      </div>
+      <div class="stat-item">
+        <h3>5%</h3>
+        <p>средний кэшбэк</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="partners-section">
+    <h2 class="partners-title">Наши партнёры</h2>
+    <div class="partners-grid">
+      <div class="partner-logo">Сбербанк</div>
+      <div class="partner-logo">Тинькофф</div>
+      <div class="partner-logo">Яндекс.Еда</div>
+      <div class="partner-logo">Самокат</div>
+      <div class="partner-logo">Delivery Club</div>
+      <div class="partner-logo">Яндекс.Лавка</div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews-section">
+    <h2 class="reviews-title">Отзывы клиентов</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">АМ</div>
+          <div>
+            <h4>Александр М.</h4>
+            <div class="review-rating">★★★★★</div>
+          </div>
+        </div>
+        <p>Отличное качество еды и быстрая доставка! Особенно радует система кэшбэка, которая экономит приличную сумму каждый месяц.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">ЕК</div>
+          <div>
+            <h4>Елена К.</h4>
+            <div class="review-rating">★★★★★</div>
+          </div>
+        </div>
+        <p>Удобный интерфейс, большой выбор заведений и возможность отслеживать статус заказа в реальном времени. Рекомендую!</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">ДС</div>
+          <div>
+            <h4>Дмитрий С.</h4>
+            <div class="review-rating">★★★★☆</div>
+          </div>
+        </div>
+        <p>Быстро и вкусно! Особенно удобно для заказа обедов в офис. Единственный минус - иногда проблемы с доставкой в час пик.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile App Section -->
+  <section class="app-section">
+    <h2 class="app-title">Скачать мобильное приложение</h2>
+    <p class="app-description">Установите наше мобильное приложение для более удобного заказа еды и получения эксклюзивных предложений</p>
+    <div class="app-badges">
+      <a href="#" class="app-badge">App Store</a>
+      <a href="#" class="app-badge">Google Play</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-forest">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Vitrina</h3>
+        <p style="color: #ccc; line-height: 1.6;">Платформа для подключения местного бизнеса к системам доставки и увеличения продаж.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">in</a>
+          <a href="#" class="social-icon">ig</a>
+          <a href="#" class="social-icon">t</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Для бизнеса</h3>
+        <ul class="footer-links">
+          <li><a href="/business/connect-company">Подключить компанию</a></li>
+          <li><a href="/business/support">Поддержка продавцов</a></li>
+          <li><a href="/business/pro-tariffs">Тарифы PRO</a></li>
+          <li><a href="/business/api">API и интеграции</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Для покупателей</h3>
+        <ul class="footer-links">
+          <li><a href="/buyers/how-to-buy">Как делать покупки</a></li>
+          <li><a href="/buyers/cashback">Кэшбэк и бонусы</a></li>
+          <li><a href="/buyers/delivery-payment">Доставка и оплата</a></li>
+          <li><a href="/buyers/faq">Частые вопросы</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Контакты</h3>
+        <ul class="footer-links">
+          <li><a href="/contacts.html">Офис и адрес</a></li>
+          <li><a href="/help.html">Помощь</a></li>
+          <li><a href="/terms.html">Условия использования</a></li>
+          <li><a href="/privacy.html">Конфиденциальность</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2023 Vitrina. Все права защищены.
+    </div>
+  </footer>
+
+  <script>
+    // Simple script for mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuFab = document.querySelector('.menu-fab');
+      const offcanvasMenu = document.getElementById('offcanvasMenu');
+      const overlay = document.getElementById('overlay');
+      const closeMenu = document.getElementById('closeMenu');
+      
+      if(menuFab) {
+        menuFab.addEventListener('click', function() {
+          offcanvasMenu.classList.add('active');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+      
+      if(closeMenu) {
+        closeMenu.addEventListener('click', function() {
+          offcanvasMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+      
+      if(overlay) {
+        overlay.addEventListener('click', function() {
+          offcanvasMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+      
+      // Add dropdown functionality for mobile
+      const dropdownToggles = document.querySelectorAll('.offcanvas-nav .dropdown > a');
+      dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+          if(window.innerWidth <= 768) {
+            e.preventDefault();
+            const dropdown = this.parentElement;
+            dropdown.classList.toggle('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
