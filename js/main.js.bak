@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Инициализируем переключатель темы
     initializeThemeToggle();
-    
-    // Инициализируем обработчик формы
-    initializeContactForm();
 });
 
 function initializeThemeToggle() {
@@ -38,7 +35,7 @@ function initializeThemeToggle() {
 }
 
 // Дополнительная функция для плавного перехода между секциями
-document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         
@@ -53,38 +50,3 @@ document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
         }
     });
 });
-
-// Функция для обработки формы обратной связи
-function initializeContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    
-    if (!contactForm) {
-        console.warn('Contact form not found');
-        return;
-    }
-    
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Получаем значения полей формы
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const message = document.getElementById('message').value;
-        
-        // Простая валидация
-        if (!name || !email || !message) {
-            alert('Пожалуйста, заполните все обязательные поля');
-            return;
-        }
-        
-        // Здесь можно добавить отправку данных на сервер
-        console.log('Форма отправлена:', { name, email, phone, message });
-        
-        // Показываем сообщение об успешной отправке
-        alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-        
-        // Сбрасываем форму
-        contactForm.reset();
-    });
-}
