@@ -113,3 +113,125 @@ footer .container {
 body.light-theme .footer-bottom {
     border-color: var(--light-border);
 }
+
+/* Footer responsive design */
+@media (max-width: 768px) {
+    .footer-links.desktop-links {
+        display: none;
+    }
+    
+    .footer-mobile-menu {
+        display: block;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr; /* Stack elements on mobile */
+    }
+}
+
+@media (min-width: 769px) {
+    .footer-mobile-menu {
+        display: none;
+    }
+    
+    .footer-links.desktop-links {
+        display: flex;
+    }
+}
+
+/* Mobile dropdown styling */
+.footer-mobile-menu {
+    display: none; /* Hidden by default, shown on mobile */
+}
+
+.mobile-dropdown {
+    border: 1px solid var(--dark-border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.mobile-dropdown summary {
+    padding: 0.75rem;
+    background-color: var(--dark-surface);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+body.light-theme .mobile-dropdown summary {
+    background-color: var(--light-surface);
+}
+
+.mobile-dropdown[open] summary {
+    background-color: var(--dark-accent-orange);
+    color: white;
+}
+
+body.light-theme .mobile-dropdown[open] summary {
+    background-color: var(--light-accent-green);
+}
+
+.mobile-links {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    background-color: var(--dark-surface);
+}
+
+body.light-theme .mobile-links {
+    background-color: var(--light-surface);
+}
+
+.mobile-links a {
+    padding: 0.5rem;
+    text-decoration: none;
+    color: var(--dark-on-surface);
+    border-radius: var(--border-radius);
+    margin: 0.25rem 0;
+    transition: var(--transition);
+}
+
+body.light-theme .mobile-links a {
+    color: var(--light-on-surface);
+}
+
+.mobile-links a:hover {
+    background-color: rgba(255, 107, 53, 0.1);
+}
+
+body.light-theme .mobile-links a:hover {
+    background-color: rgba(42, 92, 52, 0.1);
+}
+
+/* Desktop footer links styling */
+.footer-links.desktop-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-dropdown {
+    position: relative;
+}
+
+.footer-dropdown > a {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-dropdown .dropdown-content {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    background: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    max-height: none;
+}
+
+.footer-dropdown .dropdown-content a {
+    padding: 0.25rem 0;
+    opacity: 0.8;
+}
