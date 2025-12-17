@@ -3,204 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Витрина - Еда с кэшбэком</title>
+    <title>Витрина - B2B2C платформа для товаров и услуг HoReCa</title>
+    <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#121212">
+    <meta name="description" content="Платформа Витрина объединяет каталог товаров, услуги HoReCa, инструменты для бизнеса и финтех-механики">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Витрина - B2B2C платформа">
+    <meta property="og:description" content="Платформа Витрина объединяет каталог товаров, услуги HoReCa, инструменты для бизнеса и финтех-механики">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
 </head>
-<body>
-    <!-- Header -->
+<body class="dark-theme">
     <header class="header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <span class="logo-icon">🍽️</span>
-                    <span class="logo-text">Витрина</span>
+            <nav class="navbar">
+                <div class="logo">Витрина</div>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-menu">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Каталог</a>
+                        <div class="dropdown-content">
+                            <a href="#">Товары по категориям</a>
+                            <a href="#">Новые поступления</a>
+                            <a href="#">Популярные товары</a>
+                            <a href="#">Акции и кэшбэк</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Еда и доставка</a>
+                        <div class="dropdown-content">
+                            <a href="#">Рестораны</a>
+                            <a href="#">Кафе</a>
+                            <a href="#">Dark Kitchen</a>
+                            <a href="#">Доставка еды</a>
+                            <a href="#">Акции у заведений</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">О нас</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Для бизнеса</a>
+                        <div class="dropdown-content">
+                            <a href="#">Подключить компанию</a>
+                            <a href="#">Поддержка продавцов</a>
+                            <a href="#">Тарифы PRO</a>
+                            <a href="#">API и интеграции</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Для покупателей</a>
+                        <div class="dropdown-content">
+                            <a href="#">Как делать покупки</a>
+                            <a href="#">Кэшбэк и бонусы</a>
+                            <a href="#">Доставка и оплата</a>
+                            <a href="#">Частые вопросы</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Для партнёров</a>
+                        <div class="dropdown-content">
+                            <a href="#">Банки и финансовые партнёры</a>
+                            <a href="#">Технические интеграторы</a>
+                            <a href="#">Медиа и коллаборации</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+                </ul>
+                
+                <!-- Theme Switcher -->
+                <button id="theme-toggle" class="theme-switcher">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+                
+                <!-- Search -->
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Поиск...">
+                    <button id="search-btn">🔍</button>
                 </div>
                 
-                <nav class="nav-desktop">
-                    <ul class="nav-list">
-                        <li><a href="#" class="nav-link">Главная</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle">Каталог <i data-lucide="chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Пицца</a></li>
-                                <li><a href="#">Суши</a></li>
-                                <li><a href="#">Бургеры</a></li>
-                                <li><a href="#">Здоровая еда</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle">Еда и доставка <i data-lucide="chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Доставка</a></li>
-                                <li><a href="#">Самовывоз</a></li>
-                                <li><a href="#">Рестораны</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="nav-link">Для бизнеса</a></li>
-                        <li><a href="#" class="nav-link">Для покупателей</a></li>
-                        <li><a href="#" class="nav-link">Для партнёров</a></li>
-                        <li><a href="#" class="nav-link">Контакты</a></li>
-                    </ul>
-                </nav>
-                
-                <button class="menu-toggle" id="menuToggle">
-                    <i data-lucide="menu" class="menu-icon"></i>
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
+            </nav>
+            
+            <!-- Mobile Drawer Menu -->
+            <div class="mobile-drawer">
+                <div class="drawer-header">
+                    <h3>Меню</h3>
+                    <button class="close-drawer">&times;</button>
+                </div>
+                <div class="drawer-content">
+                    <div class="accordion-item">
+                        <button class="accordion-header">Каталог</button>
+                        <div class="accordion-body">
+                            <a href="#">Товары по категориям</a>
+                            <a href="#">Новые поступления</a>
+                            <a href="#">Популярные товары</a>
+                            <a href="#">Акции и кэшбэк</a>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">Еда и доставка</button>
+                        <div class="accordion-body">
+                            <a href="#">Рестораны</a>
+                            <a href="#">Кафе</a>
+                            <a href="#">Dark Kitchen</a>
+                            <a href="#">Доставка еды</a>
+                            <a href="#">Акции у заведений</a>
+                        </div>
+                    </div>
+                    <a href="#">О нас</a>
+                    <div class="accordion-item">
+                        <button class="accordion-header">Для бизнеса</button>
+                        <div class="accordion-body">
+                            <a href="#">Подключить компанию</a>
+                            <a href="#">Поддержка продавцов</a>
+                            <a href="#">Тарифы PRO</a>
+                            <a href="#">API и интеграции</a>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">Для покупателей</button>
+                        <div class="accordion-body">
+                            <a href="#">Как делать покупки</a>
+                            <a href="#">Кэшбэк и бонусы</a>
+                            <a href="#">Доставка и оплата</a>
+                            <a href="#">Частые вопросы</a>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">Для партнёров</button>
+                        <div class="accordion-body">
+                            <a href="#">Банки и финансовые партнёры</a>
+                            <a href="#">Технические интеграторы</a>
+                            <a href="#">Медиа и коллаборации</a>
+                        </div>
+                    </div>
+                    <a href="#">Контакты</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header">
-            <div class="logo">
-                <span class="logo-icon">🍽️</span>
-                <span class="logo-text">Витрина</span>
-            </div>
-            <button class="close-btn" id="closeMenu">
-                <i data-lucide="x" class="close-icon"></i>
-            </button>
-        </div>
-        
-        <ul class="mobile-nav-list">
-            <li><a href="#" class="mobile-nav-link">Главная</a></li>
-            
-            <li class="mobile-dropdown">
-                <div class="mobile-dropdown-toggle">
-                    <a href="#" class="mobile-nav-link">Каталог</a>
-                    <i data-lucide="chevron-right" class="dropdown-arrow"></i>
-                </div>
-                <ul class="mobile-submenu">
-                    <li><a href="#">Пицца</a></li>
-                    <li><a href="#">Суши</a></li>
-                    <li><a href="#">Бургеры</a></li>
-                    <li><a href="#">Здоровая еда</a></li>
-                </ul>
-            </li>
-            
-            <li class="mobile-dropdown">
-                <div class="mobile-dropdown-toggle">
-                    <a href="#" class="mobile-nav-link">Еда и доставка</a>
-                    <i data-lucide="chevron-right" class="dropdown-arrow"></i>
-                </div>
-                <ul class="mobile-submenu">
-                    <li><a href="#">Доставка</a></li>
-                    <li><a href="#">Самовывоз</a></li>
-                    <li><a href="#">Рестораны</a></li>
-                </ul>
-            </li>
-            
-            <li><a href="#" class="mobile-nav-link">Для бизнеса</a></li>
-            <li><a href="#" class="mobile-nav-link">Для покупателей</a></li>
-            <li><a href="#" class="mobile-nav-link">Для партнёров</a></li>
-            <li><a href="#" class="mobile-nav-link">Контакты</a></li>
-        </ul>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Еда у вас дома за 20 минут</h1>
-                <p class="hero-subtitle">Кэшбэк на каждую доставку. Более 1500 ресторанов в вашем городе.</p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">+1500</span>
-                        <span class="stat-label">ресторанов</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">5%</span>
-                        <span class="stat-label">средний кэшбэк</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">30</span>
-                        <span class="stat-label">минут доставка</span>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Витрина - универсальная B2B2C платформа</h1>
+                    <p>Объединяем каталог товаров, услуги HoReCa, инструменты для бизнеса и финтех-механики в едином решении</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary">Начать работу</button>
+                        <button class="btn btn-secondary">Узнать больше</button>
                     </div>
                 </div>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary">Заказать еду</button>
-                    <button class="btn btn-secondary">Стать партнёром</button>
+                <div class="hero-image">
+                    <img src="https://placehold.co/600x400/121212/FF6B35?text=Витрина" alt="Платформа Витрина">
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Food Categories -->
-    <section class="food-categories">
-        <div class="container">
-            <h2 class="section-title">Популярные категории</h2>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Пицца" alt="Пицца">
-                    <div class="category-info">
-                        <h3>Пицца</h3>
-                        <p>От 150 р.</p>
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2>Наши возможности</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛒</div>
+                        <h3>Каталог товаров</h3>
+                        <p>Широкий выбор товаров от проверенных поставщиков</p>
                     </div>
-                </div>
-                <div class="category-card">
-                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Суши" alt="Суши">
-                    <div class="category-info">
-                        <h3>Суши</h3>
-                        <p>От 200 р.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">🍽️</div>
+                        <h3>HoReCa услуги</h3>
+                        <p>Рестораны, кафе, dark kitchen и доставка еды</p>
                     </div>
-                </div>
-                <div class="category-card">
-                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Бургеры" alt="Бургеры">
-                    <div class="category-info">
-                        <h3>Бургеры</h3>
-                        <p>От 180 р.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h3>Инструменты для бизнеса</h3>
+                        <p>Все необходимое для эффективного управления</p>
                     </div>
-                </div>
-                <div class="category-card">
-                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Здоровая+еда" alt="Здоровая еда">
-                    <div class="category-info">
-                        <h3>Здоровая еда</h3>
-                        <p>От 250 р.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">💳</div>
+                        <h3>Финтех-механики</h3>
+                        <p>Кэшбэк, банковские партнёрства и безопасные платежи</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Partners -->
-    <section class="partners">
-        <div class="container">
-            <h2 class="section-title">Наши партнёры</h2>
-            <div class="partners-list">
-                <div class="partner-logo">банк 1</div>
-                <div class="partner-logo">банк 2</div>
-                <div class="partner-logo">банк 3</div>
-                <div class="partner-logo">банк 4</div>
-                <div class="partner-logo">банк 5</div>
+        <!-- Products Section -->
+        <section class="products">
+            <div class="container">
+                <h2>Популярные товары</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="https://placehold.co/200x200/121212/FF6B35?text=Товар" alt="Товар">
+                        <h3>Пример товара</h3>
+                        <p>Описание товара</p>
+                        <div class="price">1 990 ₽</div>
+                        <button class="btn btn-sm">В корзину</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/200x200/121212/FF6B35?text=Товар" alt="Товар">
+                        <h3>Пример товара</h3>
+                        <p>Описание товара</p>
+                        <div class="price">2 490 ₽</div>
+                        <button class="btn btn-sm">В корзину</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/200x200/121212/FF6B35?text=Товар" alt="Товар">
+                        <h3>Пример товара</h3>
+                        <p>Описание товара</p>
+                        <div class="price">3 990 ₽</div>
+                        <button class="btn btn-sm">В корзину</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/200x200/121212/FF6B35?text=Товар" alt="Товар">
+                        <h3>Пример товара</h3>
+                        <p>Описание товара</p>
+                        <div class="price">1 290 ₽</div>
+                        <button class="btn btn-sm">В корзину</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
+        <!-- Reviews Section -->
+        <section class="reviews">
+            <div class="container">
+                <h2>Отзывы клиентов</h2>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-rating">★★★★★</div>
+                        <p>"Отличная платформа для работы с поставщиками и управления заказами"</p>
+                        <div class="review-author">— Иван Петров</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-rating">★★★★★</div>
+                        <p>"Удобный интерфейс и быстрая доставка товаров"</p>
+                        <div class="review-author">— Мария Сидорова</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-rating">★★★★☆</div>
+                        <p>"Хорошая система кэшбэка и бонусов для постоянных клиентов"</p>
+                        <div class="review-author">— Алексей Кузнецов</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Контакты</h3>
-                    <p>support@витрина.рф</p>
-                    <p>+7 (XXX) XXX-XX-XX</p>
+                    <h3>Витрина</h3>
+                    <p>B2B2C платформа для товаров и услуг HoReCa</p>
                 </div>
                 <div class="footer-section">
-                    <h3>Социальные сети</h3>
-                    <div class="social-links">
-                        <a href="#">VK</a>
-                        <a href="#">TG</a>
-                        <a href="#">INST</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Политики</h3>
+                    <h4>Компания</h4>
                     <ul>
-                        <li><a href="#">Политика конфиденциальности</a></li>
-                        <li><a href="#">Условия использования</a></li>
-                        <li><a href="#">Пользовательское соглашение</a></li>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Карьера</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Для бизнеса</h4>
+                    <ul>
+                        <li><a href="#">Подключить компанию</a></li>
+                        <li><a href="#">Тарифы</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Партнерская программа</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li><a href="#">Помощь</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Сообщество</a></li>
+                        <li><a href="#">Статус</a></li>
                     </ul>
                 </div>
             </div>
@@ -210,6 +301,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
