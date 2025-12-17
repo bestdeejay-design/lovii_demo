@@ -414,9 +414,9 @@ body.light-theme #search-btn {
     opacity: 0.9;
 }
 
-/* Mobile Menu Button */
-\1.menu-fab {
-    display: none;
+/* Mobile Menu Button - now handled properly in media queries */
+.menu-fab {
+    display: none; /* Will be shown on smaller screens via media query */
     flex-direction: column;
     background: none;
     border: none;
@@ -424,7 +424,7 @@ body.light-theme #search-btn {
     padding: 0.5rem;
 }
 
-\1.menu-fab span {
+.menu-fab span {
     width: 25px;
     height: 3px;
     background-color: var(--dark-on-surface);
@@ -436,8 +436,8 @@ body.light-theme .menu-fab span {
     background-color: var(--light-on-surface);
 }
 
-/* Mobile Drawer */
-\1.offcanvas-menu {
+/* Mobile Drawer - corrected selector */
+.offcanvas-menu {
     position: fixed;
     top: 0;
     right: -300px;
@@ -455,7 +455,7 @@ body.light-theme .offcanvas-menu {
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
 }
 
-\1.offcanvas-menu.active {
+.offcanvas-menu.active {
     right: 0;
 }
 
