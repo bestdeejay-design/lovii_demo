@@ -62,11 +62,19 @@ body {
   align-items: center;
 }
 
-.logo a {
+.logo {
   color: var(--accent-color);
-  text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.logo-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.logo-link:hover {
+  opacity: 0.8;
 }
 
 .nav-menu ul {
