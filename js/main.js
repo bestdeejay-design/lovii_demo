@@ -37,7 +37,7 @@ function initializeComponentsWithRetry() {
         attempts++;
         
         // Check and initialize theme toggle if not already done
-        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeToggleBtn = document.getElementById('theme-toggle');
         if (!themeToggleInitialized && themeToggleBtn) {
             initializeThemeToggle(themeToggleBtn);
             themeToggleInitialized = true;
@@ -79,7 +79,7 @@ function initializeComponentsWithRetry() {
 function initializeThemeToggle(themeToggleBtn) {
     // Если элемент не передан как параметр, ищем его в DOM
     if (!themeToggleBtn) {
-        themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn = document.getElementById('theme-toggle');
         
         if (!themeToggleBtn) {
             console.error('Theme toggle button not found');
