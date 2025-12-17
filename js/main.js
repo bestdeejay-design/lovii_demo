@@ -101,6 +101,24 @@ function initializeMobileMenu() {
     
     // Initialize the new mobile navigation
     initializeNewMobileNavigation();
+    
+    // Initialize submenu toggle for mobile
+    initializeSubmenuToggle();
+}
+
+function initializeSubmenuToggle() {
+    // Handle submenu toggling for mobile view
+    const submenuItems = document.querySelectorAll('.header .has-submenu > a');
+    submenuItems.forEach(item => {
+        // Remove the default behavior for submenu links on mobile
+        item.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const parentItem = this.parentElement;
+                parentItem.classList.toggle('active');
+            }
+        });
+    });
 }
 
 function initializeNewMobileNavigation() {
@@ -234,6 +252,50 @@ function initializeContactForm() {
         
         // Сбрасываем форму
         contactForm.reset();
+    });
+    
+    // Initialize CTA form as well
+    initializeCtaForm();
+}
+
+// Функция для обработки CTA формы
+function initializeCtaForm() {
+    const ctaForm = document.getElementById('ctaForm');
+    
+    if (!ctaForm) {
+        console.warn('CTA form not found');
+        return;
+    }
+    
+    ctaForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Получаем значение поля
+        const emailPhone = document.getElementById('email_phone').value;
+        
+        // Простая валидация
+        if (!emailPhone) {
+            alert('Пожалуйста, введите email или телефон');
+            return;
+        }
+        
+        // Проверка валидности email или телефон
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/; // Простая проверка формата телефона
+        
+        if (!emailRegex.test(emailPhone) && !phoneRegex.test(emailPhone.replace(/\D/g, ''))) {
+            alert('Пожалуйста, введите действительный email или номер телефона');
+            return;
+        }
+        
+        // Здесь можно добавить отправку данных на сервер
+        console.log('CTA форма отправлена:', { emailPhone });
+        
+        // Показываем сообщение об успешной отправке
+        alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+        
+        // Сбрасываем форму
+        ctaForm.reset();
     });
 }
 

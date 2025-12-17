@@ -122,6 +122,40 @@ body {
   gap: 0.5rem;
 }
 
+.cart-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cart-icon:hover {
+  background-color: var(--bg-secondary);
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
 .btn-outline {
   background: transparent;
   color: var(--accent-color);
@@ -151,37 +185,86 @@ body {
 }
 
 /* Улучшенное меню для десктопа */
-.nav-menu ul {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-}
-
-.nav-menu a {
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: color 0.3s ease;
+/* Header submenu styles */
+.header .nav-item.has-submenu {
   position: relative;
-  padding: 0.5rem 0;
 }
 
-.nav-menu a:hover {
-  color: var(--accent-color);
+.header .nav-menu ul .nav-item.has-submenu > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.nav-menu a::after {
-  content: '';
+.header .submenu {
   position: absolute;
-  bottom: 0;
+  top: 100%;
   left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--accent-color);
-  transition: width 0.3s ease;
+  background-color: var(--bg-secondary);
+  min-width: 200px;
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.nav-menu a:hover::after {
-  width: 100%;
+.header .nav-item.has-submenu:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.header .submenu li {
+  list-style: none;
+  padding: 0;
+}
+
+.header .submenu a {
+  display: block;
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease;
+}
+
+.header .submenu a:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+  padding-left: 1.5rem;
+}
+
+/* Mobile submenu styles */
+@media (max-width: 768px) {
+  .header .submenu {
+    position: static;
+    box-shadow: none;
+    background-color: var(--bg-primary);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: max-height 0.3s ease;
+  }
+  
+  .header .nav-item.has-submenu.active .submenu {
+    max-height: 200px;
+  }
+  
+  .header .submenu-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .header .nav-item.has-submenu.active > a .submenu-arrow {
+    transform: rotate(180deg);
+  }
 }
 
 /* Mobile menu overlay - теперь используется только для десктопа при необходимости */
@@ -735,6 +818,12 @@ body {
   color: var(--text-secondary);
 }
 
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
 /* Секция тарифов */
 .pricing {
   padding: 5rem 0;
@@ -911,6 +1000,12 @@ body {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--accent-color);
+}
+
+.form-disclaimer {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 /* Футер */
@@ -1337,7 +1432,8 @@ body {
 }
 
 .login-link,
-.signup-link {
+.signup-link,
+.cart-link {
   background-color: transparent;
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
@@ -1347,7 +1443,8 @@ body {
 }
 
 .login-link:hover,
-.signup-link:hover {
+.signup-link:hover,
+.cart-link:hover {
   background-color: var(--accent-color);
   color: white;
   padding-left: 1.5rem;
