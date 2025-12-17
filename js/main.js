@@ -163,8 +163,36 @@ document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
             if (navMenu) {
                 navMenu.classList.remove('active');
             }
+            
+            // Закрываем мобильное навигационное меню (если открыто)
+            const mobileNavMenu = document.getElementById('mobileNavMenu');
+            if (mobileNavMenu) {
+                mobileNavMenu.classList.remove('active');
+            }
         }
     });
+});
+
+// Обработчик для мобильного логотипа
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileLogo = document.getElementById('mobileLogo');
+    if (mobileLogo) {
+        mobileLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Прокрутка к началу страницы
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Закрываем мобильное навигационное меню
+            const mobileNavMenu = document.getElementById('mobileNavMenu');
+            if (mobileNavMenu) {
+                mobileNavMenu.classList.remove('active');
+            }
+        });
+    }
 });
 
 // Функция для обработки формы обратной связи
