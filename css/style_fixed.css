@@ -1,0 +1,45 @@
+/* Responsive Design */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+
+    .menu-fab {
+        display: block; /* Show the mobile menu FAB button */
+    }
+
+    .search-container {
+        display: none;
+    }
+
+    .hero {
+        padding: 4rem 0;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .features, .products, .reviews {
+        padding: 4rem 0;
+    }
+
+    .features h2, .products h2, .reviews h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .offcanvas-menu {
+        display: none;
+    }
+}
