@@ -48,7 +48,8 @@ def render_page(output_path, title, content, scripts=""):
         template_path,
         title=title,
         content=content,
-        scripts=scripts
+        scripts=scripts,
+        theme_class="dark-theme"
     )
     
     # Ensure output directory exists

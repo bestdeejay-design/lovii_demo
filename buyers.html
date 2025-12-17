@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ title }} — Витрина</title>
+  <title>Для покупателей — Витрина — Витрина</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="{{ theme_class|default('dark-theme') }}">
@@ -59,7 +59,12 @@
   <button class="menu-fab" id="menuFab">≡</button>
 
   <main class="container">
-    {{ content }}
+    <section class="buyers">
+    <div class="container">
+        <h1>Для покупателей</h1>
+        <p>Найдите лучшие товары и услуги для вашего бизнеса в сфере HoReCa. Удобные инструменты для покупки и управления заказами.</p>
+    </div>
+</section>
   </main>
 
   <footer>
@@ -92,6 +97,6 @@
   </footer>
 
   <script src="/js/main.js"></script>
-  {{ scripts }}
+  
 </body>
 </html>

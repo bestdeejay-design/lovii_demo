@@ -4,49 +4,54 @@ document.addEventListener('DOMContentLoaded', function() {
   const savedTheme = localStorage.getItem('vitrina-theme') || 'dark';
   
   // Apply saved theme on load
-  if (savedTheme === 'forest') {
-    body.classList.add('theme-forest');
+  if (savedTheme === 'light') {
+    body.classList.add('light-theme');
+    body.classList.remove('dark-theme');
   } else {
-    body.classList.remove('theme-forest');
+    body.classList.add('dark-theme');
+    body.classList.remove('light-theme');
   }
   
   // Force re-render to ensure initial theme applies immediately
   void body.offsetWidth;
 
   // Update toggle knobs based on saved theme
-  const updateToggleKnobs = (isForest) => {
-    const toggleButtons = document.querySelectorAll('.theme-toggle');
+  const updateToggleKnobs = (isLight) => {
+    const toggleButtons = document.querySelectorAll('.theme-switcher');
     toggleButtons.forEach(toggleBtn => {
-      if (isForest) {
-        toggleBtn.classList.add('theme-forest');
+      if (isLight) {
+        toggleBtn.classList.add('light-theme');
       } else {
-        toggleBtn.classList.remove('theme-forest');
+        toggleBtn.classList.remove('light-theme');
       }
     });
   };
 
   // Set initial state for toggle knobs
-  updateToggleKnobs(savedTheme === 'forest');
+  updateToggleKnobs(savedTheme === 'light');
 
-  const toggleButtons = document.querySelectorAll('.theme-toggle');
+  // Handle theme toggle buttons
+  const toggleButtons = document.querySelectorAll('.theme-switcher');
   toggleButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       
-      const isNowForest = body.classList.contains('theme-forest');
-      const newTheme = isNowForest ? 'dark' : 'forest';
+      const isNowLight = body.classList.contains('light-theme');
+      const newTheme = isNowLight ? 'dark' : 'light';
       
       // Remove old theme classes and add new one
-      body.classList.remove('theme-forest');
-      if (newTheme === 'forest') {
-        body.classList.add('theme-forest');
+      body.classList.remove('light-theme', 'dark-theme');
+      if (newTheme === 'light') {
+        body.classList.add('light-theme');
+      } else {
+        body.classList.add('dark-theme');
       }
       
       localStorage.setItem('vitrina-theme', newTheme);
       
       // Update all toggle knobs
-      updateToggleKnobs(newTheme === 'forest');
+      updateToggleKnobs(newTheme === 'light');
       
       // Force re-render to ensure theme changes apply immediately
       void body.offsetWidth;

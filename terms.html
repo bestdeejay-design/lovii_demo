@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ title }} — Витрина</title>
+  <title>Условия использования — Витрина — Витрина</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="{{ theme_class|default('dark-theme') }}">
@@ -59,7 +59,12 @@
   <button class="menu-fab" id="menuFab">≡</button>
 
   <main class="container">
-    {{ content }}
+    <section class="terms">
+    <div class="container">
+        <h1>Условия использования</h1>
+        <p>Ознакомьтесь с условиями использования платформы Витрина перед началом работы с сервисом.</p>
+    </div>
+</section>
   </main>
 
   <footer>
@@ -92,6 +97,6 @@
   </footer>
 
   <script src="/js/main.js"></script>
-  {{ scripts }}
+  
 </body>
 </html>
