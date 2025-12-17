@@ -84,67 +84,67 @@ def main():
         },
         {
             "output_path": "about.html",
-            "title": "О нас — Витрина",
+            "title": "О нас",
             "content_file": "about_content.html"
         },
         {
             "output_path": "business.html",
-            "title": "Для бизнеса — Витрина",
+            "title": "Для бизнеса",
             "content_file": "business_content.html"
         },
         {
             "output_path": "buyers.html",
-            "title": "Для покупателей — Витрина",
+            "title": "Для покупателей",
             "content_file": "buyers_content.html"
         },
         {
             "output_path": "contacts.html",
-            "title": "Контакты — Витрина",
+            "title": "Контакты",
             "content_file": "contacts_content.html"
         },
         {
             "output_path": "help.html",
-            "title": "Помощь — Витрина",
+            "title": "Помощь",
             "content_file": "help_content.html"
         },
         {
             "output_path": "login-customer.html",
-            "title": "Вход для покупателя — Витрина",
+            "title": "Вход для покупателя",
             "content_file": "login_customer_content.html"
         },
         {
             "output_path": "login-partner.html",
-            "title": "Вход для партнёра — Витрина",
+            "title": "Вход для партнёра",
             "content_file": "login_partner_content.html"
         },
         {
             "output_path": "partners.html",
-            "title": "Для партнёров — Витрина",
+            "title": "Для партнёров",
             "content_file": "partners_content.html"
         },
         {
             "output_path": "privacy.html",
-            "title": "Политика конфиденциальности — Витрина",
+            "title": "Политика конфиденциальности",
             "content_file": "privacy_content.html"
         },
         {
             "output_path": "register-customer.html",
-            "title": "Регистрация покупателя — Витрина",
+            "title": "Регистрация покупателя",
             "content_file": "register_customer_content.html"
         },
         {
             "output_path": "register-partner.html",
-            "title": "Регистрация партнёра — Витрина",
+            "title": "Регистрация партнёра",
             "content_file": "register_partner_content.html"
         },
         {
             "output_path": "terms.html",
-            "title": "Условия использования — Витрина",
+            "title": "Условия использования",
             "content_file": "terms_content.html"
         },
         {
             "output_path": "catalog/index.html",
-            "title": "Каталог — Витрина",
+            "title": "Каталог",
             "content_file": "catalog_index_content.html"
         },
         {
