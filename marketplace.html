@@ -12,61 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">MarketPlace</div>
-            
-            <!-- Mobile menu button -->
-            <div class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#categories">Categories</a></li>
-                    <li><a href="#featured">Featured</a></li>
-                    <li><a href="#trending">Trending</a></li>
-                    <li><a href="#sellers">Top Sellers</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            
-            <div class="header-actions">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search products...">
-                    <button><i class="fas fa-search"></i></button>
-                </div>
-                <div class="user-actions">
-                    <a href="#" class="btn btn-outline">Login</a>
-                    <a href="#" class="btn btn-primary">Sign Up</a>
-                </div>
-                <div class="theme-toggle">
-                    <button id="themeToggle">
-                        <span class="sun-icon">☀️</span>
-                        <span class="moon-icon">🌙</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile menu overlay -->
-        <div class="mobile-menu-overlay">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#featured">Featured</a></li>
-                <li><a href="#trending">Trending</a></li>
-                <li><a href="#sellers">Top Sellers</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" class="btn btn-outline">Login</a></li>
-                <li><a href="#" class="btn btn-primary">Sign Up</a></li>
-            </ul>
-        </div>
-    </header>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -432,64 +379,38 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>MarketPlace</h4>
-                    <p>Your trusted marketplace for buying and selling products worldwide.</p>
-                    <div class="payment-methods">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-amex"></i>
-                        <i class="fab fa-paypal"></i>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="#featured">Featured</a></li>
-                        <li><a href="#trending">Trending</a></li>
-                        <li><a href="#sellers">Top Sellers</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>For Sellers</h4>
-                    <ul>
-                        <li><a href="#">Sell on MarketPlace</a></li>
-                        <li><a href="#">Seller Dashboard</a></li>
-                        <li><a href="#">Seller Resources</a></li>
-                        <li><a href="#">Fees & Policies</a></li>
-                        <li><a href="#">Help Center</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Safety Tips</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 MarketPlace. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
 
     <script src="js/main.js"></script>
     <script>
-        // Initialize components after page is loaded
+        // Load header, footer and mobile navigation templates
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize theme and form with retry mechanism
-            setTimeout(initializeComponentsWithRetry, 100);
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
         });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
     </script>
 </body>
 </html>
