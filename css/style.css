@@ -814,6 +814,21 @@ body.light-theme .footer-bottom {
     color: var(--light-on-surface);
 }
 
+/* Footer Dropdown Menus */
+.footer-dropdown {
+    position: relative;
+}
+
+.footer-dropdown .dropdown-content {
+    top: 100%;
+    left: 0;
+    background-color: var(--dark-surface);
+}
+
+body.light-theme .footer-dropdown .dropdown-content {
+    background-color: var(--light-surface);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {
