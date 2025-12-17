@@ -115,6 +115,65 @@
     .desktop-nav a:hover {
       color: var(--accent);
     }
+    
+    /* Dropdown menu styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--card);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1001;
+      border-radius: 8px;
+      overflow: hidden;
+      top: 100%;
+      left: 0;
+    }
+    
+    .dropdown-content a {
+      color: var(--text);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      transition: background-color 0.2s;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: var(--bg);
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Mobile dropdown for off-canvas menu */
+    .offcanvas-nav .dropdown {
+      position: static;
+    }
+    
+    .offcanvas-nav .dropdown-content {
+      position: static;
+      display: none;
+      box-shadow: none;
+      background-color: transparent;
+      min-width: auto;
+    }
+    
+    .offcanvas-nav .dropdown-content a {
+      padding-left: 2rem;
+      font-size: 1rem;
+    }
+    
+    .offcanvas-nav .dropdown.active .dropdown-content {
+      display: flex;
+      flex-direction: column;
+    }
 
     .theme-toggle {
       width: 42px;

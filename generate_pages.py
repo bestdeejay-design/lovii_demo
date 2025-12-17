@@ -1,9 +1,35 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+Скрипт для генерации недостающих страниц сайта
+"""
+import os
+
+# Структура страниц для генерации
+pages = {
+    '/food-delivery/cafe/index.html': 'Кафе',
+    '/food-delivery/dark-kitchen/index.html': 'Dark Kitchen',
+    '/food-delivery/delivery/index.html': 'Доставка еды',
+    '/food-delivery/establishments-sales/index.html': 'Акции у заведений',
+    '/business/connect-company/index.html': 'Подключить компанию',
+    '/business/support/index.html': 'Поддержка продавцов',
+    '/business/pro-tariffs/index.html': 'Тарифы PRO',
+    '/business/api/index.html': 'API и интеграции',
+    '/buyers/how-to-buy/index.html': 'Как делать покупки',
+    '/buyers/cashback/index.html': 'Кэшбэк и бонусы',
+    '/buyers/delivery-payment/index.html': 'Доставка и оплата',
+    '/buyers/faq/index.html': 'Частые вопросы',
+    '/partners/banks/index.html': 'Банки и финансовые партнёры',
+    '/partners/integrators/index.html': 'Технические интеграторы',
+    '/partners/media/index.html': 'Медиа и коллаборации'
+}
+
+# Шаблон HTML страницы
+html_template = """<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Товар — Витрина — Витрина</title>
+  <title>{title} — Витрина</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -137,30 +163,13 @@
   <button class="menu-fab" id="menuFab">≡</button>
 
   <main class="container">
-    <div class="product-page">
-      <div class="card" style="padding: 2rem; margin: 2rem 0;">
-        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
-          <div style="flex: 1; min-width: 300px;">
-            <img id="product-image" src="https://images.unsplash.com/photo-1603064752734-4c48eff53d05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Название товара" style="width: 100%; border-radius: 8px;">
-          </div>
-          
-          <div style="flex: 1; min-width: 300px;">
-            <h1 id="product-name">Название товара</h1>
-            <p id="vendor-name" style="color: var(--text-secondary); margin: 0.5rem 0 1rem;">Продавец: Название магазина</p>
-            
-            <div id="product-price" style="font-size: 1.8rem; font-weight: bold; color: var(--accent); margin: 1rem 0;">0 ₽</div>
-            
-            <div id="product-description" style="margin: 1.5rem 0; line-height: 1.6;">
-              <p>Описание товара будет отображаться здесь. Это может быть подробное описание характеристик, состава, размеров и других важных деталей.</p>
-            </div>
-            
-            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-              <button id="add-to-cart" class="cta-button" style="flex: 1;">Добавить в корзину</button>
-              <button id="buy-now" class="cta-button" style="background: #f0932c; flex: 1;">Купить сейчас</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <h1 class="page-title">{title}</h1>
+    
+    <div class="card" style="margin: 2rem 0; padding: 1.5rem; background: var(--card);">
+      <h2 style="margin-bottom: 1rem; color: var(--accent);">{title}</h2>
+      <p>Добро пожаловать на страницу "{title}". Здесь вы найдете всю необходимую информацию о разделе "{title}".</p>
+      <p>Эта страница находится в разработке. В ближайшее время на ней появится подробная информация, полезные материалы и функционал для удобного использования.</p>
+      <p>Если у вас есть вопросы или предложения по улучшению раздела "{title}", пожалуйста, свяжитесь с нами через раздел "Контакты".</p>
     </div>
   </main>
 
@@ -194,6 +203,33 @@
   </footer>
 
   <script src="/js/main.js"></script>
-  
 </body>
 </html>
+"""
+
+def create_page(path, title):
+    """Создает HTML страницу по заданному пути с указанным заголовком"""
+    # Создаем директорию, если она не существует
+    directory = os.path.dirname(path)
+    os.makedirs(directory, exist_ok=True)
+    
+    # Подставляем заголовок в шаблон
+    content = html_template.format(title=title)
+    
+    # Записываем содержимое в файл
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    
+    print(f"Создана страница: {path}")
+
+def main():
+    print("Начинаю генерацию страниц...")
+    
+    for path, title in pages.items():
+        full_path = f"/workspace{path}"
+        create_page(full_path, title)
+    
+    print("Генерация страниц завершена!")
+
+if __name__ == "__main__":
+    main()
