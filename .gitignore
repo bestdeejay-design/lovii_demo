@@ -1,37 +1,30 @@
 ```
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
+# Build artifacts
 dist/
 build/
-*.class
-*.exe
-*.dll
-*.so
-*.a
-*.out
+*.min.js
+*.min.css
+*.bundle.js
 
 # Dependencies
 node_modules/
-venv/
-.venv/
+
+# Logs
+*.log
+
+# Environment
 .env
 .env.local
-.env.*
+*.env.*
 
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
-
-# Editors
+# Editor/IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*.tmp
 
-# System files
+# OS
 .DS_Store
 Thumbs.db
 
@@ -39,6 +32,16 @@ Thumbs.db
 coverage/
 htmlcov/
 .coverage
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg-info/
+.eggs/
 
 # Compressed files
 *.zip
