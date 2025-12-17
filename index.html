@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Marketplace Products">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Marketplace Products">
             </div>
         </div>
     </section>
@@ -455,6 +455,9 @@
                         } else if (elementId === 'header-container') {
                             initializeMobileMenu();
                         }
+                        
+                        // After all templates are loaded, try initializing components again
+                        setTimeout(initializeAfterTemplatesLoad, 50);
                     })
                     .catch(error => console.error('Error loading template:', error));
             }

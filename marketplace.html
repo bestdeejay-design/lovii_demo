@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Marketplace Products">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Marketplace Products">
             </div>
         </div>
     </section>
@@ -484,5 +484,12 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        // Initialize components after page is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme and form with retry mechanism
+            setTimeout(initializeComponentsWithRetry, 100);
+        });
+    </script>
 </body>
 </html>

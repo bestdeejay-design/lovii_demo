@@ -10,15 +10,51 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('light-theme');
     }
     
+    // Инициализируем мобильное меню
+    initializeMobileMenu();
+    
+    // Инициализируем остальные компоненты после загрузки шаблонов
+    setTimeout(initializeAfterTemplatesLoad, 100);
+});
+
+// Инициализация компонентов после загрузки шаблонов
+function initializeAfterTemplatesLoad() {
     // Инициализируем переключатель темы
     initializeThemeToggle();
     
     // Инициализируем обработчик формы
     initializeContactForm();
+}
+
+// Alternative initialization function that keeps trying until elements are found
+function initializeComponentsWithRetry() {
+    let attempts = 0;
+    const maxAttempts = 20; // Try for up to 2 seconds (20 attempts * 100ms)
     
-    // Инициализируем мобильное меню
-    initializeMobileMenu();
-});
+    const retryInitialization = () => {
+        attempts++;
+        
+        // Try initializing theme toggle
+        if (!document.getElementById('themeToggle')) {
+            if (attempts < maxAttempts) {
+                setTimeout(retryInitialization, 100);
+            }
+        } else {
+            initializeThemeToggle();
+        }
+        
+        // Try initializing contact form
+        if (!document.getElementById('contactForm')) {
+            if (attempts < maxAttempts) {
+                setTimeout(retryInitialization, 100);
+            }
+        } else {
+            initializeContactForm();
+        }
+    };
+    
+    retryInitialization();
+}
 
 function initializeThemeToggle() {
     const themeToggleBtn = document.getElementById('themeToggle');
