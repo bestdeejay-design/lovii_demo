@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Технические интеграторы — Витрина</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- SVG фон -->
+  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
+  </svg>
+
+  <!-- Off-canvas elements -->
+  <div class="overlay" id="overlay"></div>
+  <div class="offcanvas-menu" id="offcanvasMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <nav class="offcanvas-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li class="dropdown">
+          <a href="/catalog/">Каталог</a>
+          <div class="dropdown-content">
+            <a href="/catalog/categories">Товары по категориям</a>
+            <a href="/catalog/new-arrivals">Новые поступления</a>
+            <a href="/catalog/popular">Популярные товары</a>
+            <a href="/catalog/sales">Акции и кэшбэк</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/food-delivery/">Еда и доставка</a>
+          <div class="dropdown-content">
+            <a href="/food-delivery/restaurants">Рестораны</a>
+            <a href="/food-delivery/cafe">Кафе</a>
+            <a href="/food-delivery/dark-kitchen">Dark Kitchen</a>
+            <a href="/food-delivery/delivery">Доставка еды</a>
+            <a href="/food-delivery/establishments-sales">Акции у заведений</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/business.html">Для бизнеса</a>
+          <div class="dropdown-content">
+            <a href="/business/connect-company">Подключить компанию</a>
+            <a href="/business/support">Поддержка продавцов</a>
+            <a href="/business/pro-tariffs">Тарифы PRO</a>
+            <a href="/business/api">API и интеграции</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/buyers.html">Для покупателей</a>
+          <div class="dropdown-content">
+            <a href="/buyers/how-to-buy">Как делать покупки</a>
+            <a href="/buyers/cashback">Кэшбэк и бонусы</a>
+            <a href="/buyers/delivery-payment">Доставка и оплата</a>
+            <a href="/buyers/faq">Частые вопросы</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/partners.html">Для партнёров</a>
+          <div class="dropdown-content">
+            <a href="/partners/banks">Банки и финансовые партнёры</a>
+            <a href="/partners/integrators">Технические интеграторы</a>
+            <a href="/partners/media">Медиа и коллаборации</a>
+          </div>
+        </li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="offcanvas-theme">
+      <div class="theme-toggle" id="mobileThemeToggle">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo"><span>Витрина</span></a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Главная</a></li>
+        <li class="dropdown">
+          <a href="/catalog/">Каталог</a>
+          <div class="dropdown-content">
+            <a href="/catalog/categories">Товары по категориям</a>
+            <a href="/catalog/new-arrivals">Новые поступления</a>
+            <a href="/catalog/popular">Популярные товары</a>
+            <a href="/catalog/sales">Акции и кэшбэк</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/food-delivery/">Еда и доставка</a>
+          <div class="dropdown-content">
+            <a href="/food-delivery/restaurants">Рестораны</a>
+            <a href="/food-delivery/cafe">Кафе</a>
+            <a href="/food-delivery/dark-kitchen">Dark Kitchen</a>
+            <a href="/food-delivery/delivery">Доставка еды</a>
+            <a href="/food-delivery/establishments-sales">Акции у заведений</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/business.html">Для бизнеса</a>
+          <div class="dropdown-content">
+            <a href="/business/connect-company">Подключить компанию</a>
+            <a href="/business/support">Поддержка продавцов</a>
+            <a href="/business/pro-tariffs">Тарифы PRO</a>
+            <a href="/business/api">API и интеграции</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/buyers.html">Для покупателей</a>
+          <div class="dropdown-content">
+            <a href="/buyers/how-to-buy">Как делать покупки</a>
+            <a href="/buyers/cashback">Кэшбэк и бонусы</a>
+            <a href="/buyers/delivery-payment">Доставка и оплата</a>
+            <a href="/buyers/faq">Частые вопросы</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/partners.html">Для партнёров</a>
+          <div class="dropdown-content">
+            <a href="/partners/banks">Банки и финансовые партнёры</a>
+            <a href="/partners/integrators">Технические интеграторы</a>
+            <a href="/partners/media">Медиа и коллаборации</a>
+          </div>
+        </li>
+        <li><a href="/contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" id="themeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </header>
+
+  <!-- FAB Menu Button -->
+  <button class="menu-fab" id="menuFab">≡</button>
+
+  <main class="container">
+    <h1 class="page-title">Технические интеграторы</h1>
+    
+    <div class="card" style="margin: 2rem 0; padding: 1.5rem; background: var(--card);">
+      <h2 style="margin-bottom: 1rem; color: var(--accent);">Технические интеграторы</h2>
+      <p>Добро пожаловать на страницу "Технические интеграторы". Здесь вы найдете всю необходимую информацию о разделе "Технические интеграторы".</p>
+      <p>Эта страница находится в разработке. В ближайшее время на ней появится подробная информация, полезные материалы и функционал для удобного использования.</p>
+      <p>Если у вас есть вопросы или предложения по улучшению раздела "Технические интеграторы", пожалуйста, свяжитесь с нами через раздел "Контакты".</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="/" class="logo"><span>Витрина</span></a>
+      <div class="footer-links desktop-links">
+        <a href="/buyers.html">Для покупателей</a>
+        <a href="/partners.html">Для партнёров</a>
+        <a href="/business.html">Для бизнеса</a>
+        <a href="/contacts.html">Контакты</a>
+        <a href="/terms.html">Условия</a>
+        <a href="/privacy.html">Конфиденциальность</a>
+        <a href="/help.html">Помощь</a>
+      </div>
+      <div class="footer-mobile-menu">
+        <details class="mobile-dropdown">
+          <summary>Разделы</summary>
+          <div class="mobile-links">
+            <a href="/buyers.html">Для покупателей</a>
+            <a href="/partners.html">Для партнёров</a>
+            <a href="/business.html">Для бизнеса</a>
+            <a href="/contacts.html">Контакты</a>
+            <a href="/terms.html">Условия</a>
+            <a href="/privacy.html">Конфиденциальность</a>
+            <a href="/help.html">Помощь</a>
+          </div>
+        </details>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
