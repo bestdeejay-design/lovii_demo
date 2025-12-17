@@ -177,25 +177,112 @@ html_template = """<!DOCTYPE html>
     <div class="footer-content">
       <a href="/" class="logo"><span>Витрина</span></a>
       <div class="footer-links desktop-links">
-        <a href="/buyers.html">Для покупателей</a>
-        <a href="/partners.html">Для партнёров</a>
-        <a href="/business.html">Для бизнеса</a>
-        <a href="/contacts.html">Контакты</a>
-        <a href="/terms.html">Условия</a>
-        <a href="/privacy.html">Конфиденциальность</a>
-        <a href="/help.html">Помощь</a>
+        <div class="footer-dropdown">
+          <a href="/">Главная</a>
+        </div>
+        <div class="footer-dropdown">
+          <a href="/catalog/">Каталог</a>
+          <div class="dropdown-content">
+            <a href="/catalog/categories">Товары по категориям</a>
+            <a href="/catalog/new-arrivals">Новые поступления</a>
+            <a href="/catalog/popular">Популярные товары</a>
+            <a href="/catalog/sales">Акции и кэшбэк</a>
+          </div>
+        </div>
+        <div class="footer-dropdown">
+          <a href="/food-delivery/">Еда и доставка</a>
+          <div class="dropdown-content">
+            <a href="/food-delivery/restaurants">Рестораны</a>
+            <a href="/food-delivery/cafe">Кафе</a>
+            <a href="/food-delivery/dark-kitchen">Dark Kitchen</a>
+            <a href="/food-delivery/delivery">Доставка еды</a>
+            <a href="/food-delivery/establishments-sales">Акции у заведений</a>
+          </div>
+        </div>
+        <div class="footer-dropdown">
+          <a href="/business.html">Для бизнеса</a>
+          <div class="dropdown-content">
+            <a href="/business/connect-company">Подключить компанию</a>
+            <a href="/business/support">Поддержка продавцов</a>
+            <a href="/business/pro-tariffs">Тарифы PRO</a>
+            <a href="/business/api">API и интеграции</a>
+          </div>
+        </div>
+        <div class="footer-dropdown">
+          <a href="/buyers.html">Для покупателей</a>
+          <div class="dropdown-content">
+            <a href="/buyers/how-to-buy">Как делать покупки</a>
+            <a href="/buyers/cashback">Кэшбэк и бонусы</a>
+            <a href="/buyers/delivery-payment">Доставка и оплата</a>
+            <a href="/buyers/faq">Частые вопросы</a>
+          </div>
+        </div>
+        <div class="footer-dropdown">
+          <a href="/partners.html">Для партнёров</a>
+          <div class="dropdown-content">
+            <a href="/partners/banks">Банки и финансовые партнёры</a>
+            <a href="/partners/integrators">Технические интеграторы</a>
+            <a href="/partners/media">Медиа и коллаборации</a>
+          </div>
+        </div>
+        <div class="footer-dropdown">
+          <a href="/contacts.html">Контакты</a>
+        </div>
+        <div class="footer-dropdown">
+          <a href="/help.html">Помощь</a>
+        </div>
       </div>
       <div class="footer-mobile-menu">
         <details class="mobile-dropdown">
-          <summary>Разделы</summary>
+          <summary>Разделы сайта</summary>
           <div class="mobile-links">
-            <a href="/buyers.html">Для покупателей</a>
-            <a href="/partners.html">Для партнёров</a>
-            <a href="/business.html">Для бизнеса</a>
-            <a href="/contacts.html">Контакты</a>
-            <a href="/terms.html">Условия</a>
-            <a href="/privacy.html">Конфиденциальность</a>
-            <a href="/help.html">Помощь</a>
+            <div class="mobile-dropdown-section">
+              <h4>Каталог</h4>
+              <a href="/catalog/">Все товары</a>
+              <a href="/catalog/categories">Категории</a>
+              <a href="/catalog/new-arrivals">Новинки</a>
+              <a href="/catalog/popular">Популярное</a>
+              <a href="/catalog/sales">Акции</a>
+            </div>
+            <div class="mobile-dropdown-section">
+              <h4>Еда и доставка</h4>
+              <a href="/food-delivery/">Обзор</a>
+              <a href="/food-delivery/restaurants">Рестораны</a>
+              <a href="/food-delivery/cafe">Кафе</a>
+              <a href="/food-delivery/dark-kitchen">Dark Kitchen</a>
+              <a href="/food-delivery/delivery">Доставка</a>
+              <a href="/food-delivery/establishments-sales">Акции</a>
+            </div>
+            <div class="mobile-dropdown-section">
+              <h4>Для бизнеса</h4>
+              <a href="/business.html">Обзор</a>
+              <a href="/business/connect-company">Подключить компанию</a>
+              <a href="/business/support">Поддержка</a>
+              <a href="/business/pro-tariffs">Тарифы</a>
+              <a href="/business/api">API</a>
+            </div>
+            <div class="mobile-dropdown-section">
+              <h4>Для покупателей</h4>
+              <a href="/buyers.html">Обзор</a>
+              <a href="/buyers/how-to-buy">Как покупать</a>
+              <a href="/buyers/cashback">Кэшбэк</a>
+              <a href="/buyers/delivery-payment">Доставка и оплата</a>
+              <a href="/buyers/faq">Вопросы</a>
+            </div>
+            <div class="mobile-dropdown-section">
+              <h4>Для партнёров</h4>
+              <a href="/partners.html">Обзор</a>
+              <a href="/partners/banks">Банки</a>
+              <a href="/partners/integrators">Интеграторы</a>
+              <a href="/partners/media">Медиа</a>
+            </div>
+            <div class="mobile-dropdown-section">
+              <h4>Поддержка</h4>
+              <a href="/contacts.html">Контакты</a>
+              <a href="/help.html">Помощь</a>
+              <a href="/terms.html">Условия</a>
+              <a href="/privacy.html">Конфиденциальность</a>
+            </div>
           </div>
         </details>
       </div>

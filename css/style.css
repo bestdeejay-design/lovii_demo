@@ -986,6 +986,46 @@ body.light-theme .footer-dropdown .dropdown-content {
     background-color: var(--light-surface);
 }
 
+/* Mobile Dropdown Sections */
+.mobile-dropdown-section {
+    margin-bottom: 1.5rem;
+}
+
+.mobile-dropdown-section h4 {
+    margin-bottom: 0.75rem;
+    color: var(--dark-accent-orange);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+body.light-theme .mobile-dropdown-section h4 {
+    color: var(--light-accent-green);
+}
+
+.mobile-dropdown-section a {
+    display: block;
+    padding: 0.5rem 0;
+    color: var(--dark-on-surface);
+    opacity: 0.8;
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+body.light-theme .mobile-dropdown-section a {
+    color: var(--light-on-surface);
+}
+
+.mobile-dropdown-section a:hover {
+    opacity: 1;
+    color: var(--dark-accent-orange);
+    padding-left: 0.5rem;
+}
+
+body.light-theme .mobile-dropdown-section a:hover {
+    color: var(--light-accent-green);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
 \1.desktop-nav {
