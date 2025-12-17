@@ -4,6 +4,7 @@
 __pycache__/
 *.o
 *.obj
+*.out
 
 # Dependencies
 .venv/
@@ -29,15 +30,16 @@ coverage/
 htmlcov/
 .coverage
 
-# Distribution artifacts
+# Build directories
 dist/
 build/
 target/
-*.egg-info/
 
-# Python specific
-*.pyc
-__pycache__/
-.pytest_cache/
+# Python cache
 .mypy_cache/
+.pytest_cache/
+
+# System files
+.DS_Store
+Thumbs.db
 ```

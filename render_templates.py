@@ -27,13 +27,20 @@ def render_template(template_path, **kwargs):
     
     # Replace variables in the template
     for key, value in kwargs.items():
+        # Replace exact matches first: {{ variable }}
         placeholder = f'{{{{ {key} }}}}'
         template_content = template_content.replace(placeholder, str(value))
+        
+        # Then replace matches with default filters: {{ variable|default('value') }}
+        # Find patterns like {{ variable|default('value') }}
+        import re
+        pattern = r'\{\{\s*' + key + r'\s*\|\s*default\s*\([^)]+\)\s*\}\}'
+        template_content = re.sub(pattern, str(value), template_content)
     
     return template_content
 
 
-def render_page(output_path, title, content, scripts=""):
+def render_page(output_path, title, content, scripts="", theme_class="dark-theme"):
     """
     Render a complete page using the base template.
     
@@ -42,6 +49,7 @@ def render_page(output_path, title, content, scripts=""):
         title (str): Page title
         content (str): Page content to insert
         scripts (str): Additional scripts to include
+        theme_class (str): Theme class to apply (default: dark-theme)
     """
     template_path = "templates/base.html"
     rendered_html = render_template(
@@ -49,7 +57,7 @@ def render_page(output_path, title, content, scripts=""):
         title=title,
         content=content,
         scripts=scripts,
-        theme_class="dark-theme"
+        theme_class=theme_class
     )
     
     # Ensure output directory exists
@@ -154,7 +162,8 @@ def main():
         render_page(
             output_path=page["output_path"],
             title=page["title"],
-            content=content
+            content=content,
+            theme_class="dark-theme"
         )
     
     print("Template rendering completed!")
