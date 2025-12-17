@@ -137,6 +137,9 @@ body {
   flex-direction: column;
   cursor: pointer;
   gap: 4px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .mobile-menu-btn span {
@@ -146,6 +149,41 @@ body {
   transition: 0.3s;
 }
 
+/* Улучшенное меню для десктопа */
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-menu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-menu a:hover {
+  color: var(--accent-color);
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+/* Mobile menu overlay - теперь используется только для десктопа при необходимости */
 .mobile-menu-overlay {
   display: none;
   position: fixed;
@@ -987,14 +1025,11 @@ body {
   }
   
   .mobile-menu-btn {
-    display: flex;
-    position: absolute;
-    right: 20px;
-    top: 20px;
+    display: none; /* Теперь используем отдельное мобильное меню внизу экрана */
   }
   
   .nav-menu {
-    display: none;
+    display: none; /* Скрыто на мобильных устройствах */
   }
   
   .header-actions {
@@ -1162,24 +1197,19 @@ body {
 .mobile-nav-menu {
   position: fixed;
   bottom: 90px;
-  right: 20px;
+  right: -340px; /* Скрыто за правым краем экрана */
   width: 320px;
   max-height: 70vh;
   background-color: var(--bg-secondary);
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  transform: translateY(20px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
+  transition: right 0.3s ease;
   z-index: 1001;
 }
 
 .mobile-nav-menu.active {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
+  right: 20px; /* Появляется с правой стороны */
 }
 
 .mobile-nav-header {
