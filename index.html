@@ -1,165 +1,215 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Витрина — цифровая полка для малого бизнеса — Витрина</title>
-  <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Витрина - Еда с кэшбэком</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <!-- SVG фон -->
-  <svg class="svg-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <path d="M40,-40C55,-30,70,-15,72,0C74,15,63,30,50,40C37,50,20,55,5,52C-10,49,-25,43,-35,30C-45,17,-50,0,-45,-15C-40,-30,-25,-40,-10,-45C5,-50,20,-50,35,-45C50,-40,65,-30,55,-20C45,-10,30,-5,15,-5C0,-5,-15,-10,-25,-20C-35,-30,-40,-35,-30,-45C-20,-55,-10,-60,5,-60C20,-60,35,-55,40,-45Z" transform="translate(100,100)"/>
-  </svg>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <span class="logo-text">Витрина</span>
+                </div>
+                
+                <nav class="nav-desktop">
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-link">Главная</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">Каталог <i data-lucide="chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Пицца</a></li>
+                                <li><a href="#">Суши</a></li>
+                                <li><a href="#">Бургеры</a></li>
+                                <li><a href="#">Здоровая еда</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">Еда и доставка <i data-lucide="chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Доставка</a></li>
+                                <li><a href="#">Самовывоз</a></li>
+                                <li><a href="#">Рестораны</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="nav-link">Для бизнеса</a></li>
+                        <li><a href="#" class="nav-link">Для покупателей</a></li>
+                        <li><a href="#" class="nav-link">Для партнёров</a></li>
+                        <li><a href="#" class="nav-link">Контакты</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i data-lucide="menu" class="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <!-- Off-canvas elements -->
-  <div class="overlay" id="overlay"></div>
-  <div class="offcanvas-menu" id="offcanvasMenu">
-    <button class="close-menu" id="closeMenu">×</button>
-    <nav class="offcanvas-nav">
-      <ul>
-        <li><a href="/">Главная</a></li>
-        <li><a href="/catalog/">Каталог</a></li>
-        <li><a href="/food-delivery/">Еда и доставка</a></li>
-        <li><a href="/business.html">Для бизнеса</a></li>
-        <li><a href="/buyers.html">Для покупателей</a></li>
-        <li><a href="/partners.html">Для партнёров</a></li>
-        <li><a href="/contacts.html">Контакты</a></li>
-      </ul>
-    </nav>
-    <div class="offcanvas-theme">
-      <div class="theme-toggle" id="mobileThemeToggle">
-        <div class="toggle-knob"></div>
-      </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <span class="logo-icon">🍽️</span>
+                <span class="logo-text">Витрина</span>
+            </div>
+            <button class="close-btn" id="closeMenu">
+                <i data-lucide="x" class="close-icon"></i>
+            </button>
+        </div>
+        
+        <ul class="mobile-nav-list">
+            <li><a href="#" class="mobile-nav-link">Главная</a></li>
+            
+            <li class="mobile-dropdown">
+                <div class="mobile-dropdown-toggle">
+                    <a href="#" class="mobile-nav-link">Каталог</a>
+                    <i data-lucide="chevron-right" class="dropdown-arrow"></i>
+                </div>
+                <ul class="mobile-submenu">
+                    <li><a href="#">Пицца</a></li>
+                    <li><a href="#">Суши</a></li>
+                    <li><a href="#">Бургеры</a></li>
+                    <li><a href="#">Здоровая еда</a></li>
+                </ul>
+            </li>
+            
+            <li class="mobile-dropdown">
+                <div class="mobile-dropdown-toggle">
+                    <a href="#" class="mobile-nav-link">Еда и доставка</a>
+                    <i data-lucide="chevron-right" class="dropdown-arrow"></i>
+                </div>
+                <ul class="mobile-submenu">
+                    <li><a href="#">Доставка</a></li>
+                    <li><a href="#">Самовывоз</a></li>
+                    <li><a href="#">Рестораны</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="#" class="mobile-nav-link">Для бизнеса</a></li>
+            <li><a href="#" class="mobile-nav-link">Для покупателей</a></li>
+            <li><a href="#" class="mobile-nav-link">Для партнёров</a></li>
+            <li><a href="#" class="mobile-nav-link">Контакты</a></li>
+        </ul>
     </div>
-  </div>
 
-  <!-- Header -->
-  <header>
-    <a href="/" class="logo"><span>Витрина</span></a>
-    <nav class="desktop-nav">
-      <ul>
-        <li><a href="/">Главная</a></li>
-        <li><a href="/catalog/">Каталог</a></li>
-        <li><a href="/food-delivery/">Еда и доставка</a></li>
-        <li><a href="/business.html">Для бизнеса</a></li>
-        <li><a href="/buyers.html">Для покупателей</a></li>
-        <li><a href="/partners.html">Для партнёров</a></li>
-        <li><a href="/contacts.html">Контакты</a></li>
-      </ul>
-    </nav>
-    <div class="theme-toggle" id="themeToggle">
-      <div class="toggle-knob"></div>
-    </div>
-  </header>
-
-  <!-- FAB Menu Button -->
-  <button class="menu-fab" id="menuFab">≡</button>
-
-  <main class="container">
+    <!-- Hero Section -->
     <section class="hero">
-  <h1>Ваша цифровая полка — в миллионах корзин</h1>
-  <p>«Витрина» даёт самозанятым и ИП мгновенный доступ к покупателям через действующий сервис доставки. Без логистики, без маркетинга — просто добавьте товары.</p>
-  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
-    <a href="/business.html" class="cta-button">Подключить бизнес</a>
-    <a href="/register-partner.html" class="btn-secondary">Регистрация партнёра</a>
-    <a href="/register-customer.html" class="btn-secondary">Регистрация покупателя</a>
-  </div>
-</section>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Еда у вас дома за 20 минут</h1>
+                <p class="hero-subtitle">Кэшбэк на каждую доставку. Более 1500 ресторанов в вашем городе.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">+1500</span>
+                        <span class="stat-label">ресторанов</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5%</span>
+                        <span class="stat-label">средний кэшбэк</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">30</span>
+                        <span class="stat-label">минут доставка</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Заказать еду</button>
+                    <button class="btn btn-secondary">Стать партнёром</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="project-info" style="text-align: center; margin: 3rem 0; padding: 2rem; background: var(--card); border-radius: 14px; border: 1px solid var(--border);">
-  <h2 style="margin-bottom: 1rem;">О проекте "Витрина"</h2>
-  <p style="max-width: 800px; margin: 0 auto 1.5rem; color: var(--text-secondary);">
-    "Витрина" — это инновационная платформа, которая соединяет местных производителей и ремесленников с покупателями через 
-    существующие сервисы доставки. Мы создаём цифровое пространство, где самозанятые и малый бизнес могут легко и быстро 
-    получить доступ к широкой аудитории без необходимости создавать собственные интернет-магазины и решать логистические вопросы.
-  </p>
-  <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-    <div style="text-align: center; min-width: 200px;">
-      <h3 style="color: var(--accent); margin-bottom: 0.5rem;">1000+</h3>
-      <p style="color: var(--text-secondary);">Продавцов</p>
-    </div>
-    <div style="text-align: center; min-width: 200px;">
-      <h3 style="color: var(--accent); margin-bottom: 0.5rem;">10M+</h3>
-      <p style="color: var(--text-secondary);">Покупателей</p>
-    </div>
-    <div style="text-align: center; min-width: 200px;">
-      <h3 style="color: var(--accent); margin-bottom: 0.5rem;">50+</h3>
-      <p style="color: var(--text-secondary);">Городов</p>
-    </div>
-  </div>
-</section>
+    <!-- Food Categories -->
+    <section class="food-categories">
+        <div class="container">
+            <h2 class="section-title">Популярные категории</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Пицца" alt="Пицца">
+                    <div class="category-info">
+                        <h3>Пицца</h3>
+                        <p>От 150 р.</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Суши" alt="Суши">
+                    <div class="category-info">
+                        <h3>Суши</h3>
+                        <p>От 200 р.</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Бургеры" alt="Бургеры">
+                    <div class="category-info">
+                        <h3>Бургеры</h3>
+                        <p>От 180 р.</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://placehold.co/300x200/2A5C34/FFFFFF?text=Здоровая+еда" alt="Здоровая еда">
+                    <div class="category-info">
+                        <h3>Здоровая еда</h3>
+                        <p>От 250 р.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="audience">
-  <h2 style="text-align: center; margin-bottom: 1.5rem;">Кто уже продаёт</h2>
-  <div class="audience-grid">
-    <div class="card">
-      <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Фермеры и производители</h3>
-      <p>Свежие продукты, сыры, выпечка — напрямую в корзину покупателя.</p>
-    </div>
-    <div class="card">
-      <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Ремесленники</h3>
-      <p>Хендмейд, керамика, натуральная косметика — без посредников.</p>
-    </div>
-    <div class="card">
-      <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Местные бренды</h3>
-      <p>Крафтовые напитки, специи, текстиль — ваше производство на виду.</p>
-    </div>
-  </div>
-</section>
+    <!-- Partners -->
+    <section class="partners">
+        <div class="container">
+            <h2 class="section-title">Наши партнёры</h2>
+            <div class="partners-list">
+                <div class="partner-logo">банк 1</div>
+                <div class="partner-logo">банк 2</div>
+                <div class="partner-logo">банк 3</div>
+                <div class="partner-logo">банк 4</div>
+                <div class="partner-logo">банк 5</div>
+            </div>
+        </div>
+    </section>
 
-<section class="business-info" style="text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
-  <h2>Готовы начать?</h2>
-  <p>Присоединяйтесь к "Витрине" и начните продавать через сервисы доставки</p>
-  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
-    <a href="/business.html" class="cta-button">Подключить бизнес</a>
-    <a href="/login-partner.html" class="btn-secondary">Войти как партнёр</a>
-  </div>
-</section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>support@витрина.рф</p>
+                    <p>+7 (XXX) XXX-XX-XX</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Социальные сети</h3>
+                    <div class="social-links">
+                        <a href="#">VK</a>
+                        <a href="#">TG</a>
+                        <a href="#">INST</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Политики</h3>
+                    <ul>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Условия использования</a></li>
+                        <li><a href="#">Пользовательское соглашение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Витрина. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
 
-<section class="customer-info" style="text-align: center; margin: 3rem 0; padding: 2rem; background: var(--card); border-radius: 14px; border: 1px solid var(--border);">
-  <h2 style="margin-bottom: 1rem;">Для покупателей</h2>
-  <p style="max-width: 800px; margin: 0 auto 1.5rem; color: var(--text-secondary);">
-    Откройте для себя уникальные товары от местных производителей. Поддержите самозанятых и малый бизнес в вашем регионе, 
-    получая качественные товары с удобной доставкой через привычные сервисы.
-  </p>
-  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-    <a href="/buyers.html" class="cta-button">Подробнее</a>
-    <a href="/login-customer.html" class="btn-secondary">Войти как покупатель</a>
-  </div>
-</section>
-  </main>
-
-  <footer>
-    <div class="footer-content">
-      <a href="/" class="logo"><span>Витрина</span></a>
-      <div class="footer-links desktop-links">
-        <a href="/buyers.html">Для покупателей</a>
-        <a href="/partners.html">Для партнёров</a>
-        <a href="/business.html">Для бизнеса</a>
-        <a href="/contacts.html">Контакты</a>
-        <a href="/terms.html">Условия</a>
-        <a href="/privacy.html">Конфиденциальность</a>
-        <a href="/help.html">Помощь</a>
-      </div>
-      <div class="footer-mobile-menu">
-        <details class="mobile-dropdown">
-          <summary>Разделы</summary>
-          <div class="mobile-links">
-            <a href="/buyers.html">Для покупателей</a>
-            <a href="/partners.html">Для партнёров</a>
-            <a href="/business.html">Для бизнеса</a>
-            <a href="/contacts.html">Контакты</a>
-            <a href="/terms.html">Условия</a>
-            <a href="/privacy.html">Конфиденциальность</a>
-            <a href="/help.html">Помощь</a>
-          </div>
-        </details>
-      </div>
-    </div>
-  </footer>
-
-  <script src="/js/main.js"></script>
-  
+    <script src="script.js"></script>
 </body>
 </html>
