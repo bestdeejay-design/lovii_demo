@@ -62,10 +62,11 @@ body {
   align-items: center;
 }
 
-.logo {
+.logo a {
+  color: var(--accent-color);
+  text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--accent-color);
 }
 
 .nav-menu ul {
