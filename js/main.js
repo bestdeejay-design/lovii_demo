@@ -80,34 +80,4 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.offcanvas-nav a').forEach(link => {
     link.addEventListener('click', closeMenuHandler);
   });
-  
-  // Mobile dropdown functionality
-  document.querySelectorAll('.offcanvas-nav .dropdown > a').forEach(dropdownLink => {
-    dropdownLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      const dropdown = this.parentElement;
-      const isActive = dropdown.classList.contains('active');
-      
-      // Close all other dropdowns in the same menu
-      document.querySelectorAll('.offcanvas-nav .dropdown').forEach(d => {
-        d.classList.remove('active');
-      });
-      
-      // Toggle current dropdown if it's not active
-      if (!isActive) {
-        dropdown.classList.add('active');
-      }
-    });
-  });
-  
-  // Close dropdowns when clicking elsewhere
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.offcanvas-nav .dropdown')) {
-      document.querySelectorAll('.offcanvas-nav .dropdown').forEach(d => {
-        d.classList.remove('active');
-      });
-    }
-  });
 });

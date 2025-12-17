@@ -89,11 +89,6 @@ def main():
             "content_file": "buyers_content.html"
         },
         {
-            "output_path": "cart.html",
-            "title": "Корзина — Витрина",
-            "content_file": "cart_content.html"
-        },
-        {
             "output_path": "contacts.html",
             "title": "Контакты — Витрина",
             "content_file": "contacts_content.html"
@@ -124,11 +119,6 @@ def main():
             "content_file": "privacy_content.html"
         },
         {
-            "output_path": "product.html",
-            "title": "Товар — Витрина",
-            "content_file": "product_content.html"
-        },
-        {
             "output_path": "register-customer.html",
             "title": "Регистрация покупателя — Витрина",
             "content_file": "register_customer_content.html"
@@ -147,11 +137,6 @@ def main():
             "output_path": "catalog/index.html",
             "title": "Каталог — Витрина",
             "content_file": "catalog_index_content.html"
-        },
-        {
-            "output_path": "establishment.html",
-            "title": "Заведение — Витрина",
-            "content_file": "establishment_content.html"
         }
     ]
     

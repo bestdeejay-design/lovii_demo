@@ -19,7 +19,7 @@
     <nav class="offcanvas-nav">
       <ul>
         <li><a href="/">Главная</a></li>
-        <li><a href="/catalog/">Каталог товаров</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/food-delivery/">Еда и доставка</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
         <li><a href="/buyers.html">Для покупателей</a></li>
@@ -40,7 +40,7 @@
     <nav class="desktop-nav">
       <ul>
         <li><a href="/">Главная</a></li>
-        <li><a href="/catalog/">Каталог товаров</a></li>
+        <li><a href="/catalog/">Каталог</a></li>
         <li><a href="/food-delivery/">Еда и доставка</a></li>
         <li><a href="/business.html">Для бизнеса</a></li>
         <li><a href="/buyers.html">Для покупателей</a></li>
@@ -57,51 +57,54 @@
   <button class="menu-fab" id="menuFab">≡</button>
 
   <main class="container">
-    <h1 class="page-title">Помощь</h1>
-    
-    <section class="help-content" style="max-width: 800px; margin: 0 auto;">
-      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
-        <h2 style="color: var(--accent); margin-bottom: 1rem;">Как начать продавать через "Витрину"</h2>
-        <p>Чтобы начать продавать через нашу платформу, следуйте этим шагам:</p>
-        <ol style="margin: 1rem 0 1rem 2rem; list-style: decimal;">
-          <li>Зарегистрируйтесь как самозанятый или ИП</li>
-          <li>Перейдите на страницу "Для бизнеса" и заполните анкету</li>
-          <li>Добавьте информацию о ваших товарах</li>
-          <li>Установите цены и настройте условия доставки</li>
-          <li>После одобрения модерацией товары появятся в каталоге</li>
-        </ol>
-      </div>
-      
-      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
-        <h2 style="color: var(--accent); margin-bottom: 1rem;">Как покупать товары</h2>
-        <p>Процесс покупки товаров через "Витрину" прост:</p>
-        <ol style="margin: 1rem 0 1rem 2rem; list-style: decimal;">
-          <li>Просмотрите каталог и выберите интересующие товары</li>
-          <li>Добавьте товары в корзину</li>
-          <li>Выберите удобный способ доставки</li>
-          <li>Оформите заказ</li>
-          <li>Товары будут доставлены через выбранный сервис доставки</li>
-        </ol>
-      </div>
-      
-      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
-        <h2 style="color: var(--accent); margin-bottom: 1rem;">Часто задаваемые вопросы</h2>
-        <h3 style="margin: 1rem 0 0.5rem;">Какие товары можно продавать?</h3>
-        <p>Мы поддерживаем продажу продуктов питания, товаров ручной работы, косметики, напитков и других товаров местного производства.</p>
-        
-        <h3 style="margin: 1rem 0 0.5rem;">Сколько стоит продажа через "Витрину"?</h3>
-        <p>Комиссия платформы составляет 5% от стоимости проданных товаров. За доставку отвечает выбранный вами сервис доставки.</p>
-        
-        <h3 style="margin: 1rem 0 0.5rem;">Как часто обновляется каталог?</h3>
-        <p>Каталог обновляется в реальном времени по мере добавления новых товаров продавцами.</p>
-      </div>
-      
-      <div class="card" style="padding: 2rem; margin-bottom: 1rem;">
-        <h2 style="color: var(--accent); margin-bottom: 1rem;">Нужна дополнительная помощь?</h2>
-        <p>Если у вас остались вопросы, свяжитесь с нами:</p>
-        <p style="margin-top: 1rem;"><strong>Email:</strong> <a href="mailto:support@vitrina.example" style="color: var(--accent);">support@vitrina.example</a></p>
-      </div>
-    </section>
+    <section class="hero">
+  <h1>Помощь</h1>
+  <p>Ответы на часто задаваемые вопросы</p>
+</section>
+
+<section style="max-width: 800px; margin: 2rem auto; padding: 2rem; background: var(--card); border-radius: 14px; border: 1px solid var(--border);">
+  <h2 style="margin-bottom: 1.5rem;">Часто задаваемые вопросы</h2>
+  
+  <details style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--border); border-radius: 8px;">
+    <summary style="font-weight: 600; cursor: pointer; color: var(--accent);">Как зарегистрироваться?</summary>
+    <div style="margin-top: 1rem; color: var(--text-secondary);">
+      <p>Для регистрации как покупатель перейдите на страницу регистрации покупателя, 
+      а для регистрации как партнёр - на страницу регистрации партнёра.</p>
+    </div>
+  </details>
+  
+  <details style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--border); border-radius: 8px;">
+    <summary style="font-weight: 600; cursor: pointer; color: var(--accent);">Как подключить бизнес?</summary>
+    <div style="margin-top: 1rem; color: var(--text-secondary);">
+      <p>Зарегистрируйтесь как партнёр, предоставьте информацию о вашем бизнесе 
+      и следуйте инструкциям для добавления товаров.</p>
+    </div>
+  </details>
+  
+  <details style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--border); border-radius: 8px;">
+    <summary style="font-weight: 600; cursor: pointer; color: var(--accent);">Как сделать заказ?</summary>
+    <div style="margin-top: 1rem; color: var(--text-secondary);">
+      <p>Перейдите в каталог, выберите интересующие товары и следуйте инструкциям 
+      для оформления заказа через сервис доставки.</p>
+    </div>
+  </details>
+  
+  <details style="padding: 1rem; border: 1px solid var(--border); border-radius: 8px;">
+    <summary style="font-weight: 600; cursor: pointer; color: var(--accent);">Как связаться с поддержкой?</summary>
+    <div style="margin-top: 1rem; color: var(--text-secondary);">
+      <p>Вы можете связаться с нами через форму обратной связи на странице контактов 
+      или по email: info@vitrina.ru</p>
+    </div>
+  </details>
+</section>
+
+<section style="text-align: center; margin: 3rem 0;">
+  <h2>Нужна дополнительная помощь?</h2>
+  <p style="max-width: 600px; margin: 0 auto 1.5rem; color: var(--text-secondary);">
+    Обратитесь в нашу службу поддержки
+  </p>
+  <a href="/contacts.html" class="cta-button">Связаться с нами</a>
+</section>
   </main>
 
   <footer>

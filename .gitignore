@@ -1,5 +1,36 @@
-```markdown
-# No build artifacts, dependencies, or temporary files detected in changes
-# Only source/config files (.md, .html) were added
-# No additional ignores needed beyond standard project requirements
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+
+# Dependencies
+venv/
+.venv/
+node_modules/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Distribution artifacts
+dist/
+build/
+target/
 ```
