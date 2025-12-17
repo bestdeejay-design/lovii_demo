@@ -6,8 +6,8 @@ __pycache__/
 *.obj
 
 # Dependencies
-venv/
 .venv/
+venv/
 node_modules/
 
 # Logs and temp files
@@ -29,7 +29,7 @@ coverage/
 htmlcov/
 .coverage
 
-# Distribution artifacts
+# Build directories
 dist/
 build/
 target/

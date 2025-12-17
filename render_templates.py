@@ -137,6 +137,11 @@ def main():
             "output_path": "catalog/index.html",
             "title": "Каталог — Витрина",
             "content_file": "catalog_index_content.html"
+        },
+        {
+            "output_path": "food-delivery/index.html",
+            "title": "Еда и доставка",
+            "content_file": "food_delivery_content.html"
         }
     ]
     
