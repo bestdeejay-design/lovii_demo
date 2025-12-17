@@ -19,11 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Инициализация компонентов после загрузки шаблонов
 function initializeAfterTemplatesLoad() {
-    // Инициализируем переключатель темы
-    initializeThemeToggle();
-    
-    // Инициализируем обработчик формы
-    initializeContactForm();
+    // Используем надежный метод инициализации с повторными попытками
+    initializeComponentsWithRetry();
 }
 
 // Alternative initialization function that keeps trying until elements are found
@@ -31,37 +28,63 @@ function initializeComponentsWithRetry() {
     let attempts = 0;
     const maxAttempts = 20; // Try for up to 2 seconds (20 attempts * 100ms)
     
+    // Track which components have been initialized
+    let themeToggleInitialized = false;
+    let contactFormInitialized = false;
+    let ctaFormInitialized = false;
+    
     const retryInitialization = () => {
         attempts++;
         
-        // Try initializing theme toggle
-        if (!document.getElementById('themeToggle')) {
-            if (attempts < maxAttempts) {
-                setTimeout(retryInitialization, 100);
-            }
-        } else {
-            initializeThemeToggle();
+        // Check and initialize theme toggle if not already done
+        const themeToggleBtn = document.getElementById('themeToggle');
+        if (!themeToggleInitialized && themeToggleBtn) {
+            initializeThemeToggle(themeToggleBtn);
+            themeToggleInitialized = true;
+        } else if (!themeToggleInitialized && attempts >= maxAttempts) {
+            console.warn('Theme toggle button not found after maximum attempts');
+            themeToggleInitialized = true; // Prevent further checks
         }
         
-        // Try initializing contact form
-        if (!document.getElementById('contactForm')) {
-            if (attempts < maxAttempts) {
-                setTimeout(retryInitialization, 100);
-            }
-        } else {
+        // Check and initialize contact form if not already done
+        const contactForm = document.getElementById('contactForm');
+        if (!contactFormInitialized && contactForm) {
             initializeContactForm();
+            contactFormInitialized = true;
+        } else if (!contactFormInitialized && attempts >= maxAttempts) {
+            console.warn('Contact form not found after maximum attempts');
+            contactFormInitialized = true; // Prevent further checks
+        }
+        
+        // Check and initialize CTA form if not already done
+        const ctaForm = document.getElementById('ctaForm');
+        if (!ctaFormInitialized && ctaForm) {
+            initializeCtaForm();
+            ctaFormInitialized = true;
+        } else if (!ctaFormInitialized && attempts >= maxAttempts) {
+            console.warn('CTA form not found after maximum attempts');
+            ctaFormInitialized = true; // Prevent further checks
+        }
+        
+        // Continue retrying until max attempts reached or all components initialized
+        if (attempts < maxAttempts && 
+            (!themeToggleInitialized || !contactFormInitialized || !ctaFormInitialized)) {
+            setTimeout(retryInitialization, 100);
         }
     };
     
     retryInitialization();
 }
 
-function initializeThemeToggle() {
-    const themeToggleBtn = document.getElementById('themeToggle');
-    
+function initializeThemeToggle(themeToggleBtn) {
+    // Если элемент не передан как параметр, ищем его в DOM
     if (!themeToggleBtn) {
-        console.error('Theme toggle button not found');
-        return;
+        themeToggleBtn = document.getElementById('themeToggle');
+        
+        if (!themeToggleBtn) {
+            console.error('Theme toggle button not found');
+            return;
+        }
     }
     
     themeToggleBtn.addEventListener('click', function() {
