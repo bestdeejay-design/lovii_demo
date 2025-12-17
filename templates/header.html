@@ -1,25 +1,41 @@
 <header class="header">
     <div class="container">
-        <div class="logo"><a href="#home">MarketPlace</a></div>
+        <div class="logo"><a href="#home">Витрина</a></div>
         
         <nav class="nav-menu">
             <ul>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#featured">Featured</a></li>
-                <li><a href="#trending">Trending</a></li>
-                <li><a href="#sellers">Top Sellers</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home">Главная</a></li>
+                <li class="nav-item has-submenu">
+                    <a href="#">Для клиентов <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#products">Товары и услуги</a></li>
+                        <li><a href="#food">Еда и доставка</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item has-submenu">
+                    <a href="#">Для бизнеса <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#suppliers">Для поставщиков</a></li>
+                        <li><a href="#pvs">Для ПВЗ</a></li>
+                        <li><a href="#rates">Тарифы</a></li>
+                    </ul>
+                </li>
+                <li><a href="#about">О проекте</a></li>
+                <li><a href="#contact">Контакты</a></li>
             </ul>
         </nav>
         
         <div class="header-actions">
             <div class="search-bar">
-                <input type="text" placeholder="Search products...">
+                <input type="text" placeholder="Поиск товаров...">
                 <button><i class="fas fa-search"></i></button>
             </div>
             <div class="user-actions">
-                <a href="#" class="btn btn-outline">Login</a>
-                <a href="#" class="btn btn-primary">Sign Up</a>
+                <a href="#" class="btn btn-outline">Войти</a>
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </a>
             </div>
             <div class="theme-toggle">
                 <button id="themeToggle">
