@@ -1801,11 +1801,45 @@ body {
   padding-left: 1.5rem;
 }
 
+/* Mobile nav theme toggle specific styles */
+.mobile-nav-menu .theme-toggle-item {
+  display: block;
+  margin: 0.7rem 1.5rem;
+}
+
+.mobile-nav-menu .theme-toggle-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  gap: 0.8rem;
+  border-left: 3px solid transparent;
+  min-height: 44px;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  margin: 0.7rem 0;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
 /* Show mobile nav only on mobile devices */
 @media (max-width: 768px) {
   /* Hide desktop theme toggle button in mobile view */
-  .header .theme-toggle:not(.mobile-menu-toggle) {
+  .header .theme-toggle {
     display: none;
+  }
+  
+  /* Hide theme toggle item from header menu on mobile, but show in mobile nav */
+  .header .nav-menu ul .theme-toggle-item {
+    display: none;
+  }
+  
+  /* Show mobile theme toggle in mobile menu */
+  .mobile-nav-menu .theme-toggle-item {
+    display: block;
   }
 }
 
