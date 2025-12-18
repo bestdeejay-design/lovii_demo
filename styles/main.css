@@ -381,7 +381,7 @@ body {
   left: 0;
   background-color: var(--bg-secondary);
   min-width: 250px;
-  max-width: 300px;
+  max-width: 400px;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -397,26 +397,6 @@ body {
 }
 
 /* Enhanced submenu styling for marketplace */
-.header .submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: var(--bg-secondary);
-  min-width: 250px;
-  max-width: 350px;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  list-style: none;
-  padding: 0.5rem 0;
-  margin: 0;
-  border: 1px solid var(--border-color);
-  overflow-y: auto;
-}
 
 /* Add a subtle animation delay to make it feel smoother */
 .header .has-submenu {
@@ -472,32 +452,20 @@ body {
   color: var(--text-primary);
   transition: all 0.2s ease;
   gap: 0.8rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   border-left: 3px solid transparent;
+  min-height: 44px;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .header .submenu a:hover {
   background-color: var(--bg-primary);
   color: var(--accent-color);
   padding-left: 1.5rem;
-  transform: translateX(5px);
   border-left: 3px solid var(--accent-color);
 }
 
 /* Add submenu indicator */
-.header .submenu a::before {
-  content: "▶";
-  font-size: 0.6rem;
-  margin-right: 0.5rem;
-  opacity: 0.7;
-  transition: transform 0.2s ease;
-}
-
-.header .submenu a:hover::before {
-  transform: translateX(3px);
-}
 
 .header .submenu a i {
   width: 20px;
