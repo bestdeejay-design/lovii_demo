@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Витрина - Раздел для бизнеса</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Раздел для бизнеса - Витрина</h1>
+                <p>Все страницы, созданные для бизнеса на платформе Витрина</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="links-section">
+        <div class="container">
+            <h2>Доступные страницы</h2>
+            <div class="links-grid">
+                <a href="business.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Главная для бизнеса</h3>
+                    <p>Обзор всех возможностей для бизнеса</p>
+                </a>
+                
+                <a href="suppliers.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <h3>Для поставщиков</h3>
+                    <p>Лендинг для привлечения поставщиков</p>
+                </a>
+                
+                <a href="pvz.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-store-alt"></i>
+                    </div>
+                    <h3>Для точек выдачи</h3>
+                    <p>Страница для точек выдачи заказов</p>
+                </a>
+                
+                <a href="register-supplier.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>Регистрация поставщика</h3>
+                    <p>Многошаговая форма регистрации</p>
+                </a>
+                
+                <a href="supplier-dashboard.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Личный кабинет поставщика</h3>
+                    <p>Дашборд с функционалом поставщика</p>
+                </a>
+                
+                <a href="pricing.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Тарифы</h3>
+                    <p>Детальная страница тарифов с калькулятором</p>
+                </a>
+                
+                <a href="api-integration.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Интеграция с API</h3>
+                    <p>Документация и примеры интеграции</p>
+                </a>
+                
+                <a href="partnership.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Партнёрская программа</h3>
+                    <p>Программа для привлечения партнёров</p>
+                </a>
+                
+                <a href="training.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Обучение</h3>
+                    <p>Видеоуроки, вебинары и документация</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+    </script>
+    
+    <style>
+        .links-section {
+            padding: 3rem 0;
+            background-color: var(--bg-primary);
+        }
+        
+        .links-section h2 {
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .link-card {
+            display: block;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .link-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .link-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .link-card p {
+            color: var(--text-secondary);
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Раздел для бизнеса на платформе Витрина - для поставщиков и точек выдачи">
+    <meta name="keywords" content="бизнес, поставщики, ПВЗ, маркетплейс, продажи">
+    <title>Для бизнеса - Витрина</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Решения для бизнеса</h1>
+                <p>Станьте поставщиком или точкой выдачи на платформе Витрина</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="business-section">
+        <div class="container">
+            <div class="business-intro">
+                <h2>Преимущества работы с Витриной</h2>
+                <p>Присоединяйтесь к нашей экосистеме, чтобы увеличить продажи, расширить охват и автоматизировать бизнес-процессы.</p>
+            </div>
+            
+            <div class="business-options">
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <h3>Для поставщиков</h3>
+                    <p>Продавайте свои товары тысячам покупателей, гипермаркетам и точкам выдачи</p>
+                    <ul class="benefits-list">
+                        <li>Доступ к 100 000+ покупателей</li>
+                        <li>Рост оборота на 30-70%</li>
+                        <li>Интеграция с 1С за 1 день</li>
+                        <li>Выплаты каждую неделю</li>
+                    </ul>
+                    <a href="suppliers.html" class="btn btn-primary">Стать поставщиком</a>
+                    <a href="pricing.html" class="btn btn-outline">Тарифы</a>
+                </div>
+                
+                <div class="business-card">
+                    <div class="business-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Для точек выдачи</h3>
+                    <p>Получайте дополнительный трафик и доход от выдачи заказов</p>
+                    <ul class="benefits-list">
+                        <li>30-50₽ за каждый выданный заказ</li>
+                        <li>Новые клиенты для вашего бизнеса</li>
+                        <li>Простое подключение без изменений</li>
+                        <li>Обучение за 1 день</li>
+                    </ul>
+                    <a href="pvz.html" class="btn btn-primary">Стать ПВЗ</a>
+                    <a href="api-integration.html" class="btn btn-outline">Интеграция</a>
+                </div>
+            </div>
+            
+            <div class="additional-services">
+                <h2>Дополнительные возможности</h2>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Интеграция с API</h3>
+                        <p>Автоматизируйте бизнес-процессы через API и интеграцию с 1С</p>
+                        <a href="api-integration.html">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Партнёрская программа</h3>
+                        <p>Приводите других поставщиков — получайте бонусы</p>
+                        <a href="partnership.html">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Обучение</h3>
+                        <p>Видеоуроки, вебинары и документация для успешной работы</p>
+                        <a href="training.html">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2>Готовы начать?</h2>
+                    <p>Присоединяйтесь к платформе Витрина и увеличьте продажи уже сегодня</p>
+                    <div class="cta-buttons">
+                        <a href="suppliers.html" class="btn btn-primary">Стать поставщиком</a>
+                        <a href="pvz.html" class="btn btn-outline">Стать ПВЗ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+    </script>
+    
+    <style>
+        .business-section {
+            padding: 3rem 0;
+            background-color: var(--bg-primary);
+        }
+        
+        .business-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .business-intro h2 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .business-intro p {
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .business-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .business-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .business-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .business-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .business-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .benefits-list li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .benefits-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .additional-services {
+            margin: 4rem 0;
+        }
+        
+        .additional-services h2 {
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .service-card a i {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #1e3c1e 0%, #0a1a0a 100%);
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .cta-content h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-content p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .business-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>
