@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Варианты реализации заголовка с большим количеством разделов</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .variant {
+            margin-bottom: 50px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .variant-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .variant-description {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        /* Общие стили для всех вариантов */
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            float: left;
+            margin-right: 2rem;
+        }
+
+        .header-actions {
+            float: right;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Вариант 1: Горизонтальный скроллинг */
+        .variant-1 .menu-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 10px 0;
+            margin-top: 1rem;
+        }
+
+        .variant-1 .menu-item {
+            white-space: nowrap;
+            padding: 0.75rem 1rem;
+            background-color: #555;
+            border-radius: 4px;
+            cursor: pointer;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .variant-1 .menu-item:hover {
+            background-color: #777;
+        }
+
+        /* Вариант 2: Выпадающие подменю */
+        .variant-2 nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .variant-2 nav li {
+            position: relative;
+        }
+
+        .variant-2 nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            background-color: #555;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .variant-2 nav a:hover {
+            background-color: #777;
+        }
+
+        .variant-2 .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            min-width: 200px;
+            z-index: 1000;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .variant-2 .has-submenu:hover .submenu {
+            display: block;
+        }
+
+        .variant-2 .submenu a {
+            padding: 0.75rem;
+            background-color: transparent;
+            text-align: left;
+        }
+
+        /* Вариант 3: Бургер-меню для большого количества разделов */
+        .variant-3 .menu-toggle {
+            display: none;
+        }
+
+        .variant-3 nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .variant-3 nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            background-color: #555;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .variant-3 nav a:hover {
+            background-color: #777;
+        }
+
+        /* Вариант 4: Комбинированный подход */
+        .variant-4 .main-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .variant-4 .primary-links {
+            display: flex;
+            gap: 1rem;
+            flex: 1;
+            min-width: 0; /* Позволяет сжиматься */
+        }
+
+        .variant-4 .more-menu {
+            position: relative;
+        }
+
+        .variant-4 .more-menu:hover .more-dropdown {
+            display: block;
+        }
+
+        .variant-4 .more-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            min-width: 200px;
+            z-index: 1000;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .variant-4 .more-dropdown a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem;
+            background-color: transparent;
+            text-align: left;
+        }
+
+        /* Сброс стилей для демонстрации */
+        .reset-styles {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .reset-styles h2 {
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .variant-3 nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #333;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .variant-3 nav.active ul {
+                display: flex;
+            }
+
+            .variant-3 .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5em;
+                cursor: pointer;
+            }
+
+            .variant-3 .primary-links {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Варианты реализации заголовка с большим количеством разделов</h1>
+
+    <div class="variant variant-1">
+        <h2 class="variant-title">Вариант 1: Горизонтальный скроллинг</h2>
+        <p class="variant-description">Меню с горизонтальной прокруткой позволяет разместить все разделы в одной строке, при этом пользователь может проскроллить до нужного раздела.</p>
+        
+        <div class="header">
+            <div class="container">
+                <div class="logo">Логотип</div>
+                
+                <div class="menu-container">
+                    <div class="menu-item">Главная</div>
+                    <div class="menu-item">О компании</div>
+                    <div class="menu-item">Продукция</div>
+                    <div class="menu-item">Услуги</div>
+                    <div class="menu-item">Новости</div>
+                    <div class="menu-item">Статьи</div>
+                    <div class="menu-item">Блог</div>
+                    <div class="menu-item">Портфолио</div>
+                    <div class="menu-item">Контакты</div>
+                    <div class="menu-item">Вакансии</div>
+                    <div class="menu-item">Партнеры</div>
+                    <div class="menu-item">Сертификаты</div>
+                    <div class="menu-item">Лицензии</div>
+                    <div class="menu-item">Отзывы</div>
+                    <div class="menu-item">FAQ</div>
+                    <div class="menu-item">Поддержка</div>
+                    <div class="menu-item">Документация</div>
+                    <div class="menu-item">Обучение</div>
+                    <div class="menu-item">Консультации</div>
+                    <div class="menu-item">Решения</div>
+                </div>
+                
+                <div class="header-actions">
+                    <span>Поиск</span>
+                    <span>Корзина</span>
+                    <span>Вход</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="variant variant-2">
+        <h2 class="variant-title">Вариант 2: Выпадающие подменю</h2>
+        <p class="variant-description">Группировка связанных разделов в выпадающие меню позволяет уменьшить количество видимых элементов в главном меню.</p>
+        
+        <div class="header">
+            <div class="container">
+                <div class="logo">Логотип</div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#">Главная</a></li>
+                        
+                        <li class="has-submenu">
+                            <a href="#">Продукты <i class="arrow">▼</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Электроника</a></li>
+                                <li><a href="#">Одежда</a></li>
+                                <li><a href="#">Обувь</a></li>
+                                <li><a href="#">Аксессуары</a></li>
+                                <li><a href="#">Детские товары</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="has-submenu">
+                            <a href="#">Услуги <i class="arrow">▼</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Доставка</a></li>
+                                <li><a href="#">Установка</a></li>
+                                <li><a href="#">Гарантия</a></li>
+                                <li><a href="#">Сервис</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="has-submenu">
+                            <a href="#">Информация <i class="arrow">▼</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">О компании</a></li>
+                                <li><a href="#">Новости</a></li>
+                                <li><a href="#">Блог</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Контакты</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="has-submenu">
+                            <a href="#">Поддержка <i class="arrow">▼</i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Помощь</a></li>
+                                <li><a href="#">Возврат</a></li>
+                                <li><a href="#">Гарантия</a></li>
+                                <li><a href="#">Техподдержка</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="#">Акции</a></li>
+                        <li><a href="#">Отзывы</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <span>Поиск</span>
+                    <span>Корзина</span>
+                    <span>Вход</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="variant variant-3">
+        <h2 class="variant-title">Вариант 3: Бургер-меню для большого количества разделов</h2>
+        <p class="variant-description">Компактное решение с бургер-меню, которое раскрывается при клике, показывая все разделы в выпадающем списке.</p>
+        
+        <div class="header">
+            <div class="container">
+                <div class="logo">Логотип</div>
+                
+                <button class="menu-toggle">☰</button>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">О компании</a></li>
+                        <li><a href="#">Продукция</a></li>
+                        <li><a href="#">Услуги</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">Статьи</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Портфолио</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Партнеры</a></li>
+                        <li><a href="#">Сертификаты</a></li>
+                        <li><a href="#">Лицензии</a></li>
+                        <li><a href="#">Отзывы</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Поддержка</a></li>
+                        <li><a href="#">Документация</a></li>
+                        <li><a href="#">Обучение</a></li>
+                        <li><a href="#">Консультации</a></li>
+                        <li><a href="#">Решения</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <span>Поиск</span>
+                    <span>Корзина</span>
+                    <span>Вход</span>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.querySelector('.variant-3 .menu-toggle').addEventListener('click', function() {
+                document.querySelector('.variant-3 nav').classList.toggle('active');
+            });
+        </script>
+    </div>
+
+    <div class="variant variant-4">
+        <h2 class="variant-title">Вариант 4: Комбинированный подход</h2>
+        <p class="variant-description">Сочетание видимых основных разделов и дополнительного меню с остальными разделами.</p>
+        
+        <div class="header">
+            <div class="container">
+                <div class="logo">Логотип</div>
+                
+                <div class="main-menu">
+                    <div class="primary-links">
+                        <a href="#" class="menu-item">Главная</a>
+                        <a href="#" class="menu-item">Продукция</a>
+                        <a href="#" class="menu-item">Услуги</a>
+                        <a href="#" class="menu-item">О компании</a>
+                        <a href="#" class="menu-item">Контакты</a>
+                    </div>
+                    
+                    <div class="more-menu">
+                        <a href="#" class="menu-item">Еще ▼</a>
+                        <div class="more-dropdown">
+                            <a href="#">Новости</a>
+                            <a href="#">Статьи</a>
+                            <a href="#">Блог</a>
+                            <a href="#">Портфолио</a>
+                            <a href="#">Вакансии</a>
+                            <a href="#">Партнеры</a>
+                            <a href="#">Сертификаты</a>
+                            <a href="#">Лицензии</a>
+                            <a href="#">Отзывы</a>
+                            <a href="#">FAQ</a>
+                            <a href="#">Поддержка</a>
+                            <a href="#">Документация</a>
+                            <a href="#">Обучение</a>
+                            <a href="#">Консультации</a>
+                            <a href="#">Решения</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <span>Поиск</span>
+                    <span>Корзина</span>
+                    <span>Вход</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reset-styles">
+        <h2>Рекомендации по выбору варианта</h2>
+        <ul>
+            <li><strong>Вариант 1 (Горизонтальный скроллинг)</strong>: Хорош для десктопных приложений, где пользователи готовы скроллить. Не всегда удобен на мобильных устройствах.</li>
+            <br>
+            <li><strong>Вариант 2 (Выпадающие подменю)</strong>: Отличное решение для логически связанных групп разделов. Позволяет уменьшить визуальную нагрузку.</li>
+            <br>
+            <li><strong>Вариант 3 (Бургер-меню)</strong>: Наиболее компактный вариант, особенно хорош для мобильных устройств. Может скрывать важные разделы.</li>
+            <br>
+            <li><strong>Вариант 4 (Комбинированный подход)</strong>: Баланс между доступностью ключевых разделов и компактностью. Пользователи видят основные разделы сразу.</li>
+        </ul>
+    </div>
+</body>
+</html>
