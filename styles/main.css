@@ -107,6 +107,13 @@ body {
       display: none;
   }
   
+  .profile-menu ul,
+  .profile-menu li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+  
   .profile-submenu {
       right: 0;
       left: auto;
