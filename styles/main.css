@@ -1534,8 +1534,16 @@ body {
 
 /* Breadcrumbs */
 .breadcrumbs {
-  padding: 1rem 0;
-  margin: 1rem 0;
+  padding: 0.8rem 0;
+  margin: 0;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.breadcrumb-nav {
+  display: flex;
+  padding: 0;
+  margin: 0;
 }
 
 .breadcrumb-nav ol {
@@ -1544,27 +1552,40 @@ body {
   padding: 0;
   margin: 0;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .breadcrumb-nav li {
   display: flex;
   align-items: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
 .breadcrumb-nav li:not(:last-child)::after {
-  content: ">";
+  content: "/";
   margin: 0 0.5rem;
   color: var(--text-secondary);
+  font-weight: normal;
 }
 
 .breadcrumb-nav a {
   color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.3s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }
 
 .breadcrumb-nav a:hover {
   color: var(--accent-color);
+  background-color: var(--bg-primary);
+  text-decoration: underline;
+}
+
+.breadcrumb-nav .current {
+  color: var(--accent-color);
+  font-weight: 600;
 }
 
 /* Products page layout */
