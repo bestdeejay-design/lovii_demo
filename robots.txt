@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /templates/
+Disallow: /test_*
+
+Sitemap: /sitemap.xml
