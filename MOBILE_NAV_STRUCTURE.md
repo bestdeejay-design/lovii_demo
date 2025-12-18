@@ -21,7 +21,7 @@
     <div class="mobile-nav-menu" id="mobileNavMenu">
         <!-- Шапка меню -->
         <div class="mobile-nav-header">
-            <div class="logo"><a href="#home" id="mobileLogo">Логотип</a></div>
+            <div class="logo"><a href="index.html" id="mobileLogo">Логотип</a></div>
             <button class="close-btn" id="closeMobileMenu">×</button>
         </div>
         
