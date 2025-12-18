@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Тарифы для поставщиков на платформе Витрина">
+    <meta name="keywords" content="тарифы, поставщик, комиссия, бизнес">
+    <title>Тарифы для поставщиков - Витрина</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Тарифы для поставщиков</h1>
+                <p>Выберите подходящий тариф для вашего бизнеса</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <!-- Detailed Pricing Table -->
+            <div class="pricing-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="basic">Базовый</th>
+                            <th class="pro popular">PRO <span class="popular-tag">Популярный</span></th>
+                            <th class="vip">VIP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Комиссия</strong></td>
+                            <td>10%</td>
+                            <td>7%</td>
+                            <td>5%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Минимальная сумма</strong></td>
+                            <td>1 000₽</td>
+                            <td>500₽</td>
+                            <td>0₽</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Интеграция с 1С</strong></td>
+                            <td>✓</td>
+                            <td>✓ + API</td>
+                            <td>✓ + API + поддержка</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Макс. товаров</strong></td>
+                            <td>100</td>
+                            <td>1 000</td>
+                            <td>Безлимитно</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Аналитика</strong></td>
+                            <td>Базовая</td>
+                            <td>Расширенная + прогнозы</td>
+                            <td>Персональный дашборд</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Поддержка</strong></td>
+                            <td>Чат</td>
+                            <td>Чат + телефон</td>
+                            <td>Менеджер 24/7</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Реклама в каталоге</strong></td>
+                            <td>-</td>
+                            <td>Скидка 20%</td>
+                            <td>Скидка 50%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Стоимость</strong></td>
+                            <td>Бесплатно</td>
+                            <td>2 990₽/мес</td>
+                            <td>Индивидуально</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button class="btn btn-outline">Выбрать</button></td>
+                            <td><button class="btn btn-primary">Выбрать</button></td>
+                            <td><button class="btn btn-outline">Связаться</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Profitability Calculator -->
+            <div class="calculator-section">
+                <h2>Калькулятор доходности</h2>
+                <div class="calculator">
+                    <div class="calculator-inputs">
+                        <div class="form-group">
+                            <label for="expected-turnover">Ожидаемый оборот в месяц (₽)</label>
+                            <input type="number" id="expected-turnover" name="expected_turnover" value="500000" min="0" placeholder="Введите сумму">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="selected-plan">Выберите тариф</label>
+                            <select id="selected-plan" name="selected_plan">
+                                <option value="basic">Базовый (10%)</option>
+                                <option value="pro" selected>PRO (7%)</option>
+                                <option value="vip">VIP (5%)</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="calculate-btn">Рассчитать для моего оборота</button>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <div class="result-item">
+                            <span>Ваш доход:</span>
+                            <span id="your-income">465 000₽</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Комиссия (7%):</span>
+                            <span id="commission">35 000₽</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Стоимость тарифа:</span>
+                            <span id="plan-cost">2 990₽</span>
+                        </div>
+                        <div class="result-item total">
+                            <span>Итого:</span>
+                            <span id="total-income">462 010₽</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>Часто задаваемые вопросы</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Можно ли сменить тариф?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, вы можете сменить тариф в любой момент в личном кабинете. Изменения вступят в силу с начала следующего месяца.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Есть ли пробный период?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, мы предоставляем 14 дней бесплатно на тарифе PRO для новых поставщиков. Это дает возможность оценить все преимущества расширенного тарифа.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Как снизить комиссию?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Комиссия может быть снижена при достижении определенных объемов продаж: при обороте от 1 млн/мес комиссия составляет 6%, при обороте от 3 млн/мес - 5%.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Когда происходят выплаты?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Выплаты происходят каждую неделю. Для зачисления средств на ваш счёт необходимо накопить минимальную сумму, зависящую от тарифа.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+            
+            initializePricingPage();
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+        
+        function initializePricingPage() {
+            // Calculator functionality
+            const calculateBtn = document.getElementById('calculate-btn');
+            const turnoverInput = document.getElementById('expected-turnover');
+            const planSelect = document.getElementById('selected-plan');
+            
+            calculateBtn.addEventListener('click', calculateProfitability);
+            turnoverInput.addEventListener('input', calculateProfitability);
+            planSelect.addEventListener('change', calculateProfitability);
+            
+            // Initialize calculator with default values
+            calculateProfitability();
+            
+            // FAQ accordion functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const answer = faqItem.querySelector('.faq-answer');
+                    
+                    // Toggle active class
+                    faqItem.classList.toggle('active');
+                    
+                    // Rotate chevron
+                    const chevron = this.querySelector('i');
+                    chevron.classList.toggle('fa-chevron-down');
+                    chevron.classList.toggle('fa-chevron-up');
+                    
+                    // Toggle answer visibility
+                    if (faqItem.classList.contains('active')) {
+                        answer.style.display = 'block';
+                    } else {
+                        answer.style.display = 'none';
+                    }
+                });
+            });
+        }
+        
+        function calculateProfitability() {
+            const turnover = parseFloat(document.getElementById('expected-turnover').value) || 0;
+            const selectedPlan = document.getElementById('selected-plan').value;
+            
+            let commissionRate = 0;
+            let planCost = 0;
+            
+            switch(selectedPlan) {
+                case 'basic':
+                    commissionRate = 0.10;
+                    planCost = 0;
+                    break;
+                case 'pro':
+                    commissionRate = 0.07;
+                    planCost = 2990;
+                    break;
+                case 'vip':
+                    commissionRate = 0.05;
+                    planCost = 0; // VIP cost is individual
+                    break;
+            }
+            
+            const commission = turnover * commissionRate;
+            const total = turnover - commission - planCost;
+            
+            document.getElementById('your-income').textContent = formatCurrency(turnover - commission);
+            document.getElementById('commission').textContent = formatCurrency(commission);
+            document.getElementById('plan-cost').textContent = formatCurrency(planCost);
+            document.getElementById('total-income').textContent = formatCurrency(total);
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('ru-RU').format(amount) + '₽';
+        }
+    </script>
+    
+    <style>
+        .pricing-section {
+            padding: 3rem 0;
+            background-color: var(--bg-primary);
+        }
+        
+        .pricing-table {
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .pricing-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .pricing-table th {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+        
+        .pricing-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .popular {
+            position: relative;
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .calculator-section {
+            margin: 4rem 0;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .calculator-results {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border-left: 1px solid var(--border-color);
+            padding-left: 2rem;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .result-item.total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .faq-section {
+            margin-top: 4rem;
+        }
+        
+        .faq-accordion {
+            margin-top: 1.5rem;
+        }
+        
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background-color: var(--bg-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .faq-question h3 {
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .faq-question i {
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            color: var(--text-secondary);
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+            padding: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .calculator {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-results {
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+                padding-left: 0;
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>
