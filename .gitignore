@@ -4,6 +4,9 @@
 __pycache__/
 *.o
 *.obj
+dist/
+build/
+target/
 *.class
 *.exe
 *.dll
@@ -38,16 +41,6 @@ coverage/
 htmlcov/
 .coverage
 
-# Build directories
-dist/
-build/
-target/
-.gradle/
-
-# Python specific
-.mypy_cache/
-.pytest_cache/
-
 # Compressed files
 *.zip
 *.gz
@@ -71,4 +64,9 @@ target/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+
+# Cache directories
+.mypy_cache/
+.pytest_cache/
+.gradle/
 ```
