@@ -3218,3 +3218,17 @@ body {
     text-align: center;
   }
 }
+
+/* Additional mobile navigation styles to ensure visibility */
+@media (max-width: 768px) {
+  .mobile-nav-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .mobile-nav-menu.active {
+    right: 20px;
+  }
+}
