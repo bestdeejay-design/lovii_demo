@@ -62,6 +62,57 @@ body {
   align-items: center;
 }
 
+/* Стили для нового расположения элементов */
+.profile-menu {
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+.main-menu {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.profile-submenu {
+  min-width: 220px;
+}
+
+.item-count {
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .header .container {
+      position: relative;
+  }
+  
+  .profile-menu {
+      position: static;
+  }
+  
+  .profile-submenu {
+      right: 0;
+      left: auto;
+  }
+}
+
 .logo {
   color: var(--accent-color);
   font-size: 1.5rem;
