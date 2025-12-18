@@ -269,7 +269,8 @@ body {
   top: 100%;
   left: 0;
   background-color: var(--bg-secondary);
-  min-width: 220px;
+  min-width: 250px;
+  max-width: 300px;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -281,6 +282,20 @@ body {
   padding: 0.5rem 0;
   margin: 0;
   border: 1px solid var(--border-color);
+  overflow-y: auto;
+}
+
+/* Submenu for different sections */
+.header .nav-item.has-submenu:nth-child(2) .submenu { /* Товары и Услуги */
+  min-width: 280px;
+}
+
+.header .nav-item.has-submenu:nth-child(3) .submenu { /* Для бизнеса */
+  min-width: 260px;
+}
+
+.header .nav-item.has-submenu:nth-child(7) .submenu { /* Дополнительно */
+  min-width: 240px;
 }
 
 .header .nav-item.has-submenu:hover .submenu {
@@ -302,12 +317,16 @@ body {
   color: var(--text-primary);
   transition: all 0.2s ease;
   gap: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header .submenu a:hover {
   background-color: var(--bg-primary);
   color: var(--accent-color);
   padding-left: 1.5rem;
+  transform: translateX(5px);
 }
 
 .header .submenu a i {

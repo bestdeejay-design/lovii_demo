@@ -1,5 +1,1 @@
-(js/main.js, styles/main.css, templates/header.html - these are all source files, no build artifacts, dependencies, or temp files present)
-
-```javascript
-
-```
+Nothing needs to be added to .gitignore since the changes only include source files (.css, .html) without any build artifacts, dependencies, or temporary files.
