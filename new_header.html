@@ -1,19 +1,30 @@
 <header class="header">
     <div class="container">
-        <a href="index.html" class="logo-link"><div class="logo">Витрина</div></a>
-        
-        <nav class="nav-menu">
+        <!-- Логотип (слева) -->
+        <a href="index.html" class="logo-link">
+            <div class="logo">Витрина</div>
+        </a>
+
+        <!-- Основное меню (по центру, 4 пункта) -->
+        <nav class="nav-menu main-menu">
             <ul>
-                <!-- Основные часто используемые разделы -->
-                <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
-                <li class="nav-item"><a href="products.html" class="nav-link">Товары</a></li>
-                <li class="nav-item"><a href="services.html" class="nav-link">Услуги</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">О нас</a></li>
-                <li class="nav-item"><a href="contacts.html" class="nav-link">Контакты</a></li>
-                
-                <!-- Группа "Для бизнеса" -->
+                <!-- Товары и услуги -->
                 <li class="nav-item has-submenu">
-                    <a href="suppliers.html" class="nav-link">Для бизнеса <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <a href="products.html" class="nav-link">
+                        Товары и услуги <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="products.html"><i class="fas fa-box"></i> Все товары</a></li>
+                        <li><a href="food.html"><i class="fas fa-utensils"></i> Еда и доставка</a></li>
+                        <li><a href="business.html"><i class="fas fa-building"></i> Бизнес услуги</a></li>
+                    </ul>
+                </li>
+
+                <!-- Для бизнеса -->
+                <li class="nav-item has-submenu">
+                    <a href="suppliers.html" class="nav-link">
+                        Для бизнеса <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
                     <ul class="submenu">
                         <li><a href="suppliers.html"><i class="fas fa-truck"></i> Для поставщиков</a></li>
                         <li><a href="become-supplier.html"><i class="fas fa-plus-circle"></i> Стать поставщиком</a></li>
@@ -24,10 +35,12 @@
                         <li><a href="partnership.html"><i class="fas fa-handshake"></i> Партнёрская программа</a></li>
                     </ul>
                 </li>
-                
-                <!-- Группа "О проекте" -->
+
+                <!-- О проекте -->
                 <li class="nav-item has-submenu">
-                    <a href="about.html" class="nav-link">О проекте <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <a href="about.html" class="nav-link">
+                        О проекте <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
                     <ul class="submenu">
                         <li><a href="about.html"><i class="fas fa-info-circle"></i> О нас</a></li>
                         <li><a href="team.html"><i class="fas fa-users"></i> Команда</a></li>
@@ -37,66 +50,62 @@
                         <li><a href="franchise.html"><i class="fas fa-store-alt"></i> Франшиза</a></li>
                     </ul>
                 </li>
-                
-                <!-- Группа "Помощь" -->
+
+                <!-- ДОПОЛНИТЕЛЬНО — сюда перенесено всё второстепенное -->
                 <li class="nav-item has-submenu">
-                    <a href="help-center.html" class="nav-link">Помощь <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <a href="#" class="nav-link">
+                        Дополнительно <i class="fas fa-chevron-down submenu-arrow"></i>
+                    </a>
                     <ul class="submenu">
+                        <!-- Помощь -->
                         <li><a href="help-buyers.html"><i class="fas fa-question-circle"></i> Помощь покупателям</a></li>
                         <li><a href="help-suppliers.html"><i class="fas fa-question-circle"></i> Помощь поставщикам</a></li>
                         <li><a href="faq.html"><i class="fas fa-lightbulb"></i> FAQ</a></li>
                         <li><a href="how-to-order.html"><i class="fas fa-shopping-bag"></i> Как сделать заказ</a></li>
                         <li><a href="returns.html"><i class="fas fa-undo"></i> Возврат товаров</a></li>
-                    </ul>
-                </li>
-                
-                <!-- Кнопка "Еще" для остальных разделов -->
-                <li class="nav-item more-section has-submenu">
-                    <a href="#" class="nav-link">Еще <i class="fas fa-chevron-down submenu-arrow"></i></a>
-                    <ul class="submenu">
-                        <li><a href="support.html"><i class="fas fa-headset"></i> Поддержка</a></li>
+
+                        <!-- Поддержка -->
+                        <li><a href="support.html"><i class="fas fa-headset"></i> Техническая поддержка</a></li>
+                        <li><a href="contacts.html"><i class="fas fa-envelope"></i> Контакты</a></li>
+
+                        <!-- Документы и другие -->
+                        <li><a href="documents.html"><i class="fas fa-file-alt"></i> Юридические документы</a></li>
                         <li><a href="api-docs.html"><i class="fas fa-code"></i> API документация</a></li>
                         <li><a href="api-integration.html"><i class="fas fa-plug"></i> API интеграция</a></li>
-                        <li><a href="documents.html"><i class="fas fa-file-alt"></i> Юридические документы</a></li>
                         <li><a href="advertising.html"><i class="fas fa-ad"></i> Рекламодателям</a></li>
                         <li><a href="training.html"><i class="fas fa-graduation-cap"></i> Обучение</a></li>
-                        <li><a href="promotions.html"><i class="fas fa-gift"></i> Акции</a></li>
-                        <li><a href="reviews.html"><i class="fas fa-star"></i> Отзывы</a></li>
-                        <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости</a></li>
-                        <li><a href="articles.html"><i class="fas fa-book"></i> Статьи</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
-        
+
+        <!-- Профиль и тема — справа (как и должно быть) -->
         <div class="header-actions">
-            <a href="search.html" class="search-icon">
-                <i class="fas fa-search"></i>
-            </a>
-            <a href="promotions.html" class="promotions-icon">
-                <i class="fas fa-gift"></i>
-            </a>
-            <a href="recently-viewed.html" class="recently-viewed-icon">
-                <i class="fas fa-eye"></i>
-            </a>
-            <a href="login.html" class="login-btn">Войти</a>
-            <a href="cart.html" class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">3</span>
-            </a>
-            <a href="wishlist.html" class="wishlist-icon">
-                <i class="fas fa-heart"></i>
-            </a>
-            <a href="compare.html" class="compare-icon">
-                <i class="fas fa-exchange-alt"></i>
-            </a>
+            <nav class="profile-menu">
+                <ul>
+                    <li class="nav-item has-submenu profile-dropdown">
+                        <a href="#" class="nav-link profile-link">
+                            <i class="fas fa-user"></i> Профиль
+                            <i class="fas fa-chevron-down submenu-arrow"></i>
+                        </a>
+                        <ul class="submenu profile-submenu">
+                            <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Войти</a></li>
+                            <li><a href="wishlist.html"><i class="fas fa-heart"></i> Избранное <span class="item-count">5</span></a></li>
+                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Корзина <span class="item-count">3</span></a></li>
+                            <li><a href="compare.html"><i class="fas fa-exchange-alt"></i> Сравнить <span class="item-count">2</span></a></li>
+                            <li><a href="recently-viewed.html"><i class="fas fa-eye"></i> Недавно просмотренные</a></li>
+                            <li><a href="promotions.html"><i class="fas fa-gift"></i> Акции</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
             <button id="theme-toggle" class="theme-toggle">
                 <i class="fas fa-moon"></i>
             </button>
         </div>
-        
     </div>
-    
+
     <!-- Mobile menu button -->
     <div class="mobile-menu-btn">
         <span></span>
