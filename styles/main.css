@@ -50,9 +50,11 @@ body {
 .header {
   background-color: var(--bg-secondary);
   padding: 1rem 0;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   box-shadow: var(--shadow);
 }
 
@@ -60,6 +62,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* Добавляем отступ для контента, чтобы он не скрывался под фиксированным хедером */
+body {
+  padding-top: 80px; /* Высота хедера + немного дополнительного пространства */
 }
 
 /* Стили для нового расположения элементов */
