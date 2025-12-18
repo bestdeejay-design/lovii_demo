@@ -95,7 +95,7 @@
     border-radius: 0; /* Fixed artifact - no rounded corners */
   }
   
-  .header .nav-menu ul .nav-item.has-submenu:hover .submenu {
+  .header .nav-menu ul .nav-item.has-submenu.show-submenu .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -149,7 +149,7 @@
   position: relative;
 }
 
-.header .has-submenu:hover > .submenu {
+.header .has-submenu.show-submenu > .submenu {
   transition-delay: 0.1s;
 }
 
@@ -170,7 +170,7 @@
   min-width: 280px;
 }
 
-.header .nav-item.has-submenu:hover .submenu {
+.header .nav-item.has-submenu.show-submenu .submenu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
