@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в аккаунт - Витрина - платформа для малого бизнеса</title>
+    <meta name="description" content="Вход в личный кабинет на платформе Витрина. Для покупателей, поставщиков и ПВЗ">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <include src="templates/header.html"></include>
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs container">
+        <a href="index.html">Главная</a> / <span>Вход в аккаунт</span>
+    </nav>
+    
+    <main class="main-content">
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-form">
+                        <h2>Вход в аккаунт</h2>
+                        <p>Войдите в свой аккаунт, чтобы получить доступ к персональным возможностям</p>
+                        
+                        <form class="login-form">
+                            <div class="form-group">
+                                <label for="login-email">Email</label>
+                                <input type="email" id="login-email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="login-password">Пароль</label>
+                                <input type="password" id="login-password" name="password" required>
+                            </div>
+                            
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="remember">
+                                    <span class="checkmark"></span>
+                                    Запомнить меня
+                                </label>
+                                
+                                <a href="#" class="forgot-password">Забыли пароль?</a>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full">Войти</button>
+                        </form>
+                        
+                        <div class="auth-separator">
+                            <span>или</span>
+                        </div>
+                        
+                        <div class="social-login">
+                            <button class="social-btn google">
+                                <i class="fab fa-google"></i>
+                                Войти через Google
+                            </button>
+                            <button class="social-btn vk">
+                                <i class="fab fa-vk"></i>
+                                Войти через ВКонтакте
+                            </button>
+                        </div>
+                        
+                        <div class="auth-footer">
+                            <p>Нет аккаунта? <a href="register-supplier.html">Зарегистрироваться</a></p>
+                            <p><a href="index.html">Вернуться на главную</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-features">
+                        <h3>Возможности личного кабинета</h3>
+                        
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-shopping-cart"></i>
+                                <div>
+                                    <h4>Для покупателей</h4>
+                                    <p>Отслеживание заказов, сохраненные товары, история покупок</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <i class="fas fa-box"></i>
+                                <div>
+                                    <h4>Для поставщиков</h4>
+                                    <p>Управление товарами, аналитика продаж, финансовые отчеты</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <i class="fas fa-store"></i>
+                                <div>
+                                    <h4>Для ПВЗ</h4>
+                                    <p>Управление заказами, статистика, коммуникация с клиентами</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <i class="fas fa-chart-line"></i>
+                                <div>
+                                    <h4>Аналитика</h4>
+                                    <p>Подробная статистика и аналитика для принятия решений</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="security-info">
+                            <i class="fas fa-shield-alt"></i>
+                            <p>Мы заботимся о безопасности ваших данных и используем современные методы защиты</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <include src="templates/footer.html"></include>
+</body>
+</html>

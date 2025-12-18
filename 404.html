@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена - Витрина - платформа для малого бизнеса</title>
+    <meta name="description" content="Ошибка 404 - страница не найдена. Вернитесь на главную или воспользуйтесь поиском">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <include src="templates/header.html"></include>
+    
+    <main class="main-content">
+        <section class="error-section">
+            <div class="container">
+                <div class="error-content">
+                    <h1>404</h1>
+                    <h2>Страница не найдена</h2>
+                    <p>К сожалению, запрашиваемая вами страница не существует или была перемещена.</p>
+                    
+                    <div class="error-actions">
+                        <a href="index.html" class="btn btn-primary">На главную</a>
+                        <button onclick="history.back()" class="btn btn-secondary">Вернуться назад</button>
+                    </div>
+                    
+                    <div class="search-suggestions">
+                        <h3>Поиск по сайту</h3>
+                        <div class="search-form">
+                            <input type="text" placeholder="Введите ключевые слова..." id="error-search">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i> Найти</button>
+                        </div>
+                        
+                        <h3>Популярные разделы</h3>
+                        <div class="popular-links">
+                            <a href="products.html">Товары и услуги</a>
+                            <a href="food.html">Еда и доставка</a>
+                            <a href="suppliers.html">Для поставщиков</a>
+                            <a href="pvz.html">Стать ПВЗ</a>
+                            <a href="faq.html">Часто задаваемые вопросы</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <include src="templates/footer.html"></include>
+</body>
+</html>

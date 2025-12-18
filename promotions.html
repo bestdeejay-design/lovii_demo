@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акции и скидки - Витрина - платформа для малого бизнеса</title>
+    <meta name="description" content="Текущие акции и скидки на платформе Витрина. Выгодные предложения для покупателей">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <include src="templates/header.html"></include>
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs container">
+        <a href="index.html">Главная</a> / <span>Акции и скидки</span>
+    </nav>
+    
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero promotions-hero">
+            <div class="container">
+                <h1>Акции и скидки</h1>
+                <p>Следите за выгодными предложениями и экономьте на покупках</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="promotions-filters">
+                <select class="filter-select">
+                    <option>Все категории</option>
+                    <option>Продукты питания</option>
+                    <option>Бытовая техника</option>
+                    <option>Одежда и обувь</option>
+                    <option>Красота и здоровье</option>
+                </select>
+                
+                <select class="filter-select">
+                    <option>Все акции</option>
+                    <option>Только со скидкой</option>
+                    <option>Новые</option>
+                    <option>Заканчиваются</option>
+                </select>
+            </div>
+            
+            <div class="promotions-grid">
+                <div class="promotion-card">
+                    <div class="promotion-badge">Скидка 30%</div>
+                    <div class="promotion-image">
+                        <img src="images/product_image.jpg" alt="Акция на фрукты">
+                    </div>
+                    <div class="promotion-content">
+                        <h3>Сезонные фрукты со скидкой</h3>
+                        <p>Скидка 30% на все свежие фрукты от местных фермеров</p>
+                        <div class="promotion-details">
+                            <span class="promotion-date">До 31 декабря 2024</span>
+                            <span class="promotion-discount">-30%</span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Смотреть товары</a>
+                    </div>
+                </div>
+                
+                <div class="promotion-card">
+                    <div class="promotion-badge">Новинка</div>
+                    <div class="promotion-image">
+                        <img src="images/product_image.jpg" alt="Новинка">
+                    </div>
+                    <div class="promotion-content">
+                        <h3>Скидка на первую покупку</h3>
+                        <p>15% скидка на первую покупку для новых клиентов</p>
+                        <div class="promotion-details">
+                            <span class="promotion-date">Бессрочно</span>
+                            <span class="promotion-discount">-15%</span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Активировать</a>
+                    </div>
+                </div>
+                
+                <div class="promotion-card">
+                    <div class="promotion-badge">Распродажа</div>
+                    <div class="promotion-image">
+                        <img src="images/product_image.jpg" alt="Распродажа">
+                    </div>
+                    <div class="promotion-content">
+                        <h3>Зимняя распродажа</h3>
+                        <p>Скидки до 50% на зимнюю одежду и обувь</p>
+                        <div class="promotion-details">
+                            <span class="promotion-date">До 15 января 2025</span>
+                            <span class="promotion-discount">до -50%</span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Смотреть товары</a>
+                    </div>
+                </div>
+                
+                <div class="promotion-card">
+                    <div class="promotion-badge">Товар дня</div>
+                    <div class="promotion-image">
+                        <img src="images/product_image.jpg" alt="Товар дня">
+                    </div>
+                    <div class="promotion-content">
+                        <h3>Товар дня с суперценой</h3>
+                        <p>Ежедневные супервыгодные предложения на популярные товары</p>
+                        <div class="promotion-details">
+                            <span class="promotion-date">До конца дня</span>
+                            <span class="promotion-discount">-40%</span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Забрать</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="newsletter-section">
+                <h2>Подпишитесь на уведомления об акциях</h2>
+                <p>Получайте уведомления о новых акциях и скидках первыми</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Ваш email">
+                    <button type="submit" class="btn btn-primary">Подписаться</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <include src="templates/footer.html"></include>
+    
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+</html>

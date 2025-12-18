@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Часто задаваемые вопросы - Витрина - платформа для малого бизнеса</title>
+    <meta name="description" content="Ответы на часто задаваемые вопросы о платформе Витрина. Покупателям, поставщикам, ПВЗ">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <include src="templates/header.html"></include>
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs container">
+        <a href="index.html">Главная</a> / <span>FAQ</span>
+    </nav>
+    
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero faq-hero">
+            <div class="container">
+                <h1>Часто задаваемые вопросы</h1>
+                <p>Ответы на популярные вопросы о нашей платформе</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="faq-search">
+                <input type="text" id="faq-search-input" placeholder="Поиск по вопросам...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <!-- FAQ Categories -->
+            <div class="faq-categories">
+                <button class="faq-category active" data-category="all">Все категории</button>
+                <button class="faq-category" data-category="buyers">Для покупателей</button>
+                <button class="faq-category" data-category="suppliers">Для поставщиков</button>
+                <button class="faq-category" data-category="pvz">Для ПВЗ</button>
+            </div>
+
+            <!-- FAQ Accordion -->
+            <div class="faq-accordion">
+                <!-- Buyers Questions -->
+                <div class="faq-item" data-category="buyers">
+                    <div class="faq-question">
+                        <h3>Как сделать заказ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Выберите товар → добавьте в корзину → оформите заказ → выберите доставку → оплатите. После этого ваш заказ будет передан поставщику для обработки.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="buyers">
+                    <div class="faq-question">
+                        <h3>Сколько стоит доставка?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Стоимость доставки зависит от города, веса и габаритов товара. В пределах города доставка начинается от 150 рублей. Точная стоимость рассчитывается на этапе оформления заказа.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="buyers">
+                    <div class="faq-question">
+                        <h3>Как вернуть товар?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Вы можете вернуть товар в течение 14 дней с момента получения. Для этого свяжитесь с нами через форму обратной связи или по телефону поддержки. Мы организуем возврат и вернем деньги в течение 10 рабочих дней.</p>
+                    </div>
+                </div>
+
+                <!-- Suppliers Questions -->
+                <div class="faq-item" data-category="suppliers">
+                    <div class="faq-question">
+                        <h3>Сколько стоит подключение?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Подключение к платформе абсолютно бесплатное. Комиссия взимается только с фактических продаж и составляет от 3% до 8% в зависимости от категории товаров. Точная ставка указана в тарифах.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="suppliers">
+                    <div class="faq-question">
+                        <h3>Как быстро проходят выплаты?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Выплаты производятся еженедельно на расчетный счет, указанный в личном кабинете. Первые выплаты начнутся через 7 дней после первой продажи. Для новых поставщиков предусмотрен гарантийный период в 30 дней.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="suppliers">
+                    <div class="faq-question">
+                        <h3>Какие документы нужны для регистрации?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Для регистрации поставщика требуются: свидетельство ИП/ООО, ИНН, ОГРН, банковские реквизиты, паспортные данные руководителя. Дополнительно могут потребоваться сертификаты соответствия на продукцию.</p>
+                    </div>
+                </div>
+
+                <!-- PVZ Questions -->
+                <div class="faq-item" data-category="pvz">
+                    <div class="faq-question">
+                        <h3>Что нужно для подключения ПВЗ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Для подключения точки выдачи необходимы: помещение площадью от 2 м², стационарный интернет, наличие сотрудника для приема и выдачи заказов, удобный доступ для клиентов. Также требуется заключение договора с нашей платформой.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pvz">
+                    <div class="faq-question">
+                        <h3>Сколько можно заработать на ПВЗ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Заработок точки выдачи зависит от объема заказов. В среднем ПВЗ зарабатывает 30-50 рублей за каждый заказ, плюс дополнительные бонусы за высокую активность и положительные отзывы клиентов. Топ-ПВЗ могут зарабатывать до 50 000 рублей в месяц.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pvz">
+                    <div class="faq-question">
+                        <h3>Какие требования к персоналу ПВЗ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Сотрудник точки выдачи должен быть вежливым, пунктуальным и ответственным. Обязательно знание работы с кассовым оборудованием и терминалами оплаты. Мы предоставляем бесплатное обучение работе с нашими сервисами и стандартами обслуживания клиентов.</p>
+                    </div>
+                </div>
+
+                <!-- General Questions -->
+                <div class="faq-item" data-category="all">
+                    <div class="faq-question">
+                        <h3>Какие гарантии безопасности?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Мы используем современные технологии шифрования SSL, двухфакторную аутентификацию и регулярно проводим аудит безопасности. Все финансовые операции проходят через защищенные платежные системы. Наши пользователи застрахованы на сумму до 1 000 000 рублей.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="all">
+                    <div class="faq-question">
+                        <h3>Можно ли использовать Витрину как частное лицо?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, частные лица могут использовать платформу как покупатели. Для продажи товаров требуется регистрация в качестве ИП или юридического лица. Это необходимо для соблюдения законодательства РФ в сфере электронной коммерции.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <include src="templates/footer.html"></include>
+    
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+</html>
