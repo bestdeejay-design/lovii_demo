@@ -10,7 +10,7 @@
     
     <div class="mobile-nav-menu" id="mobileNavMenu">
         <div class="mobile-nav-header">
-            <div class="logo"><a href="#home" id="mobileLogo">Витрина</a></div>
+            <div class="logo"><a href="index.html" id="mobileLogo">Витрина</a></div>
             <button class="close-btn" id="closeMobileMenu">&times;</button>
         </div>
         
