@@ -248,6 +248,7 @@ body {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
+    border-radius: 0;
   }
   
   .header .nav-menu ul .nav-item.has-submenu:hover .submenu {
@@ -450,7 +451,7 @@ body {
   background-color: var(--bg-secondary);
   min-width: 250px;
   max-width: 400px;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   opacity: 0;
   visibility: hidden;
