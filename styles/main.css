@@ -245,6 +245,9 @@ body {
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
   }
   
   .header .nav-menu ul .nav-item.has-submenu:hover .submenu {
@@ -459,6 +462,9 @@ body {
   margin: 0;
   border: 1px solid var(--border-color);
   overflow-y: auto;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Enhanced submenu styling for marketplace */
@@ -583,6 +589,7 @@ body {
     transform: none;
     transition: max-height 0.3s ease;
     box-shadow: inset 0 1px 0 var(--border-color);
+    will-change: auto;
   }
   
   .header .nav-item.has-submenu.active .submenu {
