@@ -324,23 +324,6 @@ body {
   background-color: var(--bg-secondary);
 }
 
-.sun-icon, .moon-icon {
-  position: absolute;
-  transition: opacity 0.3s ease;
-}
-
-.moon-icon {
-  opacity: 1;
-}
-
-.light-theme .moon-icon {
-  opacity: 0;
-}
-
-.light-theme .sun-icon {
-  opacity: 1;
-}
-
 /* Герой секция */
 .hero {
   min-height: 80vh;
@@ -1453,6 +1436,32 @@ body {
 .login-link:hover,
 .signup-link:hover,
 .cart-link:hover {
+  background-color: var(--accent-color);
+  color: white;
+  padding-left: 1.5rem;
+}
+
+.theme-toggle-item {
+  background-color: transparent;
+  border: none;
+  margin: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.theme-toggle-link {
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  margin: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-link:hover {
   background-color: var(--accent-color);
   color: white;
   padding-left: 1.5rem;
