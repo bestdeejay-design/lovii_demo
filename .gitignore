@@ -1,8 +1,5 @@
-```
-# HTML test files that were deleted
-demo_mobile_nav.html
-test_async_load.html
-test_changes.html
-test_functionality.html
-test_theme.html
+(js/main.js, styles/main.css, templates/header.html - these are all source files, no build artifacts, dependencies, or temp files present)
+
+```javascript
+
 ```
