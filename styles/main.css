@@ -1803,8 +1803,8 @@ body {
 
 /* Show mobile nav only on mobile devices */
 @media (max-width: 768px) {
-  .header .theme-toggle,
-  .header .theme-toggle-item {
+  /* Hide desktop theme toggle button in mobile view */
+  .header .theme-toggle:not(.mobile-menu-toggle) {
     display: none;
   }
 }
