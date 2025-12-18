@@ -209,24 +209,32 @@ function initializeSubmenuToggle() {
         });
     });
     
-    // Add desktop hover delay for better UX
-    const navItems = document.querySelectorAll('.header .has-submenu');
-    navItems.forEach(item => {
-        let hoverTimeout;
-        
-        item.addEventListener('mouseenter', function() {
-            // Clear any existing timeout to prevent flickering
-            clearTimeout(hoverTimeout);
+    // Handle submenu toggle on click for desktop
+    const submenuLinks = document.querySelectorAll('.header .has-submenu > a');
+    submenuLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Only prevent default if the link is just '#' (dropdown trigger)
+            if (this.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
             
-            // Add the hover class to show submenu
-            this.classList.add('hover-active');
+            const parentItem = this.parentElement;
+            // Toggle the submenu visibility
+            parentItem.classList.toggle('show-submenu');
+            
+            // Prevent the click from bubbling up
+            e.stopPropagation();
         });
-        
-        item.addEventListener('mouseleave', function() {
-            // Delay hiding the submenu to allow for smoother transitions
-            hoverTimeout = setTimeout(() => {
-                this.classList.remove('hover-active');
-            }, 150); // 150ms delay to prevent accidental closing
+    });
+    
+    // Close submenus when clicking elsewhere
+    document.addEventListener('click', function(e) {
+        const openSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
+        openSubmenus.forEach(submenu => {
+            // Check if the click is outside the submenu
+            if (!submenu.contains(e.target)) {
+                submenu.classList.remove('show-submenu');
+            }
         });
     });
     
