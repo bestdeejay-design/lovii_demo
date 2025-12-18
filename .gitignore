@@ -17,7 +17,7 @@ venv/
 .venv/
 .env
 .env.local
-*.env.*
+.env.*
 
 # Logs and temp files
 *.log
@@ -29,14 +29,14 @@ venv/
 .vscode/
 .idea/
 
-# Coverage reports
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage
 coverage/
 htmlcov/
 .coverage
-
-# OS generated files
-.DS_Store
-Thumbs.db
 
 # Build directories
 dist/

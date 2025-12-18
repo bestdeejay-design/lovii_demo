@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Витрина - платформа для малого бизнеса</title>
+    <meta name="description" content="Контактная информация для связи с командой Витрина. Адрес, телефон, email, форма обратной связи">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <include src="templates/header.html"></include>
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs container">
+        <a href="index.html">Главная</a> / <span>Контакты</span>
+    </nav>
+    
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero contacts-hero">
+            <div class="container">
+                <h1>Свяжитесь с нами</h1>
+                <p>Мы всегда рады ответить на ваши вопросы и помочь в решении задач</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="contacts-layout">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2>Контактная информация</h2>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Адрес офиса:</strong>
+                            <p>Москва, ул. Примерная, 15, офис 305</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Телефон:</strong>
+                            <p>+7 (999) 123-45-67 (общий)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email:</strong>
+                            <p>info@vitrina.ru</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Режим работы:</strong>
+                            <p>Пн-Пт 9:00-18:00</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Departments -->
+                    <div class="departments">
+                        <h3>Отделы</h3>
+                        
+                        <div class="department-item">
+                            <strong>Техподдержка:</strong>
+                            <p>support@vitrina.ru</p>
+                        </div>
+                        
+                        <div class="department-item">
+                            <strong>Для поставщиков:</strong>
+                            <p>partners@vitrina.ru</p>
+                        </div>
+                        
+                        <div class="department-item">
+                            <strong>Реклама:</strong>
+                            <p>ads@vitrina.ru</p>
+                        </div>
+                        
+                        <div class="department-item">
+                            <strong>PR:</strong>
+                            <p>pr@vitrina.ru</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <h2>Форма обратной связи</h2>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Тема</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Выберите тему</option>
+                                <option value="general">Общий вопрос</option>
+                                <option value="technical">Техническая поддержка</option>
+                                <option value="partner">Партнерство</option>
+                                <option value="complaint">Жалоба</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <section class="map-section">
+                <h2>Наши офисы и точки выдачи</h2>
+                <div class="map-container">
+                    <div id="map-placeholder">
+                        <div class="map-placeholder-content">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <p>Интерактивная карта России с точками офисов и ПВЗ</p>
+                            <p>В реальной реализации здесь будет карта с возможностью выбора региона</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <include src="templates/footer.html"></include>
+    
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+</html>

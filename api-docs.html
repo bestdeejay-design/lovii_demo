@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация по API - Витрина - платформа для малого бизнеса</title>
+    <meta name="description" content="Техническая документация по API платформы Витрина. Интеграция с 1С, обмен данными">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <include src="templates/header.html"></include>
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs container">
+        <a href="index.html">Главная</a> / <span>Документация по API</span>
+    </nav>
+    
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero api-hero">
+            <div class="container">
+                <h1>Документация по API</h1>
+                <p>Техническая документация для интеграции с платформой Витрина</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="api-content">
+                <div class="api-introduction">
+                    <h2>Введение</h2>
+                    <p>Наше API позволяет автоматически синхронизировать данные о товарах, остатках, заказах и ценах между вашей системой и платформой Витрина. Это упрощает управление магазином и снижает вероятность ошибок при обновлении информации.</p>
+                </div>
+                
+                <div class="api-sections">
+                    <div class="api-section">
+                        <h3>Аутентификация</h3>
+                        <p>Для доступа к API используйте токен аутентификации, который можно получить в личном кабинете поставщика.</p>
+                        <pre><code>Authorization: Bearer YOUR_API_TOKEN</code></pre>
+                    </div>
+                    
+                    <div class="api-section">
+                        <h3>Доступные методы</h3>
+                        <ul>
+                            <li>Получение списка товаров</li>
+                            <li>Обновление информации о товаре</li>
+                            <li>Получение списка заказов</li>
+                            <li>Обновление статуса заказа</li>
+                            <li>Получение информации об остатках</li>
+                            <li>Обновление цен</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="api-section">
+                        <h3>Частота запросов</h3>
+                        <p>Максимальная частота запросов: 1000 запросов в час на одного поставщика. Для высоконагруженных интеграций доступны специальные тарифы.</p>
+                    </div>
+                </div>
+                
+                <div class="integration-examples">
+                    <h2>Примеры интеграции</h2>
+                    <p>Мы предоставляем SDK и примеры интеграции для популярных систем:</p>
+                    <ul>
+                        <li>1С:Предприятие 8</li>
+                        <li>УТ 11</li>
+                        <li>ERP системы</li>
+                        <li>Собственные CRM системы</li>
+                    </ul>
+                    
+                    <div class="cta-section">
+                        <h3>Нужна помощь с интеграцией?</h3>
+                        <p>Наши технические специалисты помогут вам настроить интеграцию с минимальными усилиями</p>
+                        <a href="contacts.html" class="btn btn-primary">Связаться с технической поддержкой</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <include src="templates/footer.html"></include>
+    
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</body>
+</html>
