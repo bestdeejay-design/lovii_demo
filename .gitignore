@@ -1,5 +1,62 @@
 ```
+# Backup files
+*.html.bak
+
+# Scripts
+update_templates.sh
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
 # Logs
 *.log
-server.log
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+pip-log.txt
+pip-selfcheck.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+.coverage
+htmlcov/
+.coverage.*
+.nyc_output
+istanbul/
+.mypy_cache/
+.pytest_cache/
+.tox/
+
+# Distribution / packaging
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+dist/
+build/
+develop-eggs/
 ```
