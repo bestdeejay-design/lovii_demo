@@ -42,8 +42,12 @@
 
     <script src="js/main.js"></script>
     <script>
-        // После загрузки скрипта инициализируем переключатель темы
+        // После загрузки скрипта инициализируем тему и переключатель
         document.addEventListener('DOMContentLoaded', function() {
+            // Инициализируем тему на основе сохраненного значения
+            initializeTheme();
+            
+            // Инициализируем переключатель темы
             initializeThemeToggle();
         });
     </script>

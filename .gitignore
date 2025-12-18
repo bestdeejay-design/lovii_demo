@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since the changes only include source files (.html, .js, .css) and no build artifacts, dependencies, or temporary files.
+(js/main.js and test_theme.html are source files, no build artifacts, dependencies, or temp files detected)

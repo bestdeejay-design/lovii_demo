@@ -1,5 +1,23 @@
 // Check if saved theme exists on page load
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize mobile menu
+    initializeMobileMenu();
+    
+    // Initialize other components after templates load
+    setTimeout(initializeAfterTemplatesLoad, 100);
+});
+
+// Инициализация компонентов после загрузки шаблонов
+function initializeAfterTemplatesLoad() {
+    // Сначала устанавливаем сохраненную тему
+    initializeTheme();
+    
+    // Используем надежный метод инициализации с повторными попытками
+    initializeComponentsWithRetry();
+}
+
+// Инициализация темы при загрузке
+function initializeTheme() {
     // Check if there's a saved theme in localStorage
     const savedTheme = localStorage.getItem('theme');
     
@@ -12,18 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update the theme toggle text based on current theme
     updateThemeToggleText();
-    
-    // Initialize mobile menu
-    initializeMobileMenu();
-    
-    // Initialize other components after templates load
-    setTimeout(initializeAfterTemplatesLoad, 100);
-});
-
-// Инициализация компонентов после загрузки шаблонов
-function initializeAfterTemplatesLoad() {
-    // Используем надежный метод инициализации с повторными попытками
-    initializeComponentsWithRetry();
 }
 
 // Alternative initialization function that keeps trying until elements are found
@@ -90,14 +96,23 @@ function initializeThemeToggle(themeToggleBtn) {
         }
     }
     
-    themeToggleBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        toggleTheme();
-    });
-    
+    // Check if click event is already attached to avoid duplicates
+    if (!themeToggleBtn.hasAttribute('data-theme-listener')) {
+        themeToggleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleTheme();
+            
+            // Update the icon text based on current theme
+            updateThemeToggleText();
+        });
+        
+        // Mark that event listener has been attached
+        themeToggleBtn.setAttribute('data-theme-listener', 'true');
+    }
+
     // Also handle mobile theme toggle if it exists
     const mobileThemeToggle = document.querySelector('.theme-toggle-link');
-    if (mobileThemeToggle) {
+    if (mobileThemeToggle && !mobileThemeToggle.hasAttribute('data-theme-listener')) {
         mobileThemeToggle.addEventListener('click', function(e) {
             e.preventDefault();
             toggleTheme();
@@ -105,6 +120,9 @@ function initializeThemeToggle(themeToggleBtn) {
             // Update the icon text based on current theme
             updateThemeToggleText();
         });
+        
+        // Mark that event listener has been attached
+        mobileThemeToggle.setAttribute('data-theme-listener', 'true');
     }
 }
 
@@ -123,6 +141,7 @@ function toggleTheme() {
 }
 
 function updateThemeToggleText() {
+    // Update the mobile theme toggle link text and icon
     const mobileThemeToggle = document.querySelector('.theme-toggle-link');
     if (mobileThemeToggle) {
         if (document.body.classList.contains('light-theme')) {
