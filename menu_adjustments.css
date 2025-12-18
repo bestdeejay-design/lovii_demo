@@ -1,0 +1,63 @@
+/* CSS-правки для решения проблемы с большим количеством разделов в меню */
+
+/* Разрешаем главному меню переносить элементы на новую строку */
+.nav-menu ul {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem;
+    justify-content: flex-start;
+}
+
+/* Ограничение высоты для больших выпадающих списков с прокруткой */
+.submenu {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Корректировка позиционирования дополнительного меню */
+.more-section .submenu {
+    min-width: 250px;
+    left: auto;
+    right: 0;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .nav-menu ul {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--header-bg-color, #333);
+        flex-direction: column;
+        padding: 1rem;
+        z-index: 1000;
+    }
+    
+    .nav-menu.active ul {
+        display: flex !important;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+}
+
+/* Дополнительные стили для прокрутки в выпадающих меню */
+.submenu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.submenu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.submenu::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.submenu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
