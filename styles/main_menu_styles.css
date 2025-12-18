@@ -1,0 +1,276 @@
+/* Rebuilt CSS styles for the main menu in header.html */
+
+/* Main menu container */
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-menu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-menu a:hover {
+  color: var(--accent-color);
+}
+
+/* Desktop navigation additional items */
+.nav-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+/* Style for menu items without submenus */
+.header .nav-menu ul .nav-item:not(.has-submenu) > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.header .nav-menu ul .nav-item:not(.has-submenu) > a:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Specific styling for additional navigation links */
+.header .nav-menu ul .nav-item:not(.has-submenu) {
+  padding: 0.2rem 0.5rem;
+}
+
+.header .nav-menu ul .nav-item:not(.has-submenu) a i {
+  width: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Desktop navigation layout - proper horizontal menu */
+@media (min-width: 769px) {
+  .header .nav-menu ul {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .nav-menu {
+    position: static;
+  }
+  
+  /* Show all navigation items on desktop */
+  .header .nav-menu ul .nav-item:not(.has-submenu) {
+    display: block;
+  }
+  
+  .header .nav-menu ul .nav-divider {
+    width: calc(100% - 1rem);
+    margin: 0.5rem 0.5rem;
+  }
+  
+  /* Adjust submenu positioning for desktop */
+  .header .nav-menu ul .nav-item.has-submenu {
+    position: relative;
+  }
+  
+  .header .nav-menu ul .nav-item.has-submenu .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    border-radius: 0; /* Fixed artifact - no rounded corners */
+  }
+  
+  .header .nav-menu ul .nav-item.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* Header submenu styles for main menu */
+.header .nav-item.has-submenu {
+  position: relative;
+}
+
+.header .nav-menu ul .nav-item.has-submenu > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.header .nav-menu ul .nav-item.has-submenu > a:hover {
+  color: var(--accent-color);
+}
+
+.header .submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--bg-secondary);
+  min-width: 250px;
+  max-width: 400px;
+  border-radius: 0; /* Fixed artifact - no rounded corners */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  overflow-y: auto;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Enhanced submenu styling for marketplace */
+/* Add a subtle animation delay to make it feel smoother */
+.header .has-submenu {
+  position: relative;
+}
+
+.header .has-submenu:hover > .submenu {
+  transition-delay: 0.1s;
+}
+
+/* Submenu for different sections */
+.header .nav-item.has-submenu:nth-child(1) .submenu { /* Товары и услуги */
+  min-width: 280px;
+}
+
+.header .nav-item.has-submenu:nth-child(2) .submenu { /* Для бизнеса */
+  min-width: 300px;
+}
+
+.header .nav-item.has-submenu:nth-child(3) .submenu { /* О проекте */
+  min-width: 260px;
+}
+
+.header .nav-item.has-submenu:nth-child(4) .submenu { /* Дополнительно */
+  min-width: 280px;
+}
+
+.header .nav-item.has-submenu:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.header .submenu li {
+  list-style: none;
+  padding: 0;
+}
+
+/* Improve submenu item styling */
+.header .submenu a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  gap: 0.8rem;
+  border-left: 3px solid transparent;
+  min-height: 44px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.header .submenu a:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+.header .submenu a i {
+  width: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Mobile submenu styles */
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 80%;
+    max-width: 350px;
+    background-color: var(--bg-primary);
+    z-index: 1002;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 80px;
+    transition: right 0.3s ease;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+  }
+  
+  .header .nav-menu ul {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .header .nav-menu ul li {
+    width: 100%;
+  }
+  
+  .header .nav-menu ul .nav-item.has-submenu > a {
+    padding: 1rem 1.5rem;
+  }
+  
+  .header .submenu {
+    position: static;
+    box-shadow: none;
+    background-color: var(--bg-secondary);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: max-height 0.3s ease;
+    box-shadow: inset 0 1px 0 var(--border-color);
+    will-change: auto; /* Disable optimization when not needed */
+  }
+  
+  .header .nav-item.has-submenu.active .submenu {
+    max-height: 500px;
+  }
+  
+  .header .submenu-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .header .nav-item.has-submenu.active > a .submenu-arrow {
+    transform: rotate(180deg);
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
