@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест переключателя темы</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Заголовок -->
+    <header class="header">
+        <div class="container">
+            <!-- Логотип (слева) -->
+            <a href="index.html" class="logo-link">
+                <div class="logo">Витрина</div>
+            </a>
+
+            <!-- Основное меню (по центру, 4 пункта) -->
+            <nav class="nav-menu main-menu">
+                <ul>
+                    <li class="nav-item has-submenu">
+                        <a href="products.html" class="nav-link">
+                            Товары и услуги <i class="fas fa-chevron-down submenu-arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="products.html"><i class="fas fa-box"></i> Все товары</a></li>
+                            <li><a href="food.html"><i class="fas fa-utensils"></i> Еда и доставка</a></li>
+                            <li><a href="business.html"><i class="fas fa-building"></i> Бизнес услуги</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Профиль и тема — справа (как и должно быть) -->
+            <div class="header-actions">
+                <nav class="profile-menu">
+                    <ul>
+                        <li class="nav-item has-submenu profile-dropdown">
+                            <a href="#" class="nav-link profile-link">
+                                <i class="fas fa-user"></i> Профиль
+                                <i class="fas fa-chevron-down submenu-arrow"></i>
+                            </a>
+                            <ul class="submenu profile-submenu">
+                                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Войти</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-nav-wrapper">
+        <div class="mobile-nav-button" id="mobileNavButton">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="mobile-nav-menu" id="mobileNavMenu">
+            <div class="mobile-nav-header">
+                <div class="logo"><a href="index.html" id="mobileLogo">Витрина</a></div>
+                <button class="close-btn" id="closeMobileMenu">&times;</button>
+            </div>
+            
+            <ul class="mobile-nav-list">
+                <li class="nav-item has-submenu">
+                    <a href="products.html" class="nav-link">Товары и услуги <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="products.html"><i class="fas fa-box"></i> Все товары</a></li>
+                        <li><a href="food.html"><i class="fas fa-utensils"></i> Еда и доставка</a></li>
+                        <li><a href="business.html"><i class="fas fa-building"></i> Бизнес услуги</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-divider"></li>
+                
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link login-link"><i class="fas fa-sign-in-alt"></i> Войти</a>
+                </li>
+                
+                <li class="nav-divider"></li>
+                
+                <li class="nav-item theme-toggle-item">
+                    <a href="#" class="nav-link theme-toggle-link" id="theme-toggle-mobile">
+                        <i class="fas fa-moon"></i> Темная тема
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 100px; padding: 20px;">
+        <h1>Тест переключателя темы</h1>
+        <p>Эта страница используется для проверки корректности отображения переключателя темы на мобильных устройствах.</p>
+        <p>На мобильных устройствах переключатель темы должен быть виден только в мобильном меню, но скрыт в хедере.</p>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
