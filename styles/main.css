@@ -1806,6 +1806,12 @@ body {
   .mobile-nav-wrapper {
     display: block;
   }
+  
+  /* Hide theme toggle elements in mobile version */
+  .theme-toggle,
+  .theme-toggle-item {
+    display: none;
+  }
 }
 
 /* Breadcrumbs */
