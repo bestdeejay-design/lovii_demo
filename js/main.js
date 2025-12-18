@@ -208,6 +208,20 @@ function initializeSubmenuToggle() {
             }
         });
     });
+    
+    // Also handle the new 'Покупателям' and 'Дополнительно' sections
+    const newSubmenuItems = document.querySelectorAll('.header .has-submenu > a');
+    newSubmenuItems.forEach(item => {
+        // Ensure desktop hover still works
+        if (window.innerWidth > 768) {
+            item.addEventListener('click', function(e) {
+                // Prevent default only if it's one of the new dropdowns that don't have specific pages
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
+            });
+        }
+    });
 }
 
 function initializeNewMobileNavigation() {
