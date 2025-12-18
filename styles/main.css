@@ -1560,13 +1560,24 @@ body {
 }
 /* Modern Mobile Navigation Styles */
 .mobile-nav-wrapper {
-  display: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1001;
   width: auto;
   height: auto;
+  display: none; /* Initially hidden on all devices */
+}
+
+/* Show mobile navigation only on mobile devices */
+@media (max-width: 768px) {
+  .mobile-nav-wrapper {
+    display: block;
+  }
+  
+  .mobile-nav-menu.active {
+    right: 20px;
+  }
 }
 
 .mobile-nav-button {
@@ -3219,16 +3230,4 @@ body {
   }
 }
 
-/* Additional mobile navigation styles to ensure visibility */
-@media (max-width: 768px) {
-  .mobile-nav-wrapper {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-  
-  .mobile-nav-menu.active {
-    right: 20px;
-  }
-}
+
