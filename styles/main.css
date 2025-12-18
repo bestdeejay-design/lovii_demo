@@ -1803,13 +1803,8 @@ body {
 
 /* Show mobile nav only on mobile devices */
 @media (max-width: 768px) {
-  .mobile-nav-wrapper {
-    display: block;
-  }
-  
-  /* Hide theme toggle elements in mobile version */
-  .theme-toggle,
-  .theme-toggle-item {
+  .header .theme-toggle,
+  .header .theme-toggle-item {
     display: none;
   }
 }
