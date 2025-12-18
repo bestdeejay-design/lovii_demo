@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Результаты поиска по запросу. Найдите товары и услуги от локальных поставщиков.">
+    <meta name="keywords" content="поиск, товары, услуги, результаты поиска">
+    <meta name="author" content="Витрина">
+    <title>Результаты поиска | Витрина</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <!-- Breadcrumbs -->
+    <div class="container breadcrumbs">
+        <nav class="breadcrumb-nav">
+            <ol>
+                <li><a href="index.html">Главная</a></li>
+                <li>Поиск</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Search Results Section -->
+    <section id="search-results" class="search-results">
+        <div class="container">
+            <div class="page-header">
+                <h1>Результаты поиска</h1>
+                <div class="search-query">
+                    <p>По запросу: <strong>"молоко"</strong></p>
+                    <p>Найдено: <strong>42</strong> товаров</p>
+                </div>
+            </div>
+
+            <div class="products-layout">
+                <!-- Filters sidebar -->
+                <aside class="filters-sidebar">
+                    <div class="filter-group">
+                        <h3>Категория</h3>
+                        <div class="tree-category">
+                            <div class="category-item">
+                                <input type="checkbox" id="cat-food-search" class="category-checkbox" checked>
+                                <label for="cat-food-search" class="category-label">Продукты питания</label>
+                                <div class="subcategory">
+                                    <div class="category-item">
+                                        <input type="checkbox" id="sub-cat-dairy-search" class="category-checkbox" checked>
+                                        <label for="sub-cat-dairy-search" class="category-label">Молочные</label>
+                                    </div>
+                                    <div class="category-item">
+                                        <input type="checkbox" id="sub-cat-meat-search" class="category-checkbox">
+                                        <label for="sub-cat-meat-search" class="category-label">Мясо</label>
+                                    </div>
+                                    <div class="category-item">
+                                        <input type="checkbox" id="sub-cat-veg-search" class="category-checkbox">
+                                        <label for="sub-cat-veg-search" class="category-label">Овощи</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-item">
+                                <input type="checkbox" id="cat-household-search" class="category-checkbox">
+                                <label for="cat-household-search" class="category-label">Бытовая химия</label>
+                            </div>
+                            <div class="category-item">
+                                <input type="checkbox" id="cat-cosmetics-search" class="category-checkbox">
+                                <label for="cat-cosmetics-search" class="category-label">Косметика</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Цена</h3>
+                        <div class="price-filter">
+                            <div class="price-inputs">
+                                <input type="number" placeholder="0" value="0" min="0">
+                                <span>-</span>
+                                <input type="number" placeholder="50000" value="50000" min="0">
+                            </div>
+                            <div class="price-slider">
+                                <input type="range" min="0" max="50000" value="0" id="min-price-search">
+                                <input type="range" min="0" max="50000" value="50000" id="max-price-search">
+                            </div>
+                            <button class="btn btn-primary btn-sm">Применить</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Рейтинг</h3>
+                        <div class="rating-filter">
+                            <div class="star-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>и выше</span>
+                            </div>
+                            <div class="star-rating">
+                                <span class="stars">★★★☆☆</span>
+                                <span>и выше</span>
+                            </div>
+                            <div class="star-rating">
+                                <span class="stars">★★☆☆☆</span>
+                                <span>и выше</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main content -->
+                <main class="products-main">
+                    <div class="sort-and-results">
+                        <div class="results-counter">
+                            Показано <strong>1-20</strong> из <strong>42</strong> товаров
+                        </div>
+                        <div class="sort-controls">
+                            <select class="sort-select">
+                                <option>По релевантности</option>
+                                <option>По популярности</option>
+                                <option>По цене (дешёвые)</option>
+                                <option>По цене (дорогие)</option>
+                                <option>По новизне</option>
+                                <option>По отзывам</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="products-grid">
+                        <!-- Product cards -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Молоко деревенское">
+                                <span class="product-badge">Хит</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Молоко деревенское свежее</h3>
+                                <p>Свежее молоко от местного фермера</p>
+                                <div class="product-price">
+                                    <span class="current-price">149 ₽</span>
+                                    <span class="original-price">199 ₽</span>
+                                    <span class="discount-badge">-25%</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(23)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Сыр домашний">
+                                <span class="product-badge featured">Новинка</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Сыр домашний из коровьего молока</h3>
+                                <p>Натуральный сыр ручной работы</p>
+                                <div class="product-price">
+                                    <span class="current-price">499 ₽</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(18)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Яйца куриные">
+                                <span class="product-badge sale">Акция</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Яйца куриные высшей категории</h3>
+                                <p>Свежие яйца от кур-несушек</p>
+                                <div class="product-price">
+                                    <span class="current-price">99 ₽</span>
+                                    <span class="original-price">129 ₽</span>
+                                    <span class="discount-badge">-23%</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(42)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Мёд цветочный">
+                                <span class="product-badge eco">Эко</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Мёд цветочный натуральный</h3>
+                                <p>Натуральный лесной мед</p>
+                                <div class="product-price">
+                                    <span class="current-price">799 ₽</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(31)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Кефир">
+                                <span class="product-badge">Хит</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Кефир домашний 2.5%</h3>
+                                <p>Натуральный кефир от фермера</p>
+                                <div class="product-price">
+                                    <span class="current-price">89 ₽</span>
+                                    <span class="original-price">109 ₽</span>
+                                    <span class="discount-badge">-18%</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(15)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Творог">
+                                <span class="product-badge featured">Новинка</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Творог свежий 9% жирности</h3>
+                                <p>Домашний творог без добавок</p>
+                                <div class="product-price">
+                                    <span class="current-price">249 ₽</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(27)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Сметана">
+                                <span class="product-badge eco">Эко</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Сметана домашняя 15%</h3>
+                                <p>Натуральная сметана из свежего молока</p>
+                                <div class="product-price">
+                                    <span class="current-price">199 ₽</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(19)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Масло">
+                                <span class="product-badge sale">Акция</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Масло сливочное домашнее</h3>
+                                <p>Натуральное масло из коровьего молока</p>
+                                <div class="product-price">
+                                    <span class="current-price">349 ₽</span>
+                                    <span class="original-price">449 ₽</span>
+                                    <span class="discount-badge">-22%</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(33)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="prev-page">&lsaquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <span class="dots">...</span>
+                        <a href="#">3</a>
+                        <a href="#" class="next-page">&rsaquo;</a>
+                    </div>
+
+                    <!-- No results message (hidden by default) -->
+                    <div class="no-results" style="display: none;">
+                        <div class="no-results-content">
+                            <i class="fas fa-search"></i>
+                            <h3>По вашему запросу ничего не найдено</h3>
+                            <p>Попробуйте изменить поисковый запрос или сбросить фильтры</p>
+                            <button class="btn btn-outline">Сбросить фильтры</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+    </script>
+</body>
+</html>

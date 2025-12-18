@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Сравнение товаров. Сравните характеристики и цены товаров перед покупкой.">
+    <meta name="keywords" content="сравнение, товары, характеристики, цены">
+    <meta name="author" content="Витрина">
+    <title>Сравнение товаров | Витрина</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <!-- Breadcrumbs -->
+    <div class="container breadcrumbs">
+        <nav class="breadcrumb-nav">
+            <ol>
+                <li><a href="index.html">Главная</a></li>
+                <li>Сравнение</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Compare Section -->
+    <section id="compare" class="compare-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Сравнение товаров</h1>
+                <p>Сравните характеристики и цены выбранных товаров</p>
+            </div>
+
+            <div class="compare-table-container">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Характеристика</th>
+                            <th>
+                                <div class="product-compare-item">
+                                    <img src="images/product_image.jpg" alt="Молоко деревенское">
+                                    <div class="product-info">
+                                        <h4>Молоко деревенское свежее</h4>
+                                        <div class="product-price">149 ₽</div>
+                                    </div>
+                                    <button class="remove-compare-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="product-compare-item">
+                                    <img src="images/product_image.jpg" alt="Кефир">
+                                    <div class="product-info">
+                                        <h4>Кефир домашний 2.5%</h4>
+                                        <div class="product-price">89 ₽</div>
+                                    </div>
+                                    <button class="remove-compare-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="product-compare-item">
+                                    <img src="images/product_image.jpg" alt="Творог">
+                                    <div class="product-info">
+                                        <h4>Творог свежий 9% жирности</h4>
+                                        <div class="product-price">249 ₽</div>
+                                    </div>
+                                    <button class="remove-compare-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Рейтинг</td>
+                            <td>
+                                <div class="stars">★★★★★</div>
+                                <span>(23 отзыва)</span>
+                            </td>
+                            <td>
+                                <div class="stars">★★★★☆</div>
+                                <span>(15 отзывов)</span>
+                            </td>
+                            <td>
+                                <div class="stars">★★★★★</div>
+                                <span>(27 отзывов)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Производитель</td>
+                            <td>Фермер Иванов И.И.</td>
+                            <td>Фермер Петров П.П.</td>
+                            <td>Фермер Сидоров С.С.</td>
+                        </tr>
+                        <tr>
+                            <td>Страна</td>
+                            <td>Россия</td>
+                            <td>Россия</td>
+                            <td>Россия</td>
+                        </tr>
+                        <tr>
+                            <td>Вес</td>
+                            <td>1 л</td>
+                            <td>1 л</td>
+                            <td>300 г</td>
+                        </tr>
+                        <tr>
+                            <td>Срок годности</td>
+                            <td>7 дней</td>
+                            <td>7 дней</td>
+                            <td>5 дней</td>
+                        </tr>
+                        <tr>
+                            <td>Состав</td>
+                            <td>Свежее коровье молоко, 3.2% жирности</td>
+                            <td>Кефирный грибок, молоко, 2.5% жирности</td>
+                            <td>Молоко, закваска, 9% жирности</td>
+                        </tr>
+                        <tr>
+                            <td>Условия хранения</td>
+                            <td>При температуре 2-6°C</td>
+                            <td>При температуре 2-6°C</td>
+                            <td>При температуре 2-6°C</td>
+                        </tr>
+                        <tr>
+                            <td>Наличие</td>
+                            <td>В наличии</td>
+                            <td>В наличии</td>
+                            <td>Под заказ</td>
+                        </tr>
+                        <tr>
+                            <td>Доставка</td>
+                            <td>Завтра</td>
+                            <td>Завтра</td>
+                            <td>Через 2 дня</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="compare-actions">
+                <button class="btn btn-outline">Очистить сравнение</button>
+                <button class="btn btn-primary">Добавить ещё товар</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+    </script>
+</body>
+</html>

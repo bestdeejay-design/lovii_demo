@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Список избранного. Просмотрите и управляйте своими любимыми товарами.">
+    <meta name="keywords" content="избранное, wishlist, любимые товары">
+    <meta name="author" content="Витрина">
+    <title>Избранное | Витрина</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <!-- Breadcrumbs -->
+    <div class="container breadcrumbs">
+        <nav class="breadcrumb-nav">
+            <ol>
+                <li><a href="index.html">Главная</a></li>
+                <li>Избранное</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Wishlist Section -->
+    <section id="wishlist" class="wishlist-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Избранные товары</h1>
+                <p>Список товаров, которые вы отметили как избранные</p>
+            </div>
+
+            <div class="wishlist-container">
+                <div class="wishlist-grid">
+                    <!-- Product cards -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product_image.jpg" alt="Молоко деревенское">
+                            <span class="product-badge">Хит</span>
+                            <button class="wishlist-btn active"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Молоко деревенское свежее</h3>
+                            <p>Свежее молоко от местного фермера</p>
+                            <div class="product-price">
+                                <span class="current-price">149 ₽</span>
+                                <span class="original-price">199 ₽</span>
+                                <span class="discount-badge">-25%</span>
+                            </div>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>(23)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-sm">В корзину</button>
+                                <button class="remove-wishlist-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product_image.jpg" alt="Сыр домашний">
+                            <span class="product-badge featured">Новинка</span>
+                            <button class="wishlist-btn active"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Сыр домашний из коровьего молока</h3>
+                            <p>Натуральный сыр ручной работы</p>
+                            <div class="product-price">
+                                <span class="current-price">499 ₽</span>
+                            </div>
+                            <div class="product-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>(18)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-sm">В корзину</button>
+                                <button class="remove-wishlist-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product_image.jpg" alt="Яйца куриные">
+                            <span class="product-badge sale">Акция</span>
+                            <button class="wishlist-btn active"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Яйца куриные высшей категории</h3>
+                            <p>Свежие яйца от кур-несушек</p>
+                            <div class="product-price">
+                                <span class="current-price">99 ₽</span>
+                                <span class="original-price">129 ₽</span>
+                                <span class="discount-badge">-23%</span>
+                            </div>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>(42)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-sm">В корзину</button>
+                                <button class="remove-wishlist-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/product_image.jpg" alt="Мёд цветочный">
+                            <span class="product-badge eco">Эко</span>
+                            <button class="wishlist-btn active"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info">
+                            <h3>Мёд цветочный натуральный</h3>
+                            <p>Натуральный лесной мед</p>
+                            <div class="product-price">
+                                <span class="current-price">799 ₽</span>
+                            </div>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>(31)</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-sm">В корзину</button>
+                                <button class="remove-wishlist-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty wishlist message (hidden by default) -->
+                <div class="empty-wishlist" style="display: none;">
+                    <div class="empty-wishlist-content">
+                        <i class="fas fa-heart"></i>
+                        <h3>Ваш список избранного пуст</h3>
+                        <p>Добавляйте товары в избранное, чтобы быстро находить их позже</p>
+                        <a href="products.html" class="btn btn-primary">Перейти к покупкам</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+
+        // Remove from wishlist functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const removeButtons = document.querySelectorAll('.remove-wishlist-btn');
+            
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    productCard.remove();
+                    
+                    // Check if wishlist is now empty
+                    const productCards = document.querySelectorAll('.product-card');
+                    if (productCards.length === 0) {
+                        document.querySelector('.wishlist-grid').style.display = 'none';
+                        document.querySelector('.empty-wishlist').style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

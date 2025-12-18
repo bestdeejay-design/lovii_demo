@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Еда и доставка от местных ресторанов. Быстрая доставка, свежие продукты, вкусные блюда.">
+    <meta name="keywords" content="еда, доставка, рестораны, кафе, быстрая доставка, еда на дом">
+    <meta name="author" content="Витрина">
+    <title>Еда и доставка | Витрина</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <!-- Breadcrumbs -->
+    <div class="container breadcrumbs">
+        <nav class="breadcrumb-nav">
+            <ol>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="#">Для клиентов</a></li>
+                <li>Еда и доставка</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Food Delivery Section -->
+    <section id="food" class="food-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Еда и доставка от местных ресторанов</h1>
+                <p>Свежие блюда от проверенных заведений вашего города</p>
+            </div>
+
+            <div class="food-layout">
+                <!-- Filters sidebar -->
+                <aside class="filters-sidebar">
+                    <div class="filter-group">
+                        <h3>Тип кухни</h3>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cuisine-russian" checked>
+                            <label for="cuisine-russian">Русская</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cuisine-italian" checked>
+                            <label for="cuisine-italian">Итальянская</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cuisine-asian" checked>
+                            <label for="cuisine-asian">Азиатская</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cuisine-vegetarian">
+                            <label for="cuisine-vegetarian">Вегетарианская</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cuisine-fastfood">
+                            <label for="cuisine-fastfood">Фастфуд</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cuisine-ready">
+                            <label for="cuisine-ready">Готовые наборы</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Время доставки</h3>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="delivery-30min" checked>
+                            <label for="delivery-30min">⚡ До 30 мин</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="delivery-1hour" checked>
+                            <label for="delivery-1hour">🕐 До 1 часа</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="delivery-2hours">
+                            <label for="delivery-2hours">🕑 До 2 часов</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="delivery-tomorrow">
+                            <label for="delivery-tomorrow">📅 На завтра</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Мин. заказ</h3>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="minorder-500" checked>
+                            <label for="minorder-500">До 500₽</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="minorder-1000" checked>
+                            <label for="minorder-1000">500-1000₽</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="minorder-over1000">
+                            <label for="minorder-over1000">1000+₽</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Режим работы</h3>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="open-now" checked>
+                            <label for="open-now">✅ Сейчас открыто</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="24h">
+                            <label for="24h">🕒 Круглосуточно</label>
+                        </div>
+                    </div>
+
+                    <div class="location-info">
+                        <h3>Ваше местоположение</h3>
+                        <div class="location-display">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>г. Москва, ул. Примерная, д. 1</span>
+                            <button class="change-location-btn">Изменить</button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main content -->
+                <main class="food-main">
+                    <div class="restaurants-grid">
+                        <!-- Restaurant cards -->
+                        <div class="restaurant-card">
+                            <div class="restaurant-logo">
+                                <img src="images/product_image.jpg" alt="Ресторан Русская кухня">
+                            </div>
+                            <div class="restaurant-info">
+                                <h3>Ресторан "Русская кухня"</h3>
+                                <div class="restaurant-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(147)</span>
+                                </div>
+                                <div class="restaurant-details">
+                                    <span class="delivery-time">Среднее время доставки: 35-45 мин</span>
+                                    <span class="min-order">Мин. заказ: 500₽</span>
+                                </div>
+                            </div>
+                            <div class="restaurant-actions">
+                                <button class="btn btn-primary">Выбрать</button>
+                            </div>
+                        </div>
+
+                        <div class="restaurant-card">
+                            <div class="restaurant-logo">
+                                <img src="images/product_image.jpg" alt="Итальянская пиццерия">
+                            </div>
+                            <div class="restaurant-info">
+                                <h3>Итальянская пиццерия "La Pizza"</h3>
+                                <div class="restaurant-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(203)</span>
+                                </div>
+                                <div class="restaurant-details">
+                                    <span class="delivery-time">Среднее время доставки: 25-35 мин</span>
+                                    <span class="min-order">Мин. заказ: 400₽</span>
+                                </div>
+                            </div>
+                            <div class="restaurant-actions">
+                                <button class="btn btn-primary">Выбрать</button>
+                            </div>
+                        </div>
+
+                        <div class="restaurant-card">
+                            <div class="restaurant-logo">
+                                <img src="images/product_image.jpg" alt="Японский ресторан">
+                            </div>
+                            <div class="restaurant-info">
+                                <h3>Японский ресторан "Сакура"</h3>
+                                <div class="restaurant-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(189)</span>
+                                </div>
+                                <div class="restaurant-details">
+                                    <span class="delivery-time">Среднее время доставки: 40-50 мин</span>
+                                    <span class="min-order">Мин. заказ: 600₽</span>
+                                </div>
+                            </div>
+                            <div class="restaurant-actions">
+                                <button class="btn btn-primary">Выбрать</button>
+                            </div>
+                        </div>
+
+                        <div class="restaurant-card">
+                            <div class="restaurant-logo">
+                                <img src="images/product_image.jpg" alt="Вегетарианское кафе">
+                            </div>
+                            <div class="restaurant-info">
+                                <h3>Вегетарианское кафе "Зелень"</h3>
+                                <div class="restaurant-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(98)</span>
+                                </div>
+                                <div class="restaurant-details">
+                                    <span class="delivery-time">Среднее время доставки: 30-40 мин</span>
+                                    <span class="min-order">Мин. заказ: 450₽</span>
+                                </div>
+                            </div>
+                            <div class="restaurant-actions">
+                                <button class="btn btn-primary">Выбрать</button>
+                            </div>
+                        </div>
+
+                        <div class="restaurant-card">
+                            <div class="restaurant-logo">
+                                <img src="images/product_image.jpg" alt="Фастфуд">
+                            </div>
+                            <div class="restaurant-info">
+                                <h3>Фастфуд "Бургер-бар"</h3>
+                                <div class="restaurant-rating">
+                                    <span class="stars">★★★☆☆</span>
+                                    <span>(76)</span>
+                                </div>
+                                <div class="restaurant-details">
+                                    <span class="delivery-time">Среднее время доставки: 20-30 мин</span>
+                                    <span class="min-order">Мин. заказ: 300₽</span>
+                                </div>
+                            </div>
+                            <div class="restaurant-actions">
+                                <button class="btn btn-primary">Выбрать</button>
+                            </div>
+                        </div>
+
+                        <div class="restaurant-card">
+                            <div class="restaurant-logo">
+                                <img src="images/product_image.jpg" alt="Готовые наборы">
+                            </div>
+                            <div class="restaurant-info">
+                                <h3>Готовые наборы "Ужин за 15 минут"</h3>
+                                <div class="restaurant-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(156)</span>
+                                </div>
+                                <div class="restaurant-details">
+                                    <span class="delivery-time">Среднее время доставки: 45-60 мин</span>
+                                    <span class="min-order">Мин. заказ: 700₽</span>
+                                </div>
+                            </div>
+                            <div class="restaurant-actions">
+                                <button class="btn btn-primary">Выбрать</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="prev-page">&lsaquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <span class="dots">...</span>
+                        <a href="#">10</a>
+                        <a href="#" class="next-page">&rsaquo;</a>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+        
+        // Simulate geolocation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const changeLocationBtn = document.querySelector('.change-location-btn');
+            if (changeLocationBtn) {
+                changeLocationBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Функция выбора местоположения будет реализована в следующих версиях');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
