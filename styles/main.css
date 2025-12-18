@@ -285,17 +285,60 @@ body {
   overflow-y: auto;
 }
 
+/* Enhanced submenu styling for marketplace */
+.header .submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--bg-secondary);
+  min-width: 250px;
+  max-width: 350px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  overflow-y: auto;
+}
+
+/* Add a subtle animation delay to make it feel smoother */
+.header .has-submenu {
+  position: relative;
+}
+
+.header .has-submenu:hover > .submenu {
+  transition-delay: 0.1s;
+}
+
 /* Submenu for different sections */
-.header .nav-item.has-submenu:nth-child(2) .submenu { /* Товары и Услуги */
+.header .nav-item.has-submenu:nth-child(1) .submenu { /* Товары и услуги */
   min-width: 280px;
 }
 
-.header .nav-item.has-submenu:nth-child(3) .submenu { /* Для бизнеса */
+.header .nav-item.has-submenu:nth-child(2) .submenu { /* Для бизнеса */
+  min-width: 300px;
+}
+
+.header .nav-item.has-submenu:nth-child(3) .submenu { /* О проекте */
   min-width: 260px;
 }
 
-.header .nav-item.has-submenu:nth-child(7) .submenu { /* Дополнительно */
-  min-width: 240px;
+.header .nav-item.has-submenu:nth-child(4) .submenu { /* Помощь */
+  min-width: 280px;
+}
+
+.header .nav-item.has-submenu:nth-child(5) .submenu { /* Поддержка */
+  min-width: 280px;
+}
+
+.header .nav-item.has-submenu:nth-child(6) .submenu { /* Документы */
+  min-width: 260px;
 }
 
 .header .nav-item.has-submenu:hover .submenu {
@@ -309,6 +352,7 @@ body {
   padding: 0;
 }
 
+/* Improve submenu item styling */
 .header .submenu a {
   display: flex;
   align-items: center;
@@ -320,6 +364,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-left: 3px solid transparent;
 }
 
 .header .submenu a:hover {
@@ -327,6 +372,20 @@ body {
   color: var(--accent-color);
   padding-left: 1.5rem;
   transform: translateX(5px);
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Add submenu indicator */
+.header .submenu a::before {
+  content: "▶";
+  font-size: 0.6rem;
+  margin-right: 0.5rem;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.header .submenu a:hover::before {
+  transform: translateX(3px);
 }
 
 .header .submenu a i {
