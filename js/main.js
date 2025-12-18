@@ -1,19 +1,22 @@
-// Проверяем сохраненную тему при загрузке страницы
+// Check if saved theme exists on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, есть ли сохраненная тема в localStorage
+    // Check if there's a saved theme in localStorage
     const savedTheme = localStorage.getItem('theme');
     
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
     } else {
-        // По умолчанию темная тема
+        // Default to dark theme
         document.body.classList.remove('light-theme');
     }
     
-    // Инициализируем мобильное меню
+    // Update the theme toggle text based on current theme
+    updateThemeToggleText();
+    
+    // Initialize mobile menu
     initializeMobileMenu();
     
-    // Инициализируем остальные компоненты после загрузки шаблонов
+    // Initialize other components after templates load
     setTimeout(initializeAfterTemplatesLoad, 100);
 });
 
@@ -77,7 +80,7 @@ function initializeComponentsWithRetry() {
 }
 
 function initializeThemeToggle(themeToggleBtn) {
-    // Если элемент не передан как параметр, ищем его в DOM
+    // If element is not passed as parameter, find it in DOM
     if (!themeToggleBtn) {
         themeToggleBtn = document.getElementById('theme-toggle');
         
@@ -87,16 +90,60 @@ function initializeThemeToggle(themeToggleBtn) {
         }
     }
     
-    themeToggleBtn.addEventListener('click', function() {
-        document.body.classList.toggle('light-theme');
-        
-        // Сохраняем текущую тему в localStorage
-        if (document.body.classList.contains('light-theme')) {
-            localStorage.setItem('theme', 'light');
-        } else {
-            localStorage.setItem('theme', 'dark');
-        }
+    themeToggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleTheme();
     });
+    
+    // Also handle mobile theme toggle if it exists
+    const mobileThemeToggle = document.querySelector('.theme-toggle-link');
+    if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleTheme();
+            
+            // Update the icon text based on current theme
+            updateThemeToggleText();
+        });
+    }
+}
+
+function toggleTheme() {
+    document.body.classList.toggle('light-theme');
+    
+    // Save current theme to localStorage
+    if (document.body.classList.contains('light-theme')) {
+        localStorage.setItem('theme', 'light');
+    } else {
+        localStorage.setItem('theme', 'dark');
+    }
+    
+    // Update the icon text based on current theme
+    updateThemeToggleText();
+}
+
+function updateThemeToggleText() {
+    const mobileThemeToggle = document.querySelector('.theme-toggle-link');
+    if (mobileThemeToggle) {
+        if (document.body.classList.contains('light-theme')) {
+            mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i> Светлая тема';
+        } else {
+            mobileThemeToggle.innerHTML = '<i class="fas fa-moon"></i> Темная тема';
+        }
+    }
+    
+    // Also update the desktop theme toggle icon
+    const desktopThemeToggle = document.getElementById('theme-toggle');
+    if (desktopThemeToggle) {
+        const icon = desktopThemeToggle.querySelector('i');
+        if (icon) {
+            if (document.body.classList.contains('light-theme')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+    }
 }
 
 function initializeMobileMenu() {

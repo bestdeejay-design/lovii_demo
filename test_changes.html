@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Changes</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Test Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-link"><div class="logo">Витрина</div></a>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item has-submenu">
+                        <a href="#">Для клиентов <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="#products">Товары и услуги</a></li>
+                            <li><a href="#food">Еда и доставка</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <a href="#">Для бизнеса <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="#suppliers">Для поставщиков</a></li>
+                            <li><a href="#pvs">Для ПВЗ</a></li>
+                            <li><a href="#rates">Тарифы</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#about">О проекте</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="theme-toggle">
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu button (for smaller screens) -->
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Test Mobile Navigation -->
+    <div class="mobile-nav-wrapper">
+        <div class="mobile-nav-button" id="mobileNavButton">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="mobile-nav-menu" id="mobileNavMenu">
+            <div class="mobile-nav-header">
+                <div class="logo"><a href="#home" id="mobileLogo">Витрина</a></div>
+                <button class="close-btn" id="closeMobileMenu">&times;</button>
+            </div>
+            
+            <ul class="mobile-nav-list">
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">Для клиентов <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#products"><i class="fas fa-box"></i> Товары и услуги</a></li>
+                        <li><a href="#food"><i class="fas fa-utensils"></i> Еда и доставка</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">Для бизнеса <i class="fas fa-chevron-down submenu-arrow"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#suppliers"><i class="fas fa-truck"></i> Для поставщиков</a></li>
+                        <li><a href="#pvs"><i class="fas fa-store"></i> Для ПВЗ</a></li>
+                        <li><a href="#rates"><i class="fas fa-percentage"></i> Тарифы</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> О проекте</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Контакты</a>
+                </li>
+                
+                <li class="nav-divider"></li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link login-link"><i class="fas fa-sign-in-alt"></i> Войти</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link cart-link"><i class="fas fa-shopping-cart"></i> Корзина (3)</a>
+                </li>
+                
+                <li class="nav-divider"></li>
+                
+                <li class="nav-item theme-toggle-item">
+                    <a href="#" class="nav-link theme-toggle-link">
+                        <i class="fas fa-moon"></i> Темная тема
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <main>
+        <div class="container" style="padding: 50px 20px;">
+            <h1>Test Page for Changes</h1>
+            <p>This page tests the changes made to the header and mobile navigation:</p>
+            <ul>
+                <li>Header should only have theme toggle (no login or cart)</li>
+                <li>Mobile menu should have login, cart, and theme toggle at the bottom</li>
+                <li>Theme toggle should work in both desktop and mobile</li>
+            </ul>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize components for testing
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme toggle
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (themeToggleBtn) {
+                initializeThemeToggle(themeToggleBtn);
+            }
+            
+            // Initialize mobile navigation
+            initializeNewMobileNavigation();
+            
+            // Update theme toggle text after initialization
+            updateThemeToggleText();
+        });
+    </script>
+</body>
+</html>
