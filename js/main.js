@@ -209,6 +209,27 @@ function initializeSubmenuToggle() {
         });
     });
     
+    // Add desktop hover delay for better UX
+    const navItems = document.querySelectorAll('.header .has-submenu');
+    navItems.forEach(item => {
+        let hoverTimeout;
+        
+        item.addEventListener('mouseenter', function() {
+            // Clear any existing timeout to prevent flickering
+            clearTimeout(hoverTimeout);
+            
+            // Add the hover class to show submenu
+            this.classList.add('hover-active');
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            // Delay hiding the submenu to allow for smoother transitions
+            hoverTimeout = setTimeout(() => {
+                this.classList.remove('hover-active');
+            }, 150); // 150ms delay to prevent accidental closing
+        });
+    });
+    
     // Also handle the new 'Покупателям' and 'Дополнительно' sections
     const newSubmenuItems = document.querySelectorAll('.header .has-submenu > a');
     newSubmenuItems.forEach(item => {
