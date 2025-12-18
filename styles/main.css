@@ -95,11 +95,122 @@ body {
   color: var(--accent-color);
 }
 
+/* Desktop navigation additional items */
+.nav-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.header .nav-menu ul .nav-item:not(.has-submenu) > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.header .nav-menu ul .nav-item:not(.has-submenu) > a:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Specific styling for additional navigation links */
+.header .nav-menu ul .nav-item:not(.has-submenu) {
+  padding: 0.2rem 0.5rem;
+}
+
+.header .nav-menu ul .nav-item:not(.has-submenu) a i {
+  width: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Theme toggle item styling */
+.header .nav-menu ul .nav-item.theme-toggle-item a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0 !important;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.header .nav-menu ul .nav-item.theme-toggle-item a:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem !important;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Desktop navigation layout - proper horizontal menu */
+@media (min-width: 769px) {
+  .header .nav-menu ul {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .nav-menu {
+    position: static;
+  }
+  
+  /* Show all navigation items on desktop */
+  .header .nav-menu ul .nav-item:not(.has-submenu) {
+    display: block;
+  }
+  
+  .header .nav-menu ul .nav-divider {
+    width: calc(100% - 1rem);
+    margin: 0.5rem 0.5rem;
+  }
+  
+  /* Adjust submenu positioning for desktop */
+  .header .nav-menu ul .nav-item.has-submenu {
+    position: relative;
+  }
+  
+  .header .nav-menu ul .nav-item.has-submenu .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .header .nav-menu ul .nav-item.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
 /* Header actions for marketplace */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.search-icon, .promotions-icon, .recently-viewed-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.search-icon:hover, .promotions-icon:hover, .recently-viewed-icon:hover {
+  background-color: var(--bg-secondary);
 }
 
 .search-bar {
