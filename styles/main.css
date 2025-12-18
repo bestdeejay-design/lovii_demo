@@ -1314,6 +1314,12 @@ body {
   color: var(--accent-color);
 }
 
+.mobile-nav-header .logo a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .close-btn {
   background: none;
   border: none;
