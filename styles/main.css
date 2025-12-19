@@ -3240,3 +3240,349 @@ body {
     align-self: flex-start;
     min-width: 120px;
 }
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.trust-badge i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.trust-badge span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Activity Banner */
+.activity-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    color: white;
+    border-radius: 8px;
+    margin: 20px 0;
+    animation: slideIn 0.5s ease;
+}
+
+.activity-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.activity-icon {
+    font-size: 1.2rem;
+}
+
+.activity-timer {
+    font-weight: bold;
+    background: rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Trust Section */
+.trust-section {
+    padding: 60px 0;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.trust-item {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trust-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.trust-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.trust-item h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.trust-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Activity Section */
+.activity-section {
+    padding: 60px 0;
+    background: var(--bg-secondary);
+}
+
+.activity-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.activity-header h2 {
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.activity-header p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.activity-feed {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    animation: fadeIn 0.5s ease;
+}
+
+.activity-item:last-child {
+    margin-bottom: 0;
+}
+
+.activity-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-content p {
+    margin: 0 0 5px 0;
+    color: var(--text-primary);
+}
+
+.activity-content strong {
+    color: var(--accent-color);
+}
+
+.activity-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Special Offers Section */
+.special-offers-section {
+    padding: 60px 0;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.offer-card {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.offer-card.featured {
+    border: 2px solid var(--accent-color);
+    transform: scale(1.05);
+}
+
+.offer-card.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.offer-badge {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: #ff6b6b;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.offer-badge.featured {
+    background: #FF9800;
+}
+
+.offer-card h3 {
+    margin: 10px 0 15px 0;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+}
+
+.offer-card p {
+    color: var(--text-secondary);
+    margin: 0 0 20px 0;
+}
+
+.offer-conditions {
+    margin: 20px 0;
+}
+
+.offer-conditions p {
+    margin: 8px 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.offer-conditions p::before {
+    content: "•";
+    color: var(--accent-color);
+    display: inline-block;
+    width: 1em;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+/* Partners Section */
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.partner-item {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.partner-logo {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.partner-item h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.partner-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Values Section */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.value-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.value-card h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.value-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
