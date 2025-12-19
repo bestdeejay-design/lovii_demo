@@ -440,3 +440,92 @@ if (typeof module !== 'undefined' && module.exports) {
         initializeContactForm
     };
 }
+// Dynamic content updates
+function updateLiveStats() {
+    // Update stats with live-like data
+    const stats = document.querySelectorAll('.stat-number');
+    if (stats.length > 0) {
+        // Animate the stats on page load
+        stats.forEach(stat => {
+            const target = parseInt(stat.textContent.replace(/[^\d]/g, ''));
+            const increment = Math.ceil(target / 100);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                stat.textContent = current.toLocaleString() + (stat.textContent.includes('+') ? '+' : '');
+            }, 20);
+        });
+    }
+}
+
+// Initialize live stats after templates are loaded
+function initializeLiveStats() {
+    updateLiveStats();
+    
+    // Update stats periodically to simulate live data
+    setInterval(() => {
+        // In a real scenario, this would fetch actual data from an API
+        // For now, we just add some random increments to make it look dynamic
+        const stats = document.querySelectorAll('.stat-number');
+        if (stats.length > 0) {
+            // Add small random increments to simulate growth
+            stats.forEach(stat => {
+                const current = parseInt(stat.textContent.replace(/[^\d]/g, ''));
+                const increment = Math.floor(Math.random() * 10) + 1;
+                stat.textContent = (current + increment).toLocaleString() + (stat.textContent.includes('+') ? '+' : '');
+            });
+        }
+    }, 30000); // Update every 30 seconds
+}
+
+// Add a function to handle dynamic product recommendations
+function updateRecommendations() {
+    // This would normally fetch personalized recommendations based on user behavior
+    // For now, we'll just shuffle the products periodically
+    const productCards = document.querySelectorAll('.product-card');
+    if (productCards.length > 0) {
+        // Add a "new" badge to random products every few seconds
+        setInterval(() => {
+            const randomIndex = Math.floor(Math.random() * productCards.length);
+            const productCard = productCards[randomIndex];
+            
+            // Remove any existing dynamic badges first
+            const existingBadge = productCard.querySelector('.product-badge.dynamic');
+            if (existingBadge) {
+                existingBadge.remove();
+            }
+            
+            // Add a new dynamic badge
+            const badge = document.createElement('span');
+            badge.className = 'product-badge dynamic';
+            badge.textContent = 'Новинка';
+            badge.style.backgroundColor = '#FF9800';
+            
+            const productImage = productCard.querySelector('.product-image');
+            productImage.appendChild(badge);
+            
+            // Remove the badge after 10 seconds
+            setTimeout(() => {
+                if (badge.parentNode) {
+                    badge.remove();
+                }
+            }, 10000);
+        }, 5000); // Add a new badge every 5 seconds
+    }
+}
+
+// Initialize dynamic content features
+function initializeDynamicContent() {
+    initializeLiveStats();
+    updateRecommendations();
+}
+
+// Initialize dynamic content after templates are loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(initializeDynamicContent, 1000);
+});
