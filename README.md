@@ -1,52 +1,92 @@
-# Main Menu Project
+# Витрина - Маркетплейс для малого бизнеса
 
-This project implements a responsive main menu with submenus for web applications. It features a clean, modern design with click-based submenu navigation for better user experience.
+Современная платформа для подключения малого бизнеса к тысячам покупателей через приложение, сайт и сеть точек выдачи. Проект реализует адаптивное главное меню с подменю для веб-приложений с фокусом на пользовательский опыт и удобство навигации.
 
-## Features
+## Основные возможности
 
-- Responsive design that works on all device sizes
-- Click-based submenu navigation (no hover effects)
-- Smooth animations and transitions
-- Accessible menu structure
-- Mobile-friendly hamburger menu
-- Clean and modern UI components
+- **Адаптивный дизайн** - корректная работа на всех устройствах
+- **Интуитивная навигация** - клик-базированное меню с подменю
+- **Мобильное навигационное меню** - специальное меню внизу экрана для мобильных устройств
+- **Полноценное десктопное меню** - горизонтальное меню с подменю для настольных устройств
+- **Поддержка подменю** - многоуровневая структура меню с возможностью добавления вложенных подменю
+- **Доступность** - меню разработано с учетом принципов доступности
+- **Темная/светлая тема** - поддержка переключения цветовых схем
+- **Плавные анимации** - современные переходы и эффекты
 
-## Structure
+## Структура проекта
 
-The project includes:
+Проект включает в себя:
 
-- HTML templates for menu structure
-- CSS styles for responsive design
-- JavaScript for interactive functionality
-- SCSS source files for easy customization
+- HTML-шаблоны для структуры меню и страниц
+- CSS-стили для визуального оформления и адаптивности
+- JavaScript-функционал для интерактивности
+- Изображения и иконки для пользовательского интерфейса
+- Страницы для основных разделов сайта
+- Файлы конфигурации и документации
 
-## Installation
+## Архитектура
 
-To use this menu in your project:
+- `templates/` - HTML-шаблоны для повторно используемых компонентов
+  - `header.html` - шапка сайта с основным меню
+  - `footer.html` - подвал сайта
+  - `mobile-nav.html` - мобильное навигационное меню внизу экрана
+- `styles/` - файлы стилей
+  - `main.css` - основные стили сайта
+  - `main_menu_styles.css` - стили для меню
+- `js/` - JavaScript файлы
+  - `main.js` - основной скрипт с функциональностью
+- `images/` - изображения для сайта
+- `pages/` - отдельные страницы сайта (если есть)
 
-1. Clone the repository
-2. Copy the necessary files to your project
-3. Link the CSS and JS files in your HTML
-4. Customize the menu items as needed
+## Установка и запуск
 
-## Usage
+Проект представляет собой статический веб-сайт, который можно запустить напрямую в браузере:
 
-Include the main menu component in your HTML page and customize the menu items according to your needs. The submenu items will appear when clicking on parent menu items.
+1. Склонируйте репозиторий
+2. Откройте файл `index.html` в браузере
+3. Для разработки используйте локальный сервер (например, Live Server в VSCode)
 
-## Files
+## Особенности реализации
 
-- `index.html` - Main HTML file
-- `styles/` - CSS stylesheets
-- `js/` - JavaScript files
-- `scss/` - SCSS source files
-- `sitemap.md` - Site map
-- `project-description.md` - Detailed project description
+### Мобильное навигационное меню
+В проекте реализовано специальное мобильное навигационное меню, которое появляется внизу экрана на мобильных устройствах. Это улучшает пользовательский опыт, так как пользователи могут легко взаимодействовать с меню одной рукой.
 
-## Browser Support
+### Структура меню
+Меню построено на семантически правильной HTML-структуре с использованием тегов `nav`, `ul`, `li` и `button`. Поддерживается многоуровневая навигация с подменю.
 
-- Chrome, Firefox, Safari, Edge (latest versions)
-- Mobile browsers (iOS Safari, Chrome for Android)
+### Темизация
+Сайт поддерживает переключение между темной и светлой темами с сохранением предпочтений пользователя в localStorage.
 
-## License
+## Страницы проекта
 
-MIT License
+- `index.html` - Главная страница
+- `about.html` - О нас
+- `products.html` - Каталог товаров
+- `suppliers.html` - Для поставщиков
+- `faq.html` - Часто задаваемые вопросы
+- `support.html` - Техническая поддержка
+- `contacts.html` - Контакты
+- и другие страницы для различных разделов
+
+## Совместимость
+
+Меню и сайт протестированы и работают в следующих браузерах:
+
+- Chrome (последние 2 версии)
+- Firefox (последние 2 версии)
+- Safari (последние 2 версии)
+- Edge (последние 2 версии)
+- Mobile Safari
+- Chrome для Android
+
+## Технологии
+
+- HTML5
+- CSS3 (Flexbox, Grid, CSS-переменные)
+- JavaScript (чистый, без библиотек)
+- Font Awesome для иконок
+- Адаптивный дизайн с использованием медиа-запросов
+
+## Лицензия
+
+Этот проект распространяется под лицензией MIT.
