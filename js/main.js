@@ -519,10 +519,131 @@ function updateRecommendations() {
     }
 }
 
+// Update activity feed with dynamic content
+function updateActivityFeed() {
+    // This would normally fetch actual activity from an API
+    // For now, we'll simulate activity updates
+    const activityItems = document.querySelectorAll('.activity-item');
+    if (activityItems.length > 0) {
+        // Add new random activity every 10 seconds
+        setInterval(() => {
+            // Create a new activity item
+            const activityTypes = [
+                { icon: '🛒', action: 'покупку', entity: 'Иван Иванов', location: 'в Москве', amount: '' },
+                { icon: '📦', action: 'подключил', entity: 'Мария Смирнова', location: '', amount: '5 новых товаров' },
+                { icon: '🚚', action: 'оформил заказ', entity: 'ООО "Торг"', location: '', amount: 'на 15 000 ₽' },
+                { icon: '⭐', action: 'оставил отзыв', entity: 'Анна Петрова', location: '', amount: 'о товаре' },
+                { icon: '🔄', action: 'совершил повторную', entity: 'Сергей Козлов', location: 'в Казани', amount: '' },
+                { icon: '📈', action: 'увеличил продажи', entity: 'ИП Сидоров', location: '', amount: 'на 30%' }
+            ];
+            
+            const randomActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
+            
+            // Find a random activity item to update
+            const randomIndex = Math.floor(Math.random() * activityItems.length);
+            const activityItem = activityItems[randomIndex];
+            
+            // Update the content
+            const activityIcon = activityItem.querySelector('.activity-icon');
+            const activityContent = activityItem.querySelector('.activity-content p');
+            const activityTime = activityItem.querySelector('.activity-time');
+            
+            if (activityIcon && activityContent && activityTime) {
+                activityIcon.textContent = randomActivity.icon;
+                
+                let contentText = `<strong>${randomActivity.entity}</strong> ${randomActivity.action}`;
+                if (randomActivity.location) {
+                    contentText += ` ${randomActivity.location}`;
+                }
+                if (randomActivity.amount) {
+                    contentText += ` ${randomActivity.amount}`;
+                }
+                
+                activityContent.innerHTML = contentText;
+                activityTime.textContent = 'только что';
+                
+                // Add animation effect
+                activityItem.style.opacity = '0.5';
+                setTimeout(() => {
+                    activityItem.style.opacity = '1';
+                }, 300);
+            }
+        }, 10000); // Update every 10 seconds
+        
+        // Update time displays every minute
+        setInterval(() => {
+            const timeElements = document.querySelectorAll('.activity-time');
+            timeElements.forEach(timeEl => {
+                if (timeEl.textContent.includes('только что')) {
+                    timeEl.textContent = '1 минуту назад';
+                } else if (timeEl.textContent.includes('минуту назад')) {
+                    timeEl.textContent = '2 минуты назад';
+                } else if (timeEl.textContent.includes('минуты назад')) {
+                    const minutes = parseInt(timeEl.textContent) + 1;
+                    timeEl.textContent = `${minutes} минут назад`;
+                }
+            });
+        }, 60000); // Update every minute
+    }
+}
+
+// Update activity banner on products page
+function updateActivityBanner() {
+    const activityMessage = document.getElementById('activity-message');
+    const activityTimer = document.getElementById('activity-timer');
+    
+    if (activityMessage && activityTimer) {
+        // Product names for dynamic messages
+        const products = [
+            'Молоко деревенское свежее',
+            'Сыр домашний из коровьего молока',
+            'Яйца куриные высшей категории',
+            'Мёд цветочный натуральный',
+            'Овощи сезонные (ассорти)',
+            'Фрукты экзотические',
+            'Мыло ручной работы',
+            'Шампунь натуральный'
+        ];
+        
+        const locations = ['Москва', 'Санкт-Петербург', 'Казань', 'Новосибирск', 'Екатеринбург', 'Краснодар'];
+        
+        // Update activity message every 15 seconds
+        setInterval(() => {
+            const randomProduct = products[Math.floor(Math.random() * products.length)];
+            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+            const randomName = ['Иван Иванов', 'Мария Смирнова', 'Алексей Козлов', 'Елена Волкова', 'Дмитрий Петров', 'Ольга Сидорова'];
+            const randomPerson = randomName[Math.floor(Math.random() * randomName.length)];
+            
+            activityMessage.innerHTML = `<strong>${randomPerson}</strong> из <strong>${randomLocation}</strong> только что купил ${randomProduct}`;
+            activityTimer.textContent = 'только что';
+            
+            // Add animation effect
+            activityMessage.style.opacity = '0.7';
+            setTimeout(() => {
+                activityMessage.style.opacity = '1';
+            }, 300);
+        }, 15000); // Update every 15 seconds
+        
+        // Update timer every minute
+        setInterval(() => {
+            if (activityTimer.textContent.includes('только что')) {
+                activityTimer.textContent = '1 минуту назад';
+            } else if (activityTimer.textContent.includes('минуту назад')) {
+                activityTimer.textContent = '2 минуты назад';
+            } else if (activityTimer.textContent.includes('минуты назад')) {
+                const minutes = parseInt(activityTimer.textContent) + 1;
+                activityTimer.textContent = `${minutes} минут назад`;
+            }
+        }, 60000); // Update every minute
+    }
+}
+
 // Initialize dynamic content features
 function initializeDynamicContent() {
     initializeLiveStats();
     updateRecommendations();
+    updateActivityFeed();
+    updateActivityBanner();
 }
 
 // Initialize dynamic content after templates are loaded
