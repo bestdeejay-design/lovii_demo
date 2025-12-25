@@ -1751,6 +1751,13 @@ body {
   border-bottom: 1px solid var(--border-color);
 }
 
+/* Hide breadcrumbs on mobile devices */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    display: none !important;
+  }
+}
+
 .breadcrumb-nav {
   display: flex;
   padding: 0;
