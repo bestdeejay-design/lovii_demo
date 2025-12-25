@@ -92,16 +92,16 @@
   color: var(--accent-color);
 }
 
-/* Ensure profile menu remains visible on mobile and does not go into mobile menu */
+/* Ensure profile menu is hidden on mobile devices and does not go into mobile menu */
 @media (max-width: 768px) {
   /* Completely hide the profile menu on mobile devices */
   .profile-menu {
-    display: none;
+    display: none !important;
   }
   
-  /* Hide profile menu from the mobile navigation menu (since it's already in header) */
+  /* Hide profile menu from any mobile navigation menu */
   .mobile-nav-menu .profile-menu {
-    display: none;
+    display: none !important;
   }
   
   /* Adjust header actions layout when profile menu is hidden */
@@ -167,7 +167,7 @@
   }
   
   .profile-menu {
-    display: none;
+    display: none !important;
   }
   
   .nav-menu ul {
