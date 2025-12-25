@@ -626,6 +626,27 @@ body {
   font-size: 1.3rem;
 }
 
+.category-card ul {
+  padding-left: 0;
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.category-card li {
+  position: relative;
+  padding-left: 1.2em;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.category-card li::before {
+  content: "•";
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
 .category-card p {
   color: var(--text-secondary);
 }
