@@ -273,4 +273,20 @@
   .mobile-menu-btn {
     display: flex;
   }
+  
+  /* Ensure profile menu is not affected by mobile menu styles */
+  .profile-menu {
+    position: relative;
+    z-index: 1003; /* Ensure profile menu appears above mobile menu */
+  }
+  
+  /* Mobile-specific profile button styling */
+  .profile-link {
+    padding: 0.8rem 1rem;
+    min-height: 44px; /* Ensure touch target is large enough for mobile */
+  }
+  
+  .profile-link i {
+    font-size: 1.2rem; /* Make profile icon more visible on mobile */
+  }
 }
