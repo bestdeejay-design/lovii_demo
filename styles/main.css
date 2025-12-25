@@ -137,11 +137,13 @@ body {
   .header-actions {
       order: 2;
       width: 100%;
-      justify-content: center;
+      justify-content: flex-end; /* Align profile menu to the right */
   }
   
   .profile-menu {
       margin-right: 0;
+      position: static; /* Ensure profile menu stays in place */
+      display: block;
   }
   
   .profile-menu ul,
@@ -154,6 +156,11 @@ body {
   .profile-submenu {
       right: 0;
       left: auto;
+  }
+  
+  /* Hide profile menu from the mobile navigation menu (since it's already in header) */
+  .mobile-nav-menu .profile-menu {
+    display: none;
   }
 }
 

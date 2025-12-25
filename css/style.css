@@ -77,6 +77,64 @@
   margin-right: 2rem;
 }
 
+/* Стили для профильной кнопки */
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 0.5rem;
+  transition: color 0.3s ease;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.profile-link:hover {
+  color: var(--accent-color);
+}
+
+/* Ensure profile menu remains visible on mobile and does not go into mobile menu */
+@media (max-width: 768px) {
+  .profile-menu {
+    position: relative;
+    display: block;
+    order: 1;
+    width: auto;
+    margin-right: 0;
+    z-index: 1003; /* Ensure profile menu appears above mobile menu */
+  }
+  
+  /* Make sure profile menu stays in header-actions container on mobile */
+  .header-actions {
+    order: 2;
+    width: 100%;
+    justify-content: flex-end; /* Align profile menu to the right */
+  }
+  
+  /* Ensure profile submenu appears correctly on mobile */
+  .profile-submenu {
+    position: absolute;
+    right: 0;
+    left: auto;
+    width: 250px;
+    z-index: 1004; /* Ensure profile submenu appears above everything */
+  }
+  
+  /* Hide profile menu from the mobile navigation menu (since it's already in header) */
+  .mobile-nav-menu .profile-menu {
+    display: none;
+  }
+  
+  /* Make profile button more visible and touch-friendly on mobile */
+  .profile-link {
+    padding: 0.8rem 1rem;
+    min-height: 44px; /* Ensure touch target is large enough for mobile */
+  }
+  
+  .profile-link i {
+    font-size: 1.2rem; /* Make profile icon more visible on mobile */
+  }
+}
+
 /* Убедительно убираем любые маркеры или псевдоэлементы перед элементом "Профиль" */
 .profile-menu .nav-link::before,
 .profile-menu .profile-link::before,
