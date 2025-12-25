@@ -61,7 +61,7 @@
     gap: 30px;
   }
   
-  .nav-menu {
+  .header .nav-menu {  /* Added more specific selector */
     position: static;
   }
   
@@ -211,7 +211,9 @@
 
 /* Mobile submenu styles */
 @media (max-width: 768px) {
-  .nav-menu {
+  /* Only apply these styles to mobile navigation, not header navigation */
+  .mobile-nav-menu .nav-menu,
+  .mobile-nav-wrapper .nav-menu {
     position: fixed;
     top: 0;
     right: -100%;
@@ -226,7 +228,8 @@
     transition: right 0.3s ease;
   }
   
-  .nav-menu.active {
+  .mobile-nav-menu .nav-menu.active,
+  .mobile-nav-wrapper .nav-menu.active {
     right: 0;
   }
   
