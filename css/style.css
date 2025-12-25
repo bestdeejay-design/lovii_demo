@@ -1,0 +1,129 @@
+/* Стили для шапки сайта */
+
+/* Контейнер шапки */
+.header {
+  background-color: var(--bg-secondary);
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+
+/* Контейнер внутри шапки с ограничением ширины и центрированием */
+.header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Стили для основного меню */
+.main-menu {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Стили для навигации */
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-menu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-menu a:hover {
+  color: var(--accent-color);
+}
+
+/* Стили для элементов меню без подменю */
+.header .nav-menu ul .nav-item:not(.has-submenu) > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.header .nav-menu ul .nav-item:not(.has-submenu) > a:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Стили для профильного меню справа */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-menu {
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+/* Стили для логотипа слева */
+.logo {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.logo-link:hover {
+  opacity: 0.8;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    padding: 1rem 20px;
+    position: relative;
+  }
+  
+  .logo {
+    margin-bottom: 1rem;
+  }
+  
+  .main-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  
+  .header-actions {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .profile-menu {
+    margin-right: 0;
+  }
+  
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 0;
+  }
+}

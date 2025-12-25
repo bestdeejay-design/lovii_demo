@@ -4,7 +4,7 @@
 .nav-menu ul {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 30px;
   align-items: center;
 }
 
@@ -58,7 +58,7 @@
 @media (min-width: 769px) {
   .header .nav-menu ul {
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 30px;
   }
   
   .nav-menu {

@@ -59,8 +59,19 @@ body {
 }
 
 .header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+/* Стили для навигации */
+.main-menu {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -107,11 +118,30 @@ body {
 
 @media (max-width: 768px) {
   .header .container {
+      flex-direction: column;
+      padding: 1rem 20px;
       position: relative;
   }
   
+  .logo {
+      margin-bottom: 1rem;
+  }
+  
+  .main-menu {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+      margin: 1rem 0;
+  }
+  
+  .header-actions {
+      order: 2;
+      width: 100%;
+      justify-content: center;
+  }
+  
   .profile-menu {
-      display: none;
+      margin-right: 0;
   }
   
   .profile-menu ul,
