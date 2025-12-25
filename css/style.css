@@ -94,29 +94,9 @@
 
 /* Ensure profile menu remains visible on mobile and does not go into mobile menu */
 @media (max-width: 768px) {
+  /* Completely hide the profile menu on mobile devices */
   .profile-menu {
-    position: relative;
-    display: block;
-    order: 1;
-    width: auto;
-    margin-right: 0;
-    z-index: 1003; /* Ensure profile menu appears above mobile menu */
-  }
-  
-  /* Make sure profile menu stays in header-actions container on mobile */
-  .header-actions {
-    order: 2;
-    width: 100%;
-    justify-content: flex-end; /* Align profile menu to the right */
-  }
-  
-  /* Ensure profile submenu appears correctly on mobile */
-  .profile-submenu {
-    position: absolute;
-    right: 0;
-    left: auto;
-    width: 250px;
-    z-index: 1004; /* Ensure profile submenu appears above everything */
+    display: none;
   }
   
   /* Hide profile menu from the mobile navigation menu (since it's already in header) */
@@ -124,14 +104,11 @@
     display: none;
   }
   
-  /* Make profile button more visible and touch-friendly on mobile */
-  .profile-link {
-    padding: 0.8rem 1rem;
-    min-height: 44px; /* Ensure touch target is large enough for mobile */
-  }
-  
-  .profile-link i {
-    font-size: 1.2rem; /* Make profile icon more visible on mobile */
+  /* Adjust header actions layout when profile menu is hidden */
+  .header-actions {
+    order: 2;
+    width: 100%;
+    justify-content: flex-end; /* Align remaining items to the right */
   }
 }
 
@@ -190,7 +167,7 @@
   }
   
   .profile-menu {
-    margin-right: 0;
+    display: none;
   }
   
   .nav-menu ul {
