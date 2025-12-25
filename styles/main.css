@@ -162,22 +162,6 @@ body {
   border-left: 3px solid var(--accent-color);
 }
 
-/* Theme toggle item styling */
-.header .nav-menu ul .nav-item.theme-toggle-item a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0 !important;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
-}
-
-.header .nav-menu ul .nav-item.theme-toggle-item a:hover {
-  color: var(--accent-color);
-  padding-left: 0.5rem !important;
-  border-left: 3px solid var(--accent-color);
-}
-
 /* Desktop navigation layout - proper horizontal menu */
 @media (min-width: 769px) {
   .header .nav-menu ul {
@@ -503,30 +487,6 @@ body {
   padding: 4rem 0;
 }
 
-.hero-content {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(90deg, var(--accent-color), #8BC34A);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  line-height: 1.2;
-}
-
-.hero {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-  padding: 4rem 0;
-}
-
 .hero .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -552,6 +512,18 @@ body {
   font-size: 1.2rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
+}
+
+/* Responsive: on smaller screens, stack elements vertically and center content */
+@media (max-width: 768px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
 }
 
 .cta-buttons {
