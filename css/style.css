@@ -30,6 +30,17 @@
   align-items: center;
 }
 
+/* Desktop-only styles for main menu */
+@media (min-width: 769px) {
+  .main-menu {
+    display: flex !important;
+  }
+  
+  .header-actions {
+    display: flex !important;
+  }
+}
+
 /* Стили для навигации */
 .nav-menu ul {
   display: flex;
@@ -161,6 +172,7 @@
   }
   
   .header-actions {
+    display: none !important; /* Hide header actions completely on mobile */
     order: 2;
     width: 100%;
     justify-content: center;
