@@ -135,15 +135,16 @@ body {
   }
   
   .header-actions {
+      display: none !important; /* Hide header actions completely on mobile */
       order: 2;
       width: 100%;
       justify-content: flex-end; /* Align profile menu to the right */
   }
   
   .profile-menu {
+      display: none !important; /* Hide profile menu on mobile */
       margin-right: 0;
       position: static; /* Ensure profile menu stays in place */
-      display: block;
   }
   
   .profile-menu ul,
@@ -220,6 +221,11 @@ body {
     margin: 0.5rem 0.5rem;
   }
   
+  /* Ensure header actions are displayed on desktop */
+  .header-actions {
+    display: flex !important;
+  }
+  
   /* Adjust submenu positioning for desktop */
   .header .nav-menu ul .nav-item.has-submenu {
     position: relative;
@@ -252,6 +258,17 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+/* Дополнительное правило для переопределения других стилей на мобильных устройствах */
+@media (max-width: 768px) {
+  .header .header-actions {
+    display: none !important;
+  }
+  
+  .header .header-actions .profile-menu {
+    display: none !important;
+  }
 }
 
 .search-icon, .promotions-icon, .recently-viewed-icon {

@@ -30,16 +30,7 @@
   align-items: center;
 }
 
-/* Desktop-only styles for main menu */
-@media (min-width: 769px) {
-  .main-menu {
-    display: flex !important;
-  }
-  
-  .header-actions {
-    display: flex !important;
-  }
-}
+
 
 /* Стили для навигации */
 .nav-menu ul {
@@ -77,11 +68,6 @@
 }
 
 /* Стили для профильного меню справа */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
 
 .profile-menu {
   flex-shrink: 0;
@@ -152,38 +138,3 @@
   opacity: 0.8;
 }
 
-/* Адаптивные стили для мобильных устройств */
-@media (max-width: 768px) {
-  .header .container {
-    flex-direction: column;
-    padding: 1rem 20px;
-    position: relative;
-  }
-  
-  .logo {
-    margin-bottom: 1rem;
-  }
-  
-  .main-menu {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    margin: 1rem 0;
-  }
-  
-  .header-actions {
-    display: none !important; /* Hide header actions completely on mobile */
-    order: 2;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .profile-menu {
-    display: none !important;
-  }
-  
-  .nav-menu ul {
-    flex-direction: column;
-    gap: 0;
-  }
-}
