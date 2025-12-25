@@ -77,6 +77,19 @@
   margin-right: 2rem;
 }
 
+/* Убедительно убираем любые маркеры или псевдоэлементы перед элементом "Профиль" */
+.profile-menu .nav-link::before,
+.profile-menu .profile-link::before,
+.profile-menu a::before {
+  content: none !important;
+  display: none !important;
+}
+
+.profile-menu li {
+  list-style: none !important;
+  position: relative !important;
+}
+
 /* Стили для логотипа слева */
 .logo {
   color: var(--accent-color);
