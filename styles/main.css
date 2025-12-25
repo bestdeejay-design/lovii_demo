@@ -80,6 +80,13 @@ body {
   padding-top: 80px; /* Высота хедера + немного дополнительного пространства */
 }
 
+/* Уменьшаем отступ сверху для контента на мобильных устройствах, т.к. хедер стал меньше */
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px; /* Уменьшенный отступ для мобильного хедера */
+  }
+}
+
 /* Стили для нового расположения элементов */
 .profile-menu {
   flex-shrink: 0;
@@ -117,14 +124,27 @@ body {
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 0.5rem 0;
+  }
+  
   .header .container {
       flex-direction: column;
-      padding: 1rem 20px;
+      padding: 0.5rem 20px;
       position: relative;
   }
   
   .logo {
-      margin-bottom: 1rem;
+    font-size: 1.2rem; /* Уменьшаем размер логотипа на мобильных устройствах */
+    margin-bottom: 0.5rem;
+  }
+  
+  .header .nav-menu ul .nav-item.has-submenu > a {
+    padding: 0.5rem 0.25rem; /* Уменьшаем padding у навигационных элементов */
+  }
+  
+  .header .nav-menu ul .nav-item.theme-toggle-item a {
+    padding: 0.25rem 0 !important; /* Уменьшаем padding у элемента переключения темы */
   }
   
   .main-menu {
@@ -260,16 +280,7 @@ body {
   gap: 1rem;
 }
 
-/* Дополнительное правило для переопределения других стилей на мобильных устройствах */
-@media (max-width: 768px) {
-  .header .header-actions {
-    display: none !important;
-  }
-  
-  .header .header-actions .profile-menu {
-    display: none !important;
-  }
-}
+
 
 .search-icon, .promotions-icon, .recently-viewed-icon {
   display: inline-flex;
