@@ -643,6 +643,143 @@ function updateRecommendations() {
     }
 }
 
+// Initialize recommended products filtering
+function initializeRecommendedFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    
+    if (filterButtons.length > 0 && productCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get filter value
+                const filterValue = button.getAttribute('data-filter');
+                
+                // Filter products
+                productCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all' || category === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+}
+
+// Initialize quick view functionality
+function initializeQuickView() {
+    const quickViewButtons = document.querySelectorAll('.quick-view-btn');
+    
+    quickViewButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productCard = button.closest('.product-card');
+            const productName = productCard.querySelector('h3').textContent;
+            const productImage = productCard.querySelector('img').src;
+            const productDescription = productCard.querySelector('p').textContent;
+            const productPrice = productCard.querySelector('.current-price').textContent;
+            
+            // Show quick view modal or perform other action
+            alert(`Быстрый просмотр: ${productName}\nЦена: ${productPrice}\nОписание: ${productDescription}`);
+        });
+    });
+}
+
+// Initialize compare functionality
+function initializeCompare() {
+    const compareButtons = document.querySelectorAll('.compare-btn');
+    
+    compareButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productCard = button.closest('.product-card');
+            const productName = productCard.querySelector('h3').textContent;
+            
+            // Add to compare list or perform other action
+            alert(`Товар "${productName}" добавлен в список сравнения`);
+        });
+    });
+}
+
+// Initialize add to cart functionality
+function initializeAddToCart() {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productCard = button.closest('.product-card');
+            const productId = button.getAttribute('data-product-id');
+            const productName = productCard.querySelector('h3').textContent;
+            const productPrice = productCard.querySelector('.current-price').textContent;
+            
+            // Add to cart logic
+            alert(`Товар "${productName}" добавлен в корзину`);
+            
+            // Update cart UI
+            updateCartCount();
+        });
+    });
+}
+
+// Initialize wishlist functionality
+function initializeWishlist() {
+    const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+    
+    wishlistButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productCard = button.closest('.product-card');
+            const productName = productCard.querySelector('h3').textContent;
+            const icon = button.querySelector('i');
+            
+            // Toggle wishlist state
+            if (icon.classList.contains('far')) {
+                icon.classList.replace('far', 'fas');
+                icon.style.color = '#e74c3c';
+                alert(`Товар "${productName}" добавлен в избранное`);
+            } else {
+                icon.classList.replace('fas', 'far');
+                icon.style.color = '';
+                alert(`Товар "${productName}" удален из избранного`);
+            }
+        });
+    });
+}
+
+// Initialize quick buy functionality
+function initializeQuickBuy() {
+    const quickBuyButtons = document.querySelectorAll('.quick-buy-btn');
+    
+    quickBuyButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productCard = button.closest('.product-card');
+            const productName = productCard.querySelector('h3').textContent;
+            const productPrice = productCard.querySelector('.current-price').textContent;
+            
+            // Quick buy logic
+            alert(`Быстрая покупка: ${productName} за ${productPrice}`);
+        });
+    });
+}
+
+// Update cart count display
+function updateCartCount() {
+    // This function would update the cart count in the header
+    // For now, we'll just log it
+    console.log('Cart updated');
+}
+
 // Update activity feed with dynamic content
 function updateActivityFeed() {
     // This would normally fetch actual activity from an API
@@ -768,6 +905,14 @@ function initializeDynamicContent() {
     updateRecommendations();
     updateActivityFeed();
     updateActivityBanner();
+    
+    // Initialize Recommended Section functionality
+    initializeRecommendedFilters();
+    initializeQuickView();
+    initializeCompare();
+    initializeAddToCart();
+    initializeWishlist();
+    initializeQuickBuy();
 }
 
 // Функция для обработки контактной формы
