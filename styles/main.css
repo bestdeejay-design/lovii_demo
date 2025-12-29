@@ -1194,6 +1194,7 @@ body {
 
 .form-group {
   margin-bottom: 1.5rem;
+  position: relative;
 }
 
 .form-group label {
@@ -1213,12 +1214,51 @@ body {
   color: var(--text-primary);
   font-size: 1rem;
   box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.form-group input.error {
+  border-color: #f44336;
+}
+
+.form-group input.success {
+  border-color: #4CAF50;
+}
+
+.input-feedback {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+}
+
+.input-feedback.error {
+  color: #f44336;
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.input-feedback.success {
+  color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.btn-loading {
+  display: none;
+}
+
+.btn.loading .btn-text {
+  display: none;
+}
+
+.btn.loading .btn-loading {
+  display: inline;
 }
 
 .form-disclaimer {

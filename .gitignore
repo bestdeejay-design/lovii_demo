@@ -1,33 +1,36 @@
-```gitignore
+```markdown
 # Compiled and build artifacts
 *.pyc
 __pycache__/
 *.o
 *.obj
-*.class
-*.exe
-*.dll
-*.so
-*.a
-*.out
+dist/
+build/
+target/
 
 # Dependencies
-node_modules/
-venv/
 .venv/
+venv/
+node_modules/
+.pip/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Environment
 .env
 .env.local
 .env.*
 
-# Build directories
-dist/
-build/
-target/
-*.log
-*.tmp
-*.swp
-
-# Editor/IDE files
+# Editors
 .vscode/
 .idea/
 *.swp
@@ -37,12 +40,7 @@ target/
 .DS_Store
 Thumbs.db
 
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Compressed files
+# Common compressed files
 *.zip
 *.gz
 *.tar
