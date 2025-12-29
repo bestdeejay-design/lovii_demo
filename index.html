@@ -192,16 +192,50 @@
     <section id="recommended" class="recommended-section">
         <div class="container">
             <div class="section-header">
-                <h2>Рекомендуем вам</h2>
-                <p>Персональные рекомендации на основе вашей истории просмотров</p>
+                <div class="header-content">
+                    <h2>Рекомендуем вам</h2>
+                    <p>Персональные рекомендации на основе вашей истории просмотров</p>
+                </div>
+                <div class="header-actions">
+                    <div class="filter-controls">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn" data-filter="popular">Популярные</button>
+                        <button class="filter-btn" data-filter="new">Новинки</button>
+                        <button class="filter-btn" data-filter="discount">Со скидкой</button>
+                    </div>
+                    <a href="#" class="view-all">Смотреть все</a>
+                </div>
             </div>
-            <div class="products-grid">
-                <div class="product-card">
+            
+            <!-- Loading indicator -->
+            <div class="loading-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <p>Загружаем персональные рекомендации...</p>
+            </div>
+            
+            <div class="products-grid" id="recommended-products">
+                <div class="product-card" data-category="popular" data-rating="5">
                     <div class="product-image">
-                        <img src="images/product_image.jpg" alt="Молоко деревенское">
-                        <span class="product-badge">Хит</span>
+                        <img src="images/product_image.jpg" alt="Молоко деревенское" loading="lazy">
+                        <span class="product-badge popular">Хит</span>
+                        <button class="quick-view-btn" aria-label="Быстрый просмотр">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="image-overlay">
+                            <button class="compare-btn" aria-label="Сравнить">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="product-info">
+                        <div class="product-meta">
+                            <span class="seller">Фермер Иванов</span>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-value">4.9</span>
+                                <span class="review-count">(23)</span>
+                            </div>
+                        </div>
                         <h3>Молоко деревенское свежее</h3>
                         <p>Свежее молоко от местного фермера</p>
                         <div class="product-price">
@@ -209,45 +243,83 @@
                             <span class="original-price">199 ₽</span>
                             <span class="discount-badge">-25%</span>
                         </div>
-                        <div class="product-rating">
-                            <span class="stars">★★★★★</span>
-                            <span>(23)</span>
-                        </div>
                         <div class="product-actions">
-                            <button class="btn btn-primary btn-sm">В корзину</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                            <button class="btn btn-primary btn-sm add-to-cart" data-product-id="1">
+                                <i class="fas fa-shopping-cart"></i> В корзину
+                            </button>
+                            <button class="wishlist-btn" aria-label="Добавить в избранное">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="quick-buy-btn" aria-label="Купить быстро">
+                                <i class="fas fa-bolt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="new" data-rating="4">
                     <div class="product-image">
-                        <img src="images/product_image.jpg" alt="Сыр домашний">
+                        <img src="images/product_image.jpg" alt="Сыр домашний" loading="lazy">
                         <span class="product-badge featured">Новинка</span>
+                        <button class="quick-view-btn" aria-label="Быстрый просмотр">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="image-overlay">
+                            <button class="compare-btn" aria-label="Сравнить">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="product-info">
+                        <div class="product-meta">
+                            <span class="seller">Фермер Иванов</span>
+                            <div class="product-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-value">4.2</span>
+                                <span class="review-count">(18)</span>
+                            </div>
+                        </div>
                         <h3>Сыр домашний из коровьего молока</h3>
                         <p>Натуральный сыр ручной работы</p>
                         <div class="product-price">
                             <span class="current-price">499 ₽</span>
                         </div>
-                        <div class="product-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span>(18)</span>
-                        </div>
                         <div class="product-actions">
-                            <button class="btn btn-primary btn-sm">В корзину</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                            <button class="btn btn-primary btn-sm add-to-cart" data-product-id="2">
+                                <i class="fas fa-shopping-cart"></i> В корзину
+                            </button>
+                            <button class="wishlist-btn" aria-label="Добавить в избранное">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="quick-buy-btn" aria-label="Купить быстро">
+                                <i class="fas fa-bolt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="discount" data-rating="5">
                     <div class="product-image">
-                        <img src="images/product_image.jpg" alt="Яйца куриные">
+                        <img src="images/product_image.jpg" alt="Яйца куриные" loading="lazy">
                         <span class="product-badge sale">Акция</span>
+                        <button class="quick-view-btn" aria-label="Быстрый просмотр">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="image-overlay">
+                            <button class="compare-btn" aria-label="Сравнить">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="product-info">
+                        <div class="product-meta">
+                            <span class="seller">Фермер Иванов</span>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-value">4.8</span>
+                                <span class="review-count">(42)</span>
+                            </div>
+                        </div>
                         <h3>Яйца куриные высшей категории</h3>
                         <p>Свежие яйца от кур-несушек</p>
                         <div class="product-price">
@@ -255,35 +327,57 @@
                             <span class="original-price">129 ₽</span>
                             <span class="discount-badge">-23%</span>
                         </div>
-                        <div class="product-rating">
-                            <span class="stars">★★★★★</span>
-                            <span>(42)</span>
-                        </div>
                         <div class="product-actions">
-                            <button class="btn btn-primary btn-sm">В корзину</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                            <button class="btn btn-primary btn-sm add-to-cart" data-product-id="3">
+                                <i class="fas fa-shopping-cart"></i> В корзину
+                            </button>
+                            <button class="wishlist-btn" aria-label="Добавить в избранное">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="quick-buy-btn" aria-label="Купить быстро">
+                                <i class="fas fa-bolt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="popular" data-rating="5">
                     <div class="product-image">
-                        <img src="images/product_image.jpg" alt="Мёд цветочный">
+                        <img src="images/product_image.jpg" alt="Мёд цветочный" loading="lazy">
                         <span class="product-badge eco">Эко</span>
+                        <button class="quick-view-btn" aria-label="Быстрый просмотр">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="image-overlay">
+                            <button class="compare-btn" aria-label="Сравнить">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="product-info">
+                        <div class="product-meta">
+                            <span class="seller">Фермер Иванов</span>
+                            <div class="product-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-value">4.9</span>
+                                <span class="review-count">(31)</span>
+                            </div>
+                        </div>
                         <h3>Мёд цветочный натуральный</h3>
                         <p>Натуральный лесной мед</p>
                         <div class="product-price">
                             <span class="current-price">799 ₽</span>
                         </div>
-                        <div class="product-rating">
-                            <span class="stars">★★★★★</span>
-                            <span>(31)</span>
-                        </div>
                         <div class="product-actions">
-                            <button class="btn btn-primary btn-sm">В корзину</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                            <button class="btn btn-primary btn-sm add-to-cart" data-product-id="4">
+                                <i class="fas fa-shopping-cart"></i> В корзину
+                            </button>
+                            <button class="wishlist-btn" aria-label="Добавить в избранное">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="quick-buy-btn" aria-label="Купить быстро">
+                                <i class="fas fa-bolt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
