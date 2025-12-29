@@ -819,7 +819,7 @@ function updateActivityFeed() {
   { icon: '📦', action: 'обновил предложения', entity: 'Татьяна Жукова', location: '', amount: '15 товаров', type: 'new-products' },
 
   // Заказы
-  { icon: '🚚', action: 'оформил заказ', entity: 'ООО «Торг»', location: '', amount: 'на 15 000 ₽', type: 'order' },
+  { icon: '🚚', action: 'оформил заказ', entity: 'ООО «Торг»', location: 'в Нижнем Новгороде', amount: 'на 23 487 ₽', type: 'order' },
   { icon: '🚚', action: 'отправил заказ', entity: 'Антон Гусев', location: '', amount: 'на 4 872 ₽', type: 'order' },
   { icon: '🚚', action: 'сформировал поставку', entity: 'ИП Романов', location: '', amount: 'на 31 284 ₽', type: 'order' },
   { icon: '🚚', action: 'заказал', entity: 'Светлана Ершова', location: '', amount: 'на 18 639 ₽', type: 'order' },
