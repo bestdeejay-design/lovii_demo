@@ -789,9 +789,13 @@ function updateActivityFeed() {
         return;
     }
 
-    // Store timer references to prevent conflicts
-    let activityTimer = null;
-    let timeUpdater = null;
+    // Clear any existing intervals to prevent multiple timers
+    if (window.activityTimer) {
+        clearInterval(window.activityTimer);
+    }
+    if (window.timeUpdater) {
+        clearInterval(window.timeUpdater);
+    }
     
     // Function to get random interval between 1.5 and 4 seconds
     function getRandomInterval() {
@@ -947,7 +951,8 @@ function updateActivityFeed() {
         });
     }
 
-    // Add initial activities to start with some content
+    // Clear existing content and add initial activities to start with some content
+    activityFeed.innerHTML = '';
     for (let i = 0; i < 3; i++) {
         setTimeout(() => {
             addNewActivity();
@@ -955,12 +960,12 @@ function updateActivityFeed() {
     }
 
     // Start adding new activities at random intervals
-    activityTimer = setInterval(() => {
+    window.activityTimer = setInterval(() => {
         addNewActivity();
     }, getRandomInterval());
 
     // Update time displays every minute
-    timeUpdater = setInterval(updateTimeDisplays, 60000); // Update every minute
+    window.timeUpdater = setInterval(updateTimeDisplays, 60000); // Update every minute
 }
 
 // Update activity banner on products page
