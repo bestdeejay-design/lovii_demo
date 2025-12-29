@@ -4229,7 +4229,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     animation: slideIn 0.4s ease-out;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-left: 4px solid var(--accent-color);
     position: relative;
     overflow: hidden;
@@ -4330,7 +4330,7 @@ body {
     margin-right: 15px;
     min-width: 40px;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .activity-item:hover .activity-icon {
@@ -4373,12 +4373,12 @@ body {
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    50% { transform: scale(1.03); }
     100% { transform: scale(1); }
 }
 
 .activity-item.pulse {
-    animation: pulse 0.5s ease;
+    animation: pulse 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeIn {

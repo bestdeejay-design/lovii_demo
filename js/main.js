@@ -786,14 +786,18 @@ function updateActivityFeed() {
     // For now, we'll simulate activity updates
     const activityItems = document.querySelectorAll('.activity-item');
     if (activityItems.length > 0) {
+        // Store timer references to prevent conflicts
+        let activityTimer = null;
+        let timeUpdater = null;
+        
         // Function to get random interval between 1.2 and 4 seconds
         function getRandomInterval() {
             return Math.floor(Math.random() * 2800) + 1200;
         }
 
-        // Function to get random batch size (3-5 events)
+        // Function to get random batch size (1-2 events instead of 3-5 to reduce choppiness)
         function getRandomBatchSize() {
-            return Math.floor(Math.random() * 3) + 3;
+            return Math.floor(Math.random() * 2) + 1; // Changed from 3-5 to 1-2
         }
 
         // Function to update activity with dynamic timing
@@ -853,12 +857,12 @@ function updateActivityFeed() {
   { icon: '🆕', action: 'открыл магазин', entity: 'Дарья Мельникова', location: 'в Сочи', amount: '', type: 'registration' }
 ];
             
-            // Get random batch size
+            // Get random batch size (reduced to 1-2 to prevent choppiness)
             const batchSize = getRandomBatchSize();
             
-            // Update multiple activities in this batch
+            // Update activities with proper spacing to prevent choppiness
             for (let i = 0; i < batchSize; i++) {
-                // Add a slight delay between each update in the batch for a more natural effect
+                // Stagger updates more significantly to prevent overlap
                 setTimeout(() => {
                     const randomActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
                     
@@ -878,37 +882,47 @@ function updateActivityFeed() {
                     activityItem.classList.add(randomActivity.type);
                     
                     if (activityIcon && activityContent && activityTime) {
-                        activityIcon.textContent = randomActivity.icon;
+                        // Add fade-out effect before updating
+                        activityItem.style.opacity = '0.6';
+                        activityItem.style.transform = 'translateX(-10px)';
                         
-                        let contentText = `<strong>${randomActivity.entity}</strong> ${randomActivity.action}`;
-                        if (randomActivity.location) {
-                            contentText += ` ${randomActivity.location}`;
-                        }
-                        if (randomActivity.amount) {
-                            contentText += ` ${randomActivity.amount}`;
-                        }
-                        
-                        activityContent.innerHTML = contentText;
-                        activityTime.textContent = 'только что';
-                        
-                        // Add pulse animation effect
-                        activityItem.classList.add('pulse');
                         setTimeout(() => {
-                            activityItem.classList.remove('pulse');
-                        }, 500);
+                            activityIcon.textContent = randomActivity.icon;
+                            
+                            let contentText = `<strong>${randomActivity.entity}</strong> ${randomActivity.action}`;
+                            if (randomActivity.location) {
+                                contentText += ` ${randomActivity.location}`;
+                            }
+                            if (randomActivity.amount) {
+                                contentText += ` ${randomActivity.amount}`;
+                            }
+                            
+                            activityContent.innerHTML = contentText;
+                            activityTime.textContent = 'только что';
+                            
+                            // Add pulse animation effect
+                            activityItem.classList.add('pulse');
+                            setTimeout(() => {
+                                activityItem.classList.remove('pulse');
+                            }, 500);
+                            
+                            // Restore normal appearance
+                            activityItem.style.opacity = '1';
+                            activityItem.style.transform = 'translateX(0)';
+                        }, 150); // Slight delay for the update
                     }
-                }, i * 100); // Stagger the updates slightly
+                }, i * 300); // Increased delay between updates to 300ms to prevent choppiness
             }
             
             // Schedule next update with random interval
-            setTimeout(updateActivity, getRandomInterval());
+            activityTimer = setTimeout(updateActivity, getRandomInterval());
         }
         
         // Start the first update
-        setTimeout(updateActivity, getRandomInterval());
+        activityTimer = setTimeout(updateActivity, getRandomInterval());
         
         // Update time displays every minute
-        setInterval(() => {
+        timeUpdater = setInterval(() => {
             const timeElements = document.querySelectorAll('.activity-time');
             timeElements.forEach(timeEl => {
                 if (timeEl.textContent.includes('только что')) {
