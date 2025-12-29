@@ -1130,66 +1130,187 @@ body {
 }
 
 /* Секция контактов */
-.contact {
-  padding: 5rem 0;
-  background-color: var(--bg-secondary);
+.contact-section {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.contact h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: var(--text-primary);
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top right, rgba(76, 175, 80, 0.1) 0%, transparent 40%),
+              radial-gradient(circle at bottom left, rgba(76, 175, 80, 0.1) 0%, transparent 40%);
+  pointer-events: none;
 }
 
-.contact-container {
+.contact-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 4rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-.contact-info {
+.contact-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2rem;
 }
 
-.contact-card {
-  background-color: var(--card-bg);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
+.contact-title {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
 }
 
-.contact-card h3 {
-  color: var(--accent-color);
-  margin-top: 0;
+.contact-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+.contact-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.contact-info-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info-card .contact-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
 }
 
-.contact-card p {
-  margin-bottom: 0.8rem;
+.contact-info-card .contact-icon i {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.contact-info-card h3 {
   color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
 }
 
-.map-container {
+.contact-info-card p {
+  color: var(--text-secondary);
+  margin: 0.3rem 0;
+  font-size: 1rem;
+}
+
+.social-proof-contact {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.contact-form-container {
   background-color: var(--card-bg);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-.map-container iframe {
-  border: none;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contact-form {
-  background-color: var(--card-bg);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
+  width: 100%;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.form-subtitle {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.contact-btn {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-btn .btn-text {
+  display: inline-block;
+}
+
+.contact-btn .btn-loading {
+  display: none;
+}
+
+.contact-btn.loading .btn-text {
+  opacity: 0;
+}
+
+.contact-btn.loading .btn-loading {
+  display: inline-block;
+}
+
+/* Responsive adjustments for contact section */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 0 1rem;
+  }
+  
+  .contact-content {
+    order: 2;
+  }
+  
+  .contact-form-container {
+    order: 1;
+    padding: 2rem;
+  }
+  
+  .social-proof-contact {
+    flex-direction: column;
+  }
 }
 
 .form-group {

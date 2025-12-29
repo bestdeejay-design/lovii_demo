@@ -770,6 +770,142 @@ function initializeDynamicContent() {
     updateActivityBanner();
 }
 
+// Функция для обработки контактной формы
+function initializeContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (!contactForm) {
+        console.warn('Contact form not found');
+        return;
+    }
+    
+    // Добавляем обработчик отправки формы
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Получаем все поля формы
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const subjectInput = document.getElementById('subject');
+        const messageInput = document.getElementById('message');
+        
+        // Проверяем валидность полей
+        let isValid = true;
+        
+        // Проверяем имя
+        if (!nameInput.value.trim()) {
+            showInputFeedback('nameFeedback', 'Пожалуйста, введите ваше имя', 'error');
+            isValid = false;
+        } else {
+            hideInputFeedback('nameFeedback');
+        }
+        
+        // Проверяем email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailInput.value.trim()) {
+            showInputFeedback('emailFeedback', 'Пожалуйста, введите ваш email', 'error');
+            isValid = false;
+        } else if (!emailRegex.test(emailInput.value)) {
+            showInputFeedback('emailFeedback', 'Пожалуйста, введите корректный email', 'error');
+            isValid = false;
+        } else {
+            hideInputFeedback('emailFeedback');
+        }
+        
+        // Проверяем тему
+        if (!subjectInput.value.trim()) {
+            showInputFeedback('subjectFeedback', 'Пожалуйста, введите тему сообщения', 'error');
+            isValid = false;
+        } else {
+            hideInputFeedback('subjectFeedback');
+        }
+        
+        // Проверяем сообщение
+        if (!messageInput.value.trim()) {
+            showInputFeedback('messageFeedback', 'Пожалуйста, введите ваше сообщение', 'error');
+            isValid = false;
+        } else {
+            hideInputFeedback('messageFeedback');
+        }
+        
+        if (!isValid) {
+            return;
+        }
+        
+        // Показываем индикатор загрузки
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        submitBtn.classList.add('loading');
+        
+        // Здесь можно добавить отправку данных на сервер
+        // Для демонстрации используем setTimeout
+        setTimeout(function() {
+            // Скрываем индикатор загрузки
+            submitBtn.classList.remove('loading');
+            
+            // Показываем сообщение об успехе
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+            
+            // Сбрасываем форму
+            contactForm.reset();
+            
+            // Скрываем все индикаторы ошибок
+            hideInputFeedback('nameFeedback');
+            hideInputFeedback('emailFeedback');
+            hideInputFeedback('subjectFeedback');
+            hideInputFeedback('messageFeedback');
+        }, 2000);
+    });
+    
+    // Добавляем обработчики для валидации в реальном времени
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const messageInput = document.getElementById('message');
+    
+    if (nameInput) {
+        nameInput.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                hideInputFeedback('nameFeedback');
+            } else {
+                showInputFeedback('nameFeedback', 'Пожалуйста, введите ваше имя', 'error');
+            }
+        });
+    }
+    
+    if (emailInput) {
+        emailInput.addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value.trim() && emailRegex.test(this.value)) {
+                hideInputFeedback('emailFeedback');
+            } else if (!this.value.trim()) {
+                showInputFeedback('emailFeedback', 'Пожалуйста, введите ваш email', 'error');
+            } else {
+                showInputFeedback('emailFeedback', 'Пожалуйста, введите корректный email', 'error');
+            }
+        });
+    }
+    
+    if (subjectInput) {
+        subjectInput.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                hideInputFeedback('subjectFeedback');
+            } else {
+                showInputFeedback('subjectFeedback', 'Пожалуйста, введите тему сообщения', 'error');
+            }
+        });
+    }
+    
+    if (messageInput) {
+        messageInput.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                hideInputFeedback('messageFeedback');
+            } else {
+                showInputFeedback('messageFeedback', 'Пожалуйста, введите ваше сообщение', 'error');
+            }
+        });
+    }
+}
+
 // Initialize dynamic content after templates are loaded
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializeDynamicContent, 1000);
