@@ -525,22 +525,134 @@ body {
   padding: 0.5rem;
 }
 
-.theme-toggle button {
+/* Enhanced theme toggle with glassmorphism effect for desktop */
+.theme-toggle {
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  isolation: isolate;
 }
 
-.theme-toggle button:hover {
-  background-color: var(--bg-secondary);
+/* Glassmorphism effect for theme toggle */
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    rgba(0, 0, 0, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+/* Border glow effect */
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.theme-toggle i {
+  font-size: 1.4rem;
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s ease;
+  color: var(--text-primary);
+}
+
+/* Hover effect for desktop */
+@media (min-width: 769px) {
+  .theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.2),
+      0 4px 16px rgba(255, 255, 255, 0.1);
+  }
+  
+  .theme-toggle:hover::before {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.15) 0%, 
+      rgba(255, 255, 255, 0.1) 50%, 
+      rgba(0, 0, 0, 0.1) 100%);
+  }
+  
+  .theme-toggle:hover i {
+    transform: scale(1.2);
+  }
+}
+
+/* Click animation */
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Animation for theme change */
+.theme-toggle.changing {
+  animation: themeChangePulse 0.6s ease-in-out;
+}
+
+@keyframes themeChangePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Mobile theme toggle (no changes - keep original style) */
+@media (max-width: 768px) {
+  .header .theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .header .theme-toggle:hover {
+    background-color: var(--bg-secondary);
+  }
 }
 
 /* Герой секция */
