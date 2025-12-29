@@ -121,43 +121,67 @@
         </div>
     </section>
 
-    <!-- CTA Form Section -->
-    <section id="cta-form" class="contact">
+    <!-- Improved CTA Form Section -->
+    <section id="cta-form" class="cta-section">
         <div class="container">
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <h2>Начните продавать на Витрине уже сегодня</h2>
-                        <p>Присоединяйтесь к тысячам предпринимателей, которые уже зарабатывают с помощью нашей платформы</p>
-                        
-                        <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-number">100K+</div>
-                                <div class="stat-label">Активных продавцов</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">2M+</div>
-                                <div class="stat-label">Проданных товаров</div>
-                            </div>
+            <div class="cta-wrapper">
+                <div class="cta-content">
+                    <h2 class="cta-title">Начните продавать на Витрине уже сегодня</h2>
+                    <p class="cta-subtitle">Присоединяйтесь к тысячам предпринимателей, которые уже зарабатывают с помощью нашей платформы</p>
+                    
+                    <div class="social-proof">
+                        <div class="proof-item">
+                            <div class="proof-number">100K+</div>
+                            <div class="proof-label">Активных продавцов</div>
+                        </div>
+                        <div class="proof-item">
+                            <div class="proof-number">2M+</div>
+                            <div class="proof-label">Проданных товаров</div>
+                        </div>
+                        <div class="proof-item">
+                            <div class="proof-number">98%</div>
+                            <div class="proof-label">Довольных клиентов</div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonials-preview">
+                        <div class="testimonial-item">
+                            <div class="testimonial-text">"С помощью Витрины увеличили продажи на 150% за 3 месяца!"</div>
+                            <div class="testimonial-author">— Иван Петров, Фермерское хозяйство</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <form id="ctaForm">
-                        <div class="form-group">
-                            <label for="email_phone">Email или телефон</label>
-                            <input type="text" id="email_phone" name="email_phone" placeholder="Введите email или номер телефона" required>
-                            <div class="input-feedback" id="emailPhoneFeedback" style="display: none;"></div>
+                <div class="cta-form-container">
+                    <form id="ctaForm" class="cta-form">
+                        <div class="form-header">
+                            <h3 class="form-title">Начать сотрудничество</h3>
+                            <p class="form-subtitle">Оставьте контакты, и мы свяжемся с вами в течение 15 минут</p>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary" aria-label="Отправить заявку на подключение">
-                            <span class="btn-text">Отправить заявку</span>
+                        <div class="contact-type-selector">
+                            <button type="button" class="contact-type-btn active" data-type="email">
+                                <i class="fas fa-envelope"></i> Email
+                            </button>
+                            <button type="button" class="contact-type-btn" data-type="phone">
+                                <i class="fas fa-phone"></i> Телефон
+                            </button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="emailInput" name="email" placeholder="Введите ваш email" class="contact-input active-input" required>
+                            <input type="tel" id="phoneInput" name="phone" placeholder="Введите ваш телефон" class="contact-input" required style="display: none;">
+                            <div class="input-feedback" id="contactFeedback" style="display: none;"></div>
+                        </div>
+                        
+                        <button type="submit" class="cta-btn btn btn-primary" aria-label="Отправить заявку на подключение">
+                            <span class="btn-text">Начать продавать</span>
                             <span class="btn-loading" style="display: none;">
                                 <i class="fas fa-spinner fa-spin"></i> Отправка...
                             </span>
                         </button>
-                        <p class="form-disclaimer">Нажимая, вы соглашаетесь с политикой конфиденциальности</p>
+                        
+                        <p class="form-disclaimer">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
                     </form>
                 </div>
             </div>

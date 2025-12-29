@@ -1,6 +1,35 @@
-# Common build artifacts and dependencies
-*.pyc
+```
+# Backup files
+*.backup
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+.venv/
+venv/
 __pycache__/
+.mypy_cache/
+.pytest_cache/
+
+# Build artifacts
+dist/
+build/
+target/
+*.pyc
+*.class
 *.o
 *.obj
 *.exe
@@ -8,31 +37,16 @@ __pycache__/
 *.so
 *.a
 *.out
-dist/
-build/
-target/
-node_modules/
-.venv/
-venv/
-.env
-.env.local
-*.env.*
-# Editor and IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
+
 # System files
 .DS_Store
 Thumbs.db
-# Logs and coverage
-*.log
+
+# Coverage
 coverage/
 htmlcov/
 .coverage
-.mypy_cache/
-.pytest_cache/
+
 # Compressed files
 *.zip
 *.gz
@@ -56,3 +70,4 @@ htmlcov/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+```
