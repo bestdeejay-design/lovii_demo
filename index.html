@@ -147,10 +147,16 @@
                     <form id="ctaForm">
                         <div class="form-group">
                             <label for="email_phone">Email или телефон</label>
-                            <input type="text" id="email_phone" name="email_phone" placeholder="Введите ваш email или телефон" required>
+                            <input type="text" id="email_phone" name="email_phone" placeholder="Введите email или номер телефона" required>
+                            <div class="input-feedback" id="emailPhoneFeedback" style="display: none;"></div>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Отправить заявку</button>
+                        <button type="submit" class="btn btn-primary" aria-label="Отправить заявку на подключение">
+                            <span class="btn-text">Отправить заявку</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Отправка...
+                            </span>
+                        </button>
                         <p class="form-disclaimer">Нажимая, вы соглашаетесь с политикой конфиденциальности</p>
                     </form>
                 </div>

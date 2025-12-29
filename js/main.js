@@ -393,42 +393,120 @@ function initializeContactForm() {
 // Функция для обработки CTA формы
 function initializeCtaForm() {
     const ctaForm = document.getElementById('ctaForm');
-    
+
     if (!ctaForm) {
         console.warn('CTA form not found');
         return;
     }
-    
+
+    // Добавляем обработчик ввода для валидации в реальном времени
+    const emailPhoneInput = document.getElementById('email_phone');
+    if (emailPhoneInput) {
+        emailPhoneInput.addEventListener('input', function() {
+            validateInput(this.value);
+        });
+        
+        emailPhoneInput.addEventListener('blur', function() {
+            validateInput(this.value);
+        });
+    }
+
     ctaForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         // Получаем значение поля
         const emailPhone = document.getElementById('email_phone').value;
-        
+
         // Простая валидация
         if (!emailPhone) {
-            alert('Пожалуйста, введите email или телефон');
+            showInputFeedback('emailPhoneFeedback', 'Пожалуйста, введите email или телефон', 'error');
             return;
         }
-        
+
         // Проверка валидности email или телефон
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/; // Простая проверка формата телефона
-        
+
         if (!emailRegex.test(emailPhone) && !phoneRegex.test(emailPhone.replace(/\D/g, ''))) {
-            alert('Пожалуйста, введите действительный email или номер телефона');
+            showInputFeedback('emailPhoneFeedback', 'Пожалуйста, введите действительный email или номер телефона', 'error');
             return;
         }
-        
-        // Здесь можно добавить отправку данных на сервер
-        console.log('CTA форма отправлена:', { emailPhone });
-        
-        // Показываем сообщение об успешной отправке
-        alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
-        
-        // Сбрасываем форму
-        ctaForm.reset();
+
+        // Показываем индикатор загрузки
+        const submitBtn = ctaForm.querySelector('button[type="submit"]');
+        submitBtn.classList.add('loading');
+
+        // Имитация отправки формы (в реальном приложении здесь будет AJAX-запрос)
+        setTimeout(() => {
+            // Показываем сообщение об успешной отправке
+            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            
+            // Сбрасываем форму
+            ctaForm.reset();
+            
+            // Скрываем индикатор загрузки
+            submitBtn.classList.remove('loading');
+            
+            // Скрываем сообщение об ошибке
+            hideInputFeedback('emailPhoneFeedback');
+        }, 1500);
     });
+}
+
+// Функция для валидации ввода в реальном времени
+function validateInput(value) {
+    if (!value) {
+        hideInputFeedback('emailPhoneFeedback');
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+
+    const emailPhoneInput = document.getElementById('email_phone');
+    const feedbackElement = document.getElementById('emailPhoneFeedback');
+
+    if (emailRegex.test(value) || phoneRegex.test(value.replace(/\D/g, ''))) {
+        emailPhoneInput.classList.remove('error');
+        emailPhoneInput.classList.add('success');
+        feedbackElement.textContent = 'Корректный формат';
+        feedbackElement.className = 'input-feedback success';
+        feedbackElement.style.display = 'block';
+    } else {
+        emailPhoneInput.classList.remove('success');
+        emailPhoneInput.classList.add('error');
+        feedbackElement.textContent = 'Некорректный формат';
+        feedbackElement.className = 'input-feedback error';
+        feedbackElement.style.display = 'block';
+    }
+}
+
+// Функция для отображения сообщения в поле ввода
+function showInputFeedback(elementId, message, type) {
+    const feedbackElement = document.getElementById(elementId);
+    feedbackElement.textContent = message;
+    feedbackElement.className = `input-feedback ${type}`;
+    feedbackElement.style.display = 'block';
+    
+    // Добавляем класс к полю ввода
+    const inputField = document.getElementById('email_phone');
+    if (type === 'error') {
+        inputField.classList.add('error');
+        inputField.classList.remove('success');
+    } else if (type === 'success') {
+        inputField.classList.add('success');
+        inputField.classList.remove('error');
+    }
+}
+
+// Функция для скрытия сообщения в поле ввода
+function hideInputFeedback(elementId) {
+    const feedbackElement = document.getElementById(elementId);
+    feedbackElement.style.display = 'none';
+    
+    // Убираем классы ошибки/успеха у поля ввода
+    const inputField = document.getElementById('email_phone');
+    inputField.classList.remove('error', 'success');
 }
 
 // Экспортируем функции для использования в других частях приложения
