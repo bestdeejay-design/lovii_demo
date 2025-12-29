@@ -1463,6 +1463,15 @@ body {
   border-color: #4CAF50;
 }
 
+/* Стили для активного поля ввода */
+.contact-input.active-input {
+  display: block;
+}
+
+.contact-input:not(.active-input) {
+  display: none;
+}
+
 .cta-btn {
   width: 100%;
   padding: 16px;
@@ -1514,6 +1523,65 @@ body {
   color: #4CAF50;
   background-color: rgba(76, 175, 80, 0.1);
   border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Адаптивность для CTA Form Section */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 4rem 0;
+  }
+  
+  .cta-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 20px;
+  }
+  
+  .cta-content {
+    order: 2;
+    text-align: center;
+  }
+  
+  .cta-title {
+    font-size: 2rem;
+  }
+  
+  .cta-subtitle {
+    font-size: 1rem;
+  }
+  
+  .social-proof {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .testimonials-preview {
+    margin-top: 1rem;
+  }
+  
+  .cta-form-container {
+    order: 1;
+    padding: 1.5rem;
+  }
+  
+  .form-header {
+    text-align: center;
+  }
+  
+  .contact-type-selector {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .contact-type-btn {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .contact-type-btn i {
+    font-size: 1rem;
+  }
 }
 
 /* Футер */

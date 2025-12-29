@@ -416,14 +416,10 @@ function initializeCtaForm() {
             if (type === 'email') {
                 emailInput.classList.add('active-input');
                 phoneInput.classList.remove('active-input');
-                emailInput.style.display = 'block';
-                phoneInput.style.display = 'none';
                 emailInput.focus();
             } else {
                 phoneInput.classList.add('active-input');
                 emailInput.classList.remove('active-input');
-                phoneInput.style.display = 'block';
-                emailInput.style.display = 'none';
                 phoneInput.focus();
             }
         });
