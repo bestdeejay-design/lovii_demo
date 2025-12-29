@@ -4305,6 +4305,22 @@ body {
     color: #00BCD4;
 }
 
+.activity-item.analytics {
+    border-left-color: #607D8B;
+}
+
+.activity-item.analytics .activity-icon {
+    color: #607D8B;
+}
+
+.activity-item.registration {
+    border-left-color: #795548;
+}
+
+.activity-item.registration .activity-icon {
+    color: #795548;
+}
+
 .activity-item:last-child {
     margin-bottom: 0;
 }

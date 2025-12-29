@@ -786,56 +786,126 @@ function updateActivityFeed() {
     // For now, we'll simulate activity updates
     const activityItems = document.querySelectorAll('.activity-item');
     if (activityItems.length > 0) {
-        // Add new random activity every 10 seconds
-        setInterval(() => {
+        // Function to get random interval between 1.2 and 4 seconds
+        function getRandomInterval() {
+            return Math.floor(Math.random() * 2800) + 1200;
+        }
+
+        // Function to get random batch size (3-5 events)
+        function getRandomBatchSize() {
+            return Math.floor(Math.random() * 3) + 3;
+        }
+
+        // Function to update activity with dynamic timing
+        function updateActivity() {
             // Create a new activity item
             const activityTypes = [
-                { icon: '🛒', action: 'покупку', entity: 'Иван Иванов', location: 'в Москве', amount: '', type: 'purchase' },
-                { icon: '📦', action: 'подключил', entity: 'Мария Смирнова', location: '', amount: '5 новых товаров', type: 'new-products' },
-                { icon: '🚚', action: 'оформил заказ', entity: 'ООО "Торг"', location: '', amount: 'на 15 000 ₽', type: 'order' },
-                { icon: '⭐', action: 'оставил отзыв', entity: 'Анна Петрова', location: '', amount: 'о товаре', type: 'review' },
-                { icon: '🔄', action: 'совершил повторную', entity: 'Сергей Козлов', location: 'в Казани', amount: '', type: 'reorder' },
-                { icon: '📈', action: 'увеличил продажи', entity: 'ИП Сидоров', location: '', amount: 'на 30%', type: 'sales' }
-            ];
+  // Покупки
+  { icon: '🛒', action: 'совершил покупку', entity: 'Иван Иванов', location: 'в Москве', amount: 'на 14 723 ₽', type: 'purchase' },
+  { icon: '🛒', action: 'купил', entity: 'Артём Лебедев', location: 'в Санкт-Петербурге', amount: 'на 8 391 ₽', type: 'purchase' },
+  { icon: '🛒', action: 'оформил заказ', entity: 'ООО «Горизонт»', location: 'в Новосибирске', amount: 'на 62 847 ₽', type: 'purchase' },
+  { icon: '🛒', action: 'приобрёл', entity: 'Елена Кузнецова', location: 'в Казани', amount: 'на 3 429 ₽', type: 'purchase' },
+  { icon: '🛒', action: 'сделал заказ', entity: 'ИП Морозов', location: 'в Екатеринбурге', amount: 'на 27 615 ₽', type: 'purchase' },
+  
+  // Подключение товаров
+  { icon: '📦', action: 'подключил', entity: 'Мария Смирнова', location: '', amount: '7 новых товаров', type: 'new-products' },
+  { icon: '📦', action: 'добавил ассортимент', entity: 'ООО «Феникс»', location: '', amount: '12 SKU', type: 'new-products' },
+  { icon: '📦', action: 'расширил каталог', entity: 'Дмитрий Орлов', location: '', amount: '9 позиций', type: 'new-products' },
+  { icon: '📦', action: 'загрузил', entity: 'ИП Волкова', location: '', amount: '23 наименования', type: 'new-products' },
+  { icon: '📦', action: 'обновил предложения', entity: 'Татьяна Жукова', location: '', amount: '15 товаров', type: 'new-products' },
+
+  // Заказы
+  { icon: '🚚', action: 'оформил заказ', entity: 'ООО «Торг»', location: '', amount: 'на 15 000 ₽', type: 'order' },
+  { icon: '🚚', action: 'отправил заказ', entity: 'Антон Гусев', location: '', amount: 'на 4 872 ₽', type: 'order' },
+  { icon: '🚚', action: 'сформировал поставку', entity: 'ИП Романов', location: '', amount: 'на 31 284 ₽', type: 'order' },
+  { icon: '🚚', action: 'заказал', entity: 'Светлана Ершова', location: '', amount: 'на 18 639 ₽', type: 'order' },
+  { icon: '🚚', action: 'подтвердил доставку', entity: 'ООО «Вектор»', location: '', amount: 'на 72 503 ₽', type: 'order' },
+
+  // Отзывы и рейтинги
+  { icon: '⭐', action: 'оставил отзыв', entity: 'Анна Петрова', location: '', amount: 'о товаре', type: 'review' },
+  { icon: '⭐', action: 'оценил', entity: 'Максим Соколов', location: '', amount: 'магазин на 4.8', type: 'review' },
+  { icon: '⭐', action: 'написал рекомендацию', entity: 'ИП Ковалёв', location: '', amount: 'для нового поставщика', type: 'review' },
+  { icon: '⭐', action: 'отметил качество', entity: 'Наталья Белова', location: '', amount: 'в описании товара', type: 'review' },
+  { icon: '⭐', action: 'поделился опытом', entity: 'Олег Фёдоров', location: '', amount: 'в карточке продавца', type: 'review' },
+
+  // Повторные действия
+  { icon: '🔄', action: 'совершил повторную', entity: 'Сергей Козлов', location: 'в Казани', amount: 'покупку', type: 'reorder' },
+  { icon: '🔄', action: 'вернулся и заказал', entity: 'Евгения Маркова', location: 'в Самаре', amount: 'ещё раз', type: 'reorder' },
+  { icon: '🔄', action: 'сделал повторный заказ', entity: 'ООО «Лотос»', location: 'в Ростове-на-Дону', amount: 'через неделю', type: 'reorder' },
+  { icon: '🔄', action: 'купил снова', entity: 'ИП Григорьева', location: 'в Краснодаре', amount: 'то же наименование', type: 'reorder' },
+  { icon: '🔄', action: 'повторил покупку', entity: 'Арсений Воронцов', location: 'в Волгограде', amount: 'по рекомендации', type: 'reorder' },
+
+  // Рост и аналитика
+  { icon: '📈', action: 'увеличил продажи', entity: 'ИП Сидоров', location: '', amount: 'на 30%', type: 'sales' },
+  { icon: '📈', action: 'вышел в топ', entity: 'ООО «Меркурий»', location: '', amount: 'категории «Быт»', type: 'sales' },
+  { icon: '📈', action: 'превысил план', entity: 'Андрей Никитин', location: '', amount: 'на 22%', type: 'sales' },
+  { icon: '📈', action: 'улучшил конверсию', entity: 'Людмила Степанова', location: '', amount: 'на 17%', type: 'sales' },
+  { icon: '📈', action: 'увеличил средний чек', entity: 'ИП Попов', location: '', amount: 'до 9 240 ₽', type: 'sales' },
+
+  // Аналитика, подключение платформ
+  { icon: '📊', action: 'подключил аналитику', entity: 'Иванов и Ко', location: '', amount: 'по продажам', type: 'analytics' },
+  { icon: '📊', action: 'начал использовать', entity: 'ООО «Квант»', location: '', amount: 'отчёты по трафику', type: 'analytics' },
+  { icon: '📊', action: 'настроил витрину', entity: 'Ксения Ларионова', location: '', amount: 'под сезон', type: 'analytics' },
+
+  // Новые пользователи / регистрации
+  { icon: '🆕', action: 'зарегистрировался', entity: 'ИП Зайцев', location: 'из Челябинска', amount: '', type: 'registration' },
+  { icon: '🆕', action: 'присоединился к платформе', entity: 'ООО «Сфера»', location: 'из Владивостока', amount: '', type: 'registration' },
+  { icon: '🆕', action: 'открыл магазин', entity: 'Дарья Мельникова', location: 'в Сочи', amount: '', type: 'registration' }
+];
             
-            const randomActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
+            // Get random batch size
+            const batchSize = getRandomBatchSize();
             
-            // Find a random activity item to update
-            const randomIndex = Math.floor(Math.random() * activityItems.length);
-            const activityItem = activityItems[randomIndex];
-            
-            // Update the content
-            const activityIcon = activityItem.querySelector('.activity-icon');
-            const activityContent = activityItem.querySelector('.activity-content p');
-            const activityTime = activityItem.querySelector('.activity-time');
-            
-            // Remove previous type classes
-            activityItem.classList.remove('purchase', 'new-products', 'order', 'review', 'reorder', 'sales');
-            
-            // Add new type class
-            activityItem.classList.add(randomActivity.type);
-            
-            if (activityIcon && activityContent && activityTime) {
-                activityIcon.textContent = randomActivity.icon;
-                
-                let contentText = `<strong>${randomActivity.entity}</strong> ${randomActivity.action}`;
-                if (randomActivity.location) {
-                    contentText += ` ${randomActivity.location}`;
-                }
-                if (randomActivity.amount) {
-                    contentText += ` ${randomActivity.amount}`;
-                }
-                
-                activityContent.innerHTML = contentText;
-                activityTime.textContent = 'только что';
-                
-                // Add pulse animation effect
-                activityItem.classList.add('pulse');
+            // Update multiple activities in this batch
+            for (let i = 0; i < batchSize; i++) {
+                // Add a slight delay between each update in the batch for a more natural effect
                 setTimeout(() => {
-                    activityItem.classList.remove('pulse');
-                }, 500);
+                    const randomActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
+                    
+                    // Find a random activity item to update
+                    const randomIndex = Math.floor(Math.random() * activityItems.length);
+                    const activityItem = activityItems[randomIndex];
+                    
+                    // Update the content
+                    const activityIcon = activityItem.querySelector('.activity-icon');
+                    const activityContent = activityItem.querySelector('.activity-content p');
+                    const activityTime = activityItem.querySelector('.activity-time');
+                    
+                    // Remove previous type classes
+                    activityItem.classList.remove('purchase', 'new-products', 'order', 'review', 'reorder', 'sales', 'analytics', 'registration');
+                    
+                    // Add new type class
+                    activityItem.classList.add(randomActivity.type);
+                    
+                    if (activityIcon && activityContent && activityTime) {
+                        activityIcon.textContent = randomActivity.icon;
+                        
+                        let contentText = `<strong>${randomActivity.entity}</strong> ${randomActivity.action}`;
+                        if (randomActivity.location) {
+                            contentText += ` ${randomActivity.location}`;
+                        }
+                        if (randomActivity.amount) {
+                            contentText += ` ${randomActivity.amount}`;
+                        }
+                        
+                        activityContent.innerHTML = contentText;
+                        activityTime.textContent = 'только что';
+                        
+                        // Add pulse animation effect
+                        activityItem.classList.add('pulse');
+                        setTimeout(() => {
+                            activityItem.classList.remove('pulse');
+                        }, 500);
+                    }
+                }, i * 100); // Stagger the updates slightly
             }
-        }, 10000); // Update every 10 seconds
+            
+            // Schedule next update with random interval
+            setTimeout(updateActivity, getRandomInterval());
+        }
+        
+        // Start the first update
+        setTimeout(updateActivity, getRandomInterval());
         
         // Update time displays every minute
         setInterval(() => {
