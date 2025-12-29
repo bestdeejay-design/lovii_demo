@@ -780,162 +780,187 @@ function updateCartCount() {
     console.log('Cart updated');
 }
 
-// Update activity feed with dynamic content
+// Update activity feed with dynamic content - Vertical scrolling implementation
 function updateActivityFeed() {
-    // This would normally fetch actual activity from an API
-    // For now, we'll simulate activity updates
-    const activityItems = document.querySelectorAll('.activity-item');
-    if (activityItems.length > 0) {
-        // Store timer references to prevent conflicts
-        let activityTimer = null;
-        let timeUpdater = null;
+    // Create a pool of 5 activity cards and implement vertical scrolling
+    const activityFeed = document.querySelector('.activity-feed');
+    if (!activityFeed) {
+        console.warn('Activity feed container not found');
+        return;
+    }
+
+    // Store timer references to prevent conflicts
+    let activityTimer = null;
+    let timeUpdater = null;
+    
+    // Function to get random interval between 1.5 and 4 seconds
+    function getRandomInterval() {
+        return Math.floor(Math.random() * 2500) + 1500;
+    }
+
+    // Function to create a new activity item
+    function createActivityItem(activity) {
+        const activityItem = document.createElement('div');
+        activityItem.className = `activity-item ${activity.type}`;
         
-        // Function to get random interval between 1.2 and 4 seconds
-        function getRandomInterval() {
-            return Math.floor(Math.random() * 2800) + 1200;
+        // Build content text properly, avoiding empty strings
+        let contentText = `<strong>${activity.entity}</strong> ${activity.action}`;
+        if (activity.location && activity.location.trim() !== '') {
+            contentText += ` ${activity.location}`;
         }
-
-        // Function to get random batch size (1-2 events instead of 3-5 to reduce choppiness)
-        function getRandomBatchSize() {
-            return Math.floor(Math.random() * 2) + 1; // Changed from 3-5 to 1-2
-        }
-
-        // Function to update activity with dynamic timing
-        function updateActivity() {
-            // Create a new activity item
-            const activityTypes = [
-  // Покупки
-  { icon: '🛒', action: 'совершил покупку', entity: 'Иван Иванов', location: 'в Москве', amount: 'на 14 723 ₽', type: 'purchase' },
-  { icon: '🛒', action: 'купил', entity: 'Артём Лебедев', location: 'в Санкт-Петербурге', amount: 'на 8 391 ₽', type: 'purchase' },
-  { icon: '🛒', action: 'оформил заказ', entity: 'ООО «Горизонт»', location: 'в Новосибирске', amount: 'на 62 847 ₽', type: 'purchase' },
-  { icon: '🛒', action: 'приобрёл', entity: 'Елена Кузнецова', location: 'в Казани', amount: 'на 3 429 ₽', type: 'purchase' },
-  { icon: '🛒', action: 'сделал заказ', entity: 'ИП Морозов', location: 'в Екатеринбурге', amount: 'на 27 615 ₽', type: 'purchase' },
-  
-  // Подключение товаров
-  { icon: '📦', action: 'подключил', entity: 'Мария Смирнова', location: '', amount: '7 новых товаров', type: 'new-products' },
-  { icon: '📦', action: 'добавил ассортимент', entity: 'ООО «Феникс»', location: '', amount: '12 SKU', type: 'new-products' },
-  { icon: '📦', action: 'расширил каталог', entity: 'Дмитрий Орлов', location: '', amount: '9 позиций', type: 'new-products' },
-  { icon: '📦', action: 'загрузил', entity: 'ИП Волкова', location: '', amount: '23 наименования', type: 'new-products' },
-  { icon: '📦', action: 'обновил предложения', entity: 'Татьяна Жукова', location: '', amount: '15 товаров', type: 'new-products' },
-
-  // Заказы
-  { icon: '🚚', action: 'оформил заказ', entity: 'ООО «Торг»', location: 'в Нижнем Новгороде', amount: 'на 23 487 ₽', type: 'order' },
-  { icon: '🚚', action: 'отправил заказ', entity: 'Антон Гусев', location: '', amount: 'на 4 872 ₽', type: 'order' },
-  { icon: '🚚', action: 'сформировал поставку', entity: 'ИП Романов', location: '', amount: 'на 31 284 ₽', type: 'order' },
-  { icon: '🚚', action: 'заказал', entity: 'Светлана Ершова', location: '', amount: 'на 18 639 ₽', type: 'order' },
-  { icon: '🚚', action: 'подтвердил доставку', entity: 'ООО «Вектор»', location: '', amount: 'на 72 503 ₽', type: 'order' },
-
-  // Отзывы и рейтинги
-  { icon: '⭐', action: 'оставил отзыв', entity: 'Анна Петрова', location: '', amount: 'о товаре', type: 'review' },
-  { icon: '⭐', action: 'оценил', entity: 'Максим Соколов', location: '', amount: 'магазин на 4.8', type: 'review' },
-  { icon: '⭐', action: 'написал рекомендацию', entity: 'ИП Ковалёв', location: '', amount: 'для нового поставщика', type: 'review' },
-  { icon: '⭐', action: 'отметил качество', entity: 'Наталья Белова', location: '', amount: 'в описании товара', type: 'review' },
-  { icon: '⭐', action: 'поделился опытом', entity: 'Олег Фёдоров', location: '', amount: 'в карточке продавца', type: 'review' },
-
-  // Повторные действия
-  { icon: '🔄', action: 'совершил повторную', entity: 'Сергей Козлов', location: 'в Казани', amount: 'покупку', type: 'reorder' },
-  { icon: '🔄', action: 'вернулся и заказал', entity: 'Евгения Маркова', location: 'в Самаре', amount: 'ещё раз', type: 'reorder' },
-  { icon: '🔄', action: 'сделал повторный заказ', entity: 'ООО «Лотос»', location: 'в Ростове-на-Дону', amount: 'через неделю', type: 'reorder' },
-  { icon: '🔄', action: 'купил снова', entity: 'ИП Григорьева', location: 'в Краснодаре', amount: 'то же наименование', type: 'reorder' },
-  { icon: '🔄', action: 'повторил покупку', entity: 'Арсений Воронцов', location: 'в Волгограде', amount: 'по рекомендации', type: 'reorder' },
-
-  // Рост и аналитика
-  { icon: '📈', action: 'увеличил продажи', entity: 'ИП Сидоров', location: '', amount: 'на 30%', type: 'sales' },
-  { icon: '📈', action: 'вышел в топ', entity: 'ООО «Меркурий»', location: '', amount: 'категории «Быт»', type: 'sales' },
-  { icon: '📈', action: 'превысил план', entity: 'Андрей Никитин', location: '', amount: 'на 22%', type: 'sales' },
-  { icon: '📈', action: 'улучшил конверсию', entity: 'Людмила Степанова', location: '', amount: 'на 17%', type: 'sales' },
-  { icon: '📈', action: 'увеличил средний чек', entity: 'ИП Попов', location: '', amount: 'до 9 240 ₽', type: 'sales' },
-
-  // Аналитика, подключение платформ
-  { icon: '📊', action: 'подключил аналитику', entity: 'Иванов и Ко', location: '', amount: 'по продажам', type: 'analytics' },
-  { icon: '📊', action: 'начал использовать', entity: 'ООО «Квант»', location: '', amount: 'отчёты по трафику', type: 'analytics' },
-  { icon: '📊', action: 'настроил витрину', entity: 'Ксения Ларионова', location: '', amount: 'под сезон', type: 'analytics' },
-
-  // Новые пользователи / регистрации
-  { icon: '🆕', action: 'зарегистрировался', entity: 'ИП Зайцев', location: 'из Челябинска', amount: '', type: 'registration' },
-  { icon: '🆕', action: 'присоединился к платформе', entity: 'ООО «Сфера»', location: 'из Владивостока', amount: '', type: 'registration' },
-  { icon: '🆕', action: 'открыл магазин', entity: 'Дарья Мельникова', location: 'в Сочи', amount: '', type: 'registration' }
-];
-            
-            // Get random batch size (reduced to 1-2 to prevent choppiness)
-            const batchSize = getRandomBatchSize();
-            
-            // Update activities with proper spacing to prevent choppiness
-            for (let i = 0; i < batchSize; i++) {
-                // Stagger updates more significantly to prevent overlap
-                setTimeout(() => {
-                    const randomActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
-                    
-                    // Find a random activity item to update
-                    const randomIndex = Math.floor(Math.random() * activityItems.length);
-                    const activityItem = activityItems[randomIndex];
-                    
-                    // Update the content
-                    const activityIcon = activityItem.querySelector('.activity-icon');
-                    const activityContent = activityItem.querySelector('.activity-content p');
-                    const activityTime = activityItem.querySelector('.activity-time');
-                    
-                    // Remove previous type classes
-                    activityItem.classList.remove('purchase', 'new-products', 'order', 'review', 'reorder', 'sales', 'analytics', 'registration');
-                    
-                    // Add new type class
-                    activityItem.classList.add(randomActivity.type);
-                    
-                    if (activityIcon && activityContent && activityTime) {
-                        // Add fade-out effect before updating
-                        activityItem.style.opacity = '0.6';
-                        activityItem.style.transform = 'translateX(-10px)';
-                        
-                        setTimeout(() => {
-                            activityIcon.textContent = randomActivity.icon;
-                            
-                            let contentText = `<strong>${randomActivity.entity}</strong> ${randomActivity.action}`;
-                            if (randomActivity.location) {
-                                contentText += ` ${randomActivity.location}`;
-                            }
-                            if (randomActivity.amount) {
-                                contentText += ` ${randomActivity.amount}`;
-                            }
-                            
-                            activityContent.innerHTML = contentText;
-                            activityTime.textContent = 'только что';
-                            
-                            // Add pulse animation effect
-                            activityItem.classList.add('pulse');
-                            setTimeout(() => {
-                                activityItem.classList.remove('pulse');
-                            }, 500);
-                            
-                            // Restore normal appearance
-                            activityItem.style.opacity = '1';
-                            activityItem.style.transform = 'translateX(0)';
-                        }, 150); // Slight delay for the update
-                    }
-                }, i * 300); // Increased delay between updates to 300ms to prevent choppiness
-            }
-            
-            // Schedule next update with random interval
-            activityTimer = setTimeout(updateActivity, getRandomInterval());
+        if (activity.amount && activity.amount.trim() !== '') {
+            contentText += ` ${activity.amount}`;
         }
         
-        // Start the first update
-        activityTimer = setTimeout(updateActivity, getRandomInterval());
+        activityItem.innerHTML = `
+            <div class="activity-icon">${activity.icon}</div>
+            <div class="activity-content">
+                <p>${contentText}</p>
+                <span class="activity-time">только что</span>
+            </div>
+        `;
+        return activityItem;
+    }
+
+    // Define activity types (excluding the problematic "ООО \"Торг\"")
+    const activityTypes = [
+        // Покупки
+        { icon: '🛒', action: 'совершил покупку', entity: 'Иван Иванов', location: 'в Москве', amount: 'на 14 723 ₽', type: 'purchase' },
+        { icon: '🛒', action: 'купил', entity: 'Артём Лебедев', location: 'в Санкт-Петербурге', amount: 'на 8 391 ₽', type: 'purchase' },
+        { icon: '🛒', action: 'оформил заказ', entity: 'ООО «Горизонт»', location: 'в Новосибирске', amount: 'на 62 847 ₽', type: 'purchase' },
+        { icon: '🛒', action: 'приобрёл', entity: 'Елена Кузнецова', location: 'в Казани', amount: 'на 3 429 ₽', type: 'purchase' },
+        { icon: '🛒', action: 'сделал заказ', entity: 'ИП Морозов', location: 'в Екатеринбурге', amount: 'на 27 615 ₽', type: 'purchase' },
         
-        // Update time displays every minute
-        timeUpdater = setInterval(() => {
-            const timeElements = document.querySelectorAll('.activity-time');
-            timeElements.forEach(timeEl => {
-                if (timeEl.textContent.includes('только что')) {
-                    timeEl.textContent = '1 минуту назад';
-                } else if (timeEl.textContent.includes('минуту назад')) {
-                    timeEl.textContent = '2 минуты назад';
-                } else if (timeEl.textContent.includes('минуты назад')) {
-                    const minutes = parseInt(timeEl.textContent) + 1;
+        // Подключение товаров
+        { icon: '📦', action: 'подключил', entity: 'Мария Смирнова', location: '', amount: '7 новых товаров', type: 'new-products' },
+        { icon: '📦', action: 'добавил ассортимент', entity: 'ООО «Феникс»', location: '', amount: '12 SKU', type: 'new-products' },
+        { icon: '📦', action: 'расширил каталог', entity: 'Дмитрий Орлов', location: '', amount: '9 позиций', type: 'new-products' },
+        { icon: '📦', action: 'загрузил', entity: 'ИП Волкова', location: '', amount: '23 наименования', type: 'new-products' },
+        { icon: '📦', action: 'обновил предложения', entity: 'Татьяна Жукова', location: '', amount: '15 товаров', type: 'new-products' },
+
+        // Заказы (excluding the problematic "ООО «Торг»")
+        { icon: '🚚', action: 'отправил заказ', entity: 'Антон Гусев', location: '', amount: 'на 4 872 ₽', type: 'order' },
+        { icon: '🚚', action: 'сформировал поставку', entity: 'ИП Романов', location: '', amount: 'на 31 284 ₽', type: 'order' },
+        { icon: '🚚', action: 'заказал', entity: 'Светлана Ершова', location: '', amount: 'на 18 639 ₽', type: 'order' },
+        { icon: '🚚', action: 'подтвердил доставку', entity: 'ООО «Вектор»', location: '', amount: 'на 72 503 ₽', type: 'order' },
+        { icon: '🚚', action: 'оформил заказ', entity: 'ООО «Альфа»', location: 'в Красноярске', amount: 'на 45 120 ₽', type: 'order' },
+
+        // Отзывы и рейтинги
+        { icon: '⭐', action: 'оставил отзыв', entity: 'Анна Петрова', location: '', amount: 'о товаре', type: 'review' },
+        { icon: '⭐', action: 'оценил', entity: 'Максим Соколов', location: '', amount: 'магазин на 4.8', type: 'review' },
+        { icon: '⭐', action: 'написал рекомендацию', entity: 'ИП Ковалёв', location: '', amount: 'для нового поставщика', type: 'review' },
+        { icon: '⭐', action: 'отметил качество', entity: 'Наталья Белова', location: '', amount: 'в описании товара', type: 'review' },
+        { icon: '⭐', action: 'поделился опытом', entity: 'Олег Фёдоров', location: '', amount: 'в карточке продавца', type: 'review' },
+
+        // Повторные действия
+        { icon: '🔄', action: 'совершил повторную', entity: 'Сергей Козлов', location: 'в Казани', amount: 'покупку', type: 'reorder' },
+        { icon: '🔄', action: 'вернулся и заказал', entity: 'Евгения Маркова', location: 'в Самаре', amount: 'ещё раз', type: 'reorder' },
+        { icon: '🔄', action: 'сделал повторный заказ', entity: 'ООО «Лотос»', location: 'в Ростове-на-Дону', amount: 'через неделю', type: 'reorder' },
+        { icon: '🔄', action: 'купил снова', entity: 'ИП Григорьева', location: 'в Краснодаре', amount: 'то же наименование', type: 'reorder' },
+        { icon: '🔄', action: 'повторил покупку', entity: 'Арсений Воронцов', location: 'в Волгограде', amount: 'по рекомендации', type: 'reorder' },
+
+        // Рост и аналитика
+        { icon: '📈', action: 'увеличил продажи', entity: 'ИП Сидоров', location: '', amount: 'на 30%', type: 'sales' },
+        { icon: '📈', action: 'вышел в топ', entity: 'ООО «Меркурий»', location: '', amount: 'категории «Быт»', type: 'sales' },
+        { icon: '📈', action: 'превысил план', entity: 'Андрей Никитин', location: '', amount: 'на 22%', type: 'sales' },
+        { icon: '📈', action: 'улучшил конверсию', entity: 'Людмила Степанова', location: '', amount: 'на 17%', type: 'sales' },
+        { icon: '📈', action: 'увеличил средний чек', entity: 'ИП Попов', location: '', amount: 'до 9 240 ₽', type: 'sales' },
+
+        // Аналитика, подключение платформ
+        { icon: '📊', action: 'подключил аналитику', entity: 'Иванов и Ко', location: '', amount: 'по продажам', type: 'analytics' },
+        { icon: '📊', action: 'начал использовать', entity: 'ООО «Квант»', location: '', amount: 'отчёты по трафику', type: 'analytics' },
+        { icon: '📊', action: 'настроил витрину', entity: 'Ксения Ларионова', location: '', amount: 'под сезон', type: 'analytics' },
+
+        // Новые пользователи / регистрации
+        { icon: '🆕', action: 'зарегистрировался', entity: 'ИП Зайцев', location: 'из Челябинска', amount: '', type: 'registration' },
+        { icon: '🆕', action: 'присоединился к платформе', entity: 'ООО «Сфера»', location: 'из Владивостока', amount: '', type: 'registration' },
+        { icon: '🆕', action: 'открыл магазин', entity: 'Дарья Мельникова', location: 'в Сочи', amount: '', type: 'registration' }
+    ];
+
+    // Function to add a new activity to the bottom of the feed
+    function addNewActivity() {
+        const randomActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
+        
+        // Create new activity item
+        const newActivityItem = createActivityItem(randomActivity);
+        
+        // Add animation class for smooth entry
+        newActivityItem.style.opacity = '0';
+        newActivityItem.style.transform = 'translateY(20px)';
+        
+        // Add to the bottom of the feed
+        activityFeed.appendChild(newActivityItem);
+        
+        // Animate in
+        setTimeout(() => {
+            newActivityItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            newActivityItem.style.opacity = '1';
+            newActivityItem.style.transform = 'translateY(0)';
+        }, 10);
+
+        // Maintain pool size of 5 cards - remove the oldest if we have more than 5
+        const allActivities = activityFeed.querySelectorAll('.activity-item');
+        if (allActivities.length > 5) {
+            // Remove the first (oldest) activity with animation
+            const oldestActivity = allActivities[0];
+            oldestActivity.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            oldestActivity.style.opacity = '0';
+            oldestActivity.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                if (oldestActivity.parentNode) {
+                    oldestActivity.parentNode.removeChild(oldestActivity);
+                }
+            }, 300);
+        }
+    }
+
+    // Function to update time displays
+    function updateTimeDisplays() {
+        const timeElements = document.querySelectorAll('.activity-time');
+        timeElements.forEach(timeEl => {
+            if (timeEl.textContent.includes('только что')) {
+                timeEl.textContent = '1 минуту назад';
+            } else if (timeEl.textContent.includes('минуту назад')) {
+                timeEl.textContent = '2 минуты назад';
+            } else if (timeEl.textContent.includes('минуты назад')) {
+                const minutesMatch = timeEl.textContent.match(/(\d+)/);
+                if (minutesMatch) {
+                    const minutes = parseInt(minutesMatch[0]) + 1;
                     timeEl.textContent = `${minutes} минут назад`;
                 }
-            });
-        }, 60000); // Update every minute
+            } else if (timeEl.textContent.includes('час назад')) {
+                timeEl.textContent = '2 часа назад';
+            } else if (timeEl.textContent.includes('часа назад') || timeEl.textContent.includes('часов назад')) {
+                const hoursMatch = timeEl.textContent.match(/(\d+)/);
+                if (hoursMatch) {
+                    const hours = parseInt(hoursMatch[0]) + 1;
+                    if (hours === 1) {
+                        timeEl.textContent = '1 час назад';
+                    } else if (hours > 1 && hours < 5) {
+                        timeEl.textContent = `${hours} часа назад`;
+                    } else {
+                        timeEl.textContent = `${hours} часов назад`;
+                    }
+                }
+            }
+        });
     }
+
+    // Add initial activities to start with some content
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+            addNewActivity();
+        }, i * 800); // Stagger initial activities
+    }
+
+    // Start adding new activities at random intervals
+    activityTimer = setInterval(() => {
+        addNewActivity();
+    }, getRandomInterval());
+
+    // Update time displays every minute
+    timeUpdater = setInterval(updateTimeDisplays, 60000); // Update every minute
 }
 
 // Update activity banner on products page
