@@ -1562,25 +1562,42 @@ body {
   .cta-form-container {
     order: 1;
     padding: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  
+
   .form-header {
     text-align: center;
   }
-  
+
   .contact-type-selector {
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
-  
+
   .contact-type-btn {
     flex-direction: row;
     gap: 0.5rem;
     padding: 0.6rem 1rem;
+    flex: 1 1 auto;
+    max-width: 45%;
+    min-width: 120px;
   }
-  
+
   .contact-type-btn i {
     font-size: 1rem;
+  }
+
+  .contact-input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cta-btn {
+    width: 100%;
   }
 }
 
