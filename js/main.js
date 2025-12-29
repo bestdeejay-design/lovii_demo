@@ -790,12 +790,12 @@ function updateActivityFeed() {
         setInterval(() => {
             // Create a new activity item
             const activityTypes = [
-                { icon: '🛒', action: 'покупку', entity: 'Иван Иванов', location: 'в Москве', amount: '' },
-                { icon: '📦', action: 'подключил', entity: 'Мария Смирнова', location: '', amount: '5 новых товаров' },
-                { icon: '🚚', action: 'оформил заказ', entity: 'ООО "Торг"', location: '', amount: 'на 15 000 ₽' },
-                { icon: '⭐', action: 'оставил отзыв', entity: 'Анна Петрова', location: '', amount: 'о товаре' },
-                { icon: '🔄', action: 'совершил повторную', entity: 'Сергей Козлов', location: 'в Казани', amount: '' },
-                { icon: '📈', action: 'увеличил продажи', entity: 'ИП Сидоров', location: '', amount: 'на 30%' }
+                { icon: '🛒', action: 'покупку', entity: 'Иван Иванов', location: 'в Москве', amount: '', type: 'purchase' },
+                { icon: '📦', action: 'подключил', entity: 'Мария Смирнова', location: '', amount: '5 новых товаров', type: 'new-products' },
+                { icon: '🚚', action: 'оформил заказ', entity: 'ООО "Торг"', location: '', amount: 'на 15 000 ₽', type: 'order' },
+                { icon: '⭐', action: 'оставил отзыв', entity: 'Анна Петрова', location: '', amount: 'о товаре', type: 'review' },
+                { icon: '🔄', action: 'совершил повторную', entity: 'Сергей Козлов', location: 'в Казани', amount: '', type: 'reorder' },
+                { icon: '📈', action: 'увеличил продажи', entity: 'ИП Сидоров', location: '', amount: 'на 30%', type: 'sales' }
             ];
             
             const randomActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
@@ -808,6 +808,12 @@ function updateActivityFeed() {
             const activityIcon = activityItem.querySelector('.activity-icon');
             const activityContent = activityItem.querySelector('.activity-content p');
             const activityTime = activityItem.querySelector('.activity-time');
+            
+            // Remove previous type classes
+            activityItem.classList.remove('purchase', 'new-products', 'order', 'review', 'reorder', 'sales');
+            
+            // Add new type class
+            activityItem.classList.add(randomActivity.type);
             
             if (activityIcon && activityContent && activityTime) {
                 activityIcon.textContent = randomActivity.icon;
@@ -823,11 +829,11 @@ function updateActivityFeed() {
                 activityContent.innerHTML = contentText;
                 activityTime.textContent = 'только что';
                 
-                // Add animation effect
-                activityItem.style.opacity = '0.5';
+                // Add pulse animation effect
+                activityItem.classList.add('pulse');
                 setTimeout(() => {
-                    activityItem.style.opacity = '1';
-                }, 300);
+                    activityItem.classList.remove('pulse');
+                }, 500);
             }
         }, 10000); // Update every 10 seconds
         
