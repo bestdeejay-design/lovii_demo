@@ -17,10 +17,10 @@ build/
 .venv/
 venv/
 node_modules/
-.mypy_cache/
-.pytest_cache/
 target/
 .gradle/
+.mypy_cache/
+.pytest_cache/
 
 # Logs and temp files
 *.log
@@ -48,7 +48,7 @@ coverage/
 htmlcov/
 .coverage
 
-# Common compressed files
+# Compressed files
 *.zip
 *.gz
 *.tar
