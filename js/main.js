@@ -1174,7 +1174,68 @@ function initializeContactForm() {
 // Initialize dynamic content after templates are loaded
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializeDynamicContent, 1000);
+    // Initialize footer accordion functionality
+    setTimeout(initializeFooterAccordion, 1000);
 });
+
+// Initialize footer accordion functionality
+function initializeFooterAccordion() {
+    const footerSectionTitles = document.querySelectorAll('.footer-section-title');
+    
+    footerSectionTitles.forEach(title => {
+        title.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const section = this.parentElement;
+            const content = section.querySelector('.footer-section-content');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            // Toggle expanded state
+            this.setAttribute('aria-expanded', !isExpanded);
+            content.setAttribute('aria-expanded', !isExpanded);
+            
+            // For mobile, only allow one section to be open at a time
+            if (window.innerWidth <= 768) {
+                // Close other sections
+                footerSectionTitles.forEach(otherTitle => {
+                    if (otherTitle !== this) {
+                        const otherContent = otherTitle.parentElement.querySelector('.footer-section-content');
+                        otherTitle.setAttribute('aria-expanded', 'false');
+                        otherContent.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+    });
+    
+    // Handle window resize to adjust accordion behavior
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            // On desktop, show all sections
+            footerSectionTitles.forEach(title => {
+                const content = title.parentElement.querySelector('.footer-section-content');
+                title.setAttribute('aria-expanded', 'true');
+                content.setAttribute('aria-expanded', 'true');
+            });
+        } else {
+            // On mobile, keep sections collapsed by default
+            footerSectionTitles.forEach(title => {
+                const content = title.parentElement.querySelector('.footer-section-content');
+                // Only keep expanded if it was explicitly opened by user
+                // (we'll leave this as is for now, but could add logic to track user preferences)
+            });
+        }
+    });
+    
+    // On desktop, expand all sections by default
+    if (window.innerWidth > 768) {
+        footerSectionTitles.forEach(title => {
+            const content = title.parentElement.querySelector('.footer-section-content');
+            title.setAttribute('aria-expanded', 'true');
+            content.setAttribute('aria-expanded', 'true');
+        });
+    }
+}
 
 
 // Updated function with animation
