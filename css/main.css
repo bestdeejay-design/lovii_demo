@@ -6,12 +6,12 @@
 @import url('./base/typography.css');
 
 /* Компоненты */
-@import url('./components/header.css');
+@import url('./style.css');
 @import url('./components/buttons.css');
-@import url('./components/hero.css');
-@import url('./components/categories.css');
+@import url('./components/hero_non_bem.css');
+@import url('./components/categories_non_bem.css');
 @import url('./components/theme-toggle.css');
-@import url('./components/navigation-icons.css');
+@import url('./components/navigation-icons_non_bem.css');
 
 /* Утилиты */
 @import url('./utils/layout.css');
