@@ -1,5 +1,18 @@
-The modified files (`js/main.js`, `pages.md`, `styles/main.css`, `templates/footer.html`) are all source code and configuration files. There are no build artifacts, dependencies, temporary files, or other items that need to be ignored based on the provided change list.
+```
+# Logs and temp files
+*.log
+*.tmp
+*.swp
 
-Since the changes consist only of source/config files and no build artifacts or dependencies, no additional ignore rules are needed.
+# Environment
+.env
+.env.local
+.env.*
 
-(empty — output nothing)
+# Editors
+.vscode/
+.idea/
+
+# Original rules preserved
+*.log
+```
