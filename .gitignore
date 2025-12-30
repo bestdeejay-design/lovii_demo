@@ -18,37 +18,51 @@ target/
 .venv/
 venv/
 node_modules/
-.julia/
-.zig/
+.pip/
 .mypy_cache/
 .pytest_cache/
-.gradle/
+.coverage
 coverage/
 htmlcov/
-*.coverage
+.julia/
+.zig/
+.gradle/
+.cargo/
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
 *.swo
+*.bak
+*.~*
 
 # Environment
 .env
 .env.local
 .env.*
+*.env
+.envrc
 
-# Editors
+# Editors and IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
+*.iml
+*.project
+*.pyc
+*.pyo
+*.pyd
 
-# System
+# System files
 .DS_Store
 Thumbs.db
+desktop.ini
+*.DS_Store
+ehthumbs.db
 
-# Compressed files
+# Common compressed files
 *.zip
 *.gz
 *.tar
@@ -71,4 +85,16 @@ Thumbs.db
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+
+# Documentation and build outputs
+docs/_build/
+*.pdf
+*.docx
+*.epub
+*.mobi
+
+# Testing
+.pytest_cache/
+.nyc_output/
+coverage/
 ```
