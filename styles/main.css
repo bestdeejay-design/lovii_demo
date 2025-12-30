@@ -2088,8 +2088,20 @@ body {
 /* Футер */
 .footer {
   background-color: var(--bg-secondary);
-  padding: 3rem 0 1rem;
+  padding: 2rem 0 1rem;
   margin-top: 5rem;
+}
+
+.footer-top {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.footer-logo .logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  text-decoration: none;
 }
 
 .footer-content {
@@ -2099,9 +2111,42 @@ body {
   margin-bottom: 2rem;
 }
 
-.footer-section h4 {
+/* Стили для аккордеонов в футере */
+.footer-section-title {
+  background: none;
+  border: none;
   color: var(--accent-color);
+  font-size: 1rem;
+  font-weight: 600;
   margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  transition: color 0.3s ease;
+}
+
+.footer-section-title:hover {
+  color: var(--text-primary);
+}
+
+.footer-toggle-icon {
+  transition: transform 0.3s ease;
+}
+
+.footer-section-title[aria-expanded="true"] .footer-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.footer-section-content {
+  display: none;
+}
+
+.footer-section-content[aria-expanded="true"] {
+  display: block;
 }
 
 .footer-section ul {
@@ -2116,6 +2161,8 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.3s ease;
+  display: block;
+  padding: 0.25rem 0;
 }
 
 .footer-section a:hover {
@@ -2162,6 +2209,31 @@ body {
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
   color: var(--text-secondary);
+}
+
+/* Адаптивность для футера */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-top {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-logo .logo {
+    font-size: 1.5rem;
+  }
+  
+  /* Показываем все секции в мобильной версии с аккордеонами */
+  .footer-section-content {
+    display: none; /* Скрыто по умолчанию */
+  }
+  
+  .footer-section-content[aria-expanded="true"] {
+    display: block;
+    margin-top: 0.5rem;
+  }
 }
 
 /* Адаптивность */
