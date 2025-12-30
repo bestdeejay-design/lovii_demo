@@ -1,0 +1,265 @@
+/* Стили для шапки сайта - по БЭМ методологии */
+
+/* Блок header */
+.header {
+  background-color: var(--bg-secondary);
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+
+/* Элемент container внутри header */
+.header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Элемент main-menu внутри header */
+.header__main-menu {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Элемент logo внутри header */
+.header__logo {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header__logo-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.header__logo-link:hover {
+  opacity: 0.8;
+}
+
+/* Элемент profile-menu внутри header */
+.header__profile-menu {
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+/* Элемент profile-link внутри header */
+.header__profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 0.5rem;
+  transition: color 0.3s ease;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.header__profile-link:hover {
+  color: var(--accent-color);
+}
+
+/* Элемент nav-menu внутри header */
+.header__nav-menu ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.header__nav-menu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.header__nav-menu a:hover {
+  color: var(--accent-color);
+}
+
+/* Элемент nav-item внутри header */
+.header .header__nav-menu ul .header__nav-item:not(.has-submenu) > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.header .header__nav-menu ul .header__nav-item:not(.has-submenu) > a:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Подменю в header */
+.header__nav-item.has-submenu {
+  position: relative;
+}
+
+.header__nav-menu ul .header__nav-item.has-submenu > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.header__nav-menu ul .header__nav-item.has-submenu > a:hover {
+  color: var(--accent-color);
+}
+
+.header__submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--bg-secondary);
+  min-width: 250px;
+  max-width: 400px;
+  border-radius: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  overflow-y: auto;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.header__submenu li {
+  list-style: none;
+  padding: 0;
+}
+
+.header__submenu a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  gap: 0.8rem;
+  border-left: 3px solid transparent;
+  min-height: 44px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.header__submenu a:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Адаптивные стили для header - mobile-first подход */
+@media (max-width: 768px) {
+  /* Стили для мобильной версии header */
+  .header {
+    padding: 0.5rem 0;
+  }
+  
+  .header__container {
+    flex-direction: column;
+    padding: 0.5rem 20px;
+    position: relative;
+  }
+  
+  .header__logo {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .header__main-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  
+  .header .header__nav-menu ul .header__nav-item.has-submenu > a {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .header .header__nav-menu ul .header__nav-item.theme-toggle-item a {
+    padding: 0.25rem 0 !important;
+  }
+  
+  /* Скрытие профильного меню на мобильных устройствах */
+  .header__profile-menu {
+    display: none !important;
+    margin-right: 0;
+    position: static;
+  }
+  
+  .header__profile-menu ul,
+  .header__profile-menu li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .header__submenu {
+    right: 0;
+    left: auto;
+  }
+}
+
+/* Десктопные стили - после мобильных, как положено в mobile-first подходе */
+@media (min-width: 769px) {
+  .header .header__nav-menu ul {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .header__nav-menu {
+    position: static;
+  }
+  
+  .header__nav-menu ul .header__nav-item:not(.has-submenu) {
+    display: block;
+  }
+  
+  .header__nav-menu ul .nav-divider {
+    width: calc(100% - 1rem);
+    margin: 0.5rem 0.5rem;
+  }
+  
+  .header__submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    border-radius: 0;
+  }
+  
+  .header__nav-item.has-submenu.show-submenu .header__submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}

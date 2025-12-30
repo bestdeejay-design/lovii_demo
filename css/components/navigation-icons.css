@@ -1,0 +1,164 @@
+/* Стили для иконок навигации - по БЭМ методологии */
+
+/* Блок search-icon */
+.search-icon,
+.promotions-icon,
+.recently-viewed-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.search-icon:hover,
+.promotions-icon:hover,
+.recently-viewed-icon:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Блок search-bar */
+.search-bar {
+  display: flex;
+  border-radius: 50px;
+  overflow: hidden;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+}
+
+.search-bar input {
+  padding: 8px 15px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  outline: none;
+  width: 200px;
+}
+
+.search-bar button {
+  padding: 8px 15px;
+  background: var(--accent-color);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Блок user-actions */
+.user-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Блок cart-icon */
+.cart-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cart-icon:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Блок compare-icon */
+.compare-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.compare-icon:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Блок wishlist-icon */
+.wishlist-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.wishlist-icon:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Элемент count для wishlist */
+.wishlist__count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Элемент count для cart */
+.cart__count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Блок mobile-menu-btn */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.mobile-menu-btn span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-primary);
+  transition: 0.3s;
+}

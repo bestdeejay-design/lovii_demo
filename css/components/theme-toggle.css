@@ -1,0 +1,131 @@
+/* Стили для переключателя темы - по БЭМ методологии */
+
+/* Блок theme-toggle */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  isolation: isolate;
+}
+
+/* Элемент before для эффекта стекла */
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    rgba(0, 0, 0, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+/* Элемент after для эффекта свечения */
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.theme-toggle i {
+  font-size: 1.4rem;
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s ease;
+  color: var(--text-primary);
+}
+
+/* Эффект при наведении на десктопе */
+@media (min-width: 769px) {
+  .theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.2),
+      0 4px 16px rgba(255, 255, 255, 0.1);
+  }
+  
+  .theme-toggle:hover::before {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.15) 0%, 
+      rgba(255, 255, 255, 0.1) 50%, 
+      rgba(0, 0, 0, 0.1) 100%);
+  }
+  
+  .theme-toggle:hover i {
+    transform: scale(1.2);
+  }
+}
+
+/* Эффект при клике */
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Анимация при смене темы */
+.theme-toggle.changing {
+  animation: themeChangePulse 0.6s ease-in-out;
+}
+
+@keyframes themeChangePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Стили для мобильного переключателя темы */
+@media (max-width: 768px) {
+  .header .theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .header .theme-toggle:hover {
+    background-color: var(--bg-secondary);
+  }
+}
