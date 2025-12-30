@@ -1,0 +1,17 @@
+/* Главный CSS файл - импортирует все компоненты по системе БЭМ и mobile-first подходу */
+
+/* Базовые стили */
+@import url('./base/variables.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+
+/* Компоненты */
+@import url('./components/header.css');
+@import url('./components/buttons.css');
+@import url('./components/hero.css');
+@import url('./components/categories.css');
+@import url('./components/theme-toggle.css');
+@import url('./components/navigation-icons.css');
+
+/* Утилиты */
+@import url('./utils/layout.css');
