@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="styles/main_menu_styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header will be loaded via JavaScript -->
@@ -22,29 +25,31 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Витрина — ваш товар на полке гипермаркета</h1>
-                <p>Подключаем малый бизнес к тысячам покупателей через приложение, сайт и сеть точек выдачи</p>
-                <div class="stats-banner">
-                    <div class="stat">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Поставщиков</div>
+                <div class="hero-text">
+                    <h1 class="hero-title">Витрина — ваш товар на полке гипермаркета</h1>
+                    <p class="hero-subtitle">Подключаем малый бизнес к тысячам покупателей через приложение, сайт и сеть точек выдачи</p>
+                    <div class="stats-banner">
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Поставщиков</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100K+</div>
+                            <div class="stat-label">Покупателей</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">ПВЗ</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">100K+</div>
-                        <div class="stat-label">Покупателей</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">ПВЗ</div>
+                    <div class="cta-buttons">
+                        <a href="#products" class="btn btn-primary">Смотреть каталог</a>
+                        <a href="#become-supplier" class="btn btn-secondary">Стать поставщиком</a>
                     </div>
                 </div>
-                <div class="cta-buttons">
-                    <a href="#products" class="btn btn-primary">Смотреть каталог</a>
-                    <a href="#become-supplier" class="btn btn-outline">Стать поставщиком</a>
+                <div class="hero-image">
+                    <img src="https://placehold.co/600x500/4a90e2/ffffff?text=Витрина+Marketplace" alt="Marketplace Products" class="hero-img">
                 </div>
-            </div>
-            <div class="hero-image">
-                <img src="images/hero_image.jpg" alt="Marketplace Products">
             </div>
         </div>
     </section>
@@ -52,28 +57,31 @@
     <!-- How it works Section -->
     <section id="how-it-works" class="features">
         <div class="container">
-            <h2>Начните продавать за 3 шага</h2>
+            <h2 class="section-title">Начните продавать за 3 шага</h2>
             <div class="features-grid">
                 <div class="feature-card">
+                    <div class="feature-step">1</div>
                     <div class="feature-icon">
                         <i class="fas fa-clipboard-list"></i>
                     </div>
-                    <h3>Регистрация</h3>
-                    <p>Заполните заявку, загрузите документы, пройдите верификацию за 24 часа</p>
+                    <h3 class="feature-title">Регистрация</h3>
+                    <p class="feature-description">Заполните заявку, загрузите документы, пройдите верификацию за 24 часа</p>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-step">2</div>
                     <div class="feature-icon">
                         <i class="fas fa-box"></i>
                     </div>
-                    <h3>Загрузка товаров</h3>
-                    <p>Добавьте товары через личный кабинет или интегрируйте с 1С</p>
+                    <h3 class="feature-title">Загрузка товаров</h3>
+                    <p class="feature-description">Добавьте товары через личный кабинет или интегрируйте с 1С</p>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-step">3</div>
                     <div class="feature-icon">
                         <i class="fas fa-credit-card"></i>
                     </div>
-                    <h3>Продажи и выплаты</h3>
-                    <p>Получайте заказы, автоматические выплаты и детальную аналитику</p>
+                    <h3 class="feature-title">Продажи и выплаты</h3>
+                    <p class="feature-description">Получайте заказы, автоматические выплаты и детальную аналитику</p>
                 </div>
             </div>
         </div>
@@ -82,40 +90,43 @@
     <!-- For whom Section -->
     <section id="for-whom" class="categories">
         <div class="container">
-            <h2>Витрина подходит для любого бизнеса</h2>
+            <h2 class="section-title">Витрина подходит для любого бизнеса</h2>
             <div class="categories-grid">
                 <div class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-bullseye"></i>
                     </div>
-                    <h3>Самозанятые</h3>
-                    <ul>
+                    <h3 class="category-title">Самозанятые</h3>
+                    <ul class="category-features">
                         <li>Продавайте без открытия ИП</li>
                         <li>Налог 4–6%</li>
                         <li>Вывод денег на карту</li>
                     </ul>
+                    <a href="become-supplier.html" class="category-link">Начать продавать</a>
                 </div>
                 <div class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-building"></i>
                     </div>
-                    <h3>ИП и ООО</h3>
-                    <ul>
+                    <h3 class="category-title">ИП и ООО</h3>
+                    <ul class="category-features">
                         <li>Подключение за 1 день</li>
                         <li>Работа с НДС и без НДС</li>
                         <li>Экспорт в 1С</li>
                     </ul>
+                    <a href="become-supplier.html" class="category-link">Начать продавать</a>
                 </div>
                 <div class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-store"></i>
                     </div>
-                    <h3>Гипермаркеты и ПВЗ</h3>
-                    <ul>
+                    <h3 class="category-title">Гипермаркеты и ПВЗ</h3>
+                    <ul class="category-features">
                         <li>Дополнительный трафик</li>
                         <li>Увеличение среднего чека</li>
                         <li>Автоматизация выдачи</li>
                     </ul>
+                    <a href="pvz.html" class="category-link">Стать ПВЗ</a>
                 </div>
             </div>
         </div>
@@ -421,15 +432,26 @@
     <section id="testimonials" class="testimonials-section">
         <div class="container">
             <div class="section-header">
-                <h2>Отзывы наших клиентов</h2>
+                <h2 class="section-title">Отзывы наших клиентов</h2>
                 <p>Узнайте, как Витрина помогает малому бизнесу расти и развиваться</p>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-rating">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                        <div class="testimonial-verified">
+                            <i class="fas fa-check-circle"></i> Проверенный поставщик
+                        </div>
+                    </div>
                     <div class="testimonial-content">
                         <p>С помощью Витрины увеличили продажи на 150% за 3 месяца. Платформа действительно помогает малому бизнесу выйти на новый уровень.</p>
                     </div>
-                    <div class="testimonial-rating">★★★★★</div>
                     <div class="testimonial-author">
                         <div class="author-avatar">ИП</div>
                         <div class="author-info">
@@ -440,10 +462,21 @@
                 </div>
 
                 <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-rating">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                        <div class="testimonial-verified">
+                            <i class="fas fa-check-circle"></i> Проверенный поставщик
+                        </div>
+                    </div>
                     <div class="testimonial-content">
                         <p>Автоматизация документооборота и быстрые выплаты — это то, что выделяет Витрину среди других маркетплейсов. Рекомендую!</p>
                     </div>
-                    <div class="testimonial-rating">★★★★★</div>
                     <div class="testimonial-author">
                         <div class="author-avatar">МК</div>
                         <div class="author-info">
@@ -454,10 +487,21 @@
                 </div>
 
                 <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-rating">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                        <div class="testimonial-verified">
+                            <i class="fas fa-check-circle"></i> Проверенный поставщик
+                        </div>
+                    </div>
                     <div class="testimonial-content">
                         <p>Подключились к платформе за 1 день. Удобный личный кабинет и отличная техподдержка. Теперь поставляем в 50+ точек выдачи.</p>
                     </div>
-                    <div class="testimonial-rating">★★★★★</div>
                     <div class="testimonial-author">
                         <div class="author-avatar">АО</div>
                         <div class="author-info">
@@ -486,11 +530,13 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Связаться с нами</h2>
+                <p>У вас есть вопросы? Наши специалисты готовы помочь вам 24/7</p>
+            </div>
+            
             <div class="contact-wrapper">
                 <div class="contact-content">
-                    <h2 class="contact-title">Связаться с нами</h2>
-                    <p class="contact-subtitle">У вас есть вопросы? Наши специалисты готовы помочь вам 24/7</p>
-                    
                     <div class="contact-info-grid">
                         <div class="contact-info-card">
                             <div class="contact-icon">
