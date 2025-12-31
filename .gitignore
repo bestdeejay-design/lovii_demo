@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore as the changes only include HTML and CSS source files, which should not be ignored.
+(css/components/hero.css is a source file, and there are no build artifacts, dependencies, or temporary files in the changes)
