@@ -20,6 +20,9 @@
 /* Контент внутри hero */
 .hero-content {
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero-content h1 {
@@ -38,12 +41,37 @@
   margin-bottom: 2rem;
 }
 
+/* Статистика баннер внутри hero */
+.stats-banner {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+  justify-content: flex-start;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
 /* Изображение внутри hero */
 .hero-image {
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .hero-img {
@@ -54,7 +82,7 @@
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   vertical-align: top;
-  object-fit: cover;
+  object-fit: contain;
   max-height: 400px;
 }
 
@@ -68,6 +96,11 @@
 
 /* Адаптивные стили для hero - mobile-first подход */
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
   .hero .container {
     grid-template-columns: 1fr;
     text-align: center;
@@ -75,10 +108,42 @@
   
   .hero-content {
     text-align: center;
+    order: 2; /* Move text content below image on mobile */
+  }
+  
+  .hero-image {
+    order: 1; /* Move image above text on mobile */
+    margin-bottom: 2rem;
   }
   
   .hero-img {
-    max-width: 300px;
-    margin: 0 auto;
+    max-width: 100%;
+    max-height: 300px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .stats-banner {
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-img {
+    max-width: 350px;
+    max-height: 350px;
   }
 }
