@@ -48,6 +48,14 @@
   max-width: 400px;
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  vertical-align: top;
+}
+
+.hero-img {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
 }
 
 /* Кнопки вызова к действию внутри hero */
