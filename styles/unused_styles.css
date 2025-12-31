@@ -73,3 +73,79 @@
   padding: 4rem 0;
   background: linear-gradient(135deg, var(--accent-color) 0%, #45a049 100%);
 }
+
+/* BEM styles for hero section that were conflicting with non-BEM styles */
+/* These are unused because the HTML uses non-BEM classes like .hero-content, .hero-image instead of .hero__content, .hero__image */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  padding: 4rem 0;
+}
+
+.hero__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero__content {
+  text-align: left;
+}
+
+.hero__title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--accent-color), #8BC34A);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.hero__image {
+  text-align: center;
+}
+
+.hero__image img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero__cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .hero__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero__content {
+    text-align: center;
+  }
+}
+
+/* Conflicting styles for hero image that were causing display issues */
+/* These styles were conflicting with .hero-img class styles */
+.hero-image img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  vertical-align: top;
+}

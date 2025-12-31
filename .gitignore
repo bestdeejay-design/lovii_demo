@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes. The deleted files are all HTML test files which are source files and should not be ignored.
+(css/components/hero.css, css/components/hero_non_bem.css, styles/unused_styles.css)
