@@ -426,6 +426,40 @@ body {
   color: white;
 }
 
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Добавлены классы с подчеркиванием для совместимости с HTML */
+.btn_primary {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.btn_primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
+}
+
+.btn_secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-primary);
+}
+
+.btn_secondary:hover {
+  background-color: var(--secondary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
