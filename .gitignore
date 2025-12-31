@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since the changes only include HTML files (test_header_footer.html and index.html), which are source files and should not be ignored.
+(empty)
