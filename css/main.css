@@ -6,7 +6,7 @@
 @import url('./base/typography.css');
 
 /* Компоненты */
-@import url('./style.css');  /* Стили шапки сайта */
+@import url('./components/header.css');  /* Стили шапки сайта и мобильной навигации */
 @import url('./components/buttons.css');  /* Кнопки */
 @import url('./components/hero.css');  /* Секция героя */
 @import url('./components/categories.css');  /* Секция категорий */
