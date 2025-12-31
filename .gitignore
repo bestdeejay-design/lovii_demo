@@ -1,68 +1,18 @@
 ```
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
-dist/
-build/
-target/
-
-# Dependencies
-.venv/
-venv/
-node_modules/
-.julia/
-.zig/
-
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-*.swo
 
 # Environment
 .env
 .env.local
-.env.*
+.env.
 
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Python specific
-*.pyc
-__pycache__/
-*.pyo
-*.pyd
-.Python
-*.so
-*.egg-info/
-.eggs/
-
-# MyPy cache
-.mypy_cache/
-.pytest_cache/
-
-# Distribution / packaging
-*.tar.gz
-*.whl
-*.egg
-
-# IDE specific
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
+# Original rules preserved
+*.log
 ```
