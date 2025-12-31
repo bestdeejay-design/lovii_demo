@@ -28,9 +28,6 @@
 .hero .container {
   position: relative;
   z-index: 2; /* Ensure content is above background effects */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
   width: 100%;
 }
 
@@ -41,8 +38,6 @@
   align-items: center;
   gap: 4rem;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 4rem 0;
 }
 
@@ -146,7 +141,6 @@
   object-fit: contain; /* Показывать всё изображение, без обрезки */
   max-height: 450px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin: auto; /* Центрирование */
 }
 
 .hero-img:hover {
@@ -225,14 +219,18 @@
   }
   
   .hero-image {
-    margin-bottom: 1.5rem;
-    max-width: 90%;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   .hero-img {
     max-width: 100%;
     max-height: 250px;
     object-fit: contain; /* Обеспечить полное отображение на мобильных */
+    width: auto;
+    height: auto;
   }
   
   .hero-title {
@@ -290,6 +288,12 @@
     font-size: 1.2rem;
   }
   
+  .hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .hero-img {
     max-width: 400px;
     max-height: 350px;
