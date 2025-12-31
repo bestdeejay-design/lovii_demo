@@ -1,12 +1,33 @@
 /* Стили для героя секции - с классами, соответствующими HTML (не БЭМ) */
 
-/* Блок hero */
+/* Базовый блок hero */
 .hero {
   min-height: 80vh;
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   padding: 4rem 0;
+}
+
+/* Модификаторы для разных типов hero */
+.hero--about {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.hero--pvz {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.hero--business {
+  background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+}
+
+.hero--become-supplier {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+}
+
+.hero--default {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 /* Контейнер внутри hero */
