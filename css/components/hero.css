@@ -1,3 +1,74 @@
-/* Стили для героя секции - по БЭМ методологии */
-/* Этот файл теперь пуст, так как стили были перенесены в unused_styles.css */
-/* Так как HTML использует не-BEM классы, эти стили больше не используются */
+/* Стили для героя секции - с классами, соответствующими HTML (не БЭМ) */
+
+/* Блок hero */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  padding: 4rem 0;
+}
+
+/* Контейнер внутри hero */
+.hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Контент внутри hero */
+.hero-content {
+  text-align: left;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--accent-color), #8BC34A);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Изображение внутри hero */
+.hero-image {
+  text-align: center;
+}
+
+.hero-img {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  vertical-align: top;
+}
+
+/* Кнопки вызова к действию внутри hero */
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Адаптивные стили для hero - mobile-first подход */
+@media (max-width: 768px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
+}

@@ -1,6 +1,5 @@
-/* Стили для иконок навигации */
+/* Стили для иконок навигации - с классами, соответствующими HTML (не БЭМ) */
 
-/* Блок search-icon */
 .search-icon,
 .promotions-icon,
 .recently-viewed-icon {
@@ -22,7 +21,6 @@
   background-color: var(--bg-secondary);
 }
 
-/* Блок search-bar */
 .search-bar {
   display: flex;
   border-radius: 50px;
@@ -48,13 +46,11 @@
   cursor: pointer;
 }
 
-/* Блок user-actions */
 .user-actions {
   display: flex;
   gap: 0.5rem;
 }
 
-/* Блок cart-icon */
 .cart-icon {
   position: relative;
   display: inline-flex;
@@ -73,7 +69,6 @@
   background-color: var(--bg-secondary);
 }
 
-/* Блок compare-icon */
 .compare-icon {
   position: relative;
   display: inline-flex;
@@ -92,7 +87,6 @@
   background-color: var(--bg-secondary);
 }
 
-/* Блок wishlist-icon */
 .wishlist-icon {
   position: relative;
   display: inline-flex;
@@ -109,6 +103,20 @@
 
 .wishlist-icon:hover {
   background-color: var(--bg-secondary);
+}
+
+/* Правильный класс для счетчиков элементов */
+.item-count {
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
 }
 
 /* Блок mobile-menu-btn */
