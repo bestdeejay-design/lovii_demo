@@ -1297,3 +1297,120 @@ body {
 .loading-indicator.hidden {
   display: none;
 }
+/* Стили для страницы ошибок (404 и т.д.) */
+
+.error-section {
+  padding: 4rem 0;
+  min-height: calc(100vh - 200px); /* Adjust for header and footer */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+}
+
+.error-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.error-content h1 {
+  font-size: 6rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.error-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.error-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.error-actions .btn {
+  min-width: 180px;
+}
+
+.search-suggestions {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.search-suggestions h3 {
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.popular-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.popular-links a {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: 5px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.popular-links a:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive styles for error page */
+@media (max-width: 768px) {
+  .error-content h1 {
+    font-size: 4rem;
+  }
+  
+  .error-content h2 {
+    font-size: 2rem;
+  }
+  
+  .error-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .error-actions .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .popular-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .popular-links a {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+}

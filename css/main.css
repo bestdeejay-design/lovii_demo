@@ -12,6 +12,7 @@
 @import url('./components/categories.css');  /* Секция категорий */
 @import url('./components/theme-toggle.css');  /* Переключатель темы */
 @import url('./components/navigation-icons.css');  /* Иконки навигации */
+@import url('./components/error-page.css');  /* Стили страниц ошибок */
 
 /* Утилиты */
 @import url('./utils/layout.css');
