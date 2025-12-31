@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes, as they consist only of source files (`.md` and `.html` files).
+Nothing to output - the changes consist only of source/config files (.md and .css) with no build artifacts, dependencies, or temp files that need to be ignored.

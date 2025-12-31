@@ -35,6 +35,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 4rem;
+  position: relative;
+  z-index: 2; /* Ensure content is above background effects */
 }
 
 /* Контент внутри hero */
@@ -45,6 +47,13 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
+}
+
+/* Улучшенная иерархия контента в hero */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 /* Заголовок hero */
@@ -84,14 +93,19 @@
 .stats-banner {
   display: flex;
   gap: 3rem;
-  margin: 2.5rem 0;
+  margin: 2rem 0 2.5rem 0;
   justify-content: flex-start;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .stat {
   text-align: center;
   min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-number {
@@ -106,7 +120,7 @@
 .stat-label {
   font-size: 1rem;
   color: var(--text-secondary);
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 500;
@@ -147,7 +161,7 @@
   gap: 1.5rem;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 /* Современные стили для кнопок в hero */
@@ -162,6 +176,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  min-width: 200px; /* Убедимся, что кнопки имеют минимальную ширину для лучшего визуального баланса */
+  text-align: center;
 }
 
 .btn_hero_primary {
@@ -208,6 +224,10 @@
     order: 2;
   }
   
+  .hero-text {
+    align-items: center;
+  }
+  
   .hero-image {
     order: 1;
     margin-bottom: 1.5rem;
@@ -240,6 +260,10 @@
     flex-wrap: wrap;
   }
   
+  .stat {
+    min-width: 80px;
+  }
+  
   .stat-number {
     font-size: 1.7rem;
   }
@@ -247,11 +271,13 @@
   .cta-buttons {
     justify-content: center;
     gap: 1rem;
+    flex-direction: column; /* Кнопки друг под другом на мобильных */
   }
   
   .btn_hero {
-    padding: 0.8rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     font-size: 1rem;
+    min-width: 220px; /* Увеличим минимальную ширину для мобильных */
   }
 }
 
@@ -279,11 +305,16 @@
     gap: 2rem;
   }
   
+  .stat {
+    min-width: 90px;
+  }
+  
   .stat-number {
     font-size: 2rem;
   }
   
   .btn_hero {
     padding: 0.9rem 1.8rem;
+    min-width: 180px;
   }
 }
