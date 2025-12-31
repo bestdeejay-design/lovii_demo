@@ -1,6 +1,6 @@
 /* Улучшенные стили для героя секции - современный подход крупных медиа брендов */
 
-/* Базовый блок hero */
+/* Базовый блок hero - общий стиль для всех страниц */
 .hero {
   min-height: 85vh;
   display: flex;
@@ -27,91 +27,6 @@
 .hero-content-wrapper {
   position: relative;
   z-index: 1;
-}
-
-/* Модификаторы для разных типов hero */
-.hero--about {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-}
-
-.hero--pvz {
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-}
-
-.hero--business {
-  background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
-}
-
-.hero--become-supplier {
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-}
-
-.hero--default {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-}
-
-.hero--advertising {
-  background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-}
-
-.hero--api {
-  background: linear-gradient(135deg, #344151 0%, #2c3c4e 100%);
-}
-
-.hero--blog {
-  background: linear-gradient(135deg, #e74c3c 0%, #e67e22 100%);
-}
-
-.hero--contacts {
-  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
-}
-
-.hero--documents {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-}
-
-.hero--faq {
-  background: linear-gradient(135deg, #9b59b6 0%, #344151 100%);
-}
-
-.hero--franchise {
-  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-}
-
-.hero--help {
-  background: linear-gradient(135deg, #1abc9c 0%, #2ecc71 100%);
-}
-
-.hero--how-to-order {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-}
-
-.hero--investors {
-  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
-}
-
-.hero--jobs {
-  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-}
-
-.hero--promotions {
-  background: linear-gradient(135deg, #e74c3c 0%, #f1c40f 100%);
-}
-
-.hero--returns {
-  background: linear-gradient(135deg, #7f8c8d 0%, #95a5a6 100%);
-}
-
-.hero--support {
-  background: linear-gradient(135deg, #3498db 0%, #1abc9c 100%);
-}
-
-.hero--team {
-  background: linear-gradient(135deg, #2c3c4e 0%, #344151 100%);
-}
-
-.hero--supplier {
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
 }
 
 /* Контейнер внутри hero */
