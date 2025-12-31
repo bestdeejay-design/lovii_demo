@@ -93,6 +93,14 @@
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     border-radius: 0; /* Fixed artifact - no rounded corners */
+    pointer-events: none; /* Prevents submenu from interfering with hover */
+  }
+  
+  .header .nav-menu ul .nav-item.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
   }
   
   .header .nav-menu ul .nav-item.has-submenu.show-submenu .submenu {
@@ -141,6 +149,7 @@
   will-change: transform;
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
+  pointer-events: none; /* Prevents submenu from interfering with hover */
 }
 
 /* Enhanced submenu styling for marketplace */
@@ -170,10 +179,12 @@
   min-width: 280px;
 }
 
+.header .nav-item.has-submenu:hover .submenu,
 .header .nav-item.has-submenu.show-submenu .submenu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .header .submenu li {

@@ -41,6 +41,9 @@
 /* Изображение внутри hero */
 .hero-image {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero-img {
@@ -51,6 +54,8 @@
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   vertical-align: top;
+  object-fit: cover;
+  max-height: 400px;
 }
 
 /* Кнопки вызова к действию внутри hero */
@@ -70,5 +75,10 @@
   
   .hero-content {
     text-align: center;
+  }
+  
+  .hero-img {
+    max-width: 300px;
+    margin: 0 auto;
   }
 }
