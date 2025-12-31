@@ -2,8 +2,6 @@
 # Compiled and build artifacts
 *.pyc
 __pycache__/
-*.o
-*.obj
 
 # Dependencies
 .venv/
@@ -29,8 +27,23 @@ coverage/
 htmlcov/
 .coverage
 
+# Python specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg-info/
+.eggs/
+
 # Distribution / packaging
+.Python
+*.so
+.PyCharmCache
+*.pyc
 dist/
 build/
 *.egg-info/
+.eggs/
 ```
