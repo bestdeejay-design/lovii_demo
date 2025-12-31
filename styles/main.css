@@ -4105,15 +4105,31 @@ body {
 /* Stats banner for hero section */
 .stats-banner {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 2rem;
     margin: 2rem 0;
     flex-wrap: wrap;
 }
 
-.stat {
+/* Адаптивные стили для баннера статистики */
+@media (max-width: 768px) {
+  .stats-banner {
+    justify-content: center;
+  }
+  
+  .hero .stat {
     text-align: center;
+  }
+}
+
+.stat {
     padding: 1rem;
+    text-align: center;
+}
+
+/* Специфические стили для статистики в hero секции */
+.hero .stat {
+    text-align: left;
 }
 
 .stat-number {
