@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Hero Section</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-color: #4CAF50;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/components/hero.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Витрина — ваш товар на полке гипермаркета</h1>
+                    <p class="hero-subtitle">Подключаем малый бизнес к тысячам покупателей через приложение, сайт и сеть точек выдачи</p>
+                    <div class="stats-banner">
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Поставщиков</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100K+</div>
+                            <div class="stat-label">Покупателей</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">ПВЗ</div>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="products.html" class="btn btn_hero btn_hero_primary">Смотреть каталог</a>
+                        <a href="become-supplier.html" class="btn btn_hero btn_hero_secondary">Стать поставщиком</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/hero_image.jpg" alt="Marketplace Products" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
