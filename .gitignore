@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since only a source file (test_hero.html) was modified and no build artifacts, dependencies, or temporary files were detected.
+Nothing needs to be added to .gitignore since the only change is a deleted HTML file (test_hero.html), which doesn't require any ignore rules.
