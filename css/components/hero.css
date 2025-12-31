@@ -11,14 +11,15 @@
 
 /* Контейнер внутри hero */
 .hero .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  gap: 3rem;
 }
 
 /* Контент внутри hero */
 .hero-content {
+  flex: 1;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -68,10 +69,11 @@
 
 /* Изображение внутри hero */
 .hero-image {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  min-width: 0; /* Allows flex item to shrink below content size */
 }
 
 .hero-img {
@@ -102,7 +104,7 @@
   }
   
   .hero .container {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     text-align: center;
   }
   
@@ -114,6 +116,7 @@
   .hero-image {
     order: 1; /* Move image above text on mobile */
     margin-bottom: 2rem;
+    flex: none; /* Allow image container to size to content on mobile */
   }
   
   .hero-img {
