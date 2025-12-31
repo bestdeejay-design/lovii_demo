@@ -4117,7 +4117,7 @@ body {
     justify-content: center;
   }
   
-  .hero .stat {
+  .hero .stats-banner .stat {
     text-align: center;
   }
 }
@@ -4130,6 +4130,28 @@ body {
 /* Специфические стили для статистики в hero секции */
 .hero .stat {
     text-align: left;
+}
+
+/* Уточняем стили для баннера статистики в hero секции */
+.hero .stats-banner {
+    justify-content: flex-start;
+}
+
+.hero .stats-banner .stat {
+    text-align: left;
+    flex: 1;
+    min-width: 120px;
+}
+
+/* Адаптивные стили для баннера статистики в hero секции */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero .stats-banner {
+    justify-content: center;
+  }
+  
+  .hero .stats-banner .stat {
+    text-align: center;
+  }
 }
 
 .stat-number {
