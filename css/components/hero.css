@@ -26,9 +26,6 @@
 
 /* Контейнер внутри hero */
 .hero .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   z-index: 2; /* Ensure content is above background effects */
   max-width: 1200px;
@@ -44,6 +41,9 @@
   align-items: center;
   gap: 4rem;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 0;
 }
 
 /* Текстовый контент в hero */
@@ -212,16 +212,11 @@
     padding: 3rem 0;
   }
   
-  .hero .container {
-    flex-direction: column;
-    text-align: center;
-    gap: 2.5rem;
-  }
-  
   .hero-content {
     flex-direction: column;
     text-align: center;
     gap: 2.5rem;
+    padding: 3rem 0;
   }
   
   .hero-text {
@@ -282,13 +277,9 @@
 
 /* Tablet styles */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .hero .container {
-    gap: 2.5rem;
-    padding: 0 15px;
-  }
-  
   .hero-content {
     gap: 2.5rem;
+    padding: 3.5rem 0;
   }
   
   .hero-title {
