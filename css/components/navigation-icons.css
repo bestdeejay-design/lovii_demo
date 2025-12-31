@@ -1,4 +1,4 @@
-/* Стили для иконок навигации - по БЭМ методологии */
+/* Стили для иконок навигации */
 
 /* Блок search-icon */
 .search-icon,
@@ -109,40 +109,6 @@
 
 .wishlist-icon:hover {
   background-color: var(--bg-secondary);
-}
-
-/* Элемент count для wishlist */
-.wishlist__count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: var(--accent-color);
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  font-size: 0.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-/* Элемент count для cart */
-.cart__count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: var(--accent-color);
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  font-size: 0.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
 }
 
 /* Блок mobile-menu-btn */
