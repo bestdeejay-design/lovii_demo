@@ -1,0 +1,61 @@
+/* Файл для действительно неиспользуемых CSS-стилей */
+
+/* Стили, которые не используются ни в одном HTML-файле проекта */
+/* Оставлены здесь для истории или возможного будущего использования */
+
+/* Старые стили для статистики, которые не используются в текущем проекте */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item .stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.stat-item .stat-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+}
+
+/* Старые стили stats */
+.stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.seller-stats {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.seller-stats span {
+  color: #4CAF50;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Старая стилизация stats секции */
+.stats {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--accent-color) 0%, #45a049 100%);
+}
