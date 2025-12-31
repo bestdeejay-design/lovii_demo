@@ -1,18 +1,1 @@
-```
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-
-# Environment
-.env
-.env.local
-.env.*
-
-# Editors
-.vscode/
-.idea/
-
-# Original rules preserved
-*.log
-```
+Nothing should be ignored based on the provided file changes. The only modified file is a CSS source file (`css/components/header.css`), which is a legitimate source code file that should be tracked in version control. No build artifacts, dependencies, or temporary files are present in the changes.
