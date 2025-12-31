@@ -706,6 +706,10 @@ body {
 }
 
 .hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
   text-align: left;
 }
 
@@ -733,6 +737,7 @@ body {
   }
   
   .hero-content {
+    grid-template-columns: 1fr;
     text-align: center;
   }
 }
@@ -790,6 +795,7 @@ body {
   max-width: 400px;
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  vertical-align: top;
 }
 
 /* Categories Section */
@@ -2278,9 +2284,8 @@ body {
   }
   
   .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
+    text-align: center;
   }
   
   .trending-grid {
