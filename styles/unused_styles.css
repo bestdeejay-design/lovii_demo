@@ -4,6 +4,7 @@
 /* They are preserved here in case they are needed in the future */
 
 /* Original general stats styles that were conflicting with hero-specific styles */
+/* These are unused because we use hero-specific styles like .hero .stats-banner */
 .stats-banner {
     display: flex;
     justify-content: flex-start;
