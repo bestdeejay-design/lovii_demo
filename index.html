@@ -182,12 +182,12 @@
                         <div class="form-group">
                             <input type="email" id="emailInput" name="email" placeholder="Введите ваш email" class="contact-input active-input" required>
                             <input type="tel" id="phoneInput" name="phone" placeholder="Введите ваш телефон" class="contact-input" required>
-                            <div class="input-feedback" id="contactFeedback" style="display: none;"></div>
+                            <div class="input-feedback hidden" id="contactFeedback"></div>
                         </div>
                         
                         <button type="submit" class="cta-btn btn btn_primary" aria-label="Отправить заявку на подключение">
                             <span class="btn-text">Начать продавать</span>
-                            <span class="btn-loading" style="display: none;">
+                            <span class="btn-loading hidden">
                                 <i class="fas fa-spinner fa-spin"></i> Отправка...
                             </span>
                         </button>
@@ -219,7 +219,7 @@
             </div>
             
             <!-- Loading indicator -->
-            <div class="loading-indicator" style="display: none;">
+            <div class="loading-indicator hidden">
                 <div class="spinner"></div>
                 <p>Загружаем персональные рекомендации...</p>
             </div>
@@ -591,27 +591,27 @@
                         
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="Ваше имя" required>
-                            <div class="input-feedback" id="nameFeedback" style="display: none;"></div>
+                            <div class="input-feedback hidden" id="nameFeedback"></div>
                         </div>
                         
                         <div class="form-group">
                             <input type="email" id="email" name="email" placeholder="Ваш email" required>
-                            <div class="input-feedback" id="emailFeedback" style="display: none;"></div>
+                            <div class="input-feedback hidden" id="emailFeedback"></div>
                         </div>
                         
                         <div class="form-group">
                             <input type="text" id="subject" name="subject" placeholder="Тема сообщения" required>
-                            <div class="input-feedback" id="subjectFeedback" style="display: none;"></div>
+                            <div class="input-feedback hidden" id="subjectFeedback"></div>
                         </div>
                         
                         <div class="form-group">
                             <textarea id="message" name="message" rows="5" placeholder="Ваше сообщение" required></textarea>
-                            <div class="input-feedback" id="messageFeedback" style="display: none;"></div>
+                            <div class="input-feedback hidden" id="messageFeedback"></div>
                         </div>
                         
                         <button type="submit" class="contact-btn btn btn_primary" aria-label="Отправить сообщение">
                             <span class="btn-text">Отправить сообщение</span>
-                            <span class="btn-loading" style="display: none;">
+                            <span class="btn-loading hidden">
                                 <i class="fas fa-spinner fa-spin"></i> Отправка...
                             </span>
                         </button>
