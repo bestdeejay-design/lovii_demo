@@ -67,6 +67,68 @@
   border-left: 3px solid var(--accent-color);
 }
 
+/* Desktop submenu styles */
+@media (min-width: 769px) {
+  .header .nav-menu ul .nav-item.has-submenu {
+    position: relative;
+  }
+
+  .header .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--bg-secondary);
+    min-width: 250px;
+    border-radius: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    border: 1px solid var(--border-color);
+    pointer-events: none; /* Prevents submenu from interfering with hover */
+  }
+
+  .header .nav-item.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .header .submenu a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    gap: 0.8rem;
+    border-left: 3px solid transparent;
+  }
+
+  .header .submenu a:hover {
+    background-color: var(--bg-primary);
+    color: var(--accent-color);
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--accent-color);
+  }
+  
+  /* Enhanced submenu hover behavior to prevent flickering */
+  .header .nav-item.has-submenu {
+    display: inline-block;
+  }
+  
+  .header .nav-item.has-submenu > a {
+    position: relative;
+    z-index: 1001;
+  }
+}
+
 /* Стили для профильного меню справа */
 
 .profile-menu {
