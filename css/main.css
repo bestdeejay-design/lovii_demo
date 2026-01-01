@@ -14,6 +14,7 @@
 @import url('./components/theme-toggle.css');  /* Переключатель темы */
 @import url('./components/navigation-icons.css');  /* Иконки навигации */
 @import url('./components/error-page.css');  /* Стили страниц ошибок */
+@import url('./components/footer.css');  /* Стили футера */
 
 /* Утилиты */
 @import url('./utils/layout.css');
