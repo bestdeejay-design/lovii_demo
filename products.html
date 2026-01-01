@@ -533,6 +533,330 @@
         // Initialize after templates load
         function initializeAfterTemplatesLoad() {
             copyFiltersToMobile();
+            
+            // Initialize filter functionality
+            initializeFilters();
+            
+            // Initialize theme toggle functionality after templates are loaded
+            initializeThemeToggleAfterLoad();
+        }
+        
+        // Initialize theme toggle functionality after templates are loaded
+        function initializeThemeToggleAfterLoad() {
+            // Desktop theme toggle
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleTheme();
+                    
+                    // Update the icon text based on current theme
+                    updateThemeToggleText();
+                });
+            }
+            
+            // Mobile theme toggle
+            const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+            if (mobileThemeToggle) {
+                mobileThemeToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleTheme();
+                    
+                    // Update the icon text based on current theme
+                    updateThemeToggleText();
+                });
+            }
+            
+            // Initialize theme based on saved preference
+            initializeTheme();
+        }
+        
+        // Initialize filter functionality
+        function initializeFilters() {
+            // Initialize category filters
+            const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+            categoryCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    filterProducts();
+                });
+            });
+            
+            // Initialize supplier filters
+            const supplierCheckboxes = document.querySelectorAll('.supplier-list input[type="checkbox"]');
+            supplierCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    filterProducts();
+                });
+            });
+            
+            // Initialize availability filters
+            const availabilityCheckboxes = document.querySelectorAll('.filter-group h3 ~ .filter-content input[type="checkbox"]');
+            availabilityCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    filterProducts();
+                });
+            });
+            
+            // Initialize rating filters
+            const ratingFilters = document.querySelectorAll('.star-rating');
+            ratingFilters.forEach(rating => {
+                rating.addEventListener('click', function() {
+                    filterProducts();
+                });
+            });
+            
+            // Initialize price filter
+            const priceInputs = document.querySelectorAll('.price-inputs input');
+            priceInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    filterProducts();
+                });
+            });
+            
+            const priceSliders = document.querySelectorAll('.price-slider input[type="range"]');
+            priceSliders.forEach(slider => {
+                slider.addEventListener('input', function() {
+                    filterProducts();
+                });
+            });
+            
+            // Initialize filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from siblings
+                    const siblings = this.parentElement.querySelectorAll('.filter-btn');
+                    siblings.forEach(sibling => sibling.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter products
+                    filterProducts();
+                });
+            });
+        }
+        
+        // Function to filter products based on selected filters
+        function filterProducts() {
+            const products = document.querySelectorAll('.product-card');
+            
+            // Get all selected filters
+            const selectedCategories = [];
+            const categoryCheckboxes = document.querySelectorAll('.category-checkbox:checked');
+            categoryCheckboxes.forEach(checkbox => {
+                // Extract category from the label text or checkbox ID
+                const label = document.querySelector(`label[for="${checkbox.id}"]`);
+                if (label) {
+                    selectedCategories.push(label.textContent.trim().toLowerCase());
+                }
+            });
+            
+            // Get selected supplier filters
+            const selectedSuppliers = [];
+            const supplierCheckboxes = document.querySelectorAll('.supplier-list input[type="checkbox"]:checked');
+            supplierCheckboxes.forEach(checkbox => {
+                const label = document.querySelector(`label[for="${checkbox.id}"]`);
+                if (label) {
+                    selectedSuppliers.push(label.textContent.trim().toLowerCase());
+                }
+            });
+            
+            // Get selected availability options
+            const selectedAvailability = [];
+            const availabilityCheckboxes = document.querySelectorAll('.filter-group h3 ~ .filter-content input[type="checkbox"]:checked');
+            availabilityCheckboxes.forEach(checkbox => {
+                const label = document.querySelector(`label[for="${checkbox.id}"]`);
+                if (label) {
+                    selectedAvailability.push(label.textContent.trim().toLowerCase());
+                }
+            });
+            
+            // Get selected price range
+            const minPriceInput = document.querySelector('#min-price');
+            const maxPriceInput = document.querySelector('#max-price');
+            const minPrice = minPriceInput ? parseInt(minPriceInput.value) || 0 : 0;
+            const maxPrice = maxPriceInput ? parseInt(maxPriceInput.value) || 50000 : 50000;
+            
+            // Get selected rating
+            const selectedRating = document.querySelector('.star-rating .stars.active');
+            
+            // Get selected category filter buttons
+            const activeCategoryFilter = document.querySelector('.filter-controls .filter-btn.active');
+            const activeCategory = activeCategoryFilter ? activeCategoryFilter.textContent.trim().toLowerCase() : '';
+            
+            // Apply filters to each product
+            products.forEach(product => {
+                let showProduct = true;
+                
+                // Category filtering logic
+                if (selectedCategories.length > 0) {
+                    // For this implementation, we'll assume each product has a data-category attribute
+                    // In a real implementation, you'd match against the product's actual categories
+                    const productCategories = product.textContent.toLowerCase();
+                    let categoryMatch = false;
+                    
+                    for (const category of selectedCategories) {
+                        if (productCategories.includes(category)) {
+                            categoryMatch = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!categoryMatch) {
+                        showProduct = false;
+                    }
+                }
+                
+                // Category button filter (e.g., "Продукты", "Дом")
+                if (activeCategory && activeCategory !== 'все' && !product.textContent.toLowerCase().includes(activeCategory)) {
+                    showProduct = false;
+                }
+                
+                // Price filtering
+                const priceElement = product.querySelector('.current-price');
+                if (priceElement) {
+                    const priceText = priceElement.textContent.replace(/\D/g, '');
+                    const productPrice = parseInt(priceText) || 0;
+                    
+                    if (productPrice < minPrice || productPrice > maxPrice) {
+                        showProduct = false;
+                    }
+                }
+                
+                // Availability filtering
+                if (selectedAvailability.length > 0) {
+                    // Check if product matches any selected availability option
+                    const productText = product.textContent.toLowerCase();
+                    let availabilityMatch = false;
+                    
+                    for (const availability of selectedAvailability) {
+                        if (productText.includes(availability)) {
+                            availabilityMatch = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!availabilityMatch) {
+                        showProduct = false;
+                    }
+                }
+                
+                // Supplier filtering
+                if (selectedSuppliers.length > 0) {
+                    // Check if product matches any selected supplier
+                    const productText = product.textContent.toLowerCase();
+                    let supplierMatch = false;
+                    
+                    for (const supplier of selectedSuppliers) {
+                        if (productText.includes(supplier)) {
+                            supplierMatch = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!supplierMatch) {
+                        showProduct = false;
+                    }
+                }
+                
+                // Apply the display decision
+                product.style.display = showProduct ? 'block' : 'none';
+                
+                // For grid layout, we may need to handle the display differently
+                if (showProduct) {
+                    product.style.display = 'flex';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        
+        // Ensure theme functions are available after main.js loads
+        function initializeThemeToggleAfterLoad() {
+            // Wait a bit to ensure main.js has loaded
+            setTimeout(function() {
+                // Desktop theme toggle - try to use main.js function if available
+                const themeToggleBtn = document.getElementById('theme-toggle');
+                if (themeToggleBtn && typeof initializeThemeToggle === 'function') {
+                    initializeThemeToggle(themeToggleBtn);
+                } else if (themeToggleBtn) {
+                    // Fallback to local implementation
+                    themeToggleBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        toggleTheme();
+                        updateThemeToggleText();
+                    });
+                }
+                
+                // Mobile theme toggle
+                const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+                if (mobileThemeToggle) {
+                    mobileThemeToggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        toggleTheme();
+                        updateThemeToggleText();
+                    });
+                }
+                
+                // Initialize theme based on saved preference
+                initializeTheme();
+            }, 100);
+        }
+        
+        // Local theme functions as fallback
+        function initializeTheme() {
+            // Check if there's a saved theme in localStorage
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                // Default to dark theme
+                document.body.classList.remove('light-theme');
+            }
+            
+            // Update the theme toggle text based on current theme
+            updateThemeToggleText();
+        }
+        
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            
+            // Save current theme to localStorage
+            if (document.body.classList.contains('light-theme')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+            
+            // Update the icon text based on current theme
+            updateThemeToggleText();
+        }
+        
+        function updateThemeToggleText() {
+            // Update the mobile theme toggle link text and icon
+            const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+            if (mobileThemeToggle) {
+                if (document.body.classList.contains('light-theme')) {
+                    mobileThemeToggle.innerHTML = '<i class="fas fa-moon"></i> Темная тема';
+                } else {
+                    mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i> Светлая тема';
+                }
+            }
+            
+            // Also update the desktop theme toggle icon
+            const desktopThemeToggle = document.getElementById('theme-toggle');
+            if (desktopThemeToggle) {
+                const icon = desktopThemeToggle.querySelector('i');
+                if (icon) {
+                    if (document.body.classList.contains('light-theme')) {
+                        icon.className = 'fas fa-sun';
+                    } else {
+                        icon.className = 'fas fa-moon';
+                    }
+                }
+            }
         }
     </script>
 </body>
