@@ -35,7 +35,7 @@ function initializeTheme() {
 // Alternative initialization function that keeps trying until elements are found
 function initializeComponentsWithRetry() {
     let attempts = 0;
-    const maxAttempts = 20; // Try for up to 2 seconds (20 attempts * 100ms)
+    const maxAttempts = 10; // Reduce attempts to 1 second (10 attempts * 100ms)
     
     // Track which components have been initialized
     let themeToggleInitialized = false;
@@ -51,7 +51,10 @@ function initializeComponentsWithRetry() {
             initializeThemeToggle(themeToggleBtn);
             themeToggleInitialized = true;
         } else if (!themeToggleInitialized && attempts >= maxAttempts) {
-            console.warn('Theme toggle button not found after maximum attempts');
+            // Only warn if we're on a page where theme toggle is expected
+            if (themeToggleBtn) {
+                initializeThemeToggle(themeToggleBtn);
+            }
             themeToggleInitialized = true; // Prevent further checks
         }
         
@@ -61,7 +64,6 @@ function initializeComponentsWithRetry() {
             initializeContactForm();
             contactFormInitialized = true;
         } else if (!contactFormInitialized && attempts >= maxAttempts) {
-            console.warn('Contact form not found after maximum attempts');
             contactFormInitialized = true; // Prevent further checks
         }
         
@@ -71,13 +73,11 @@ function initializeComponentsWithRetry() {
             initializeCtaForm();
             ctaFormInitialized = true;
         } else if (!ctaFormInitialized && attempts >= maxAttempts) {
-            console.warn('CTA form not found after maximum attempts');
             ctaFormInitialized = true; // Prevent further checks
         }
         
         // Continue retrying until max attempts reached or all components initialized
-        if (attempts < maxAttempts && 
-            (!themeToggleInitialized || !contactFormInitialized || !ctaFormInitialized)) {
+        if (attempts < maxAttempts) {
             setTimeout(retryInitialization, 100);
         }
     };
