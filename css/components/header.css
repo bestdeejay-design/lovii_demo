@@ -91,11 +91,26 @@
     pointer-events: none; /* Prevents submenu from interfering with hover */
   }
 
+  /* Show submenu when parent has 'show-submenu' class (controlled by JavaScript) */
+  .header .nav-item.has-submenu.show-submenu .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Also maintain hover functionality as fallback */
   .header .nav-item.has-submenu:hover .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+  }
+  
+  /* Profile submenu positioning - appears below the profile link */
+  .profile-submenu {
+    right: 0;
+    left: auto;
   }
 
   .header .submenu a {

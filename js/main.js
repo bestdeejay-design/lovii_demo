@@ -183,12 +183,13 @@ function initializeMobileMenu() {
 }
 
 function initializeSubmenuToggle() {
-    // Handle submenu toggling for mobile view
+    // Handle submenu toggling for both mobile and desktop views
     const submenuItems = document.querySelectorAll('.header .has-submenu > a');
     submenuItems.forEach(item => {
-        // Remove the default behavior for submenu links on mobile
         item.addEventListener('click', function(e) {
+            // Determine if we're on mobile or desktop
             if (window.innerWidth <= 768) {
+                // Mobile behavior - toggle submenu
                 e.preventDefault();
                 const parentItem = this.parentElement;
                 const wasActive = parentItem.classList.contains('active');
@@ -198,7 +199,6 @@ function initializeSubmenuToggle() {
                 allSubmenus.forEach(submenu => {
                     submenu.classList.remove('active');
                     // Update aria-expanded attribute for accessibility
-                    const submenuLink = submenu.querySelector('a');
                     const submenuContent = submenu.querySelector('.submenu');
                     if (submenuContent) {
                         submenuContent.setAttribute('aria-expanded', 'false');
@@ -214,29 +214,37 @@ function initializeSubmenuToggle() {
                         submenuContent.setAttribute('aria-expanded', 'true');
                     }
                 }
+            } else {
+                // Desktop behavior - if it's a dropdown trigger (href="#"), prevent default
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                } else {
+                    // If it's a real link, check if submenu is already open
+                    const parentItem = this.parentElement;
+                    const isSubmenuOpen = parentItem.classList.contains('show-submenu');
+                    
+                    if (isSubmenuOpen) {
+                        // If submenu is open, just close it and don't navigate
+                        e.preventDefault();
+                        parentItem.classList.remove('show-submenu');
+                        return;
+                    }
+                    // If submenu is not open, allow navigation to the link
+                }
+                
+                // Toggle the submenu visibility for desktop if it's a dropdown trigger
+                if (this.getAttribute('href') === '#') {
+                    const parentItem = this.parentElement;
+                    parentItem.classList.toggle('show-submenu');
+                }
+                
+                // Prevent the click from bubbling up
+                e.stopPropagation();
             }
         });
     });
     
-    // Handle submenu toggle on click for desktop
-    const submenuLinks = document.querySelectorAll('.header .has-submenu > a');
-    submenuLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Only prevent default if the link is just '#' (dropdown trigger)
-            if (this.getAttribute('href') === '#') {
-                e.preventDefault();
-            }
-            
-            const parentItem = this.parentElement;
-            // Toggle the submenu visibility
-            parentItem.classList.toggle('show-submenu');
-            
-            // Prevent the click from bubbling up
-            e.stopPropagation();
-        });
-    });
-    
-    // Close submenus when clicking elsewhere
+    // Close submenus when clicking elsewhere (for desktop)
     document.addEventListener('click', function(e) {
         const openSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
         openSubmenus.forEach(submenu => {
@@ -247,18 +255,19 @@ function initializeSubmenuToggle() {
         });
     });
     
-    // Also handle the new 'Покупателям' and 'Дополнительно' sections
-    const newSubmenuItems = document.querySelectorAll('.header .has-submenu > a');
-    newSubmenuItems.forEach(item => {
-        // Ensure desktop hover still works
-        if (window.innerWidth > 768) {
-            item.addEventListener('click', function(e) {
-                // Prevent default only if it's one of the new dropdowns that don't have specific pages
-                if (this.getAttribute('href') === '#') {
-                    e.preventDefault();
+    // Close submenus when clicking elsewhere (for mobile)
+    document.addEventListener('click', function(e) {
+        const openSubmenus = document.querySelectorAll('.header .has-submenu.active');
+        openSubmenus.forEach(submenu => {
+            // Check if the click is outside the submenu
+            if (!submenu.contains(e.target)) {
+                submenu.classList.remove('active');
+                const submenuContent = submenu.querySelector('.submenu');
+                if (submenuContent) {
+                    submenuContent.setAttribute('aria-expanded', 'false');
                 }
-            });
-        }
+            }
+        });
     });
 }
 
