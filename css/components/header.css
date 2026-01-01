@@ -125,6 +125,14 @@
     position: relative;
     z-index: 1001;
   }
+  
+  /* Ensure submenu is accessible */
+  .header .nav-item.has-submenu:focus-within .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 }
 
 /* Стили для профильного меню справа */
@@ -179,6 +187,16 @@
   /* Adjust the container layout when main menu is hidden */
   .header .container {
     justify-content: space-between;
+  }
+  
+  /* Ensure mobile nav menu doesn't conflict with header */
+  .mobile-nav-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001;
+    width: auto;
+    height: auto;
   }
 }
 
@@ -248,11 +266,17 @@
   z-index: 1002;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
+  border: none;
 }
 
 .mobile-nav-button:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav-button:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .mobile-nav-button .hamburger {
@@ -273,6 +297,24 @@
   transition: all 0.3s ease;
 }
 
+/* Animation for hamburger when menu is active */
+.mobile-nav-button.active .hamburger span:nth-child(1),
+.mobile-nav-button.active .hamburger span:nth-child(3) {
+  transform-origin: center;
+}
+
+.mobile-nav-button.active .hamburger span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.mobile-nav-button.active .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-nav-button.active .hamburger span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
 .mobile-nav-menu {
   position: fixed;
   bottom: 90px;
@@ -283,7 +325,7 @@
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  transition: right 0.3s ease;
+  transition: right 0.3s ease, opacity 0.3s ease;
   z-index: 1001;
 }
 
@@ -325,10 +367,16 @@
   justify-content: center;
   border-radius: 50%;
   transition: background-color 0.3s ease;
+  align-self: center;
 }
 
 .close-btn:hover {
   background-color: var(--bg-secondary);
+}
+
+.close-btn:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .mobile-nav-list {
@@ -371,6 +419,11 @@
   padding-left: 1.8rem;
 }
 
+.nav-link:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
+}
+
 .nav-link i {
   width: 20px;
   text-align: center;
@@ -387,12 +440,13 @@
   margin: 0;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
   background-color: var(--bg-primary);
 }
 
 .nav-item.has-submenu.active > .submenu {
   max-height: 500px;
+  opacity: 1;
 }
 
 .nav-item.has-submenu.active > a .submenu-arrow {
@@ -418,4 +472,9 @@
   background-color: var(--bg-secondary);
   color: var(--accent-color);
   padding-left: 3.3rem;
+}
+
+.submenu li a:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
 }
