@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore for this change list, as it only contains a modified HTML file (404.html) which is a source file that should not be ignored.
+(adapted_header.html, header_variants.html, new_header.html, profile_header.html are all html files which are source code files, and there are no build artifacts, dependencies, or temp files in the changes, so output nothing)
