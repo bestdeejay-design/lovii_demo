@@ -1,3 +1,1 @@
-```css
-
-```
+Nothing needs to be added to .gitignore for this change list, as it only contains a modified HTML file (404.html) which is a source file that should not be ignored.
