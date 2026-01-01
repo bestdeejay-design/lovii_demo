@@ -120,7 +120,7 @@
 }
 
 .mobile-filters-content {
-  background: white;
+  background: var(--card-bg);
   height: 100%;
   border-radius: 10px;
   padding: 1rem;
@@ -346,8 +346,8 @@
 }
 
 .offer-card.featured {
-  border-left: 4px solid #FF9800;
-  background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+  border-left: 4px solid var(--accent-color);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--card-bg) 100%);
 }
 
 .offer-card h3 {
@@ -357,7 +357,7 @@
 }
 
 .offer-card.featured h3 {
-  color: #FF9800;
+  color: var(--accent-color);
 }
 
 .offer-card p {
@@ -407,8 +407,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background: linear-gradient(90deg, #4CAF50, #8BC34A);
-  color: white;
+  background: linear-gradient(90deg, var(--accent-color), #8BC34A);
+  color: var(--text-primary);
   border-radius: 8px;
   margin: 20px 0;
   animation: slideIn 0.5s ease;
