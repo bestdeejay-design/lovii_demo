@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore for this change list, as it only contains a modified HTML file (products.html) which is a source file that should not be ignored.
+Nothing needs to be added to .gitignore since the only modified file is `products.html`, which is a source file and should not be ignored.
