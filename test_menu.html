@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест меню</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+    <div id="header-container"></div>
+
+    <div style="height: 100vh; padding: 20px;">
+        <h1>Тестирование меню</h1>
+        <p>Проверьте, что все элементы меню работают корректно:</p>
+        <ul>
+            <li>Левое меню (Товары и услуги, Для бизнеса, О проекте, Дополнительно) должно открываться по клику</li>
+            <li>Правое меню (Профиль) должно открываться по клику</li>
+            <li>Меню должно корректно работать как на десктопе, так и на мобильных устройствах</li>
+        </ul>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'header-container') {
+                        initializeMobileMenu();
+                    }
+
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
+        }
+    </script>
+</body>
+</html>
