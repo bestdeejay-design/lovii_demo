@@ -22,25 +22,25 @@
                     <div class="error-icon">
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <h1>404</h1>
-                    <h2>Страница не найдена</h2>
-                    <p>К сожалению, запрашиваемая вами страница не существует или была перемещена.</p>
+                    <h1 class="error-code">404</h1>
+                    <h2 class="error-title">Страница не найдена</h2>
+                    <p class="error-description">К сожалению, запрашиваемая вами страница не существует или была перемещена.</p>
                     
                     <div class="error-actions">
-                        <a href="index.html" class="btn btn--primary btn_primary">На главную</a>
+                        <a href="index.html" class="btn btn--primary btn_primary">Вернуться на главную</a>
                         <button onclick="history.back()" class="btn btn--secondary btn_secondary">Вернуться назад</button>
                     </div>
                     
                     <div class="search-suggestions">
-                        <h3>Поиск по сайту</h3>
+                        <h3 class="suggestions-title">Поиск по сайту</h3>
                         <form class="search-form" onsubmit="handleSearch(event)">
                             <div class="search-input-container">
-                                <input type="text" placeholder="Введите ключевые слова..." id="error-search" autocomplete="off">
-                                <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                                <input type="text" placeholder="Введите ключевые слова..." id="error-search" autocomplete="off" aria-label="Поиск по сайту">
+                                <button type="submit" class="search-btn" aria-label="Поиск"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
                         
-                        <h3>Популярные разделы</h3>
+                        <h3 class="suggestions-title">Популярные разделы</h3>
                         <div class="popular-links">
                             <a href="products.html" class="popular-link">Товары и услуги</a>
                             <a href="food.html" class="popular-link">Еда и доставка</a>
@@ -68,28 +68,11 @@
     <script>
         // Load header, footer and mobile navigation templates
         document.addEventListener('DOMContentLoaded', function() {
+            // Using the loadTemplate function from main.js
             loadTemplate('templates/header.html', 'header-container');
             loadTemplate('templates/footer.html', 'footer-container');
             loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
         });
-
-        function loadTemplate(url, elementId) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
-                    // Re-initialize any JavaScript functionality after template is loaded
-                    if (elementId === 'mobile-nav-container') {
-                        initializeNewMobileNavigation();
-                    } else if (elementId === 'header-container') {
-                        initializeMobileMenu();
-                    }
-                    
-                    // After all templates are loaded, try initializing components again
-                    setTimeout(initializeAfterTemplatesLoad, 50);
-                })
-                .catch(error => console.error('Error loading template:', error));
-        }
         
         function handleSearch(event) {
             event.preventDefault();
