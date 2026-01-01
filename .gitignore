@@ -1,1 +1,1 @@
-Nothing should be ignored since the changes only include source files (404.html, js/main.js) without any build artifacts, dependencies, or temporary files.
+Nothing should be ignored based on the provided file changes. The modification of '404.html' is a source file that should be tracked in version control.
