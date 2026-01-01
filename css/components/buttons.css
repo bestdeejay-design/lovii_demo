@@ -80,6 +80,14 @@
   box-shadow: none;
 }
 
+/* Модификатор hero для button */
+.btn_hero {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-width: 200px;
+}
+
 /* Модификатор loading для button */
 .btn_loading {
   position: relative;
