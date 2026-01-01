@@ -99,13 +99,13 @@
     pointer-events: auto;
   }
 
-  /* Also maintain hover functionality as fallback */
-  .header .nav-item.has-submenu:hover .submenu {
+  /* Remove hover functionality to prevent conflicts with JavaScript */
+  /* .header .nav-item.has-submenu:hover .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
-  }
+  } */
   
   /* Profile submenu positioning - appears below the profile link */
   .profile-submenu {

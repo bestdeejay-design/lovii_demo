@@ -43,9 +43,20 @@
 
                     // After all templates are loaded, try initializing components again
                     setTimeout(initializeAfterTemplatesLoad, 50);
+                    // And specifically initialize submenu toggle again since elements are now available
+                    setTimeout(initializeSubmenuToggle, 100);
                 })
                 .catch(error => console.error('Error loading template:', error));
         }
+        
+        // Verification script
+        setTimeout(function() {
+            const submenuItems = document.querySelectorAll('.header .has-submenu > a');
+            console.log(`Found ${submenuItems.length} submenu items in test page`);
+            submenuItems.forEach((item, index) => {
+                console.log(`${index + 1}. ${item.textContent.trim()} - href: ${item.getAttribute('href')}`);
+            });
+        }, 2000);
     </script>
 </body>
 </html>
