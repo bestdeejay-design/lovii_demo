@@ -454,6 +454,8 @@
             // Initialize mobile filters toggle
             document.getElementById('mobileFiltersToggle').addEventListener('click', function() {
                 this.classList.toggle('active');
+                // Make sure filters are copied to mobile before showing
+                copyFiltersToMobile();
                 document.getElementById('mobileFiltersSidebar').style.display = 'block';
             });
             
@@ -485,6 +487,9 @@
                     
                     // After all templates are loaded, try initializing components again
                     setTimeout(initializeAfterTemplatesLoad, 50);
+                    
+                    // Also copy filters to mobile sidebar after templates load
+                    setTimeout(copyFiltersToMobile, 100);
                 })
                 .catch(error => console.error('Error loading template:', error));
         }
@@ -524,14 +529,90 @@
                 // Add click handlers to mobile filter elements
                 const clonedFilterHeaders = clonedFilters.querySelectorAll('.filter-group h3');
                 clonedFilterHeaders.forEach(header => {
-                    header.onclick = function() {
+                    // Remove existing event listeners and add new ones
+                    const newHeader = header.cloneNode(true);
+                    newHeader.onclick = function() {
                         toggleFilter(this);
                     };
+                    header.parentNode.replaceChild(newHeader, header);
+                });
+                
+                // Add change event listeners to cloned checkboxes
+                const clonedCheckboxes = clonedFilters.querySelectorAll('input[type="checkbox"]');
+                clonedCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        // Trigger filtering when mobile filters change
+                        filterProducts();
+                    });
+                });
+                
+                // Add input event listeners to cloned price inputs
+                const clonedPriceInputs = clonedFilters.querySelectorAll('.price-filter input');
+                clonedPriceInputs.forEach(input => {
+                    input.addEventListener('input', function() {
+                        filterProducts();
+                    });
+                });
+                
+                // Add click event listeners to cloned category filter buttons
+                const clonedCategoryButtons = clonedFilters.querySelectorAll('.filter-controls .filter-btn');
+                clonedCategoryButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove active class from all buttons in this group
+                        const allButtons = this.closest('.filter-controls').querySelectorAll('.filter-btn');
+                        allButtons.forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        // Add active class to clicked button
+                        this.classList.add('active');
+                        // Apply filters
+                        filterProducts();
+                    });
                 });
                 
                 // Append the cloned filters to mobile content
                 mobileFiltersContent.appendChild(clonedFilters);
             }
+        }
+        
+        // Function to initialize components after templates load
+        function initializeAfterTemplatesLoad() {
+            // Copy filters to mobile sidebar
+            copyFiltersToMobile();
+            
+            // Initialize other components if needed
+            initializeFilterEventListeners();
+        }
+        
+        // Function to initialize filter event listeners
+        function initializeFilterEventListeners() {
+            // Add event listeners to filter checkboxes and other elements
+            const filterCheckboxes = document.querySelectorAll('.category-checkbox, .supplier-list input[type="checkbox"], .filter-group input[type="checkbox"]');
+            filterCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', filterProducts);
+            });
+            
+            // Add event listeners to price inputs
+            const priceInputs = document.querySelectorAll('.price-filter input');
+            priceInputs.forEach(input => {
+                input.addEventListener('input', filterProducts);
+            });
+            
+            // Add event listeners to category filter buttons
+            const categoryButtons = document.querySelectorAll('.filter-controls .filter-btn');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons in this group
+                    const allButtons = this.closest('.filter-controls').querySelectorAll('.filter-btn');
+                    allButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Apply filters
+                    filterProducts();
+                });
+            });
         }
         
         // Function to filter products based on selected filters
