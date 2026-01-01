@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="styles/main_menu_styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/components/products.css">
     <style>
         /* Улучшенные стили для адаптивного каталога товаров */
         .products-page-header {
@@ -641,6 +640,37 @@
                     </div>
                 </div>
 
+                <!-- Trust Elements -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Гарантия качества</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-truck"></i>
+                        <span>Быстрая доставка</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-undo"></i>
+                        <span>Возврат 30 дней</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-headset"></i>
+                        <span>Поддержка 24/7</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Activity Banner -->
+                <div class="activity-banner">
+                    <div class="activity-text">
+                        <span class="activity-icon">🔔</span>
+                        <span id="activity-message">Иван Иванов из Москвы только что купил Молоко деревенское свежее</span>
+                    </div>
+                    <div class="activity-timer">
+                        <span id="activity-timer">только что</span>
+                    </div>
+                </div>
+
                 <!-- Products Grid -->
                 <div class="products-grid">
                     <!-- Product cards -->
@@ -1053,39 +1083,166 @@
             element.classList.toggle('active');
             filterContent.classList.toggle('expanded');
         }
-        
-        // Function to copy desktop filters to mobile when needed
-        function copyFiltersToMobile() {
-            const desktopFilters = document.getElementById('desktopFilters');
-            const mobileFiltersContent = document.querySelector('.mobile-filters-content-inner');
-            if(desktopFilters && mobileFiltersContent) {
-                // Clone filters content to mobile sidebar
-                mobileFiltersContent.innerHTML = desktopFilters.innerHTML;
-                
-                // Update IDs to avoid conflicts
-                const mobileInputs = mobileFiltersContent.querySelectorAll('input[id]');
-                mobileInputs.forEach(input => {
-                    const newId = input.id + '-mobile';
-                    input.id = newId;
-                    const label = mobileFiltersContent.querySelector(`label[for="${input.id.replace('-mobile', '')}"]`);
-                    if(label) {
-                        label.setAttribute('for', newId);
+    </script>
+</body>
+</html>uct-badge eco">Эко</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Мёд цветочный натуральный</h3>
+                                <p>Натуральный лесной мед</p>
+                                <div class="product-price">
+                                    <span class="current-price">799 ₽</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(31)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Овощи">
+                                <span class="product-badge">Хит</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Овощи сезонные (ассорти)</h3>
+                                <p>Свежие овощи с местной фермы</p>
+                                <div class="product-price">
+                                    <span class="current-price">249 ₽</span>
+                                    <span class="original-price">299 ₽</span>
+                                    <span class="discount-badge">-17%</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(15)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Фрукты">
+                                <span class="product-badge featured">Новинка</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Фрукты экзотические</h3>
+                                <p>Сезонные фрукты из теплых стран</p>
+                                <div class="product-price">
+                                    <span class="current-price">399 ₽</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(27)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Мыло">
+                                <span class="product-badge eco">Эко</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Мыло ручной работы</h3>
+                                <p>Натуральное мыло без химии</p>
+                                <div class="product-price">
+                                    <span class="current-price">199 ₽</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span>(19)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="images/product_image.jpg" alt="Шампунь">
+                                <span class="product-badge sale">Акция</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Шампунь натуральный</h3>
+                                <p>Без парабенов и сульфатов</p>
+                                <div class="product-price">
+                                    <span class="current-price">349 ₽</span>
+                                    <span class="original-price">449 ₽</span>
+                                    <span class="discount-badge">-22%</span>
+                                </div>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span>(33)</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">В корзину</button>
+                                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="prev-page">&lsaquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <span class="dots">...</span>
+                        <a href="#">10</a>
+                        <a href="#" class="next-page">&rsaquo;</a>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded via JavaScript -->
+    <div id="footer-container"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-container"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header, footer and mobile navigation templates
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplate('templates/header.html', 'header-container');
+            loadTemplate('templates/footer.html', 'footer-container');
+            loadTemplate('templates/mobile-nav.html', 'mobile-nav-container');
+        });
+
+        function loadTemplate(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // Re-initialize any JavaScript functionality after template is loaded
+                    if (elementId === 'mobile-nav-container') {
+                        initializeNewMobileNavigation();
+                    } else if (elementId === 'header-container') {
+                        initializeMobileMenu();
                     }
-                });
-                
-                // Add click handlers to mobile filter elements
-                const mobileFilterHeaders = mobileFiltersContent.querySelectorAll('.filter-group h3');
-                mobileFilterHeaders.forEach(header => {
-                    header.onclick = function() {
-                        toggleFilter(this);
-                    };
-                });
-            }
-        }
-        
-        // Initialize after templates load
-        function initializeAfterTemplatesLoad() {
-            copyFiltersToMobile();
+                    
+                    // After all templates are loaded, try initializing components again
+                    setTimeout(initializeAfterTemplatesLoad, 50);
+                })
+                .catch(error => console.error('Error loading template:', error));
         }
     </script>
 </body>
