@@ -141,6 +141,22 @@
   margin-right: 2rem;
 }
 
+/* Header actions container for desktop (profile menu and theme toggle) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* Desktop theme toggle positioning and styling */
+@media (min-width: 769px) {
+  .theme-toggle {
+    /* Ensure proper positioning within header-actions */
+    align-self: center;
+  }
+}
+
 /* Стили для профильной кнопки */
 .profile-link {
   display: flex;
@@ -177,6 +193,10 @@
     display: none !important;
   }
   
+  /* Hide theme toggle on mobile devices - more specific selector to override theme-toggle.css */
+  .header .theme-toggle {
+    display: none !important;
+  }
   /* Adjust header actions layout when profile menu is hidden */
   .header-actions {
     order: 2;
