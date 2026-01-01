@@ -1,1 +1,1 @@
-(adapted_header.html, header_variants.html, new_header.html, profile_header.html are all html files which are source code files, and there are no build artifacts, dependencies, or temp files in the changes, so output nothing)
+Nothing should be ignored since the changes only include source files (404.html, js/main.js) without any build artifacts, dependencies, or temporary files.

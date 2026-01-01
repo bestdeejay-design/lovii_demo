@@ -1263,3 +1263,22 @@ function toggleTheme() {
     // Update the icon text based on current theme
     updateThemeToggleText();
 }
+
+// Function to load HTML templates
+function loadTemplate(url, elementId) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById(elementId).innerHTML = data;
+            // Re-initialize any JavaScript functionality after template is loaded
+            if (elementId === 'mobile-nav-container') {
+                initializeNewMobileNavigation();
+            } else if (elementId === 'header-container') {
+                initializeMobileMenu();
+            }
+            
+            // After all templates are loaded, try initializing components again
+            setTimeout(initializeAfterTemplatesLoad, 50);
+        })
+        .catch(error => console.error('Error loading template:', error));
+}
