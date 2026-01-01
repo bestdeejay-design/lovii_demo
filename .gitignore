@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes, as they only include source files (HTML, CSS, JS) and no build artifacts, dependencies, or temporary files.
+Nothing should be ignored based on the provided file changes, as they consist only of source files (.js, .css, .html) and no build artifacts, dependencies, or temporary files.

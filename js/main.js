@@ -41,9 +41,21 @@ function initializeComponentsWithRetry() {
     let themeToggleInitialized = false;
     let contactFormInitialized = false;
     let ctaFormInitialized = false;
+    let submenuInitialized = false;
     
     const retryInitialization = () => {
         attempts++;
+        
+        // Check and initialize submenu toggle if not already done
+        const submenuItems = document.querySelectorAll('.header .has-submenu > a');
+        if (!submenuInitialized && submenuItems.length > 0) {
+            initializeSubmenuToggle();
+            submenuInitialized = true;
+        } else if (!submenuInitialized && attempts >= maxAttempts) {
+            // Initialize even if no items found, in case they appear later
+            initializeSubmenuToggle();
+            submenuInitialized = true; // Prevent further checks
+        }
         
         // Check and initialize theme toggle if not already done
         const themeToggleBtn = document.getElementById('theme-toggle');
@@ -215,51 +227,46 @@ function initializeSubmenuToggle() {
                     }
                 }
             } else {
-                // Desktop behavior - if it's a dropdown trigger (href="#"), prevent default
+                // Desktop behavior - if it's a dropdown trigger (href="#"), prevent default and toggle submenu
                 if (this.getAttribute('href') === '#') {
                     e.preventDefault();
-                } else {
-                    // If it's a real link, check if submenu is already open
-                    const parentItem = this.parentElement;
-                    const isSubmenuOpen = parentItem.classList.contains('show-submenu');
-                    
-                    if (isSubmenuOpen) {
-                        // If submenu is open, just close it and don't navigate
-                        e.preventDefault();
-                        parentItem.classList.remove('show-submenu');
-                        return;
-                    }
-                    // If submenu is not open, allow navigation to the link
-                }
-                
-                // Toggle the submenu visibility for desktop if it's a dropdown trigger
-                if (this.getAttribute('href') === '#') {
                     const parentItem = this.parentElement;
                     parentItem.classList.toggle('show-submenu');
                 }
-                
-                // Prevent the click from bubbling up
-                e.stopPropagation();
+                // For real links, allow navigation but also toggle submenu if needed
+                else {
+                    const parentItem = this.parentElement;
+                    // Toggle submenu if it's not already open, otherwise close it
+                    if (!parentItem.classList.contains('show-submenu')) {
+                        // Close other open submenus first
+                        const allSubmenus = parentItem.parentElement.querySelectorAll('.has-submenu.show-submenu');
+                        allSubmenus.forEach(submenu => {
+                            submenu.classList.remove('show-submenu');
+                        });
+                        // Then allow navigation to the link
+                    } else {
+                        // If submenu is open, close it instead of navigating
+                        e.preventDefault();
+                        parentItem.classList.remove('show-submenu');
+                    }
+                }
             }
         });
     });
     
-    // Close submenus when clicking elsewhere (for desktop)
+    // Close submenus when clicking elsewhere
     document.addEventListener('click', function(e) {
-        const openSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
-        openSubmenus.forEach(submenu => {
-            // Check if the click is outside the submenu
+        // Close desktop submenus
+        const openDesktopSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
+        openDesktopSubmenus.forEach(submenu => {
             if (!submenu.contains(e.target)) {
                 submenu.classList.remove('show-submenu');
             }
         });
-    });
-    
-    // Close submenus when clicking elsewhere (for mobile)
-    document.addEventListener('click', function(e) {
-        const openSubmenus = document.querySelectorAll('.header .has-submenu.active');
-        openSubmenus.forEach(submenu => {
-            // Check if the click is outside the submenu
+        
+        // Close mobile submenus
+        const openMobileSubmenus = document.querySelectorAll('.header .has-submenu.active');
+        openMobileSubmenus.forEach(submenu => {
             if (!submenu.contains(e.target)) {
                 submenu.classList.remove('active');
                 const submenuContent = submenu.querySelector('.submenu');
