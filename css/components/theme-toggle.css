@@ -129,3 +129,37 @@
     background-color: var(--bg-secondary);
   }
 }
+
+/* Специфические стили для мобильного переключателя темы в мобильном меню */
+.mobile-nav-menu .theme-toggle-link {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0.9rem 1.5rem !important;
+  text-decoration: none !important;
+  color: var(--text-primary) !important;
+  transition: all 0.2s ease !important;
+  font-size: 1rem !important;
+  gap: 0.8rem !important;
+  background-color: var(--bg-secondary) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  justify-content: flex-start !important;
+  font-weight: normal !important;
+}
+
+.mobile-nav-menu .theme-toggle-link:hover {
+  background-color: var(--bg-primary) !important;
+  color: var(--accent-color) !important;
+  padding-left: 1.8rem !important;
+}
+
+/* Дополнительные стили для текста внутри мобильного переключателя темы */
+.mobile-nav-menu .theme-toggle-link i,
+.mobile-nav-menu .theme-toggle-link span,
+.mobile-nav-menu .theme-toggle-link > text {
+  color: var(--text-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+}
