@@ -1846,6 +1846,10 @@ body {
 }
 /* Стили для страницы ошибок (404 и т.д.) */
 
+.error-page {
+  background: var(--bg-primary);
+}
+
 .error-section {
   padding: 4rem 0;
   min-height: calc(100vh - 200px); /* Adjust for header and footer */
@@ -1860,6 +1864,12 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.error-icon {
+  font-size: 4rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
 }
 
 .error-content h1 {
@@ -1904,6 +1914,41 @@ body {
   color: var(--text-primary);
 }
 
+.search-form {
+  margin-bottom: 1.5rem;
+}
+
+.search-input-container {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.search-input-container input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  outline: none;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.search-input-container button {
+  padding: 12px 20px;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.search-input-container button:hover {
+  background: var(--accent-hover);
+}
+
 .popular-links {
   display: flex;
   flex-wrap: wrap;
@@ -1912,7 +1957,7 @@ body {
   margin-top: 1rem;
 }
 
-.popular-links a {
+.popular-link {
   display: inline-block;
   padding: 0.8rem 1.5rem;
   background-color: var(--bg-secondary);
@@ -1923,7 +1968,7 @@ body {
   border: 1px solid var(--border-color);
 }
 
-.popular-links a:hover {
+.popular-link:hover {
   background-color: var(--accent-color);
   color: white;
   transform: translateY(-2px);
@@ -1935,27 +1980,31 @@ body {
   .error-content h1 {
     font-size: 4rem;
   }
-  
+
   .error-content h2 {
     font-size: 2rem;
   }
-  
+
   .error-actions {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .error-actions .btn {
     width: 100%;
     max-width: 300px;
   }
-  
+
+  .search-input-container {
+    flex-direction: column;
+  }
+
   .popular-links {
     flex-direction: column;
     align-items: center;
   }
-  
-  .popular-links a {
+
+  .popular-link {
     width: 100%;
     max-width: 300px;
     text-align: center;

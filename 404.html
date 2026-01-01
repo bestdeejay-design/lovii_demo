@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Страница не найдена - Витрина - платформа для малого бизнеса</title>
     <meta name="description" content="Ошибка 404 - страница не найдена. Вернитесь на главную или воспользуйтесь поиском">
-    <meta name="keywords" content="ваш, список, ключевых, слов">
+    <meta name="keywords" content="ошибка 404, страница не найдена, витрина, малый бизнес, товары, услуги">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/combined.css">
-    <link rel="stylesheet" href="styles/main_menu_styles.css">
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-        <!-- Header will be loaded via JavaScript -->
+<body class="error-page">
+    <!-- Header will be loaded via JavaScript -->
     <div id="header-container"></div>
     
     <main class="main-content">
         <section class="error-section">
             <div class="container">
                 <div class="error-content">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
                     <h1>404</h1>
                     <h2>Страница не найдена</h2>
                     <p>К сожалению, запрашиваемая вами страница не существует или была перемещена.</p>
@@ -31,18 +32,20 @@
                     
                     <div class="search-suggestions">
                         <h3>Поиск по сайту</h3>
-                        <div class="search-form">
-                            <input type="text" placeholder="Введите ключевые слова..." id="error-search">
-                            <button class="btn btn--primary"><i class="fas fa-search"></i> Найти</button>
-                        </div>
+                        <form class="search-form" onsubmit="handleSearch(event)">
+                            <div class="search-input-container">
+                                <input type="text" placeholder="Введите ключевые слова..." id="error-search" autocomplete="off">
+                                <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
                         
                         <h3>Популярные разделы</h3>
                         <div class="popular-links">
-                            <a href="products.html">Товары и услуги</a>
-                            <a href="food.html">Еда и доставка</a>
-                            <a href="suppliers.html">Для поставщиков</a>
-                            <a href="pvz.html">Стать ПВЗ</a>
-                            <a href="faq.html">Часто задаваемые вопросы</a>
+                            <a href="products.html" class="popular-link">Товары и услуги</a>
+                            <a href="food.html" class="popular-link">Еда и доставка</a>
+                            <a href="suppliers.html" class="popular-link">Для поставщиков</a>
+                            <a href="pvz.html" class="popular-link">Стать ПВЗ</a>
+                            <a href="faq.html" class="popular-link">Часто задаваемые вопросы</a>
                         </div>
                     </div>
                 </div>
@@ -50,12 +53,13 @@
         </section>
     </main>
 
+    <!-- Footer will be loaded via JavaScript -->
     <div id="footer-container"></div>
 
     <!-- Mobile Navigation -->
     <div id="mobile-nav-container"></div>
 
-    <button id="backToTop" class="back-to-top">
+    <button id="backToTop" class="back-to-top" title="Наверх">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -84,6 +88,15 @@
                     setTimeout(initializeAfterTemplatesLoad, 50);
                 })
                 .catch(error => console.error('Error loading template:', error));
+        }
+        
+        function handleSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('error-search').value;
+            if(query.trim() !== '') {
+                // In a real implementation, this would redirect to search results
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            }
         }
     </script>
 </body>
