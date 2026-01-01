@@ -126,19 +126,6 @@ function initializeThemeToggle(themeToggleBtn) {
     }
 }
 
-function toggleTheme() {
-    document.body.classList.toggle('light-theme');
-    
-    // Save current theme to localStorage
-    if (document.body.classList.contains('light-theme')) {
-        localStorage.setItem('theme', 'light');
-    } else {
-        localStorage.setItem('theme', 'dark');
-    }
-    
-    // Update the icon text based on current theme
-    updateThemeToggleText();
-}
 
 function updateThemeToggleText() {
     // Update the mobile theme toggle link text and icon
