@@ -473,26 +473,7 @@
             });
         });
 
-        function loadTemplate(url, elementId) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
-                    // Re-initialize any JavaScript functionality after template is loaded
-                    if (elementId === 'mobile-nav-container') {
-                        initializeNewMobileNavigation();
-                    } else if (elementId === 'header-container') {
-                        initializeMobileMenu();
-                    }
-                    
-                    // After all templates are loaded, try initializing components again
-                    setTimeout(initializeAfterTemplatesLoad, 50);
-                    
-                    // Also copy filters to mobile sidebar after templates load
-                    setTimeout(copyFiltersToMobile, 100);
-                })
-                .catch(error => console.error('Error loading template:', error));
-        }
+
         
         function toggleFilter(element) {
             const filterGroup = element.parentElement;
@@ -576,13 +557,7 @@
         }
         
         // Function to initialize components after templates load
-        function initializeAfterTemplatesLoad() {
-            // Copy filters to mobile sidebar
-            copyFiltersToMobile();
-            
-            // Initialize other components if needed
-            initializeFilterEventListeners();
-        }
+
         
         // Function to initialize filter event listeners
         function initializeFilterEventListeners() {
