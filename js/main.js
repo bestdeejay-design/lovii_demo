@@ -227,28 +227,26 @@ function initializeSubmenuToggle() {
                     }
                 }
             } else {
-                // Desktop behavior - if it's a dropdown trigger (href="#"), prevent default and toggle submenu
-                if (this.getAttribute('href') === '#') {
-                    e.preventDefault();
-                    const parentItem = this.parentElement;
-                    parentItem.classList.toggle('show-submenu');
-                }
-                // For real links, allow navigation but also toggle submenu if needed
-                else {
-                    const parentItem = this.parentElement;
-                    // Toggle submenu if it's not already open, otherwise close it
-                    if (!parentItem.classList.contains('show-submenu')) {
-                        // Close other open submenus first
-                        const allSubmenus = parentItem.parentElement.querySelectorAll('.has-submenu.show-submenu');
-                        allSubmenus.forEach(submenu => {
-                            submenu.classList.remove('show-submenu');
-                        });
-                        // Then allow navigation to the link
-                    } else {
-                        // If submenu is open, close it instead of navigating
-                        e.preventDefault();
-                        parentItem.classList.remove('show-submenu');
+                // Desktop behavior - prevent default to ensure submenu toggle works properly
+                e.preventDefault();
+                const parentItem = this.parentElement;
+                
+                // Check if submenu is already open
+                const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
+                
+                // Close all other open submenus first
+                const allSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
+                allSubmenus.forEach(submenu => {
+                    if (submenu !== parentItem) {
+                        submenu.classList.remove('show-submenu');
                     }
+                });
+                
+                // Toggle the current submenu
+                if (isCurrentlyOpen) {
+                    parentItem.classList.remove('show-submenu');
+                } else {
+                    parentItem.classList.add('show-submenu');
                 }
             }
         });
@@ -276,6 +274,21 @@ function initializeSubmenuToggle() {
             }
         });
     });
+    
+    // Additional desktop submenu handling for better UX
+    // Hover effect for desktop (only when not on mobile)
+    if (window.innerWidth > 768) {
+        const headerHasSubmenuItems = document.querySelectorAll('.header .has-submenu');
+        headerHasSubmenuItems.forEach(item => {
+            // Ensure proper handling of submenu on mouseenter/mouseleave
+            item.addEventListener('mouseenter', function() {
+                // Don't interfere if submenu is already open by click
+                if (!this.classList.contains('show-submenu')) {
+                    // Optional: Add hover behavior here if needed
+                }
+            });
+        });
+    }
 }
 
 function initializeNewMobileNavigation() {
