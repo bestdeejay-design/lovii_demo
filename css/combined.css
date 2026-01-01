@@ -1517,6 +1517,21 @@ body {
   margin-top: 5rem;
 }
 
+.footer-top {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.footer-logo .logo {
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -1526,31 +1541,112 @@ body {
   gap: 3rem;
 }
 
-.footer-column h3 {
-  color: var(--text-primary);
-  margin-bottom: 1.5rem;
-  font-size: 1.3rem;
+/* Footer sections for desktop */
+@media (min-width: 769px) {
+  .footer-section {
+    display: block;
+  }
+  
+  .footer-section-title {
+    display: none; /* Hide accordion buttons on desktop */
+  }
+  
+  .footer-section-content {
+    display: block !important; /* Override mobile display none */
+    padding: 0; /* Reset padding since we're showing content directly */
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-section ul li a {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .footer-section ul li a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
 }
 
-.footer-column ul {
-  list-style: none;
+/* Footer accordion sections for mobile */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .footer-section {
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-section-title {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: none;
+    color: var(--text-primary);
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .footer-toggle-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .footer-section-title[aria-expanded="true"] .footer-toggle-icon {
+    transform: rotate(180deg);
+  }
+  
+  .footer-section-content {
+    padding: 1rem;
+    display: none;
+  }
+  
+  .footer-section-content[aria-expanded="true"] {
+    display: block;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.8rem;
+  }
+  
+  .footer-section ul li a {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    text-decoration: none;
+    display: block;
+    padding: 0.25rem 0;
+  }
+  
+  .footer-section ul li a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
 }
 
-.footer-column ul li {
-  margin-bottom: 0.8rem;
-}
-
-.footer-column ul li a {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-  text-decoration: none;
-}
-
-.footer-column ul li a:hover {
-  color: var(--accent-color);
-  text-decoration: underline;
-}
-
+/* Footer bottom section */
 .footer-bottom {
   max-width: 1200px;
   margin: 3rem auto 0;
@@ -1558,7 +1654,49 @@ body {
   border-top: 1px solid var(--border-color);
   text-align: center;
   color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
+
+.footer-bottom p {
+  margin: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.footer-contacts {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Desktop footer styling */
 
 /* Кнопки */
 .btn {
