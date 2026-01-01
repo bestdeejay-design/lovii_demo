@@ -294,6 +294,9 @@
         }
         
         function initializeRegistrationForm() {
+            // Initialize required attributes for the first step
+            updateRequiredAttributes(1);
+            
             // Step navigation
             document.querySelectorAll('.next-step').forEach(button => {
                 button.addEventListener('click', function() {
@@ -318,7 +321,10 @@
             
             // Form validation
             document.getElementById('supplierRegistrationForm').addEventListener('submit', function(e) {
-                e.preventDefault();
+                // Set required attributes for all steps before validation
+                document.querySelectorAll('#step2 input[data-required="true"], #step3 input[data-required="true"], #step4 input[data-required="true"]').forEach(field => {
+                    field.setAttribute('required', '');
+                });
                 
                 // Validate password match
                 const password = document.getElementById('password').value;
@@ -326,11 +332,11 @@
                 
                 if (password !== confirmPassword) {
                     alert('Пароли не совпадают');
+                    e.preventDefault();
                     return;
                 }
                 
                 // Check required fields
-                const formData = new FormData(this);
                 let isValid = true;
                 
                 // Additional validation can be added here
@@ -364,6 +370,28 @@
             // Update summary on last step
             if (stepNumber == 5) {
                 updateSummary();
+            }
+            
+            // Update required attributes based on current step
+            updateRequiredAttributes(stepNumber);
+        }
+        
+        function updateRequiredAttributes(stepNumber) {
+            // Remove required from all fields initially
+            document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+                field.removeAttribute('data-required');
+                if (field.hasAttribute('required')) {
+                    field.setAttribute('data-required', 'true');
+                    field.removeAttribute('required');
+                }
+            });
+            
+            // Add required back to fields in current step only
+            const currentStep = document.getElementById(`step${stepNumber}`);
+            if (currentStep) {
+                currentStep.querySelectorAll('input[data-required="true"], select[data-required="true"], textarea[data-required="true"]').forEach(field => {
+                    field.setAttribute('required', '');
+                });
             }
         }
         
@@ -460,6 +488,9 @@
             }
             
             verificationForm.innerHTML = formHTML;
+            
+            // Update required attributes for the current step after form is updated
+            updateRequiredAttributes(3);
         }
         
         function updateSummary() {
@@ -473,6 +504,9 @@
             document.getElementById('summary-name').textContent = fullName;
             document.getElementById('summary-email').textContent = email;
             document.getElementById('summary-phone').textContent = phone;
+            
+            // Update required attributes for the current step (step 5)
+            updateRequiredAttributes(5);
         }
     </script>
     
