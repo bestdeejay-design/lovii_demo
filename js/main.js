@@ -198,12 +198,19 @@ function initializeSubmenuToggle() {
     // Handle submenu toggling for both mobile and desktop views
     const submenuItems = document.querySelectorAll('.header .has-submenu > a');
     submenuItems.forEach(item => {
+        // Check if event listener is already attached to avoid duplicates
+        if (item.hasAttribute('data-submenu-listener')) {
+            return;
+        }
+        
         item.addEventListener('click', function(e) {
+            // Always prevent default to ensure submenu toggle works properly
+            e.preventDefault();
+            const parentItem = this.parentElement;
+            
             // Determine if we're on mobile or desktop
             if (window.innerWidth <= 768) {
                 // Mobile behavior - toggle submenu
-                e.preventDefault();
-                const parentItem = this.parentElement;
                 const wasActive = parentItem.classList.contains('active');
                 
                 // Close all other submenus in the same level
@@ -227,10 +234,7 @@ function initializeSubmenuToggle() {
                     }
                 }
             } else {
-                // Desktop behavior - prevent default to ensure submenu toggle works properly
-                e.preventDefault();
-                const parentItem = this.parentElement;
-                
+                // Desktop behavior
                 // Check if submenu is already open
                 const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
                 
@@ -250,6 +254,9 @@ function initializeSubmenuToggle() {
                 }
             }
         });
+        
+        // Mark that event listener has been attached
+        item.setAttribute('data-submenu-listener', 'true');
     });
     
     // Close submenus when clicking elsewhere
@@ -286,6 +293,11 @@ function initializeSubmenuToggle() {
                 if (!this.classList.contains('show-submenu')) {
                     // Optional: Add hover behavior here if needed
                 }
+            });
+            
+            // Handle mouseleave to close submenu if needed
+            item.addEventListener('mouseleave', function() {
+                // Keep submenu open if it was opened by click
             });
         });
     }
