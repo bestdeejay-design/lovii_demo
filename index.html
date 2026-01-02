@@ -628,6 +628,8 @@
         <!-- Mobile Navigation -->
         <div id="mobile-nav-container"></div>
 
+        <script src="js/main-menu.js"></script>
+        <script src="js/mobile-menu.js"></script>
         <script src="js/main.js"></script>
         <script>
             // Load header, footer and mobile navigation templates
@@ -647,6 +649,8 @@
                             initializeNewMobileNavigation();
                         } else if (elementId === 'header-container') {
                             initializeMobileMenu();
+                            // Initialize main menu after header is loaded
+                            setTimeout(initializeMainMenu, 10);
                         }
                         
                         // After all templates are loaded, try initializing components again
