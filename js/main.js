@@ -253,6 +253,12 @@ function initializeSubmenuToggle() {
                 } else {
                     parentItem.classList.add('show-submenu');
                 }
+                
+                // Rotate submenu arrow
+                const arrow = this.querySelector('.submenu-arrow');
+                if (arrow) {
+                    arrow.style.transform = isCurrentlyOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
             });
             
             item.setAttribute('data-menu-initialized', 'true');
@@ -324,6 +330,12 @@ function initializeSubmenuToggle() {
                     if (submenu) {
                         submenu.setAttribute('aria-expanded', 'true');
                     }
+                }
+                
+                // Rotate submenu arrow
+                const arrow = this.querySelector('.submenu-arrow');
+                if (arrow) {
+                    arrow.style.transform = isCurrentlyActive ? 'rotate(0deg)' : 'rotate(180deg)';
                 }
             });
             

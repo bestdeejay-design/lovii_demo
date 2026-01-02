@@ -30,27 +30,26 @@
   align-items: center;
 }
 
-/* Стили для навигации */
-.nav-menu ul {
+/* Стили для основного списка меню */
+.main-menu-list {
   display: flex;
   list-style: none;
   gap: 30px;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-menu a {
+/* Стили для элементов основного меню */
+.main-menu-list .nav-item {
+  position: relative;
+}
+
+.main-menu-list .nav-link {
   color: var(--text-primary);
   text-decoration: none;
   transition: color 0.3s ease;
   font-weight: 500;
-}
-
-.nav-menu a:hover {
-  color: var(--accent-color);
-}
-
-/* Стили для элементов меню без подменю */
-.header .nav-menu ul .nav-item:not(.has-submenu) > a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -59,15 +58,42 @@
   border-left: 3px solid transparent;
 }
 
-.header .nav-menu ul .nav-item:not(.has-submenu) > a:hover {
+.main-menu-list .nav-link:hover {
+  color: var(--accent-color);
+}
+
+.main-menu-list .nav-link i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+/* Стили для пунктов меню без подменю */
+.main-menu-list .nav-item:not(.has-submenu) > .nav-link {
+  border-left: 3px solid transparent;
+}
+
+.main-menu-list .nav-item:not(.has-submenu) > .nav-link:hover {
   color: var(--accent-color);
   padding-left: 0.5rem;
   border-left: 3px solid var(--accent-color);
 }
 
+/* Стили для пунктов меню с подменю */
+.main-menu-list .nav-item.has-submenu > .nav-link {
+  border-left: 3px solid transparent;
+}
+
+.main-menu-list .nav-item.has-submenu > .nav-link:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+
+
 /* Desktop submenu styles */
 @media (min-width: 769px) {
-  .header .nav-menu ul .nav-item.has-submenu {
+  .header .main-menu-list .nav-item.has-submenu {
     position: relative;
   }
 
