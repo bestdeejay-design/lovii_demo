@@ -64,7 +64,7 @@ function initializeRouting() {
         }
         
         // Обработка кликов по ссылкам в меню
-        document.querySelectorAll('.header .main-menu-list .nav-link').forEach(link => {
+        document.querySelectorAll('.header .main-menu-list > .nav-item > .nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
                 
@@ -73,19 +73,18 @@ function initializeRouting() {
                 const hasSubmenu = parentItem.classList.contains('has-submenu');
                 
                 if (href && href !== '#') {
-                    // Если у элемента нет подменю, или это элемент с подменю но без дочерних ссылок,
-                    // переходим по ссылке
+                    // Если у элемента нет подменю, переходим по ссылке
                     if (!hasSubmenu) {
                         e.preventDefault();
                         handleNavigation(href);
                     } else {
-                        // Для элементов с подменю проверяем, есть ли у них дочерние ссылки
-                        const submenu = parentItem.querySelector('.submenu');
-                        if (submenu && submenu.querySelectorAll('a').length === 0) {
-                            e.preventDefault();
-                            handleNavigation(href);
-                        }
-                        // Если есть подменю с дочерними ссылками, обработчик подменю будет управлять кликом
+                        // Для элементов с подменю, если кликнули на основную ссылку (а не на ссылку в подменю),
+                        // и если нужно, можно перейти по основной ссылке
+                        // В текущей реализации мы позволяем обработчику подменю управлять кликом
+                        // Если вы хотите, чтобы основная ссылка вела на страницу, даже если есть подменю,
+                        // раскомментируйте следующие строки:
+                        // e.preventDefault();
+                        // handleNavigation(href);
                     }
                 }
             });
