@@ -1,52 +1,50 @@
 ```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+dist/
+build/
+target/
+*.class
+*.so
+*.dll
+*.exe
+*.out
+
 # Dependencies
 node_modules/
-
-# Environment
+venv/
+.venv/
 .env
 .env.local
 .env.*
-
-# Logs
-*.log
-
-# Coverage
+.julia/
+zig*/
+.jest/
+.nyc_output/
 coverage/
 htmlcov/
 .coverage
 
-# Build artifacts
-dist/
-build/
-*.min.js
-*.min.css
-
-# IDE
-.vscode/
-.idea/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Testing
-.pytest_cache/
-.mypy_cache/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Temporary files
+# Logs and temp files
+*.log
 *.tmp
 *.swp
-*~
+*.swo
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
 ```
+
+Wait, I need to reconsider this. The only modified file is `lovi-pwa/index.html`, which is a source/config file. There are no build artifacts, dependencies, or temp files in the changes. According to rule 6, if the changes contain only source or config files and no build artifacts, dependencies, or temp files, I should output an empty .gitignore.
+
+(empty — output nothing)
