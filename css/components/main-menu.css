@@ -1,0 +1,133 @@
+/* Стили для основного меню */
+.main-menu-list {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu-list .nav-item {
+  position: relative;
+}
+
+.main-menu-list .nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.main-menu-list .nav-link:hover {
+  color: var(--accent-color);
+}
+
+.main-menu-list .nav-link i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+/* Стили для пунктов меню без подменю */
+.main-menu-list .nav-item:not(.has-submenu) > .nav-link {
+  border-left: 3px solid transparent;
+}
+
+.main-menu-list .nav-item:not(.has-submenu) > .nav-link:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Стили для пунктов меню с подменю */
+.main-menu-list .nav-item.has-submenu > .nav-link {
+  border-left: 3px solid transparent;
+}
+
+.main-menu-list .nav-item.has-submenu > .nav-link:hover {
+  color: var(--accent-color);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+/* Desktop submenu styles */
+@media (min-width: 769px) {
+  .header .main-menu-list .nav-item.has-submenu {
+    position: relative;
+  }
+
+  .header .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--bg-secondary);
+    min-width: 250px;
+    border-radius: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    border: 1px solid var(--border-color);
+    pointer-events: none; /* Prevents submenu from interfering with hover */
+  }
+
+  /* Show submenu when parent has 'show-submenu' class (controlled by JavaScript) */
+  .header .nav-item.has-submenu.show-submenu .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  
+  /* Profile submenu positioning - appears below the profile link */
+  .profile-submenu {
+    right: 0;
+    left: auto;
+  }
+
+  .header .submenu a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    gap: 0.8rem;
+    border-left: 3px solid transparent;
+  }
+
+  .header .submenu a:hover {
+    background-color: var(--bg-primary);
+    color: var(--accent-color);
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--accent-color);
+  }
+  
+  /* Enhanced submenu hover behavior to prevent flickering */
+  .header .nav-item.has-submenu {
+    display: inline-block;
+  }
+  
+  .header .nav-item.has-submenu > a {
+    position: relative;
+    z-index: 1001;
+  }
+}
+
+/* Скрытие основного меню на мобильных устройствах */
+@media (max-width: 768px) {
+  .main-menu {
+    display: none;
+  }
+}

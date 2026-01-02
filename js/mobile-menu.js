@@ -24,9 +24,6 @@ function initializeMobileMenu() {
     
     // Initialize the new mobile navigation
     initializeNewMobileNavigation();
-    
-    // Initialize submenu toggle for mobile
-    initializeSubmenuToggle();
 }
 
 function initializeNewMobileNavigation() {
@@ -105,10 +102,6 @@ function initializeNewMobileNavigation() {
     }
 }
 
-// Export functions for use in other parts of the application
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        initializeMobileMenu,
-        initializeNewMobileNavigation
-    };
-}
+// Make functions available globally
+window.initializeMobileMenu = initializeMobileMenu;
+window.initializeNewMobileNavigation = initializeNewMobileNavigation;
