@@ -1,8 +1,5 @@
 // Check if saved theme exists on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize mobile menu
-    initializeMobileMenu();
-    
     // Initialize other components after templates load
     setTimeout(initializeAfterTemplatesLoad, 100);
 });
@@ -49,11 +46,15 @@ function initializeComponentsWithRetry() {
         // Check and initialize submenu toggle if not already done
         const submenuItems = document.querySelectorAll('.header .has-submenu > a');
         if (!submenuInitialized && submenuItems.length > 0) {
-            initializeSubmenuToggle();
+            if (typeof initializeMainMenu !== 'undefined') {
+                initializeMainMenu();
+            }
             submenuInitialized = true;
         } else if (!submenuInitialized && attempts >= maxAttempts) {
             // Initialize even if no items found, in case they appear later
-            initializeSubmenuToggle();
+            if (typeof initializeMainMenu !== 'undefined') {
+                initializeMainMenu();
+            }
             submenuInitialized = true; // Prevent further checks
         }
         
@@ -164,313 +165,8 @@ function updateThemeToggleText() {
     }
 }
 
-function initializeMobileMenu() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.querySelector('.nav-menu');
-    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-    
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-        });
-    }
-    
-    // Мобильное меню для оверлея (если используется)
-    const overlayMenuBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileMenuOverlay) {
-        const overlayMenuItems = mobileMenuOverlay.querySelectorAll('a');
-        
-        overlayMenuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                mobileMenuOverlay.classList.remove('active');
-            });
-        });
-    }
-    
-    // Initialize the new mobile navigation
-    initializeNewMobileNavigation();
-    
-    // Initialize submenu toggle for mobile
-    initializeSubmenuToggle();
-}
 
-function initializeSubmenuToggle() {
-    // Initialize menu based on screen size
-    function initializeMenuByScreenSize() {
-        // Remove all initialization attributes to avoid conflicts
-        document.querySelectorAll('.header .has-submenu > a').forEach(item => {
-            item.removeAttribute('data-menu-initialized');
-            item.removeAttribute('data-mobile-menu-initialized');
-        });
-        
-        // Remove all submenu link initialization attributes
-        document.querySelectorAll('.header .has-submenu .submenu a').forEach(link => {
-            link.removeAttribute('data-submenu-link-initialized');
-            link.removeAttribute('data-mobile-submenu-link-initialized');
-        });
-        
-        // Remove all active submenu classes to reset state
-        document.querySelectorAll('.header .has-submenu').forEach(item => {
-            item.classList.remove('show-submenu', 'active');
-            const submenu = item.querySelector('.submenu');
-            if (submenu) {
-                submenu.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        if (window.innerWidth > 768) {
-            initializeDesktopMenu();
-        } else {
-            initializeMobileMenu();
-        }
-    }
-    
-    // Desktop menu functionality
-    function initializeDesktopMenu() {
-        const submenuItems = document.querySelectorAll('.header .has-submenu > a');
-        
-        // Add click event listeners to submenu items
-        submenuItems.forEach(item => {
-            if (item.hasAttribute('data-menu-initialized')) return;
-            
-            item.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default link behavior
-                e.stopPropagation(); // Stop event from bubbling up immediately
-                
-                const parentItem = this.parentElement;
-                const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
-                
-                // Close all other submenus first
-                document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
-                    if (submenu !== parentItem) {
-                        submenu.classList.remove('show-submenu');
-                    }
-                });
-                
-                // Toggle current submenu
-                if (isCurrentlyOpen) {
-                    parentItem.classList.remove('show-submenu');
-                } else {
-                    parentItem.classList.add('show-submenu');
-                }
-                
-                // Rotate submenu arrow
-                const arrow = this.querySelector('.submenu-arrow');
-                if (arrow) {
-                    arrow.style.transform = isCurrentlyOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-                }
-            });
-            
-            item.setAttribute('data-menu-initialized', 'true');
-        });
-        
-        // Handle clicks on submenu links to allow navigation
-        const submenuLinks = document.querySelectorAll('.header .has-submenu .submenu a');
-        submenuLinks.forEach(link => {
-            if (link.hasAttribute('data-submenu-link-initialized')) return;
-            
-            link.addEventListener('click', function(e) {
-                // Allow submenu links to work normally
-                // No preventDefault here so navigation works
-            });
-            
-            link.setAttribute('data-submenu-link-initialized', 'true');
-        });
-        
-        // Close all submenus when clicking outside menu area
-        document.addEventListener('click', function(e) {
-            const header = document.querySelector('.header');
-            
-            // Check if click is outside header entirely
-            if (!header || !header.contains(e.target)) {
-                document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
-                    submenu.classList.remove('show-submenu');
-                });
-                return;
-            }
-            
-            // Check if click is inside header but not in a menu item with submenu
-            const clickedElement = e.target;
-            const isInsideSubmenu = clickedElement.closest('.submenu');
-            const isMenuLink = clickedElement.classList.contains('nav-link') || clickedElement.closest('.nav-link');
-            
-            // If click is not inside a submenu or menu link, close all submenus
-            if (!isInsideSubmenu && !isMenuLink) {
-                document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
-                    submenu.classList.remove('show-submenu');
-                });
-            }
-        });
-    }
-    
-    // Mobile menu functionality
-    function initializeMobileMenu() {
-        const submenuItems = document.querySelectorAll('.header .has-submenu > a');
-        
-        submenuItems.forEach(item => {
-            if (item.hasAttribute('data-mobile-menu-initialized')) return;
-            
-            item.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default link behavior
-                e.stopPropagation(); // Stop event from bubbling
-                
-                const parentItem = this.parentElement;
-                const isCurrentlyActive = parentItem.classList.contains('active');
-                
-                // Toggle submenu
-                if (isCurrentlyActive) {
-                    parentItem.classList.remove('active');
-                    const submenu = parentItem.querySelector('.submenu');
-                    if (submenu) {
-                        submenu.setAttribute('aria-expanded', 'false');
-                    }
-                } else {
-                    parentItem.classList.add('active');
-                    const submenu = parentItem.querySelector('.submenu');
-                    if (submenu) {
-                        submenu.setAttribute('aria-expanded', 'true');
-                    }
-                }
-                
-                // Rotate submenu arrow
-                const arrow = this.querySelector('.submenu-arrow');
-                if (arrow) {
-                    arrow.style.transform = isCurrentlyActive ? 'rotate(0deg)' : 'rotate(180deg)';
-                }
-            });
-            
-            item.setAttribute('data-mobile-menu-initialized', 'true');
-        });
-        
-        // Handle clicks on submenu links to allow navigation
-        const submenuLinks = document.querySelectorAll('.header .has-submenu .submenu a');
-        submenuLinks.forEach(link => {
-            if (link.hasAttribute('data-mobile-submenu-link-initialized')) return;
-            
-            link.addEventListener('click', function(e) {
-                // Allow submenu links to work normally
-                // No preventDefault here so navigation works
-            });
-            
-            link.setAttribute('data-mobile-submenu-link-initialized', 'true');
-        });
-    }
-    
-    // Initialize initially
-    initializeMenuByScreenSize();
-    
-    // Handle window resize to switch between desktop and mobile modes
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(initializeMenuByScreenSize, 150);
-    });
-}
 
-function initializeNewMobileNavigation() {
-    const mobileNavButton = document.getElementById('mobileNavButton');
-    const mobileNavMenu = document.getElementById('mobileNavMenu');
-    const closeMobileMenu = document.getElementById('closeMobileMenu');
-    
-    if (mobileNavButton && mobileNavMenu) {
-        // Toggle mobile navigation menu
-        mobileNavButton.addEventListener('click', function() {
-            mobileNavMenu.classList.toggle('active');
-            mobileNavButton.classList.toggle('active');
-            
-            // Improve accessibility
-            const isExpanded = mobileNavMenu.classList.contains('active');
-            mobileNavButton.setAttribute('aria-expanded', isExpanded);
-            
-            // Focus on the first menu item when opening
-            if (isExpanded) {
-                const firstMenuItem = mobileNavMenu.querySelector('.nav-link');
-                if (firstMenuItem) {
-                    firstMenuItem.focus();
-                }
-            }
-        });
-        
-        // Close mobile navigation menu
-        if (closeMobileMenu) {
-            closeMobileMenu.addEventListener('click', function() {
-                mobileNavMenu.classList.remove('active');
-                mobileNavButton.classList.remove('active');
-                mobileNavButton.setAttribute('aria-expanded', 'false');
-                
-                // Return focus to the menu button when closing
-                mobileNavButton.focus();
-            });
-        }
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!mobileNavMenu.contains(event.target) && 
-                !mobileNavButton.contains(event.target) &&
-                mobileNavMenu.classList.contains('active')) {
-                mobileNavMenu.classList.remove('active');
-                mobileNavButton.classList.remove('active');
-                mobileNavButton.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        // Handle submenu toggling
-        const submenuItems = document.querySelectorAll('.has-submenu > .nav-link');
-        submenuItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const parentItem = this.parentElement;
-                parentItem.classList.toggle('active');
-                
-                // Update aria-expanded attribute for accessibility
-                const submenu = this.nextElementSibling;
-                if (submenu && submenu.classList.contains('submenu')) {
-                    const isExpanded = parentItem.classList.contains('active');
-                    submenu.setAttribute('aria-expanded', isExpanded);
-                }
-            });
-        });
-        
-        // Handle keyboard navigation
-        mobileNavMenu.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                mobileNavMenu.classList.remove('active');
-                mobileNavButton.classList.remove('active');
-                mobileNavButton.setAttribute('aria-expanded', 'false');
-                mobileNavButton.focus();
-            }
-        });
-    }
-}
-
-// Дополнительная функция для плавного перехода между секциями
-document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-            
-            // Закрываем мобильное меню при клике на ссылку
-            const navMenu = document.querySelector('.nav-menu');
-            if (navMenu) {
-                navMenu.classList.remove('active');
-            }
-            
-            // Закрываем мобильное навигационное меню (если открыто)
-            const mobileNavMenu = document.getElementById('mobileNavMenu');
-            if (mobileNavMenu) {
-                mobileNavMenu.classList.remove('active');
-            }
-        }
     });
 });
 
@@ -711,7 +407,6 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         initializeThemeToggle,
         initializeMobileMenu,
-        initializeNewMobileNavigation,
         initializeContactForm
     };
 }
@@ -1422,9 +1117,7 @@ function loadTemplate(url, elementId) {
         .then(data => {
             document.getElementById(elementId).innerHTML = data;
             // Re-initialize any JavaScript functionality after template is loaded
-            if (elementId === 'mobile-nav-container') {
-                initializeNewMobileNavigation();
-            } else if (elementId === 'header-container') {
+            if (elementId === 'header-container') {
                 initializeMobileMenu();
             }
             
