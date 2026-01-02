@@ -206,6 +206,8 @@ function initializeSubmenuToggle() {
         item.addEventListener('click', function(e) {
             // Always prevent default to ensure submenu toggle works properly
             e.preventDefault();
+            // Stop event propagation to prevent document click handler from immediately closing the submenu
+            e.stopPropagation();
             const parentItem = this.parentElement;
             
             // Determine if we're on mobile or desktop
