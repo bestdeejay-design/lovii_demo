@@ -195,114 +195,133 @@ function initializeMobileMenu() {
 }
 
 function initializeSubmenuToggle() {
-    // Handle submenu toggling for both mobile and desktop views
+    // Clean up any existing event listeners to prevent duplicates
     const submenuItems = document.querySelectorAll('.header .has-submenu > a');
-    submenuItems.forEach(item => {
-        // Check if event listener is already attached to avoid duplicates
-        if (item.hasAttribute('data-submenu-listener')) {
-            return;
-        }
-        
-        item.addEventListener('click', function(e) {
-            // Always prevent default to ensure submenu toggle works properly
-            e.preventDefault();
-            // Stop event propagation to prevent document click handler from immediately closing the submenu
-            e.stopPropagation();
-            const parentItem = this.parentElement;
-            
-            // Determine if we're on mobile or desktop
-            if (window.innerWidth <= 768) {
-                // Mobile behavior - toggle submenu
-                const wasActive = parentItem.classList.contains('active');
-                
-                // Close all other submenus in the same level
-                const allSubmenus = parentItem.parentElement.querySelectorAll('.has-submenu');
-                allSubmenus.forEach(submenu => {
-                    submenu.classList.remove('active');
-                    // Update aria-expanded attribute for accessibility
-                    const submenuContent = submenu.querySelector('.submenu');
-                    if (submenuContent) {
-                        submenuContent.setAttribute('aria-expanded', 'false');
-                    }
-                });
-                
-                // Toggle the current submenu
-                if (!wasActive) {
-                    parentItem.classList.add('active');
-                    // Update aria-expanded attribute for accessibility
-                    const submenuContent = parentItem.querySelector('.submenu');
-                    if (submenuContent) {
-                        submenuContent.setAttribute('aria-expanded', 'true');
-                    }
-                }
-            } else {
-                // Desktop behavior
-                // Check if submenu is already open
-                const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
-                
-                // Close all other open submenus first
-                const allSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
-                allSubmenus.forEach(submenu => {
-                    if (submenu !== parentItem) {
-                        submenu.classList.remove('show-submenu');
-                    }
-                });
-                
-                // Toggle the current submenu
-                if (isCurrentlyOpen) {
-                    parentItem.classList.remove('show-submenu');
-                } else {
-                    parentItem.classList.add('show-submenu');
-                }
-            }
-        });
-        
-        // Mark that event listener has been attached
-        item.setAttribute('data-submenu-listener', 'true');
-    });
     
-    // Close submenus when clicking elsewhere
-    document.addEventListener('click', function(e) {
-        // Close desktop submenus
-        const openDesktopSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
-        openDesktopSubmenus.forEach(submenu => {
-            if (!submenu.contains(e.target)) {
-                submenu.classList.remove('show-submenu');
-            }
-        });
+    // Function to handle submenu toggle based on current device type
+    function handleSubmenuToggle(item, e) {
+        e.preventDefault();
+        e.stopPropagation(); // Stop propagation to prevent document click handler from immediately closing the submenu
         
-        // Close mobile submenus
-        const openMobileSubmenus = document.querySelectorAll('.header .has-submenu.active');
-        openMobileSubmenus.forEach(submenu => {
-            if (!submenu.contains(e.target)) {
+        const parentItem = item.parentElement;
+        
+        // Determine if we're on mobile or desktop view
+        if (window.innerWidth <= 768) {
+            // Mobile behavior - toggle submenu with active class
+            const isCurrentlyActive = parentItem.classList.contains('active');
+            
+            // Close all other submenus in the same level
+            const allSubmenus = parentItem.parentElement.querySelectorAll('.has-submenu');
+            allSubmenus.forEach(submenu => {
                 submenu.classList.remove('active');
                 const submenuContent = submenu.querySelector('.submenu');
                 if (submenuContent) {
                     submenuContent.setAttribute('aria-expanded', 'false');
                 }
+            });
+            
+            // Toggle the current submenu
+            if (!isCurrentlyActive) {
+                parentItem.classList.add('active');
+                const submenuContent = parentItem.querySelector('.submenu');
+                if (submenuContent) {
+                    submenuContent.setAttribute('aria-expanded', 'true');
+                }
             }
-        });
-    });
-    
-    // Additional desktop submenu handling for better UX
-    // Hover effect for desktop (only when not on mobile)
-    if (window.innerWidth > 768) {
-        const headerHasSubmenuItems = document.querySelectorAll('.header .has-submenu');
-        headerHasSubmenuItems.forEach(item => {
-            // Ensure proper handling of submenu on mouseenter/mouseleave
-            item.addEventListener('mouseenter', function() {
-                // Don't interfere if submenu is already open by click
-                if (!this.classList.contains('show-submenu')) {
-                    // Optional: Add hover behavior here if needed
+        } else {
+            // Desktop behavior - toggle submenu with show-submenu class
+            const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
+            
+            // Close all other open submenus
+            document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
+                if (submenu !== parentItem) {
+                    submenu.classList.remove('show-submenu');
                 }
             });
             
-            // Handle mouseleave to close submenu if needed
-            item.addEventListener('mouseleave', function() {
-                // Keep submenu open if it was opened by click
-            });
-        });
+            // Toggle the current submenu
+            if (isCurrentlyOpen) {
+                parentItem.classList.remove('show-submenu');
+            } else {
+                parentItem.classList.add('show-submenu');
+            }
+        }
     }
+    
+    // Initialize submenu toggles
+    submenuItems.forEach(item => {
+        if (item.hasAttribute('data-submenu-initialized')) return;
+        
+        // Add click event listener that handles both mobile and desktop
+        item.addEventListener('click', function(e) {
+            handleSubmenuToggle(this, e);
+        });
+        
+        item.setAttribute('data-submenu-initialized', 'true');
+    });
+    
+    // Close submenus when clicking outside
+    document.addEventListener('click', function(e) {
+        // Check if the click was outside the header area
+        const header = document.querySelector('.header');
+        if (!header || !header.contains(e.target)) {
+            // Close all submenus regardless of device type
+            document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
+                submenu.classList.remove('show-submenu');
+            });
+            document.querySelectorAll('.header .has-submenu.active').forEach(submenu => {
+                submenu.classList.remove('active');
+                const submenuContent = submenu.querySelector('.submenu');
+                if (submenuContent) {
+                    submenuContent.setAttribute('aria-expanded', 'false');
+                }
+            });
+            return;
+        }
+        
+        // Determine if we're on mobile or desktop view
+        if (window.innerWidth <= 768) {
+            // Handle mobile submenu closing
+            const openMobileSubmenus = document.querySelectorAll('.header .has-submenu.active');
+            openMobileSubmenus.forEach(submenu => {
+                if (!submenu.contains(e.target)) {
+                    submenu.classList.remove('active');
+                    const submenuContent = submenu.querySelector('.submenu');
+                    if (submenuContent) {
+                        submenuContent.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        } else {
+            // Handle desktop submenu closing
+            const openDesktopSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
+            openDesktopSubmenus.forEach(submenu => {
+                if (!submenu.contains(e.target)) {
+                    submenu.classList.remove('show-submenu');
+                }
+            });
+        }
+    });
+    
+    // Handle window resize to ensure proper behavior when switching between mobile/desktop
+    window.addEventListener('resize', function() {
+        // When resizing, ensure correct classes are applied based on new screen size
+        if (window.innerWidth <= 768) {
+            // On mobile view, ensure desktop classes are removed
+            document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
+                submenu.classList.remove('show-submenu');
+            });
+        } else {
+            // On desktop view, ensure mobile classes are removed
+            document.querySelectorAll('.header .has-submenu.active').forEach(submenu => {
+                submenu.classList.remove('active');
+                const submenuContent = submenu.querySelector('.submenu');
+                if (submenuContent) {
+                    submenuContent.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    });
 }
 
 function initializeNewMobileNavigation() {

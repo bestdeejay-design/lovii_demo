@@ -98,14 +98,6 @@
     transform: translateY(0);
     pointer-events: auto;
   }
-
-  /* Remove hover functionality to prevent conflicts with JavaScript */
-  /* .header .nav-item.has-submenu:hover .submenu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  } */
   
   /* Profile submenu positioning - appears below the profile link */
   .profile-submenu {
@@ -139,14 +131,6 @@
   .header .nav-item.has-submenu > a {
     position: relative;
     z-index: 1001;
-  }
-  
-  /* Ensure submenu is accessible */
-  .header .nav-item.has-submenu:focus-within .submenu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
   }
 }
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест десктопного меню</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <include src="templates/header.html"></include>
+    
+    <main style="padding: 120px 20px 20px;">
+        <h1>Тест десктопного меню</h1>
+        <p>Проверьте, как работает основное меню на десктопе и мобильном устройстве.</p>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Simulate template loading by directly inserting the header content
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all components after "template" loads
+            setTimeout(function() {
+                initializeAfterTemplatesLoad();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
