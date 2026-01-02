@@ -48,37 +48,58 @@ function initializeMainMenu() {
         const submenu = parentItem.querySelector('.submenu');
         const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
         
+        // Проверяем, был ли клик на стрелке (а не на ссылке в целом)
+        const isArrowClick = e.target.classList.contains('submenu-arrow') || 
+                           e.target.parentElement.classList.contains('submenu-arrow');
+        
         // Проверяем, есть ли подменю у этого элемента
         if (submenu) {
-            // Закрываем все другие подменю
-            document.querySelectorAll('.header .main-menu-list .has-submenu.show-submenu').forEach(submenu => {
-                if (submenu !== parentItem) {
-                    submenu.classList.remove('show-submenu');
-                    // Возвращаем стрелку в исходное положение
-                    const arrow = submenu.querySelector('.submenu-arrow');
-                    if (arrow) {
-                        arrow.style.transform = 'rotate(0deg)';
+            // Если клик был на стрелке, просто переключаем подменю
+            if (isArrowClick) {
+                // Закрываем все другие подменю
+                document.querySelectorAll('.header .main-menu-list .has-submenu.show-submenu').forEach(submenu => {
+                    if (submenu !== parentItem) {
+                        submenu.classList.remove('show-submenu');
+                        // Возвращаем стрелку в исходное положение
+                        const arrow = submenu.querySelector('.submenu-arrow');
+                        if (arrow) {
+                            arrow.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+                
+                // Переключаем текущее подменю
+                if (isCurrentlyOpen) {
+                    parentItem.classList.remove('show-submenu');
+                } else {
+                    parentItem.classList.add('show-submenu');
+                }
+                
+                // Поворачиваем стрелку
+                const arrow = this.querySelector('.submenu-arrow');
+                if (arrow) {
+                    arrow.style.transform = isCurrentlyOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+            } else {
+                // Если клик был не на стрелке, переходим по основной ссылке
+                const href = this.getAttribute('href');
+                if (href && href !== '#') {
+                    if (typeof handleNavigation !== 'undefined') {
+                        handleNavigation(href);
+                    } else {
+                        window.location.href = href;
                     }
                 }
-            });
-            
-            // Переключаем текущее подменю
-            if (isCurrentlyOpen) {
-                parentItem.classList.remove('show-submenu');
-            } else {
-                parentItem.classList.add('show-submenu');
-            }
-            
-            // Поворачиваем стрелку
-            const arrow = this.querySelector('.submenu-arrow');
-            if (arrow) {
-                arrow.style.transform = isCurrentlyOpen ? 'rotate(0deg)' : 'rotate(180deg)';
             }
         } else {
             // Если нет подменю, переходим по ссылке
             const href = this.getAttribute('href');
             if (href && href !== '#') {
-                window.location.href = href;
+                if (typeof handleNavigation !== 'undefined') {
+                    handleNavigation(href);
+                } else {
+                    window.location.href = href;
+                }
             }
         }
     }
@@ -92,31 +113,52 @@ function initializeMainMenu() {
         const submenu = parentItem.querySelector('.submenu');
         const isCurrentlyActive = parentItem.classList.contains('active');
         
+        // Проверяем, был ли клик на стрелке (а не на ссылке в целом)
+        const isArrowClick = e.target.classList.contains('submenu-arrow') || 
+                           e.target.parentElement.classList.contains('submenu-arrow');
+        
         // Проверяем, есть ли подменю у этого элемента
         if (submenu) {
-            // Переключаем подменю
-            if (isCurrentlyActive) {
-                parentItem.classList.remove('active');
-                if (submenu) {
-                    submenu.setAttribute('aria-expanded', 'false');
+            // Если клик был на стрелке, переключаем подменю
+            if (isArrowClick) {
+                // Переключаем подменю
+                if (isCurrentlyActive) {
+                    parentItem.classList.remove('active');
+                    if (submenu) {
+                        submenu.setAttribute('aria-expanded', 'false');
+                    }
+                } else {
+                    parentItem.classList.add('active');
+                    if (submenu) {
+                        submenu.setAttribute('aria-expanded', 'true');
+                    }
+                }
+                
+                // Поворачиваем стрелку
+                const arrow = this.querySelector('.submenu-arrow');
+                if (arrow) {
+                    arrow.style.transform = isCurrentlyActive ? 'rotate(0deg)' : 'rotate(180deg)';
                 }
             } else {
-                parentItem.classList.add('active');
-                if (submenu) {
-                    submenu.setAttribute('aria-expanded', 'true');
+                // Если клик был не на стрелке, переходим по основной ссылке
+                const href = this.getAttribute('href');
+                if (href && href !== '#') {
+                    if (typeof handleNavigation !== 'undefined') {
+                        handleNavigation(href);
+                    } else {
+                        window.location.href = href;
+                    }
                 }
-            }
-            
-            // Поворачиваем стрелку
-            const arrow = this.querySelector('.submenu-arrow');
-            if (arrow) {
-                arrow.style.transform = isCurrentlyActive ? 'rotate(0deg)' : 'rotate(180deg)';
             }
         } else {
             // Если нет подменю, переходим по ссылке
             const href = this.getAttribute('href');
             if (href && href !== '#') {
-                window.location.href = href;
+                if (typeof handleNavigation !== 'undefined') {
+                    handleNavigation(href);
+                } else {
+                    window.location.href = href;
+                }
             }
         }
     }

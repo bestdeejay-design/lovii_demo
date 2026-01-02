@@ -6,6 +6,7 @@ __pycache__/
 *.obj
 dist/
 build/
+target/
 *.class
 *.exe
 *.dll
@@ -14,15 +15,12 @@ build/
 *.out
 
 # Dependencies
-.venv/
-venv/
 node_modules/
-target/
-.gradle/
-.mypy_cache/
-.pytest_cache/
-htmlcov/
-.coverage
+venv/
+.venv/
+.env
+.env.local
+.env.*
 
 # Logs and temp files
 *.log
@@ -30,14 +28,11 @@ htmlcov/
 *.swp
 *.swo
 
-# Environment
-.env
-.env.local
-.env.*
-
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # System files
 .DS_Store
@@ -45,8 +40,10 @@ Thumbs.db
 
 # Coverage
 coverage/
+htmlcov/
+.coverage
 
-# Common compressed files
+# Compressed files
 *.zip
 *.gz
 *.tar
@@ -69,4 +66,112 @@ coverage/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+
+# Python specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+.Python
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.tox/
+.coverage
+htmlcov/
+
+# Node.js specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+dist/
+build/
+
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+target/
+.gradle/
+build/
+
+# C/C++ specific
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.out
+*.obj
+*.ilk
+*.pdb
+*.sdf
+*.suo
+*.idb
+*.vcxproj.filters
+*.vcproj.filters
+
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.prof
+
+# Ruby specific
+*.gem
+*.rbc
+.bundle/
+.coverage
+InstalledFiles
+pkg/
+spec/reports/
+test/tmp/
+test/version_tmp/
+tmp/
+
+# Rust specific
+target/
+Cargo.lock
+*.so
+*.dylib
+*.dll
+
+# Web specific
+*.min.js
+*.min.css
+public/dist/
+public/build/
+
+# Environment specific
+.env
+.env.local
+.env.*
+!.env.example
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 ```
