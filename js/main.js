@@ -195,132 +195,163 @@ function initializeMobileMenu() {
 }
 
 function initializeSubmenuToggle() {
-    // Clean up any existing event listeners to prevent duplicates
-    const submenuItems = document.querySelectorAll('.header .has-submenu > a');
-    
-    // Function to handle submenu toggle based on current device type
-    function handleSubmenuToggle(item, e) {
-        e.preventDefault();
-        e.stopPropagation(); // Stop propagation to prevent document click handler from immediately closing the submenu
+    // Initialize menu based on screen size
+    function initializeMenuByScreenSize() {
+        // Remove all initialization attributes to avoid conflicts
+        document.querySelectorAll('.header .has-submenu > a').forEach(item => {
+            item.removeAttribute('data-menu-initialized');
+            item.removeAttribute('data-mobile-menu-initialized');
+        });
         
-        const parentItem = item.parentElement;
+        // Remove all submenu link initialization attributes
+        document.querySelectorAll('.header .has-submenu .submenu a').forEach(link => {
+            link.removeAttribute('data-submenu-link-initialized');
+            link.removeAttribute('data-mobile-submenu-link-initialized');
+        });
         
-        // Determine if we're on mobile or desktop view
-        if (window.innerWidth <= 768) {
-            // Mobile behavior - toggle submenu with active class
-            const isCurrentlyActive = parentItem.classList.contains('active');
-            
-            // Close all other submenus in the same level
-            const allSubmenus = parentItem.parentElement.querySelectorAll('.has-submenu');
-            allSubmenus.forEach(submenu => {
-                submenu.classList.remove('active');
-                const submenuContent = submenu.querySelector('.submenu');
-                if (submenuContent) {
-                    submenuContent.setAttribute('aria-expanded', 'false');
-                }
-            });
-            
-            // Toggle the current submenu
-            if (!isCurrentlyActive) {
-                parentItem.classList.add('active');
-                const submenuContent = parentItem.querySelector('.submenu');
-                if (submenuContent) {
-                    submenuContent.setAttribute('aria-expanded', 'true');
-                }
+        // Remove all active submenu classes to reset state
+        document.querySelectorAll('.header .has-submenu').forEach(item => {
+            item.classList.remove('show-submenu', 'active');
+            const submenu = item.querySelector('.submenu');
+            if (submenu) {
+                submenu.setAttribute('aria-expanded', 'false');
             }
+        });
+        
+        if (window.innerWidth > 768) {
+            initializeDesktopMenu();
         } else {
-            // Desktop behavior - toggle submenu with show-submenu class
-            const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
-            
-            // Close all other open submenus
-            document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
-                if (submenu !== parentItem) {
-                    submenu.classList.remove('show-submenu');
-                }
-            });
-            
-            // Toggle the current submenu
-            if (isCurrentlyOpen) {
-                parentItem.classList.remove('show-submenu');
-            } else {
-                parentItem.classList.add('show-submenu');
-            }
+            initializeMobileMenu();
         }
     }
     
-    // Initialize submenu toggles
-    submenuItems.forEach(item => {
-        if (item.hasAttribute('data-submenu-initialized')) return;
+    // Desktop menu functionality
+    function initializeDesktopMenu() {
+        const submenuItems = document.querySelectorAll('.header .has-submenu > a');
         
-        // Add click event listener that handles both mobile and desktop
-        item.addEventListener('click', function(e) {
-            handleSubmenuToggle(this, e);
-        });
-        
-        item.setAttribute('data-submenu-initialized', 'true');
-    });
-    
-    // Close submenus when clicking outside
-    document.addEventListener('click', function(e) {
-        // Check if the click was outside the header area
-        const header = document.querySelector('.header');
-        if (!header || !header.contains(e.target)) {
-            // Close all submenus regardless of device type
-            document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
-                submenu.classList.remove('show-submenu');
-            });
-            document.querySelectorAll('.header .has-submenu.active').forEach(submenu => {
-                submenu.classList.remove('active');
-                const submenuContent = submenu.querySelector('.submenu');
-                if (submenuContent) {
-                    submenuContent.setAttribute('aria-expanded', 'false');
+        // Add click event listeners to submenu items
+        submenuItems.forEach(item => {
+            if (item.hasAttribute('data-menu-initialized')) return;
+            
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+                e.stopPropagation(); // Stop event from bubbling up immediately
+                
+                const parentItem = this.parentElement;
+                const isCurrentlyOpen = parentItem.classList.contains('show-submenu');
+                
+                // Close all other submenus first
+                document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
+                    if (submenu !== parentItem) {
+                        submenu.classList.remove('show-submenu');
+                    }
+                });
+                
+                // Toggle current submenu
+                if (isCurrentlyOpen) {
+                    parentItem.classList.remove('show-submenu');
+                } else {
+                    parentItem.classList.add('show-submenu');
                 }
             });
-            return;
-        }
+            
+            item.setAttribute('data-menu-initialized', 'true');
+        });
         
-        // Determine if we're on mobile or desktop view
-        if (window.innerWidth <= 768) {
-            // Handle mobile submenu closing
-            const openMobileSubmenus = document.querySelectorAll('.header .has-submenu.active');
-            openMobileSubmenus.forEach(submenu => {
-                if (!submenu.contains(e.target)) {
-                    submenu.classList.remove('active');
-                    const submenuContent = submenu.querySelector('.submenu');
-                    if (submenuContent) {
-                        submenuContent.setAttribute('aria-expanded', 'false');
+        // Handle clicks on submenu links to allow navigation
+        const submenuLinks = document.querySelectorAll('.header .has-submenu .submenu a');
+        submenuLinks.forEach(link => {
+            if (link.hasAttribute('data-submenu-link-initialized')) return;
+            
+            link.addEventListener('click', function(e) {
+                // Allow submenu links to work normally
+                // No preventDefault here so navigation works
+            });
+            
+            link.setAttribute('data-submenu-link-initialized', 'true');
+        });
+        
+        // Close all submenus when clicking outside menu area
+        document.addEventListener('click', function(e) {
+            const header = document.querySelector('.header');
+            
+            // Check if click is outside header entirely
+            if (!header || !header.contains(e.target)) {
+                document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
+                    submenu.classList.remove('show-submenu');
+                });
+                return;
+            }
+            
+            // Check if click is inside header but not in a menu item with submenu
+            const clickedElement = e.target;
+            const isInsideSubmenu = clickedElement.closest('.submenu');
+            const isMenuLink = clickedElement.classList.contains('nav-link') || clickedElement.closest('.nav-link');
+            
+            // If click is not inside a submenu or menu link, close all submenus
+            if (!isInsideSubmenu && !isMenuLink) {
+                document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
+                    submenu.classList.remove('show-submenu');
+                });
+            }
+        });
+    }
+    
+    // Mobile menu functionality
+    function initializeMobileMenu() {
+        const submenuItems = document.querySelectorAll('.header .has-submenu > a');
+        
+        submenuItems.forEach(item => {
+            if (item.hasAttribute('data-mobile-menu-initialized')) return;
+            
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+                e.stopPropagation(); // Stop event from bubbling
+                
+                const parentItem = this.parentElement;
+                const isCurrentlyActive = parentItem.classList.contains('active');
+                
+                // Toggle submenu
+                if (isCurrentlyActive) {
+                    parentItem.classList.remove('active');
+                    const submenu = parentItem.querySelector('.submenu');
+                    if (submenu) {
+                        submenu.setAttribute('aria-expanded', 'false');
+                    }
+                } else {
+                    parentItem.classList.add('active');
+                    const submenu = parentItem.querySelector('.submenu');
+                    if (submenu) {
+                        submenu.setAttribute('aria-expanded', 'true');
                     }
                 }
             });
-        } else {
-            // Handle desktop submenu closing
-            const openDesktopSubmenus = document.querySelectorAll('.header .has-submenu.show-submenu');
-            openDesktopSubmenus.forEach(submenu => {
-                if (!submenu.contains(e.target)) {
-                    submenu.classList.remove('show-submenu');
-                }
+            
+            item.setAttribute('data-mobile-menu-initialized', 'true');
+        });
+        
+        // Handle clicks on submenu links to allow navigation
+        const submenuLinks = document.querySelectorAll('.header .has-submenu .submenu a');
+        submenuLinks.forEach(link => {
+            if (link.hasAttribute('data-mobile-submenu-link-initialized')) return;
+            
+            link.addEventListener('click', function(e) {
+                // Allow submenu links to work normally
+                // No preventDefault here so navigation works
             });
-        }
-    });
+            
+            link.setAttribute('data-mobile-submenu-link-initialized', 'true');
+        });
+    }
     
-    // Handle window resize to ensure proper behavior when switching between mobile/desktop
+    // Initialize initially
+    initializeMenuByScreenSize();
+    
+    // Handle window resize to switch between desktop and mobile modes
+    let resizeTimer;
     window.addEventListener('resize', function() {
-        // When resizing, ensure correct classes are applied based on new screen size
-        if (window.innerWidth <= 768) {
-            // On mobile view, ensure desktop classes are removed
-            document.querySelectorAll('.header .has-submenu.show-submenu').forEach(submenu => {
-                submenu.classList.remove('show-submenu');
-            });
-        } else {
-            // On desktop view, ensure mobile classes are removed
-            document.querySelectorAll('.header .has-submenu.active').forEach(submenu => {
-                submenu.classList.remove('active');
-                const submenuContent = submenu.querySelector('.submenu');
-                if (submenuContent) {
-                    submenuContent.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initializeMenuByScreenSize, 150);
     });
 }
 
