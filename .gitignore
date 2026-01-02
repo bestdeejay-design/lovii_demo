@@ -1,40 +1,30 @@
 ```
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
-dist/
-build/
-target/
-*.class
-*.exe
-*.dll
-*.so
-*.a
-*.out
-
 # Dependencies
 node_modules/
-venv/
-.venv/
+
+# Build artifacts
+dist/
+build/
+*.js
+*.css
+*.map
+
+# Environment
 .env
 .env.local
-.env.*
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
+*.env.*
 
 # Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*.tmp
 
-# System files
+# Logs
+*.log
+
+# OS
 .DS_Store
 Thumbs.db
 
@@ -43,135 +33,36 @@ coverage/
 htmlcov/
 .coverage
 
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-
-# Python specific
-*.pyc
+# Python
 __pycache__/
+*.pyc
 *.pyo
 *.pyd
 .Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
 *.so
-.Python
 *.egg-info/
-.eggs/
-.pytest_cache/
-.mypy_cache/
-.tox/
-.coverage
-htmlcov/
+.egg/
 
-# Node.js specific
-node_modules/
+# Node.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 node_modules/
-dist/
-build/
-
-# Java specific
-*.class
-*.jar
-*.war
-*.ear
-target/
-.gradle/
-build/
-
-# C/C++ specific
-*.o
-*.a
-*.so
-*.dll
-*.exe
-*.out
-*.obj
-*.ilk
-*.pdb
-*.sdf
-*.suo
-*.idb
-*.vcxproj.filters
-*.vcproj.filters
-
-# Go specific
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-*.test
-*.prof
-
-# Ruby specific
-*.gem
-*.rbc
-.bundle/
-.coverage
-InstalledFiles
-pkg/
-spec/reports/
-test/tmp/
-test/version_tmp/
-tmp/
-
-# Rust specific
-target/
-Cargo.lock
-*.so
-*.dylib
-*.dll
-
-# Web specific
+jspm_packages/
 *.min.js
 *.min.css
+
+# Vite specific
+!.vite/
+.vite/cache
+.vite/deps
+
+# React/PWA specific
 public/dist/
 public/build/
-
-# Environment specific
-.env
-.env.local
-.env.*
-!.env.example
-
-# IDE specific
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
 ```
