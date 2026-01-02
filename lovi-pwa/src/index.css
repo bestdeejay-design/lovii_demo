@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-/* Custom Tailwind-like styles based on the specification */
+/* Custom styles based on the specification */
 :root {
   --primary-color: #0066FF;
   --accent-color: #FF6B00;
