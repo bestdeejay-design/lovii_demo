@@ -1,1039 +1,1441 @@
-<!-- mobile.html — Единый HTML-файл для демо-прототипа «Лови» -->
-<!-- Техническое задание для AI: реализуй ВСЁ внутри этого файла -->
-<!-- Структура:
-  1. Подключи Tailwind CSS и Google Fonts (Inter)
-  2. Создай стиль-блок с общими правилами
-  3. Создай 23 скрытых <div class="screen hidden"> с id="screen-xxx"
-  4. Реализуй функцию showScreen(id): скрывает все .screen, показывает #screen-{id}
-  5. Сохраняй mock-данные (профиль, баланс, заказы) в localStorage
-  6. Все кнопки — через onclick="showScreen('vitrina')"
-  7. Никаких внешних зависимостей, кроме CDN
-  8. Демо должно работать по двойному клику на файл (file://)
--->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Лови — демо</title>
-  <!-- Google Fonts: Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS CDN -->
-  <script src=" https://cdn.tailwindcss.com "></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0066FF',
-            accent: '#FF6B00',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лови - Единая лояльность для Васильевского</title>
+    <!-- Подключение Tailwind CSS через CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Подключение шрифта Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1F2937;
+            max-width: 414px;
+            margin: 0 auto;
+            padding: 0;
         }
-      }
-    }
-  </script>
-  <style>
-    .screen { display: none; }
-    .screen.active { display: block; }
-    .hidden { display: none; }
-    .flex-center { display: flex; flex-direction: column; align-items: center; }
-    .btn { width: 100%; height: 52px; border-radius: 12px; font-weight: 500; }
-    .btn-primary { background-color: #0066FF; color: white; }
-    .btn-accent { background-color: #FF6B00; color: white; }
-    .btn-outline { border: 2px solid #0066FF; background: transparent; color: #0066FF; }
-    .btn-outline-accent { border: 2px solid #FF6B00; background: transparent; color: #FF6B00; }
-    .input { width: 100%; height: 52px; border: 1px solid #D1D5DB; border-radius: 12px; padding: 0 16px; }
-    .footer-links { font-size: 12px; color: #6B7280; text-align: center; margin-top: 20px; }
-  </style>
+        .screen {
+            display: none;
+            padding: 20px 24px;
+            min-height: 100vh;
+        }
+        .screen.active {
+            display: block;
+        }
+        .btn-primary {
+            background-color: #0066FF;
+            color: white;
+            height: 52px;
+            border-radius: 12px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #0066FF;
+            border: 1px solid #D1D5DB;
+            height: 52px;
+            border-radius: 12px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+        .input-field {
+            width: 100%;
+            height: 52px;
+            border: 1px solid #D1D5DB;
+            border-radius: 12px;
+            padding: 0 16px;
+            font-size: 16px;
+        }
+        .input-code {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #D1D5DB;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+        .status-new { background-color: #F3F4F6; color: #4B5563; }
+        .status-ready { background-color: #FEF3C7; color: #D97706; }
+        .status-delivered { background-color: #D1FAE5; color: #059669; }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 414px;
+            margin: 0 auto;
+            background: white;
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            padding: 10px 0;
+        }
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+        }
+        .product-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .order-item {
+            border-bottom: 1px solid #E5E7EB;
+            padding: 12px 0;
+        }
+        .order-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .balance-display {
+            background-color: #F9FAFB;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .loyalty-source {
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .slider-container {
+            width: 100%;
+            margin: 20px 0;
+        }
+        .slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #E5E7EB;
+            border-radius: 4px;
+            outline: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0066FF;
+            cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0066FF;
+            cursor: pointer;
+        }
+        .order-status-track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 30px 0;
+        }
+        .order-status-track::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #E5E7EB;
+            z-index: 1;
+        }
+        .status-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        .status-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #E5E7EB;
+            margin-bottom: 5px;
+        }
+        .status-dot.active {
+            background-color: #0066FF;
+        }
+        .status-dot.completed {
+            background-color: #10B981;
+        }
+        .status-label {
+            font-size: 12px;
+            text-align: center;
+            color: #6B7280;
+        }
+        .status-label.active {
+            color: #0066FF;
+        }
+        .status-label.completed {
+            color: #10B981;
+        }
+        .filter-chip {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: #F3F4F6;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        .filter-chip.active {
+            background-color: #0066FF;
+            color: white;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .delivery-option {
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .delivery-option.active {
+            border-color: #0066FF;
+            background-color: #EFF6FF;
+        }
+    </style>
 </head>
-<body class="bg-white text-gray-900 font-sans">
-  <!-- Экран 1: Главная (гость) -->
-  <div id="screen-main" class="screen active p-6">
-    <div class="flex-center mb-8">
-      <div class="w-12 h-12 bg-primary rounded-full mb-6"></div>
-      <h1 class="text-2xl font-semibold mb-1">Единая лояльность для Васильевского</h1>
-      <p class="text-gray-600 text-base">Покупайте у местных, получайте баллы, тратьте где угодно на острове</p>
-    </div>
-    <button class="btn btn-primary mb-6" onclick="showScreen('phone')">Войти</button>
-    <button class="btn btn-outline mb-10" onclick="showScreen('tsp-register')">Добавить свой бизнес</button>
-    <div class="footer-links">Пользовательское соглашение • Политика конфиденциальности</div>
-  </div>
+<body>
+    <!-- Функция навигации -->
+    <script>
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+            document.getElementById('screen-' + id).classList.add('active');
+        }
+        
+        // Глобальные переменные
+        let currentUser = null;
+        let currentOrder = null;
+        let currentShop = null;
+        let currentCourier = null;
+        let currentTSP = null;
+        let currentHR = null;
+        
+        // Инициализация mock-данных
+        function initMockData() {
+            // Проверяем, есть ли уже данные в localStorage
+            if (!localStorage.getItem('lovii_user')) {
+                // Создаем mock-данные пользователя
+                const user = {
+                    phone: '+7 *** ***-99-99',
+                    name: 'Иван Иванов',
+                    addresses: [
+                        { id: 1, street: '7-я линия В.О.', house: '25', apartment: '12', full: '7-я линия В.О., 25, кв. 12' }
+                    ],
+                    balance: 120,
+                    loyaltyBalances: [
+                        { id: 1, name: 'Билайн', points: 500, converted: 450, expires: '31.12.2026' },
+                        { id: 2, name: 'Тинькофф', points: 300, converted: 270, expires: '15.03.2027' },
+                        { id: 3, name: 'Фотострана', points: 150, converted: 135, expires: '20.06.2026' }
+                    ]
+                };
+                localStorage.setItem('lovii_user', JSON.stringify(user));
+            }
+            
+            if (!localStorage.getItem('lovii_orders')) {
+                const orders = [
+                    {
+                        id: 1,
+                        date: '2024-01-15',
+                        items: ['Сдобная булочка ×2 — 180 ₽'],
+                        shop: 'Пекарня "Грибоедов"',
+                        total: 180,
+                        status: 'delivered',
+                        pointsEarned: 9
+                    },
+                    {
+                        id: 2,
+                        date: '2024-01-10',
+                        items: ['Кофе по-венски ×1 — 250 ₽'],
+                        shop: 'Кафе "Островок"',
+                        total: 250,
+                        status: 'ready',
+                        pointsEarned: 12
+                    },
+                    {
+                        id: 3,
+                        date: '2024-01-05',
+                        items: ['Багет с ветчиной ×1 — 120 ₽'],
+                        shop: 'Пекарня "Грибоедов"',
+                        total: 120,
+                        status: 'new',
+                        pointsEarned: 6
+                    }
+                ];
+                localStorage.setItem('lovii_orders', JSON.stringify(orders));
+            }
+            
+            if (!localStorage.getItem('lovii_shops')) {
+                const shops = [
+                    {
+                        id: 1,
+                        name: 'Пекарня "Грибоедов"',
+                        category: 'Еда',
+                        minOrder: 300,
+                        deliveryCost: 99,
+                        rating: 4.8,
+                        items: [
+                            { id: 1, name: 'Сдобная булочка', description: 'Свежая сдобная булочка с изюмом', price: 90, image: 'bread1' },
+                            { id: 2, name: 'Круассан', description: 'Классический французский круассан', price: 120, image: 'bread2' },
+                            { id: 3, name: 'Хлеб с отрубями', description: 'Полезный хлеб с отрубями', price: 80, image: 'bread3' }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: 'Кафе "Островок"',
+                        category: 'Еда',
+                        minOrder: 200,
+                        deliveryCost: 99,
+                        rating: 4.5,
+                        items: [
+                            { id: 4, name: 'Кофе по-венски', description: 'Горячий кофе с молочной пенкой', price: 250, image: 'coffee1' },
+                            { id: 5, name: 'Капучино', description: 'Классический капучино', price: 220, image: 'coffee2' },
+                            { id: 6, name: 'Латте', description: 'Мягкий латте с молоком', price: 200, image: 'coffee3' }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: 'Цветочный салон "Весна"',
+                        category: 'Товары',
+                        minOrder: 500,
+                        deliveryCost: 150,
+                        rating: 4.7,
+                        items: [
+                            { id: 7, name: 'Букет роз', description: 'Красные розы, 25 штук', price: 2500, image: 'roses' },
+                            { id: 8, name: 'Герберы', description: 'Яркие герберы, 15 штук', price: 1800, image: 'gerberas' }
+                        ]
+                    }
+                ];
+                localStorage.setItem('lovii_shops', JSON.stringify(shops));
+            }
+            
+            if (!localStorage.getItem('lovii_couriers')) {
+                const couriers = [
+                    { id: 1, name: 'Алексей Петров', phone: '+7 (999) 999-99-99', rating: 4.9 }
+                ];
+                localStorage.setItem('lovii_couriers', JSON.stringify(couriers));
+            }
+            
+            if (!localStorage.getItem('lovii_tsp')) {
+                const tsp = [
+                    { id: 1, name: 'Пекарня "Грибоедов"', status: 'online', orders: 3, balance: 27900 }
+                ];
+                localStorage.setItem('lovii_tsp', JSON.stringify(tsp));
+            }
+            
+            if (!localStorage.getItem('lovii_couriers_data')) {
+                const couriersData = [
+                    { id: 1, name: 'Михаил Сидоров', balance: 2450, orders: 12 }
+                ];
+                localStorage.setItem('lovii_couriers_data', JSON.stringify(couriersData));
+            }
+            
+            if (!localStorage.getItem('lovii_hr')) {
+                const hr = [
+                    { id: 1, name: 'ООО "Рога и Копыта"', budget: 500000, employees: 45 }
+                ];
+                localStorage.setItem('lovii_hr', JSON.stringify(hr));
+            }
+        }
+        
+        // Загрузка данных пользователя
+        function loadUserData() {
+            const user = JSON.parse(localStorage.getItem('lovii_user') || '{}');
+            currentUser = user;
+            return user;
+        }
+        
+        // Загрузка заказов
+        function loadOrders() {
+            return JSON.parse(localStorage.getItem('lovii_orders') || '[]');
+        }
+        
+        // Загрузка магазинов
+        function loadShops() {
+            return JSON.parse(localStorage.getItem('lovii_shops') || '[]');
+        }
+        
+        // Функция для форматирования баланса
+        function formatBalance(points) {
+            return points + ' баллов "Лови"';
+        }
+        
+        // Функция для получения статуса заказа
+        function getOrderStatusText(status) {
+            const statusMap = {
+                'new': 'Новый',
+                'ready': 'Готов',
+                'delivered': 'Доставлен'
+            };
+            return statusMap[status] || status;
+        }
+        
+        // Функция для получения класса статуса
+        function getOrderStatusClass(status) {
+            const classMap = {
+                'new': 'status-new',
+                'ready': 'status-ready',
+                'delivered': 'status-delivered'
+            };
+            return classMap[status] || 'status-new';
+        }
+        
+        // Функция для обновления баланса
+        function updateBalance(points) {
+            if (currentUser) {
+                currentUser.balance = points;
+                localStorage.setItem('lovii_user', JSON.stringify(currentUser));
+            }
+        }
+        
+        // Функция для получения баланса
+        function getBalance() {
+            const user = loadUserData();
+            return user.balance || 0;
+        }
+        
+        // Функция для отправки заказа
+        function placeOrder(orderData) {
+            const orders = loadOrders();
+            const newOrder = {
+                id: orders.length + 1,
+                date: new Date().toISOString().split('T')[0],
+                ...orderData,
+                status: 'new',
+                pointsEarned: Math.floor(orderData.total * 0.05) // 5% возвращаются баллами
+            };
+            orders.push(newOrder);
+            localStorage.setItem('lovii_orders', JSON.stringify(orders));
+            return newOrder;
+        }
+        
+        // Функция для обновления статуса заказа
+        function updateOrderStatus(orderId, status) {
+            const orders = loadOrders();
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = status;
+                localStorage.setItem('lovii_orders', JSON.stringify(orders));
+            }
+        }
+        
+        // Инициализация данных при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            initMockData();
+            loadUserData();
+            // Показываем главный экран по умолчанию
+            showScreen('main');
+        });
+        
+        // Функция для обработки ввода телефона
+        function handlePhoneInput() {
+            const phoneInput = document.getElementById('phone-input');
+            const button = document.getElementById('get-code-btn');
+            
+            if (phoneInput && button) {
+                phoneInput.addEventListener('input', function() {
+                    // Оставляем только цифры
+                    let value = this.value.replace(/\D/g, '');
+                    
+                    // Форматируем номер
+                    if (value.length >= 1) {
+                        value = '+7 (' + value.substring(0, 3);
+                    }
+                    if (value.length > 4) {
+                        value = value.substring(0, 6) + ') ' + value.substring(6, 9);
+                    }
+                    if (value.length > 9) {
+                        value = value.substring(0, 11) + '-' + value.substring(9, 11);
+                    }
+                    if (value.length > 12) {
+                        value = value.substring(0, 14) + '-' + value.substring(11, 13);
+                    }
+                    if (value.length > 14) {
+                        value = value.substring(0, 16);
+                    }
+                    
+                    this.value = value;
+                    
+                    // Активируем кнопку если введено 10+ цифр
+                    button.disabled = value.replace(/\D/g, '').length < 10;
+                });
+            }
+        }
+        
+        // Функция для обработки ввода SMS-кода
+        function handleCodeInput() {
+            const inputs = document.querySelectorAll('.code-input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', function() {
+                    if (this.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+        }
+        
+        // Функция для запуска таймера SMS
+        function startSmsTimer() {
+            let timeLeft = 30;
+            const timerElement = document.getElementById('sms-timer');
+            
+            if (timerElement) {
+                const timerInterval = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        timerElement.innerHTML = '<a href="#" class="text-blue-600" onclick="requestNewCode()">Запросить код повторно</a>';
+                    } else {
+                        timerElement.textContent = `Запросить код повторно через ${String(Math.floor(timeLeft / 60)).padStart(2, '0')}:${String(timeLeft % 60).padStart(2, '0')}`;
+                        timeLeft--;
+                    }
+                }, 1000);
+            }
+        }
+        
+        // Функция для запроса нового кода
+        function requestNewCode() {
+            // В реальной реализации здесь был бы запрос к серверу
+            // В демонстрации просто сбрасываем таймер
+            startSmsTimer();
+        }
+        
+        // Функция для обновления отображения баланса
+        function updateBalanceDisplay() {
+            const balanceElements = document.querySelectorAll('.balance-display');
+            const balance = getBalance();
+            
+            balanceElements.forEach(el => {
+                el.innerHTML = '<span>🪙</span> <span>' + formatBalance(balance) + '</span>';
+            });
+        }
+        
+        // Функция для обновления данных на экране профиля
+        function updateProfileScreen() {
+            const nameInput = document.getElementById('profile-name');
+            const addressBtn = document.getElementById('add-address-btn');
+            
+            if (nameInput && currentUser) {
+                nameInput.value = currentUser.name || '';
+            }
+            
+            if (addressBtn && currentUser && currentUser.addresses && currentUser.addresses.length > 0) {
+                addressBtn.textContent = currentUser.addresses[0].full;
+            }
+        }
+        
+        // Функция для обновления списка заказов
+        function updateOrdersList() {
+            const ordersContainer = document.getElementById('orders-list');
+            if (!ordersContainer) return;
+            
+            const orders = loadOrders();
+            ordersContainer.innerHTML = '';
+            
+            orders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.className = 'order-item';
+                orderElement.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="font-medium">Заказ #${order.id}</div>
+                            <div class="text-sm text-gray-500">${order.date}</div>
+                            <div class="text-sm">${order.items[0]}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="order-status ${getOrderStatusClass(order.status)}">${getOrderStatusText(order.status)}</div>
+                            ${order.status === 'delivered' ? '<button class="mt-2 text-blue-600 text-sm">Повторить</button>' : ''}
+                        </div>
+                    </div>
+                `;
+                orderElement.addEventListener('click', () => {
+                    currentOrder = order;
+                    showScreen('order-detail');
+                });
+                ordersContainer.appendChild(orderElement);
+            });
+        }
+        
+        // Функция для обновления списка магазинов
+        function updateShopsList() {
+            const shopsContainer = document.getElementById('shops-list');
+            if (!shopsContainer) return;
+            
+            const shops = loadShops();
+            shopsContainer.innerHTML = '';
+            
+            shops.forEach(shop => {
+                const shopElement = document.createElement('div');
+                shopElement.className = 'product-card';
+                shopElement.innerHTML = `
+                    <h3 class="font-semibold text-lg">${shop.name}</h3>
+                    <div class="text-sm text-gray-500 mb-2">${shop.category} • ₽${shop.minOrder} • ₽${shop.deliveryCost} доставка</div>
+                    <button class="btn-primary" onclick="openShop(${shop.id})">Заказать</button>
+                `;
+                shopsContainer.appendChild(shopElement);
+            });
+        }
+        
+        // Функция для открытия магазина
+        function openShop(shopId) {
+            const shops = loadShops();
+            const shop = shops.find(s => s.id === shopId);
+            if (shop) {
+                currentShop = shop;
+                showScreen('shop');
+                updateShopScreen();
+            }
+        }
+        
+        // Функция для обновления экрана магазина
+        function updateShopScreen() {
+            const shopHeader = document.getElementById('shop-header');
+            const shopItems = document.getElementById('shop-items');
+            
+            if (shopHeader && currentShop) {
+                shopHeader.innerHTML = `
+                    <button class="text-blue-600 mb-4" onclick="showScreen('vitrina')">&larr; Назад</button>
+                    <h2 class="text-xl font-semibold">${currentShop.name}</h2>
+                    <div class="text-gray-500 mb-4">${currentShop.category} • ₽${currentShop.minOrder} мин. заказ • ₽${currentShop.deliveryCost} доставка</div>
+                `;
+            }
+            
+            if (shopItems && currentShop) {
+                shopItems.innerHTML = '';
+                currentShop.items.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'product-card';
+                    itemElement.innerHTML = `
+                        <div class="flex">
+                            <div class="w-16 h-16 bg-gray-200 rounded-md mr-4 flex items-center justify-center">
+                                <span>🍞</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium">${item.name}</h3>
+                                <p class="text-sm text-gray-500 mb-2">${item.description}</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold">₽${item.price}</span>
+                                    <button class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    shopItems.appendChild(itemElement);
+                });
+            }
+        }
+        
+        // Функция для обновления экрана кошелька
+        function updateWalletScreen() {
+            const walletContainer = document.getElementById('wallet-sources');
+            if (!walletContainer) return;
+            
+            const user = loadUserData();
+            const totalBalance = user.loyaltyBalances ? user.loyaltyBalances.reduce((sum, source) => sum + source.converted, 0) : 0;
+            
+            document.getElementById('total-balance').textContent = `Общий баланс: ${totalBalance} ₽`;
+            
+            walletContainer.innerHTML = '';
+            if (user.loyaltyBalances) {
+                user.loyaltyBalances.forEach(source => {
+                    const sourceElement = document.createElement('div');
+                    sourceElement.className = 'loyalty-source';
+                    sourceElement.innerHTML = `
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-semibold">${source.name}</h3>
+                            <span class="font-medium">${source.points} баллов</span>
+                        </div>
+                        <div class="text-sm text-gray-500 mb-2">Конвертировано: ${source.converted} ₽</div>
+                        <div class="text-xs text-gray-400 mb-3">Сгорает: ${source.expires}</div>
+                        <button class="btn-primary" onclick="showScreen('exchange')">Обменять</button>
+                    `;
+                    walletContainer.appendChild(sourceElement);
+                });
+            }
+        }
+        
+        // Функция для обновления экрана заказа
+        function updateOrderScreen() {
+            // Обновляем состав заказа
+            const orderItems = document.getElementById('order-items');
+            if (orderItems && currentShop) {
+                orderItems.innerHTML = '';
+                // Добавляем примеры товаров
+                currentShop.items.slice(0, 2).forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <span>${item.name} ×1</span>
+                        <span>₽${item.price}</span>
+                    `;
+                    orderItems.appendChild(itemElement);
+                });
+                
+                // Обновляем итог
+                const total = currentShop.items.slice(0, 2).reduce((sum, item) => sum + item.price, 0);
+                document.getElementById('order-total').textContent = `₽${total}`;
+                
+                // Обновляем баланс
+                updateBalanceDisplay();
+            }
+        }
+        
+        // Функция для обновления экрана деталей заказа
+        function updateOrderDetailScreen() {
+            if (!currentOrder) return;
+            
+            // Обновляем статусы заказа
+            const statusTrack = document.getElementById('order-status-track');
+            if (statusTrack) {
+                statusTrack.innerHTML = `
+                    <div class="status-step">
+                        <div class="status-dot ${currentOrder.status !== 'new' ? 'completed' : 'active'}"></div>
+                        <div class="status-label ${currentOrder.status !== 'new' ? 'completed' : 'active'}">Принят</div>
+                    </div>
+                    <div class="status-step">
+                        <div class="status-dot ${currentOrder.status === 'delivered' ? 'completed' : currentOrder.status === 'ready' ? 'active' : ''}"></div>
+                        <div class="status-label ${currentOrder.status === 'delivered' ? 'completed' : currentOrder.status === 'ready' ? 'active' : ''}">Готов</div>
+                    </div>
+                    <div class="status-step">
+                        <div class="status-dot ${currentOrder.status === 'delivered' ? 'completed' : ''}"></div>
+                        <div class="status-label ${currentOrder.status === 'delivered' ? 'completed' : ''}">Доставлен</div>
+                    </div>
+                `;
+            }
+            
+            // Обновляем информацию о курьере
+            const courierInfo = document.getElementById('courier-info');
+            if (courierInfo) {
+                const courier = JSON.parse(localStorage.getItem('lovii_couriers') || '[]')[0];
+                if (courier) {
+                    courierInfo.innerHTML = `
+                        <h3 class="font-semibold mb-2">Курьер: ${courier.name}</h3>
+                        <div class="flex justify-between items-center">
+                            <span>${courier.phone}</span>
+                            <button class="btn-primary" style="width: auto; padding: 8px 16px;">Позвонить</button>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // Функция для обновления экрана TSP
+        function updateTSPPanel() {
+            const tsp = JSON.parse(localStorage.getItem('lovii_tsp') || '[]')[0];
+            if (tsp) {
+                document.getElementById('tsp-name').textContent = tsp.name;
+                document.getElementById('tsp-status').textContent = tsp.status === 'online' ? 'Онлайн' : 'Оффлайн';
+                document.getElementById('tsp-balance').textContent = `Баланс: ₽${(tsp.balance / 100).toFixed(2)}`;
+            }
+        }
+        
+        // Функция для обновления экрана курьера
+        function updateCourierPanel() {
+            const courier = JSON.parse(localStorage.getItem('lovii_couriers_data') || '[]')[0];
+            if (courier) {
+                document.getElementById('courier-balance').textContent = `Баланс: ${courier.balance} ₽`;
+            }
+        }
+        
+        // Функция для обновления экрана HR
+        function updateHRPanel() {
+            const hr = JSON.parse(localStorage.getItem('lovii_hr') || '[]')[0];
+            if (hr) {
+                document.getElementById('hr-budget').textContent = `Доступно: ${hr.budget} баллов`;
+                document.getElementById('hr-employees').textContent = `Сотрудников: ${hr.employees}`;
+            }
+        }
+    </script>
 
-  <!-- Экран 2: Ввод телефона -->
-  <div id="screen-phone" class="screen p-6">
-    <div class="flex-center mb-6">
-      <div class="w-12 h-12 bg-primary rounded-full mb-6"></div>
-      <h2 class="text-2xl font-semibold mb-6">Войдите по номеру</h2>
-    </div>
-    <input id="phone-input" type="tel" placeholder="+7 (999) 999-99-99" class="input mb-6" oninput="checkPhone()">
-    <button id="phone-btn" class="btn btn-primary mb-6 opacity-50 cursor-not-allowed" disabled>Получить код</button>
-    <p class="text-gray-500 text-sm mb-10">Отправляя код, вы соглашаетесь с условиями</p>
-    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
-  </div>
-
-  <!-- Экран 3: Ввод кода -->
-  <div id="screen-code" class="screen p-6">
-    <div class="flex-center mb-6">
-      <div class="w-12 h-12 bg-primary rounded-full mb-6"></div>
-      <h2 class="text-2xl font-semibold mb-6">Код отправлен на +7 ••• •••-••-••</h2>
-    </div>
-    <div class="flex justify-between mb-6">
-      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
-      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
-      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
-      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
-    </div>
-    <div id="code-timer" class="text-center text-gray-600 mb-4">Запросить код повторно через 00:30</div>
-    <button id="code-btn" class="btn btn-primary mb-10 opacity-50 cursor-not-allowed" disabled onclick="showScreen('profile')">Продолжить</button>
-    <button class="btn btn-outline" onclick="showScreen('phone')">Назад</button>
-  </div>
-
-  <!-- Экран 4: Профиль (первичное заполнение) -->
-  <div id="screen-profile" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Добро пожаловать!</h2>
-    <input type="text" placeholder="ФИО" class="input mb-6" id="profile-fio" oninput="checkProfileForm()">
-    <button class="btn btn-outline mb-6 flex items-center justify-center" onclick="showScreen('addresses')">
-      <span>📍</span> <span class="ml-2">Добавить адрес</span>
-    </button>
-    <button class="btn btn-outline-accent mb-4" onclick="showScreen('tsp-register')">Добавить свой бизнес</button>
-    <button class="btn btn-outline mb-6" onclick="showScreen('courier-register')">Стать курьером</button>
-    <button id="profile-continue-btn" class="btn btn-primary mb-6 opacity-50 cursor-not-allowed" disabled onclick="saveProfileAndGoToVitrina()">Продолжить</button>
-    <button class="btn btn-outline" onclick="showScreen('code')">Назад</button>
-  </div>
-
-  <!-- Экран 5: Витрина -->
-  <div id="screen-vitrina" class="screen p-6">
-    <div class="flex justify-between items-center mb-6">
-      <div class="font-bold">Лови</div>
-      <div class="flex items-center">
-        <span>🪙</span>
-        <span class="ml-1" id="balance-display">120</span>
-      </div>
-    </div>
-    <div class="mb-6">
-      <input type="text" placeholder="Найти товар или услугу…" class="input">
-    </div>
-    <div class="flex mb-6 overflow-x-auto space-x-4 pb-2">
-      <button class="px-4 py-2 bg-blue-100 text-primary rounded-full whitespace-nowrap">Все</button>
-      <button class="px-4 py-2 text-gray-600 rounded-full whitespace-nowrap">Еда</button>
-      <button class="px-4 py-2 text-gray-600 rounded-full whitespace-nowrap">Товары</button>
-      <button class="px-4 py-2 text-gray-600 rounded-full whitespace-nowrap">Услуги</button>
-    </div>
-    <div class="space-y-4 mb-20">
-      <div class="p-4 border rounded-xl">
-        <div class="font-semibold">Пекарня “Грибоедов”</div>
-        <div class="text-sm text-gray-600">Еда • От 300 ₽ • Доставка 99 ₽</div>
-        <button class="btn btn-primary mt-3" onclick="showScreen('shop')">Заказать</button>
-      </div>
-      <div class="p-4 border rounded-xl">
-        <div class="font-semibold">Кафе “Островок”</div>
-        <div class="text-sm text-gray-600">Еда • От 250 ₽ • Доставка 79 ₽</div>
-        <button class="btn btn-primary mt-3" onclick="showScreen('shop')">Заказать</button>
-      </div>
-    </div>
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
-      <button class="font-semibold text-primary">Витрина</button>
-      <button onclick="showScreen('orders')">Заказы</button>
-      <button onclick="showScreen('profile')">Профиль</button>
-    </div>
-  </div>
-
-  <!-- Экран 6: Каталог точки -->
-  <div id="screen-shop" class="screen p-6">
-    <div class="flex items-center mb-6">
-      <button onclick="showScreen('vitrina')" class="mr-4">←</button>
-      <div>
-        <div class="font-semibold">Пекарня “Грибоедов”</div>
-        <div class="text-sm text-gray-600">Пекарня • Еда</div>
-      </div>
-    </div>
-    <div class="space-y-4 mb-24">
-      <div class="flex">
-        <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"></div>
-        <div class="flex-1">
-          <div class="font-medium">Сдобная булочка</div>
-          <div class="text-sm text-gray-600">С изюмом</div>
-          <div class="font-bold mt-1">90 ₽</div>
-        </div>
-        <button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center">+</button>
-      </div>
-      <div class="flex">
-        <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"></div>
-        <div class="flex-1">
-          <div class="font-medium">Багет свежий</div>
-          <div class="text-sm text-gray-600">Сдобный</div>
-          <div class="font-bold mt-1">65 ₽</div>
-        </div>
-        <button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center">+</button>
-      </div>
-      <div class="flex">
-        <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"></div>
-        <div class="flex-1">
-          <div class="font-medium">Круассан</div>
-          <div class="text-sm text-gray-600">С ветчиной и сыром</div>
-          <div class="font-bold mt-1">120 ₽</div>
-        </div>
-        <button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center">+</button>
-      </div>
-    </div>
-    <button class="btn btn-primary fixed bottom-20 left-6 right-6" onclick="showScreen('order')">Заказать на 275 ₽</button>
-  </div>
-
-  <!-- Экран 7: Оформление заказа -->
-  <div id="screen-order" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Оформление заказа</h2>
-    <div class="mb-6 p-4 bg-gray-50 rounded-xl">
-      <div class="font-medium">Сдобная булочка ×2</div>
-      <div class="text-sm text-gray-600">180 ₽</div>
-    </div>
-    <div class="mb-6">
-      <div class="font-medium mb-2">Доставка</div>
-      <label class="flex items-center mb-2">
-        <input type="radio" name="delivery" value="pickup" checked class="mr-2"> 
-        <span>Самовывоз</span>
-      </label>
-      <label class="flex items-center">
-        <input type="radio" name="delivery" value="courier" class="mr-2"> 
-        <span>Курьер (+99 ₽)</span>
-      </label>
-    </div>
-    <div class="mb-4">
-      <div class="flex justify-between mb-2">
-        <span>Промокод</span>
-        <input type="text" placeholder="Введите промокод" class="w-32 text-sm border border-gray-300 rounded px-2 py-1">
-        <button class="ml-2 text-sm text-primary">Применить</button>
-      </div>
-    </div>
-    <div class="mb-6">
-      <div class="flex justify-between items-center mb-2">
-        <span>🪙 Баллы “Лови”</span>
-        <span class="text-sm text-gray-600">Доступно: <span id="available-points">120</span></span>
-      </div>
-      <div class="flex items-center">
-        <span class="mr-2">0</span>
-        <input type="range" id="points-slider" min="0" max="120" value="0" class="flex-1" oninput="updatePointsValue()">
-        <span class="ml-2"><span id="points-used">0</span> из 120</span>
-      </div>
-      <div class="text-right text-sm text-gray-600 mt-1">Экономия: <span id="points-savings">0</span> ₽</div>
-    </div>
-    <div class="font-bold text-xl mb-6">К оплате: <span id="total-price">180</span> ₽</div>
-    <button class="btn btn-primary mb-6" onclick="confirmOrder()">Оплатить <span id="payment-amount">180</span> ₽</button>
-    <button class="btn btn-outline" onclick="showScreen('shop')">Назад</button>
-  </div>
-
-  <!-- Экран 8: Подтверждение заказа -->
-  <div id="screen-order-confirmed" class="screen p-6 flex-center">
-    <div class="w-18 h-18 bg-green-500 rounded-full flex items-center justify-center mb-6">
-      <span class="text-white text-3xl">✓</span>
-    </div>
-    <h2 class="text-2xl font-semibold mb-1">Заказ принят!</h2>
-    <p class="text-gray-600 mb-6">Спасибо за покупку в “Пекарне Грибоедов”</p>
-    <p class="text-primary font-medium mb-10">+9 баллов “Лови” начислено на ваш счёт</p>
-    <button class="btn btn-primary mb-4" onclick="showScreen('orders')">Мои заказы</button>
-    <button class="btn btn-outline" onclick="showScreen('vitrina')">Вернуться в витрину</button>
-  </div>
-
-  <!-- Экран 9: История заказов -->
-  <div id="screen-orders" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Мои заказы</h2>
-    <div id="orders-list" class="space-y-4 mb-20">
-      <!-- Заказы будут загружены динамически -->
-    </div>
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
-      <button onclick="showScreen('vitrina')">Витрина</button>
-      <button class="font-semibold text-primary">Заказы</button>
-      <button onclick="showScreen('profile')">Профиль</button>
-    </div>
-  </div>
-
-  <!-- Экран 10: Кошелёк -->
-  <div id="screen-wallet" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Мои баллы</h2>
-    <div class="bg-blue-50 p-4 rounded-xl mb-6">
-      <div class="text-primary font-bold text-xl">Общий баланс: <span id="total-balance">0</span> ₽</div>
-      <div class="text-sm text-gray-600">Эквивалент в рублях по текущим курсам</div>
-    </div>
-    <div id="balance-details" class="space-y-4 mb-6">
-      <!-- Детали баланса будут загружены динамически -->
-    </div>
-    <button class="btn btn-primary mb-10" onclick="showScreen('connect-loyalty')">+ Подключить банк или сервис</button>
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
-      <button onclick="showScreen('vitrina')">Витрина</button>
-      <button onclick="showScreen('orders')">Заказы</button>
-      <button onclick="showScreen('profile')">Профиль</button>
-    </div>
-  </div>
-
-  <!-- Экран 11: Подключение лояльности -->
-  <div id="screen-connect-loyalty" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Подключите программу лояльности</h2>
-    <p class="text-gray-600 mb-8">Выберите сервис, в котором у вас есть баллы</p>
-    <div class="space-y-4 mb-20">
-      <button class="flex items-center p-4 border rounded-xl w-full">
-        <div class="w-10 h-10 bg-gray-200 rounded mr-4"></div>
-        <span>Билайн</span>
-      </button>
-    </div>
-    <button class="btn btn-outline" onclick="showScreen('wallet')">Назад</button>
-  </div>
-
-  <!-- Экран 12: Обмен баллов -->
-  <div id="screen-exchange" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Обмен баллов</h2>
-    <div class="mb-4">
-      <label class="block mb-2">Откуда обмениваете?</label>
-      <select class="input mb-4">
-        <option>Баллы Билайна</option>
-      </select>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2">Сколько обменять?</label>
-      <input type="number" value="500" class="input">
-      <p class="text-sm text-gray-500 mt-1">Доступно: 500 баллов</p>
-    </div>
-    <div class="text-gray-500 mb-4">
-      <div>Курс: 1 балл = 1 ₽</div>
-      <div>Комиссия: 5% (25 ₽)</div>
-    </div>
-    <div class="font-bold text-lg mb-6">Получите: 475 баллов “Лови”</div>
-    <button class="btn btn-primary mb-6" onclick="showScreen('wallet')">Обменять 475 баллов</button>
-    <button class="btn btn-outline" onclick="showScreen('wallet')">Назад</button>
-  </div>
-
-  <!-- Экран 13: Вывод на карту -->
-  <div id="screen-payout" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Вывод на карту</h2>
-    <div class="mb-6">
-      <div class="text-gray-600 mb-2">Доступно: <span id="payout-available">120</span> баллов “Лови”</div>
-      <input type="number" id="payout-amount" value="120" min="1" max="120" class="input mb-2" oninput="calculatePayout()">
-      <div class="text-sm text-gray-500">1 балл = 1 рубль</div>
-    </div>
-    <div class="text-gray-500 mb-2">Комиссия: 3% (<span id="payout-fee">3.60</span> ₽)</div>
-    <div class="font-bold mb-6">К получению: <span id="payout-receive">116.40</span> ₽</div>
-    <input type="text" id="card-number" placeholder="Номер карты (СБП)" class="input mb-6">
-    <button class="btn btn-green-500 bg-green-500 text-white mb-10" onclick="processPayout()">Вывести <span id="payout-final">116.40</span> ₽</button>
-    <button class="btn btn-outline" onclick="showScreen('wallet')">Назад</button>
-  </div>
-
-  <!-- Экран 14: Регистрация ТСП -->
-  <div id="screen-tsp-register" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Регистрация бизнеса</h2>
-    <input type="text" placeholder="Название точки" class="input mb-4">
-    <input type="text" placeholder="ИНН" class="input mb-4">
-    <select class="input mb-4">
-      <option>Еда</option>
-      <option>Товары</option>
-      <option>Услуги</option>
-    </select>
-    <input type="text" placeholder="Адрес" class="input mb-4">
-    <input type="tel" placeholder="Телефон" class="input mb-6">
-    <label class="flex items-center mb-6">
-      <input type="checkbox" class="mr-2">
-      <span>Согласен с условиями и политикой конфиденциальности</span>
-    </label>
-    <button class="btn btn-primary mb-4" onclick="showScreen('tsp')">Отправить на модерацию</button>
-    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
-  </div>
-
-  <!-- Экран 15: Панель ТСП -->
-  <div id="screen-tsp" class="screen p-6">
-    <div class="flex justify-between items-center mb-6">
-      <div>
-        <h2 class="text-xl font-semibold">Пекарня “Грибоедов”</h2>
-        <div class="text-green-600 font-medium">Статус: Онлайн</div>
-      </div>
-      <button class="btn btn-accent text-sm px-4 py-2">Вызвать курьера</button>
-    </div>
-    
-    <div class="grid grid-cols-2 gap-4 mb-6">
-      <button class="btn btn-outline">Добавить товар</button>
-      <button class="btn btn-outline">Загрузить Excel</button>
-    </div>
-    
-    <div class="flex border-b mb-4">
-      <button class="pb-2 px-4 font-semibold text-primary border-b-2 border-primary">Заказы</button>
-      <button class="pb-2 px-4 text-gray-500">Каталог</button>
-      <button class="pb-2 px-4 text-gray-500">Финансы</button>
-      <button class="pb-2 px-4 text-gray-500">Статистика</button>
-    </div>
-    
-    <div class="space-y-4">
-      <div class="p-4 border rounded-xl">
-        <div class="font-semibold">#123 • Сегодня, 14:30</div>
-        <div>Сдобная булочка ×2</div>
-        <div class="text-blue-600 font-medium">Новый</div>
-        <button class="btn btn-primary mt-2">Готов</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Экран 16: Выплата подтверждена -->
-  <div id="screen-payout-confirmed" class="screen p-6 flex-center">
-    <div class="w-18 h-18 bg-green-500 rounded-full flex items-center justify-center mb-6">
-      <span class="text-white text-3xl">✓</span>
-    </div>
-    <h2 class="text-2xl font-semibold mb-1">Выплата прошла успешно!</h2>
-    <p class="text-gray-600 mb-6">На вашу карту поступило <span id="payout-success-amount">116.40</span> ₽</p>
-    <div class="text-center mb-10">
-      <div class="text-gray-600">Списано: <span id="payout-success-points">120</span> баллов</div>
-      <div class="text-gray-600">Комиссия: 3%</div>
-    </div>
-    <button class="btn btn-primary mb-4" onclick="showScreen('wallet')">В кошелёк</button>
-    <button class="btn btn-outline" onclick="showScreen('vitrina')">В витрину</button>
-  </div>
-
-  <!-- Экран 17: Регистрация курьера -->
-  <div id="screen-courier-register" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Стать курьером</h2>
-    <input type="text" placeholder="ФИО" class="input mb-4">
-    <input type="tel" placeholder="Телефон" class="input mb-4">
-    <input type="text" placeholder="Серия и номер паспорта" class="input mb-4">
-    <select class="input mb-4">
-      <option>Пеший</option>
-      <option>Велосипед</option>
-      <option>Самокат</option>
-      <option>Мотоцикл</option>
-      <option>Автомобиль</option>
-    </select>
-    <input type="text" placeholder="Код приглашения (опционально)" class="input mb-6">
-    <label class="flex items-center mb-6">
-      <input type="checkbox" class="mr-2">
-      <span>Согласен с условиями и политикой конфиденциальности</span>
-    </label>
-    <button class="btn btn-primary mb-4" onclick="showScreen('courier')">Отправить заявку</button>
-    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
-  </div>
-
-  <!-- Экран 18: Панель курьера -->
-  <div id="screen-courier" class="screen p-6">
-    <div class="bg-blue-50 p-4 rounded-xl mb-6">
-      <div class="text-primary font-bold text-xl">2 450 ₽</div>
-      <div class="text-sm text-gray-600">Доступно для вывода</div>
-    </div>
-    
-    <button class="btn btn-primary mb-6" onclick="showScreen('payout')">Вывести на СБП</button>
-    
-    <div class="space-y-4">
-      <div class="p-4 border rounded-xl">
-        <div class="font-semibold">Заказ #456</div>
-        <div>Пекарня “Грибоедов” → 7-я линия В.О., 25</div>
-        <div class="flex space-x-2 mt-2">
-          <button class="btn btn-primary text-sm flex-1">Взять</button>
-          <button class="btn btn-outline text-sm flex-1">Навигация</button>
-          <button class="btn btn-accent text-sm flex-1">Доставлено</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Экран 19: Регистрация HR -->
-  <div id="screen-hr-register" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Подключить корпоративную программу</h2>
-    <input type="text" placeholder="Название компании" class="input mb-4">
-    <input type="text" placeholder="ИНН" class="input mb-4">
-    <input type="number" placeholder="Количество сотрудников" class="input mb-4">
-    <input type="email" placeholder="Email" class="input mb-4">
-    <input type="tel" placeholder="Телефон" class="input mb-6">
-    
-    <div class="mb-6">
-      <div class="font-medium mb-2">Выберите тариф</div>
-      <div class="space-y-2">
-        <label class="flex items-center">
-          <input type="radio" name="tariff" checked class="mr-2">
-          <span>Базовый — 50 ₽/сотр. в мес</span>
-        </label>
-        <label class="flex items-center">
-          <input type="radio" name="tariff" class="mr-2">
-          <span>Профессиональный — 100 ₽/сотр. в мес</span>
-        </label>
-        <label class="flex items-center">
-          <input type="radio" name="tariff" class="mr-2">
-          <span>Корпоративный — 150 ₽/сотр. в мес</span>
-        </label>
-      </div>
-    </div>
-    
-    <label class="flex items-center mb-6">
-      <input type="checkbox" class="mr-2">
-      <span>Согласен с условиями и политикой конфиденциальности</span>
-    </label>
-    <button class="btn btn-primary mb-4" onclick="showScreen('hr-dashboard')">Подключить компанию</button>
-    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
-  </div>
-
-  <!-- Экран 20: HR-кабинет -->
-  <div id="screen-hr-dashboard" class="screen p-6">
-    <div class="bg-blue-50 p-4 rounded-xl mb-6">
-      <div class="text-primary font-bold text-xl">500 000 баллов</div>
-      <div class="text-sm text-gray-600">Доступно для начисления</div>
-    </div>
-    
-    <div class="grid grid-cols-2 gap-4 mb-6">
-      <button class="btn btn-primary">Начислить баллы</button>
-      <button class="btn btn-outline">Загрузить Excel</button>
-    </div>
-    
-    <div class="mb-6">
-      <div class="font-semibold mb-2">Аналитика</div>
-      <div class="text-gray-600">Активных сотрудников: 120</div>
-      <div class="text-gray-600">Средний остаток: 2 450 баллов</div>
-    </div>
-    
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b">
-            <th class="text-left py-2">Сотрудник</th>
-            <th class="text-left py-2">Баллы</th>
-            <th class="text-left py-2">Дата</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b">
-            <td class="py-2">Иванов И.И.</td>
-            <td class="py-2">5 000</td>
-            <td class="py-2">01.01.2024</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Экран 21: Управление адресами -->
-  <div id="screen-addresses" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Адреса доставки</h2>
-    
-    <div id="addresses-list" class="space-y-4 mb-6">
-      <!-- Адреса будут загружены динамически -->
-    </div>
-    
-    <button class="btn btn-outline mb-10" onclick="showScreen('add-address')">Добавить адрес</button>
-    
-    <button class="btn btn-primary" onclick="showScreen('profile')">Сохранить и вернуться</button>
-  </div>
-
-  <!-- Экран 22: Добавление адреса -->
-  <div id="screen-add-address" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Добавить адрес</h2>
-    
-    <input type="text" id="address-street" placeholder="Улица" class="input mb-4">
-    <div class="flex space-x-4 mb-4">
-      <input type="text" id="address-building" placeholder="Дом" class="input flex-1">
-      <input type="text" id="address-apartment" placeholder="Квартира" class="input flex-1">
-    </div>
-    <input type="text" placeholder="Подъезд" class="input mb-4">
-    <input type="text" placeholder="Этаж" class="input mb-6">
-    
-    <button class="btn btn-primary mb-4" onclick="addAddress()">Сохранить</button>
-    <button class="btn btn-outline" onclick="showScreen('addresses')">Назад</button>
-  </div>
-
-  <!-- Экран 23: Детали заказа -->
-  <div id="screen-order-detail" class="screen p-6">
-    <h2 class="text-2xl font-semibold mb-6">Заказ #123</h2>
-    
-    <div class="mb-6">
-      <div class="flex items-center mb-2">
-        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-        <div class="text-sm">Новый • 14:30</div>
-      </div>
-      <div class="flex items-center mb-2">
-        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-        <div class="text-sm">Готовится • 15:15</div>
-      </div>
-      <div class="flex items-center mb-2">
-        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-        <div class="text-sm">В пути • 16:00</div>
-      </div>
-      <div class="flex items-center">
-        <div class="w-3 h-3 bg-gray-300 rounded-full mr-2"></div>
-        <div class="text-sm">Доставлен • —</div>
-      </div>
-    </div>
-    
-    <div class="p-4 border rounded-xl mb-6">
-      <div class="font-semibold">Курьер: Петр Петров</div>
-      <div class="flex justify-between mt-2">
-        <button class="btn btn-outline text-sm">📞 Позвонить</button>
-        <button class="btn btn-primary text-sm">Написать</button>
-      </div>
-    </div>
-    
-    <div class="mb-6">
-      <img src="https://placehold.co/300x150" alt="Карта" class="w-full rounded-xl">
-      <button class="btn btn-outline mt-2">Открыть в Яндекс.Картах</button>
-    </div>
-    
-    <button class="btn btn-outline-accent mb-6">Проблема с доставкой?</button>
-    <button class="btn btn-outline" onclick="showScreen('orders')">Назад</button>
-  </div>
-
-  <!-- Экран 24: Офлайн/ошибка -->
-  <div id="screen-offline" class="screen p-6 flex-center">
-    <div class="w-18 h-18 bg-red-500 rounded-full flex items-center justify-center mb-6">
-      <span class="text-white text-3xl">!</span>
-    </div>
-    <h2 class="text-2xl font-semibold mb-1">Нет подключения к интернету</h2>
-    <p class="text-gray-600 mb-6 text-center">Но вы можете просматривать кэшированные экраны</p>
-    <button class="btn btn-primary mb-4" onclick="location.reload()">Повторить</button>
-    <button class="btn btn-outline" onclick="showScreen('vitrina')">Показать кэшированные экраны</button>
-  </div>
-
-  <script>
-    // Глобальная функция навигации
-    function showScreen(id) {
-      document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
-      document.getElementById('screen-' + id).classList.add('active');
-    }
-
-    // Проверка ввода телефона
-    function checkPhone() {
-      const input = document.getElementById('phone-input');
-      const btn = document.getElementById('phone-btn');
-      if (input.value.replace(/\D/g, '').length >= 10) {
-        btn.disabled = false;
-        btn.classList.remove('opacity-50', 'cursor-not-allowed');
-      } else {
-        btn.disabled = true;
-        btn.classList.add('opacity-50', 'cursor-not-allowed');
-      }
-    }
-
-    // Валидация ввода кода (всегда 1234)
-    function checkCode() {
-      const inputs = document.querySelectorAll('#screen-code input');
-      const code = Array.from(inputs).map(input => input.value).join('');
-      if (code === '1234') {
-        document.getElementById('code-btn').disabled = false;
-        document.getElementById('code-btn').classList.remove('opacity-50', 'cursor-not-allowed');
-      } else {
-        document.getElementById('code-btn').disabled = true;
-        document.getElementById('code-btn').classList.add('opacity-50', 'cursor-not-allowed');
-      }
-    }
-
-    // Инициализация mock-данных
-    function initMockData() {
-      if (!localStorage.getItem('profile')) {
-        localStorage.setItem('profile', JSON.stringify({
-          phone: '+7 *** ***-99-99',
-          fio: 'Иван Иванов',
-          addresses: ['7-я линия В.О., 25, кв. 12']
-        }));
-      }
-      
-      if (!localStorage.getItem('balance')) {
-        localStorage.setItem('balance', JSON.stringify({
-          total: 120,
-          details: [
-            { source: 'Билайн', points: 500, value: 450, expires: '31.12.2026' },
-            { source: 'Тинькофф', points: 300, value: 270, expires: '15.06.2027' }
-          ]
-        }));
-      }
-      
-      if (!localStorage.getItem('orders')) {
-        localStorage.setItem('orders', JSON.stringify([
-          { id: '123', date: 'Сегодня, 14:30', items: 'Сдобная булочка ×2', status: 'Доставлен', total: 180 },
-          { id: '124', date: 'Вчера, 16:45', items: 'Кофе ×1, Круассан ×2', status: 'Готов', total: 250 }
-        ]));
-      }
-    }
-
-    // Проверка формы профиля
-    function checkProfileForm() {
-      const fioInput = document.getElementById('profile-fio');
-      const continueBtn = document.getElementById('profile-continue-btn');
-      const profile = JSON.parse(localStorage.getItem('profile') || {});
-      const addresses = profile.addresses || [];
-      
-      if (fioInput.value.trim() && addresses.length > 0) {
-        continueBtn.disabled = false;
-        continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-      } else {
-        continueBtn.disabled = true;
-        continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
-      }
-    }
-
-    // Сохранение профиля
-    function saveProfileAndGoToVitrina() {
-      const fioInput = document.getElementById('profile-fio');
-      const fio = fioInput.value.trim();
-      if (fio) {
-        const profile = JSON.parse(localStorage.getItem('profile') || {});
-        profile.fio = fio;
-        localStorage.setItem('profile', JSON.stringify(profile));
-        showScreen('vitrina');
-      }
-    }
-
-    // Загрузка адресов
-    function loadAddresses() {
-      const profile = JSON.parse(localStorage.getItem('profile') || {});
-      const addresses = profile.addresses || [];
-      const addressesList = document.getElementById('addresses-list');
-      
-      if (addressesList) {
-        addressesList.innerHTML = '';
-        addresses.forEach((address, index) => {
-          const addressElement = document.createElement('div');
-          addressElement.className = 'p-4 border rounded-xl flex justify-between items-center';
-          addressElement.innerHTML = `
-            <div>
-              <div class="font-medium">${address}</div>
-              <div class="text-sm text-gray-600">Дом</div>
+    <!-- 1. Главная (гость) -->
+    <div id="screen-main" class="screen">
+        <div class="flex flex-col items-center justify-center h-full">
+            <div class="w-12 h-12 bg-blue-600 rounded-lg mb-6 flex items-center justify-center text-white text-xl">Л</div>
+            <h1 class="text-2xl font-semibold text-center mb-2">Единая лояльность для Васильевского</h1>
+            <p class="text-gray-500 text-center mb-8">Покупайте у местных, получайте баллы, выводите на СБП</p>
+            <button class="btn-primary mb-4" onclick="showScreen('phone')">Войти</button>
+            <button class="btn-secondary mb-8" onclick="showScreen('tsp-register')">Добавить свой бизнес</button>
+            <div class="text-xs text-gray-500 text-center">
+                <a href="#" class="underline">Пользовательское соглашение</a> • 
+                <a href="#" class="underline">Политика конфиденциальности</a>
             </div>
-            <button class="text-red-500" onclick="removeAddress(${index})">✕</button>
-          `;
-          addressesList.appendChild(addressElement);
-        });
-      }
-    }
+        </div>
+    </div>
 
-    // Добавление адреса
-    function addAddress() {
-      const street = document.getElementById('address-street').value;
-      const building = document.getElementById('address-building').value;
-      const apartment = document.getElementById('address-apartment').value;
-      
-      if (street && building) {
-        const fullAddress = `${street}, ${building}, кв. ${apartment || ' '}`;
-        const profile = JSON.parse(localStorage.getItem('profile') || {});
-        if (!profile.addresses) {
-          profile.addresses = [];
-        }
-        profile.addresses.push(fullAddress);
-        localStorage.setItem('profile', JSON.stringify(profile));
+    <!-- 2. Ввод телефона -->
+    <div id="screen-phone" class="screen">
+        <h2 class="text-xl font-semibold mb-6">Войдите по номеру</h2>
+        <input type="tel" id="phone-input" class="input-field mb-4" placeholder="+7 (999) 999-99-99" maxlength="18">
+        <button id="get-code-btn" class="btn-primary mb-4" disabled onclick="showScreen('code')">Получить код</button>
+        <p class="text-sm text-gray-500 mb-6 text-center">
+            Нажимая кнопку, вы соглашаетесь с <a href="#" class="text-blue-600">условиями</a> и 
+            <a href="#" class="text-blue-600">политикой конфиденциальности</a>
+        </p>
+        <button class="btn-secondary" onclick="showScreen('main')">Назад</button>
+    </div>
+
+    <!-- 3. Ввод SMS-кода -->
+    <div id="screen-code" class="screen">
+        <h2 class="text-xl font-semibold mb-2">Код отправлен на +7 ••• •••-••-••</h2>
+        <p id="sms-timer" class="text-sm text-gray-500 mb-6">Запросить код повторно через 00:30</p>
         
-        // Очистить поля ввода
-        document.getElementById('address-street').value = '';
-        document.getElementById('address-building').value = '';
-        document.getElementById('address-apartment').value = '';
+        <div class="flex justify-center mb-6">
+            <input type="text" class="input-code code-input" maxlength="1">
+            <input type="text" class="input-code code-input" maxlength="1">
+            <input type="text" class="input-code code-input" maxlength="1">
+            <input type="text" class="input-code code-input" maxlength="1" maxlength="1">
+        </div>
         
-        showScreen('addresses');
-        loadAddresses();
-      }
-    }
+        <button class="btn-primary mb-4" onclick="showScreen('profile')">Продолжить</button>
+        <button class="btn-secondary" onclick="showScreen('phone')">Назад</button>
+    </div>
 
-    // Удаление адреса
-    function removeAddress(index) {
-      const profile = JSON.parse(localStorage.getItem('profile') || {});
-      if (profile.addresses && profile.addresses.length > index) {
-        profile.addresses.splice(index, 1);
-        localStorage.setItem('profile', JSON.stringify(profile));
-        loadAddresses();
-      }
-    }
+    <!-- 4. Профиль (первичное заполнение) -->
+    <div id="screen-profile" class="screen">
+        <h2 class="text-xl font-semibold mb-6">Добро пожаловать!</h2>
+        <input type="text" id="profile-name" class="input-field mb-4" placeholder="ФИО" required>
+        <button id="add-address-btn" class="input-field text-left mb-4 flex items-center" onclick="showScreen('addresses')">
+            <span>📍</span> <span class="ml-2">Добавить адрес</span>
+        </button>
+        <button class="btn-secondary mb-2" onclick="showScreen('tsp-register')">Добавить свой бизнес</button>
+        <button class="btn-secondary mb-6" onclick="showScreen('courier-register')">Стать курьером</button>
+        <button class="btn-primary" onclick="showScreen('vitrina')">Продолжить</button>
+    </div>
 
-    // Обновление отображения баланса
-    function updateBalanceDisplay() {
-      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
-      const balanceDisplay = document.getElementById('balance-display');
-      if (balanceDisplay) {
-        balanceDisplay.textContent = balanceData.total || 0;
-      }
-    }
+    <!-- 5. Управление адресами -->
+    <div id="screen-addresses" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Адреса доставки</h2>
+        <div class="mb-6">
+            <div class="p-4 border border-gray-200 rounded-lg mb-2">7-я линия В.О., 25, кв. 12</div>
+            <button class="btn-secondary" onclick="showScreen('profile')">Добавить адрес</button>
+        </div>
+        <button class="btn-primary" onclick="showScreen('profile')">Сохранить и продолжить</button>
+    </div>
 
-    // Обновление значения баллов
-    function updatePointsValue() {
-      const slider = document.getElementById('points-slider');
-      const pointsUsed = document.getElementById('points-used');
-      const pointsSavings = document.getElementById('points-savings');
-      const totalPrice = document.getElementById('total-price');
-      const paymentAmount = document.getElementById('payment-amount');
-      const deliveryCost = document.querySelector('input[name="delivery"]:checked').value === 'courier' ? 99 : 0;
-      
-      const points = parseInt(slider.value);
-      pointsUsed.textContent = points;
-      
-      // 1 балл = 1 рубль
-      const savings = points;
-      pointsSavings.textContent = savings;
-      
-      // Обновляем итоговую стоимость
-      const initialPrice = 180; // цена заказа
-      const finalPrice = initialPrice + deliveryCost - savings;
-      
-      totalPrice.textContent = finalPrice;
-      paymentAmount.textContent = finalPrice;
-    }
-
-    // Подтверждение заказа
-    function confirmOrder() {
-      // Получаем использованные баллы
-      const pointsUsed = parseInt(document.getElementById('points-slider').value) || 0;
-      
-      // Обновляем баланс
-      if (pointsUsed > 0) {
-        const balanceData = JSON.parse(localStorage.getItem('balance') || {});
-        balanceData.total = (balanceData.total || 0) - pointsUsed;
-        localStorage.setItem('balance', JSON.stringify(balanceData));
-      }
-      
-      // Создаем новый заказ
-      const orders = JSON.parse(localStorage.getItem('orders') || []);
-      const newOrder = {
-        id: (orders.length + 1).toString(),
-        date: new Date().toLocaleString('ru-RU', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        items: 'Сдобная булочка ×2',
-        status: 'Новый',
-        total: 180 // цена без учета баллов
-      };
-      orders.push(newOrder);
-      localStorage.setItem('orders', JSON.stringify(orders));
-      
-      showScreen('order-confirmed');
-    }
-
-    // Загрузка заказов
-    function loadOrders() {
-      const orders = JSON.parse(localStorage.getItem('orders') || []);
-      const ordersList = document.getElementById('orders-list');
-      
-      if (ordersList) {
-        ordersList.innerHTML = '';
-        orders.forEach((order, index) => {
-          const orderElement = document.createElement('div');
-          orderElement.className = 'p-4 border rounded-xl';
-          orderElement.innerHTML = `
-            <div class="font-semibold">#${order.id} • ${order.date}</div>
-            <div>${order.items}</div>
-            <div class="${order.status === 'Доставлен' ? 'text-green-600' : order.status === 'Готов' ? 'text-blue-600' : 'text-gray-600'} font-medium">${order.status}</div>
-            ${order.status === 'Доставлен' ? '<button class="btn btn-outline mt-2 text-sm">Повторить</button>' : ''}
-          `;
-          ordersList.appendChild(orderElement);
-        });
-      }
-    }
-
-    // Загрузка баланса
-    function loadWallet() {
-      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
-      const totalBalance = document.getElementById('total-balance');
-      const balanceDetails = document.getElementById('balance-details');
-      
-      if (totalBalance) {
-        // Вычисляем общий баланс в рублях
-        let total = 0;
-        if (balanceData.details && Array.isArray(balanceData.details)) {
-          balanceData.details.forEach(item => {
-            total += item.value || 0;
-          });
-        } else {
-          // Если нет детализации, используем просто total
-          total = balanceData.total || 0;
-        }
-        totalBalance.textContent = total;
-      }
-      
-      if (balanceDetails) {
-        balanceDetails.innerHTML = '';
-        if (balanceData.details && Array.isArray(balanceData.details)) {
-          balanceData.details.forEach((item, index) => {
-            const detailElement = document.createElement('div');
-            detailElement.className = 'p-4 border rounded-xl';
-            detailElement.innerHTML = `
-              <div class="font-medium">${item.source}</div>
-              <div>${item.points} баллов = ${item.value} ₽</div>
-              <div class="text-sm text-gray-500">Сгорают ${item.expires}</div>
-              <button class="btn btn-accent mt-2" onclick="showScreen('exchange')">Обменять</button>
-            `;
-            balanceDetails.appendChild(detailElement);
-          });
-        }
-      }
-    }
-
-    // Расчет выплаты
-    function calculatePayout() {
-      const amountInput = document.getElementById('payout-amount');
-      const feeElement = document.getElementById('payout-fee');
-      const receiveElement = document.getElementById('payout-receive');
-      const finalElement = document.getElementById('payout-final');
-      
-      const amount = parseFloat(amountInput.value) || 0;
-      const feePercent = 0.03; // 3% комиссия
-      const fee = amount * feePercent;
-      const receive = amount - fee;
-      
-      feeElement.textContent = fee.toFixed(2);
-      receiveElement.textContent = receive.toFixed(2);
-      finalElement.textContent = receive.toFixed(2);
-    }
-
-    // Обработка выплаты
-    function processPayout() {
-      const amountInput = document.getElementById('payout-amount');
-      const cardNumberInput = document.getElementById('card-number');
-      const amount = parseFloat(amountInput.value) || 0;
-      const cardNumber = cardNumberInput.value.trim();
-      
-      if (amount <= 0) {
-        alert('Введите сумму для вывода');
-        return;
-      }
-      
-      if (!cardNumber) {
-        alert('Введите номер карты');
-        return;
-      }
-      
-      // Проверяем, достаточно ли баллов
-      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
-      const availablePoints = balanceData.total || 0;
-      
-      if (amount > availablePoints) {
-        alert('Недостаточно баллов для вывода');
-        return;
-      }
-      
-      // Обновляем баланс
-      balanceData.total = availablePoints - amount;
-      localStorage.setItem('balance', JSON.stringify(balanceData));
-      
-      // Обновляем экран подтверждения
-      const successAmountElement = document.getElementById('payout-success-amount');
-      const successPointsElement = document.getElementById('payout-success-points');
-      
-      if (successAmountElement) {
-        const fee = amount * 0.03;
-        const received = amount - fee;
-        successAmountElement.textContent = received.toFixed(2);
-      }
-      
-      if (successPointsElement) {
-        successPointsElement.textContent = amount;
-      }
-      
-      // Перенаправляем на подтверждение
-      showScreen('payout-confirmed');
-    }
-
-    // Инициализация экрана выплаты
-    function initPayoutScreen() {
-      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
-      const availablePoints = balanceData.total || 0;
-      
-      // Устанавливаем доступное количество баллов
-      const availableElement = document.getElementById('payout-available');
-      const amountInput = document.getElementById('payout-amount');
-      
-      if (availableElement) {
-        availableElement.textContent = availablePoints;
-      }
-      
-      if (amountInput) {
-        amountInput.max = availablePoints;
-        amountInput.value = availablePoints > 0 ? Math.min(availablePoints, 1000) : 0; // Устанавливаем разумный лимит или доступное количество
-      }
-      
-      // Пересчитываем значения
-      calculatePayout();
-    }
-
-    // Обработка изменений доставки
-    document.addEventListener('DOMContentLoaded', function() {
-      // Добавляем обработчики для переключения доставки
-      const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
-      deliveryRadios.forEach(radio => {
-        radio.addEventListener('change', updatePointsValue);
-      });
-    });
-
-    // Таймер для повторного запроса кода
-    function startCodeTimer() {
-      let timeLeft = 30;
-      const timerElement = document.getElementById('code-timer');
-      
-      const timer = setInterval(() => {
-        timeLeft--;
-        if (timerElement) {
-          timerElement.textContent = `Запросить код повторно через 00:${timeLeft.toString().padStart(2, '0')}`;
-        }
+    <!-- 6. Витрина -->
+    <div id="screen-vitrina" class="screen pt-4">
+        <div class="flex justify-between items-center mb-6">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm">Л</div>
+            <div class="balance-display text-sm">
+                <span>🪙</span>
+                <span>120 баллов "Лови"</span>
+            </div>
+        </div>
         
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          if (timerElement) {
-            timerElement.innerHTML = '<a href="#" class="text-primary" onclick="restartCodeTimer()">Запросить код повторно</a>';
-          }
-        }
-      }, 1000);
-    }
-
-    // Перезапуск таймера
-    function restartCodeTimer() {
-      startCodeTimer();
-      // Здесь можно добавить логику отправки нового кода
-    }
-
-    // Инициализация при загрузке
-    document.addEventListener('DOMContentLoaded', function() {
-      initMockData();
-      
-      // Привязка событий к полям ввода кода
-      const codeInputs = document.querySelectorAll('#screen-code input');
-      codeInputs.forEach((input, index) => {
-        input.addEventListener('input', function() {
-          if (this.value.length === 1 && index < codeInputs.length - 1) {
-            codeInputs[index + 1].focus();
-          }
-          checkCode();
-        });
+        <input type="text" class="input-field mb-4" placeholder="Поиск...">
         
-        // Разрешить переход между полями
-        input.addEventListener('keydown', function(e) {
-          if (e.key === 'Backspace' && this.value === '' && index > 0) {
-            codeInputs[index - 1].focus();
-          }
+        <div class="flex overflow-x-auto pb-2 mb-4">
+            <div class="filter-chip active">Все</div>
+            <div class="filter-chip">Еда</div>
+            <div class="filter-chip">Товары</div>
+            <div class="filter-chip">Услуги</div>
+        </div>
+        
+        <div id="shops-list">
+            <!-- Список магазинов будет загружен динамически -->
+        </div>
+        
+        <!-- Нижнее меню -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="showScreen('vitrina')">
+                <div class="text-blue-600">🛒</div>
+                <div>Витрина</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('orders')">
+                <div class="text-gray-400">📦</div>
+                <div>Заказы</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('wallet')">
+                <div class="text-gray-400">🪙</div>
+                <div>Баллы</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('profile')">
+                <div class="text-gray-400">👤</div>
+                <div>Профиль</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. Каталог точки -->
+    <div id="screen-shop" class="screen pt-4">
+        <div id="shop-header">
+            <!-- Заголовок магазина будет загружен динамически -->
+        </div>
+        
+        <div id="shop-items">
+            <!-- Товары магазина будут загружены динамически -->
+        </div>
+        
+        <button class="fixed bottom-24 left-0 right-0 max-w-md mx-auto w-[calc(100%-48px)] btn-primary" onclick="showScreen('order')">
+            Заказать на 370 ₽
+        </button>
+    </div>
+
+    <!-- 8. Оформление заказа -->
+    <div id="screen-order" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Состав заказа</h2>
+        
+        <div id="order-items">
+            <!-- Товары заказа будут загружены динамически -->
+        </div>
+        
+        <div class="border-t border-gray-200 pt-4 mb-4">
+            <div class="flex justify-between mb-2">
+                <span>Товары</span>
+                <span id="order-total">₽370</span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span>Доставка</span>
+                <span>₽99</span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span>Промокод</span>
+                <span>-₽0</span>
+            </div>
+            <div class="flex justify-between font-semibold text-lg mt-2 pt-2 border-t">
+                <span>Итого</span>
+                <span>₽469</span>
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <div class="delivery-option active">
+                <label class="flex items-center">
+                    <input type="radio" name="delivery" checked class="mr-2">
+                    <span>Курьер (+99 ₽)</span>
+                </label>
+            </div>
+            <div class="delivery-option">
+                <label class="flex items-center">
+                    <input type="radio" name="delivery" class="mr-2">
+                    <span>Самовывоз</span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <input type="text" class="input-field mb-2" placeholder="Промокод">
+            <button class="btn-secondary">Применить</button>
+        </div>
+        
+        <div class="mb-6">
+            <div class="flex justify-between mb-2">
+                <span>Потратить баллы</span>
+                <span>0 из 120</span>
+            </div>
+            <div class="slider-container">
+                <input type="range" min="0" max="120" value="0" class="slider" id="points-slider">
+            </div>
+        </div>
+        
+        <button class="btn-primary" onclick="showScreen('order-confirmed')">Оплатить 469 ₽</button>
+    </div>
+
+    <!-- 9. Подтверждение заказа -->
+    <div id="screen-order-confirmed" class="screen flex flex-col items-center justify-center h-full">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+            <span class="text-green-600 text-2xl">✓</span>
+        </div>
+        <h2 class="text-xl font-semibold mb-2 text-center">Заказ принят!</h2>
+        <p class="text-gray-500 text-center mb-6">Спасибо за покупку в "Пекарне Грибоедов"</p>
+        <p class="text-gray-500 text-center mb-8">+9 баллов "Лови" начислено</p>
+        <button class="btn-primary mb-3" onclick="showScreen('orders')">Мои заказы</button>
+        <button class="btn-secondary" onclick="showScreen('vitrina')">Вернуться в витрину</button>
+    </div>
+
+    <!-- 10. История заказов -->
+    <div id="screen-orders" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Мои заказы</h2>
+        <div id="orders-list">
+            <!-- Список заказов будет загружен динамически -->
+        </div>
+        
+        <!-- Нижнее меню -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="showScreen('vitrina')">
+                <div class="text-gray-400">🛒</div>
+                <div>Витрина</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('orders')">
+                <div class="text-blue-600">📦</div>
+                <div>Заказы</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('wallet')">
+                <div class="text-gray-400">🪙</div>
+                <div>Баллы</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('profile')">
+                <div class="text-gray-400">👤</div>
+                <div>Профиль</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. Детали заказа (трекинг) -->
+    <div id="screen-order-detail" class="screen">
+        <div class="order-status-track" id="order-status-track">
+            <!-- Статусы заказа будут загружены динамически -->
+        </div>
+        
+        <div class="p-4 bg-gray-50 rounded-lg mb-6">
+            <h3 class="font-semibold mb-2">Информация о курьере</h3>
+            <div id="courier-info">
+                <!-- Информация о курьере будет загружена динамически -->
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <img src="https://placehold.co/300x200/e5e7eb/9ca3af?text=Карта+маршрута" alt="Карта маршрута" class="w-full rounded-lg">
+            <button class="btn-primary mt-2" style="width: auto; padding: 8px 16px;">Открыть в Яндекс.Картах</button>
+        </div>
+        
+        <button class="btn-secondary mb-4">Проблема с доставкой?</button>
+        <button class="btn-primary" onclick="showScreen('orders')">Назад</button>
+    </div>
+
+    <!-- 12. Кошелёк баллов -->
+    <div id="screen-wallet" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Кошелёк баллов</h2>
+        <div class="p-4 bg-blue-50 rounded-lg mb-6">
+            <div id="total-balance">Общий баланс: 720 ₽</div>
+        </div>
+        
+        <div id="wallet-sources">
+            <!-- Источники баллов будут загружены динамически -->
+        </div>
+        
+        <button class="btn-primary mb-4" onclick="showScreen('connect-loyalty')">+ Подключить банк или сервис</button>
+        
+        <!-- Нижнее меню -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="showScreen('vitrina')">
+                <div class="text-gray-400">🛒</div>
+                <div>Витрина</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('orders')">
+                <div class="text-gray-400">📦</div>
+                <div>Заказы</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('wallet')">
+                <div class="text-blue-600">🪙</div>
+                <div>Баллы</div>
+            </div>
+            <div class="nav-item" onclick="showScreen('profile')">
+                <div class="text-gray-400">👤</div>
+                <div>Профиль</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13. Подключение лояльности -->
+    <div id="screen-connect-loyalty" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Подключить лояльность</h2>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="border border-gray-200 rounded-lg p-4 text-center">
+                <div class="text-3xl mb-2">📱</div>
+                <div class="text-sm mb-2">Билайн</div>
+                <button class="btn-primary text-xs" style="padding: 6px 12px;">Подключить</button>
+            </div>
+            <div class="border border-gray-200 rounded-lg p-4 text-center">
+                <div class="text-3xl mb-2">💳</div>
+                <div class="text-sm mb-2">Тинькофф</div>
+                <button class="btn-primary text-xs" style="padding: 6px 12px;">Подключить</button>
+            </div>
+            <div class="border border-gray-200 rounded-lg p-4 text-center">
+                <div class="text-3xl mb-2">📦</div>
+                <div class="text-sm mb-2">OZON</div>
+                <button class="btn-primary text-xs" style="padding: 6px 12px;">Подключить</button>
+            </div>
+            <div class="border border-gray-200 rounded-lg p-4 text-center">
+                <div class="text-3xl mb-2">🐻</div>
+                <div class="text-sm mb-2">Wildberries</div>
+                <button class="btn-primary text-xs" style="padding: 6px 12px;">Подключить</button>
+            </div>
+        </div>
+        
+        <input type="text" class="input-field mb-4" placeholder="Введите ID или номер телефона">
+        <p class="text-sm text-gray-500 mb-6">Ваши данные защищены. Мы не храним пароли.</p>
+        <button class="btn-primary mb-4" onclick="showScreen('wallet')">Подключить</button>
+        <button class="btn-secondary" onclick="showScreen('wallet')">Назад</button>
+    </div>
+
+    <!-- 14. Обмен баллов -->
+    <div id="screen-exchange" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Обмен баллов</h2>
+        
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2">Источник</label>
+            <select class="input-field">
+                <option>Билайн (500 баллов)</option>
+                <option>Тинькофф (300 баллов)</option>
+                <option>Фотострана (150 баллов)</option>
+            </select>
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2">Сумма к обмену</label>
+            <input type="number" class="input-field" placeholder="Введите сумму" max="500" value="500">
+            <p class="text-sm text-gray-500 mt-1">Максимум: 500 баллов</p>
+        </div>
+        
+        <div class="p-4 bg-gray-50 rounded-lg mb-6">
+            <div class="flex justify-between mb-1">
+                <span>Комиссия:</span>
+                <span>5%</span>
+            </div>
+            <div class="flex justify-between font-semibold">
+                <span>Получите:</span>
+                <span>475 баллов "Лови"</span>
+            </div>
+        </div>
+        
+        <button class="btn-primary mb-4" onclick="showScreen('wallet')">Подтвердить обмен</button>
+        <button class="btn-secondary" onclick="showScreen('wallet')">Назад</button>
+    </div>
+
+    <!-- 15. Вывод на карту -->
+    <div id="screen-payout" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Вывод на карту</h2>
+        
+        <div class="p-4 bg-gray-50 rounded-lg mb-6">
+            <div class="flex justify-between">
+                <span>Доступно:</span>
+                <span>120 баллов</span>
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2">Сумма вывода</label>
+            <input type="number" class="input-field" placeholder="Введите сумму" max="120" value="120">
+            <p class="text-sm text-gray-500 mt-1">Максимум: 120 баллов</p>
+        </div>
+        
+        <div class="p-4 bg-gray-50 rounded-lg mb-6">
+            <div class="flex justify-between mb-1">
+                <span>Комиссия:</span>
+                <span>3% (3.60 ₽)</span>
+            </div>
+            <div class="flex justify-between font-semibold">
+                <span>К получению:</span>
+                <span>116.40 ₽</span>
+            </div>
+        </div>
+        
+        <input type="text" class="input-field mb-6" placeholder="Номер карты (СБП)">
+        <button class="btn-primary mb-4" onclick="showScreen('orders')">Вывести</button>
+        <button class="btn-secondary" onclick="showScreen('orders')">Назад</button>
+    </div>
+
+    <!-- 16. Регистрация ТСП -->
+    <div id="screen-tsp-register" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Регистрация ТСП</h2>
+        
+        <input type="text" class="input-field mb-4" placeholder="Название точки">
+        <input type="text" class="input-field mb-4" placeholder="ИНН">
+        <select class="input-field mb-4">
+            <option>Выберите категорию</option>
+            <option>Еда</option>
+            <option>Товары</option>
+            <option>Услуги</option>
+        </select>
+        <input type="text" class="input-field mb-4" placeholder="Адрес">
+        <input type="tel" class="input-field mb-4" placeholder="Телефон">
+        
+        <div class="flex items-start mb-6">
+            <input type="checkbox" id="tsp-agreement" class="mt-1 mr-2">
+            <label for="tsp-agreement" class="text-sm">Соглашаюсь с условиями и политикой конфиденциальности</label>
+        </div>
+        
+        <button class="btn-primary mb-4" onclick="showScreen('tsp')">Отправить на модерацию</button>
+        <button class="btn-secondary" onclick="showScreen('main')">Назад</button>
+    </div>
+
+    <!-- 17. Панель ТСП -->
+    <div id="screen-tsp" class="screen">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2 id="tsp-name" class="text-xl font-semibold">Пекарня "Грибоедов"</h2>
+                <div class="text-sm text-green-600" id="tsp-status">Онлайн</div>
+            </div>
+            <button class="btn-secondary text-sm" style="padding: 8px 16px;">Вызвать курьера</button>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <button class="btn-primary" style="padding: 12px;">Добавить товар</button>
+            <button class="btn-secondary" style="padding: 12px;">Загрузить Excel</button>
+        </div>
+        
+        <div class="flex border-b mb-4">
+            <div class="pb-2 px-4 border-b-2 border-blue-600 font-medium">Заказы</div>
+            <div class="pb-2 px-4 text-gray-500">Каталог</div>
+            <div class="pb-2 px-4 text-gray-500">Финансы</div>
+            <div class="pb-2 px-4 text-gray-500">Статистика</div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="p-4 border border-gray-200 rounded-lg mb-3">
+                <div class="flex justify-between">
+                    <div>
+                        <div class="font-medium">Заказ #123</div>
+                        <div class="text-sm text-gray-500">Сдобная булочка ×2</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">279 ₽</div>
+                        <button class="text-blue-600 text-sm mt-1">Готов</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border border-gray-200 rounded-lg mb-3">
+                <div class="flex justify-between">
+                    <div>
+                        <div class="font-medium">Заказ #124</div>
+                        <div class="text-sm text-gray-500">Круассан ×1</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold">120 ₽</div>
+                        <button class="text-blue-600 text-sm mt-1">Готов</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="flex justify-between">
+                <span>Баланс:</span>
+                <span id="tsp-balance">279.00 ₽</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 18. Выплата подтверждена -->
+    <div id="screen-payout-confirmed" class="screen flex flex-col items-center justify-center h-full">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+            <span class="text-green-600 text-2xl">✓</span>
+        </div>
+        <h2 class="text-xl font-semibold mb-2 text-center">Средства за заказ #123 зачислены</h2>
+        
+        <div class="p-4 bg-gray-50 rounded-lg w-full mb-6">
+            <div class="flex justify-between mb-2">
+                <span>Сумма:</span>
+                <span>279 ₽</span>
+            </div>
+            <div class="flex justify-between">
+                <span>Комиссия:</span>
+                <span>14 ₽ (5%)</span>
+            </div>
+        </div>
+        
+        <button class="btn-primary mb-3" style="width: auto; padding: 10px 24px;">Скачать акт</button>
+        <button class="btn-secondary mb-3" style="width: auto; padding: 10px 24px;">Выгрузить в 1С</button>
+        <button class="btn-secondary" onclick="showScreen('tsp')">Вернуться в панель</button>
+    </div>
+
+    <!-- 19. Регистрация курьера -->
+    <div id="screen-courier-register" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Регистрация курьера</h2>
+        
+        <input type="text" class="input-field mb-4" placeholder="ФИО">
+        <input type="tel" class="input-field mb-4" placeholder="Телефон">
+        <input type="text" class="input-field mb-4" placeholder="Серия и номер паспорта">
+        <select class="input-field mb-4">
+            <option>Выберите транспорт</option>
+            <option>Велосипед</option>
+            <option>Самокат</option>
+            <option>Легковой автомобиль</option>
+        </select>
+        <input type="text" class="input-field mb-6" placeholder="Код приглашения (опционально)">
+        
+        <div class="flex items-start mb-6">
+            <input type="checkbox" id="courier-agreement" class="mt-1 mr-2">
+            <label for="courier-agreement" class="text-sm">Соглашаюсь с условиями и политикой конфиденциальности</label>
+        </div>
+        
+        <button class="btn-primary mb-4" onclick="showScreen('courier')">Отправить заявку</button>
+        <button class="btn-secondary" onclick="showScreen('main')">Назад</button>
+    </div>
+
+    <!-- 20. Панель курьера -->
+    <div id="screen-courier" class="screen">
+        <div class="p-4 bg-blue-50 rounded-lg mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-sm">Баланс</div>
+                    <div id="courier-balance" class="text-xl font-semibold">2 450 ₽</div>
+                </div>
+                <button class="btn-primary text-sm" style="padding: 8px 16px;">Вывести на СБП</button>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="p-4 border border-gray-200 rounded-lg mb-3">
+                <div class="flex justify-between mb-2">
+                    <div>
+                        <div class="font-medium">Пекарня "Грибоедов"</div>
+                        <div class="text-sm text-gray-500">7-я линия В.О., 25</div>
+                    </div>
+                    <button class="btn-primary text-xs" style="padding: 6px 12px;">Взять</button>
+                </div>
+                <div class="text-sm">7-я линия В.О., 45, кв. 12</div>
+            </div>
+            
+            <div class="p-4 border border-gray-200 rounded-lg mb-3">
+                <div class="flex justify-between mb-2">
+                    <div>
+                        <div class="font-medium">Кафе "Островок"</div>
+                        <div class="text-sm text-gray-500">14-я линия В.О., 10</div>
+                    </div>
+                    <button class="btn-secondary text-xs" style="padding: 6px 12px;" disabled>Взят</button>
+                </div>
+                <div class="text-sm">15-я линия В.О., 30, кв. 8</div>
+                <div class="flex mt-2">
+                    <button class="btn-primary text-xs mr-2" style="padding: 6px 12px;">Навигация</button>
+                    <button class="btn-secondary text-xs" style="padding: 6px 12px;">Доставлено</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 21. Регистрация HR -->
+    <div id="screen-hr-register" class="screen">
+        <h2 class="text-xl font-semibold mb-4">Регистрация HR</h2>
+        
+        <input type="text" class="input-field mb-4" placeholder="Название компании">
+        <input type="text" class="input-field mb-4" placeholder="ИНН">
+        <input type="number" class="input-field mb-4" placeholder="Количество сотрудников">
+        <input type="email" class="input-field mb-4" placeholder="Email">
+        <input type="tel" class="input-field mb-4" placeholder="Телефон">
+        
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2">Тариф</label>
+            <select class="input-field">
+                <option>Базовый (50 баллов/мес)</option>
+                <option>Профессиональный (100 баллов/мес)</option>
+                <option>Корпоративный (200 баллов/мес)</option>
+            </select>
+        </div>
+        
+        <div class="flex items-start mb-6">
+            <input type="checkbox" id="hr-agreement" class="mt-1 mr-2">
+            <label for="hr-agreement" class="text-sm">Соглашаюсь с условиями и политикой конфиденциальности</label>
+        </div>
+        
+        <button class="btn-primary mb-4" onclick="showScreen('hr-dashboard')">Подключить компанию</button>
+        <button class="btn-secondary" onclick="showScreen('main')">Назад</button>
+    </div>
+
+    <!-- 22. HR-кабинет -->
+    <div id="screen-hr-dashboard" class="screen">
+        <div class="p-4 bg-blue-50 rounded-lg mb-6">
+            <div class="text-sm">Бюджет</div>
+            <div id="hr-budget" class="text-xl font-semibold">500 000 баллов</div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <button class="btn-primary">Начислить баллы</button>
+            <button class="btn-secondary">Загрузить список (Excel)</button>
+        </div>
+        
+        <div class="mb-4">
+            <h3 class="font-semibold mb-2">Аналитика</h3>
+            <div class="p-4 border border-gray-200 rounded-lg">
+                <div class="flex justify-between mb-2">
+                    <span>Активных сотрудников:</span>
+                    <span id="hr-employees">45</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Средний остаток:</span>
+                    <span>2 300 баллов</span>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <h3 class="font-semibold mb-2">История операций</h3>
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left p-3">Дата</th>
+                            <th class="text-left p-3">Сотрудник</th>
+                            <th class="text-left p-3">Баллы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-200">
+                            <td class="p-3">2024-01-15</td>
+                            <td class="p-3">Иванов И.И.</td>
+                            <td class="p-3">+500</td>
+                        </tr>
+                        <tr class="border-t border-gray-200">
+                            <td class="p-3">2024-01-10</td>
+                            <td class="p-3">Петров П.П.</td>
+                            <td class="p-3">+300</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 23. Офлайн / ошибка -->
+    <div id="screen-offline" class="screen flex flex-col items-center justify-center h-full">
+        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+            <span class="text-red-600 text-2xl">!</span>
+        </div>
+        <h2 class="text-xl font-semibold mb-2 text-center">Нет подключения к интернету</h2>
+        <p class="text-gray-500 text-center mb-8">Но вы можете просматривать кэшированные экраны</p>
+        <button class="btn-primary mb-3" onclick="location.reload()">Повторить</button>
+        <a href="#" class="text-blue-600" onclick="showScreen('vitrina')">Показать кэшированные экраны</a>
+    </div>
+
+    <!-- Инициализация скриптов -->
+    <script>
+        // Инициализация после загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчики событий
+            handlePhoneInput();
+            handleCodeInput();
+            startSmsTimer();
+            
+            // Обновляем данные на экранах
+            updateBalanceDisplay();
+            updateProfileScreen();
+            updateOrdersList();
+            updateShopsList();
+            updateWalletScreen();
         });
-      });
-      
-      // Проверка начального состояния
-      if (localStorage.getItem('profile')) {
-        showScreen('vitrina');
-      }
-    });
-    
-    // Переопределение showScreen для специальной логики
-    const originalShowScreen = showScreen;
-    showScreen = function(id) {
-      originalShowScreen(id);
-      
-      // Загрузка адресов при открытии экрана адресов
-      if (id === 'addresses') {
-        loadAddresses();
-      }
-      
-      // Запуск таймера при открытии экрана кода
-      if (id === 'code') {
-        startCodeTimer();
-      }
-      
-      // Обновление отображения баланса при открытии витрины
-      if (id === 'vitrina') {
-        updateBalanceDisplay();
-      }
-      
-      // Загрузка заказов при открытии экрана заказов
-      if (id === 'orders') {
-        loadOrders();
-      }
-      
-      // Загрузка кошелька при открытии экрана кошелька
-      if (id === 'wallet') {
-        loadWallet();
-      }
-      
-      // Инициализация экрана выплаты
-      if (id === 'payout') {
-        initPayoutScreen();
-      }
-    };
-  </script>
+    </script>
 </body>
 </html>
