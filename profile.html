@@ -1,0 +1,103 @@
+<!-- 
+ВАЖНОЕ ПРАВИЛО ПРОЕКТА
+1. Все изменения сначала фиксируются в pages.md
+2. Структура проекта НЕЛЬЗЯ менять без согласования
+3. Проверка перед коммитом:
+   - Работает ли переключение тем?
+   - Корректно ли загружаются шаблоны?
+   - Нет ли внешних CDN?
+   - Проходит ли валидацию HTML/CSS?
+4. Все стили — только через css/main.css
+5. Все скрипты — только через /js/
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - Лови</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="dark-theme">
+    <div id="dynamic-header"></div>
+    
+    <main class="main-content">
+        <section class="profile-section">
+            <div class="container">
+                <div class="profile-header">
+                    <h1 class="page-title">Профиль пользователя</h1>
+                    <div class="user-info">
+                        <div class="avatar">👤</div>
+                        <div class="user-details">
+                            <h2>Иван Петров</h2>
+                            <p class="user-email">ivan@example.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="account">Аккаунт</button>
+                    <button class="tab-btn" data-tab="subscription">Подписка</button>
+                    <button class="tab-btn" data-tab="settings">Настройки</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div id="account" class="tab-pane active">
+                        <div class="form-container">
+                            <h3>Информация об аккаунте</h3>
+                            <form class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="first-name">Имя</label>
+                                        <input type="text" id="first-name" value="Иван">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name">Фамилия</label>
+                                        <input type="text" id="last-name" value="Петров">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email-profile">Email</label>
+                                    <input type="email" id="email-profile" value="ivan@example.com">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div id="subscription" class="tab-pane">
+                        <div class="subscription-info">
+                            <h3>Текущий план: Стандарт</h3>
+                            <p>Описание текущего тарифного плана с основными возможностями</p>
+                            <div class="subscription-actions">
+                                <button class="btn btn-secondary">Изменить план</button>
+                                <button class="btn btn-outline">Отменить подписку</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="settings" class="tab-pane">
+                        <div class="form-container">
+                            <h3>Настройки</h3>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="notifications" checked>
+                                <label for="notifications">Уведомления о новых функциях</label>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="marketing" checked>
+                                <label for="marketing">Маркетинговые рассылки</label>
+                            </div>
+                            <button class="btn btn-danger">Удалить аккаунт</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="dynamic-footer"></div>
+    <div id="dynamic-mobile-nav"></div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

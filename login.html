@@ -1,0 +1,58 @@
+<!-- 
+ВАЖНОЕ ПРАВИЛО ПРОЕКТА
+1. Все изменения сначала фиксируются в pages.md
+2. Структура проекта НЕЛЬЗЯ менять без согласования
+3. Проверка перед коммитом:
+   - Работает ли переключение тем?
+   - Корректно ли загружаются шаблоны?
+   - Нет ли внешних CDN?
+   - Проходит ли валидацию HTML/CSS?
+4. Все стили — только через css/main.css
+5. Все скрипты — только через /js/
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Лови</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="dark-theme">
+    <div id="dynamic-header"></div>
+    
+    <main class="main-content">
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-form-container">
+                    <h1 class="auth-title">Вход в аккаунт</h1>
+                    <form class="auth-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Пароль</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Запомнить меня</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Войти</button>
+                    </form>
+                    <div class="auth-links">
+                        <a href="#" class="auth-link">Забыли пароль?</a>
+                        <a href="profile.html" class="auth-link">Создать аккаунт</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="dynamic-footer"></div>
+    <div id="dynamic-mobile-nav"></div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
