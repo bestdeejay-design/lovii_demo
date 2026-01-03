@@ -61,6 +61,11 @@ class TemplateLoader {
       themeToggle.addEventListener('click', () => {
         const isDarkTheme = window.themeManager.toggleTheme();
       });
+      
+      // Update the theme icon after header is loaded
+      if (window.themeManager && typeof window.themeManager.updateThemeIcon === 'function') {
+        window.themeManager.updateThemeIcon();
+      }
     } else {
       console.warn('Theme toggle element not found in header');
     }
