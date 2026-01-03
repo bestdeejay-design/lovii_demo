@@ -81,26 +81,27 @@
       <div class="w-12 h-12 bg-primary rounded-full mb-6"></div>
       <h2 class="text-2xl font-semibold mb-6">Код отправлен на +7 ••• •••-••-••</h2>
     </div>
-    <div class="flex justify-between mb-8">
+    <div class="flex justify-between mb-6">
       <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
       <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
       <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
       <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
     </div>
-    <button class="btn btn-primary mb-10" onclick="showScreen('profile')">Продолжить</button>
+    <div id="code-timer" class="text-center text-gray-600 mb-4">Запросить код повторно через 00:30</div>
+    <button id="code-btn" class="btn btn-primary mb-10 opacity-50 cursor-not-allowed" disabled onclick="showScreen('profile')">Продолжить</button>
     <button class="btn btn-outline" onclick="showScreen('phone')">Назад</button>
   </div>
 
   <!-- Экран 4: Профиль (первичное заполнение) -->
   <div id="screen-profile" class="screen p-6">
     <h2 class="text-2xl font-semibold mb-6">Добро пожаловать!</h2>
-    <input type="text" placeholder="Иван Иванов" class="input mb-6">
-    <button class="btn btn-outline mb-6 flex items-center justify-center">
+    <input type="text" placeholder="ФИО" class="input mb-6" id="profile-fio" oninput="checkProfileForm()">
+    <button class="btn btn-outline mb-6 flex items-center justify-center" onclick="showScreen('addresses')">
       <span>📍</span> <span class="ml-2">Добавить адрес</span>
     </button>
     <button class="btn btn-outline-accent mb-4" onclick="showScreen('tsp-register')">Добавить свой бизнес</button>
-    <button class="btn btn-outline mb-10" onclick="showScreen('courier-register')">Стать курьером</button>
-    <button class="btn btn-primary mb-6" onclick="saveProfileAndGoToVitrina()">Продолжить</button>
+    <button class="btn btn-outline mb-6" onclick="showScreen('courier-register')">Стать курьером</button>
+    <button id="profile-continue-btn" class="btn btn-primary mb-6 opacity-50 cursor-not-allowed" disabled onclick="saveProfileAndGoToVitrina()">Продолжить</button>
     <button class="btn btn-outline" onclick="showScreen('code')">Назад</button>
   </div>
 
@@ -110,7 +111,7 @@
       <div class="font-bold">Лови</div>
       <div class="flex items-center">
         <span>🪙</span>
-        <span class="ml-1">120</span>
+        <span class="ml-1" id="balance-display">120</span>
       </div>
     </div>
     <div class="mb-6">
@@ -119,11 +120,18 @@
     <div class="flex mb-6 overflow-x-auto space-x-4 pb-2">
       <button class="px-4 py-2 bg-blue-100 text-primary rounded-full whitespace-nowrap">Все</button>
       <button class="px-4 py-2 text-gray-600 rounded-full whitespace-nowrap">Еда</button>
+      <button class="px-4 py-2 text-gray-600 rounded-full whitespace-nowrap">Товары</button>
+      <button class="px-4 py-2 text-gray-600 rounded-full whitespace-nowrap">Услуги</button>
     </div>
     <div class="space-y-4 mb-20">
       <div class="p-4 border rounded-xl">
         <div class="font-semibold">Пекарня “Грибоедов”</div>
-        <div class="text-sm text-gray-600">От 300 ₽ • Доставка 99 ₽</div>
+        <div class="text-sm text-gray-600">Еда • От 300 ₽ • Доставка 99 ₽</div>
+        <button class="btn btn-primary mt-3" onclick="showScreen('shop')">Заказать</button>
+      </div>
+      <div class="p-4 border rounded-xl">
+        <div class="font-semibold">Кафе “Островок”</div>
+        <div class="text-sm text-gray-600">Еда • От 250 ₽ • Доставка 79 ₽</div>
         <button class="btn btn-primary mt-3" onclick="showScreen('shop')">Заказать</button>
       </div>
     </div>
@@ -143,7 +151,7 @@
         <div class="text-sm text-gray-600">Пекарня • Еда</div>
       </div>
     </div>
-    <div class="space-y-4">
+    <div class="space-y-4 mb-24">
       <div class="flex">
         <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"></div>
         <div class="flex-1">
@@ -153,8 +161,26 @@
         </div>
         <button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center">+</button>
       </div>
+      <div class="flex">
+        <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"></div>
+        <div class="flex-1">
+          <div class="font-medium">Багет свежий</div>
+          <div class="text-sm text-gray-600">Сдобный</div>
+          <div class="font-bold mt-1">65 ₽</div>
+        </div>
+        <button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center">+</button>
+      </div>
+      <div class="flex">
+        <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"></div>
+        <div class="flex-1">
+          <div class="font-medium">Круассан</div>
+          <div class="text-sm text-gray-600">С ветчиной и сыром</div>
+          <div class="font-bold mt-1">120 ₽</div>
+        </div>
+        <button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center">+</button>
+      </div>
     </div>
-    <button class="btn btn-primary fixed bottom-20 left-6 right-6" onclick="showScreen('order')">Заказать на 90 ₽</button>
+    <button class="btn btn-primary fixed bottom-20 left-6 right-6" onclick="showScreen('order')">Заказать на 275 ₽</button>
   </div>
 
   <!-- Экран 7: Оформление заказа -->
@@ -166,15 +192,36 @@
     </div>
     <div class="mb-6">
       <div class="font-medium mb-2">Доставка</div>
-      <label class="block mb-2"><input type="radio" name="delivery" checked> Самовывоз</label>
-      <label class="block"><input type="radio" name="delivery"> Курьер (+99 ₽)</label>
+      <label class="flex items-center mb-2">
+        <input type="radio" name="delivery" value="pickup" checked class="mr-2"> 
+        <span>Самовывоз</span>
+      </label>
+      <label class="flex items-center">
+        <input type="radio" name="delivery" value="courier" class="mr-2"> 
+        <span>Курьер (+99 ₽)</span>
+      </label>
     </div>
-    <div class="flex items-center mb-6">
-      <span>🪙 У вас 120 баллов</span>
-      <input type="range" min="0" max="120" class="ml-2 flex-1">
+    <div class="mb-4">
+      <div class="flex justify-between mb-2">
+        <span>Промокод</span>
+        <input type="text" placeholder="Введите промокод" class="w-32 text-sm border border-gray-300 rounded px-2 py-1">
+        <button class="ml-2 text-sm text-primary">Применить</button>
+      </div>
     </div>
-    <div class="font-bold text-xl mb-6">К оплате: 180 ₽</div>
-    <button class="btn btn-primary mb-6" onclick="showScreen('order-confirmed')">Оплатить 180 ₽</button>
+    <div class="mb-6">
+      <div class="flex justify-between items-center mb-2">
+        <span>🪙 Баллы “Лови”</span>
+        <span class="text-sm text-gray-600">Доступно: <span id="available-points">120</span></span>
+      </div>
+      <div class="flex items-center">
+        <span class="mr-2">0</span>
+        <input type="range" id="points-slider" min="0" max="120" value="0" class="flex-1" oninput="updatePointsValue()">
+        <span class="ml-2"><span id="points-used">0</span> из 120</span>
+      </div>
+      <div class="text-right text-sm text-gray-600 mt-1">Экономия: <span id="points-savings">0</span> ₽</div>
+    </div>
+    <div class="font-bold text-xl mb-6">К оплате: <span id="total-price">180</span> ₽</div>
+    <button class="btn btn-primary mb-6" onclick="confirmOrder()">Оплатить <span id="payment-amount">180</span> ₽</button>
     <button class="btn btn-outline" onclick="showScreen('shop')">Назад</button>
   </div>
 
@@ -193,12 +240,8 @@
   <!-- Экран 9: История заказов -->
   <div id="screen-orders" class="screen p-6">
     <h2 class="text-2xl font-semibold mb-6">Мои заказы</h2>
-    <div class="space-y-4 mb-20">
-      <div class="p-4 border rounded-xl">
-        <div class="font-semibold">#123 • Сегодня, 14:30</div>
-        <div>Сдобная булочка ×2</div>
-        <div class="text-green-600 font-medium">Доставлен</div>
-      </div>
+    <div id="orders-list" class="space-y-4 mb-20">
+      <!-- Заказы будут загружены динамически -->
     </div>
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
       <button onclick="showScreen('vitrina')">Витрина</button>
@@ -211,14 +254,11 @@
   <div id="screen-wallet" class="screen p-6">
     <h2 class="text-2xl font-semibold mb-6">Мои баллы</h2>
     <div class="bg-blue-50 p-4 rounded-xl mb-6">
-      <div class="text-primary font-bold">Общий баланс: 720 ₽</div>
+      <div class="text-primary font-bold text-xl">Общий баланс: <span id="total-balance">0</span> ₽</div>
       <div class="text-sm text-gray-600">Эквивалент в рублях по текущим курсам</div>
     </div>
-    <div class="mb-6 p-4 border rounded-xl">
-      <div class="font-medium">Баллы Билайна</div>
-      <div>500 баллов = 450 ₽</div>
-      <div class="text-sm text-gray-500">Сгорают 31.12.2026</div>
-      <button class="btn btn-accent mt-2">Обменять</button>
+    <div id="balance-details" class="space-y-4 mb-6">
+      <!-- Детали баланса будут загружены динамически -->
     </div>
     <button class="btn btn-primary mb-10" onclick="showScreen('connect-loyalty')">+ Подключить банк или сервис</button>
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
@@ -268,35 +308,289 @@
   <div id="screen-payout" class="screen p-6">
     <h2 class="text-2xl font-semibold mb-6">Вывод на карту</h2>
     <div class="mb-6">
-      <div class="text-gray-600 mb-2">Доступно: 120 баллов “Лови”</div>
-      <input type="number" value="120" class="input mb-2">
+      <div class="text-gray-600 mb-2">Доступно: <span id="payout-available">120</span> баллов “Лови”</div>
+      <input type="number" id="payout-amount" value="120" min="1" max="120" class="input mb-2" oninput="calculatePayout()">
       <div class="text-sm text-gray-500">1 балл = 1 рубль</div>
     </div>
-    <div class="text-gray-500 mb-4">Комиссия: 3% (3.60 ₽)</div>
-    <div class="font-bold mb-6">К получению: 116.40 ₽</div>
-    <input type="text" placeholder="Номер карты (СБП)" class="input mb-6">
-    <button class="btn btn-green-500 bg-green-500 text-white mb-10">Вывести 116.40 ₽</button>
+    <div class="text-gray-500 mb-2">Комиссия: 3% (<span id="payout-fee">3.60</span> ₽)</div>
+    <div class="font-bold mb-6">К получению: <span id="payout-receive">116.40</span> ₽</div>
+    <input type="text" id="card-number" placeholder="Номер карты (СБП)" class="input mb-6">
+    <button class="btn btn-green-500 bg-green-500 text-white mb-10" onclick="processPayout()">Вывести <span id="payout-final">116.40</span> ₽</button>
     <button class="btn btn-outline" onclick="showScreen('wallet')">Назад</button>
   </div>
 
-  <!-- Экраны 14–23 (ТСП, курьер, HR, офлайн) — упрощённые заглушки -->
-  <div id="screen-tsp-register" class="screen p-6"><h2>Регистрация ТСП</h2><button class="btn btn-accent mt-6" onclick="showScreen('tsp')">Отправить</button></div>
-  <div id="screen-tsp" class="screen p-6"><h2>Панель ТСП</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Выйти</button></div>
-  <div id="screen-courier-register" class="screen p-6"><h2>Регистрация курьера</h2><button class="btn btn-primary mt-6" onclick="showScreen('courier')">Отправить</button></div>
-  <div id="screen-courier" class="screen p-6"><h2>Панель курьера</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Выйти</button></div>
-  <div id="screen-hr-register" class="screen p-6"><h2>HR-регистрация</h2><button class="btn btn-primary mt-6" onclick="showScreen('hr-dashboard')">Подключить</button></div>
-  <div id="screen-hr-dashboard" class="screen p-6"><h2>HR-кабинет</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Выйти</button></div>
-  <div id="screen-offline" class="screen p-6"><h2>Нет интернета</h2><button class="btn btn-primary mt-6" onclick="location.reload()">Повторить</button></div>
-  <div id="screen-about" class="screen p-6"><h2>О приложении</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Назад</button></div>
-  <div id="screen-settings" class="screen p-6"><h2>Настройки</h2><button class="btn btn-primary mt-6" onclick="showScreen('profile')">Назад</button></div>
-  <div id="screen-faq" class="screen p-6"><h2>Частые вопросы</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Назад</button></div>
+  <!-- Экран 14: Регистрация ТСП -->
+  <div id="screen-tsp-register" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Регистрация бизнеса</h2>
+    <input type="text" placeholder="Название точки" class="input mb-4">
+    <input type="text" placeholder="ИНН" class="input mb-4">
+    <select class="input mb-4">
+      <option>Еда</option>
+      <option>Товары</option>
+      <option>Услуги</option>
+    </select>
+    <input type="text" placeholder="Адрес" class="input mb-4">
+    <input type="tel" placeholder="Телефон" class="input mb-6">
+    <label class="flex items-center mb-6">
+      <input type="checkbox" class="mr-2">
+      <span>Согласен с условиями и политикой конфиденциальности</span>
+    </label>
+    <button class="btn btn-primary mb-4" onclick="showScreen('tsp')">Отправить на модерацию</button>
+    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
+  </div>
+
+  <!-- Экран 15: Панель ТСП -->
+  <div id="screen-tsp" class="screen p-6">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h2 class="text-xl font-semibold">Пекарня “Грибоедов”</h2>
+        <div class="text-green-600 font-medium">Статус: Онлайн</div>
+      </div>
+      <button class="btn btn-accent text-sm px-4 py-2">Вызвать курьера</button>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <button class="btn btn-outline">Добавить товар</button>
+      <button class="btn btn-outline">Загрузить Excel</button>
+    </div>
+    
+    <div class="flex border-b mb-4">
+      <button class="pb-2 px-4 font-semibold text-primary border-b-2 border-primary">Заказы</button>
+      <button class="pb-2 px-4 text-gray-500">Каталог</button>
+      <button class="pb-2 px-4 text-gray-500">Финансы</button>
+      <button class="pb-2 px-4 text-gray-500">Статистика</button>
+    </div>
+    
+    <div class="space-y-4">
+      <div class="p-4 border rounded-xl">
+        <div class="font-semibold">#123 • Сегодня, 14:30</div>
+        <div>Сдобная булочка ×2</div>
+        <div class="text-blue-600 font-medium">Новый</div>
+        <button class="btn btn-primary mt-2">Готов</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Экран 16: Выплата подтверждена -->
+  <div id="screen-payout-confirmed" class="screen p-6 flex-center">
+    <div class="w-18 h-18 bg-green-500 rounded-full flex items-center justify-center mb-6">
+      <span class="text-white text-3xl">✓</span>
+    </div>
+    <h2 class="text-2xl font-semibold mb-1">Выплата прошла успешно!</h2>
+    <p class="text-gray-600 mb-6">На вашу карту поступило <span id="payout-success-amount">116.40</span> ₽</p>
+    <div class="text-center mb-10">
+      <div class="text-gray-600">Списано: <span id="payout-success-points">120</span> баллов</div>
+      <div class="text-gray-600">Комиссия: 3%</div>
+    </div>
+    <button class="btn btn-primary mb-4" onclick="showScreen('wallet')">В кошелёк</button>
+    <button class="btn btn-outline" onclick="showScreen('vitrina')">В витрину</button>
+  </div>
+
+  <!-- Экран 17: Регистрация курьера -->
+  <div id="screen-courier-register" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Стать курьером</h2>
+    <input type="text" placeholder="ФИО" class="input mb-4">
+    <input type="tel" placeholder="Телефон" class="input mb-4">
+    <input type="text" placeholder="Серия и номер паспорта" class="input mb-4">
+    <select class="input mb-4">
+      <option>Пеший</option>
+      <option>Велосипед</option>
+      <option>Самокат</option>
+      <option>Мотоцикл</option>
+      <option>Автомобиль</option>
+    </select>
+    <input type="text" placeholder="Код приглашения (опционально)" class="input mb-6">
+    <label class="flex items-center mb-6">
+      <input type="checkbox" class="mr-2">
+      <span>Согласен с условиями и политикой конфиденциальности</span>
+    </label>
+    <button class="btn btn-primary mb-4" onclick="showScreen('courier')">Отправить заявку</button>
+    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
+  </div>
+
+  <!-- Экран 18: Панель курьера -->
+  <div id="screen-courier" class="screen p-6">
+    <div class="bg-blue-50 p-4 rounded-xl mb-6">
+      <div class="text-primary font-bold text-xl">2 450 ₽</div>
+      <div class="text-sm text-gray-600">Доступно для вывода</div>
+    </div>
+    
+    <button class="btn btn-primary mb-6" onclick="showScreen('payout')">Вывести на СБП</button>
+    
+    <div class="space-y-4">
+      <div class="p-4 border rounded-xl">
+        <div class="font-semibold">Заказ #456</div>
+        <div>Пекарня “Грибоедов” → 7-я линия В.О., 25</div>
+        <div class="flex space-x-2 mt-2">
+          <button class="btn btn-primary text-sm flex-1">Взять</button>
+          <button class="btn btn-outline text-sm flex-1">Навигация</button>
+          <button class="btn btn-accent text-sm flex-1">Доставлено</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Экран 19: Регистрация HR -->
+  <div id="screen-hr-register" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Подключить корпоративную программу</h2>
+    <input type="text" placeholder="Название компании" class="input mb-4">
+    <input type="text" placeholder="ИНН" class="input mb-4">
+    <input type="number" placeholder="Количество сотрудников" class="input mb-4">
+    <input type="email" placeholder="Email" class="input mb-4">
+    <input type="tel" placeholder="Телефон" class="input mb-6">
+    
+    <div class="mb-6">
+      <div class="font-medium mb-2">Выберите тариф</div>
+      <div class="space-y-2">
+        <label class="flex items-center">
+          <input type="radio" name="tariff" checked class="mr-2">
+          <span>Базовый — 50 ₽/сотр. в мес</span>
+        </label>
+        <label class="flex items-center">
+          <input type="radio" name="tariff" class="mr-2">
+          <span>Профессиональный — 100 ₽/сотр. в мес</span>
+        </label>
+        <label class="flex items-center">
+          <input type="radio" name="tariff" class="mr-2">
+          <span>Корпоративный — 150 ₽/сотр. в мес</span>
+        </label>
+      </div>
+    </div>
+    
+    <label class="flex items-center mb-6">
+      <input type="checkbox" class="mr-2">
+      <span>Согласен с условиями и политикой конфиденциальности</span>
+    </label>
+    <button class="btn btn-primary mb-4" onclick="showScreen('hr-dashboard')">Подключить компанию</button>
+    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
+  </div>
+
+  <!-- Экран 20: HR-кабинет -->
+  <div id="screen-hr-dashboard" class="screen p-6">
+    <div class="bg-blue-50 p-4 rounded-xl mb-6">
+      <div class="text-primary font-bold text-xl">500 000 баллов</div>
+      <div class="text-sm text-gray-600">Доступно для начисления</div>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <button class="btn btn-primary">Начислить баллы</button>
+      <button class="btn btn-outline">Загрузить Excel</button>
+    </div>
+    
+    <div class="mb-6">
+      <div class="font-semibold mb-2">Аналитика</div>
+      <div class="text-gray-600">Активных сотрудников: 120</div>
+      <div class="text-gray-600">Средний остаток: 2 450 баллов</div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b">
+            <th class="text-left py-2">Сотрудник</th>
+            <th class="text-left py-2">Баллы</th>
+            <th class="text-left py-2">Дата</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b">
+            <td class="py-2">Иванов И.И.</td>
+            <td class="py-2">5 000</td>
+            <td class="py-2">01.01.2024</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Экран 21: Управление адресами -->
+  <div id="screen-addresses" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Адреса доставки</h2>
+    
+    <div id="addresses-list" class="space-y-4 mb-6">
+      <!-- Адреса будут загружены динамически -->
+    </div>
+    
+    <button class="btn btn-outline mb-10" onclick="showScreen('add-address')">Добавить адрес</button>
+    
+    <button class="btn btn-primary" onclick="showScreen('profile')">Сохранить и вернуться</button>
+  </div>
+
+  <!-- Экран 22: Добавление адреса -->
+  <div id="screen-add-address" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Добавить адрес</h2>
+    
+    <input type="text" id="address-street" placeholder="Улица" class="input mb-4">
+    <div class="flex space-x-4 mb-4">
+      <input type="text" id="address-building" placeholder="Дом" class="input flex-1">
+      <input type="text" id="address-apartment" placeholder="Квартира" class="input flex-1">
+    </div>
+    <input type="text" placeholder="Подъезд" class="input mb-4">
+    <input type="text" placeholder="Этаж" class="input mb-6">
+    
+    <button class="btn btn-primary mb-4" onclick="addAddress()">Сохранить</button>
+    <button class="btn btn-outline" onclick="showScreen('addresses')">Назад</button>
+  </div>
+
+  <!-- Экран 23: Детали заказа -->
+  <div id="screen-order-detail" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Заказ #123</h2>
+    
+    <div class="mb-6">
+      <div class="flex items-center mb-2">
+        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+        <div class="text-sm">Новый • 14:30</div>
+      </div>
+      <div class="flex items-center mb-2">
+        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+        <div class="text-sm">Готовится • 15:15</div>
+      </div>
+      <div class="flex items-center mb-2">
+        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+        <div class="text-sm">В пути • 16:00</div>
+      </div>
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-gray-300 rounded-full mr-2"></div>
+        <div class="text-sm">Доставлен • —</div>
+      </div>
+    </div>
+    
+    <div class="p-4 border rounded-xl mb-6">
+      <div class="font-semibold">Курьер: Петр Петров</div>
+      <div class="flex justify-between mt-2">
+        <button class="btn btn-outline text-sm">📞 Позвонить</button>
+        <button class="btn btn-primary text-sm">Написать</button>
+      </div>
+    </div>
+    
+    <div class="mb-6">
+      <img src="https://placehold.co/300x150" alt="Карта" class="w-full rounded-xl">
+      <button class="btn btn-outline mt-2">Открыть в Яндекс.Картах</button>
+    </div>
+    
+    <button class="btn btn-outline-accent mb-6">Проблема с доставкой?</button>
+    <button class="btn btn-outline" onclick="showScreen('orders')">Назад</button>
+  </div>
+
+  <!-- Экран 24: Офлайн/ошибка -->
+  <div id="screen-offline" class="screen p-6 flex-center">
+    <div class="w-18 h-18 bg-red-500 rounded-full flex items-center justify-center mb-6">
+      <span class="text-white text-3xl">!</span>
+    </div>
+    <h2 class="text-2xl font-semibold mb-1">Нет подключения к интернету</h2>
+    <p class="text-gray-600 mb-6 text-center">Но вы можете просматривать кэшированные экраны</p>
+    <button class="btn btn-primary mb-4" onclick="location.reload()">Повторить</button>
+    <button class="btn btn-outline" onclick="showScreen('vitrina')">Показать кэшированные экраны</button>
+  </div>
 
   <script>
+    // Глобальная функция навигации
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
       document.getElementById('screen-' + id).classList.add('active');
     }
 
+    // Проверка ввода телефона
     function checkPhone() {
       const input = document.getElementById('phone-input');
       const btn = document.getElementById('phone-btn');
@@ -309,16 +603,437 @@
       }
     }
 
-    function saveProfileAndGoToVitrina() {
-      // mock save
-      localStorage.setItem('profile', JSON.stringify({fio: 'Иван Иванов'}));
-      showScreen('vitrina');
+    // Валидация ввода кода (всегда 1234)
+    function checkCode() {
+      const inputs = document.querySelectorAll('#screen-code input');
+      const code = Array.from(inputs).map(input => input.value).join('');
+      if (code === '1234') {
+        document.getElementById('code-btn').disabled = false;
+        document.getElementById('code-btn').classList.remove('opacity-50', 'cursor-not-allowed');
+      } else {
+        document.getElementById('code-btn').disabled = true;
+        document.getElementById('code-btn').classList.add('opacity-50', 'cursor-not-allowed');
+      }
     }
 
-    // Инициализация
-    if (localStorage.getItem('profile')) {
-      showScreen('vitrina');
+    // Инициализация mock-данных
+    function initMockData() {
+      if (!localStorage.getItem('profile')) {
+        localStorage.setItem('profile', JSON.stringify({
+          phone: '+7 *** ***-99-99',
+          fio: 'Иван Иванов',
+          addresses: ['7-я линия В.О., 25, кв. 12']
+        }));
+      }
+      
+      if (!localStorage.getItem('balance')) {
+        localStorage.setItem('balance', JSON.stringify({
+          total: 120,
+          details: [
+            { source: 'Билайн', points: 500, value: 450, expires: '31.12.2026' },
+            { source: 'Тинькофф', points: 300, value: 270, expires: '15.06.2027' }
+          ]
+        }));
+      }
+      
+      if (!localStorage.getItem('orders')) {
+        localStorage.setItem('orders', JSON.stringify([
+          { id: '123', date: 'Сегодня, 14:30', items: 'Сдобная булочка ×2', status: 'Доставлен', total: 180 },
+          { id: '124', date: 'Вчера, 16:45', items: 'Кофе ×1, Круассан ×2', status: 'Готов', total: 250 }
+        ]));
+      }
     }
+
+    // Проверка формы профиля
+    function checkProfileForm() {
+      const fioInput = document.getElementById('profile-fio');
+      const continueBtn = document.getElementById('profile-continue-btn');
+      const profile = JSON.parse(localStorage.getItem('profile') || {});
+      const addresses = profile.addresses || [];
+      
+      if (fioInput.value.trim() && addresses.length > 0) {
+        continueBtn.disabled = false;
+        continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      } else {
+        continueBtn.disabled = true;
+        continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    }
+
+    // Сохранение профиля
+    function saveProfileAndGoToVitrina() {
+      const fioInput = document.getElementById('profile-fio');
+      const fio = fioInput.value.trim();
+      if (fio) {
+        const profile = JSON.parse(localStorage.getItem('profile') || {});
+        profile.fio = fio;
+        localStorage.setItem('profile', JSON.stringify(profile));
+        showScreen('vitrina');
+      }
+    }
+
+    // Загрузка адресов
+    function loadAddresses() {
+      const profile = JSON.parse(localStorage.getItem('profile') || {});
+      const addresses = profile.addresses || [];
+      const addressesList = document.getElementById('addresses-list');
+      
+      if (addressesList) {
+        addressesList.innerHTML = '';
+        addresses.forEach((address, index) => {
+          const addressElement = document.createElement('div');
+          addressElement.className = 'p-4 border rounded-xl flex justify-between items-center';
+          addressElement.innerHTML = `
+            <div>
+              <div class="font-medium">${address}</div>
+              <div class="text-sm text-gray-600">Дом</div>
+            </div>
+            <button class="text-red-500" onclick="removeAddress(${index})">✕</button>
+          `;
+          addressesList.appendChild(addressElement);
+        });
+      }
+    }
+
+    // Добавление адреса
+    function addAddress() {
+      const street = document.getElementById('address-street').value;
+      const building = document.getElementById('address-building').value;
+      const apartment = document.getElementById('address-apartment').value;
+      
+      if (street && building) {
+        const fullAddress = `${street}, ${building}, кв. ${apartment || ' '}`;
+        const profile = JSON.parse(localStorage.getItem('profile') || {});
+        if (!profile.addresses) {
+          profile.addresses = [];
+        }
+        profile.addresses.push(fullAddress);
+        localStorage.setItem('profile', JSON.stringify(profile));
+        
+        // Очистить поля ввода
+        document.getElementById('address-street').value = '';
+        document.getElementById('address-building').value = '';
+        document.getElementById('address-apartment').value = '';
+        
+        showScreen('addresses');
+        loadAddresses();
+      }
+    }
+
+    // Удаление адреса
+    function removeAddress(index) {
+      const profile = JSON.parse(localStorage.getItem('profile') || {});
+      if (profile.addresses && profile.addresses.length > index) {
+        profile.addresses.splice(index, 1);
+        localStorage.setItem('profile', JSON.stringify(profile));
+        loadAddresses();
+      }
+    }
+
+    // Обновление отображения баланса
+    function updateBalanceDisplay() {
+      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
+      const balanceDisplay = document.getElementById('balance-display');
+      if (balanceDisplay) {
+        balanceDisplay.textContent = balanceData.total || 0;
+      }
+    }
+
+    // Обновление значения баллов
+    function updatePointsValue() {
+      const slider = document.getElementById('points-slider');
+      const pointsUsed = document.getElementById('points-used');
+      const pointsSavings = document.getElementById('points-savings');
+      const totalPrice = document.getElementById('total-price');
+      const paymentAmount = document.getElementById('payment-amount');
+      const deliveryCost = document.querySelector('input[name="delivery"]:checked').value === 'courier' ? 99 : 0;
+      
+      const points = parseInt(slider.value);
+      pointsUsed.textContent = points;
+      
+      // 1 балл = 1 рубль
+      const savings = points;
+      pointsSavings.textContent = savings;
+      
+      // Обновляем итоговую стоимость
+      const initialPrice = 180; // цена заказа
+      const finalPrice = initialPrice + deliveryCost - savings;
+      
+      totalPrice.textContent = finalPrice;
+      paymentAmount.textContent = finalPrice;
+    }
+
+    // Подтверждение заказа
+    function confirmOrder() {
+      // Получаем использованные баллы
+      const pointsUsed = parseInt(document.getElementById('points-slider').value) || 0;
+      
+      // Обновляем баланс
+      if (pointsUsed > 0) {
+        const balanceData = JSON.parse(localStorage.getItem('balance') || {});
+        balanceData.total = (balanceData.total || 0) - pointsUsed;
+        localStorage.setItem('balance', JSON.stringify(balanceData));
+      }
+      
+      // Создаем новый заказ
+      const orders = JSON.parse(localStorage.getItem('orders') || []);
+      const newOrder = {
+        id: (orders.length + 1).toString(),
+        date: new Date().toLocaleString('ru-RU', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        items: 'Сдобная булочка ×2',
+        status: 'Новый',
+        total: 180 // цена без учета баллов
+      };
+      orders.push(newOrder);
+      localStorage.setItem('orders', JSON.stringify(orders));
+      
+      showScreen('order-confirmed');
+    }
+
+    // Загрузка заказов
+    function loadOrders() {
+      const orders = JSON.parse(localStorage.getItem('orders') || []);
+      const ordersList = document.getElementById('orders-list');
+      
+      if (ordersList) {
+        ordersList.innerHTML = '';
+        orders.forEach((order, index) => {
+          const orderElement = document.createElement('div');
+          orderElement.className = 'p-4 border rounded-xl';
+          orderElement.innerHTML = `
+            <div class="font-semibold">#${order.id} • ${order.date}</div>
+            <div>${order.items}</div>
+            <div class="${order.status === 'Доставлен' ? 'text-green-600' : order.status === 'Готов' ? 'text-blue-600' : 'text-gray-600'} font-medium">${order.status}</div>
+            ${order.status === 'Доставлен' ? '<button class="btn btn-outline mt-2 text-sm">Повторить</button>' : ''}
+          `;
+          ordersList.appendChild(orderElement);
+        });
+      }
+    }
+
+    // Загрузка баланса
+    function loadWallet() {
+      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
+      const totalBalance = document.getElementById('total-balance');
+      const balanceDetails = document.getElementById('balance-details');
+      
+      if (totalBalance) {
+        // Вычисляем общий баланс в рублях
+        let total = 0;
+        if (balanceData.details && Array.isArray(balanceData.details)) {
+          balanceData.details.forEach(item => {
+            total += item.value || 0;
+          });
+        } else {
+          // Если нет детализации, используем просто total
+          total = balanceData.total || 0;
+        }
+        totalBalance.textContent = total;
+      }
+      
+      if (balanceDetails) {
+        balanceDetails.innerHTML = '';
+        if (balanceData.details && Array.isArray(balanceData.details)) {
+          balanceData.details.forEach((item, index) => {
+            const detailElement = document.createElement('div');
+            detailElement.className = 'p-4 border rounded-xl';
+            detailElement.innerHTML = `
+              <div class="font-medium">${item.source}</div>
+              <div>${item.points} баллов = ${item.value} ₽</div>
+              <div class="text-sm text-gray-500">Сгорают ${item.expires}</div>
+              <button class="btn btn-accent mt-2" onclick="showScreen('exchange')">Обменять</button>
+            `;
+            balanceDetails.appendChild(detailElement);
+          });
+        }
+      }
+    }
+
+    // Расчет выплаты
+    function calculatePayout() {
+      const amountInput = document.getElementById('payout-amount');
+      const feeElement = document.getElementById('payout-fee');
+      const receiveElement = document.getElementById('payout-receive');
+      const finalElement = document.getElementById('payout-final');
+      
+      const amount = parseFloat(amountInput.value) || 0;
+      const feePercent = 0.03; // 3% комиссия
+      const fee = amount * feePercent;
+      const receive = amount - fee;
+      
+      feeElement.textContent = fee.toFixed(2);
+      receiveElement.textContent = receive.toFixed(2);
+      finalElement.textContent = receive.toFixed(2);
+    }
+
+    // Обработка выплаты
+    function processPayout() {
+      const amountInput = document.getElementById('payout-amount');
+      const cardNumberInput = document.getElementById('card-number');
+      const amount = parseFloat(amountInput.value) || 0;
+      const cardNumber = cardNumberInput.value.trim();
+      
+      if (amount <= 0) {
+        alert('Введите сумму для вывода');
+        return;
+      }
+      
+      if (!cardNumber) {
+        alert('Введите номер карты');
+        return;
+      }
+      
+      // Проверяем, достаточно ли баллов
+      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
+      const availablePoints = balanceData.total || 0;
+      
+      if (amount > availablePoints) {
+        alert('Недостаточно баллов для вывода');
+        return;
+      }
+      
+      // Обновляем баланс
+      balanceData.total = availablePoints - amount;
+      localStorage.setItem('balance', JSON.stringify(balanceData));
+      
+      // Обновляем экран подтверждения
+      const successAmountElement = document.getElementById('payout-success-amount');
+      const successPointsElement = document.getElementById('payout-success-points');
+      
+      if (successAmountElement) {
+        const fee = amount * 0.03;
+        const received = amount - fee;
+        successAmountElement.textContent = received.toFixed(2);
+      }
+      
+      if (successPointsElement) {
+        successPointsElement.textContent = amount;
+      }
+      
+      // Перенаправляем на подтверждение
+      showScreen('payout-confirmed');
+    }
+
+    // Инициализация экрана выплаты
+    function initPayoutScreen() {
+      const balanceData = JSON.parse(localStorage.getItem('balance') || {});
+      const availablePoints = balanceData.total || 0;
+      
+      // Устанавливаем доступное количество баллов
+      const availableElement = document.getElementById('payout-available');
+      const amountInput = document.getElementById('payout-amount');
+      
+      if (availableElement) {
+        availableElement.textContent = availablePoints;
+      }
+      
+      if (amountInput) {
+        amountInput.max = availablePoints;
+        amountInput.value = availablePoints > 0 ? Math.min(availablePoints, 1000) : 0; // Устанавливаем разумный лимит или доступное количество
+      }
+      
+      // Пересчитываем значения
+      calculatePayout();
+    }
+
+    // Обработка изменений доставки
+    document.addEventListener('DOMContentLoaded', function() {
+      // Добавляем обработчики для переключения доставки
+      const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
+      deliveryRadios.forEach(radio => {
+        radio.addEventListener('change', updatePointsValue);
+      });
+    });
+
+    // Таймер для повторного запроса кода
+    function startCodeTimer() {
+      let timeLeft = 30;
+      const timerElement = document.getElementById('code-timer');
+      
+      const timer = setInterval(() => {
+        timeLeft--;
+        if (timerElement) {
+          timerElement.textContent = `Запросить код повторно через 00:${timeLeft.toString().padStart(2, '0')}`;
+        }
+        
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          if (timerElement) {
+            timerElement.innerHTML = '<a href="#" class="text-primary" onclick="restartCodeTimer()">Запросить код повторно</a>';
+          }
+        }
+      }, 1000);
+    }
+
+    // Перезапуск таймера
+    function restartCodeTimer() {
+      startCodeTimer();
+      // Здесь можно добавить логику отправки нового кода
+    }
+
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+      initMockData();
+      
+      // Привязка событий к полям ввода кода
+      const codeInputs = document.querySelectorAll('#screen-code input');
+      codeInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+          if (this.value.length === 1 && index < codeInputs.length - 1) {
+            codeInputs[index + 1].focus();
+          }
+          checkCode();
+        });
+        
+        // Разрешить переход между полями
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Backspace' && this.value === '' && index > 0) {
+            codeInputs[index - 1].focus();
+          }
+        });
+      });
+      
+      // Проверка начального состояния
+      if (localStorage.getItem('profile')) {
+        showScreen('vitrina');
+      }
+    });
+    
+    // Переопределение showScreen для специальной логики
+    const originalShowScreen = showScreen;
+    showScreen = function(id) {
+      originalShowScreen(id);
+      
+      // Загрузка адресов при открытии экрана адресов
+      if (id === 'addresses') {
+        loadAddresses();
+      }
+      
+      // Запуск таймера при открытии экрана кода
+      if (id === 'code') {
+        startCodeTimer();
+      }
+      
+      // Обновление отображения баланса при открытии витрины
+      if (id === 'vitrina') {
+        updateBalanceDisplay();
+      }
+      
+      // Загрузка заказов при открытии экрана заказов
+      if (id === 'orders') {
+        loadOrders();
+      }
+      
+      // Загрузка кошелька при открытии экрана кошелька
+      if (id === 'wallet') {
+        loadWallet();
+      }
+      
+      // Инициализация экрана выплаты
+      if (id === 'payout') {
+        initPayoutScreen();
+      }
+    };
   </script>
 </body>
 </html>
