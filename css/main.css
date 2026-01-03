@@ -708,6 +708,18 @@ input:checked + .slider:before {
   color: var(--text-primary);
 }
 
+.user-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-image: url('../assets/icons/profile.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+  vertical-align: middle;
+}
+
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
@@ -847,6 +859,38 @@ input:checked + .slider:before {
 .nav-icon {
   font-size: 1.5rem;
   margin-bottom: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.nav-icon.products-icon::before {
+  background-image: url('../assets/icons/products.svg');
+}
+
+.nav-icon.about-icon::before {
+  background-image: url('../assets/icons/about.svg');
+}
+
+.nav-icon.profile-icon::before {
+  background-image: url('../assets/icons/profile.svg');
+}
+
+.nav-icon.login-icon::before {
+  background-image: url('../assets/icons/home.svg'); /* Using home icon for login since there's no specific login icon */
 }
 
 .nav-text {
@@ -928,6 +972,55 @@ input:checked + .slider:before {
   font-size: 3rem;
   margin-bottom: 20px;
   text-align: center;
+}
+
+/* Product icon SVG implementations with theme coloring */
+.product-icon.analytics-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: block;
+  background-image: url('../assets/icons/chart.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.product-icon.marketing-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: block;
+  background-image: url('../assets/icons/briefcase.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.product-icon.mobile-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: block;
+  background-image: url('../assets/icons/products.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.product-icon.bonus-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: block;
+  background-image: url('../assets/icons/store.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
 }
 
 .product-card h3 {
@@ -1049,6 +1142,17 @@ input:checked + .slider:before {
 
 .avatar {
   font-size: 3rem;
+}
+
+.avatar-icon {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  background-image: url('../assets/icons/profile.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
 }
 
 .user-details h2 {
