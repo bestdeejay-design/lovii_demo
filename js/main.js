@@ -17,8 +17,16 @@ function initializePageComponents() {
 }
 
 function initializeThemeToggle() {
-  // Обработчик переключения темы уже установлен в templates.js
+  // Обработчик переключения темы управляется через templates.js
   // Эта функция оставлена для совместимости, если потребуется дополнительная логика
+  // Обновляем состояние мобильного переключателя темы, если он существует
+  if (window.themeManager && document.getElementById('mobile-theme-toggle')) {
+    const isDarkTheme = window.themeManager.getCurrentTheme() === 'dark';
+    const mobileToggle = document.getElementById('mobile-theme-toggle');
+    if (mobileToggle) {
+      mobileToggle.checked = isDarkTheme;
+    }
+  }
 }
 
 function initializeSmoothScrolling() {

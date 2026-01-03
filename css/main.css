@@ -353,8 +353,66 @@ h3 {
   background-color: var(--bg-secondary);
 }
 
-.theme-icon {
-  font-size: 1.5rem;
+/* Theme Switcher */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-secondary);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--text-primary);
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--accent-primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider:after {
+  content: '☀️';
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+input:checked + .slider:after {
+  content: '🌙';
+  left: auto;
+  right: 8px;
 }
 
 .user-link {
@@ -789,6 +847,52 @@ h3 {
 
 .auth-link:hover {
   color: var(--accent-primary);
+}
+
+/* Profile dropdown menu for mobile */
+.profile-menu {
+  position: relative;
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  z-index: 100;
+  padding: 10px 0;
+  margin-top: 5px;
+}
+
+.profile-menu:hover .profile-dropdown,
+.profile-menu:focus-within .profile-dropdown {
+  display: block;
+}
+
+/* For mobile touch support */
+.profile-menu .profile-dropdown.active {
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg-secondary);
+}
+
+.theme-switcher-item {
+  padding: 15px !important;
 }
 
 /* Адаптивность */

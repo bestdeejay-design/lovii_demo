@@ -43,9 +43,8 @@ class ThemeManager {
       } else {
         console.warn('Theme icon element not found');
       }
-    } else {
-      console.warn('Theme toggle element not found');
-    }
+    } 
+    // Don't show warning if theme toggle doesn't exist in header since it's moved to mobile menu
   }
 
   getCurrentTheme() {
