@@ -10,7 +10,7 @@ class TemplateLoader {
     }
 
     try {
-      const response = await fetch(`/templates/${templateName}.html`);
+      const response = await fetch(`./templates/${templateName}.html`);
       if (!response.ok) {
         throw new Error(`Ошибка загрузки шаблона: ${templateName}`);
       }
@@ -53,15 +53,7 @@ class TemplateLoader {
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        const isDarkTheme = document.body.classList.contains('dark-theme');
-        localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-        
-        // Обновляем иконку темы
-        const themeIcon = themeToggle.querySelector('.theme-icon');
-        if (themeIcon) {
-          themeIcon.textContent = isDarkTheme ? '☀️' : '🌙';
-        }
+        const isDarkTheme = window.themeManager.toggleTheme();
       });
     }
 
