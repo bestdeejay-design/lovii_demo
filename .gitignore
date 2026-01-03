@@ -1,1 +1,41 @@
-(menu_audit_report.md, update_menu_scripts.sh, js/main.js, products.html)
+```
+# Build artifacts
+dist/
+build/
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.out
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+*.env.*
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Backup files
+*.backup
+*.bak
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# OS files
+.DS_Store
+Thumbs.db
+```
