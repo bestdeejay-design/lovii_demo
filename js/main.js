@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 function initializePageComponents() {
   // Инициализация компонентов страницы
   initializeThemeToggle();
-  initializeMobileNavigation();
   initializeSmoothScrolling();
 }
 
@@ -24,19 +23,6 @@ function initializeThemeToggle() {
     themeToggle.addEventListener('click', function(e) {
       e.preventDefault();
       const isDark = window.themeManager.toggleTheme();
-    });
-  }
-}
-
-function initializeMobileNavigation() {
-  // Обработчик мобильной навигации
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', function() {
-      const mobileNav = document.getElementById('mobile-nav');
-      if (mobileNav) {
-        mobileNav.classList.toggle('active');
-      }
     });
   }
 }
