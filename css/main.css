@@ -257,8 +257,32 @@ h3 {
 }
 
 .feature-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/icons/store.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.feature-icon.chart::before {
+  background-image: url('../assets/icons/chart.svg');
+}
+
+.feature-icon.briefcase::before {
+  background-image: url('../assets/icons/briefcase.svg');
 }
 
 .feature-card h3 {
@@ -316,6 +340,10 @@ h3 {
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
 }
 
 .step-card:hover {
@@ -377,8 +405,32 @@ h3 {
 }
 
 .audience-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audience-icon::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/icons/user.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.audience-icon.building::before {
+  background-image: url('../assets/icons/building.svg');
+}
+
+.audience-icon.shopping-cart::before {
+  background-image: url('../assets/icons/shopping-cart.svg');
 }
 
 .audience-card h3 {
@@ -456,8 +508,36 @@ h3 {
 }
 
 .product-image {
-  font-size: 3rem;
-  margin-bottom: 15px;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/icons/palette.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.product-image.droplet::before {
+  background-image: url('../assets/icons/droplet.svg');
+}
+
+.product-image.yarn::before {
+  background-image: url('../assets/icons/yarn.svg');
+}
+
+.product-image.pepper::before {
+  background-image: url('../assets/icons/pepper.svg');
 }
 
 .product-card h3 {
@@ -883,9 +963,35 @@ input:checked + .slider:before {
   transform: translateY(-50%);
 }
 
-/* Страница контактов */
-.contacts-content {
-  padding: 60px 0;
+/* Contact page icons */
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.contact-icon::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/icons/building.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(42%) sepia(45%) saturate(748%) hue-rotate(var(--icon-hue, 180deg)) brightness(100%) contrast(100%);
+}
+
+.contact-icon.email::before {
+  background-image: url('../assets/icons/palette.svg');
+}
+
+.contact-icon.phone::before {
+  background-image: url('../assets/icons/chart.svg');
 }
 
 .contacts-grid {

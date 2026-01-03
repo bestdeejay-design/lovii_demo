@@ -27,6 +27,7 @@
   --btn-danger-bg: var(--error-color);
   --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, black 10%);
   --btn-danger-text: #ffffff;
+  --icon-hue: 180deg;
 }
 
 /* Светлая тема — применяется при наличии класса .light-theme на <body> */
@@ -58,5 +59,6 @@
   --btn-danger-bg: var(--error-color);
   --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, white 10%);
   --btn-danger-text: #ffffff;
+  --icon-hue: 240deg;
 }
 
