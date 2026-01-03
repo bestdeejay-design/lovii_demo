@@ -33,21 +33,22 @@ class ThemeManager {
     localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
     this.updateThemeIcon();
     
+    // Ensure mobile switcher is updated too
+    this.updateMobileThemeSwitcher();
+    
     return isLightTheme;
   }
 
   updateThemeIcon() {
+    // Обновляем иконку в десктопной версии
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
       const themeIcon = themeToggle.querySelector('.theme-icon');
       if (themeIcon) {
         const isLightTheme = document.body.classList.contains('light-theme');
         themeIcon.textContent = isLightTheme ? '☀️' : '🌙';
-      } else {
-        console.warn('Theme icon element not found');
       }
-    } 
-    // Don't show warning if theme toggle doesn't exist in header since it's moved to mobile menu
+    }
     
     // Обновляем состояние свитчера в мобильном меню
     this.updateMobileThemeSwitcher();
