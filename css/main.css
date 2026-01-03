@@ -273,10 +273,12 @@ h3 {
 .cta-section {
   padding: 80px 0;
   text-align: center;
-  background: var(--bg-secondary);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--card-bg) 100%);
   color: var(--text-primary);
   margin-top: 40px;
   border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .cta-section h2 {
@@ -316,6 +318,14 @@ h3 {
   color: var(--accent-primary);
   text-decoration: none;
   transition: color 0.3s ease;
+}
+
+.logo-link {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
 }
 
 .logo a:hover {
@@ -403,6 +413,23 @@ input:checked + .slider:before {
 
 input:checked + .slider:after {
   content: none;
+}
+
+/* Добавляем иконки для тем в слайдер */
+input + .slider:before {
+  content: "🌙";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+input:checked + .slider:before {
+  content: "☀️";
+  transform: translateX(30px);
+  background-color: #f0f0f0;
+  color: #333;
 }
 
 

@@ -39,22 +39,33 @@ class ThemeManager {
     // Ensure mobile switcher is updated too
     this.updateMobileThemeSwitcher();
     
+    // Update profile switcher as well
+    this.updateProfileThemeSwitcher();
+    
     return isLightTheme;
   }
 
   updateThemeIcon() {
     // Обновляем иконку в десктопной версии
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle = document.getElementById('theme-toggle-header');
     if (themeToggle) {
-      const themeIcon = themeToggle.querySelector('.theme-icon');
-      if (themeIcon) {
-        const isLightTheme = document.body.classList.contains('light-theme');
-        themeIcon.textContent = isLightTheme ? '☀️' : '🌙';
-      }
+      const isLightTheme = document.body.classList.contains('light-theme');
+      // Для переключателя с CSS-стилями не нужно обновлять иконку, т.к. она задается в CSS
     }
     
     // Обновляем состояние свитчера в мобильном меню
     this.updateMobileThemeSwitcher();
+    
+    // Обновляем состояние свитчера в профиле
+    this.updateProfileThemeSwitcher();
+  }
+
+  updateProfileThemeSwitcher() {
+    const profileThemeToggle = document.getElementById('theme-toggle-setting');
+    if (profileThemeToggle) {
+      const isLightTheme = document.body.classList.contains('light-theme');
+      profileThemeToggle.checked = isLightTheme;
+    }
   }
 
   updateMobileThemeSwitcher() {

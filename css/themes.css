@@ -15,6 +15,18 @@
   --error-color: #f87171;       /* ошибка */
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);        /* тени */
   --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1); /* тени при наведении */
+  --btn-primary-bg: var(--accent-color);
+  --btn-primary-hover: color-mix(in srgb, var(--accent-color) 90%, black 10%);
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: var(--accent-color);
+  --btn-secondary-border: var(--accent-color);
+  --btn-outline-bg: transparent;
+  --btn-outline-text: var(--text-primary);
+  --btn-outline-border: var(--border-color);
+  --btn-danger-bg: var(--error-color);
+  --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, black 10%);
+  --btn-danger-text: #ffffff;
 }
 
 /* Светлая тема — применяется при наличии класса .light-theme на <body> */
@@ -25,8 +37,8 @@
   --text-primary: #1e293b;
   --text-secondary: #64748b;
   --accent-color: #4f46e5;
-  --accent-primary: #4361ee;    /* дополнительный акцентный цвет для совместимости */
-  --accent-secondary: #4895ef;  /* дополнительный акцентный цвет для совместимости */
+  --accent-primary: #4361ee;
+  --accent-secondary: #4895ef;
   --border-color: #e2e8f0;
   --input-bg: #ffffff;
   --input-border: #cbd5e1;
@@ -34,12 +46,8 @@
   --error-color: #dc2626;
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Цвета для кнопок */
-:root, .light-theme {
   --btn-primary-bg: var(--accent-color);
-  --btn-primary-hover: color-mix(in srgb, var(--accent-color) 90%, black 10%);  /* адаптивный цвет для светлой/темной темы */
+  --btn-primary-hover: color-mix(in srgb, var(--accent-color) 90%, white 10%);
   --btn-primary-text: #ffffff;
   --btn-secondary-bg: transparent;
   --btn-secondary-text: var(--accent-color);
@@ -48,7 +56,7 @@
   --btn-outline-text: var(--text-primary);
   --btn-outline-border: var(--border-color);
   --btn-danger-bg: var(--error-color);
-  --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, black 10%);
+  --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, white 10%);
   --btn-danger-text: #ffffff;
 }
 

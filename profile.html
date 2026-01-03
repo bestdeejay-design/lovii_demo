@@ -81,9 +81,14 @@
                     <div id="settings" class="tab-pane">
                         <div class="form-container">
                             <h3>Настройки</h3>
-                            <div class="form-group checkbox-group">
-                                <input type="checkbox" id="theme-toggle-setting" onchange="window.themeManager.toggleTheme()">
-                                <label for="theme-toggle-setting">Темная тема</label>
+                            <div class="form-group">
+                                <label class="theme-switcher-item">
+                                    <span class="theme-label">Темная тема</span>
+                                    <label class="theme-switch">
+                                        <input type="checkbox" id="theme-toggle-setting">
+                                        <span class="slider"></span>
+                                    </label>
+                                </label>
                             </div>
                             <div class="form-group checkbox-group">
                                 <input type="checkbox" id="notifications" checked>
