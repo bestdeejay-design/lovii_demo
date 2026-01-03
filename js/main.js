@@ -1085,6 +1085,12 @@ function loadTemplate(url, elementId) {
                     initializeMobileMenu();
                 }
             }
+                
+                // Initialize main menu for desktop functionality
+                if (typeof initializeMainMenu !== 'undefined') {
+                    // Use a small timeout to ensure DOM is fully rendered before initialization
+                    setTimeout(initializeMainMenu, 10);
+                }
             
             // After all templates are loaded, try initializing components again
             setTimeout(initializeAfterTemplatesLoad, 50);
