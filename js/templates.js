@@ -121,7 +121,10 @@ class TemplateLoader {
         }
       });
     } else {
-      console.warn('Mobile menu button not found');
+      // Don't show warning if we're on mobile view and button isn't needed
+      if (window.innerWidth > 1023) {
+        console.warn('Mobile menu button not found');
+      }
     }
   }
 
