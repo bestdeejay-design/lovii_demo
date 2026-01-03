@@ -22,6 +22,7 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   padding-bottom: 80px; /* Место для мобильной навигации */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -138,7 +139,7 @@ a:hover {
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .form-group input:focus,
@@ -247,7 +248,7 @@ h3 {
   border-radius: 12px;
   padding: 30px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .feature-card:hover {
@@ -272,9 +273,10 @@ h3 {
 .cta-section {
   padding: 80px 0;
   text-align: center;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  color: white;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   margin-top: 40px;
+  border-radius: 12px;
 }
 
 .cta-section h2 {
@@ -299,6 +301,7 @@ h3 {
   border-bottom: 1px solid var(--border-color);
   padding: 16px 0;
   box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .header-content {
@@ -312,6 +315,11 @@ h3 {
   font-weight: 700;
   color: var(--accent-primary);
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo a:hover {
+  color: var(--accent-color);
 }
 
 .desktop-nav .nav-list {
@@ -337,23 +345,12 @@ h3 {
   gap: 20px;
 }
 
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
+.theme-toggle-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
 }
 
-.theme-toggle:hover {
-  background-color: var(--bg-secondary);
-}
-
-/* Theme Switcher - современный стиль без иконок */
+/* Theme Switcher - современный стиль */
 .theme-switch {
   position: relative;
   display: inline-block;
@@ -408,6 +405,10 @@ input:checked + .slider:after {
   content: none;
 }
 
+
+
+
+
 .user-link {
   font-size: 1.5rem;
   text-decoration: none;
@@ -437,6 +438,7 @@ input:checked + .slider:after {
   background-color: var(--bg-secondary);
   padding: 60px 0 20px;
   margin-top: 80px;
+  transition: background-color 0.3s ease;
 }
 
 .footer-content {
@@ -512,6 +514,7 @@ input:checked + .slider:after {
   z-index: 1000;
   padding: 10px 0;
   display: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .mobile-nav.active {

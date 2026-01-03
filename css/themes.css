@@ -1,18 +1,18 @@
 /* Тёмная тема — по умолчанию */
 :root {
-  --bg-primary: #121212;        /* основной фон */
-  --bg-secondary: #1e1e1e;      /* вторичный фон (секции, карточки) */
-  --card-bg: #252525;           /* фон карточек */
-  --text-primary: #ffffff;      /* основной текст */
-  --text-secondary: #b0b0b0;    /* второстепенный текст */
-  --accent-color: #4CAF50;      /* акцентный цвет (CTA, кнопки) */
+  --bg-primary: #0f0f15;        /* основной фон */
+  --bg-secondary: #1a1a25;      /* вторичный фон (секции, карточки) */
+  --card-bg: #1e1e2a;           /* фон карточек */
+  --text-primary: #f0f0f5;      /* основной текст */
+  --text-secondary: #a0a0b0;    /* второстепенный текст */
+  --accent-color: #5d8bff;      /* акцентный цвет (CTA, кнопки) */
   --accent-primary: #4361ee;    /* дополнительный акцентный цвет для совместимости */
-  --accent-secondary: #3f37c9;  /* дополнительный акцентный цвет для совместимости */
-  --border-color: #333333;      /* границы */
-  --input-bg: #2d2d2d;          /* фон полей ввода */
-  --input-border: #444444;      /* граница полей */
-  --success-color: #4CAF50;     /* успех (например, подтверждение) */
-  --error-color: #f44336;       /* ошибка */
+  --accent-secondary: #4895ef;  /* дополнительный акцентный цвет для совместимости */
+  --border-color: #33334d;      /* границы */
+  --input-bg: #252535;          /* фон полей ввода */
+  --input-border: #40405a;      /* граница полей */
+  --success-color: #4ade80;     /* успех (например, подтверждение) */
+  --error-color: #f87171;       /* ошибка */
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);        /* тени */
   --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1); /* тени при наведении */
 }
@@ -20,26 +20,26 @@
 /* Светлая тема — применяется при наличии класса .light-theme на <body> */
 .light-theme {
   --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
+  --bg-secondary: #f8fafc;
   --card-bg: #ffffff;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --accent-color: #4CAF50;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --accent-color: #4f46e5;
   --accent-primary: #4361ee;    /* дополнительный акцентный цвет для совместимости */
   --accent-secondary: #4895ef;  /* дополнительный акцентный цвет для совместимости */
-  --border-color: #e0e0e0;
+  --border-color: #e2e8f0;
   --input-bg: #ffffff;
-  --input-border: #cccccc;
-  --success-color: #4CAF50;
-  --error-color: #f44336;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --input-border: #cbd5e1;
+  --success-color: #16a34a;
+  --error-color: #dc2626;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Цвета для кнопок */
 :root, .light-theme {
   --btn-primary-bg: var(--accent-color);
-  --btn-primary-hover: #45a049;  /* немного темнее для светлой темы, ярче для темной */
+  --btn-primary-hover: color-mix(in srgb, var(--accent-color) 90%, black 10%);  /* адаптивный цвет для светлой/темной темы */
   --btn-primary-text: #ffffff;
   --btn-secondary-bg: transparent;
   --btn-secondary-text: var(--accent-color);
@@ -48,7 +48,7 @@
   --btn-outline-text: var(--text-primary);
   --btn-outline-border: var(--border-color);
   --btn-danger-bg: var(--error-color);
-  --btn-danger-hover: #d32f2f;
+  --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, black 10%);
   --btn-danger-text: #ffffff;
 }
 

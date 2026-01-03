@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-content">
             <div class="logo">
-                <a href="index.html">Лови</a>
+                <a href="index.html" class="logo-link">Лови</a>
             </div>
             
             <nav class="desktop-nav">
@@ -14,9 +14,12 @@
             </nav>
             
             <div class="header-actions">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
-                    <span class="theme-icon">🌙</span>
-                </button>
+                <div class="theme-toggle-wrapper">
+                    <label class="theme-switch" for="theme-toggle-header">
+                        <input type="checkbox" id="theme-toggle-header">
+                        <span class="slider"></span>
+                    </label>
+                </div>
                 <a href="profile.html" class="user-link">👤</a>
             </div>
         </div>
