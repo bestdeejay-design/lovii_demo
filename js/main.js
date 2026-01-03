@@ -43,12 +43,14 @@ function initializeSmoothScrolling() {
 function initializeFormHandlers() {
   // Обработчики форм
   const forms = document.querySelectorAll('form');
-  forms.forEach(form => {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      handleFormSubmit(this);
+  if (forms.length > 0) {
+    forms.forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        handleFormSubmit(this);
+      });
     });
-  });
+  }
 }
 
 function handleFormSubmit(form) {
@@ -87,25 +89,31 @@ function handleFormSubmit(form) {
 function initializeTabHandlers() {
   // Обработчики вкладок на странице профиля
   const tabButtons = document.querySelectorAll('.tab-btn');
-  tabButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const tabId = this.getAttribute('data-tab');
-      switchTab(tabId);
+  if (tabButtons.length > 0) {
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        switchTab(tabId);
+      });
     });
-  });
+  }
 }
 
 function switchTab(tabId) {
   // Переключение вкладок
   const tabButtons = document.querySelectorAll('.tab-btn');
-  tabButtons.forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
-  });
+  if (tabButtons.length > 0) {
+    tabButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+    });
+  }
   
   const tabPanes = document.querySelectorAll('.tab-pane');
-  tabPanes.forEach(pane => {
-    pane.classList.toggle('active', pane.id === tabId);
-  });
+  if (tabPanes.length > 0) {
+    tabPanes.forEach(pane => {
+      pane.classList.toggle('active', pane.id === tabId);
+    });
+  }
 }
 
 function showMessage(message, type = 'info') {
