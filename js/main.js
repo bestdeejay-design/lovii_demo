@@ -17,14 +17,8 @@ function initializePageComponents() {
 }
 
 function initializeThemeToggle() {
-  // Обработчик переключения темы (дополнительный, если нужно)
-  const themeToggle = document.getElementById('theme-toggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      const isDark = window.themeManager.toggleTheme();
-    });
-  }
+  // Обработчик переключения темы уже установлен в templates.js
+  // Эта функция оставлена для совместимости, если потребуется дополнительная логика
 }
 
 function initializeSmoothScrolling() {
@@ -66,7 +60,7 @@ function handleFormSubmit(form) {
   let isValid = true;
   const requiredFields = form.querySelectorAll('[required]');
   requiredFields.forEach(field => {
-    if (!field.value.trim()) {
+    if (!field.value?.trim()) {
       isValid = false;
       field.classList.add('error');
     } else {
@@ -103,11 +97,13 @@ function initializeTabHandlers() {
 
 function switchTab(tabId) {
   // Переключение вкладок
-  document.querySelectorAll('.tab-btn').forEach(btn => {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
   });
   
-  document.querySelectorAll('.tab-pane').forEach(pane => {
+  const tabPanes = document.querySelectorAll('.tab-pane');
+  tabPanes.forEach(pane => {
     pane.classList.toggle('active', pane.id === tabId);
   });
 }

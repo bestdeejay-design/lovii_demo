@@ -29,6 +29,8 @@ class TemplateLoader {
     if (headerElement) {
       headerElement.innerHTML = headerContent;
       this.initHeaderEvents();
+    } else {
+      console.warn('Header element not found');
     }
   }
 
@@ -37,6 +39,8 @@ class TemplateLoader {
     const footerElement = document.getElementById('dynamic-footer');
     if (footerElement) {
       footerElement.innerHTML = footerContent;
+    } else {
+      console.warn('Footer element not found');
     }
   }
 
@@ -45,6 +49,8 @@ class TemplateLoader {
     const navElement = document.getElementById('dynamic-mobile-nav');
     if (navElement) {
       navElement.innerHTML = navContent;
+    } else {
+      console.warn('Mobile navigation element not found');
     }
   }
 
@@ -55,6 +61,8 @@ class TemplateLoader {
       themeToggle.addEventListener('click', () => {
         const isDarkTheme = window.themeManager.toggleTheme();
       });
+    } else {
+      console.warn('Theme toggle element not found in header');
     }
 
     // Добавляем обработчик для мобильного меню
@@ -64,8 +72,12 @@ class TemplateLoader {
         const mobileNav = document.getElementById('mobile-nav');
         if (mobileNav) {
           mobileNav.classList.toggle('active');
+        } else {
+          console.warn('Mobile navigation element not found');
         }
       });
+    } else {
+      console.warn('Mobile menu button not found');
     }
   }
 

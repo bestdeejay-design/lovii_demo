@@ -40,7 +40,11 @@ class ThemeManager {
       if (themeIcon) {
         const isDarkTheme = document.body.classList.contains('dark-theme');
         themeIcon.textContent = isDarkTheme ? '🌙' : '☀️';
+      } else {
+        console.warn('Theme icon element not found');
       }
+    } else {
+      console.warn('Theme toggle element not found');
     }
   }
 
