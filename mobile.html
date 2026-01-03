@@ -1,0 +1,324 @@
+<!-- mobile.html — Единый HTML-файл для демо-прототипа «Лови» -->
+<!-- Техническое задание для AI: реализуй ВСЁ внутри этого файла -->
+<!-- Структура:
+  1. Подключи Tailwind CSS и Google Fonts (Inter)
+  2. Создай стиль-блок с общими правилами
+  3. Создай 23 скрытых <div class="screen hidden"> с id="screen-xxx"
+  4. Реализуй функцию showScreen(id): скрывает все .screen, показывает #screen-{id}
+  5. Сохраняй mock-данные (профиль, баланс, заказы) в localStorage
+  6. Все кнопки — через onclick="showScreen('vitrina')"
+  7. Никаких внешних зависимостей, кроме CDN
+  8. Демо должно работать по двойному клику на файл (file://)
+-->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Лови — демо</title>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src=" https://cdn.tailwindcss.com "></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0066FF',
+            accent: '#FF6B00',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .hidden { display: none; }
+    .flex-center { display: flex; flex-direction: column; align-items: center; }
+    .btn { width: 100%; height: 52px; border-radius: 12px; font-weight: 500; }
+    .btn-primary { background-color: #0066FF; color: white; }
+    .btn-accent { background-color: #FF6B00; color: white; }
+    .btn-outline { border: 2px solid #0066FF; background: transparent; color: #0066FF; }
+    .btn-outline-accent { border: 2px solid #FF6B00; background: transparent; color: #FF6B00; }
+    .input { width: 100%; height: 52px; border: 1px solid #D1D5DB; border-radius: 12px; padding: 0 16px; }
+    .footer-links { font-size: 12px; color: #6B7280; text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+  <!-- Экран 1: Главная (гость) -->
+  <div id="screen-main" class="screen active p-6">
+    <div class="flex-center mb-8">
+      <div class="w-12 h-12 bg-primary rounded-full mb-6"></div>
+      <h1 class="text-2xl font-semibold mb-1">Единая лояльность для Васильевского</h1>
+      <p class="text-gray-600 text-base">Покупайте у местных, получайте баллы, тратьте где угодно на острове</p>
+    </div>
+    <button class="btn btn-primary mb-6" onclick="showScreen('phone')">Войти</button>
+    <button class="btn btn-outline mb-10" onclick="showScreen('tsp-register')">Добавить свой бизнес</button>
+    <div class="footer-links">Пользовательское соглашение • Политика конфиденциальности</div>
+  </div>
+
+  <!-- Экран 2: Ввод телефона -->
+  <div id="screen-phone" class="screen p-6">
+    <div class="flex-center mb-6">
+      <div class="w-12 h-12 bg-primary rounded-full mb-6"></div>
+      <h2 class="text-2xl font-semibold mb-6">Войдите по номеру</h2>
+    </div>
+    <input id="phone-input" type="tel" placeholder="+7 (999) 999-99-99" class="input mb-6" oninput="checkPhone()">
+    <button id="phone-btn" class="btn btn-primary mb-6 opacity-50 cursor-not-allowed" disabled>Получить код</button>
+    <p class="text-gray-500 text-sm mb-10">Отправляя код, вы соглашаетесь с условиями</p>
+    <button class="btn btn-outline" onclick="showScreen('main')">Назад</button>
+  </div>
+
+  <!-- Экран 3: Ввод кода -->
+  <div id="screen-code" class="screen p-6">
+    <div class="flex-center mb-6">
+      <div class="w-12 h-12 bg-primary rounded-full mb-6"></div>
+      <h2 class="text-2xl font-semibold mb-6">Код отправлен на +7 ••• •••-••-••</h2>
+    </div>
+    <div class="flex justify-between mb-8">
+      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
+      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
+      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
+      <input class="w-14 h-14 text-center border border-gray-300 rounded-lg" maxlength="1">
+    </div>
+    <button class="btn btn-primary mb-10" onclick="showScreen('profile')">Продолжить</button>
+    <button class="btn btn-outline" onclick="showScreen('phone')">Назад</button>
+  </div>
+
+  <!-- Экран 4: Профиль (первичное заполнение) -->
+  <div id="screen-profile" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Добро пожаловать!</h2>
+    <input type="text" placeholder="Иван Иванов" class="input mb-6">
+    <button class="btn btn-outline mb-6 flex items-center justify-center">
+      <span>📍</span> <span class="ml-2">Добавить адрес</span>
+    </button>
+    <button class="btn btn-outline-accent mb-4" onclick="showScreen('tsp-register')">Добавить свой бизнес</button>
+    <button class="btn btn-outline mb-10" onclick="showScreen('courier-register')">Стать курьером</button>
+    <button class="btn btn-primary mb-6" onclick="saveProfileAndGoToVitrina()">Продолжить</button>
+    <button class="btn btn-outline" onclick="showScreen('code')">Назад</button>
+  </div>
+
+  <!-- Экран 5: Витрина -->
+  <div id="screen-vitrina" class="screen p-6">
+    <div class="flex justify-between items-center mb-6">
+      <div class="font-bold">Лови</div>
+      <div class="flex items-center">
+        <span>🪙</span>
+        <span class="ml-1">120</span>
+      </div>
+    </div>
+    <div class="mb-6">
+      <input type="text" placeholder="Найти товар или услугу…" class="input">
+    </div>
+    <div class="flex mb-6 overflow-x-auto space-x-4 pb-2">
+      <button class="px-4 py-2 bg-blue-100 text-primary rounded-full whitespace-nowrap">Все</button>
+      <button class="px-4 py-2 text-gray-600 rounded-full whitespace-nowrap">Еда</button>
+    </div>
+    <div class="space-y-4 mb-20">
+      <div class="p-4 border rounded-xl">
+        <div class="font-semibold">Пекарня “Грибоедов”</div>
+        <div class="text-sm text-gray-600">От 300 ₽ • Доставка 99 ₽</div>
+        <button class="btn btn-primary mt-3" onclick="showScreen('shop')">Заказать</button>
+      </div>
+    </div>
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
+      <button class="font-semibold text-primary">Витрина</button>
+      <button onclick="showScreen('orders')">Заказы</button>
+      <button onclick="showScreen('profile')">Профиль</button>
+    </div>
+  </div>
+
+  <!-- Экран 6: Каталог точки -->
+  <div id="screen-shop" class="screen p-6">
+    <div class="flex items-center mb-6">
+      <button onclick="showScreen('vitrina')" class="mr-4">←</button>
+      <div>
+        <div class="font-semibold">Пекарня “Грибоедов”</div>
+        <div class="text-sm text-gray-600">Пекарня • Еда</div>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <div class="flex">
+        <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"></div>
+        <div class="flex-1">
+          <div class="font-medium">Сдобная булочка</div>
+          <div class="text-sm text-gray-600">С изюмом</div>
+          <div class="font-bold mt-1">90 ₽</div>
+        </div>
+        <button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center">+</button>
+      </div>
+    </div>
+    <button class="btn btn-primary fixed bottom-20 left-6 right-6" onclick="showScreen('order')">Заказать на 90 ₽</button>
+  </div>
+
+  <!-- Экран 7: Оформление заказа -->
+  <div id="screen-order" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Оформление заказа</h2>
+    <div class="mb-6 p-4 bg-gray-50 rounded-xl">
+      <div class="font-medium">Сдобная булочка ×2</div>
+      <div class="text-sm text-gray-600">180 ₽</div>
+    </div>
+    <div class="mb-6">
+      <div class="font-medium mb-2">Доставка</div>
+      <label class="block mb-2"><input type="radio" name="delivery" checked> Самовывоз</label>
+      <label class="block"><input type="radio" name="delivery"> Курьер (+99 ₽)</label>
+    </div>
+    <div class="flex items-center mb-6">
+      <span>🪙 У вас 120 баллов</span>
+      <input type="range" min="0" max="120" class="ml-2 flex-1">
+    </div>
+    <div class="font-bold text-xl mb-6">К оплате: 180 ₽</div>
+    <button class="btn btn-primary mb-6" onclick="showScreen('order-confirmed')">Оплатить 180 ₽</button>
+    <button class="btn btn-outline" onclick="showScreen('shop')">Назад</button>
+  </div>
+
+  <!-- Экран 8: Подтверждение заказа -->
+  <div id="screen-order-confirmed" class="screen p-6 flex-center">
+    <div class="w-18 h-18 bg-green-500 rounded-full flex items-center justify-center mb-6">
+      <span class="text-white text-3xl">✓</span>
+    </div>
+    <h2 class="text-2xl font-semibold mb-1">Заказ принят!</h2>
+    <p class="text-gray-600 mb-6">Спасибо за покупку в “Пекарне Грибоедов”</p>
+    <p class="text-primary font-medium mb-10">+9 баллов “Лови” начислено на ваш счёт</p>
+    <button class="btn btn-primary mb-4" onclick="showScreen('orders')">Мои заказы</button>
+    <button class="btn btn-outline" onclick="showScreen('vitrina')">Вернуться в витрину</button>
+  </div>
+
+  <!-- Экран 9: История заказов -->
+  <div id="screen-orders" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Мои заказы</h2>
+    <div class="space-y-4 mb-20">
+      <div class="p-4 border rounded-xl">
+        <div class="font-semibold">#123 • Сегодня, 14:30</div>
+        <div>Сдобная булочка ×2</div>
+        <div class="text-green-600 font-medium">Доставлен</div>
+      </div>
+    </div>
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
+      <button onclick="showScreen('vitrina')">Витрина</button>
+      <button class="font-semibold text-primary">Заказы</button>
+      <button onclick="showScreen('profile')">Профиль</button>
+    </div>
+  </div>
+
+  <!-- Экран 10: Кошелёк -->
+  <div id="screen-wallet" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Мои баллы</h2>
+    <div class="bg-blue-50 p-4 rounded-xl mb-6">
+      <div class="text-primary font-bold">Общий баланс: 720 ₽</div>
+      <div class="text-sm text-gray-600">Эквивалент в рублях по текущим курсам</div>
+    </div>
+    <div class="mb-6 p-4 border rounded-xl">
+      <div class="font-medium">Баллы Билайна</div>
+      <div>500 баллов = 450 ₽</div>
+      <div class="text-sm text-gray-500">Сгорают 31.12.2026</div>
+      <button class="btn btn-accent mt-2">Обменять</button>
+    </div>
+    <button class="btn btn-primary mb-10" onclick="showScreen('connect-loyalty')">+ Подключить банк или сервис</button>
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 flex justify-around">
+      <button onclick="showScreen('vitrina')">Витрина</button>
+      <button onclick="showScreen('orders')">Заказы</button>
+      <button onclick="showScreen('profile')">Профиль</button>
+    </div>
+  </div>
+
+  <!-- Экран 11: Подключение лояльности -->
+  <div id="screen-connect-loyalty" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Подключите программу лояльности</h2>
+    <p class="text-gray-600 mb-8">Выберите сервис, в котором у вас есть баллы</p>
+    <div class="space-y-4 mb-20">
+      <button class="flex items-center p-4 border rounded-xl w-full">
+        <div class="w-10 h-10 bg-gray-200 rounded mr-4"></div>
+        <span>Билайн</span>
+      </button>
+    </div>
+    <button class="btn btn-outline" onclick="showScreen('wallet')">Назад</button>
+  </div>
+
+  <!-- Экран 12: Обмен баллов -->
+  <div id="screen-exchange" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Обмен баллов</h2>
+    <div class="mb-4">
+      <label class="block mb-2">Откуда обмениваете?</label>
+      <select class="input mb-4">
+        <option>Баллы Билайна</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2">Сколько обменять?</label>
+      <input type="number" value="500" class="input">
+      <p class="text-sm text-gray-500 mt-1">Доступно: 500 баллов</p>
+    </div>
+    <div class="text-gray-500 mb-4">
+      <div>Курс: 1 балл = 1 ₽</div>
+      <div>Комиссия: 5% (25 ₽)</div>
+    </div>
+    <div class="font-bold text-lg mb-6">Получите: 475 баллов “Лови”</div>
+    <button class="btn btn-primary mb-6" onclick="showScreen('wallet')">Обменять 475 баллов</button>
+    <button class="btn btn-outline" onclick="showScreen('wallet')">Назад</button>
+  </div>
+
+  <!-- Экран 13: Вывод на карту -->
+  <div id="screen-payout" class="screen p-6">
+    <h2 class="text-2xl font-semibold mb-6">Вывод на карту</h2>
+    <div class="mb-6">
+      <div class="text-gray-600 mb-2">Доступно: 120 баллов “Лови”</div>
+      <input type="number" value="120" class="input mb-2">
+      <div class="text-sm text-gray-500">1 балл = 1 рубль</div>
+    </div>
+    <div class="text-gray-500 mb-4">Комиссия: 3% (3.60 ₽)</div>
+    <div class="font-bold mb-6">К получению: 116.40 ₽</div>
+    <input type="text" placeholder="Номер карты (СБП)" class="input mb-6">
+    <button class="btn btn-green-500 bg-green-500 text-white mb-10">Вывести 116.40 ₽</button>
+    <button class="btn btn-outline" onclick="showScreen('wallet')">Назад</button>
+  </div>
+
+  <!-- Экраны 14–23 (ТСП, курьер, HR, офлайн) — упрощённые заглушки -->
+  <div id="screen-tsp-register" class="screen p-6"><h2>Регистрация ТСП</h2><button class="btn btn-accent mt-6" onclick="showScreen('tsp')">Отправить</button></div>
+  <div id="screen-tsp" class="screen p-6"><h2>Панель ТСП</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Выйти</button></div>
+  <div id="screen-courier-register" class="screen p-6"><h2>Регистрация курьера</h2><button class="btn btn-primary mt-6" onclick="showScreen('courier')">Отправить</button></div>
+  <div id="screen-courier" class="screen p-6"><h2>Панель курьера</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Выйти</button></div>
+  <div id="screen-hr-register" class="screen p-6"><h2>HR-регистрация</h2><button class="btn btn-primary mt-6" onclick="showScreen('hr-dashboard')">Подключить</button></div>
+  <div id="screen-hr-dashboard" class="screen p-6"><h2>HR-кабинет</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Выйти</button></div>
+  <div id="screen-offline" class="screen p-6"><h2>Нет интернета</h2><button class="btn btn-primary mt-6" onclick="location.reload()">Повторить</button></div>
+  <div id="screen-about" class="screen p-6"><h2>О приложении</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Назад</button></div>
+  <div id="screen-settings" class="screen p-6"><h2>Настройки</h2><button class="btn btn-primary mt-6" onclick="showScreen('profile')">Назад</button></div>
+  <div id="screen-faq" class="screen p-6"><h2>Частые вопросы</h2><button class="btn btn-primary mt-6" onclick="showScreen('main')">Назад</button></div>
+
+  <script>
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+      document.getElementById('screen-' + id).classList.add('active');
+    }
+
+    function checkPhone() {
+      const input = document.getElementById('phone-input');
+      const btn = document.getElementById('phone-btn');
+      if (input.value.replace(/\D/g, '').length >= 10) {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      } else {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    }
+
+    function saveProfileAndGoToVitrina() {
+      // mock save
+      localStorage.setItem('profile', JSON.stringify({fio: 'Иван Иванов'}));
+      showScreen('vitrina');
+    }
+
+    // Инициализация
+    if (localStorage.getItem('profile')) {
+      showScreen('vitrina');
+    }
+  </script>
+</body>
+</html>
