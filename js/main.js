@@ -170,8 +170,6 @@ function updateThemeToggleText() {
 
 
 
-    });
-});
 
 // Обработчик для мобильного логотипа
 document.addEventListener('DOMContentLoaded', function() {
@@ -196,49 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Функция для обработки формы обратной связи
-function initializeContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    
-    if (!contactForm) {
-        console.warn('Contact form not found');
-        return;
-    }
-    
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Получаем значения полей формы
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
-        
-        // Простая валидация
-        if (!name || !email || !subject || !message) {
-            alert('Пожалуйста, заполните все обязательные поля');
-            return;
-        }
-        
-        // Проверка валидности email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Пожалуйста, введите действительный адрес электронной почты');
-            return;
-        }
-        
-        // Здесь можно добавить отправку данных на сервер
-        console.log('Форма отправлена:', { name, email, subject, message });
-        
-        // Показываем сообщение об успешной отправке
-        alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-        
-        // Сбрасываем форму
-        contactForm.reset();
-    });
-    
-    // Initialize CTA form as well
-    initializeCtaForm();
-}
+
 
 // Функция для обработки CTA формы
 function initializeCtaForm() {
@@ -1214,6 +1170,7 @@ function initializeRouting() {
                 if (href && href !== '#') {
                     // Если у элемента нет подменю, или это элемент с подменю но без дочерних ссылок,
                     // переходим по ссылке
+                    if (!hasSubmenu) {
                         e.preventDefault();
                         handleNavigation(href);
                     } else {
