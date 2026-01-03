@@ -1121,7 +1121,13 @@ function loadTemplate(url, elementId) {
             document.getElementById(elementId).innerHTML = data;
             // Re-initialize any JavaScript functionality after template is loaded
             if (elementId === 'header-container') {
-                initializeMobileMenu();
+                // Use the new responsive header functionality instead of the old one
+                if (typeof initializeResponsiveHeader !== 'undefined') {
+                    initializeResponsiveHeader();
+                } else {
+                    // Fallback to initializeMobileMenu if new functionality is not available
+                    initializeMobileMenu();
+                }
             }
             
             // After all templates are loaded, try initializing components again
