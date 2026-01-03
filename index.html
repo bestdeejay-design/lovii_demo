@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лови - SaaS + оператор лояльности</title>
+    <title>Витрина — ваш товар на полке гипермаркета</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/main.css">
@@ -24,45 +24,139 @@
     <div id="dynamic-header"></div>
     
     <main class="main-content">
+        <!-- Герой-секция -->
         <section class="hero">
             <div class="container">
-                <h1 class="hero-title">Лови - Управление лояльностью нового поколения</h1>
-                <p class="hero-subtitle">SaaS-платформа для создания программ лояльности, маркетинга и CRM</p>
+                <h1 class="hero-title">Витрина — ваш товар на полке гипермаркета</h1>
+                <p class="hero-subtitle">Платформа для самозанятых, ИП и ООО, которые хотят попасть на полки крупных ритейлеров</p>
                 <div class="hero-actions">
-                    <button class="btn btn-primary">Начать бесплатно</button>
-                    <button class="btn btn-secondary">Демо-тур</button>
+                    <a href="#catalog" class="btn btn-primary">Смотреть каталог</a>
+                    <a href="#supplier-form" class="btn btn-secondary">Стать поставщиком</a>
                 </div>
             </div>
         </section>
         
+        <!-- Преимущества платформы -->
         <section class="features">
             <div class="container">
-                <h2 class="section-title">Возможности платформы</h2>
+                <h2 class="section-title">Почему выбирают Витрину</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3>Аналитика</h3>
-                        <p>Отслеживайте поведение клиентов и эффективность программ лояльности</p>
+                        <div class="feature-icon">🏪</div>
+                        <h3>Выход на розницу</h3>
+                        <p>Попадите на полки гипермаркетов и ПВЗ по всей стране</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Таргетинг</h3>
-                        <p>Создавайте персонализированные предложения для каждой группы клиентов</p>
+                        <div class="feature-icon">📈</div>
+                        <h3>Рост продаж</h3>
+                        <p>Увеличьте объемы реализации и узнаваемость бренда</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">📱</div>
-                        <h3>Мобильное приложение</h3>
-                        <p>Готовое решение для взаимодействия с клиентами через мобильное приложение</p>
+                        <div class="feature-icon">💼</div>
+                        <h3>Прозрачность</h3>
+                        <p>Отслеживайте продажи, остатки и маркетинговые показатели</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section class="cta-section">
+        <!-- Как начать продавать -->
+        <section class="steps">
             <div class="container">
-                <h2>Готовы начать?</h2>
-                <p>Присоединяйтесь к тысячам компаний, которые уже используют Лови</p>
-                <button class="btn btn-primary">Создать аккаунт</button>
+                <h2 class="section-title">Как начать продавать за 3 шага</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Зарегистрируйтесь</h3>
+                        <p>Создайте аккаунт поставщика и заполните информацию о себе</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Добавьте товары</h3>
+                        <p>Опубликуйте продукцию с фотографиями и описаниями</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Начните продавать</h3>
+                        <p>Получайте заказы от гипермаркетов и ПВЗ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Для кого подходит -->
+        <section class="target-audience">
+            <div class="container">
+                <h2 class="section-title">Для кого подходит Витрина</h2>
+                <div class="audience-grid">
+                    <div class="audience-card">
+                        <div class="audience-icon">👨‍💼</div>
+                        <h3>Самозанятые</h3>
+                        <p>Выход на массовый рынок без создания юридического лица</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-icon">🏢</div>
+                        <h3>ИП и ООО</h3>
+                        <p>Расширение каналов сбыта и увеличение объемов продаж</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-icon">🛒</div>
+                        <h3>Ритейлеры</h3>
+                        <p>Поиск локальных поставщиков и уникальной продукции</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Форма для заявки -->
+        <section id="supplier-form" class="cta-section">
+            <div class="container">
+                <h2>Хотите стать поставщиком?</h2>
+                <p>Оставьте заявку, и мы свяжемся с вами в течение 24 часов</p>
+                <form class="supplier-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Имя" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="tel" placeholder="Телефон" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить заявку</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Рекомендательные товары -->
+        <section id="catalog" class="recommended">
+            <div class="container">
+                <h2 class="section-title">Популярные товары</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">🎨</div>
+                        <h3>Мастер-классы по квиллингу</h3>
+                        <p class="product-price">от 890 ₽</p>
+                        <span class="product-location">Москва</span>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">🍯</div>
+                        <h3>Мед натуральный</h3>
+                        <p class="product-price">от 1200 ₽</p>
+                        <span class="product-location">Краснодарский край</span>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">🧶</div>
+                        <h3>Вязаные игрушки</h3>
+                        <p class="product-price">от 1500 ₽</p>
+                        <span class="product-location">Санкт-Петербург</span>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">🌶️</div>
+                        <h3>Острые соусы</h3>
+                        <p class="product-price">от 450 ₽</p>
+                        <span class="product-location">Красноярск</span>
+                    </div>
+                </div>
+                <div class="center-button">
+                    <a href="/catalog" class="btn btn-secondary">Смотреть весь каталог</a>
+                </div>
             </div>
         </section>
     </main>
