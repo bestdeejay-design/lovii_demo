@@ -134,7 +134,7 @@ a:hover {
   padding: 12px 16px;
   border: 2px solid var(--border-color);
   border-radius: 8px;
-  background-color: var(--bg-card);
+  background-color: var(--card-bg);
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -242,7 +242,7 @@ h3 {
 }
 
 .feature-card {
-  background-color: var(--bg-card);
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 30px;
@@ -621,7 +621,7 @@ input:checked + .slider:after {
 }
 
 .product-card {
-  background-color: var(--bg-card);
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 30px;
@@ -816,7 +816,7 @@ input:checked + .slider:after {
   max-width: 400px;
   width: 100%;
   padding: 40px;
-  background-color: var(--bg-card);
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   box-shadow: var(--shadow);
@@ -860,7 +860,7 @@ input:checked + .slider:after {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: var(--bg-card);
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: var(--shadow);
