@@ -881,16 +881,32 @@ input:checked + .slider:before {
   background-image: url('../assets/icons/products.svg');
 }
 
+.nav-icon.box-icon::before {
+  background-image: url('../assets/icons/box.svg');
+}
+
 .nav-icon.about-icon::before {
   background-image: url('../assets/icons/about.svg');
+}
+
+.nav-icon.info-icon::before {
+  background-image: url('../assets/icons/info.svg');
 }
 
 .nav-icon.profile-icon::before {
   background-image: url('../assets/icons/profile.svg');
 }
 
+.nav-icon.user-icon::before {
+  background-image: url('../assets/icons/user-alt.svg');
+}
+
 .nav-icon.login-icon::before {
   background-image: url('../assets/icons/home.svg'); /* Using home icon for login since there's no specific login icon */
+}
+
+.nav-icon.key-icon::before {
+  background-image: url('../assets/icons/key.svg');
 }
 
 .nav-text {
