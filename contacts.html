@@ -1,0 +1,103 @@
+<!-- 
+ВАЖНОЕ ПРАВИЛО ПРОЕКТА
+1. Все изменения сначала фиксируются в pages.md
+2. Структура проекта НЕЛЬЗЯ менять без согласования
+3. Проверка перед коммитом:
+   - Работает ли переключение тем?
+   - Корректно ли загружаются шаблоны?
+   - Нет ли внешних CDN?
+   - Проходит ли валидацию HTML/CSS?
+4. Все стили — только через css/main.css
+5. Все скрипты — только через /js/
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Лови</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="dark-theme">
+    <div id="dynamic-header"></div>
+    
+    <main class="main-content">
+        <section class="contacts-hero">
+            <div class="container">
+                <h1 class="page-title">Связаться с нами</h1>
+                <p class="page-subtitle">Мы всегда рады помочь и ответить на ваши вопросы</p>
+            </div>
+        </section>
+        
+        <section class="contacts-content">
+            <div class="container">
+                <div class="contacts-grid">
+                    <div class="contact-info">
+                        <h2>Контактная информация</h2>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>info@lovi.ru</p>
+                                <p>support@lovi.ru</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h3>Телефон</h3>
+                                <p>+7 (495) 123-45-67</p>
+                                <p>Ежедневно с 9:00 до 18:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-details">
+                                <h3>Адрес</h3>
+                                <p>г. Москва, ул. Тверская, д. 1</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <h2>Написать нам</h2>
+                        <form class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Имя</label>
+                                    <input type="text" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company">Компания</label>
+                                    <input type="text" id="company">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email-contact">Email</label>
+                                <input type="email" id="email-contact" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Тема</label>
+                                <input type="text" id="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Сообщение</label>
+                                <textarea id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Отправить сообщение</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="dynamic-footer"></div>
+    <div id="dynamic-mobile-nav"></div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

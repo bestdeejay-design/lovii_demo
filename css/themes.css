@@ -1,0 +1,49 @@
+:root {
+  /* Цвета для светлой темы (по умолчанию в переменных) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --accent-primary: #4361ee;
+  --accent-secondary: #3f37c9;
+  --success: #4cc9f0;
+  --warning: #f72585;
+  --error: #e63946;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme {
+  /* Цвета для темной темы */
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-card: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --border-color: #333333;
+  --accent-primary: #4361ee;
+  --accent-secondary: #4895ef;
+  --success: #4cc9f0;
+  --warning: #f72585;
+  --error: #e63946;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Цвета для кнопок */
+:root {
+  --btn-primary-bg: var(--accent-primary);
+  --btn-primary-hover: var(--accent-secondary);
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: var(--accent-primary);
+  --btn-secondary-border: var(--accent-primary);
+  --btn-outline-bg: transparent;
+  --btn-outline-text: var(--text-primary);
+  --btn-outline-border: var(--border-color);
+  --btn-danger-bg: var(--error);
+  --btn-danger-hover: #d90429;
+  --btn-danger-text: #ffffff;
+}
