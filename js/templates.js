@@ -70,6 +70,47 @@ class TemplateLoader {
       console.warn('Theme toggle element not found in header');
     }
 
+    // Initialize mobile theme toggle if it exists
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    if (mobileThemeToggle) {
+      // Set initial state based on current theme
+      if (window.themeManager && typeof window.themeManager.getCurrentTheme === 'function') {
+        const isDarkTheme = window.themeManager.getCurrentTheme() === 'dark';
+        mobileThemeToggle.checked = isDarkTheme;
+      }
+      
+      mobileThemeToggle.addEventListener('change', () => {
+        const isDarkTheme = window.themeManager.toggleTheme();
+        // Update mobile toggle state to match theme
+        mobileThemeToggle.checked = isDarkTheme;
+      });
+    }
+
+    // Initialize profile dropdown for mobile
+    const profileMenu = document.querySelector('.profile-menu');
+    if (profileMenu) {
+      const profileLink = profileMenu.querySelector('a');
+      const dropdown = profileMenu.querySelector('.profile-dropdown');
+      
+      if (profileLink && dropdown) {
+        // Toggle dropdown on profile menu click
+        profileLink.addEventListener('click', (e) => {
+          // Prevent default link behavior on mobile
+          if (window.innerWidth <= 1023) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+          }
+        });
+        
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', (e) => {
+          if (!profileMenu.contains(e.target)) {
+            dropdown.classList.remove('active');
+          }
+        });
+      }
+    }
+
     // Добавляем обработчик для мобильного меню
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     if (mobileMenuBtn) {
@@ -77,6 +118,11 @@ class TemplateLoader {
         const mobileNav = document.getElementById('mobile-nav');
         if (mobileNav) {
           mobileNav.classList.toggle('active');
+          // Close profile dropdown when mobile menu opens
+          const profileDropdown = document.querySelector('.profile-dropdown');
+          if (profileDropdown) {
+            profileDropdown.classList.remove('active');
+          }
         } else {
           console.warn('Mobile navigation element not found');
         }
