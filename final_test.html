@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финальный тест свитчера темы</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Финальный тест современного свитчера тем</h1>
+        <p>Эта страница для тестирования нового переключателя темы без иконок.</p>
+        
+        <div style="margin: 20px 0; padding: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px;">
+            <h2>Тестовый элемент с использованием CSS-переменных</h2>
+            <p style="color: var(--text-primary);">Текст с основным цветом</p>
+            <p style="color: var(--text-secondary);">Текст с второстепенным цветом</p>
+            <div style="background-color: var(--bg-secondary); padding: 10px; border-radius: 4px; margin-top: 10px;">
+                Блок с вторичным фоном
+            </div>
+        </div>
+    </div>
+
+    <!-- Мобильное меню для тестирования переключателя -->
+    <nav class="mobile-nav" id="mobile-nav" style="display: block;">
+        <div class="container">
+            <ul class="mobile-nav-list">
+                <li>
+                    <a href="#">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-text">Продукты</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="nav-icon">ℹ️</span>
+                        <span class="nav-text">О нас</span>
+                    </a>
+                </li>
+                <li class="profile-menu">
+                    <a href="#" onclick="event.preventDefault();">
+                        <span class="nav-icon">👤</span>
+                        <span class="nav-text">Профиль</span>
+                    </a>
+                    <div class="profile-dropdown active">
+                        <div class="dropdown-item theme-switcher-item">
+                            <span class="theme-label">Тема</span>
+                            <label class="theme-switch">
+                                <input type="checkbox" id="mobile-theme-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="nav-icon">🔑</span>
+                        <span class="nav-text">Вход</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <script src="js/theme.js"></script>
+</body>
+</html>

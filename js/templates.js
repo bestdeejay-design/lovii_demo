@@ -70,22 +70,6 @@ class TemplateLoader {
       console.warn('Theme toggle element not found in header');
     }
 
-    // Initialize mobile theme toggle if it exists
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-    if (mobileThemeToggle) {
-      // Set initial state based on current theme
-      if (window.themeManager && typeof window.themeManager.getCurrentTheme === 'function') {
-        const isDarkTheme = window.themeManager.getCurrentTheme() === 'dark';
-        mobileThemeToggle.checked = isDarkTheme;
-      }
-      
-      mobileThemeToggle.addEventListener('change', () => {
-        const isDarkTheme = window.themeManager.toggleTheme();
-        // Update mobile toggle state to match theme
-        mobileThemeToggle.checked = isDarkTheme;
-      });
-    }
-
     // Initialize profile dropdown for mobile
     const profileMenu = document.querySelector('.profile-menu');
     if (profileMenu) {
