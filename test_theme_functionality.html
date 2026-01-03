@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест темы</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="dark-theme">
+    <!-- Desktop header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">Лови</a>
+                </div>
+                
+                <nav class="desktop-nav">
+                    <ul class="nav-list">
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="products.html">Продукты</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <a href="profile.html" class="user-link">👤</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile navigation -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="container">
+            <ul class="mobile-nav-list">
+                <li>
+                    <a href="products.html">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-text">Продукты</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="about.html">
+                        <span class="nav-icon">ℹ️</span>
+                        <span class="nav-text">О нас</span>
+                    </a>
+                </li>
+                <li class="profile-menu">
+                    <a href="profile.html">
+                        <span class="nav-icon">👤</span>
+                        <span class="nav-text">Профиль</span>
+                    </a>
+                    <div class="profile-dropdown">
+                        <div class="dropdown-item theme-switcher-item">
+                            <span class="theme-label">Тема</span>
+                            <label class="theme-switch">
+                                <input type="checkbox" id="mobile-theme-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <span class="nav-icon">🔑</span>
+                        <span class="nav-text">Вход</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <h1>Тестирование тем</h1>
+            <p>Проверьте, что:</p>
+            <ul>
+                <li>Есть десктопный переключатель темы (иконка луны/солнца)</li>
+                <li>Есть мобильный переключатель темы в выпадающем меню профиля</li>
+                <li>Оба переключателя работают и синхронизированы</li>
+                <li>Тема сохраняется между сессиями</li>
+            </ul>
+        </div>
+    </main>
+
+    <script src="js/theme.js"></script>
+    <script>
+        // Инициализация после загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчик для десктопного переключателя
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const isLightTheme = window.themeManager.toggleTheme();
+                });
+            }
+
+            // Обработчик для мобильного переключателя
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            if (mobileThemeToggle) {
+                // Устанавливаем начальное состояние
+                window.themeManager.updateMobileThemeSwitcher();
+                
+                mobileThemeToggle.addEventListener('change', () => {
+                    window.themeManager.toggleTheme();
+                });
+            }
+
+            // Инициализация выпадающего меню профиля
+            const profileMenu = document.querySelector('.profile-menu');
+            if (profileMenu) {
+                const profileLink = profileMenu.querySelector('a');
+                const dropdown = profileMenu.querySelector('.profile-dropdown');
+                
+                if (profileLink && dropdown) {
+                    profileLink.addEventListener('click', (e) => {
+                        if (window.innerWidth <= 1023) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('active');
+                        }
+                    });
+                    
+                    document.addEventListener('click', (e) => {
+                        if (!profileMenu.contains(e.target)) {
+                            dropdown.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
