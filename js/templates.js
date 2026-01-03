@@ -56,15 +56,21 @@ class TemplateLoader {
 
   initHeaderEvents() {
     // Добавляем обработчик для переключения темы
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle = document.getElementById('theme-toggle-header');
     if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const isDarkTheme = window.themeManager.toggleTheme();
-      });
-      
-      // Update the theme icon after header is loaded
-      if (window.themeManager && typeof window.themeManager.updateThemeIcon === 'function') {
-        window.themeManager.updateThemeIcon();
+      // Set initial state based on current theme
+      if (window.themeManager) {
+        const isLightTheme = window.themeManager.getCurrentTheme() === 'light';
+        themeToggle.checked = isLightTheme;
+        
+        themeToggle.addEventListener('change', () => {
+          const isDarkTheme = window.themeManager.toggleTheme();
+          // Update mobile theme toggle if exists
+          if (window.themeManager) {
+            window.themeManager.updateMobileThemeSwitcher();
+            window.themeManager.setupProfileThemeToggle(); // Update profile toggle too
+          }
+        });
       }
     }
 
@@ -91,6 +97,11 @@ class TemplateLoader {
           }
         });
       }
+    }
+    
+    // Initialize theme toggle in profile settings if we're on the profile page
+    if (window.location.pathname.includes('profile.html') && window.themeManager) {
+      window.themeManager.setupProfileThemeToggle();
     }
 
     // Добавляем обработчик для мобильного меню

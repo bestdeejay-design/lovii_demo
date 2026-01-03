@@ -25,6 +25,9 @@ class ThemeManager {
     
     // Настраиваем мобильный переключатель темы
     this.setupMobileThemeToggle();
+    
+    // Настраиваем переключатель темы в профиле
+    this.setupProfileThemeToggle();
   }
 
   toggleTheme() {
@@ -59,6 +62,20 @@ class ThemeManager {
     if (mobileThemeToggle) {
       const isLightTheme = document.body.classList.contains('light-theme');
       mobileThemeToggle.checked = isLightTheme;
+    }
+  }
+
+  setupProfileThemeToggle() {
+    const profileThemeToggle = document.getElementById('theme-toggle-setting');
+    if (profileThemeToggle) {
+      // Устанавливаем начальное состояние
+      const isLightTheme = document.body.classList.contains('light-theme');
+      profileThemeToggle.checked = isLightTheme;
+      
+      // Добавляем обработчик события
+      profileThemeToggle.addEventListener('change', () => {
+        this.toggleTheme();
+      });
     }
   }
 
