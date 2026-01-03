@@ -1,1 +1,3 @@
-(css/components/hero.css)
+(css/components/unified-menu.css, templates/unified_header.html, pages.md, templates/header.html) are source files, and there are no build artifacts, dependencies, or temp files in the changes.
+
+(empty — output nothing)
