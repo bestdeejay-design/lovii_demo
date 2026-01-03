@@ -22,6 +22,9 @@ class ThemeManager {
     
     // Обновляем иконку темы в зависимости от текущей темы
     this.updateThemeIcon();
+    
+    // Настраиваем мобильный переключатель темы
+    this.setupMobileThemeToggle();
   }
 
   toggleTheme() {
@@ -45,6 +48,30 @@ class ThemeManager {
       }
     } 
     // Don't show warning if theme toggle doesn't exist in header since it's moved to mobile menu
+    
+    // Обновляем состояние свитчера в мобильном меню
+    this.updateMobileThemeSwitcher();
+  }
+
+  updateMobileThemeSwitcher() {
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    if (mobileThemeToggle) {
+      const isLightTheme = document.body.classList.contains('light-theme');
+      mobileThemeToggle.checked = isLightTheme;
+    }
+  }
+
+  setupMobileThemeToggle() {
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    if (mobileThemeToggle) {
+      // Устанавливаем начальное состояние
+      this.updateMobileThemeSwitcher();
+      
+      // Добавляем обработчик события
+      mobileThemeToggle.addEventListener('change', () => {
+        this.toggleTheme();
+      });
+    }
   }
 
   getCurrentTheme() {
