@@ -10,14 +10,14 @@ class ThemeManager {
     
     if (savedTheme) {
       // Если тема сохранена, применяем её
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
       } else {
-        document.body.classList.remove('dark-theme');
+        document.body.classList.remove('light-theme');
       }
     } else {
-      // Если тема не сохранена, по умолчанию используем тёмную тему
-      document.body.classList.add('dark-theme');
+      // Если тема не сохранена, по умолчанию используем тёмную тему (без класса)
+      document.body.classList.remove('light-theme');
     }
     
     // Обновляем иконку темы в зависимости от текущей темы
@@ -25,12 +25,12 @@ class ThemeManager {
   }
 
   toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-    const isDarkTheme = document.body.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+    document.body.classList.toggle('light-theme');
+    const isLightTheme = document.body.classList.contains('light-theme');
+    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
     this.updateThemeIcon();
     
-    return isDarkTheme;
+    return isLightTheme;
   }
 
   updateThemeIcon() {
@@ -38,8 +38,8 @@ class ThemeManager {
     if (themeToggle) {
       const themeIcon = themeToggle.querySelector('.theme-icon');
       if (themeIcon) {
-        const isDarkTheme = document.body.classList.contains('dark-theme');
-        themeIcon.textContent = isDarkTheme ? '🌙' : '☀️';
+        const isLightTheme = document.body.classList.contains('light-theme');
+        themeIcon.textContent = isLightTheme ? '☀️' : '🌙';
       } else {
         console.warn('Theme icon element not found');
       }
@@ -48,7 +48,7 @@ class ThemeManager {
   }
 
   getCurrentTheme() {
-    return document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    return document.body.classList.contains('light-theme') ? 'light' : 'dark';
   }
 }
 
