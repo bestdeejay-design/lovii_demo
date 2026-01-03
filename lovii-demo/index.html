@@ -1,0 +1,67 @@
+<!-- 
+ВАЖНОЕ ПРАВИЛО ПРОЕКТА
+1. Все изменения сначала фиксируются в pages.md
+2. Структура проекта НЕЛЬЗЯ менять без согласования
+3. Проверка перед коммитом:
+   - Работает ли переключение тем?
+   - Корректно ли загружаются шаблоны?
+   - Нет ли внешних CDN?
+   - Проходит ли валидацию HTML/CSS?
+4. Все стили — только через css/main.css
+5. Все скрипты — только через /js/
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лови - SaaS + оператор лояльности</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="dark-theme">
+    <div id="dynamic-header"></div>
+    
+    <main class="main-content">
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">Платформа «Лови»</h1>
+                <p class="hero-subtitle">Инновационное решение для управления лояльностью и SaaS-сервисов</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary">Начать бесплатно</button>
+                    <button class="btn btn-secondary">Узнать больше</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Возможности платформы</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Аналитика</h3>
+                        <p>Мощная система аналитики для принятия решений на основе данных</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Таргетинг</h3>
+                        <p>Точная настройка кампаний для вашей целевой аудитории</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Мобильность</h3>
+                        <p>Полноценная мобильная платформа для ваших клиентов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="dynamic-footer"></div>
+    <div id="dynamic-mobile-nav"></div>
+    
+    <script src="js/templates.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
