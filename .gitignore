@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since the only modified file is `404.html`, which is a source/config file and not a build artifact, dependency, or temporary file.
+Nothing needs to be added to .gitignore since the only change is a modified HTML template file, which is a source file that should be tracked.
