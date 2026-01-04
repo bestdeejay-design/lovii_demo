@@ -1,7 +1,6 @@
 @import url('themes.css');
 
-/* Подключение Google Fonts Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Шрифт Inter подключается через Google Fonts */
 
 /* Сброс стилей */
 * {
@@ -1461,7 +1460,7 @@ input:checked + .slider:before {
 }
 
 .theme-switcher-item {
-  padding: 15px !important;
+  padding: 15px;
 }
 
 .theme-label {
@@ -1878,6 +1877,6 @@ a:focus {
 /* Скрываем бургер-меню в шапке на мобильных устройствах, где уже есть навигация внизу */
 @media (max-width: 1023px) {
   .mobile-menu-btn {
-    display: none !important;
+    display: none;
   }
 }
