@@ -1,1 +1,4 @@
-Nothing needs to be added to .gitignore since the only change is a modified HTML template file, which is a source file that should be tracked.
+(css/main.css and footer.css are source files, no build artifacts or dependencies detected)
+
+# No build artifacts, dependencies, or temporary files detected in changes
+# Only source CSS files were modified/deleted, so no additional ignores needed
