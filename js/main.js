@@ -177,3 +177,19 @@ document.addEventListener('click', function(e) {
     }
   }
 });
+
+// Функции для поиска на странице 404
+function handleSearch(event) {
+  if (event.key === 'Enter') {
+    performSearch();
+  }
+}
+
+function performSearch() {
+  const searchTerm = document.getElementById('error-search')?.value?.trim();
+  if (searchTerm) {
+    showMessage(`Поиск по запросу: "${searchTerm}"\nНа реальном сайте здесь бы отобразились результаты поиска.`, 'info');
+    // В реальной реализации это перенаправило бы на страницу с результатами поиска
+    // window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+  }
+}
