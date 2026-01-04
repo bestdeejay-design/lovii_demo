@@ -130,7 +130,7 @@
     </style>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+    <div id="dynamic-header"></div>
     
     <main class="main-content">
         <div class="error-container">
@@ -165,15 +165,14 @@
         </div>
     </main>
     
-    <div id="footer-placeholder"></div>
-    <div id="mobile-nav-placeholder"></div>
+    <div id="dynamic-footer"></div>
+    <div id="dynamic-mobile-nav"></div>
     
     <script>
         // Load header, footer, and mobile nav
-        document.addEventListener('DOMContentLoaded', function() {
-            loadHeader();
-            loadFooter();
-            loadMobileNav();
+        document.addEventListener('DOMContentLoaded', async function() {
+            const templateLoader = new TemplateLoader();
+            await templateLoader.loadAllTemplates();
         });
     </script>
 </body>

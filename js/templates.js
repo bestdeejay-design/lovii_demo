@@ -49,6 +49,7 @@ class TemplateLoader {
     const navElement = document.getElementById('dynamic-mobile-nav');
     if (navElement) {
       navElement.innerHTML = navContent;
+      this.initMobileNavEvents();
     } else {
       console.warn('Mobile navigation element not found');
     }
@@ -75,29 +76,7 @@ class TemplateLoader {
     }
 
     // Initialize profile dropdown for mobile
-    const profileMenu = document.querySelector('.profile-menu');
-    if (profileMenu) {
-      const profileLink = profileMenu.querySelector('a');
-      const dropdown = profileMenu.querySelector('.profile-dropdown');
-      
-      if (profileLink && dropdown) {
-        // Toggle dropdown on profile menu click
-        profileLink.addEventListener('click', (e) => {
-          // Prevent default link behavior on mobile
-          if (window.innerWidth <= 1023) {
-            e.preventDefault();
-            dropdown.classList.toggle('active');
-          }
-        });
-        
-        // Close dropdown when clicking elsewhere
-        document.addEventListener('click', (e) => {
-          if (!profileMenu.contains(e.target)) {
-            dropdown.classList.remove('active');
-          }
-        });
-      }
-    }
+    this.initProfileDropdownEvents();
     
     // Initialize theme toggle in profile settings if we're on the profile page
     if (window.location.pathname.includes('profile.html') && window.themeManager) {
@@ -130,6 +109,43 @@ class TemplateLoader {
       if (window.innerWidth > 1023) {
         console.warn('Mobile menu button not found');
       }
+    }
+  }
+
+  initProfileDropdownEvents() {
+    // Initialize profile dropdown for mobile
+    const profileMenu = document.querySelector('.profile-menu');
+    if (profileMenu) {
+      const profileLink = profileMenu.querySelector('a');
+      const dropdown = profileMenu.querySelector('.profile-dropdown');
+      
+      if (profileLink && dropdown) {
+        // Toggle dropdown on profile menu click
+        profileLink.addEventListener('click', (e) => {
+          // Prevent default link behavior on mobile
+          if (window.innerWidth <= 1023) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+          }
+        });
+        
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', (e) => {
+          if (!profileMenu.contains(e.target)) {
+            dropdown.classList.remove('active');
+          }
+        });
+      }
+    }
+  }
+
+  initMobileNavEvents() {
+    // Initialize profile dropdown for mobile navigation
+    this.initProfileDropdownEvents();
+    
+    // Initialize mobile theme toggle if it exists
+    if (window.themeManager) {
+      window.themeManager.setupMobileThemeToggle();
     }
   }
 
