@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена - 404 | Global Marketplace</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <script src="js/templates.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary-color);
+            max-width: 600px;
+        }
+        
+        .error-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-container {
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--input-bg-color);
+            color: var(--text-color);
+        }
+        
+        .popular-sections {
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .popular-sections h3 {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .popular-link {
+            display: block;
+            padding: 1rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .popular-link:hover {
+            background-color: var(--hover-bg-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-home:hover {
+            background-color: var(--primary-hover-color);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover-color);
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    
+    <main class="main-content">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Страница не найдена</h1>
+            <p class="error-message">
+                Извините, но страница, которую вы ищете, не существует или была перемещена. 
+                Возможно, вы ошиблись при вводе адреса или страница была удалена.
+            </p>
+            
+            <div class="error-actions">
+                <a href="index.html" class="btn-home">Вернуться на главную</a>
+                <a href="javascript:history.back()" class="btn-secondary">Вернуться назад</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="error-search" placeholder="Поиск по сайту..." onkeypress="handleSearch(event)">
+                <button onclick="performSearch()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background-color: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Найти</button>
+            </div>
+            
+            <div class="popular-sections">
+                <h3>Популярные разделы</h3>
+                <div class="popular-grid">
+                    <a href="index.html" class="popular-link">Главная</a>
+                    <a href="products.html" class="popular-link">Каталог товаров</a>
+                    <a href="about.html" class="popular-link">О нас</a>
+                    <a href="contacts.html" class="popular-link">Контакты</a>
+                    <a href="login.html" class="popular-link">Личный кабинет</a>
+                    <a href="profile.html" class="popular-link">Профиль</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div id="footer-placeholder"></div>
+    <div id="mobile-nav-placeholder"></div>
+    
+    <script>
+        // Load header, footer, and mobile nav
+        document.addEventListener('DOMContentLoaded', function() {
+            loadHeader();
+            loadFooter();
+            loadMobileNav();
+        });
+    </script>
+</body>
+</html>
