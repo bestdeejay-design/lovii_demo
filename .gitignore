@@ -1,4 +1,5 @@
-(css/main.css and footer.css are source files, no build artifacts or dependencies detected)
+(css/main.css, js/templates.js are source files, no build artifacts or temp files detected)
 
-# No build artifacts, dependencies, or temporary files detected in changes
-# Only source CSS files were modified/deleted, so no additional ignores needed
+# No build artifacts, dependencies, or temp files detected in changes
+# Only source files (css/main.css, js/templates.js) were modified
+# No additional .gitignore rules needed

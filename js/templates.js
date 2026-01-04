@@ -39,9 +39,36 @@ class TemplateLoader {
     const footerElement = document.getElementById('dynamic-footer');
     if (footerElement) {
       footerElement.innerHTML = footerContent;
+      this.initFooterAccordion();
     } else {
       console.warn('Footer element not found');
     }
+  }
+
+  initFooterAccordion() {
+    // Initialize accordion functionality for footer sections on mobile
+    const footerSections = document.querySelectorAll('.footer-section');
+    
+    footerSections.forEach(section => {
+      const header = section.querySelector('h3, h4');
+      if (header) {
+        header.addEventListener('click', () => {
+          if (window.innerWidth <= 767) {
+            section.classList.toggle('active');
+          }
+        });
+      }
+    });
+    
+    // Also handle window resize to reset accordion state when switching from mobile to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 767) {
+        // Remove active class when switching to desktop view
+        footerSections.forEach(section => {
+          section.classList.remove('active');
+        });
+      }
+    });
   }
 
   async loadMobileNav() {

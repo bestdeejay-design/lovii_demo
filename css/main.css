@@ -983,6 +983,40 @@ input:checked + .slider:before {
   border-radius: 4px;
 }
 
+/* Аккордеон для мобильных устройств */
+@media (max-width: 767px) {
+  .footer-section h3,
+  .footer-section h4 {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .footer-section h3::after,
+  .footer-section h4::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+  }
+  
+  .footer-section.active h3::after,
+  .footer-section.active h4::after {
+    content: '-';
+  }
+  
+  .footer-section ul {
+    max-height: 300px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .footer-section:not(.active) ul {
+    max-height: 0;
+  }
+}
+
 /* Мобильная навигация */
 .mobile-nav {
   position: fixed;
@@ -1776,245 +1810,7 @@ a:focus {
   outline-offset: 2px;
 }
 
-/* Стили для нового футера */
-.main-footer {
-  background-color: #1a1a1a;
-  color: #fff;
-  padding-top: 60px;
-  margin-top: 80px; /* Compensate for the existing footer-top margin */
-}
 
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Структура колонок */
-.footer-column {
-  width: 100%;
-  padding: 0 15px;
-  margin-bottom: 40px;
-}
-
-/* Четырехколоночная структура на больших экранах */
-@media (min-width: 768px) {
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .footer-column {
-    flex: 1 1 calc(25% - 30px);
-    margin-bottom: 0;
-  }
-}
-
-/* На планшетах - две колонки */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .footer-column {
-    flex: 1 1 calc(50% - 30px);
-  }
-}
-
-/* На мобильных устройствах - одна колонка */
-@media (max-width: 767px) {
-  .footer-column {
-    margin-bottom: 30px;
-  }
-}
-
-/* Заголовки колонок */
-.footer-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #fff;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.footer-title::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 40px;
-  height: 2px;
-  background-color: var(--accent-primary);
-}
-
-/* Списки ссылок */
-.footer-links {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 12px;
-}
-
-.footer-links a {
-  color: #b0b0b0;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s ease;
-  display: block;
-}
-
-.footer-links a:hover {
-  color: var(--accent-primary);
-  text-decoration: underline;
-}
-
-/* Контактная информация */
-.footer-contact p {
-  color: #b0b0b0;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.footer-contact strong {
-  color: #fff;
-}
-
-/* Социальные иконки */
-.social-icons {
-  margin-top: 20px;
-  display: flex;
-  gap: 15px;
-}
-
-.social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #333;
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-icons a:hover {
-  background-color: var(--accent-primary);
-  transform: translateY(-2px);
-}
-
-/* Нижняя часть футера */
-.footer-bottom {
-  background-color: #0d0d0d;
-  padding: 20px 0;
-  border-top: 1px solid #333;
-  margin-top: 40px;
-}
-
-.copyright {
-  color: #777;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.footer-bottom-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-bottom-links a {
-  color: #777;
-  text-decoration: none;
-  font-size: 13px;
-  transition: color 0.3s ease;
-}
-
-.footer-bottom-links a:hover {
-  color: var(--accent-primary);
-}
-
-/* Адаптация для мобильных устройств */
-@media (max-width: 767px) {
-  .main-footer {
-    padding-top: 40px;
-  }
-  
-  .copyright {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  
-  .footer-bottom-links {
-    justify-content: center;
-  }
-  
-  .footer-bottom {
-    text-align: center;
-  }
-  
-  .social-icons {
-    justify-content: center;
-  }
-}
-
-/* Дополнительная адаптация для очень маленьких экранов */
-@media (max-width: 480px) {
-  .footer-container {
-    padding: 0 15px;
-  }
-  
-  .footer-title {
-    font-size: 16px;
-  }
-  
-  .footer-links a {
-    font-size: 13px;
-  }
-  
-  .footer-bottom-links {
-    gap: 10px;
-  }
-  
-  .footer-bottom-links a {
-    font-size: 12px;
-  }
-}
-
-/* Доступность */
-.main-footer a:focus,
-.main-footer .social-icons a:focus {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-/* Аккордеоны в футере для мобильных устройств */
-@media (max-width: 767px) {
-  .footer-title {
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .footer-links {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  
-  .footer-links.active {
-    max-height: 500px; /* Достаточно большая высота для отображения всех ссылок */
-  }
-  
-  .accordion-icon {
-    float: right;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Добавляем отступы для мобильного футера */
-  .footer-column {
-    margin-bottom: 20px;
-  }
-}
 
 /* Скрываем бургер-меню в шапке на мобильных устройствах, где уже есть навигация внизу */
 @media (max-width: 1023px) {
