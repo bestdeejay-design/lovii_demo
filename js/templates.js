@@ -108,6 +108,11 @@ class TemplateLoader {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     if (mobileMenuBtn) {
       mobileMenuBtn.addEventListener('click', () => {
+        // Проверяем ширину экрана - не обрабатываем клик на мобильных устройствах
+        if (window.innerWidth <= 1023) {
+          return; // Не обрабатываем клик, если ширина экрана <= 1023px
+        }
+        
         const mobileNav = document.getElementById('mobile-nav');
         if (mobileNav) {
           mobileNav.classList.toggle('active');

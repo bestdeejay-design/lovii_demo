@@ -1810,3 +1810,37 @@ a:focus {
   outline-offset: 2px;
   border-radius: 4px;
 }
+/* Аккордеоны в футере для мобильных устройств */
+@media (max-width: 767px) {
+  .footer-title {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .footer-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .footer-links.active {
+    max-height: 500px; /* Достаточно большая высота для отображения всех ссылок */
+  }
+  
+  .accordion-icon {
+    float: right;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Добавляем отступы для мобильного футера */
+  .footer-column {
+    margin-bottom: 20px;
+  }
+}
+
+/* Скрываем бургер-меню в шапке на мобильных устройствах, где уже есть навигация внизу */
+@media (max-width: 1023px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}

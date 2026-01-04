@@ -14,6 +14,7 @@ function initializePageComponents() {
   // Инициализация компонентов страницы
   initializeThemeToggle();
   initializeSmoothScrolling();
+  initializeFooterAccordions();
 }
 
 function initializeThemeToggle() {
@@ -42,6 +43,87 @@ function initializeSmoothScrolling() {
         });
       }
     });
+  });
+}
+
+function initializeFooterAccordions() {
+  // Инициализация аккордеонов в футере для мобильных устройств
+  const updateFooterAccordions = () => {
+    const footerTitles = document.querySelectorAll('.footer-title');
+    const footerLinks = document.querySelectorAll('.footer-links');
+    
+    if (window.innerWidth <= 767) {
+      // Включаем аккордеонный режим для мобильных устройств
+      footerTitles.forEach(title => {
+        title.style.cursor = 'pointer';
+        // Проверяем, есть ли уже иконка аккордеона
+        let accordionIcon = title.querySelector('.accordion-icon');
+        if (!accordionIcon) {
+          // Добавляем значок аккордеона
+          accordionIcon = document.createElement('span');
+          accordionIcon.className = 'accordion-icon';
+          accordionIcon.innerHTML = '▼';
+          accordionIcon.style.float = 'right';
+          accordionIcon.style.transition = 'transform 0.3s ease';
+          title.appendChild(accordionIcon);
+        }
+      });
+      
+      // Изначально скрываем содержимое колонок на мобильных устройствах
+      footerLinks.forEach(links => {
+        links.style.maxHeight = '0';
+        links.style.overflow = 'hidden';
+        links.style.transition = 'max-height 0.3s ease';
+      });
+      
+      // Добавляем обработчики кликов для заголовков
+      footerTitles.forEach(title => {
+        title.removeEventListener('click', handleAccordionClick); // Удаляем предыдущий обработчик, если был
+        title.addEventListener('click', handleAccordionClick);
+      });
+    } else {
+      // Возвращаем обычное состояние для десктопов
+      footerLinks.forEach(links => {
+        links.style.maxHeight = '';
+        links.style.overflow = '';
+        links.classList.remove('active');
+      });
+      
+      // Удаляем иконки аккордеонов
+      const accordionIcons = document.querySelectorAll('.accordion-icon');
+      accordionIcons.forEach(icon => {
+        icon.remove();
+      });
+    }
+  };
+  
+  // Функция обработки клика по заголовку аккордеона
+  const handleAccordionClick = function() {
+    if (window.innerWidth <= 767) {
+      const content = this.nextElementSibling;
+      if (content && content.classList.contains('footer-links')) {
+        const isActive = content.classList.contains('active');
+        content.classList.toggle('active');
+        
+        // Обновляем высоту
+        content.style.maxHeight = isActive ? '0' : content.scrollHeight + 'px';
+        
+        // Поворачиваем иконку аккордеона
+        const icon = this.querySelector('.accordion-icon');
+        if (icon) {
+          icon.style.transform = isActive ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      }
+    }
+  };
+  
+  // Вызываем при инициализации
+  updateFooterAccordions();
+  
+  // Добавляем обработчик изменения размера окна
+  window.addEventListener('resize', () => {
+    // Используем setTimeout для срабатывания после изменения размера
+    setTimeout(updateFooterAccordions, 100);
   });
 }
 
