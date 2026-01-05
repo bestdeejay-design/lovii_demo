@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лови — цифровой оператор лояльности для микробизнеса</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Default (dark) theme */
+            --bg-color: #0A0F1F;
+            --text-color: #FFFFFF;
+            --accent-color: #FF6B35;
+            --card-bg: #1A2238;
+            --border-color: #2D3748;
+            --icon-color: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --accent-color: #F97316;
+            --card-bg: #F3F4F6;
+            --border-color: #E5E7EB;
+            --icon-color: #000000;
+        }
+
+        [data-theme="vibrant"] {
+            --bg-color: linear-gradient(135deg, #0f0c29, #302b63);
+            --text-color: #FFFFFF;
+            --accent-color: #ff7e5f;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --border-color: rgba(255, 255, 255, 0.2);
+            --icon-color: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Roboto, system-ui, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and Navigation */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 15, 31, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 1000;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 12px;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: var(--accent-color);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+
+        /* Full Menu (Mobile) */
+        .full-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .full-menu.active {
+            transform: translateY(0);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .theme-toggle {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 0 80px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cards Section */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+
+        .contact-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Parallax effect */
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .mobile-nav {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Hidden SVG sprite */
+        .svg-sprite {
+            display: none;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- SVG Sprite -->
+    <svg class="svg-sprite">
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-catalog" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-business" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-about" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-more" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-email" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-web" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </g>
+        </symbol>
+    </svg>
+
+    <!-- AI AGENT GUIDE -->
+    <!-- 
+    AI AGENT GUIDE:
+    1. Mobile navigation works as follows:
+       - Bottom bar with 5 icons: home, catalog, business, about, more
+       - First four icons navigate to sections
+       - 'more' icon opens full-menu (slide-up from bottom)
+       - Full-menu contains additional links and theme toggle
+    2. Adding new icons:
+       - Add new <symbol> to the SVG sprite
+       - Each icon must support color variations for all three themes
+       - Use CSS variables like fill="var(--icon-color)" for theme compatibility
+       - Icons should be available in three color versions for dark/light/vibrant themes
+    3. What NOT to change:
+       - Order of mobile navigation buttons (home, catalog, business, about, more)
+       - Theme structure and localStorage implementation
+       - Core navigation functionality
+    4. Adding new sections:
+       - Create new section with unique ID
+       - Add corresponding navigation item
+       - Update mobile navigation if needed
+       - Ensure section is responsive and works with parallax effects
+    -->
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-item active" data-target="home">
+            <svg class="nav-icon"><use href="#icon-home"></use></svg>
+            <span>Главная</span>
+        </a>
+        <a href="#catalog" class="nav-item" data-target="catalog">
+            <svg class="nav-icon"><use href="#icon-catalog"></use></svg>
+            <span>Каталог</span>
+        </a>
+        <a href="#business" class="nav-item" data-target="business">
+            <svg class="nav-icon"><use href="#icon-business"></use></svg>
+            <span>Бизнес</span>
+        </a>
+        <a href="#about" class="nav-item" data-target="about">
+            <svg class="nav-icon"><use href="#icon-about"></use></svg>
+            <span>О нас</span>
+        </a>
+        <a href="#" class="nav-item" id="more-btn">
+            <svg class="nav-icon"><use href="#icon-more"></use></svg>
+            <span>Еще</span>
+        </a>
+    </nav>
+
+    <!-- Full Menu -->
+    <div class="full-menu" id="full-menu">
+        <div class="menu-header">
+            <h3>Меню</h3>
+            <button class="close-menu" id="close-menu">&times;</button>
+        </div>
+        <div class="menu-links">
+            <a href="#" class="menu-link">Главная</a>
+            <a href="#catalog" class="menu-link">Каталог</a>
+            <a href="#business" class="menu-link">Бизнес</a>
+            <a href="#about" class="menu-link">О нас</a>
+            <a href="#" class="menu-link">Контакты</a>
+            <a href="#" class="menu-link">Помощь</a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle">Сменить тему</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title parallax-element" data-rellax-speed="2">Цифровая витрина + оператор лояльности</h1>
+            <p class="hero-subtitle parallax-element" data-rellax-speed="1">Платформа и оператор баллов лояльности для микробизнеса</p>
+            <a href="mailto:hello@lovii.ru" class="btn">Стать партнёром</a>
+        </div>
+    </section>
+
+    <!-- For Whom Section -->
+    <section id="catalog">
+        <div class="container">
+            <h2 class="section-title parallax-element" data-rellax-speed="1">Для кого</h2>
+            <p class="section-subtitle">Платформа, которая объединяет всех участников экосистемы</p>
+            
+            <div class="cards-grid">
+                <div class="card parallax-element" data-rellax-speed="0.5">
+                    <svg class="card-icon"><use href="#icon-business"></use></svg>
+                    <h3 class="card-title">Микробизнес</h3>
+                    <p class="card-text">Инструменты для увеличения лояльности клиентов и роста прибыли</p>
+                </div>
+                
+                <div class="card parallax-element" data-rellax-speed="0.5">
+                    <svg class="card-icon"><use href="#icon-home"></use></svg>
+                    <h3 class="card-title">Клиенты</h3>
+                    <p class="card-text">Удобный способ получать бонусы и скидки в любимых заведениях</p>
+                </div>
+                
+                <div class="card parallax-element" data-rellax-speed="0.5">
+                    <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                    <h3 class="card-title">Бренды</h3>
+                    <p class="card-text">Возможность привлекать клиентов через партнерские сети</p>
+                </div>
+                
+                <div class="card parallax-element" data-rellax-speed="0.5">
+                    <svg class="card-icon"><use href="#icon-about"></use></svg>
+                    <h3 class="card-title">Франчайзи</h3>
+                    <p class="card-text">Поддержка и инструменты для развития собственной сети</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Section -->
+    <section id="business">
+        <div class="container">
+            <h2 class="section-title">Бизнес-модель</h2>
+            <p class="section-subtitle">Как работает платформа "Лови"</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="card-title">Интеграция</h3>
+                    <p class="card-text">Простое подключение вашей точки к платформе через мобильное приложение или веб-интерфейс</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Начисление</h3>
+                    <p class="card-text">Автоматическое начисление баллов за каждую покупку в партнерской сети</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Списание</h3>
+                    <p class="card-text">Удобное списание баллов в любом партнерском заведении</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Аналитика</h3>
+                    <p class="card-text">Детальная аналитика для роста вашего бизнеса</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">О проекте "Лови"</h2>
+            <p class="section-subtitle">Инновационная платформа для малого и микробизнеса</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="card-title">Миссия</h3>
+                    <p class="card-text">Создать экосистему, которая помогает малому бизнесу расти и развиваться</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Цель</h3>
+                    <p class="card-text">Объединить все точки лояльности в одной удобной платформе</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Преимущества</h3>
+                    <p class="card-text">Увеличение среднего чека, удержание клиентов, аналитика и многое другое</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Команда</h3>
+                    <p class="card-text">Профессионалы с опытом в fintech, маркетинге и развитии бизнеса</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-contact">
+                <p>Свяжитесь с нами:</p>
+                <a href="mailto:hello@lovii.ru" class="contact-link">hello@lovii.ru</a>
+            </div>
+            <p class="footer-text">© 2026 Проект "Лови". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
+    <script>
+        // Initialize Rellax for parallax effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize parallax
+            if (document.querySelectorAll('.parallax-element').length > 0) {
+                const rellax = new Rellax('.parallax-element', {
+                    // Configuration options
+                });
+            }
+
+            // Theme management
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            body.setAttribute('data-theme', currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme');
+                let newTheme;
+                
+                if (currentTheme === 'dark') {
+                    newTheme = 'light';
+                } else if (currentTheme === 'light') {
+                    newTheme = 'vibrant';
+                } else {
+                    newTheme = 'dark';
+                }
+                
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Mobile menu functionality
+            const fullMenu = document.getElementById('full-menu');
+            const moreBtn = document.getElementById('more-btn');
+            const closeMenu = document.getElementById('close-menu');
+            const menuLinks = document.querySelectorAll('.menu-link');
+
+            moreBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                fullMenu.classList.add('active');
+            });
+
+            closeMenu.addEventListener('click', function() {
+                fullMenu.classList.remove('active');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!fullMenu.contains(e.target) && 
+                    !moreBtn.contains(e.target) && 
+                    fullMenu.classList.contains('active')) {
+                    fullMenu.classList.remove('active');
+                }
+            });
+
+            // Navigation
+            const navItems = document.querySelectorAll('.nav-item:not(#more-btn)');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Get target section
+                    const target = this.getAttribute('data-target');
+                    
+                    if (target === 'home') {
+                        // Scroll to top for home
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        // Scroll to section
+                        const targetSection = document.getElementById(target);
+                        if (targetSection) {
+                            targetSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // GSAP animations
+            gsap.from('.hero-title', {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.2
+            });
+            
+            gsap.from('.hero-subtitle', {
+                duration: 1,
+                y: 30,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.4
+            });
+            
+            gsap.from('.btn', {
+                duration: 0.8,
+                y: 20,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.6
+            });
+
+            // Animate cards when they come into view
+            const cards = document.querySelectorAll('.card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gsap.to(entry.target, {
+                            duration: 0.6,
+                            y: 0,
+                            opacity: 1,
+                            ease: 'power2.out'
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                gsap.set(card, { y: 30, opacity: 0 });
+                observer.observe(card);
+            });
+        });
+
+        // Handle reduced motion preference
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            gsap.config({ force3D: false });
+        }
+    </script>
+</body>
+</html>
