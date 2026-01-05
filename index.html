@@ -164,6 +164,46 @@
             border-radius: 8px;
             background: var(--card-bg-alt);
         }
+        
+        .menu-category {
+            margin-bottom: 10px;
+        }
+        
+        .menu-category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--card-bg-alt);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .menu-category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 10px;
+        }
+        
+        .menu-category-content.expanded {
+            max-height: 200px; /* Adjust based on content */
+        }
+        
+        .menu-category-content a.menu-link {
+            display: block;
+            margin: 5px 0;
+        }
+        
+        .menu-category-arrow {
+            transition: transform 0.3s ease;
+            fill: var(--icon-color);
+        }
+        
+        .menu-category-arrow.rotated {
+            transform: rotate(180deg);
+        }
 
         .theme-toggle {
             background: var(--accent-color);
@@ -657,6 +697,11 @@
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </g>
         </symbol>
+        <symbol id="icon-features" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </g>
+        </symbol>
     </svg>
 
     <!-- AI AGENT GUIDE -->
@@ -745,12 +790,37 @@
             <button class="close-menu" id="close-menu">&times;</button>
         </div>
         <div class="menu-links">
-            <a href="#" class="menu-link">Главная</a>
-            <a href="#catalog" class="menu-link">Каталог</a>
-            <a href="#business" class="menu-link">Бизнес</a>
-            <a href="#about" class="menu-link">О нас</a>
-            <a href="#" class="menu-link">Контакты</a>
-            <a href="#" class="menu-link">Помощь</a>
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Основное</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#" class="menu-link">Главная</a>
+                    <a href="#catalog" class="menu-link">Каталог</a>
+                    <a href="#business" class="menu-link">Бизнес</a>
+                </div>
+            </div>
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>О нас</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#about" class="menu-link">О проекте</a>
+                    <a href="#features" class="menu-link">Возможности</a>
+                </div>
+            </div>
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Поддержка</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#" class="menu-link">Контакты</a>
+                    <a href="#" class="menu-link">Помощь</a>
+                </div>
+            </div>
         </div>
         <button class="theme-toggle" id="theme-toggle">Сменить тему</button>
     </div>
@@ -882,6 +952,57 @@
         </div>
     </section>
 
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-content">
+                <h2 class="section-title">Возможности платформы</h2>
+                <p class="section-subtitle">Функции и преимущества, которые предоставляет платформа "Лови"</p>
+                
+                <div class="cards-grid">
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-features"></use></svg>
+                        <h3 class="card-title">Управление лояльностью</h3>
+                        <p class="card-text">Система начисления и списания баллов для повышения удержания клиентов</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Аналитика</h3>
+                        <p class="card-text">Детальная аналитика поведения клиентов и эффективности акций</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-home"></use></svg>
+                        <h3 class="card-title">Персонализация</h3>
+                        <p class="card-text">Индивидуальные предложения для каждого клиента на основе истории покупок</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-about"></use></svg>
+                        <h3 class="card-title">Интеграции</h3>
+                        <p class="card-text">Простая интеграция с популярными CRM и POS-системами</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-web"></use></svg>
+                        <h3 class="card-title">Мобильное приложение</h3>
+                        <p class="card-text">Удобное приложение для клиентов с картой лояльности и каталогом</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-email"></use></svg>
+                        <h3 class="card-title">Маркетинг</h3>
+                        <p class="card-text">Инструменты для проведения маркетинговых кампаний и акций</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 10%; left: 5%; opacity: 0.1;"></div>
+            <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -983,6 +1104,27 @@
                             }
                         }
                     }
+                });
+            });
+            
+            // Harmonica menu functionality
+            const menuCategoryHeaders = document.querySelectorAll('.menu-category-header');
+            menuCategoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.menu-category-arrow');
+                    
+                    // Close all other categories
+                    document.querySelectorAll('.menu-category-content').forEach(item => {
+                        if (item !== content) {
+                            item.classList.remove('expanded');
+                            item.previousElementSibling.querySelector('.menu-category-arrow').classList.remove('rotated');
+                        }
+                    });
+                    
+                    // Toggle current category
+                    content.classList.toggle('expanded');
+                    arrow.classList.toggle('rotated');
                 });
             });
 
