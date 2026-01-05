@@ -183,5 +183,47 @@
     </svg>
 
     <script src="js/theme.js"></script>
+    <script>
+        // Initialize theme manager if it doesn't exist
+        if (!window.themeManager) {
+            window.themeManager = new ThemeManager();
+        }
+        
+        // Make sure theme buttons work properly
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up theme buttons if they exist
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            themeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    if (window.themeManager && typeof window.themeManager.setTheme === 'function') {
+                        window.themeManager.setTheme(theme);
+                    } else {
+                        // Fallback implementation if themeManager is not available
+                        document.body.className = theme === 'dark' ? '' : `${theme}-theme`;
+                        localStorage.setItem('theme', theme);
+                    }
+                });
+            });
+            
+            // Update active button based on current theme
+            function updateActiveThemeButton() {
+                const currentTheme = window.themeManager ? window.themeManager.getCurrentTheme() : 
+                    document.body.classList.contains('light-theme') ? 'light' : 
+                    document.body.classList.contains('vibrant-theme') ? 'vibrant' : 'dark';
+                
+                themeButtons.forEach(button => {
+                    if (button.getAttribute('data-theme') === currentTheme) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Run once on load
+            updateActiveThemeButton();
+        });
+    </script>
 </body>
 </html>
