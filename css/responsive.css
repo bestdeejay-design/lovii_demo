@@ -180,6 +180,27 @@
         padding-right: 0;
         margin-bottom: 40px;
     }
+    
+    .business-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .business-pricing {
+        width: 100%;
+    }
+    
+    .pricing-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-card.popular {
+        transform: scale(1);
+    }
+    
+    .pricing-card.popular:hover {
+        transform: translateY(-10px);
+    }
 
     #about .cards-grid {
         grid-template-columns: 1fr;
@@ -239,5 +260,26 @@
     .section-subtitle {
         font-size: 1.1rem;
         margin-bottom: 50px;
+    }
+    
+    /* Additional responsive styles for business section */
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .benefit-item {
+        padding: 20px;
+    }
+    
+    .pricing-card {
+        padding: 30px 20px;
+    }
+    
+    .card-price {
+        font-size: 1.6rem;
+    }
+    
+    .card-title {
+        font-size: 1.5rem;
     }
 }
