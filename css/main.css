@@ -1,6 +1,12 @@
 @import url('themes.css');
 
-/* Шрифт Inter подключается через Google Fonts */
+/* Добавляем стили для навигационных иконок */
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-color);
+  transition: fill 0.3s ease;
+}
 
 /* Сброс стилей */
 * {
@@ -608,6 +614,9 @@ h3 {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .desktop-nav .nav-list a:hover {

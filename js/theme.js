@@ -33,6 +33,9 @@ class ThemeManager {
     // Настраиваем переключатель темы в профиле
     this.setupProfileThemeToggle();
     
+    // Настраиваем переключатель темы в шапке
+    this.setupHeaderThemeToggle();
+    
     // Настраиваем переключатели тем на странице (если есть)
     this.setupPageThemeToggles();
   }
@@ -160,18 +163,25 @@ class ThemeManager {
       
       // Добавляем обработчик события
       mobileThemeToggle.addEventListener('change', () => {
-        const currentTheme = this.getCurrentTheme();
-        if (currentTheme === 'light') {
-          // Если текущая тема light, переключаем на dark
-          this.setTheme('dark');
-        } else {
-          // В противном случае переключаем на light
-          this.setTheme('light');
-        }
+        this.cycleTheme();
       });
     }
   }
 
+  setupHeaderThemeToggle() {
+    const headerThemeToggle = document.getElementById('theme-toggle-header');
+    if (headerThemeToggle) {
+      // Устанавливаем начальное состояние
+      const currentTheme = this.getCurrentTheme();
+      headerThemeToggle.checked = currentTheme === 'light';
+      
+      // Добавляем обработчик события
+      headerThemeToggle.addEventListener('change', () => {
+        this.cycleTheme();
+      });
+    }
+  }
+  
   setupPageThemeToggles() {
     // Настраиваем кнопки переключения тем на странице
     const themeButtons = document.querySelectorAll('.theme-btn[data-theme]');
@@ -181,6 +191,21 @@ class ThemeManager {
         this.setTheme(theme);
       });
     });
+  }
+  
+  cycleTheme() {
+    const currentTheme = this.getCurrentTheme();
+    let newTheme;
+    
+    if (currentTheme === 'dark') {
+      newTheme = 'light';
+    } else if (currentTheme === 'light') {
+      newTheme = 'vibrant';
+    } else {
+      newTheme = 'dark';
+    }
+    
+    this.setTheme(newTheme);
   }
 
   getCurrentTheme() {
