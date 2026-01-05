@@ -158,15 +158,19 @@ AI AGENT GUIDE:
    - Gradient text and backgrounds
    - Enhanced card hover animations with rotation
    - Animated background elements with CSS keyframes
-MOBILE ADAPTATION SPECIFICATIONS:
-6. Mobile optimization requirements:
+6. External libraries:
+   - GSAP (GreenSock Animation Platform) for animations: https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js
+   - Rellax for parallax effects: https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js
+   - Both libraries are loaded from CDN
+   - If experiencing script errors, clear browser cache or try different CDN versions
+7. Mobile optimization requirements:
    - All interactive elements should have minimum 44px touch target size
    - Use min-height: 50px for buttons and navigation items
    - Optimize complex grid layouts for single-column display on mobile
    - Use @media (max-width: 480px) for very small screens
    - Adjust padding and font sizes for better readability on small screens
    - Ensure all content remains accessible when grid layouts change
-7. Mobile menu behavior:
+8. Mobile menu behavior:
    - Full menu (opened by 'more' icon) should automatically close when clicking on menu links
    - Menu links should maintain smooth scrolling navigation functionality
    - Menu should also close when clicking outside or using the close button
