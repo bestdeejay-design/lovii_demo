@@ -149,3 +149,30 @@ footer {
 .svg-sprite {
     display: none;
 }
+
+/* Benefits List */
+.benefits-list {
+    margin: 30px 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.benefit-item {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.benefit-item h4 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--accent-color);
+}
+
+.benefit-item p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
