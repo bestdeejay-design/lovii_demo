@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Switching System with SVG Icons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            transition: background 0.3s ease;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--text-primary);
+        }
+
+        .theme-switcher {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .theme-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent-color);
+            background: transparent;
+            color: var(--accent-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .theme-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .navigation {
+            margin: 2rem 0;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-list a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-list a:hover {
+            background: var(--bg-secondary);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--icon-color);
+        }
+
+        .content {
+            padding: 2rem 0;
+        }
+
+        .content h2 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Theme Switching System</h1>
+            <div class="theme-switcher">
+                <button class="theme-btn" data-theme="dark">Dark</button>
+                <button class="theme-btn" data-theme="light">Light</button>
+                <button class="theme-btn" data-theme="vibrant">Vibrant</button>
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <ul class="nav-list">
+                <li><a href="#"><svg class="icon"><use href="#icon-home"></use></svg> Home</a></li>
+                <li><a href="#"><svg class="icon"><use href="#icon-catalog"></use></svg> Catalog</a></li>
+                <li><a href="#"><svg class="icon"><use href="#icon-business"></use></svg> Business</a></li>
+                <li><a href="#"><svg class="icon"><use href="#icon-about"></use></svg> About</a></li>
+                <li><a href="#"><svg class="icon"><use href="#icon-more"></use></svg> More</a></li>
+                <li><a href="#"><svg class="icon"><use href="#icon-email"></use></svg> Email</a></li>
+                <li><a href="#"><svg class="icon"><use href="#icon-web"></use></svg> Web</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h2>Content Area</h2>
+            <p>This page demonstrates a theme switching system with SVG icons that adapt to the current theme.</p>
+            <p>Try switching between the different themes using the buttons in the header.</p>
+        </main>
+    </div>
+
+    <!-- SVG Sprite -->
+    <svg style="display:none">
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-catalog" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-business" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-about" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-more" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-email" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-web" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-3.5h11V18zm0-5H4V9.5h11V13zm5 5h-4V9.5h4V18z"/>
+            </g>
+        </symbol>
+    </svg>
+
+    <script src="js/theme.js"></script>
+</body>
+</html>

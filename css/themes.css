@@ -1,13 +1,13 @@
-/* Тёмная тема — по умолчанию */
+/* Тёмная тема (dark) — по умолчанию */
 :root {
-  --bg-primary: #0f0f15;        /* основной фон */
+  --bg-primary: #0A0F1F;        /* основной фон */
   --bg-secondary: #1a1a25;      /* вторичный фон (секции, карточки) */
   --card-bg: #1e1e2a;           /* фон карточек */
   --text-primary: #f0f0f5;      /* основной текст */
   --text-secondary: #a0a0b0;    /* второстепенный текст */
-  --accent-color: #5d8bff;      /* акцентный цвет (CTA, кнопки) */
-  --accent-primary: #4361ee;    /* дополнительный акцентный цвет для совместимости */
-  --accent-secondary: #4895ef;  /* дополнительный акцентный цвет для совместимости */
+  --accent-color: #FF6B35;      /* акцентный цвет (CTA, кнопки) */
+  --accent-primary: #FF6B35;    /* дополнительный акцентный цвет для совместимости */
+  --accent-secondary: #FF7E5F;  /* дополнительный акцентный цвет для совместимости */
   --border-color: #33334d;      /* границы */
   --input-bg: #252535;          /* фон полей ввода */
   --input-border: #40405a;      /* граница полей */
@@ -27,19 +27,19 @@
   --btn-danger-bg: var(--error-color);
   --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, black 10%);
   --btn-danger-text: #ffffff;
-  --icon-hue: 180deg;
+  --icon-color: #f0f0f5;
 }
 
-/* Светлая тема — применяется при наличии класса .light-theme на <body> */
+/* Светлая тема (light) — применяется при наличии класса .light-theme на <body> */
 .light-theme {
-  --bg-primary: #ffffff;
+  --bg-primary: #FFFFFF;
   --bg-secondary: #f8fafc;
   --card-bg: #ffffff;
   --text-primary: #1e293b;
   --text-secondary: #64748b;
-  --accent-color: #4f46e5;
-  --accent-primary: #4361ee;
-  --accent-secondary: #4895ef;
+  --accent-color: #F97316;
+  --accent-primary: #F97316;
+  --accent-secondary: #fb923c;
   --border-color: #e2e8f0;
   --input-bg: #ffffff;
   --input-border: #cbd5e1;
@@ -59,6 +59,38 @@
   --btn-danger-bg: var(--error-color);
   --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, white 10%);
   --btn-danger-text: #ffffff;
-  --icon-hue: 240deg;
+  --icon-color: #1e293b;
+}
+
+/* Яркая тема (vibrant) — применяется при наличии класса .vibrant-theme на <body> */
+.vibrant-theme {
+  --bg-primary: linear-gradient(135deg, #0f0c29, #302b63);
+  --bg-secondary: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --accent-color: #ff7e5f;
+  --accent-primary: #ff7e5f;
+  --accent-secondary: #feb2a4;
+  --border-color: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.3);
+  --success-color: #4ade80;
+  --error-color: #f87171;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --btn-primary-bg: var(--accent-color);
+  --btn-primary-hover: color-mix(in srgb, var(--accent-color) 90%, white 10%);
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: rgba(255, 255, 255, 0.1);
+  --btn-secondary-text: #ffffff;
+  --btn-secondary-border: rgba(255, 255, 255, 0.3);
+  --btn-outline-bg: transparent;
+  --btn-outline-text: #ffffff;
+  --btn-outline-border: rgba(255, 255, 255, 0.5);
+  --btn-danger-bg: var(--error-color);
+  --btn-danger-hover: color-mix(in srgb, var(--error-color) 90%, white 10%);
+  --btn-danger-text: #ffffff;
+  --icon-color: #ffffff;
 }
 
