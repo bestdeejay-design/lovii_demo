@@ -156,6 +156,40 @@ section {
     z-index: 1;
 }
 
+/* Features Section Specific Styles */
+#features {
+    position: relative;
+    z-index: 2;
+}
+
+#features .section-content {
+    position: relative;
+    z-index: 3;
+}
+
+#features .cards-grid {
+    position: relative;
+    z-index: 4;
+    overflow: visible; /* Allow for hover effects */
+    margin-top: 80px; /* Increase margin to prevent overlap with section title */
+}
+
+/* Ensure cards don't overlap section title and subtitle */
+#features .section-title,
+#features .section-subtitle {
+    position: relative;
+    z-index: 6; /* Higher than cards-grid */
+}
+
+/* Adjust card hover effect in features section to prevent overlap with title/subtitle */
+#features .card {
+    margin-top: 20px; /* Add some space to prevent overlap */
+}
+
+#features .card:hover {
+    transform: translateY(-10px) rotate(1deg); /* Reduced hover effect to prevent overlap */
+}
+
 .card {
     background: var(--card-bg);
     padding: 40px 30px;
