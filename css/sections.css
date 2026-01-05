@@ -123,6 +123,14 @@ section {
     z-index: 1;
     box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
     min-height: 50px; /* Обеспечиваем минимальную высоту для удобства нажатия */
+    opacity: 1; /* Ensure buttons are visible by default */
+    transform: translateY(0); /* Ensure buttons are in correct position by default */
+}
+
+/* Animation starting state - only applied when GSAP is working */
+.btn.animate-init {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .btn::before {
@@ -156,38 +164,52 @@ section {
     z-index: 1;
 }
 
-/* Features Section Specific Styles */
-#features {
+/* Standardized section header z-index system - applies to all sections with cards */
+section .section-title,
+section .section-subtitle {
     position: relative;
-    z-index: 2;
+    z-index: 6; /* Higher than cards-grid to prevent overlap */
 }
 
-#features .section-content {
+section .section-content {
     position: relative;
     z-index: 3;
 }
 
-#features .cards-grid {
+section .cards-grid {
     position: relative;
     z-index: 4;
     overflow: visible; /* Allow for hover effects */
     margin-top: 80px; /* Increase margin to prevent overlap with section title */
 }
 
-/* Ensure cards don't overlap section title and subtitle */
-#features .section-title,
-#features .section-subtitle {
+/* Special handling for business section which has asymmetrical layout */
+#business .cards-grid {
+    margin-top: 0; /* Business section has special asymmetrical layout */
+}
+
+/* For sections with special layouts, ensure section titles are still visible */
+#business .section-title,
+#business .section-subtitle {
     position: relative;
-    z-index: 6; /* Higher than cards-grid */
+    z-index: 6; /* Ensure visibility in special layouts */
 }
 
-/* Adjust card hover effect in features section to prevent overlap with title/subtitle */
-#features .card {
-    margin-top: 20px; /* Add some space to prevent overlap */
+/* About section has staggered layout but still needs title protection */
+#about .section-title,
+#about .section-subtitle {
+    position: relative;
+    z-index: 6; /* Ensure visibility in staggered layout */
 }
 
-#features .card:hover {
+/* Reduce hover effect to prevent overlap with title/subtitle */
+.card:hover {
     transform: translateY(-10px) rotate(1deg); /* Reduced hover effect to prevent overlap */
+}
+
+/* Specific margin for cards in sections to prevent overlap */
+section .card {
+    margin-top: 20px; /* Add some space to prevent overlap */
 }
 
 .card {
@@ -623,6 +645,8 @@ section {
     gap: 20px;
     flex-wrap: wrap;
 }
+
+
 
 /* Animation for background */
 @keyframes rotate {

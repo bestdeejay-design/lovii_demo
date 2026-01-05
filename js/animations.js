@@ -18,6 +18,12 @@ function initializeAnimations() {
         delay: 0.4
     });
     
+    // Add animation initialization class to buttons for GSAP to use as starting point
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.classList.add('animate-init');
+    });
+    
     gsap.from('.btn', {
         duration: 0.8,
         y: 20,
