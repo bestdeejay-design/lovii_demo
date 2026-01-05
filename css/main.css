@@ -1,0 +1,151 @@
+/* Theme Variables */
+:root {
+    /* Default (dark) theme */
+    --bg-color: #0A0F1F;
+    --text-color: #FFFFFF;
+    --accent-color: #FF6B35;
+    --card-bg: #1A2238;
+    --border-color: #2D3748;
+    --icon-color: #FFFFFF;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, var(--accent-color), #ff9a8b);
+    --card-bg-alt: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --accent-color: #F97316;
+    --card-bg: #F3F4F6;
+    --border-color: #E5E7EB;
+    --icon-color: #000000;
+    --card-bg-alt: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="vibrant"] {
+    --bg-color: linear-gradient(135deg, #0f0c29, #302b63);
+    --text-color: #FFFFFF;
+    --accent-color: #ff7e5f;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --icon-color: #FFFFFF;
+    --card-bg-alt: rgba(255, 255, 255, 0.08);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', Roboto, system-ui, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header and Navigation */
+header {
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 15, 31, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+    padding: 80px 0 40px;
+    text-align: center;
+    position: relative;
+}
+
+.footer-contact {
+    margin-bottom: 30px;
+}
+
+.contact-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.contact-link:hover::after {
+    width: 100%;
+}
+
+.footer-text {
+    opacity: 0.7;
+    font-size: 1rem;
+}
+
+/* Decorative Elements */
+.decoration {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.decoration.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.1), transparent 70%);
+}
+
+.decoration.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid rgba(255, 107, 53, 0.05);
+}
+
+/* Parallax effect */
+.parallax-element {
+    transition: transform 0.1s ease-out;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Hidden SVG sprite */
+.svg-sprite {
+    display: none;
+}

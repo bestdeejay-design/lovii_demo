@@ -1,0 +1,243 @@
+/* Mobile Navigation */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 1000;
+    border-top: 1px solid var(--border-color);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 12px;
+    padding: 8px 10px; /* Увеличил отступы для лучшей тапаемости */
+    transition: color 0.3s ease;
+    min-height: 50px; /* Обеспечиваем минимальную высоту для удобства нажатия */
+}
+
+.nav-item.active {
+    color: var(--accent-color);
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+/* Full Menu (Mobile) */
+.full-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    padding: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.full-menu.active {
+    transform: translateY(0);
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-link {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--card-bg-alt);
+}
+
+.menu-category {
+    margin-bottom: 10px;
+}
+
+.menu-category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--card-bg-alt);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.menu-category-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 10px;
+}
+
+.menu-category-content.expanded {
+    max-height: 200px; /* Adjust based on content */
+}
+
+.menu-category-content a.menu-link {
+    display: block;
+    margin: 5px 0;
+}
+
+.menu-category-arrow {
+    transition: transform 0.3s ease;
+    fill: var(--icon-color);
+}
+
+.menu-category-arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.theme-toggle {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .mobile-nav {
+        display: none;
+    }
+
+    .section-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.8rem;
+    }
+
+    #business .section-wrapper {
+        flex-direction: row;
+    }
+
+    #about .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    #about .card:nth-child(1) {
+        grid-row: span 1;
+    }
+
+    #about .card:nth-child(3) {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 767px) {
+    #business .section-wrapper {
+        flex-direction: column;
+    }
+
+    #business .content {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+
+    #about .cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Оптимизация сложной сетки в секции "О проекте" для мобильных устройств */
+    #about .card:nth-child(1) {
+        grid-row: auto;
+        margin-bottom: 20px;
+    }
+    
+    #about .card:nth-child(3) {
+        grid-column: auto;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+}
+
+/* Улучшаем отображение сетки карточек на очень маленьких экранах */
+@media (max-width: 480px) {
+    .cards-grid {
+        gap: 25px;
+        margin-top: 30px;
+    }
+    
+    .card {
+        padding: 25px 20px;
+        min-height: 180px;
+    }
+    
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 15px;
+    }
+    
+    .card-title {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 50px;
+    }
+}

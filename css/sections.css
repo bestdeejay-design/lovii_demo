@@ -1,0 +1,255 @@
+/* Sections */
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+/* Asymmetrical section design */
+.section-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(255, 107, 53, 0.1), transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.section-content {
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 70px;
+    opacity: 0.8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 150px 0 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+    z-index: 0;
+    animation: rotate 20s linear infinite;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    background: linear-gradient(to right, var(--text-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 50px;
+    opacity: 0.9;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+    min-height: 50px; /* Обеспечиваем минимальную высоту для удобства нажатия */
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--accent-color), #ff9a8b);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+}
+
+.btn:hover::before {
+    width: 100%;
+}
+
+/* Cards Section */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    min-height: 200px; /* Обеспечиваем минимальную высоту для лучшего отображения на мобильных */
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--card-bg-alt);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+}
+
+.card:hover {
+    transform: translateY(-15px) rotate(2deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover::before {
+    height: 100%;
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 25px;
+    filter: drop-shadow(0 5px 10px rgba(255, 107, 53, 0.2));
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    opacity: 0.8;
+    line-height: 1.7;
+}
+
+/* Business Section - Asymmetrical Layout */
+#business .section-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+#business .content {
+    flex: 1;
+    padding-right: 40px;
+}
+
+#business .cards-grid {
+    flex: 1;
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* About Section - Staggered Layout */
+#about .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+#about .card:nth-child(1) {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#about .card:nth-child(3) {
+    grid-column: span 2;
+}
+
+/* Animation for background */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
