@@ -1,1 +1,3 @@
-Nothing should be ignored based on the provided file changes. The modification of 'index.html' is a source file that should be tracked in version control.
+(index.html is a source file, no build artifacts, dependencies, or temp files detected in changes)
+
+(empty — output nothing)
