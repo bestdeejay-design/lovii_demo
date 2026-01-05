@@ -1162,16 +1162,7 @@ input:checked + .slider:before {
   line-height: 1.8;
 }
 
-.values-list {
-  margin: 20px 0;
-  padding-left: 20px;
-  color: var(--text-secondary);
-}
 
-.values-list li {
-  margin-bottom: 10px;
-  line-height: 1.8;
-}
 
 /* Дополнительные стили для страницы "О нас" */
 .values-grid {
@@ -1796,9 +1787,7 @@ input:checked + .slider:before {
   }
 }
 
-.fade-in {
-  animation: fadeIn 0.5s ease forwards;
-}
+
 
 /* Фокус для доступности */
 button:focus,
