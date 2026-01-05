@@ -17,6 +17,8 @@
             --border-color: #2D3748;
             --icon-color: #FFFFFF;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--accent-color), #ff9a8b);
+            --card-bg-alt: rgba(255, 255, 255, 0.05);
         }
 
         [data-theme="light"] {
@@ -26,6 +28,7 @@
             --card-bg: #F3F4F6;
             --border-color: #E5E7EB;
             --icon-color: #000000;
+            --card-bg-alt: rgba(0, 0, 0, 0.03);
         }
 
         [data-theme="vibrant"] {
@@ -35,6 +38,7 @@
             --card-bg: rgba(255, 255, 255, 0.1);
             --border-color: rgba(255, 255, 255, 0.2);
             --icon-color: #FFFFFF;
+            --card-bg-alt: rgba(255, 255, 255, 0.08);
         }
 
         * {
@@ -157,7 +161,7 @@
             text-decoration: none;
             padding: 10px;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg-alt);
         }
 
         .theme-toggle {
@@ -174,121 +178,307 @@
 
         /* Sections */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        /* Asymmetrical section design */
+        .section-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 107, 53, 0.1), transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 20px;
             text-align: center;
+            position: relative;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 70px;
             opacity: 0.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 120px 0 80px;
+            padding: 150px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+            z-index: 0;
+            animation: rotate 20s linear infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--text-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
+            font-size: 1.5rem;
+            margin-bottom: 50px;
             opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
             display: inline-block;
             background: var(--accent-color);
             color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
+            padding: 18px 40px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-color), #ff9a8b);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: -1;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn:hover::before {
+            width: 100%;
         }
 
         /* Cards Section */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
             margin-top: 50px;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
+            padding: 40px 30px;
+            border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--card-bg-alt);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: -1;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover::before {
+            height: 100%;
         }
 
         .card-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            filter: drop-shadow(0 5px 10px rgba(255, 107, 53, 0.2));
         }
 
         .card-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
         }
 
         .card-text {
             opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* Business Section - Asymmetrical Layout */
+        #business .section-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        #business .content {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        #business .cards-grid {
+            flex: 1;
+            margin-top: 0;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* About Section - Staggered Layout */
+        #about .cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        #about .card:nth-child(1) {
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #about .card:nth-child(3) {
+            grid-column: span 2;
         }
 
         /* Footer */
         footer {
-            padding: 60px 0 30px;
+            padding: 80px 0 40px;
             text-align: center;
+            position: relative;
         }
 
         .footer-contact {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .contact-link {
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
         }
 
-        .contact-link:hover {
-            text-decoration: underline;
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .contact-link:hover::after {
+            width: 100%;
         }
 
         .footer-text {
             opacity: 0.7;
-            font-size: 0.9rem;
+            font-size: 1rem;
+        }
+
+        /* Decorative Elements */
+        .decoration {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .decoration.circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1), transparent 70%);
+        }
+
+        .decoration.triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid rgba(255, 107, 53, 0.05);
         }
 
         /* Parallax effect */
@@ -303,15 +493,58 @@
             }
 
             .section-title {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
 
             .hero-title {
-                font-size: 4rem;
+                font-size: 4.5rem;
             }
 
             .hero-subtitle {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+            }
+
+            #business .section-wrapper {
+                flex-direction: row;
+            }
+
+            #about .cards-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            #about .card:nth-child(1) {
+                grid-row: span 1;
+            }
+
+            #about .card:nth-child(3) {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 767px) {
+            #business .section-wrapper {
+                flex-direction: column;
+            }
+
+            #business .content {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+
+            #about .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
             }
         }
 
@@ -320,6 +553,16 @@
             * {
                 transition: none !important;
                 animation: none !important;
+            }
+        }
+
+        /* Animation for background */
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
             }
         }
 
@@ -377,6 +620,7 @@
        - First four icons navigate to sections
        - 'more' icon opens full-menu (slide-up from bottom)
        - Full-menu contains additional links and theme toggle
+       - Mobile navigation is preserved on all screen sizes below 768px
     2. Adding new icons:
        - Add new <symbol> to the SVG sprite
        - Each icon must support color variations for all three themes
@@ -384,6 +628,7 @@
        - Icons should be available in three color versions for dark/light/vibrant themes
     3. What NOT to change:
        - Order of mobile navigation buttons (home, catalog, business, about, more)
+       - Core mobile navigation functionality (it's excellent as is)
        - Theme structure and localStorage implementation
        - Core navigation functionality
     4. Adding new sections:
@@ -391,6 +636,14 @@
        - Add corresponding navigation item
        - Update mobile navigation if needed
        - Ensure section is responsive and works with parallax effects
+    5. Modern design elements:
+       - Asymmetrical layouts using section-wrapper
+       - Staggered card grids using CSS grid with special positioning
+       - Decorative elements (circles, gradients) for visual interest
+       - Animated buttons with hover effects
+       - Gradient text and backgrounds
+       - Enhanced card hover animations with rotation
+       - Animated background elements with CSS keyframes
     -->
 
     <!-- Mobile Navigation -->
@@ -437,70 +690,94 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1 class="hero-title parallax-element" data-rellax-speed="2">Цифровая витрина + оператор лояльности</h1>
-            <p class="hero-subtitle parallax-element" data-rellax-speed="1">Платформа и оператор баллов лояльности для микробизнеса</p>
-            <a href="mailto:hello@lovii.ru" class="btn">Стать партнёром</a>
+            <div class="hero-content">
+                <h1 class="hero-title parallax-element" data-rellax-speed="2">Цифровая витрина + оператор лояльности</h1>
+                <p class="hero-subtitle parallax-element" data-rellax-speed="1">Платформа и оператор баллов лояльности для микробизнеса</p>
+                <a href="mailto:hello@lovii.ru" class="btn">Стать партнёром</a>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 20%; right: 10%; opacity: 0.3;"></div>
+            <div class="decoration circle" style="bottom: 10%; left: 15%; opacity: 0.2;"></div>
         </div>
     </section>
 
     <!-- For Whom Section -->
     <section id="catalog">
         <div class="container">
-            <h2 class="section-title parallax-element" data-rellax-speed="1">Для кого</h2>
-            <p class="section-subtitle">Платформа, которая объединяет всех участников экосистемы</p>
-            
-            <div class="cards-grid">
-                <div class="card parallax-element" data-rellax-speed="0.5">
-                    <svg class="card-icon"><use href="#icon-business"></use></svg>
-                    <h3 class="card-title">Микробизнес</h3>
-                    <p class="card-text">Инструменты для увеличения лояльности клиентов и роста прибыли</p>
-                </div>
+            <div class="section-content">
+                <h2 class="section-title parallax-element" data-rellax-speed="1">Для кого</h2>
+                <p class="section-subtitle">Платформа, которая объединяет всех участников экосистемы</p>
                 
-                <div class="card parallax-element" data-rellax-speed="0.5">
-                    <svg class="card-icon"><use href="#icon-home"></use></svg>
-                    <h3 class="card-title">Клиенты</h3>
-                    <p class="card-text">Удобный способ получать бонусы и скидки в любимых заведениях</p>
-                </div>
-                
-                <div class="card parallax-element" data-rellax-speed="0.5">
-                    <svg class="card-icon"><use href="#icon-catalog"></use></svg>
-                    <h3 class="card-title">Бренды</h3>
-                    <p class="card-text">Возможность привлекать клиентов через партнерские сети</p>
-                </div>
-                
-                <div class="card parallax-element" data-rellax-speed="0.5">
-                    <svg class="card-icon"><use href="#icon-about"></use></svg>
-                    <h3 class="card-title">Франчайзи</h3>
-                    <p class="card-text">Поддержка и инструменты для развития собственной сети</p>
+                <div class="cards-grid">
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-business"></use></svg>
+                        <h3 class="card-title">Микробизнес</h3>
+                        <p class="card-text">Инструменты для увеличения лояльности клиентов и роста прибыли</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-home"></use></svg>
+                        <h3 class="card-title">Клиенты</h3>
+                        <p class="card-text">Удобный способ получать бонусы и скидки в любимых заведениях</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Бренды</h3>
+                        <p class="card-text">Возможность привлекать клиентов через партнерские сети</p>
+                    </div>
+                    
+                    <div class="card parallax-element" data-rellax-speed="0.5">
+                        <svg class="card-icon"><use href="#icon-about"></use></svg>
+                        <h3 class="card-title">Франчайзи</h3>
+                        <p class="card-text">Поддержка и инструменты для развития собственной сети</p>
+                    </div>
                 </div>
             </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 10%; left: 5%; opacity: 0.1;"></div>
+            <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
         </div>
     </section>
 
     <!-- Business Section -->
     <section id="business">
         <div class="container">
-            <h2 class="section-title">Бизнес-модель</h2>
-            <p class="section-subtitle">Как работает платформа "Лови"</p>
-            <div class="cards-grid">
-                <div class="card">
-                    <h3 class="card-title">Интеграция</h3>
-                    <p class="card-text">Простое подключение вашей точки к платформе через мобильное приложение или веб-интерфейс</p>
+            <div class="section-wrapper">
+                <div class="content">
+                    <h2 class="section-title">Бизнес-модель</h2>
+                    <p class="section-subtitle">Как работает платформа "Лови" - современное решение для микробизнеса</p>
+                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
+                        Платформа "Лови" объединяет все точки лояльности в единую экосистему, 
+                        позволяя малому бизнесу конкурировать с крупными сетями за счет 
+                        персонализированного подхода к каждому клиенту.
+                    </p>
+                    <a href="mailto:hello@lovii.ru" class="btn">Начать сотрудничество</a>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Начисление</h3>
-                    <p class="card-text">Автоматическое начисление баллов за каждую покупку в партнерской сети</p>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Списание</h3>
-                    <p class="card-text">Удобное списание баллов в любом партнерском заведении</p>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Аналитика</h3>
-                    <p class="card-text">Детальная аналитика для роста вашего бизнеса</p>
+                <div class="cards-grid">
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-business"></use></svg>
+                        <h3 class="card-title">Интеграция</h3>
+                        <p class="card-text">Простое подключение вашей точки к платформе через мобильное приложение или веб-интерфейс</p>
+                    </div>
+                    
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-about"></use></svg>
+                        <h3 class="card-title">Начисление</h3>
+                        <p class="card-text">Автоматическое начисление баллов за каждую покупку в партнерской сети</p>
+                    </div>
+                    
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-home"></use></svg>
+                        <h3 class="card-title">Списание</h3>
+                        <p class="card-text">Удобное списание баллов в любом партнерском заведении</p>
+                    </div>
+                    
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Аналитика</h3>
+                        <p class="card-text">Детальная аналитика для роста вашего бизнеса</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -513,23 +790,25 @@
             <p class="section-subtitle">Инновационная платформа для малого и микробизнеса</p>
             <div class="cards-grid">
                 <div class="card">
-                    <h3 class="card-title">Миссия</h3>
-                    <p class="card-text">Создать экосистему, которая помогает малому бизнесу расти и развиваться</p>
+                    <svg class="card-icon"><use href="#icon-about"></use></svg>
+                    <h3 class="card-title">Наша миссия</h3>
+                    <p class="card-text">Создать экосистему, которая помогает малому бизнесу расти и развиваться, объединяя усилия тысяч предпринимателей</p>
                 </div>
                 
                 <div class="card">
                     <h3 class="card-title">Цель</h3>
-                    <p class="card-text">Объединить все точки лояльности в одной удобной платформе</p>
+                    <p class="card-text">Объединить все точки лояльности в одной удобной платформе, где каждый участник получает максимум пользы</p>
                 </div>
                 
                 <div class="card">
+                    <svg class="card-icon"><use href="#icon-business"></use></svg>
                     <h3 class="card-title">Преимущества</h3>
-                    <p class="card-text">Увеличение среднего чека, удержание клиентов, аналитика и многое другое</p>
+                    <p class="card-text">Увеличение среднего чека, удержание клиентов, аналитика и персонализированные предложения</p>
                 </div>
                 
                 <div class="card">
                     <h3 class="card-title">Команда</h3>
-                    <p class="card-text">Профессионалы с опытом в fintech, маркетинге и развитии бизнеса</p>
+                    <p class="card-text">Профессионалы с опытом в fintech, маркетинге и развитии бизнеса, объединенные общей целью</p>
                 </div>
             </div>
         </div>
@@ -579,6 +858,13 @@
                 
                 body.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
+                
+                // Trigger a small animation to show theme change
+                gsap.to(body, {
+                    backgroundColor: getComputedStyle(body).getPropertyValue('--bg-color'),
+                    duration: 0.5,
+                    ease: 'power2.out'
+                });
             });
 
             // Mobile menu functionality
@@ -658,6 +944,16 @@
                 ease: 'power3.out',
                 delay: 0.6
             });
+            
+            // Animate decorative elements
+            gsap.from('.decoration', {
+                duration: 1.5,
+                scale: 0,
+                opacity: 0,
+                ease: 'elastic.out(1, 0.5)',
+                stagger: 0.2,
+                delay: 0.5
+            });
 
             // Animate cards when they come into view
             const cards = document.querySelectorAll('.card');
@@ -668,7 +964,8 @@
                             duration: 0.6,
                             y: 0,
                             opacity: 1,
-                            ease: 'power2.out'
+                            ease: 'power2.out',
+                            scale: 1
                         });
                         observer.unobserve(entry.target);
                     }
@@ -676,8 +973,39 @@
             }, { threshold: 0.1 });
 
             cards.forEach(card => {
-                gsap.set(card, { y: 30, opacity: 0 });
+                gsap.set(card, { y: 30, opacity: 0, scale: 0.95 });
                 observer.observe(card);
+            });
+            
+            // Animate section titles
+            const sectionTitles = document.querySelectorAll('.section-title');
+            const titleObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gsap.to(entry.target, {
+                            duration: 0.8,
+                            y: 0,
+                            opacity: 1,
+                            ease: 'back.out(1.7)',
+                            onComplete: () => {
+                                // Add a subtle bounce effect after the main animation
+                                gsap.to(entry.target, {
+                                    duration: 0.3,
+                                    yoyo: true,
+                                    repeat: 1,
+                                    y: -5,
+                                    ease: 'power1.inOut'
+                                });
+                            }
+                        });
+                        titleObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sectionTitles.forEach(title => {
+                gsap.set(title, { y: 20, opacity: 0 });
+                titleObserver.observe(title);
             });
         });
 
