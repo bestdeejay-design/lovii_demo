@@ -1,1 +1,1 @@
-(css/responsive.css, css/sections.css, index.html)
+Nothing needs to be added to .gitignore since only a source file (index.html) was modified and there are no build artifacts, dependencies, or temporary files in the changes.
