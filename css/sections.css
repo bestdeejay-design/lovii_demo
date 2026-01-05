@@ -24,7 +24,6 @@ section {
 
 .section-content {
     position: relative;
-    z-index: 1;
 }
 
 .section-title {
@@ -165,10 +164,14 @@ section {
 }
 
 /* Standardized section header z-index system - applies to all sections with cards */
-section .section-title,
-section .section-subtitle {
+section .section-title {
     position: relative;
     z-index: 6; /* Higher than cards-grid to prevent overlap */
+}
+
+section .section-subtitle {
+    position: relative;
+    z-index: 5; /* Higher than cards-grid to prevent overlap */
 }
 
 section .section-content {
@@ -202,11 +205,6 @@ section .cards-grid {
     z-index: 6; /* Ensure visibility in staggered layout */
 }
 
-/* Reduce hover effect to prevent overlap with title/subtitle */
-.card:hover {
-    transform: translateY(-10px) rotate(1deg); /* Reduced hover effect to prevent overlap */
-}
-
 /* Specific margin for cards in sections to prevent overlap */
 section .card {
     margin-top: 20px; /* Add some space to prevent overlap */
@@ -238,7 +236,7 @@ section .card {
 }
 
 .card:hover {
-    transform: translateY(-15px) rotate(2deg);
+    transform: translateY(-10px); /* Only vertical movement, no rotation */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
