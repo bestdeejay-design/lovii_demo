@@ -1,0 +1,41 @@
+/* Theme Variables */
+:root {
+    /* Default (dark) theme */
+    --bg-color: #0A0F1F;
+    --text-color: #FFFFFF;
+    --accent-color: #FF6B35;
+    --card-bg: #1A2238;
+    --border-color: #2D3748;
+    --icon-color: #FFFFFF;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, var(--accent-color), #ff9a8b);
+    --card-bg-alt: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --accent-color: #F97316;
+    --card-bg: #F3F4F6;
+    --border-color: #E5E7EB;
+    --icon-color: #000000;
+    --card-bg-alt: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="vibrant"] {
+    --bg-color: linear-gradient(135deg, #0f0c29, #302b63);
+    --text-color: #FFFFFF;
+    --accent-color: #ff7e5f;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --icon-color: #FFFFFF;
+    --card-bg-alt: rgba(255, 255, 255, 0.08);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
