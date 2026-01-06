@@ -1,6 +1,9 @@
 // Animation functions using GSAP
 
 function initializeAnimations() {
+    // Add gsap-loaded class to body to enable animation states
+    document.body.classList.add('gsap-loaded');
+    
     // GSAP animations
     gsap.from('.hero-title', {
         duration: 1,
