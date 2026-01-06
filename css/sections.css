@@ -7,7 +7,7 @@ section {
 /* Asymmetrical section design */
 .section-wrapper {
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden to visible to prevent card cutoff */
 }
 
 .section-wrapper::before {
