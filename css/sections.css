@@ -198,6 +198,11 @@ section .cards-grid {
     margin-top: 0; /* Business section has special asymmetrical layout */
 }
 
+/* Special handling for features section which has asymmetrical layout */
+#features .cards-grid {
+    margin-top: 0; /* Features section has special asymmetrical layout */
+}
+
 /* For sections with special layouts, ensure section titles are still visible */
 #business .section-title,
 #business .section-subtitle {
@@ -205,11 +210,11 @@ section .cards-grid {
     z-index: 6; /* Ensure visibility in special layouts */
 }
 
-/* About section has staggered layout but still needs title protection */
-#about .section-title,
-#about .section-subtitle {
+/* For features section with special layout, ensure section titles are still visible */
+#features .section-title,
+#features .section-subtitle {
     position: relative;
-    z-index: 6; /* Ensure visibility in staggered layout */
+    z-index: 6; /* Ensure visibility in special layouts */
 }
 
 /* Specific margin for cards in sections to prevent overlap */
@@ -282,6 +287,25 @@ section .card {
 }
 
 #business .cards-grid {
+    flex: 1;
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Features Section - Same Asymmetrical Layout as Business */
+#features .section-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+#features .content {
+    flex: 1;
+    padding-right: 40px;
+}
+
+#features .cards-grid {
     flex: 1;
     margin-top: 0;
     grid-template-columns: 1fr;
