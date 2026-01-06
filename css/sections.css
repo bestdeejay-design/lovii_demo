@@ -127,7 +127,14 @@ section {
 }
 
 /* Animation starting state - only applied when GSAP is working */
+/* Ensure buttons are visible even if GSAP fails to load */
 .btn.animate-init {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Animation starting state that will be applied only when GSAP is ready */
+.gsap-loaded .btn.animate-init {
     opacity: 0;
     transform: translateY(20px);
 }
