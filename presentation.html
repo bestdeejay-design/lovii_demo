@@ -361,6 +361,230 @@
         .nav-item span {
             font-size: 0.7rem;
         }
+        
+        /* Slider Styles */
+        .slider-container {
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: var(--card-bg);
+            padding: 30px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .slide {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            text-align: center;
+            pointer-events: none;
+        }
+        
+        .slide.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+        
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+        
+        .slide.next {
+            transform: translateX(100%);
+        }
+        
+        /* Ensure slide transitions work properly with theme changes */
+        .slider {
+            transition: background 0.3s ease;
+        }
+        
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .slide-content h3 {
+            margin: 15px 0 10px;
+            font-size: 1.5rem;
+        }
+        
+        .slide-content p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary, var(--text-color));
+            opacity: 0.9;
+        }
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            color: var(--text-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .slider-arrow:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slider-arrow:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+        
+        .slider-arrow-prev {
+            left: 20px;
+        }
+        
+        .slider-arrow-next {
+            right: 20px;
+        }
+        
+        .slider-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator:hover {
+            transform: scale(1.2);
+            background: var(--accent-color);
+        }
+        
+        .indicator.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+        
+        .indicator:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+        
+        /* Animation for slide transitions */
+        .slide.fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .slide.fade-out {
+            animation: fadeOut 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(0); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-50px); }
+        }
+        
+        /* Responsive slider styles */
+        @media (max-width: 768px) {
+            .slider {
+                padding: 20px 15px;
+                min-height: 250px;
+            }
+            
+            .slider-arrow {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .slider-arrow-prev {
+                left: 10px;
+            }
+            
+            .slider-arrow-next {
+                right: 10px;
+            }
+            
+            .slide-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .slide-content p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slider {
+                padding: 15px 10px;
+                min-height: 200px;
+            }
+            
+            .slider-arrow {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .slide-content h3 {
+                font-size: 1.2rem;
+                margin: 10px 0 8px;
+            }
+            
+            .slide-content .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -508,26 +732,68 @@
             <div class="section-description">
                 <p>Процесс работы ПВЗ "Город Лови" прост и понятен:</p>
                 
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Поставщик</h3>
-                        <p>Локальные производители и поставщики подключаются к нашей платформе</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Каталог</h3>
-                        <p>Товары и услуги поставщиков поступают в цифровой каталог</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Заказ</h3>
-                        <p>Клиенты делают заказы через мобильное приложение или сайт</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Выдача</h3>
-                        <p>Заказы выдаются в вашем ПВЗ, клиент получает товар и баллы лояльности</p>
+                <!-- Slider Container -->
+                <div class="slider-container">
+                    <div class="slider">
+                        <!-- Slider Content -->
+                        <div class="slides">
+                            <div class="slide active" data-slide="0">
+                                <div class="slide-content">
+                                    <div class="step-number">1</div>
+                                    <h3>Поставщик</h3>
+                                    <p>Локальные производители и поставщики подключаются к нашей платформе</p>
+                                </div>
+                            </div>
+                            <div class="slide" data-slide="1">
+                                <div class="slide-content">
+                                    <div class="step-number">2</div>
+                                    <h3>Каталог</h3>
+                                    <p>Товары и услуги поставщиков поступают в цифровой каталог</p>
+                                </div>
+                            </div>
+                            <div class="slide" data-slide="2">
+                                <div class="slide-content">
+                                    <div class="step-number">3</div>
+                                    <h3>Заказ</h3>
+                                    <p>Клиенты делают заказы через мобильное приложение или сайт</p>
+                                </div>
+                            </div>
+                            <div class="slide" data-slide="3">
+                                <div class="slide-content">
+                                    <div class="step-number">4</div>
+                                    <h3>Выдача</h3>
+                                    <p>Заказы выдаются в вашем ПВЗ, клиент получает товар и баллы лояльности</p>
+                                </div>
+                            </div>
+                            <div class="slide" data-slide="4">
+                                <div class="slide-content">
+                                    <div class="step-number">5</div>
+                                    <h3>Рост</h3>
+                                    <p>Бизнес растёт за счёт локальных поставок и лояльности клиентов</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation Arrows -->
+                        <button class="slider-arrow slider-arrow-prev" aria-label="Предыдущий слайд">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="slider-arrow slider-arrow-next" aria-label="Следующий слайд">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Slide Indicators -->
+                        <div class="slider-indicators">
+                            <button class="indicator active" data-slide="0" aria-label="Перейти к слайду 1"></button>
+                            <button class="indicator" data-slide="1" aria-label="Перейти к слайду 2"></button>
+                            <button class="indicator" data-slide="2" aria-label="Перейти к слайду 3"></button>
+                            <button class="indicator" data-slide="3" aria-label="Перейти к слайду 4"></button>
+                            <button class="indicator" data-slide="4" aria-label="Перейти к слайду 5"></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -942,6 +1208,174 @@
             });
         }
         
+        // Slider functionality
+        function initializeSlider() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.slider-arrow-prev');
+            const nextBtn = document.querySelector('.slider-arrow-next');
+            const indicators = document.querySelectorAll('.indicator');
+            let currentSlide = 0;
+            let slideInterval;
+            const slideDuration = 5000; // 5 seconds between auto slides
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Remove active class from current slide
+                slides[currentSlide].classList.remove('active');
+                indicators[currentSlide].classList.remove('active');
+                
+                // Update current slide
+                currentSlide = index;
+                
+                // Add active class to new slide
+                slides[currentSlide].classList.add('active');
+                indicators[currentSlide].classList.add('active');
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                const nextIndex = (currentSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            // Function to go to previous slide
+            function prevSlide() {
+                const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prevIndex);
+            }
+            
+            // Add event listeners to navigation buttons
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                nextSlide();
+                resetSlideTimer();
+            });
+            
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                prevSlide();
+                resetSlideTimer();
+            });
+            
+            // Add event listeners to indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSlide(index);
+                    resetSlideTimer();
+                });
+                
+                // Add keyboard navigation support
+                indicator.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        showSlide(index);
+                        resetSlideTimer();
+                    }
+                });
+            });
+            
+            // Keyboard navigation support for the entire slider
+            slider.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    resetSlideTimer();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    resetSlideTimer();
+                }
+            });
+            
+            // Touch/swipe support for mobile devices
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            slider.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            slider.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const swipeThreshold = 50; // Minimum distance to be considered a swipe
+                
+                if (touchStartX - touchEndX > swipeThreshold) {
+                    // Swipe left - next slide
+                    nextSlide();
+                    resetSlideTimer();
+                } else if (touchEndX - touchStartX > swipeThreshold) {
+                    // Swipe right - previous slide
+                    prevSlide();
+                    resetSlideTimer();
+                }
+            }
+            
+            // Function to reset the auto slide timer
+            function resetSlideTimer() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+                
+                slideInterval = setInterval(() => {
+                    nextSlide();
+                }, slideDuration);
+            }
+            
+            // Initialize auto slide timer
+            resetSlideTimer();
+            
+            // Pause auto slide when user hovers over slider
+            slider.addEventListener('mouseenter', function() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+            });
+            
+            // Resume auto slide when user leaves slider
+            slider.addEventListener('mouseleave', function() {
+                resetSlideTimer();
+            });
+            
+            // Make the slider accessible by adding ARIA attributes
+            const slidesContainer = document.querySelector('.slides');
+            slidesContainer.setAttribute('role', 'region');
+            slidesContainer.setAttribute('aria-label', 'Слайдер процесса работы ПВЗ');
+            
+            slides.forEach((slide, index) => {
+                slide.setAttribute('role', 'group');
+                slide.setAttribute('aria-roledescription', 'slide');
+                slide.setAttribute('aria-label', `${index + 1} из ${slides.length}`);
+                
+                if (index === currentSlide) {
+                    slide.setAttribute('aria-hidden', 'false');
+                } else {
+                    slide.setAttribute('aria-hidden', 'true');
+                }
+            });
+            
+            // Update ARIA attributes when changing slides
+            function updateAriaAttributes() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.setAttribute('aria-hidden', 'false');
+                    } else {
+                        slide.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
+            
+            // Override showSlide to update ARIA attributes
+            const originalShowSlide = showSlide;
+            showSlide = function(index) {
+                originalShowSlide(index);
+                updateAriaAttributes();
+            };
+        }
+        
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
@@ -950,6 +1384,7 @@
             initializeForm();
             initializeParallax();
             initializeAnimations();
+            initializeSlider(); // Initialize the slider
         });
     </script>
 </body>
