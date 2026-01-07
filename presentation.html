@@ -615,8 +615,32 @@
         </symbol>
     </svg>
 
-    <!-- Floating Navigation -->
-    <nav class="floating-nav">
+    <!-- Left Navigation -->
+    <nav class="left-nav">
+        <a href="#home" class="nav-item active" data-target="home">
+            <svg class="nav-icon"><use href="#icon-home"></use></svg>
+            <span>Главная</span>
+        </a>
+        <a href="#concept" class="nav-item" data-target="concept">
+            <svg class="nav-icon"><use href="#icon-features"></use></svg>
+            <span>Концепция</span>
+        </a>
+        <a href="#business" class="nav-item" data-target="business">
+            <svg class="nav-icon"><use href="#icon-business"></use></svg>
+            <span>Бизнес</span>
+        </a>
+        <a href="#results" class="nav-item" data-target="results">
+            <svg class="nav-icon"><use href="#icon-chart"></use></svg>
+            <span>Результаты</span>
+        </a>
+        <a href="#partnership" class="nav-item" data-target="partnership">
+            <svg class="nav-icon"><use href="#icon-handshake"></use></svg>
+            <span>Партнерство</span>
+        </a>
+    </nav>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
         <a href="#home" class="nav-item active" data-target="home">
             <svg class="nav-icon"><use href="#icon-home"></use></svg>
             <span>Главная</span>
@@ -930,6 +954,14 @@
                             top: target.offsetTop - 100,
                             behavior: 'smooth'
                         });
+                        
+                        // Close mobile menu after selection
+                        const mobileNav = document.querySelector('.mobile-nav');
+                        if (mobileNav) {
+                            setTimeout(() => {
+                                mobileNav.classList.remove('show');
+                            }, 500);
+                        }
                     }
                 });
             });
