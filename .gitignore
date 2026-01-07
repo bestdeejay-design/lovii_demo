@@ -1,5 +1,1 @@
-(test_features_responsive.html and css/responsive.css are source files, no build artifacts, dependencies, or temp files in the changes)
-
-```html
-
-```
+Nothing should be ignored based on the provided file changes. The only modified file is `presentation.html`, which is a source file and should not be ignored.
