@@ -181,7 +181,17 @@
         margin-bottom: 40px;
     }
     
-    .business-stats {
+    #features .section-wrapper {
+        flex-direction: column;
+    }
+
+    #features .content {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    
+    #features .business-stats,
+    #business .business-stats {
         grid-template-columns: 1fr;
         gap: 20px;
     }
@@ -200,6 +210,11 @@
     
     .pricing-card.popular:hover {
         transform: translateY(-10px);
+    }
+    
+    /* Benefits list responsive styles for both business and features sections */
+    .benefits-list {
+        grid-template-columns: 1fr !important; /* Override any existing grid columns */
     }
 
     #about .cards-grid {
