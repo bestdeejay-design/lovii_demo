@@ -247,54 +247,293 @@
 /* Улучшаем отображение сетки карточек на очень маленьких экранах */
 @media (max-width: 480px) {
     .cards-grid {
-        gap: 25px;
+        gap: 20px;
         margin-top: 30px;
     }
     
     .card {
-        padding: 25px 20px;
-        min-height: 180px;
+        padding: 20px 15px;
+        min-height: 160px;
     }
     
     .card-icon {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 15px;
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 10px;
     }
     
     .card-title {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+    
+    .card-text {
+        font-size: 0.95rem;
     }
     
     .section-title {
-        font-size: 2.2rem;
-        margin-bottom: 15px;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
     }
     
     .section-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 50px;
+        font-size: 1rem;
+        margin-bottom: 30px;
+        line-height: 1.5;
     }
     
     /* Additional responsive styles for business section */
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
     }
     
     .benefit-item {
-        padding: 20px;
+        padding: 18px;
+    }
+    
+    .benefit-icon {
+        width: 20px;
+        height: 20px;
+        top: 18px;
+        right: 18px;
+    }
+    
+    .benefit-item h4 {
+        font-size: 1.1rem;
+        margin-right: 25px;
+    }
+    
+    .benefit-item p {
+        font-size: 0.95rem;
     }
     
     .pricing-card {
-        padding: 30px 20px;
+        padding: 25px 15px;
     }
     
     .card-price {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     
     .card-title {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+    }
+    
+    .card-desc {
+        font-size: 1rem;
+    }
+    
+    .pricing-header {
+        margin-bottom: 25px;
+    }
+    
+    .pricing-title {
+        font-size: 1.6rem;
+    }
+    
+    .pricing-subtitle {
+        font-size: 1rem;
+    }
+    
+    .card-features li {
+        padding: 8px 0;
+        font-size: 0.95rem;
+    }
+    
+    /* Hero section adjustments */
+    .hero {
+        padding: 100px 0 60px;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        line-height: 1.5;
+    }
+    
+    .btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+        min-height: 45px;
+    }
+    
+    .btn-primary {
+        margin-right: 10px;
+    }
+    
+    .hero-buttons {
+        gap: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .testimonial-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .testimonial-author {
+        font-size: 0.95rem;
+    }
+}
+
+/* Additional responsive fixes for complex layouts */
+@media (max-width: 767px) {
+    /* Fix for sections with asymmetrical layouts */
+    .section-wrapper {
+        flex-direction: column !important;
+    }
+    
+    .content {
+        padding-right: 0 !important;
+        margin-bottom: 40px !important;
+    }
+    
+    .business-pricing,
+    .pricing-cards {
+        width: 100% !important;
+    }
+    
+    /* Adjust stats for mobile */
+    .business-stats {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .stat-item {
+        padding: 20px 10px !important;
+    }
+    
+    /* Adjust benefits list for mobile */
+    .benefits-list {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    /* Adjust pricing cards for mobile */
+    .pricing-cards {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .pricing-card.popular {
+        transform: scale(1) !important;
+    }
+    
+    .pricing-card.popular:hover {
+        transform: translateY(-5px) !important;
+    }
+    
+    /* Ensure proper spacing on mobile */
+    section {
+        padding: 60px 0 !important;
+    }
+    
+    /* Adjust container padding */
+    .container {
+        padding: 0 15px !important;
+    }
+    
+    /* Fix for staggered grid in about section */
+    #about .cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    #about .card:nth-child(1) {
+        grid-row: auto !important;
+        margin-bottom: 20px !important;
+    }
+    
+    #about .card:nth-child(3) {
+        grid-column: auto !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .card {
+        padding: 18px 12px;
+        min-height: 140px;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+    
+    .benefit-item {
+        padding: 15px;
+    }
+    
+    .pricing-card {
+        padding: 20px 12px;
+    }
+    
+    .btn {
+        padding: 14px 25px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile navigation fixes */
+@media (max-width: 767px) {
+    /* Ensure mobile navigation is properly sized */
+    .mobile-nav {
+        padding: 12px 0;
+    }
+    
+    .nav-item {
+        min-height: 55px;
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+    
+    .nav-icon {
+        width: 22px;
+        height: 22px;
+        margin-bottom: 3px;
+    }
+    
+    /* Adjust full menu for better mobile experience */
+    .full-menu {
+        padding: 15px;
+    }
+    
+    .menu-header {
+        margin-bottom: 15px;
+    }
+    
+    .menu-link {
+        padding: 12px;
+        font-size: 1rem;
+    }
+    
+    /* Ensure all content is properly spaced on mobile */
+    .section-content {
+        padding: 0 10px;
+    }
+    
+    /* Fix for decorative elements on mobile */
+    .decoration.circle {
+        width: 150px;
+        height: 150px;
     }
 }
