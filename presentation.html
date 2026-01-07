@@ -13,10 +13,19 @@
     <link rel="stylesheet" href="css/sections.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Local styles for presentation-specific functionality -->
+    <style>
+        /* Presentation-specific styles if needed */
+        .presentation-section {
+            min-height: 100vh;
+            padding: 80px 0;
+        }
+    </style>
 </head>
 <body data-theme="dark">
     <!-- SVG Sprite -->
-    <svg class="svg-sprite">
+    <svg class="svg-sprite" style="display: none;">
         <symbol id="icon-home" viewBox="0 0 24 24">
             <g fill="var(--icon-color)">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
@@ -124,76 +133,23 @@
         </symbol>
     </svg>
 
-    <!-- Desktop Sidebar Navigation -->
-    <aside class="sidebar-nav">
-        <div class="sidebar-header">
-            <h3>Навигация</h3>
-        </div>
-        <nav class="sidebar-menu">
-            <a href="#home" class="nav-item active" data-target="home">
-                <svg class="nav-icon"><use href="#icon-home"></use></svg>
-                <span>Главная</span>
-            </a>
-            <a href="#features" class="nav-item" data-target="features">
-                <svg class="nav-icon"><use href="#icon-features"></use></svg>
-                <span>Возможности</span>
-            </a>
-            <a href="#catalog" class="nav-item" data-target="catalog">
-                <svg class="nav-icon"><use href="#icon-catalog"></use></svg>
-                <span>Каталог</span>
-            </a>
-            <a href="#business" class="nav-item" data-target="business">
-                <svg class="nav-icon"><use href="#icon-business"></use></svg>
-                <span>Бизнес</span>
-            </a>
-            <a href="#about" class="nav-item" data-target="about">
-                <svg class="nav-icon"><use href="#icon-about"></use></svg>
-                <span>О проекте</span>
-            </a>
-            <a href="#franchise" class="nav-item" data-target="franchise">
-                <svg class="nav-icon"><use href="#icon-strategy"></use></svg>
-                <span>Франшиза</span>
-            </a>
-            <a href="#suppliers" class="nav-item" data-target="suppliers">
-                <svg class="nav-icon"><use href="#icon-users"></use></svg>
-                <span>Поставщики</span>
-            </a>
-            <a href="#partners" class="nav-item" data-target="partners">
-                <svg class="nav-icon"><use href="#icon-handshake"></use></svg>
-                <span>Партнеры</span>
-            </a>
-            <a href="#help" class="nav-item" data-target="help">
-                <svg class="nav-icon"><use href="#icon-more"></use></svg>
-                <span>Помощь</span>
-            </a>
-            <a href="#docs" class="nav-item" data-target="docs">
-                <svg class="nav-icon"><use href="#icon-web"></use></svg>
-                <span>Документы</span>
-            </a>
-            <a href="#contacts" class="nav-item" data-target="contacts">
-                <svg class="nav-icon"><use href="#icon-email"></use></svg>
-                <span>Контакты</span>
-            </a>
-        </nav>
-    </aside>
-
-    <!-- Mobile Navigation -->
+    <!-- Mobile Navigation (Always at the bottom) -->
     <nav class="mobile-nav">
         <a href="#home" class="nav-item active" data-target="home">
             <svg class="nav-icon"><use href="#icon-home"></use></svg>
             <span>Главная</span>
         </a>
-        <a href="#catalog" class="nav-item" data-target="catalog">
-            <svg class="nav-icon"><use href="#icon-catalog"></use></svg>
-            <span>Каталог</span>
+        <a href="#concept" class="nav-item" data-target="concept">
+            <svg class="nav-icon"><use href="#icon-features"></use></svg>
+            <span>Концепция</span>
         </a>
         <a href="#business" class="nav-item" data-target="business">
             <svg class="nav-icon"><use href="#icon-business"></use></svg>
             <span>Бизнес</span>
         </a>
-        <a href="#about" class="nav-item" data-target="about">
-            <svg class="nav-icon"><use href="#icon-about"></use></svg>
-            <span>О нас</span>
+        <a href="#franchise" class="nav-item" data-target="franchise">
+            <svg class="nav-icon"><use href="#icon-strategy"></use></svg>
+            <span>Франшиза</span>
         </a>
         <a href="#" class="nav-item" id="more-btn">
             <svg class="nav-icon"><use href="#icon-more"></use></svg>
@@ -214,30 +170,22 @@
                     <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
                 </div>
                 <div class="menu-category-content">
-                    <a href="#" class="menu-link">Главная</a>
-                    <a href="#features" class="menu-link">Возможности</a>
-                    <a href="#catalog" class="menu-link">Каталог</a>
-                    <a href="#business" class="menu-link">Бизнес</a>
-                    <a href="#about" class="menu-link">О проекте</a>
-                </div>
-            </div>
-            <div class="menu-category">
-                <div class="menu-category-header">
-                    <span>Франшиза</span>
-                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
-                </div>
-                <div class="menu-category-content">
-                    <a href="#franchise" class="menu-link">Франшиза «Город Лови»</a>
-                </div>
-            </div>
-            <div class="menu-category">
-                <div class="menu-category-header">
-                    <span>Для бизнеса</span>
-                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
-                </div>
-                <div class="menu-category-content">
+                    <a href="#home" class="menu-link">Главная</a>
+                    <a href="#concept" class="menu-link">Концепция</a>
+                    <a href="#business" class="menu-link">Бизнес-модель</a>
+                    <a href="#franchise" class="menu-link">Франшиза</a>
                     <a href="#suppliers" class="menu-link">Для поставщиков</a>
-                    <a href="#partners" class="menu-link">Партнёрская программа</a>
+                </div>
+            </div>
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Преимущества</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#features" class="menu-link">Возможности</a>
+                    <a href="#partners" class="menu-link">Партнеры</a>
+                    <a href="#results" class="menu-link">Результаты</a>
                 </div>
             </div>
             <div class="menu-category">
@@ -246,9 +194,8 @@
                     <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
                 </div>
                 <div class="menu-category-content">
-                    <a href="#help" class="menu-link">Помощь и поддержка</a>
+                    <a href="#help" class="menu-link">Помощь</a>
                     <a href="#contacts" class="menu-link">Контакты</a>
-                    <a href="#docs" class="menu-link">Документы</a>
                 </div>
             </div>
         </div>
@@ -272,6 +219,229 @@
         </div>
     </section>
     
+    <!-- Concept Section -->
+    <section id="concept">
+        <div class="container">
+            <div class="section-content">
+                <h2 class="section-title">Концепция проекта</h2>
+                <p class="section-subtitle">Цифровая инфраструктура локальной экономики</p>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-loyalty"></use></svg>
+                        <h3 class="card-title">Оператор лояльности</h3>
+                        <p class="card-text">Объединение всех баллов лояльности в одной экосистеме</p>
+                    </div>
+                    
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Локальный каталог</h3>
+                        <p class="card-text">Товары и услуги от местных поставщиков</p>
+                    </div>
+                    
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-finance"></use></svg>
+                        <h3 class="card-title">Универсальная оплата</h3>
+                        <p class="card-text">Рубли + баллы лояльности, обмен и вывод через СБП</p>
+                    </div>
+                    
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-chart"></use></svg>
+                        <h3 class="card-title">Аналитика и отчеты</h3>
+                        <p class="card-text">Детальная статистика по продажам и клиентам</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 10%; left: 5%; opacity: 0.1;"></div>
+            <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
+        </div>
+    </section>
+    
+    <!-- Business Section -->
+    <section id="business">
+        <div class="container">
+            <div class="section-wrapper">
+                <div class="content">
+                    <h2 class="section-title">Бизнес-модель</h2>
+                    <p class="section-subtitle">Как работает экосистема «Лови»</p>
+                    
+                    <div class="business-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1500+</div>
+                            <div class="stat-label">Подключенных точек</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">25%</div>
+                            <div class="stat-label">Средний рост чека</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">40%</div>
+                            <div class="stat-label">Удержание клиентов</div>
+                        </div>
+                    </div>
+
+                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
+                        Платформа «Лови» объединяет все точки лояльности в единую экосистему,
+                        позволяя малому бизнесу конкурировать с крупными сетями за счет
+                        персонализированного подхода к каждому клиенту.
+                    </p>
+
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-features"></use></svg>
+                            <h4>Увеличение среднего чека</h4>
+                            <p>Клиенты тратят на 20-30% больше при использовании системы лояльности</p>
+                        </div>
+                        <div class="benefit-item">
+                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-features"></use></svg>
+                            <h4>Повышенное удержание</h4>
+                            <p>Система баллов лояльности увеличивает возврат клиентов на 40%</p>
+                        </div>
+                        <div class="benefit-item">
+                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-features"></use></svg>
+                            <h4>Простая интеграция</h4>
+                            <p>Подключение за 15 минут без технических сложностей</p>
+                        </div>
+                    </div>
+
+                    <div class="business-testimonial">
+                        <div class="testimonial-content">
+                            <p>«Система лояльности "Лови" помогла увеличить средний чек в моем кафе на 28% за первые 3 месяца работы с платформой»</p>
+                            <div class="testimonial-author">— Иван Петров, владелец кафе "Уютный Кот"</div>
+                        </div>
+                    </div>
+
+                    <a href="mailto:hello@lovii.ru" class="btn btn-primary">Начать сотрудничество</a>
+                </div>
+
+                <div class="business-pricing">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Тарифы для бизнеса</h3>
+                        <p class="pricing-subtitle">Гибкие тарифы под любой бюджет</p>
+                    </div>
+
+                    <div class="pricing-cards">
+                        <div class="pricing-card popular">
+                            <div class="card-badge">Популярный</div>
+                            <h3 class="card-title">Стандарт</h3>
+                            <div class="card-price">5–10% с продаж</div>
+                            <p class="card-desc">Без абонплаты</p>
+                            <ul class="card-features">
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Система лояльности</li>
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Аналитика продаж</li>
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> QR-оплата баллами</li>
+                            </ul>
+                            <a href="mailto:hello@lovii.ru?subject=Тариф Стандарт" class="btn btn-secondary">Выбрать тариф</a>
+                        </div>
+
+                        <div class="pricing-card">
+                            <h3 class="card-title">Премиум</h3>
+                            <div class="card-price">3–7% + абонплата</div>
+                            <p class="card-desc">от 2 000 ₽/мес</p>
+                            <ul class="card-features">
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Все функции Стандарт</li>
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Персональный менеджер</li>
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Расширенная аналитика</li>
+                            </ul>
+                            <a href="mailto:hello@lovii.ru?subject=Тариф Премиум" class="btn btn-secondary">Выбрать тариф</a>
+                        </div>
+
+                        <div class="pricing-card">
+                            <h3 class="card-title">VIP</h3>
+                            <div class="card-price">0–5% + абонплата</div>
+                            <p class="card-desc">до 30 000 ₽/мес</p>
+                            <ul class="card-features">
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Все функции Премиум</li>
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Индивидуальная настройка</li>
+                                <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Приоритетная поддержка</li>
+                            </ul>
+                            <a href="mailto:hello@lovii.ru?subject=Тариф VIP" class="btn btn-secondary">Выбрать тариф</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section id="franchise">
+        <div class="container">
+            <div class="section-content">
+                <h2 class="section-title">Франшиза «Город Лови»</h2>
+                <p class="section-subtitle">Возможности для франчайзи в экосистеме «Лови»</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-business"></use></svg>
+                        <h3 class="card-title">Варианты входа</h3>
+                        <p class="card-text">100%, 50/50, пилот (0%) - гибкие условия для старта вашего бизнеса</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-home"></use></svg>
+                        <h3 class="card-title">Доход франчайзи</h3>
+                        <p class="card-text">Тарифы точек, логистика, ПВЗ, рекламный доход от Мобиап</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-about"></use></svg>
+                        <h3 class="card-title">Поддержка</h3>
+                        <p class="card-text">IT, маркетинг, логистика через «Атмосферу»</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Требования</h3>
+                        <p class="card-text">Наличие ПВЗ или логистической базы</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 10%; left: 5%; opacity: 0.1;"></div>
+            <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
+        </div>
+    </section>
+
+    <!-- Suppliers Section -->
+    <section id="suppliers">
+        <div class="container">
+            <div class="section-content">
+                <h2 class="section-title">Для поставщиков</h2>
+                <p class="section-subtitle">Преимущества и процесс подключения</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-business"></use></svg>
+                        <h3 class="card-title">Преимущества</h3>
+                        <p class="card-text">Приём баллов без комиссий, SaaS бесплатно, реклама</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-home"></use></svg>
+                        <h3 class="card-title">Процесс подключения</h3>
+                        <p class="card-text">Регистрация → верификация → размещение товаров</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Поддержка</h3>
+                        <p class="card-text">Обучение и техническая поддержка</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-about"></use></svg>
+                        <h3 class="card-title">Интеграция</h3>
+                        <p class="card-text">Простая интеграция с вашими системами</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 10%; left: 5%; opacity: 0.1;"></div>
+            <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features">
         <div class="container">
@@ -310,37 +480,37 @@
             <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
         </div>
     </section>
-    
-    <!-- Catalog Section -->
-    <section id="catalog">
+
+    <!-- Partners Section -->
+    <section id="partners">
         <div class="container">
             <div class="section-content">
-                <h2 class="section-title">Каталог товаров и услуг</h2>
-                <p class="section-subtitle">Витрина локальных точек: кафе, фермеры, ремесленники</p>
-                
+                <h2 class="section-title">Партнёрская программа</h2>
+                <p class="section-subtitle">Условия и материалы для партнёров</p>
+
                 <div class="cards-grid">
                     <div class="card">
-                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
-                        <h3 class="card-title">Оплата</h3>
-                        <p class="card-text">Рубли + баллы лояльности (обмен FM → Ozon/WB, вывод через СБП)</p>
+                        <svg class="card-icon"><use href="#icon-business"></use></svg>
+                        <h3 class="card-title">Условия</h3>
+                        <p class="card-text">% от комиссии за привлечённых поставщиков или клиентов</p>
                     </div>
-                    
+
                     <div class="card">
                         <svg class="card-icon"><use href="#icon-home"></use></svg>
-                        <h3 class="card-title">Акцент</h3>
-                        <p class="card-text">Чаевые в баллах, прямая оплата микробизнесу</p>
+                        <h3 class="card-title">Материалы</h3>
+                        <p class="card-text">QR-коды, баннеры, реферальные ссылки</p>
                     </div>
-                    
+
                     <div class="card">
-                        <svg class="card-icon"><use href="#icon-business"></use></svg>
-                        <h3 class="card-title">Геозависимость</h3>
-                        <p class="card-text">Отображение только локальных поставщиков</p>
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Поддержка</h3>
+                        <p class="card-text">Обучение и консультации для партнёров</p>
                     </div>
-                    
+
                     <div class="card">
                         <svg class="card-icon"><use href="#icon-about"></use></svg>
-                        <h3 class="card-title">Преимущества</h3>
-                        <p class="card-text">Увеличение среднего чека, удержание клиентов, аналитика</p>
+                        <h3 class="card-title">Отчеты</h3>
+                        <p class="card-text">Детальная аналитика по вашим рефералам</p>
                     </div>
                 </div>
             </div>
@@ -349,268 +519,37 @@
             <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
         </div>
     </section>
-    
-    <!-- Business Section -->
-    <section id="business">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="content">
-                    <h2 class="section-title">Для микробизнеса</h2>
-                    <p class="section-subtitle">Подключение как торговой точки (еда, товары, услуги)</p>
-                    
-                    <div class="business-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">3M+</div>
-                            <div class="stat-label">Активных пользователей</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">7000+</div>
-                            <div class="stat-label">Точек продаж</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Франчайзи</div>
-                        </div>
-                    </div>
-                    
-                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
-                        Платформа "Лови" объединяет все точки лояльности в единую экосистему, 
-                        позволяя малому бизнесу конкурировать с крупными сетями за счет 
-                        персонализированного подхода к каждому клиенту.
-                    </p>
-                    
-                    <div class="benefits-list">
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-users"></use></svg>
-                            <h4>Клиенты</h4>
-                            <p>Жители конкретного района с доступом к локальному каталогу, возможность оплаты баллами, кэшбэк и обмен «замороженных» баллов</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-business"></use></svg>
-                            <h4>ТСП</h4>
-                            <p>Кафе, лавки, мастера, фермеры - подключаются по лицензии, получают цифровую витрину без затрат на ИТ и маркетинг</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-home"></use></svg>
-                            <h4>Франчайзи</h4>
-                            <p>Владельцы рынков, ТЦ, получают эксклюзивную лицензию на локацию, обязаны подключить 50 ТСП за 6 месяцев</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-profile"></use></svg>
-                            <h4>Корпоративные</h4>
-                            <p>Компании, желающие мотивировать сотрудников через внутренние баллы, которые можно обменять на универсальные «Лови»</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="image">
-                    <svg class="section-image" width="500" height="400" viewBox="0 0 500 400">
-                        <rect width="500" height="400" fill="#4a6cf7" rx="8"/>
-                        <text x="50%" y="50%" fill="#ffffff" font-size="24" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle">Business Solution</text>
-                    </svg>
-                </div>
-            </div>
-            
-            <div class="section-wrapper">
-                <div class="content">
-                    <div class="business-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">1500+</div>
-                            <div class="stat-label">Подключенных точек</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">25%</div>
-                            <div class="stat-label">Средний рост чека</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">40%</div>
-                            <div class="stat-label">Удержание клиентов</div>
-                        </div>
-                    </div>
-                    
-                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
-                        Платформа "Лови" объединяет все точки лояльности в единую экосистему, 
-                        позволяя малому бизнесу конкурировать с крупными сетями за счет 
-                        персонализированного подхода к каждому клиенту.
-                    </p>
-                    
-                    <div class="benefits-list">
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-features"></use></svg>
-                            <h4>Увеличение среднего чека</h4>
-                            <p>Клиенты тратят на 20-30% больше при использовании системы лояльности</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-features"></use></svg>
-                            <h4>Повышенное удержание</h4>
-                            <p>Система баллов повышает лояльность клиентов</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="content">
-                    <h2 class="section-title">О проекте «Лови»</h2>
-                    <p class="section-subtitle">Инновационная платформа для локального бизнеса</p>
-                    
-                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
-                        Проект «Лови» - это цифровой оператор лояльности, объединяющий локальный бизнес в единую экосистему. 
-                        Мы помогаем малому бизнесу конкурировать с крупными сетями за счет персонализированного подхода.
-                    </p>
-                    
-                    <div class="benefits-list">
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-loyalty"></use></svg>
-                            <h4>Единая система</h4>
-                            <p>Объединение всех баллов лояльности в одной экосистеме</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-network"></use></svg>
-                            <h4>Локальная сеть</h4>
-                            <p>Поддержка местного бизнеса и развитие локальных сообществ</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-grow"></use></svg>
-                            <h4>Рост бизнеса</h4>
-                            <p>Увеличение среднего чека и удержание клиентов</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-finance"></use></svg>
-                            <h4>Финансовые инструменты</h4>
-                            <p>Универсальная оплата: рубли + баллы лояльности</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="image">
-                    <svg class="section-image" width="500" height="400" viewBox="0 0 500 400">
-                        <rect width="500" height="400" fill="#4a6cf7" rx="8"/>
-                        <text x="50%" y="50%" fill="#ffffff" font-size="24" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle">Business Solution</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Franchise Section -->
-    <section id="franchise">
+    <!-- Results Section -->
+    <section id="results">
         <div class="container">
             <div class="section-content">
-                <h2 class="section-title">Франшиза «Город Лови»</h2>
-                <p class="section-subtitle">Станьте частью экосистемы локального бизнеса</p>
+                <h2 class="section-title">Результаты</h2>
+                <p class="section-subtitle">Показатели эффективности нашей платформы</p>
                 
-                <div class="cards-grid">
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-home"></use></svg>
-                        <h3 class="card-title">Эксклюзивная лицензия</h3>
-                        <p class="card-text">Право на использование бренда в вашем городе</p>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-number">1500+</div>
+                        <div class="metric-label">Подключенных точек</div>
+                        <p class="metric-desc">Работающие точки по всей России</p>
                     </div>
                     
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-users"></use></svg>
-                        <h3 class="card-title">Поддержка 50 ТСП</h3>
-                        <p class="card-text">Обязательство подключить 50 торговых точек за 6 месяцев</p>
+                    <div class="metric-card">
+                        <div class="metric-number">25%</div>
+                        <div class="metric-label">Средний рост чека</div>
+                        <p class="metric-desc">Увеличение среднего чека у клиентов</p>
                     </div>
                     
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-strategy"></use></svg>
-                        <h3 class="card-title">Бизнес-модель</h3>
-                        <p class="card-text">Проверенная модель ведения бизнеса с подробной документацией</p>
+                    <div class="metric-card">
+                        <div class="metric-number">40%</div>
+                        <div class="metric-label">Удержание клиентов</div>
+                        <p class="metric-desc">Повышенный уровень лояльности</p>
                     </div>
                     
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-trophy"></use></svg>
-                        <h3 class="card-title">Преимущества</h3>
-                        <p class="card-text">Доход от комиссии и роста локального бизнеса</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Suppliers Section -->
-    <section id="suppliers">
-        <div class="container">
-            <div class="section-wrapper">
-                <div class="image">
-                    <svg class="section-image" width="500" height="400" viewBox="0 0 500 400">
-                        <rect width="500" height="400" fill="#6366f1" rx="8"/>
-                        <text x="50%" y="50%" fill="#ffffff" font-size="24" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle">Для поставщиков</text>
-                    </svg>
-                </div>
-                
-                <div class="content">
-                    <h2 class="section-title">Для поставщиков</h2>
-                    <p class="section-subtitle">Подключитесь к платформе и увеличьте продажи</p>
-                    
-                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
-                        Подключитесь к платформе «Лови» как поставщик товаров или услуг. 
-                        Получите доступ к локальной аудитории без затрат на маркетинг и ИТ-инфраструктуру.
-                    </p>
-                    
-                    <div class="benefits-list">
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-cart"></use></svg>
-                            <h4>Цифровая витрина</h4>
-                            <p>Бесплатная витрина для ваших товаров и услуг</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-grow"></use></svg>
-                            <h4>Рост продаж</h4>
-                            <p>Доступ к локальной аудитории с готовой системой лояльности</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-chart"></use></svg>
-                            <h4>Аналитика</h4>
-                            <p>Детальная статистика по продажам и поведению клиентов</p>
-                        </div>
-                        <div class="benefit-item">
-                            <svg class="benefit-icon" width="24" height="24"><use href="#icon-handshake"></use></svg>
-                            <h4>Поддержка</h4>
-                            <p>Техническая и маркетинговая поддержка</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section id="partners">
-        <div class="container">
-            <div class="section-content">
-                <h2 class="section-title">Партнёрская программа</h2>
-                <p class="section-subtitle">Привлекайте новых участников и зарабатывайте</p>
-                
-                <div class="cards-grid">
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-handshake"></use></svg>
-                        <h3 class="card-title">Привлечение бизнеса</h3>
-                        <p class="card-text">Получайте вознаграждение за привлечение новых торговых точек</p>
-                    </div>
-                    
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-users"></use></svg>
-                        <h3 class="card-title">Привлечение клиентов</h3>
-                        <p class="card-text">Бонусы за привлечение новых пользователей платформы</p>
-                    </div>
-                    
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-chart"></use></svg>
-                        <h3 class="card-title">Аналитика</h3>
-                        <p class="card-text">Доступ к подробной статистике по вашим рефералам</p>
-                    </div>
-                    
-                    <div class="card">
-                        <svg class="card-icon"><use href="#icon-wishlist"></use></svg>
-                        <h3 class="card-title">Преимущества</h3>
-                        <p class="card-text">Дополнительный доход без вложений</p>
+                    <div class="metric-card">
+                        <div class="metric-number">10M+</div>
+                        <div class="metric-label">Баллов в обращении</div>
+                        <p class="metric-desc">Объем баллов в экосистеме</p>
                     </div>
                 </div>
             </div>
@@ -620,145 +559,114 @@
     <!-- Help Section -->
     <section id="help">
         <div class="container">
-            <div class="section-wrapper">
-                <div class="content">
-                    <h2 class="section-title">Помощь и поддержка</h2>
-                    <p class="section-subtitle">Мы всегда готовы помочь</p>
-                    
-                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
-                        У вас есть вопросы? Наша команда поддержки всегда готова помочь вам разобраться 
-                        с любыми аспектами работы платформы «Лови».
-                    </p>
-                    
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <svg class="contact-icon" width="24" height="24"><use href="#icon-email"></use></svg>
-                            <div>
-                                <h4>Электронная почта</h4>
-                                <p>support@lovii.ru</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <svg class="contact-icon" width="24" height="24"><use href="#icon-web"></use></svg>
-                            <div>
-                                <h4>Онлайн поддержка</h4>
-                                <p>Чат в приложении «Лови»</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <svg class="contact-icon" width="24" height="24"><use href="#icon-profile"></use></svg>
-                            <div>
-                                <h4>Документация</h4>
-                                <p>Полная документация на нашем сайте</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="image">
-                    <svg class="section-image" width="500" height="400" viewBox="0 0 500 400">
-                        <rect width="500" height="400" fill="#8b5cf6" rx="8"/>
-                        <text x="50%" y="50%" fill="#ffffff" font-size="24" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle">Помощь и поддержка</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Documents Section -->
-    <section id="docs">
-        <div class="container">
             <div class="section-content">
-                <h2 class="section-title">Документы</h2>
-                <p class="section-subtitle">Юридическая информация и документация</p>
-                
-                <div class="documents-grid">
-                    <div class="document-card">
-                        <svg class="document-icon"><use href="#icon-web"></use></svg>
-                        <h3 class="document-title">Пользовательское соглашение</h3>
-                        <a href="#" class="document-link">Скачать PDF</a>
+                <h2 class="section-title">Помощь и поддержка</h2>
+                <p class="section-subtitle">Разделы: для покупателей, для поставщиков</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-home"></use></svg>
+                        <h3 class="card-title">Для покупателей</h3>
+                        <p class="card-text">Как использовать баллы, как зарегистрироваться, как найти точки</p>
                     </div>
-                    
-                    <div class="document-card">
-                        <svg class="document-icon"><use href="#icon-web"></use></svg>
-                        <h3 class="document-title">Политика конфиденциальности</h3>
-                        <a href="#" class="document-link">Скачать PDF</a>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-business"></use></svg>
+                        <h3 class="card-title">Для поставщиков</h3>
+                        <p class="card-text">Как подключиться, как настроить систему, как управлять акциями</p>
                     </div>
-                    
-                    <div class="document-card">
-                        <svg class="document-icon"><use href="#icon-web"></use></svg>
-                        <h3 class="document-title">Документы для бизнеса</h3>
-                        <a href="#" class="document-link">Скачать архив</a>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Часто задаваемые вопросы</h3>
+                        <p class="card-text">Ответы на самые популярные вопросы о платформе</p>
                     </div>
-                    
-                    <div class="document-card">
-                        <svg class="document-icon"><use href="#icon-web"></use></svg>
-                        <h3 class="document-title">Франшиза «Город Лови»</h3>
-                        <a href="#" class="document-link">Скачать PDF</a>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-about"></use></svg>
+                        <h3 class="card-title">Контакты поддержки</h3>
+                        <p class="card-text">Email, телефон, онлайн-чат для решения ваших вопросов</p>
                     </div>
                 </div>
             </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 10%; left: 5%; opacity: 0.1;"></div>
+            <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
         </div>
     </section>
 
     <!-- Contacts Section -->
     <section id="contacts">
         <div class="container">
-            <div class="section-wrapper">
-                <div class="content">
-                    <h2 class="section-title">Контакты</h2>
-                    <p class="section-subtitle">Свяжитесь с нами</p>
-                    
-                    <p class="section-text" style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; max-width: 600px;">
-                        Готовы присоединиться к экосистеме «Лови»? Свяжитесь с нами, 
-                        и мы расскажем, как начать сотрудничество.
-                    </p>
-                    
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <svg class="contact-icon" width="24" height="24"><use href="#icon-email"></use></svg>
-                            <div>
-                                <h4>Почта для партнёров</h4>
-                                <p>hello@lovii.ru</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <svg class="contact-icon" width="24" height="24"><use href="#icon-location"></use></svg>
-                            <div>
-                                <h4>Адрес</h4>
-                                <p>г. Москва, ул. Примерная, д. 1</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <svg class="contact-icon" width="24" height="24"><use href="#icon-web"></use></svg>
-                            <div>
-                                <h4>Сайт</h4>
-                                <p>lovii.ru</p>
-                            </div>
-                        </div>
+            <div class="section-content">
+                <h2 class="section-title">Контакты</h2>
+                <p class="section-subtitle">Свяжитесь с нами любым удобным способом</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-email"></use></svg>
+                        <h3 class="card-title">Email</h3>
+                        <p class="card-text">hello@lovii.ru</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-home"></use></svg>
+                        <h3 class="card-title">Адрес</h3>
+                        <p class="card-text">г. Москва, ул. Примерная, д. 1</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-business"></use></svg>
+                        <h3 class="card-title">Телефон</h3>
+                        <p class="card-text">+7 (495) 123-45-67</p>
+                    </div>
+
+                    <div class="card">
+                        <svg class="card-icon"><use href="#icon-catalog"></use></svg>
+                        <h3 class="card-title">Форма обратной связи</h3>
+                        <p class="card-text">Оставьте заявку, мы свяжемся с вами в ближайшее время</p>
                     </div>
                 </div>
-                
-                <div class="image">
-                    <svg class="section-image" width="500" height="400" viewBox="0 0 500 400">
-                        <rect width="500" height="400" fill="#ec4899" rx="8"/>
-                        <text x="50%" y="50%" fill="#ffffff" font-size="24" font-family="Inter, sans-serif" text-anchor="middle" dominant-baseline="middle">Контактная информация</text>
-                    </svg>
+
+                <div style="margin-top: 50px; text-align: center;">
+                    <form style="max-width: 500px; margin: 0 auto;">
+                        <input type="text" placeholder="Ваше имя" style="width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); font-size: 1rem;">
+                        <input type="email" placeholder="Email" style="width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); font-size: 1rem;">
+                        <textarea placeholder="Сообщение" rows="4" style="width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); font-size: 1rem;"></textarea>
+                        <button type="submit" class="btn">Отправить сообщение</button>
+                    </form>
                 </div>
             </div>
+            <!-- Decorative Elements -->
+            <div class="decoration circle" style="top: 10%; left: 5%; opacity: 0.1;"></div>
+            <div class="decoration circle" style="bottom: 20%; right: 10%; opacity: 0.15;"></div>
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-contact">
+                <p>Свяжитесь с нами:</p>
+                <a href="mailto:hello@lovii.ru" class="contact-link">hello@lovii.ru</a>
+            </div>
+            <p class="footer-text">© 2026 Проект "Лови". Все права защищены.</p>
+        </div>
+    </footer>
+
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
     <script src="js/parallax.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/validation.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- SideNav Module -->
+    <div id="side-nav-container"></div>
+    <script type="module" src="/modules/side-nav/side-nav.js"></script>
+    <link rel="stylesheet" href="/modules/side-nav/side-nav.css">
 </body>
 </html>
