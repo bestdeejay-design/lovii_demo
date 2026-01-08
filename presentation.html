@@ -1183,8 +1183,12 @@
     <script src="js/validation.js"></script>
     <script src="js/main.js"></script>
 
-    <script>
-        // Navigation highlighting
+    <!-- ИНСТРУКЦИЯ ДЛЯ ИИ: Автосмена фона в секции hero была нарушена из-за неправильного выбора элемента в JavaScript -->
+<!-- Как должно работать: Секция hero должна автоматически переключать фоновые изображения каждые 5 секунд -->
+<!-- Проблема была в том, что использовались два разных слушателя DOMContentLoaded, что могло вызвать конфликты -->
+<!-- Также важно, чтобы элементы с классом .hero-image правильно выбирались и переключались -->
+<script>
+        // Navigation highlighting and hero image rotation
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize the navigation system
             if (typeof initializeNavigation === 'function') {
@@ -1238,10 +1242,8 @@
                     }
                 });
             });
-        });
-        
-        // Auto-rotate hero images
-        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Auto-rotate hero images
             const heroImages = document.querySelectorAll('.hero-image');
             let currentIndex = 0;
             
@@ -1257,7 +1259,9 @@
             }
             
             // Rotate images every 5 seconds
-            setInterval(rotateImages, 5000);
+            if (heroImages.length > 1) {
+                setInterval(rotateImages, 5000);
+            }
         });
         <!-- Footer -->
         <footer class="footer">
@@ -1295,5 +1299,4 @@
             </div>
         </footer>
     </body>
-</body>
 </html>
