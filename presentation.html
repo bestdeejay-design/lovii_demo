@@ -135,6 +135,7 @@
             transition: var(--transition);
             border: none;
             cursor: pointer;
+            min-width: 220px;
         }
         
         .btn-primary {
@@ -200,6 +201,9 @@
             box-shadow: var(--card-shadow);
             transition: var(--transition);
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .card:hover {
@@ -241,6 +245,9 @@
             border-radius: 20px;
             box-shadow: var(--card-shadow);
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .stat-number {
@@ -318,6 +325,9 @@
             border: 1px solid var(--border-color);
             position: relative;
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .pricing-card.popular {
@@ -361,6 +371,7 @@
             list-style: none;
             margin: 30px 0;
             padding: 0;
+            width: 100%;
         }
         
         .card-features li {
@@ -670,6 +681,7 @@
                 width: 100%;
                 max-width: 300px;
                 padding: 15px 20px;
+                min-width: auto;
             }
             
             .cards-grid {
@@ -745,6 +757,24 @@
             .section-wrapper {
                 padding: 0 15px;
             }
+        }
+        
+        /* Accessibility improvements */
+        .nav-item:focus,
+        .menu-link:focus,
+        .close-menu:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Better focus management for mobile menu */
+        .full-menu:focus {
+            outline: none;
         }
     </style>
 </head>
@@ -1259,41 +1289,60 @@
             // Rotate images every 5 seconds
             setInterval(rotateImages, 5000);
         });
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-grid">
-                    <div class="footer-section">
-                        <h3>LOVII</h3>
-                        <ul class="footer-links">
-                            <li><a href="#home">Главная</a></li>
-                            <li><a href="#concept">Концепция</a></li>
-                            <li><a href="#business">Бизнес</a></li>
-                            <li><a href="#results">Результаты</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Партнерство</h3>
-                        <ul class="footer-links">
-                            <li><a href="#partnership">Возможности</a></li>
-                            <li><a href="mailto:hello@lovii.ru">Контакты</a></li>
-                            <li><a href="#">Документы</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Поддержка</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Помощь</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Техподдержка</a></li>
-                        </ul>
-                    </div>
+    </script>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>LOVII</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#concept">Концепция</a></li>
+                        <li><a href="#business">Бизнес</a></li>
+                        <li><a href="#results">Результаты</a></li>
+                    </ul>
                 </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2026 LOVII. Все права защищены. Платформа будущего для локальной экономики.</p>
+                <div class="footer-section">
+                    <h3>Партнерство</h3>
+                    <ul class="footer-links">
+                        <li><a href="#partnership">Возможности</a></li>
+                        <li><a href="mailto:hello@lovii.ru">Контакты</a></li>
+                        <li><a href="#">Документы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Поддержка</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Помощь</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Техподдержка</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Юридическая информация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Пользовательское соглашение</a></li>
+                        <li><a href="#">Реквизиты</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LOVII. Все права защищены. Платформа будущего для локальной экономики.</p>
+            </div>
+        </div>
+    </footer>
     </body>
-</body>
 </html>
