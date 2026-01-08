@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Graphics Sections with 16:9 Background</title>
+    <link rel="stylesheet" href="css/graphics.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 30px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Graphics Sections with 16:9 Aspect Ratio</h1>
+        
+        <!-- Section 1 -->
+        <section class="graphics-section section-1">
+            <div class="aspect-ratio-box">
+                <div class="content-container">
+                    <!-- Background SVG -->
+                    <svg class="background-svg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Example background pattern - you can customize this -->
+                        <defs>
+                            <pattern id="grid1" width="100" height="100" patternUnits="userSpaceOnUse">
+                                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="1600" height="900" fill="url(#grid1)" />
+                        <!-- Decorative elements -->
+                        <circle cx="400" cy="200" r="50" fill="rgba(79, 192, 141, 0.1)" />
+                        <circle cx="1200" cy="700" r="80" fill="rgba(243, 156, 18, 0.1)" />
+                    </svg>
+                    
+                    <!-- Content area for your images -->
+                    <div class="graphics-content">
+                        <img id="image1" class="image-placeholder" src="" alt="Graphics content 1 will appear here" style="display: none;">
+                        <p id="placeholder-text1" style="color: #666; font-size: 1.2em;">Image 1 will appear here after GitHub upload</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2 -->
+        <section class="graphics-section section-2">
+            <div class="aspect-ratio-box">
+                <div class="content-container">
+                    <!-- Background SVG -->
+                    <svg class="background-svg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="grid2" width="80" height="80" patternUnits="userSpaceOnUse">
+                                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="1600" height="900" fill="url(#grid2)" />
+                        <!-- Decorative elements -->
+                        <rect x="300" y="300" width="150" height="150" fill="rgba(155, 89, 182, 0.1)" transform="rotate(45 375 375)" />
+                        <rect x="1100" y="500" width="120" height="120" fill="rgba(231, 76, 60, 0.1)" transform="rotate(30 1160 560)" />
+                    </svg>
+                    
+                    <!-- Content area for your images -->
+                    <div class="graphics-content">
+                        <img id="image2" class="image-placeholder" src="" alt="Graphics content 2 will appear here" style="display: none;">
+                        <p id="placeholder-text2" style="color: #666; font-size: 1.2em;">Image 2 will appear here after GitHub upload</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3 -->
+        <section class="graphics-section section-3">
+            <div class="aspect-ratio-box">
+                <div class="content-container">
+                    <!-- Background SVG -->
+                    <svg class="background-svg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="grid3" width="120" height="120" patternUnits="userSpaceOnUse">
+                                <path d="M 120 0 L 0 0 0 120" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="1600" height="900" fill="url(#grid3)" />
+                        <!-- Decorative elements -->
+                        <circle cx="800" cy="450" r="100" fill="rgba(241, 196, 15, 0.1)" />
+                        <circle cx="500" cy="650" r="60" fill="rgba(52, 152, 219, 0.1)" />
+                        <circle cx="1100" cy="250" r="40" fill="rgba(155, 89, 182, 0.1)" />
+                    </svg>
+                    
+                    <!-- Content area for your images -->
+                    <div class="graphics-content">
+                        <img id="image3" class="image-placeholder" src="" alt="Graphics content 3 will appear here" style="display: none;">
+                        <p id="placeholder-text3" style="color: #666; font-size: 1.2em;">Image 3 will appear here after GitHub upload</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4 -->
+        <section class="graphics-section section-4">
+            <div class="aspect-ratio-box">
+                <div class="content-container">
+                    <!-- Background SVG -->
+                    <svg class="background-svg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="grid4" width="60" height="60" patternUnits="userSpaceOnUse">
+                                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="1600" height="900" fill="url(#grid4)" />
+                        <!-- Decorative elements -->
+                        <rect x="200" y="200" width="200" height="80" rx="10" fill="rgba(26, 188, 156, 0.1)" transform="rotate(15 300 240)" />
+                        <rect x="1200" y="600" width="180" height="80" rx="10" fill="rgba(230, 126, 34, 0.1)" transform="rotate(-15 1290 640)" />
+                    </svg>
+                    
+                    <!-- Content area for your images -->
+                    <div class="graphics-content">
+                        <img id="image4" class="image-placeholder" src="" alt="Graphics content 4 will appear here" style="display: none;">
+                        <p id="placeholder-text4" style="color: #666; font-size: 1.2em;">Image 4 will appear here after GitHub upload</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Function to update image source when you have the GitHub URL
+        function updateGraphicsImage(imageId, placeholderId, imageUrl) {
+            const imgElement = document.getElementById(imageId);
+            const placeholder = document.getElementById(placeholderId);
+            
+            if (imageUrl) {
+                imgElement.src = imageUrl;
+                imgElement.style.display = 'block';
+                placeholder.style.display = 'none';
+            } else {
+                imgElement.style.display = 'none';
+                placeholder.style.display = 'block';
+            }
+        }
+        
+        // Example usage for each section:
+        // updateGraphicsImage('image1', 'placeholder-text1', 'https://raw.githubusercontent.com/username/repository/branch/path/to/image1.jpg');
+        // updateGraphicsImage('image2', 'placeholder-text2', 'https://raw.githubusercontent.com/username/repository/branch/path/to/image2.jpg');
+        // updateGraphicsImage('image3', 'placeholder-text3', 'https://raw.githubusercontent.com/username/repository/branch/path/to/image3.jpg');
+        // updateGraphicsImage('image4', 'placeholder-text4', 'https://raw.githubusercontent.com/username/repository/branch/path/to/image4.jpg');
+        
+        // You can also update all at once with an array of URLs
+        function updateAllImages(imageUrls) {
+            const imageIds = ['image1', 'image2', 'image3', 'image4'];
+            const placeholderIds = ['placeholder-text1', 'placeholder-text2', 'placeholder-text3', 'placeholder-text4'];
+            
+            imageUrls.forEach((url, index) => {
+                if (index < imageIds.length) {
+                    updateGraphicsImage(imageIds[index], placeholderIds[index], url);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
