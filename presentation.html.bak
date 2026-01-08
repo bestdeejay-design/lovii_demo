@@ -107,7 +107,7 @@
             font-weight: 900;
             margin-bottom: 20px;
             line-height: 1.1;
-            color: white;
+            color: var(--text-color);
             animation: fadeInUp 1s ease-out;
         }
         
@@ -115,14 +115,14 @@
             font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 40px;
-            color: white;
+            color: var(--text-color);
             animation: fadeInUp 1s ease-out 0.2s both;
         }
         
         .hero-tagline {
             font-size: 1.2rem;
             margin-bottom: 60px;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             animation: fadeInUp 1s ease-out 0.4s both;
         }
         
@@ -999,6 +999,17 @@
             </div>
             <div class="menu-category">
                 <div class="menu-category-header">
+                    <span>Поддержка</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#partnership" class="menu-link">Контакты</a>
+                    <a href="#partnership" class="menu-link">Документы</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-image-container">
@@ -1023,23 +1034,21 @@
             <img src="img/generated_image_d47fb216-ff34-4f0d-a43a-7bb48d3e60a6.png" class="hero-image" alt="LOVII Platform">
         </div>
         <div class="hero-overlay"></div>
-        <!-- Hero Content Inside the Hero Section -->
-        <div class="hero-content-wrapper">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">LOVII</h1>
-                    <p class="hero-subtitle">Цифровая инфраструктура локальной экономики</p>
-                    <p class="hero-tagline">Объединяем баллы лояльности, увеличиваем продажи, создаем масштабируемую экосистему</p>
-                    <div class="hero-buttons">
-                        <a href="#partnership" class="btn btn-primary">Стать стратегическим партнером</a>
-                        <a href="#concept" class="btn btn-secondary">Узнать больше</a>
+    </section>
+    
+    <section class="hero-content-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">LOVII</h1>
+                <p class="hero-subtitle">Цифровая инфраструктура локальной экономики</p>
+                <p class="hero-tagline">Объединяем баллы лояльности, увеличиваем продажи, создаем масштабируемую экосистему</p>
+                <div class="hero-buttons">
+                    <a href="#partnership" class="btn btn-primary">Стать стратегическим партнером</a>
+                    <a href="#concept" class="btn btn-secondary">Узнать больше</a>
                 </div>
             </div>
         </div>
     </section>
-            </div>
-    </section>
-                </div>
 
     <!-- Concept Section -->
     <section class="presentation-section" id="concept">
@@ -1309,6 +1318,15 @@
         });
     </script>
     
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/main.js"></script>
     
     <!-- Footer -->
     <footer class="footer">
