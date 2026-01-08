@@ -89,6 +89,17 @@
             margin: 0 auto;
             padding: 0 20px;
             text-align: center;
+            position: relative;
+            z-index: 3; /* Ensure content appears above overlay */
+        }
+        
+        .hero-content-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+            z-index: 3; /* Ensure content appears above overlay */
         }
         
         .hero-title {
@@ -960,10 +971,10 @@
             <svg class="nav-icon"><use href="#icon-handshake"></use></svg>
             <span>Партнерство</span>
         </a>
-        <a href="#" class="nav-item" id="more-btn">
-            <svg class="nav-icon"><use href="#icon-more"></use></svg>
-            <span>Еще</span>
-        </a>
+        <button class="theme-toggle" id="mobile-theme-toggle">
+            <svg class="nav-icon"><use href="#icon-settings"></use></svg>
+            <span>Тема</span>
+        </button>
     </nav>
 
     <!-- Full Menu -->
@@ -988,17 +999,6 @@
             </div>
             <div class="menu-category">
                 <div class="menu-category-header">
-                    <span>Поддержка</span>
-                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
-                </div>
-                <div class="menu-category-content">
-                    <a href="#partnership" class="menu-link">Контакты</a>
-                    <a href="#partnership" class="menu-link">Документы</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-image-container">
@@ -1023,21 +1023,23 @@
             <img src="img/generated_image_d47fb216-ff34-4f0d-a43a-7bb48d3e60a6.png" class="hero-image" alt="LOVII Platform">
         </div>
         <div class="hero-overlay"></div>
-    </section>
-    
-    <section class="hero-content-section">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">LOVII</h1>
-                <p class="hero-subtitle">Цифровая инфраструктура локальной экономики</p>
-                <p class="hero-tagline">Объединяем баллы лояльности, увеличиваем продажи, создаем масштабируемую экосистему</p>
-                <div class="hero-buttons">
-                    <a href="#partnership" class="btn btn-primary">Стать стратегическим партнером</a>
-                    <a href="#concept" class="btn btn-secondary">Узнать больше</a>
+        <!-- Hero Content Inside the Hero Section -->
+        <div class="hero-content-wrapper">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">LOVII</h1>
+                    <p class="hero-subtitle">Цифровая инфраструктура локальной экономики</p>
+                    <p class="hero-tagline">Объединяем баллы лояльности, увеличиваем продажи, создаем масштабируемую экосистему</p>
+                    <div class="hero-buttons">
+                        <a href="#partnership" class="btn btn-primary">Стать стратегическим партнером</a>
+                        <a href="#concept" class="btn btn-secondary">Узнать больше</a>
                 </div>
             </div>
         </div>
     </section>
+            </div>
+    </section>
+                </div>
 
     <!-- Concept Section -->
     <section class="presentation-section" id="concept">
