@@ -1,1 +1,10 @@
-(css/graphics.css, graphics_section.html, graphics_sections_readme.md, multi_graphics_sections.html)
+```
+# Images
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.webm
+*.svg
+```
