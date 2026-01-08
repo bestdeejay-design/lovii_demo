@@ -65,7 +65,7 @@
         }
         
         .hero-image.active {
-            opacity: 0.3;
+            opacity: 0.2; /* Reduced opacity for better visibility */
         }
         
         .hero-overlay {
@@ -74,7 +74,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(66, 153, 225, 0.7) 0%, rgba(139, 92, 246, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.5) 0%, rgba(139, 92, 246, 0.5) 100%); /* Reduced opacity for better visibility */
             z-index: 2;
         }
         
@@ -471,7 +471,56 @@
         
         /* Mobile Navigation */
         .mobile-nav {
-            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+            display: none; /* Initially hidden, will be shown via media query */
+        }
+        
+        .mobile-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            min-width: 50px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            border-radius: 8px;
+        }
+        
+        .mobile-nav .nav-item.active,
+        .mobile-nav .nav-item:hover {
+            color: var(--accent-color);
+        }
+        
+        .mobile-nav .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .mobile-nav span {
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: flex;
+            }
+            
+            .left-nav {
+                display: none;
+            }
         }
         
         /* Full Menu (Hidden by default) */
@@ -490,7 +539,7 @@
             overflow-y: auto;
         }
         
-        .full-menu.show {
+        .full-menu.active {
             transform: translateY(0);
         }
         
@@ -584,6 +633,10 @@
                 font-size: 1.2rem;
             }
             
+            .hero-tagline {
+                font-size: 1rem;
+            }
+            
             .section-title {
                 font-size: 2rem;
             }
@@ -595,11 +648,87 @@
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
             
             .btn {
                 width: 100%;
                 max-width: 300px;
+                padding: 15px 20px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .card {
+                padding: 25px 20px;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stat-item {
+                padding: 25px;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+            
+            .testimonial {
+                padding: 30px;
+            }
+            
+            .testimonial-text {
+                font-size: 1.1rem;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card {
+                padding: 30px 20px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 16px;
+                font-size: 1rem;
+            }
+            
+            .section-wrapper {
+                padding: 0 15px;
             }
         }
     </style>
@@ -1024,50 +1153,62 @@
                     <a href="mailto:hello@lovii.ru?subject=Тариф Премиум" class="btn btn-primary">Начать сотрудничество</a>
                 </div>
 
-                <div class="pricing-card">
-                    <h3 class="card-title">VIP</h3>
-                    <div class="card-price">0–5% + абонплата</div>
-                    <p class="card-desc">до 30 000 ₽/мес</p>
-                    <ul class="card-features">
-                        <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Все функции Премиум</li>
-                        <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Индивидуальная настройка</li>
-                        <li><svg class="feature-icon"><use href="#icon-features"></use></svg> Приоритетная поддержка</li>
-                    </ul>
-                    <a href="mailto:hello@lovii.ru?subject=Тариф VIP" class="btn btn-primary">Начать сотрудничество</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>LOVII</h3>
-                    <p>Цифровая инфраструктура локальной экономики</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Контакты</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:hello@lovii.ru">hello@lovii.ru</a></li>
-                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
-                        <li>г. Москва, ул. Примерная, д. 1</li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Партнерам</h3>
-                    <ul class="footer-links">
-                        <li><a href="#business">Бизнес-модель</a></li>
-                        <li><a href="#partnership">Партнерство</a></li>
-                        <li><a href="#results">Результаты</a></li>
-                    </ul>
-                </div>
-            </div>
+        document.addEventListener(047DOMContentLoaded047, function() {
+            // Initialize the navigation system
+            if (typeof initializeNavigation === 047function047) {
+                initializeNavigation();
+            }
             
-            <div class="footer-bottom">
+            const sections = document.querySelectorAll(047.presentation-section047);
+            const navItems = document.querySelectorAll(047.nav-item047);
+            
+            function updateActiveNav() {
+                let current = 047047;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute(047id047);
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    if (!item.id || (item.id !== 047more-btn047 && !item.classList.contains(047menu-link047))) {
+                        item.classList.remove(047active047);
+                        if (item.getAttribute(047href047) && item.getAttribute(047href047).substring(1) === current) {
+                            item.classList.add(047active047);
+                        }
+                    }
+                });
+            }
+            
+            window.addEventListener(047scroll047, updateActiveNav);
+            updateActiveNav();
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll(047a[href^="#"]:not(.menu-link):not([id="more-btn"])047).forEach(anchor => {
+                anchor.addEventListener(047click047, function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute(047href047));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 047smooth047
+                        });
+                        
+                        // Close full menu after selection
+                        const fullMenu = document.getElementById(047full-menu047);
+                        if (fullMenu) {
+                            fullMenu.classList.remove(047active047);
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Auto-rotate hero images
                 <p>&copy; 2026 LOVII. Все права защищены. Платформа будущего для локальной экономики.</p>
             </div>
         </div>
@@ -1086,6 +1227,11 @@
     <script>
         // Navigation highlighting
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the navigation system
+            if (typeof initializeNavigation === 'function') {
+                initializeNavigation();
+            }
+            
             const sections = document.querySelectorAll('.presentation-section');
             const navItems = document.querySelectorAll('.nav-item');
             
@@ -1102,9 +1248,11 @@
                 });
                 
                 navItems.forEach(item => {
-                    item.classList.remove('active');
-                    if (item.getAttribute('href').substring(1) === current) {
-                        item.classList.add('active');
+                    if (!item.id || (item.id !== 'more-btn' && !item.classList.contains('menu-link'))) {
+                        item.classList.remove('active');
+                        if (item.getAttribute('href') && item.getAttribute('href').substring(1) === current) {
+                            item.classList.add('active');
+                        }
                     }
                 });
             }
@@ -1113,7 +1261,7 @@
             updateActiveNav();
             
             // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            document.querySelectorAll('a[href^="#"]:not(.menu-link):not([id="more-btn"])').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
@@ -1123,12 +1271,10 @@
                             behavior: 'smooth'
                         });
                         
-                        // Close mobile menu after selection
-                        const mobileNav = document.querySelector('.mobile-nav');
-                        if (mobileNav) {
-                            setTimeout(() => {
-                                mobileNav.classList.remove('show');
-                            }, 500);
+                        // Close full menu after selection
+                        const fullMenu = document.getElementById('full-menu');
+                        if (fullMenu) {
+                            fullMenu.classList.remove('active');
                         }
                     }
                 });
