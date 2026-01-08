@@ -15,6 +15,8 @@ function initializeThemeManagement() {
             newTheme = 'light';
         } else if (currentTheme === 'light') {
             newTheme = 'vibrant';
+        } else if (currentTheme === 'vibrant') {
+            newTheme = 'casual';
         } else {
             newTheme = 'dark';
         }
