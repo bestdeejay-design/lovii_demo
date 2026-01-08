@@ -32,6 +32,18 @@
     --card-bg-alt: rgba(255, 255, 255, 0.08);
 }
 
+[data-theme="casual"] {
+    --bg-color: #F5F7FA;
+    --text-color: #4A5447;
+    --accent-color: #C97C5D;
+    --card-bg: #FFFFFF;
+    --border-color: #E0E6ED;
+    --icon-color: #8F9E8B;
+    --shadow: 0 4px 12px rgba(201, 124, 93, 0.1);
+    --gradient-primary: linear-gradient(135deg, #C97C5D, #C9A66B);
+    --card-bg-alt: rgba(201, 124, 93, 0.05);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     * {
