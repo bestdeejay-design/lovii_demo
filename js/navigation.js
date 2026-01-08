@@ -7,29 +7,39 @@ function initializeNavigation() {
     const closeMenu = document.getElementById('close-menu');
     const menuLinks = document.querySelectorAll('.menu-link');
 
-    moreBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        fullMenu.classList.add('active');
-    });
+    // Only add event listener if moreBtn exists (for pages that have it)
+    if (moreBtn) {
+        moreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            fullMenu.classList.add('active');
+        });
+    }
 
-    closeMenu.addEventListener('click', function() {
-        fullMenu.classList.remove('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!fullMenu.contains(e.target) && 
-            !moreBtn.contains(e.target) && 
-            fullMenu.classList.contains('active')) {
+    // Only add event listener if closeMenu exists
+    if (closeMenu) {
+        closeMenu.addEventListener('click', function() {
             fullMenu.classList.remove('active');
-        }
-    });
+        });
+    }
+
+    // Close menu when clicking outside (only if both elements exist)
+    if (moreBtn && closeMenu) {
+        document.addEventListener('click', function(e) {
+            if (!fullMenu.contains(e.target) && 
+                !moreBtn.contains(e.target) && 
+                fullMenu.classList.contains('active')) {
+                fullMenu.classList.remove('active');
+            }
+        });
+    }
     
     // Close menu when clicking on menu links
     menuLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Close the full menu
-            fullMenu.classList.remove('active');
+            // Close the full menu if it exists
+            if (fullMenu) {
+                fullMenu.classList.remove('active');
+            }
             
             // Handle navigation if the link has a hash
             if (this.getAttribute('href') && this.getAttribute('href') !== '#') {
