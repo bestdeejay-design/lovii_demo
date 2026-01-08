@@ -11,9 +11,13 @@
 ### Основные файлы
 - `index.html` - главная страница с полным описанием проекта
 - `presentation.html` - презентационный контент для инвесторов
-- `css/` - стилевые файлы (main.css, responsive.css, sections.css, animations.css, theme.css)
+- `graphics_section.html` - секция для графических материалов с соотношением сторон 16:9
+- `css/` - стилевые файлы (main.css, responsive.css, sections.css, animations.css, theme.css, graphics.css)
 - `js/` - скриптовые файлы (main.js, navigation.js, animations.js, parallax.js, theme.js, validation.js)
 - `modules/side-nav/` - модуль боковой навигации
+- `img/` - каталог с изображениями для графических материалов
+- `analysis.md` - анализ отзывчивости presentation.html
+- `graphics_sections_readme.md` - документация по графическим секциям
 
 ### Основные разделы сайта
 - Главная (hero section)
@@ -28,6 +32,7 @@
 - Помощь и поддержка
 - Контакты
 - Документы
+- Графические материалы (в отдельном файле graphics_section.html)
 
 ## Основные возможности
 
@@ -48,6 +53,9 @@
 - Поддержка режима ограниченной подвижности (prefers-reduced-motion)
 - Наличие боковой навигации для десктопных устройств
 - Использование современных библиотек (GSAP для анимаций, Rellax для параллакса)
+- Графические секции с соотношением сторон 16:9 для визуального контента
+- Улучшенная мобильная адаптация с оптимизированными сенсорными элементами
+- Оптимизация сложных макетов для лучшего отображения на мобильных устройствах
 
 ### Технические особенности:
 - Используется CSS Grid и Flexbox для адаптивного дизайна
@@ -59,6 +67,9 @@
 - Сохранение выбранной темы в localStorage
 - Поддержка различных размеров экранов
 - Минимальные размеры интерактивных элементов для удобства на мобильных устройствах
+- Графические секции с соотношением сторон 16:9
+- Улучшенная мобильная адаптация с оптимизированными размерами сенсорных элементов
+- Оптимизация сложных макетов для мобильных экранов
 
 ## Как работает сайт и его компоненты
 
@@ -143,6 +154,7 @@ AI AGENT GUIDE:
    - Use @media (max-width: 480px) for very small screens
    - Adjust padding and font sizes for better readability on small screens
    - Ensure all content remains accessible when grid layouts change
+   - Graphics sections should maintain 16:9 aspect ratio using padding-top technique
 8. Mobile menu behavior:
    - Full menu (opened by 'more' icon) should automatically close when clicking on menu links
    - Menu links should maintain smooth scrolling navigation functionality
@@ -155,15 +167,21 @@ AI AGENT GUIDE:
 /workspace/
 ├── CNAME
 ├── README.md
+├── analysis.md
 ├── audit_report.md
 ├── css/
 │   ├── animations.css
+│   ├── graphics.css
 │   ├── main.css
 │   ├── responsive.css
 │   ├── sections.css
 │   └── theme.css
 ├── design_system_prompt.md
+├── graphics_section.html
+├── graphics_sections_readme.md
 ├── gsap.min.js
+├── img/
+│   ├── generated_image_*.png (multiple image files)
 ├── index.html
 ├── js/
 │   ├── animations.js
@@ -188,6 +206,7 @@ AI AGENT GUIDE:
 - `sections.css` - Стили для секций и карточек
 - `animations.css` - CSS анимации
 - `theme.css` - Переменные тем и стили для режима ограниченной подвижности
+- `graphics.css` - Стили для графических секций с соотношением сторон 16:9
 
 ### Файлы JavaScript
 
