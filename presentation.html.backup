@@ -1152,8 +1152,67 @@
                     </ul>
                     <a href="mailto:hello@lovii.ru?subject=Тариф Премиум" class="btn btn-primary">Начать сотрудничество</a>
                 </div>
+
+        document.addEventListener(047DOMContentLoaded047, function() {
+            // Initialize the navigation system
+            if (typeof initializeNavigation === 047function047) {
+                initializeNavigation();
+            }
+            
+            const sections = document.querySelectorAll(047.presentation-section047);
+            const navItems = document.querySelectorAll(047.nav-item047);
+            
+            function updateActiveNav() {
+                let current = 047047;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute(047id047);
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    if (!item.id || (item.id !== 047more-btn047 && !item.classList.contains(047menu-link047))) {
+                        item.classList.remove(047active047);
+                        if (item.getAttribute(047href047) && item.getAttribute(047href047).substring(1) === current) {
+                            item.classList.add(047active047);
+                        }
+                    }
+                });
+            }
+            
+            window.addEventListener(047scroll047, updateActiveNav);
+            updateActiveNav();
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll(047a[href^="#"]:not(.menu-link):not([id="more-btn"])047).forEach(anchor => {
+                anchor.addEventListener(047click047, function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute(047href047));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 047smooth047
+                        });
+                        
+                        // Close full menu after selection
+                        const fullMenu = document.getElementById(047full-menu047);
+                        if (fullMenu) {
+                            fullMenu.classList.remove(047active047);
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Auto-rotate hero images
+                <p>&copy; 2026 LOVII. Все права защищены. Платформа будущего для локальной экономики.</p>
             </div>
-        </section>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -1168,11 +1227,6 @@
     <script>
         // Navigation highlighting
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize the navigation system
-            if (typeof initializeNavigation === 'function') {
-                initializeNavigation();
-            }
-            
             const sections = document.querySelectorAll('.presentation-section');
             const navItems = document.querySelectorAll('.nav-item');
             
@@ -1189,11 +1243,9 @@
                 });
                 
                 navItems.forEach(item => {
-                    if (!item.id || (item.id !== 'more-btn' && !item.classList.contains('menu-link'))) {
-                        item.classList.remove('active');
-                        if (item.getAttribute('href') && item.getAttribute('href').substring(1) === current) {
-                            item.classList.add('active');
-                        }
+                    item.classList.remove('active');
+                    if (item.getAttribute('href').substring(1) === current) {
+                        item.classList.add('active');
                     }
                 });
             }
@@ -1202,7 +1254,7 @@
             updateActiveNav();
             
             // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]:not(.menu-link):not([id="more-btn"])').forEach(anchor => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
@@ -1241,41 +1293,6 @@
             // Rotate images every 5 seconds
             setInterval(rotateImages, 5000);
         });
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-grid">
-                    <div class="footer-section">
-                        <h3>LOVII</h3>
-                        <ul class="footer-links">
-                            <li><a href="#home">Главная</a></li>
-                            <li><a href="#concept">Концепция</a></li>
-                            <li><a href="#business">Бизнес</a></li>
-                            <li><a href="#results">Результаты</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Партнерство</h3>
-                        <ul class="footer-links">
-                            <li><a href="#partnership">Возможности</a></li>
-                            <li><a href="mailto:hello@lovii.ru">Контакты</a></li>
-                            <li><a href="#">Документы</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Поддержка</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Помощь</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Техподдержка</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2026 LOVII. Все права защищены. Платформа будущего для локальной экономики.</p>
-                </div>
-            </div>
-        </footer>
-    </body>
+    </script>
 </body>
 </html>
