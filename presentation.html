@@ -571,11 +571,11 @@
             max-height: 70vh;
             overflow-y: auto;
         }
-        
+
         .full-menu.active {
             transform: translateY(0);
         }
-        
+
         .menu-header {
             display: flex;
             justify-content: space-between;
@@ -584,12 +584,12 @@
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 15px;
         }
-        
+
         .menu-header h3 {
             margin: 0;
             color: var(--text-color);
         }
-        
+
         .close-menu {
             background: none;
             border: none;
@@ -603,17 +603,17 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .menu-links {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        
+
         .menu-category {
             margin-bottom: 15px;
         }
-        
+
         .menu-category-header {
             display: flex;
             justify-content: space-between;
@@ -621,17 +621,17 @@
             padding: 10px 0;
             cursor: pointer;
         }
-        
+
         .menu-category-content {
             display: none;
             padding-left: 10px;
             margin-top: 10px;
         }
-        
+
         .menu-category-content.show {
             display: block;
         }
-        
+
         .menu-link {
             display: block;
             padding: 10px 15px;
@@ -640,12 +640,12 @@
             border-radius: 8px;
             transition: var(--transition);
         }
-        
+
         .menu-link:hover {
             background: var(--card-bg-alt);
             color: var(--accent-color);
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -656,120 +656,120 @@
                 transform: translateY(0);
             }
         }
-        
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1.2rem;
             }
-            
+
             .hero-tagline {
                 font-size: 1rem;
             }
-            
+
             .hero-content-section {
                 padding: 40px 0;
             }
-            
+
             .section-title {
                 font-size: 2rem;
             }
-            
+
             .left-nav {
                 display: none;
             }
-            
+
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
             }
-            
+
             .btn {
                 width: 100%;
                 max-width: 300px;
                 padding: 15px 20px;
                 min-width: auto;
             }
-            
+
             .cards-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .card {
                 padding: 25px 20px;
             }
-            
+
             .card-title {
                 font-size: 1.3rem;
             }
-            
+
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .stat-item {
                 padding: 25px;
             }
-            
+
             .stat-number {
                 font-size: 3rem;
             }
-            
+
             .testimonial {
                 padding: 30px;
             }
-            
+
             .testimonial-text {
                 font-size: 1.1rem;
             }
-            
+
             .pricing-cards {
                 grid-template-columns: 1fr;
             }
-            
+
             .pricing-card {
                 padding: 30px 20px;
             }
-            
+
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .hero {
                 padding: 100px 0;
             }
-            
+
             .hero-title {
                 font-size: 2rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1.1rem;
             }
-            
+
             .section-title {
                 font-size: 1.8rem;
             }
-            
+
             .btn {
                 padding: 12px 16px;
                 font-size: 1rem;
             }
-            
+
             .section-wrapper {
                 padding: 0 15px;
             }
         }
-        
+
         /* Accessibility improvements */
         .nav-item:focus,
         .menu-link:focus,
@@ -777,12 +777,12 @@
             outline: 2px solid var(--accent-color);
             outline-offset: 2px;
         }
-        
+
         /* Smooth scrolling for anchor links */
         html {
             scroll-behavior: smooth;
         }
-        
+
         /* Better focus management for mobile menu */
         .full-menu:focus {
             outline: none;
@@ -834,7 +834,7 @@
         </symbol>
         <symbol id="icon-cart" viewBox="0 0 24 24">
             <g fill="var(--icon-color)">
-                <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1"/>
             </g>
         </symbol>
         <symbol id="icon-wishlist" viewBox="0 0 24 24">
@@ -912,7 +912,6 @@
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </g>
         </symbol>
-        
         <symbol id="icon-settings" viewBox="0 0 24 24">
             <g fill="var(--icon-color)">
                 <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5Z" />
@@ -948,7 +947,7 @@
             <span>Тема</span>
         </button>
     </nav>
-    
+
     <!-- Mobile Navigation -->
     <nav class="mobile-nav">
         <a href="#home" class="nav-item active" data-target="home">
@@ -999,6 +998,19 @@
             </div>
             <div class="menu-category">
                 <div class="menu-category-header">
+                    <span>Поддержка</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#" class="menu-link">Помощь</a>
+                    <a href="#" class="menu-link">Контакты</a>
+                    <a href="#" class="menu-link">Документы</a>
+                </div>
+            </div>
+        </div>
+        <button class="theme-toggle" id="menu-theme-toggle">Сменить тему</button>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-image-container">
@@ -1033,13 +1045,11 @@
                     <div class="hero-buttons">
                         <a href="#partnership" class="btn btn-primary">Стать стратегическим партнером</a>
                         <a href="#concept" class="btn btn-secondary">Узнать больше</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-            </div>
-    </section>
-                </div>
 
     <!-- Concept Section -->
     <section class="presentation-section" id="concept">
@@ -1219,7 +1229,8 @@
                     <a href="mailto:hello@lovii.ru?subject=Тариф Премиум" class="btn btn-primary">Начать сотрудничество</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -1238,22 +1249,22 @@
             if (typeof initializeNavigation === 'function') {
                 initializeNavigation();
             }
-            
+
             const sections = document.querySelectorAll('.presentation-section');
             const navItems = document.querySelectorAll('.nav-item');
-            
+
             function updateActiveNav() {
                 let current = '';
-                
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
-                    
+
                     if (pageYOffset >= (sectionTop - 200)) {
                         current = section.getAttribute('id');
                     }
                 });
-                
+
                 navItems.forEach(item => {
                     if (!item.id || (item.id !== 'more-btn' && !item.classList.contains('menu-link'))) {
                         item.classList.remove('active');
@@ -1263,10 +1274,10 @@
                     }
                 });
             }
-            
+
             window.addEventListener('scroll', updateActiveNav);
             updateActiveNav();
-            
+
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]:not(.menu-link):not([id="more-btn"])').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -1277,7 +1288,7 @@
                             top: target.offsetTop - 100,
                             behavior: 'smooth'
                         });
-                        
+
                         // Close full menu after selection
                         const fullMenu = document.getElementById('full-menu');
                         if (fullMenu) {
@@ -1287,29 +1298,28 @@
                 });
             });
         });
-        
+
         // Auto-rotate hero images
         document.addEventListener('DOMContentLoaded', function() {
             const heroImages = document.querySelectorAll('.hero-image');
             let currentIndex = 0;
-            
+
             function rotateImages() {
                 // Remove active class from current image
                 heroImages[currentIndex].classList.remove('active');
-                
+
                 // Move to next image
                 currentIndex = (currentIndex + 1) % heroImages.length;
-                
+
                 // Add active class to next image
                 heroImages[currentIndex].classList.add('active');
             }
-            
+
             // Rotate images every 5 seconds
             setInterval(rotateImages, 5000);
         });
     </script>
-    
-    
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -1353,5 +1363,5 @@
             </div>
         </div>
     </footer>
-    </body>
+</body>
 </html>
