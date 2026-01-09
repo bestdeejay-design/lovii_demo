@@ -4,22 +4,28 @@ function initializeAnimations() {
     // Add gsap-loaded class to body to enable animation states
     document.body.classList.add('gsap-loaded');
     
-    // GSAP animations
-    gsap.from('.hero-title', {
-        duration: 1,
-        y: 50,
-        opacity: 0,
-        ease: 'power3.out',
-        delay: 0.2
-    });
+    // GSAP animations - only run if elements exist
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        gsap.from(heroTitle, {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.2
+        });
+    }
     
-    gsap.from('.hero-subtitle', {
-        duration: 1,
-        y: 30,
-        opacity: 0,
-        ease: 'power3.out',
-        delay: 0.4
-    });
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroSubtitle) {
+        gsap.from(heroSubtitle, {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.4
+        });
+    }
     
     // Add animation initialization class to buttons for GSAP to use as starting point
     const buttons = document.querySelectorAll('.btn');
@@ -27,76 +33,85 @@ function initializeAnimations() {
         button.classList.add('animate-init');
     });
     
-    gsap.from('.btn', {
-        duration: 0.8,
-        y: 20,
-        opacity: 0,
-        ease: 'power3.out',
-        delay: 0.6
-    });
+    if (buttons.length > 0) {
+        gsap.from('.btn', {
+            duration: 0.8,
+            y: 20,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.6
+        });
+    }
     
-    // Animate decorative elements
-    gsap.from('.decoration', {
-        duration: 1.5,
-        scale: 0,
-        opacity: 0,
-        ease: 'elastic.out(1, 0.5)',
-        stagger: 0.2,
-        delay: 0.5
-    });
+    // Animate decorative elements only if they exist
+    const decorations = document.querySelectorAll('.decoration');
+    if (decorations.length > 0) {
+        gsap.from('.decoration', {
+            duration: 1.5,
+            scale: 0,
+            opacity: 0,
+            ease: 'elastic.out(1, 0.5)',
+            stagger: 0.2,
+            delay: 0.5
+        });
+    }
 
     // Animate cards when they come into view
     const cards = document.querySelectorAll('.card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                gsap.to(entry.target, {
-                    duration: 0.6,
-                    y: 0,
-                    opacity: 1,
-                    ease: 'power2.out',
-                    scale: 1
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
+    if (cards.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    gsap.to(entry.target, {
+                        duration: 0.6,
+                        y: 0,
+                        opacity: 1,
+                        ease: 'power2.out',
+                        scale: 1
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-    cards.forEach(card => {
-        gsap.set(card, { y: 30, opacity: 0, scale: 0.95 });
-        observer.observe(card);
-    });
+        cards.forEach(card => {
+            gsap.set(card, { y: 30, opacity: 0, scale: 0.95 });
+            observer.observe(card);
+        });
+    }
     
     // Animate section titles
     const sectionTitles = document.querySelectorAll('.section-title');
-    const titleObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                gsap.to(entry.target, {
-                    duration: 0.8,
-                    y: 0,
-                    opacity: 1,
-                    ease: 'back.out(1.7)',
-                    onComplete: () => {
-                        // Add a subtle bounce effect after the main animation
-                        gsap.to(entry.target, {
-                            duration: 0.3,
-                            yoyo: true,
-                            repeat: 1,
-                            y: -5,
-                            ease: 'power1.inOut'
-                        });
-                    }
-                });
-                titleObserver.unobserve(entry.target);
-            }
+    if (sectionTitles.length > 0) {
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    gsap.to(entry.target, {
+                        duration: 0.8,
+                        y: 0,
+                        opacity: 1,
+                        ease: 'back.out(1.7)',
+                        onComplete: () => {
+                            // Add a subtle bounce effect after the main animation
+                            gsap.to(entry.target, {
+                                duration: 0.3,
+                                yoyo: true,
+                                repeat: 1,
+                                y: -5,
+                                ease: 'power1.inOut'
+                            });
+                        }
+                    });
+                    titleObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        sectionTitles.forEach(title => {
+            gsap.set(title, { y: 20, opacity: 0 });
+            titleObserver.observe(title);
         });
-    }, { threshold: 0.1 });
-    
-    sectionTitles.forEach(title => {
-        gsap.set(title, { y: 20, opacity: 0 });
-        titleObserver.observe(title);
-    });
+    }
 }
 
 // Handle reduced motion preference
