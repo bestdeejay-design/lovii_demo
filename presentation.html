@@ -1300,24 +1300,22 @@
         });
 
         // Auto-rotate hero images
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroImages = document.querySelectorAll('.hero-image');
-            let currentIndex = 0;
+        const heroImages = document.querySelectorAll('.hero-image');
+        let currentIndex = 0;
 
-            function rotateImages() {
-                // Remove active class from current image
-                heroImages[currentIndex].classList.remove('active');
+        function rotateImages() {
+            // Remove active class from current image
+            heroImages[currentIndex].classList.remove('active');
 
-                // Move to next image
-                currentIndex = (currentIndex + 1) % heroImages.length;
+            // Move to next image
+            currentIndex = (currentIndex + 1) % heroImages.length;
 
-                // Add active class to next image
-                heroImages[currentIndex].classList.add('active');
-            }
+            // Add active class to next image
+            heroImages[currentIndex].classList.add('active');
+        }
 
-            // Rotate images every 5 seconds
-            setInterval(rotateImages, 5000);
-        });
+        // Rotate images every 5 seconds
+        setInterval(rotateImages, 5000);
     </script>
 
     <!-- Footer -->
