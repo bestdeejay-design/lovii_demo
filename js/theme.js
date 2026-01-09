@@ -2,7 +2,6 @@
 
 function initializeThemeManagement() {
     const themeToggle = document.getElementById('theme-toggle');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     const body = document.body;
     const currentTheme = localStorage.getItem('theme') || 'dark';
     body.setAttribute('data-theme', currentTheme);
@@ -32,13 +31,8 @@ function initializeThemeManagement() {
         });
     }
 
-    // Desktop theme toggle
+    // Theme toggle
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
-    }
-
-    // Mobile theme toggle
-    if (mobileThemeToggle) {
-        mobileThemeToggle.addEventListener('click', toggleTheme);
     }
 }
