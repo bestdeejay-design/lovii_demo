@@ -687,13 +687,16 @@
         }
 
         .menu-category-content {
-            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 10px;
             padding-left: 10px;
             margin-top: 10px;
         }
 
-        .menu-category-content.show {
-            display: block;
+        .menu-category-content.expanded {
+            max-height: 200px; /* Adjust based on content */
         }
 
         .menu-link {
@@ -1352,10 +1355,6 @@
     <script>
         // Navigation highlighting
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize the navigation system
-            if (typeof initializeNavigation === 'function') {
-                initializeNavigation();
-            }
 
             const sections = document.querySelectorAll('.presentation-section');
             const navItems = document.querySelectorAll('.nav-item');
