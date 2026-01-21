@@ -1,1 +1,42 @@
-Nothing needs to be added to .gitignore since the changes only include HTML, CSS, and JavaScript source files which should be tracked in version control.
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.class
+*.dll
+*.so
+*.a
+*.exe
+*.out
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+*.env.*
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Editors
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Distribution / Build
+dist/
+build/
+target/
+.gradle/
+.mypy_cache/
+.pytest_cache/
