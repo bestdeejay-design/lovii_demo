@@ -1,7 +1,7 @@
 // Theme management functionality
 
 function initializeThemeManagement() {
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-menu');
     const body = document.body;
     const currentTheme = localStorage.getItem('theme') || 'dark';
     body.setAttribute('data-theme', currentTheme);
@@ -31,8 +31,8 @@ function initializeThemeManagement() {
         });
     }
 
-    // Theme toggle
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-    }
+    // Theme toggle - handle all theme toggle buttons
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('click', toggleTheme);
+    });
 }
