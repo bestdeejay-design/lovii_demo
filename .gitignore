@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes. The only modified file is `presentation.html`, which is a source file and should not be added to .gitignore.
+Nothing needs to be added to .gitignore since the changes only include HTML, CSS, and JavaScript source files which should be tracked in version control.
