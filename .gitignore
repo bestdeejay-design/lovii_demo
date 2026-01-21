@@ -4,11 +4,11 @@ __pycache__/
 *.o
 *.obj
 *.class
+*.exe
 *.dll
 *.so
 *.a
 *.out
-*.exe
 
 # Dependencies
 node_modules/
@@ -16,7 +16,7 @@ venv/
 .venv/
 .env
 .env.local
-.env.*
+*.env.*
 
 # Logs and temp files
 *.log
@@ -33,15 +33,13 @@ coverage/
 htmlcov/
 .coverage
 
-# Distribution / Build
+# Build directories
 dist/
 build/
 target/
 .gradle/
 
 # Python specific
-*.pyc
-__pycache__/
 .mypy_cache/
 .pytest_cache/
 
