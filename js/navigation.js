@@ -60,24 +60,51 @@ function initializeNavigation() {
         });
     });
     
-    // Harmonica menu functionality
+    // Theme toggle button should close menu after changing theme
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            // Close the full menu after theme change
+            if (fullMenu) {
+                setTimeout(() => {
+                    fullMenu.classList.remove('active');
+                }, 300); // Delay to allow theme change animation to complete
+            }
+        });
+    }
+    
+    // Harmonica menu functionality (excluding settings category)
     const menuCategoryHeaders = document.querySelectorAll('.menu-category-header');
     menuCategoryHeaders.forEach(header => {
         header.addEventListener('click', function() {
             const content = this.nextElementSibling;
             const arrow = this.querySelector('.menu-category-arrow');
             
-            // Close all other categories
-            document.querySelectorAll('.menu-category-content').forEach(item => {
-                if (item !== content) {
-                    item.classList.remove('expanded');
-                    item.previousElementSibling.querySelector('.menu-category-arrow').classList.remove('rotated');
-                }
-            });
+            // Check if this is the settings category (contains theme toggle)
+            const isSettingsCategory = content.querySelector('.theme-toggle') !== null;
             
-            // Toggle current category
-            content.classList.toggle('expanded');
-            arrow.classList.toggle('rotated');
+            if (isSettingsCategory) {
+                // For settings category, just toggle without closing others
+                content.classList.toggle('expanded');
+                arrow.classList.toggle('rotated');
+            } else {
+                // Close all other categories
+                document.querySelectorAll('.menu-category-content').forEach(item => {
+                    if (item !== content) {
+                        const categoryArrow = item.previousElementSibling ? 
+                            item.previousElementSibling.querySelector('.menu-category-arrow') : null;
+                        
+                        if (categoryArrow) {
+                            item.classList.remove('expanded');
+                            categoryArrow.classList.remove('rotated');
+                        }
+                    }
+                });
+                
+                // Toggle current category
+                content.classList.toggle('expanded');
+                arrow.classList.toggle('rotated');
+            }
         });
     });
 

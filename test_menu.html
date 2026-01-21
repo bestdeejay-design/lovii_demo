@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест меню</title>
+    <style>
+        /* Импортируем наши стили */
+        /* Theme Variables */
+        :root {
+            /* Default (dark) theme */
+            --bg-color: #0A0F1F;
+            --text-color: #FFFFFF;
+            --accent-color: #FF6B35;
+            --card-bg: #1A2238;
+            --border-color: #2D3748;
+            --icon-color: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--accent-color), #ff9a8b);
+            --card-bg-alt: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --accent-color: #F97316;
+            --card-bg: #F3F4F6;
+            --border-color: #E5E7EB;
+            --icon-color: #000000;
+            --card-bg-alt: rgba(0, 0, 0, 0.03);
+        }
+
+        [data-theme="vibrant"] {
+            --bg-color: linear-gradient(135deg, #0f0c29, #302b63);
+            --text-color: #FFFFFF;
+            --accent-color: #ff7e5f;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --border-color: rgba(255, 255, 255, 0.2);
+            --icon-color: #FFFFFF;
+            --card-bg-alt: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="casual"] {
+            --bg-color: #F5F7FA;
+            --text-color: #4A5447;
+            --accent-color: #C97C5D;
+            --card-bg: #FFFFFF;
+            --border-color: #E0E6ED;
+            --icon-color: #8F9E8B;
+            --shadow: 0 4px 12px rgba(201, 124, 93, 0.1);
+            --gradient-primary: linear-gradient(135deg, #C97C5D, #C9A66B);
+            --card-bg-alt: rgba(201, 124, 93, 0.05);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Стили для мобильного меню */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 1000;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 12px;
+            padding: 8px 10px;
+            transition: color 0.3s ease;
+            min-height: 50px;
+        }
+
+        .nav-item.active {
+            color: var(--accent-color);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+
+        /* Full Menu (Mobile) */
+        .full-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .full-menu.active {
+            transform: translateY(0);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: var(--card-bg-alt);
+        }
+
+        .menu-category {
+            margin-bottom: 10px;
+        }
+
+        .menu-category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--card-bg-alt);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .menu-category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 10px;
+        }
+
+        .menu-category-content.expanded {
+            max-height: 200px; /* Adjust based on content */
+        }
+
+        .menu-category-content a.menu-link {
+            display: block;
+            margin: 5px 0;
+        }
+
+        .menu-category-arrow {
+            transition: transform 0.3s ease;
+            fill: var(--icon-color);
+        }
+
+        .menu-category-arrow.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Добавляем стили для footer в меню */
+        .menu-links-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .theme-toggle {
+            background: var(--card-bg-alt);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 100%;
+            margin: 5px 0;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .theme-toggle-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        
+        .svg-sprite {
+            display: none;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- SVG Sprite -->
+    <svg class="svg-sprite">
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-catalog" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-business" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-about" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-more" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </g>
+        </symbol>
+        <symbol id="icon-theme" viewBox="0 0 24 24">
+            <g fill="var(--icon-color)">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </g>
+        </symbol>
+    </svg>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-item active" data-target="home">
+            <svg class="nav-icon"><use href="#icon-home"></use></svg>
+            <span>Главная</span>
+        </a>
+        <a href="#catalog" class="nav-item" data-target="catalog">
+            <svg class="nav-icon"><use href="#icon-catalog"></use></svg>
+            <span>Каталог</span>
+        </a>
+        <a href="#business" class="nav-item" data-target="business">
+            <svg class="nav-icon"><use href="#icon-business"></use></svg>
+            <span>Бизнес</span>
+        </a>
+        <a href="#about" class="nav-item" data-target="about">
+            <svg class="nav-icon"><use href="#icon-about"></use></svg>
+            <span>О нас</span>
+        </a>
+        <a href="#" class="nav-item" id="more-btn">
+            <svg class="nav-icon"><use href="#icon-more"></use></svg>
+            <span>Еще</span>
+        </a>
+    </nav>
+
+    <!-- Full Menu -->
+    <div class="full-menu" id="full-menu">
+        <div class="menu-header">
+            <h3>Меню</h3>
+            <button class="close-menu" id="close-menu">&times;</button>
+        </div>
+        <div class="menu-links">
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Основное</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#" class="menu-link">Главная</a>
+                    <a href="#features" class="menu-link">Возможности</a>
+                    <a href="#catalog" class="menu-link">Каталог</a>
+                    <a href="#business" class="menu-link">Бизнес</a>
+                    <a href="#about" class="menu-link">О проекте</a>
+                </div>
+            </div>
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Франшиза</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#franchise" class="menu-link">Франшиза «Город Лови»</a>
+                </div>
+            </div>
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Для бизнеса</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#suppliers" class="menu-link">Для поставщиков</a>
+                    <a href="#partners" class="menu-link">Партнёрская программа</a>
+                </div>
+            </div>
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Поддержка</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <a href="#help" class="menu-link">Помощь и поддержка</a>
+                    <a href="#contacts" class="menu-link">Контакты</a>
+                    <a href="#docs" class="menu-link">Документы</a>
+                </div>
+            </div>
+        </div>
+        <div class="menu-links-footer">
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>Настройки</span>
+                    <svg class="menu-category-arrow" width="16" height="16"><use href="#icon-more"></use></svg>
+                </div>
+                <div class="menu-category-content">
+                    <button class="theme-toggle" id="theme-toggle">
+                        <svg class="theme-toggle-icon"><use href="#icon-theme"></use></svg>
+                        Сменить тему
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Тестирование улучшенного меню</h1>
+    <p>Этот тест проверяет визуальные изменения в мобильном меню и кнопке смены темы.</p>
+    
+    <script>
+        // Простая реализация функциональности для тестирования
+        document.addEventListener('DOMContentLoaded', function() {
+            const fullMenu = document.getElementById('full-menu');
+            const moreBtn = document.getElementById('more-btn');
+            const closeMenu = document.getElementById('close-menu');
+            
+            // Открытие меню
+            if (moreBtn) {
+                moreBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    fullMenu.classList.add('active');
+                });
+            }
+            
+            // Закрытие меню
+            if (closeMenu) {
+                closeMenu.addEventListener('click', function() {
+                    fullMenu.classList.remove('active');
+                });
+            }
+            
+            // Закрытие по клику вне области
+            document.addEventListener('click', function(e) {
+                if (!fullMenu.contains(e.target) && 
+                    !moreBtn.contains(e.target) && 
+                    fullMenu.classList.contains('active')) {
+                    fullMenu.classList.remove('active');
+                }
+            });
+            
+            // Гармошка для категорий меню
+            const menuCategoryHeaders = document.querySelectorAll('.menu-category-header');
+            menuCategoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.menu-category-arrow');
+                    
+                    // Проверяем, это категория настроек или нет
+                    const isSettingsCategory = content.querySelector('.theme-toggle') !== null;
+                    
+                    if (isSettingsCategory) {
+                        // Для категории настроек просто переключаем
+                        content.classList.toggle('expanded');
+                        arrow.classList.toggle('rotated');
+                    } else {
+                        // Для других категорий закрываем все остальные
+                        document.querySelectorAll('.menu-category-content').forEach(item => {
+                            if (item !== content) {
+                                const categoryArrow = item.previousElementSibling ? 
+                                    item.previousElementSibling.querySelector('.menu-category-arrow') : null;
+                                
+                                if (categoryArrow) {
+                                    item.classList.remove('expanded');
+                                    categoryArrow.classList.remove('rotated');
+                                }
+                            }
+                        });
+                        
+                        // Переключаем текущую категорию
+                        content.classList.toggle('expanded');
+                        arrow.classList.toggle('rotated');
+                    }
+                });
+            });
+            
+            // Обработка смены темы
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const body = document.body;
+                    const currentTheme = body.getAttribute('data-theme');
+                    let newTheme;
+                    
+                    if (currentTheme === 'dark') {
+                        newTheme = 'light';
+                    } else if (currentTheme === 'light') {
+                        newTheme = 'vibrant';
+                    } else if (currentTheme === 'vibrant') {
+                        newTheme = 'casual';
+                    } else {
+                        newTheme = 'dark';
+                    }
+                    
+                    body.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    
+                    // Закрываем меню после смены темы
+                    setTimeout(() => {
+                        fullMenu.classList.remove('active');
+                    }, 300);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
