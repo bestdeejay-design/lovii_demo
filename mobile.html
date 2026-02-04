@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOVII - Мобильное приложение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E9E4D4; /* --bg-main */
+            color: #4A5447; /* --text-primary */
+            width: 375px;
+            min-height: 100vh;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .screen {
+            display: none;
+            padding: 20px;
+            height: calc(100vh - 120px); /* Account for header and footer */
+            overflow-y: auto;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #E9E4D4;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(74, 84, 71, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4A5447;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .profile-icon {
+            width: 28px;
+            height: 28px;
+            fill: #4A5447;
+        }
+
+        /* Footer navigation */
+        .footer-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 10px;
+            background-color: #E9E4D4;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 375px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(74, 84, 71, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            fill: #4A5447;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            margin-top: 2px;
+            color: #4A5447;
+        }
+
+        .nav-item.center {
+            position: relative;
+        }
+
+        .nav-item.center .nav-icon-wrapper {
+            background-color: #C97C5D; /* --accent-terra */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -20px;
+            border: 3px solid #E9E4D4;
+        }
+
+        .nav-item.center .nav-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Screen 1 - Main */
+        .main-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        .main-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+        }
+
+        .catch-colors-btn {
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(201, 124, 93, 0.3);
+        }
+
+        /* Screen 2 - Authorization */
+        .auth-screen {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #8F9E8B; /* --accent-sage */
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        .login-btn {
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(201, 124, 93, 0.3);
+        }
+
+        /* Screen 3 - SMS Code */
+        .sms-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .sms-title {
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .code-input {
+            width: 100%;
+            max-width: 200px;
+            padding: 14px;
+            text-align: center;
+            font-size: 24px;
+            border: 1px solid #8F9E8B; /* --accent-sage */
+            border-radius: 8px;
+            letter-spacing: 8px;
+        }
+
+        .confirm-btn {
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(201, 124, 93, 0.3);
+        }
+
+        /* Screen 4 - Stores */
+        .stores-screen {
+            padding-top: 20px;
+        }
+
+        .stores-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stores-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .store-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .store-icon {
+            width: 40px;
+            height: 40px;
+            fill: #C97C5D; /* --accent-terra */
+        }
+
+        .store-name {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <svg class="logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Heart shape -->
+                <path d="M16 26C16 26 6 20 6 12C6 8.68629 8.68629 6 12 6C13.5 6 15 7 16 8C17 7 18.5 6 20 6C23.3137 6 26 8.68629 26 12C26 20 16 26 16 26Z" fill="#C97C5D"/>
+                <!-- Left leaf -->
+                <path d="M10 10C8 12 10 16 12 16C14 16 16 12 14 10C12 8 10 10 10 10Z" fill="#8F9E8B"/>
+                <!-- Right leaf -->
+                <path d="M22 10C24 12 22 16 20 16C18 16 16 12 18 10C20 8 22 10 22 10Z" fill="#8F9E8B"/>
+            </svg>
+            <span class="logo-text">LOVII</span>
+        </div>
+        <button class="profile-btn" id="profileBtn">
+            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 20C20 17.5 18 15.5 15.5 15.5H8.5C6 15.5 4 17.5 4 20" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Screen 1: Main -->
+    <div id="mainScreen" class="screen active">
+        <div class="main-screen">
+            <svg class="main-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Large heart shape -->
+                <path d="M60 100C60 100 20 80 20 50C20 30 35 15 55 15C65 15 80 20 90 30C100 20 115 15 125 15C145 15 160 30 160 50C160 80 120 100 120 100L60 100Z" fill="#C97C5D"/>
+                <!-- Left large leaf -->
+                <path d="M40 40C30 50 35 70 50 75C65 80 80 60 70 50C60 40 40 40 40 40Z" fill="#8F9E8B"/>
+                <!-- Right large leaf -->
+                <path d="M100 40C120 50 115 70 100 75C85 80 70 60 80 50C90 40 100 40 100 40Z" fill="#8F9E8B"/>
+            </svg>
+            <button class="catch-colors-btn" id="catchColorsBtn">Лови цвета</button>
+        </div>
+    </div>
+
+    <!-- Screen 2: Authorization -->
+    <div id="authScreen" class="screen">
+        <div class="auth-screen">
+            <div class="input-group">
+                <label for="phoneInput">Номер телефона</label>
+                <input type="tel" id="phoneInput" placeholder="+7 (___) ___-__-__">
+            </div>
+            <div class="input-group">
+                <label for="promoInput">Промокод (4 символа)</label>
+                <input type="text" id="promoInput" placeholder="ABCD" maxlength="4">
+            </div>
+            <button class="login-btn" id="loginBtn">Войти</button>
+        </div>
+    </div>
+
+    <!-- Screen 3: SMS Code -->
+    <div id="smsScreen" class="screen">
+        <div class="sms-screen">
+            <h2 class="sms-title">Введите код из SMS</h2>
+            <input type="text" class="code-input" id="codeInput" placeholder="____" maxlength="4">
+            <button class="confirm-btn" id="confirmBtn">Подтвердить</button>
+        </div>
+    </div>
+
+    <!-- Screen 4: Stores -->
+    <div id="storesScreen" class="screen">
+        <div class="stores-screen">
+            <h2 class="stores-title">Торговые точки рядом</h2>
+            <div class="stores-grid">
+                <div class="store-card">
+                    <svg class="store-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 30C25.5228 30 30 25.5228 30 20C30 14.4772 25.5228 10 20 10C14.4772 10 10 14.4772 10 20C10 25.5228 14.4772 30 20 30Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 20L25 20" stroke="currentColor" stroke-width="2"/>
+                        <path d="M20 15V25" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <div class="store-name">Рыбный прилавок</div>
+                </div>
+                <div class="store-card">
+                    <svg class="store-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="15" stroke="currentColor" stroke-width="2"/>
+                        <path d="M10 20H30" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 15L25 25" stroke="currentColor" stroke-width="2"/>
+                        <path d="M25 15L15 25" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <div class="store-name">Пиццерия 'Маргарита'</div>
+                </div>
+                <div class="store-card">
+                    <svg class="store-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="15" width="20" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 10L25 10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 30L25 30" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <div class="store-name">Шаверма на углу</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Navigation (only on main screen) -->
+    <footer class="footer-nav" id="footerNav">
+        <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-label">Главная</span>
+        </div>
+        <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-label">Поиск</span>
+        </div>
+        <div class="nav-item center">
+            <div class="nav-icon-wrapper">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-label">Уведомления</span>
+        </div>
+        <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 20C20 17.5 18 15.5 15.5 15.5H8.5C6 15.5 4 17.5 4 20" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <span class="nav-label">Профиль</span>
+        </div>
+    </footer>
+
+    <script>
+        // DOM elements
+        const mainScreen = document.getElementById('mainScreen');
+        const authScreen = document.getElementById('authScreen');
+        const smsScreen = document.getElementById('smsScreen');
+        const storesScreen = document.getElementById('storesScreen');
+        
+        const catchColorsBtn = document.getElementById('catchColorsBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const profileBtn = document.getElementById('profileBtn');
+        
+        const footerNav = document.getElementById('footerNav');
+
+        // Function to show a specific screen and hide others
+        function showScreen(screenId) {
+            // Hide all screens
+            mainScreen.classList.remove('active');
+            authScreen.classList.remove('active');
+            smsScreen.classList.remove('active');
+            storesScreen.classList.remove('active');
+            
+            // Show selected screen
+            document.getElementById(screenId).classList.add('active');
+            
+            // Show/hide footer navigation based on current screen
+            if (screenId === 'mainScreen') {
+                footerNav.style.display = 'flex';
+            } else {
+                footerNav.style.display = 'none';
+            }
+        }
+
+        // Event listeners for screen transitions
+        catchColorsBtn.addEventListener('click', () => {
+            showScreen('authScreen');
+        });
+
+        loginBtn.addEventListener('click', () => {
+            showScreen('smsScreen');
+        });
+
+        confirmBtn.addEventListener('click', () => {
+            showScreen('storesScreen');
+        });
+
+        profileBtn.addEventListener('click', () => {
+            // For demo purposes, go back to main screen when profile button clicked
+            showScreen('mainScreen');
+        });
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            showScreen('mainScreen');
+        });
+    </script>
+</body>
+</html>
