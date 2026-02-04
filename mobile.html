@@ -730,7 +730,7 @@
         const catchColorsBtn = document.getElementById('catchColorsBtn');
         const loginBtn = document.getElementById('loginBtn');
         const confirmBtn = document.getElementById('confirmBtn');
-        const profileBtn = document.getElementById('profileBtn');
+        const profileNavItem = document.getElementById('profileNavItem');
         
         const footerNav = document.getElementById('footerNav');
         const categoriesGrid = document.getElementById('categoriesGrid');
@@ -792,36 +792,36 @@
                 case 'start':
                     targetScreen = 'mainScreen';
                     // Hide profile button on start screen
-                    profileBtn.classList.add('hidden');
+                    profileNavItem.classList.add('hidden');
                     break;
                 case 'auth':
                     targetScreen = 'authScreen';
                     // Show profile button on other screens
-                    profileBtn.classList.remove('hidden');
+                    profileNavItem.classList.remove('hidden');
                     break;
                 case 'sms':
                     targetScreen = 'smsScreen';
                     // Show profile button on other screens
-                    profileBtn.classList.remove('hidden');
+                    profileNavItem.classList.remove('hidden');
                     break;
                 case 'main':
                     targetScreen = 'storesScreen';
                     // Show profile button on other screens
-                    profileBtn.classList.remove('hidden');
+                    profileNavItem.classList.remove('hidden');
                     break;
                 case 'categories':
                     targetScreen = 'categoriesScreen';
                     // Show profile button on other screens
-                    profileBtn.classList.remove('hidden');
+                    profileNavItem.classList.remove('hidden');
                     break;
                 case 'gifts':
                     targetScreen = 'giftsScreen';
                     // Show profile button on other screens
-                    profileBtn.classList.remove('hidden');
+                    profileNavItem.classList.remove('hidden');
                     break;
                 default:
                     // Show profile button on other screens
-                    profileBtn.classList.remove('hidden');
+                    profileNavItem.classList.remove('hidden');
                     break;
             }
             
@@ -846,7 +846,7 @@
             navigateTo('main');
         });
 
-        profileBtn.addEventListener('click', () => {
+        profileNavItem.addEventListener('click', () => {
             // Go back to start screen
             navigateTo('start');
         });
