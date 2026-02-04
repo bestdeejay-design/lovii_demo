@@ -912,57 +912,6 @@
         });
         
         // Handle hash change to include gifts screen
-        function handleHashChange() {
-            const hash = window.location.hash.substring(1);
-            let targetScreen = 'mainScreen'; // default
-            
-            switch(hash) {
-                case 'start':
-                    targetScreen = 'mainScreen';
-                    // Hide header on start screen
-                    document.getElementById('header').classList.add('hidden');
-                    // Hide profile button on start screen
-                    profileBtn.classList.add('hidden');
-                    break;
-                case 'auth':
-                    targetScreen = 'authScreen';
-                    // Show header and profile button on other screens
-                    document.getElementById('header').classList.remove('hidden');
-                    profileBtn.classList.remove('hidden');
-                    break;
-                case 'sms':
-                    targetScreen = 'smsScreen';
-                    // Show header and profile button on other screens
-                    document.getElementById('header').classList.remove('hidden');
-                    profileBtn.classList.remove('hidden');
-                    break;
-                case 'main':
-                    targetScreen = 'storesScreen';
-                    // Show header and profile button on other screens
-                    document.getElementById('header').classList.remove('hidden');
-                    profileBtn.classList.remove('hidden');
-                    break;
-                case 'categories':
-                    targetScreen = 'categoriesScreen';
-                    // Show header and profile button on other screens
-                    document.getElementById('header').classList.remove('hidden');
-                    profileBtn.classList.remove('hidden');
-                    break;
-                case 'gifts':
-                    targetScreen = 'giftsScreen';
-                    // Show header and profile button on other screens
-                    document.getElementById('header').classList.remove('hidden');
-                    profileBtn.classList.remove('hidden');
-                    break;
-                default:
-                    // Show header and profile button on other screens
-                    document.getElementById('header').classList.remove('hidden');
-                    profileBtn.classList.remove('hidden');
-                    break;
-            }
-            
-            showScreen(targetScreen);
-        }
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
