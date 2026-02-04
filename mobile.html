@@ -284,6 +284,117 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
 
+        /* Stores screen styles */
+        .stores-screen {
+            padding-top: 20px;
+        }
+
+        .stores-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #4A5447; /* --text-primary */
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stores-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .store-card {
+            background-color: #F0EDDE;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(79, 107, 92, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .store-card:hover, .store-card:focus {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(79, 107, 92, 0.15);
+        }
+
+        .store-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .category-icon-circle {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(143, 158, 139, 0.1); /* Light sage background */
+        }
+
+        .store-icon {
+            width: 48px;
+            height: 48px;
+            fill: #8F9E8B; /* --accent-sage */
+        }
+
+        .store-info {
+            flex: 1;
+        }
+
+        .store-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4A5447; /* --text-primary */
+            margin-bottom: 5px;
+        }
+
+        .store-category {
+            font-size: 14px;
+            color: #8F9E8B; /* --accent-sage */
+            font-weight: 500;
+        }
+
+        .lovii-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .lovii-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .open-btn {
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .open-btn:hover {
+            background-color: #b56c52; /* Darker terra */
+        }
+
         .category-icon {
             width: 40px;
             height: 40px;
@@ -450,6 +561,46 @@
             "Клининг и уборка"
         ];
 
+        // Stores data for the main screen after auth
+        const stores = [
+            {
+                name: 'Рыбный прилавок "У причала"',
+                category: 'Свежая рыба',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12C18 12 15 15 12 15C9 15 6 12 6 12C6 12 9 9 12 9C15 9 18 12 18 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 100
+            },
+            {
+                name: 'Пиццерия "Маргарита"',
+                category: 'Итальянская кухня',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 150
+            },
+            {
+                name: 'Шаверма на углу',
+                category: 'Уличная еда',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11H20C20 16 17 20 12 20C7 20 4 16 4 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 22H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 80
+            },
+            {
+                name: 'Японская лавка "Харуши"',
+                category: 'Японская кухня',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 200
+            },
+            {
+                name: 'Булочная "Ржаное счастье"',
+                category: 'Пекарни и кондитерские',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 15C2 15 4 13 8 13C12 13 16 17 22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 13V9C10 7.34315 11.3431 6 13 6C14.6569 6 16 7.34315 16 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 120
+            },
+            {
+                name: 'Кофейня "Уютный угол"',
+                category: 'Кофейни',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 12C17 14.2091 15.2091 16 13 16C10.7909 16 9 14.2091 9 12C9 9.79086 10.7909 8 13 8C15.2091 8 17 9.79086 17 12Z" stroke="currentColor" stroke-width="2"/><path d="M18 22C18 20.8954 17.1046 20 16 20H10C8.89543 20 8 20.8954 8 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 16V12C20 8.68629 17.3137 6 14 6H10C6.68629 6 4 8.68629 4 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 110
+            }
+        ];
+
         // Category icons mapping (using SVG as required)
         const categoryIcons = {
             "Итальянская кухня": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -475,80 +626,6 @@
         };
 
         // Stores data for the main screen after auth
-        const stores = [
-            {
-                name: 'Рыбный прилавок \"У причала\"',
-                category: 'Свежая рыба',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 100
-            },
-            {
-                name: 'Пиццерия \"Маргарита\"',
-                category: 'Итальянская кухня',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 150
-            },
-            {
-                name: 'Шаверма на углу',
-                category: 'Уличная еда',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 80
-            },
-            {
-                name: 'Японская лавка \"Харуши\"',
-                category: 'Японская кухня',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 200
-            },
-            {
-                name: 'Булочная \"Ржаное счастье\"',
-                category: 'Пекарни и кондитерские',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 120
-            },
-            {
-                name: 'Цветочный дворик',
-                category: 'Цветочные магазины',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 90
-            },
-            {
-                name: 'Кофейня \"Уютный угол\"',
-                category: 'Кофейни',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 110
-            },
-            {
-                name: 'Фермерский рынок \"Сезонный\"',
-                category: 'Фермерские лавки',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 130
-            },
-            {
-                name: 'Барбершоп \"Классический стиль\"',
-                category: 'Барбершопы',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 160
-            },
-            {
-                name: 'Салон красоты \"Элегантность\"',
-                category: 'Салоны красоты',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 180
-            },
-            {
-                name: 'SPA-салон \"Расслабление\"',
-                category: 'Массаж и спа',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 210
-            },
-            {
-                name: 'Центр репетиторства \"Гений\"',
-                category: 'Репетиторы и обучение',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 140
-            }
-        ];
 
         // DOM elements
         const mainScreen = document.getElementById('mainScreen');
