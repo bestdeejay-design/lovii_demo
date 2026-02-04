@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOVII - Мобильное приложение</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -53,15 +55,14 @@
             gap: 8px;
         }
 
-        .logo-svg {
-            width: 32px;
-            height: 32px;
+        .app-logo {
+            height: 24px;
         }
 
-        .logo-text {
-            font-size: 20px;
-            font-weight: 700;
-            color: #4A5447;
+        .hero-logo {
+            height: 80px;
+            margin: 0 auto 30px;
+            display: block;
         }
 
         .profile-btn {
@@ -69,6 +70,10 @@
             border: none;
             cursor: pointer;
             padding: 5px;
+        }
+
+        .profile-btn.hidden {
+            display: none;
         }
 
         .profile-icon {
@@ -419,15 +424,7 @@
     <!-- Header -->
     <header class="header">
         <div class="logo-container">
-            <svg class="logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Heart shape -->
-                <path d="M16 26C16 26 6 20 6 12C6 8.68629 8.68629 6 12 6C13.5 6 15 7 16 8C17 7 18.5 6 20 6C23.3137 6 26 8.68629 26 12C26 20 16 26 16 26Z" fill="#C97C5D"/>
-                <!-- Left leaf -->
-                <path d="M10 10C8 12 10 16 12 16C14 16 16 12 14 10C12 8 10 10 10 10Z" fill="#8F9E8B"/>
-                <!-- Right leaf -->
-                <path d="M22 10C24 12 22 16 20 16C18 16 16 12 18 10C20 8 22 10 22 10Z" fill="#8F9E8B"/>
-            </svg>
-            <span class="logo-text">LOVII</span>
+            <img src="logo.png" alt="LOVII" class="app-logo">
         </div>
         <button class="profile-btn" id="profileBtn">
             <svg class="profile-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -440,14 +437,7 @@
     <!-- Screen 1: Main -->
     <div id="mainScreen" class="screen active">
         <div class="main-screen">
-            <svg class="main-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Large heart shape -->
-                <path d="M60 100C60 100 20 80 20 50C20 30 35 15 55 15C65 15 80 20 90 30C100 20 115 15 125 15C145 15 160 30 160 50C160 80 120 100 120 100L60 100Z" fill="#C97C5D"/>
-                <!-- Left large leaf -->
-                <path d="M40 40C30 50 35 70 50 75C65 80 80 60 70 50C60 40 40 40 40 40Z" fill="#8F9E8B"/>
-                <!-- Right large leaf -->
-                <path d="M100 40C120 50 115 70 100 75C85 80 70 60 80 50C90 40 100 40 100 40Z" fill="#8F9E8B"/>
-            </svg>
+            <img src="logo.png" alt="LOVII" class="hero-logo">
             <button class="catch-colors-btn" id="catchColorsBtn">Лови</button>
         </div>
     </div>
@@ -698,18 +688,32 @@
             switch(hash) {
                 case 'start':
                     targetScreen = 'mainScreen';
+                    // Hide profile button on start screen
+                    profileBtn.classList.add('hidden');
                     break;
                 case 'auth':
                     targetScreen = 'authScreen';
+                    // Show profile button on other screens
+                    profileBtn.classList.remove('hidden');
                     break;
                 case 'sms':
                     targetScreen = 'smsScreen';
+                    // Show profile button on other screens
+                    profileBtn.classList.remove('hidden');
                     break;
                 case 'main':
                     targetScreen = 'storesScreen';
+                    // Show profile button on other screens
+                    profileBtn.classList.remove('hidden');
                     break;
                 case 'categories':
                     targetScreen = 'categoriesScreen';
+                    // Show profile button on other screens
+                    profileBtn.classList.remove('hidden');
+                    break;
+                default:
+                    // Show profile button on other screens
+                    profileBtn.classList.remove('hidden');
                     break;
             }
             
