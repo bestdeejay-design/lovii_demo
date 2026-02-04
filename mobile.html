@@ -247,36 +247,126 @@
         }
 
         .stores-title {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 600;
             margin-bottom: 20px;
             text-align: center;
+            color: #4A5447; /* --text-primary */
         }
 
-        .stores-grid {
-            display: grid;
-            gap: 15px;
+        .stores-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .store-card {
-            background-color: white;
-            border-radius: 12px;
+            background-color: #F0EDDE;
+            border-radius: 16px;
             padding: 16px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(201, 124, 93, 0.1); /* --accent-terra with opacity */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInSlideUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .store-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .store-card:hover, .store-card:focus {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .store-header {
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .category-icon-circle {
+            width: 50px;
+            height: 50px;
+            background-color: #C97C5D; /* --accent-terra */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .store-icon {
-            width: 40px;
-            height: 40px;
-            fill: #C97C5D; /* --accent-terra */
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .store-info {
+            flex-grow: 1;
         }
 
         .store-name {
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #4A5447; /* --text-primary */
+            margin-bottom: 4px;
+        }
+
+        .store-category {
+            font-size: 14px;
+            color: #8F9E8B; /* --accent-sage */
             font-weight: 500;
+        }
+
+        .lovii-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .lovii-badge svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 5px;
+        }
+
+        .open-btn {
+            display: block;
+            width: 100%;
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .open-btn:hover, .open-btn:focus {
+            background-color: #b86c4d; /* slightly darker shade */
+        }
+
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -345,31 +435,79 @@
     <div id="storesScreen" class="screen">
         <div class="stores-screen">
             <h2 class="stores-title">Торговые точки рядом</h2>
-            <div class="stores-grid">
+            <div class="stores-list">
                 <div class="store-card">
-                    <svg class="store-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 30C25.5228 30 30 25.5228 30 20C30 14.4772 25.5228 10 20 10C14.4772 10 10 14.4772 10 20C10 25.5228 14.4772 30 20 30Z" stroke="currentColor" stroke-width="2"/>
-                        <path d="M15 20L25 20" stroke="currentColor" stroke-width="2"/>
-                        <path d="M20 15V25" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <div class="store-name">Рыбный прилавок</div>
+                    <div class="store-header">
+                        <div class="category-icon-circle">
+                            <svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="store-info">
+                            <div class="store-name">Рыбный прилавок "У причала"</div>
+                            <div class="store-category">Свежая рыба</div>
+                        </div>
+                    </div>
+                    <div class="lovii-badge">
+                        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 12C7 12 2 9 2 5C2 3.34315 3.34315 2 5 2C5.75 2 6.5 2.25 7 2.75C7.5 2.25 8.25 2 9 2C10.6569 2 12 3.34315 12 5C12 9 7 12 7 12Z" fill="white"/>
+                            <path d="M5 5C4 6 5 8 6 8C7 8 8 6 7 5C6 4 5 5 5 5Z" fill="white"/>
+                            <path d="M9 5C10 6 9 8 8 8C7 8 6 6 7 5C8 4 9 5 9 5Z" fill="white"/>
+                        </svg>
+                        +100 баллов за покупку
+                    </div>
+                    <button class="open-btn">Открыть</button>
                 </div>
+                
                 <div class="store-card">
-                    <svg class="store-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="20" cy="20" r="15" stroke="currentColor" stroke-width="2"/>
-                        <path d="M10 20H30" stroke="currentColor" stroke-width="2"/>
-                        <path d="M15 15L25 25" stroke="currentColor" stroke-width="2"/>
-                        <path d="M25 15L15 25" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <div class="store-name">Пиццерия 'Маргарита'</div>
+                    <div class="store-header">
+                        <div class="category-icon-circle">
+                            <svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="store-info">
+                            <div class="store-name">Пиццерия "Маргарита"</div>
+                            <div class="store-category">Итальянская кухня</div>
+                        </div>
+                    </div>
+                    <div class="lovii-badge">
+                        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 12C7 12 2 9 2 5C2 3.34315 3.34315 2 5 2C5.75 2 6.5 2.25 7 2.75C7.5 2.25 8.25 2 9 2C10.6569 2 12 3.34315 12 5C12 9 7 12 7 12Z" fill="white"/>
+                            <path d="M5 5C4 6 5 8 6 8C7 8 8 6 7 5C6 4 5 5 5 5Z" fill="white"/>
+                            <path d="M9 5C10 6 9 8 8 8C7 8 6 6 7 5C8 4 9 5 9 5Z" fill="white"/>
+                        </svg>
+                        +150 баллов за покупку
+                    </div>
+                    <button class="open-btn">Открыть</button>
                 </div>
+                
                 <div class="store-card">
-                    <svg class="store-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="10" y="15" width="20" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
-                        <path d="M15 10L25 10" stroke="currentColor" stroke-width="2"/>
-                        <path d="M15 30L25 30" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <div class="store-name">Шаверма на углу</div>
+                    <div class="store-header">
+                        <div class="category-icon-circle">
+                            <svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="store-info">
+                            <div class="store-name">Шаверма на углу</div>
+                            <div class="store-category">Уличная еда</div>
+                        </div>
+                    </div>
+                    <div class="lovii-badge">
+                        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 12C7 12 2 9 2 5C2 3.34315 3.34315 2 5 2C5.75 2 6.5 2.25 7 2.75C7.5 2.25 8.25 2 9 2C10.6569 2 12 3.34315 12 5C12 9 7 12 7 12Z" fill="white"/>
+                            <path d="M5 5C4 6 5 8 6 8C7 8 8 6 7 5C6 4 5 5 5 5Z" fill="white"/>
+                            <path d="M9 5C10 6 9 8 8 8C7 8 6 6 7 5C8 4 9 5 9 5Z" fill="white"/>
+                        </svg>
+                        +80 баллов за покупку
+                    </div>
+                    <button class="open-btn">Открыть</button>
                 </div>
             </div>
         </div>
@@ -469,6 +607,21 @@
         // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
             showScreen('mainScreen');
+            
+            // Add animation to store cards when they become visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe store cards
+            document.querySelectorAll('.store-card').forEach(card => {
+                observer.observe(card);
+            });
         });
     </script>
 </body>
