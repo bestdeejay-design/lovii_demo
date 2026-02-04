@@ -726,6 +726,7 @@
         const smsScreen = document.getElementById('smsScreen');
         const storesScreen = document.getElementById('storesScreen');
         const categoriesScreen = document.getElementById('categoriesScreen');
+        const giftsScreen = document.getElementById('giftsScreen');
         
         const catchColorsBtn = document.getElementById('catchColorsBtn');
         const loginBtn = document.getElementById('loginBtn');
@@ -761,16 +762,17 @@
             smsScreen.classList.remove('active');
             storesScreen.classList.remove('active');
             categoriesScreen.classList.remove('active');
+            giftsScreen.classList.remove('active');
             
             // Show selected screen
             document.getElementById(screenId).classList.add('active');
             
-            // Update footer visibility based on authentication status
-            updateFooterVisibility();
+            // Update header and footer visibility based on authentication status
+            updateHeaderFooterVisibility();
         }
 
-        // Update footer visibility based on current screen
-        function updateFooterVisibility() {
+        // Update header and footer visibility based on current screen
+        function updateHeaderFooterVisibility() {
             const isAuthenticated = window.location.hash !== '#start' && 
                                   window.location.hash !== '' && 
                                   !window.location.hash.includes('auth') && 
@@ -778,8 +780,10 @@
                                   
             if (isAuthenticated) {
                 footerNav.classList.add('show');
+                document.getElementById('header').classList.remove('hidden');
             } else {
                 footerNav.classList.remove('show');
+                document.getElementById('header').classList.add('hidden');
             }
         }
 
