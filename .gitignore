@@ -1,1 +1,3 @@
-Nothing needs to be added to .gitignore since only a source file (`mobile.html`) was added, which doesn't match any of the ignore patterns.
+```html
+
+```
