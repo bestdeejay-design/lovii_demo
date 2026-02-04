@@ -49,10 +49,27 @@
             border-bottom: 1px solid rgba(74, 84, 71, 0.1);
         }
 
+        .header.hidden {
+            display: none;
+        }
+
         .logo-container {
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .notification-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .notification-icon {
+            width: 28px;
+            height: 28px;
+            fill: #4A5447;
         }
 
         .app-logo {
@@ -419,18 +436,64 @@
                 transform: translateY(0);
             }
         }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            border-radius: 16px 16px 0 0;
+            padding: 20px;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+
+        .modal-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .modal-item:last-child {
+            border-bottom: none;
+        }
+
+        .logout-item {
+            color: #C97C5D;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="logo-container">
+    <header class="header" id="header">
+        <div class="logo-container" id="logoContainer">
             <img src="img/logo512.png" alt="LOVII" class="app-logo">
+            <span style="font-size: 20px; font-weight: bold; color: #4A5447;">LOVII</span>
         </div>
-        <button class="profile-btn" id="profileBtn">
-            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-                <path d="M20 20C20 17.5 18 15.5 15.5 15.5H8.5C6 15.5 4 17.5 4 20" stroke="currentColor" stroke-width="2"/>
+        <button class="notification-btn" id="notificationBtn">
+            <svg id="bellIconWithDot" class="notification-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+                <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="18" cy="6" r="2" fill="#FF0000"/>
+            </svg>
+            <svg id="bellIconWithoutDot" class="notification-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.7295 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
     </header>
@@ -489,10 +552,10 @@
 
     <!-- Footer Navigation -->
     <footer class="footer-nav" id="footerNav">
-        <div class="nav-item" data-target="storesScreen">
+        <div class="nav-item" data-target="mainScreen">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="10" stroke="#C97C5D" stroke-width="2"/>
+                <path d="M12 8L8 12L12 16L16 12L12 8Z" fill="#C97C5D"/>
             </svg>
             <span class="nav-label">Главная</span>
         </div>
@@ -511,14 +574,13 @@
                 </svg>
             </div>
         </div>
-        <div class="nav-item" data-target="storesScreen">
+        <div class="nav-item" data-target="giftsScreen">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 2L14 6H20L16 10L18 14L12 11L6 14L8 10L4 6H10L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="nav-label">Уведомления</span>
+            <span class="nav-label">Подарки</span>
         </div>
-        <div class="nav-item" data-target="storesScreen">
+        <div class="nav-item" id="profileNavItem">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
                 <path d="M20 20C20 17.5 18 15.5 15.5 15.5H8.5C6 15.5 4 17.5 4 20" stroke="currentColor" stroke-width="2"/>
@@ -526,6 +588,46 @@
             <span class="nav-label">Профиль</span>
         </div>
     </footer>
+
+    <!-- Gifts Screen -->
+    <div id="giftsScreen" class="screen">
+        <div class="categories-screen">
+            <h2 class="categories-title">Онлайн-предложения</h2>
+            <div class="categories-grid" id="giftsGrid">
+                <div class="category-card">
+                    <h3>Банки</h3>
+                    <p>Сбербанк — 5% кэшбэк</p>
+                </div>
+                <div class="category-card">
+                    <h3>Операторы</h3>
+                    <p>Мегафон — обмен ГБ на баллы</p>
+                </div>
+                <div class="category-card">
+                    <h3>Косметика</h3>
+                    <p>Л'Этуаль — бонусы за покупки</p>
+                </div>
+                <div class="category-card">
+                    <h3>Страховки</h3>
+                    <p>ИНГОССТРАХ — баллы за полис</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-item">Профиль</div>
+            <div class="modal-item">История операций</div>
+            <div class="modal-item">Баланс</div>
+            <div class="modal-item">QR код</div>
+            <div class="modal-item">Избранное</div>
+            <div class="modal-item">Корзина</div>
+            <div class="modal-item">Безопасность</div>
+            <div class="modal-item">Конфиденциальность</div>
+            <div class="modal-item logout-item" id="logoutItem">Выйти</div>
+        </div>
+    </div>
 
     <script>
         // Categories list
@@ -753,6 +855,10 @@
                     navigateTo('categories');
                 } else if(target === 'storesScreen') {
                     navigateTo('main');
+                } else if(target === 'mainScreen') {
+                    navigateTo('main');
+                } else if(target === 'giftsScreen') {
+                    navigateTo('gifts');
                 }
             });
         });
@@ -761,6 +867,102 @@
         document.querySelector('.nav-item.center').addEventListener('click', () => {
             navigateTo('categories');
         });
+        
+        // Add click event to logo container to navigate to main screen
+        document.getElementById('logoContainer').addEventListener('click', () => {
+            navigateTo('main');
+        });
+        
+        // Add click event to notification button to toggle bell icons
+        document.getElementById('notificationBtn').addEventListener('click', () => {
+            const bellWithDot = document.getElementById('bellIconWithDot');
+            const bellWithoutDot = document.getElementById('bellIconWithoutDot');
+            
+            if(bellWithDot.style.display !== 'none') {
+                bellWithDot.style.display = 'none';
+                bellWithoutDot.style.display = 'block';
+            } else {
+                bellWithDot.style.display = 'block';
+                bellWithoutDot.style.display = 'none';
+            }
+        });
+        
+        // Profile navigation item click handler
+        document.getElementById('profileNavItem').addEventListener('click', () => {
+            const modal = document.getElementById('profileModal');
+            if(modal.style.display === 'none' || modal.style.display === '') {
+                modal.style.display = 'block';
+            } else {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('profileModal');
+            if(event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Logout item click handler
+        document.getElementById('logoutItem').addEventListener('click', () => {
+            navigateTo('start');
+            document.getElementById('profileModal').style.display = 'none';
+        });
+        
+        // Handle hash change to include gifts screen
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            let targetScreen = 'mainScreen'; // default
+            
+            switch(hash) {
+                case 'start':
+                    targetScreen = 'mainScreen';
+                    // Hide header on start screen
+                    document.getElementById('header').classList.add('hidden');
+                    // Hide profile button on start screen
+                    profileBtn.classList.add('hidden');
+                    break;
+                case 'auth':
+                    targetScreen = 'authScreen';
+                    // Show header and profile button on other screens
+                    document.getElementById('header').classList.remove('hidden');
+                    profileBtn.classList.remove('hidden');
+                    break;
+                case 'sms':
+                    targetScreen = 'smsScreen';
+                    // Show header and profile button on other screens
+                    document.getElementById('header').classList.remove('hidden');
+                    profileBtn.classList.remove('hidden');
+                    break;
+                case 'main':
+                    targetScreen = 'storesScreen';
+                    // Show header and profile button on other screens
+                    document.getElementById('header').classList.remove('hidden');
+                    profileBtn.classList.remove('hidden');
+                    break;
+                case 'categories':
+                    targetScreen = 'categoriesScreen';
+                    // Show header and profile button on other screens
+                    document.getElementById('header').classList.remove('hidden');
+                    profileBtn.classList.remove('hidden');
+                    break;
+                case 'gifts':
+                    targetScreen = 'giftsScreen';
+                    // Show header and profile button on other screens
+                    document.getElementById('header').classList.remove('hidden');
+                    profileBtn.classList.remove('hidden');
+                    break;
+                default:
+                    // Show header and profile button on other screens
+                    document.getElementById('header').classList.remove('hidden');
+                    profileBtn.classList.remove('hidden');
+                    break;
+            }
+            
+            showScreen(targetScreen);
+        }
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
