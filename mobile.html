@@ -850,10 +850,7 @@
             navigateTo('main');
         });
 
-        profileNavItem.addEventListener('click', () => {
-            // Go back to start screen
-            navigateTo('start');
-        });
+
 
         // Add event listeners to footer nav items
         document.querySelectorAll('.nav-item[data-target]').forEach(item => {
@@ -872,9 +869,11 @@
             });
         });
 
-        // Center button specifically navigates to categories
-        document.querySelector('.nav-item.center').addEventListener('click', () => {
-            navigateTo('categories');
+        // Center button - currently without specific action as per requirements
+        document.querySelector('.nav-item.center').addEventListener('click', (e) => {
+            // Currently no action for the '+' button as per requirements
+            e.preventDefault();
+            return false;
         });
         
         // Add click event to logo container to navigate to main screen
