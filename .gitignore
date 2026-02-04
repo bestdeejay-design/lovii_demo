@@ -1,3 +1,1 @@
-```html
-
-```
+Nothing needs to be added to .gitignore since the changes only include HTML files (final_mobile.html and mobile.html), which are source files that should be tracked in version control.
