@@ -685,6 +685,7 @@ body {
             <div class="modal-item">Корзина</div>
             <div class="modal-item">Безопасность</div>
             <div class="modal-item">Конфиденциальность</div>
+            <div class="modal-item" id="themeToggleItem">🌙 Тёмная тема</div>
             <div class="modal-item logout-item" id="logoutItem">Выйти</div>
         </div>
     </div>
@@ -1175,6 +1176,30 @@ body {
                 }
             };
         });
+         // === Переключение темы из профильного меню ===
+const themeToggleItem = document.getElementById('themeToggleItem');
+if (themeToggleItem) {
+  // Восстанавливаем сохранённую тему
+  const savedTheme = localStorage.getItem('lovii-theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggleItem.textContent = '☀️ Светлая тема';
+  }
+
+  // Обработчик клика
+  themeToggleItem.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.removeItem('lovii-theme');
+      themeToggleItem.textContent = '🌙 Тёмная тема';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('lovii-theme', 'dark');
+      themeToggleItem.textContent = '☀️ Светлая тема';
+    }
+  });
+}
     </script>
 </body>
 </html>
