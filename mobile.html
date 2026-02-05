@@ -614,6 +614,8 @@
             <div class="categories-grid" id="categoriesGrid">
                 <!-- Categories will be populated by JavaScript -->
             </div>
+            <!-- //поиск по категориям -->
+            <input type="text" id="categorySearch" placeholder="Найти категорию..." style="width:100%; padding:10px; margin-bottom:15px; border:1px solid var(--accent-sage); border-radius:8px;">
         </div>
     </div>
 
@@ -966,7 +968,15 @@ if (themeToggleItem) {
     }
   });
 }
-
+// поиск по категориям
+document.getElementById('categorySearch').addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase();
+  document.querySelectorAll('.category-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(term) ? 'flex' : 'none';
+  });
+});
+        
 // === ИНИЦИАЛИЗАЦИЯ ===
 document.addEventListener('DOMContentLoaded', () => 
     {
