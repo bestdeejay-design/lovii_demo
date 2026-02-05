@@ -677,6 +677,7 @@ body {
     <!-- Profile Modal -->
     <div id="profileModal" class="modal-overlay" style="display: none;">
         <div class="modal-content">
+            <div class="modal-close" style="text-align: right; margin-bottom: 10px; cursor: pointer; font-size: 24px;">×</div>
             <div class="modal-item">Профиль</div>
             <div class="modal-item">История операций</div>
             <div class="modal-item">Баланс</div>
@@ -1011,14 +1012,6 @@ body {
             }
         });
         
-        // Close modal when clicking outside of it
-        window.addEventListener('click', (event) => {
-            const modal = document.getElementById('profileModal');
-            if(event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-        
         // Logout item click handler
         document.getElementById('logoutItem').addEventListener('click', () => {
             navigateTo('start');
@@ -1177,29 +1170,55 @@ body {
             };
         });
          // === Переключение темы из профильного меню ===
-const themeToggleItem = document.getElementById('themeToggleItem');
-if (themeToggleItem) {
-  // Восстанавливаем сохранённую тему
-  const savedTheme = localStorage.getItem('lovii-theme');
-  if (savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    themeToggleItem.textContent = '☀️ Светлая тема';
-  }
-
-  // Обработчик клика
-  themeToggleItem.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.removeItem('lovii-theme');
-      themeToggleItem.textContent = '🌙 Тёмная тема';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('lovii-theme', 'dark');
-      themeToggleItem.textContent = '☀️ Светлая тема';
-    }
-  });
-}
+        const themeToggleItem = document.getElementById('themeToggleItem');
+        if (themeToggleItem) {
+          // Восстанавливаем сохранённую тему
+          const savedTheme = localStorage.getItem('lovii-theme');
+          if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggleItem.textContent = '☀️ Светлая тема';
+          }
+        
+          // Обработчик клика
+          themeToggleItem.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+              document.documentElement.removeAttribute('data-theme');
+              localStorage.removeItem('lovii-theme');
+              themeToggleItem.textContent = '🌙 Тёмная тема';
+            } else {
+              document.documentElement.setAttribute('data-theme', 'dark');
+              localStorage.setItem('lovii-theme', 'dark');
+              themeToggleItem.textContent = '☀️ Светлая тема';
+            }
+          });
+        }
+        // === Улучшенное управление модальным окном профиля ===
+            const profileModal = document.getElementById('profileModal');
+            const modalContent = profileModal.querySelector('.modal-content');
+            
+            // Закрытие по клику/тапу вне контента (работает на мобильных)
+            function handleClickOutside(event) {
+              if (!modalContent.contains(event.target)) {
+                profileModal.style.display = 'none';
+              }
+            }
+            
+            // Подписываемся на оба события для надёжности
+            profileModal.addEventListener('mousedown', handleClickOutside);   // десктоп
+            profileModal.addEventListener('touchstart', handleClickOutside, { passive: true }); // мобильные
+            
+            // Обработка кликов по пунктам меню
+            document.querySelectorAll('#profileModal .modal-item').forEach(item => {
+              item.addEventListener('click', function() {
+                // Не закрываем, если это переключатель темы
+                if (this.id === 'themeToggleItem') {
+                  return;
+                }
+                // Закрываем во всех остальных случаях
+                profileModal.style.display = 'none';
+              });
+            });
     </script>
 </body>
 </html>
