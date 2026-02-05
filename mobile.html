@@ -510,6 +510,31 @@
             font-size: 16px;
         }
 
+        .banner-carousel {
+            width: 100%;
+            height: 200px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(79, 107, 92, 0.08);
+            -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+        }
+
+        .banner-track {
+            white-space: nowrap;
+            display: flex;
+            height: 200px;
+        }
+
+        .banner-slide {
+            display: inline-block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            flex: 0 0 auto;
+        }
+
         @keyframes fadeInSlideUp {
             to {
                 opacity: 1;
@@ -622,11 +647,16 @@
                 </div>
             </div>
             
-            <!-- Ad Banner -->
-            <div class="ad-banner">
-                <div class="ad-content">
-                    <h3>Реклама</h3>
-                    <p>Партнер: Royal Canin</p>
+            <!-- Banner Carousel -->
+            <div class="banner-carousel">
+                <div class="banner-track">
+                    <img src="img/banner1.png" alt="Баннер 1" class="banner-slide">
+                    <img src="img/banner2.png" alt="Баннер 2" class="banner-slide">
+                    <img src="img/banner3.png" alt="Баннер 3" class="banner-slide">
+                    <img src="img/banner4.png" alt="Баннер 4" class="banner-slide">
+                    <img src="img/banner5.png" alt="Баннер 5" class="banner-slide">
+                    <img src="img/banner6.png" alt="Баннер 6" class="banner-slide">
+                    <img src="img/banner8.png" alt="Баннер 8" class="banner-slide">
                 </div>
             </div>
             
