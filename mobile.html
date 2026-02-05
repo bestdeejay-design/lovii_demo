@@ -1019,11 +1019,22 @@ document.addEventListener('DOMContentLoaded', () =>
     
     // Запуск
     startAuto();
-    
     // Остановить и запланировать возобновление при тапе/клике
     carousel.addEventListener('touchstart', pauseAndScheduleResume, { passive: true });
     carousel.addEventListener('mousedown', pauseAndScheduleResume);
 });
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-in');
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.category-card, .store-card').forEach(card => {
+          observer.observe(card);
+        });
 </script>
 </body>
 </html>
