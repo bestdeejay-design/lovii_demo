@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOVII - Оператор лояльности</title>
+<link rel="icon" href="img/logo512.png" type="image/png">
+<link rel="apple-touch-icon" href="img/logo512.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  /* Яркая тема — по умолчанию */
+  --bg-main: #E9E4D4;
+  --text-primary: #4A5447;
+  --accent-terra: #C97C5D;
+  --accent-sage: #8F9E8B;
+  --card-bg: #F0EDDE;
+  --border-color: rgba(74, 84, 71, 0.1);
+  --header-footer-bg: #E9E4D4;
+  --modal-bg: white;
+  --modal-text: #333;
+  --modal-border: #eee;
+}
+[data-theme="dark"] {
+  /* Тёмная тема */
+  --bg-main: #121212;
+  --text-primary: #f0f0f0;
+  --accent-terra: #D4A03D;
+  --accent-sage: #A8B894;
+  --card-bg: #1e1e1e;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --header-footer-bg: #1a1a1a;
+  --modal-bg: #2a2a2a;
+  --modal-text: #f0f0f0;
+  --modal-border: rgba(255, 255, 255, 0.1);
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  width: 375px;
+  min-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+}
+.screen {
+  display: none;
+  padding: 20px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+.screen.active {
+  display: block;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: var(--header-footer-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-color);
+}
+.header.hidden {
+  display: none;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.notification-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+.notification-icon {
+  width: 28px;
+  height: 28px;
+  fill: var(--text-primary);
+}
+.app-logo {
+  height: 48px;
+}
+.hero-logo {
+  height: 280px;
+  margin: 0 auto 30px;
+  display: block;
+}
+.profile-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+.profile-btn.hidden {
+  display: none;
+}
+.profile-icon {
+  width: 28px;
+  height: 28px;
+  fill: var(--text-primary);
+}
+.footer-nav {
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 10px;
+  background-color: var(--header-footer-bg);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 375px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border-color);
+}
+.footer-nav.show {
+  display: flex;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  cursor: pointer;
+}
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+}
+.nav-label {
+  font-size: 10px;
+  margin-top: 2px;
+  color: var(--text-primary);
+}
+.nav-item.center .nav-icon-wrapper {
+  background-color: var(--accent-terra);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -20px;
+  border: 3px solid var(--bg-main);
+}
+.main-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+.catch-colors-btn,
+.login-btn,
+.confirm-btn,
+.open-btn {
+  background-color: var(--accent-terra);
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(201, 124, 93, 0.3);
+}
+.catch-colors-btn {
+  padding: 15px 30px;
+  font-size: 16px;
+  width: 80%;
+  border-radius: 12px;
+}
+.login-btn {
+  padding: 16px;
+  font-size: 18px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.confirm-btn {
+  padding: 16px 40px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+.open-btn {
+  padding: 14px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+.open-btn:hover {
+  background-color: #b56c52;
+}
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--accent-sage);
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+}
+.code-input {
+  width: 100%;
+  max-width: 200px;
+  padding: 14px;
+  text-align: center;
+  font-size: 24px;
+  border: 1px solid var(--accent-sage);
+  border-radius: 8px;
+  letter-spacing: 8px;
+}
+.categories-title,
+.stores-title {
+  color: var(--text-primary);
+}
+.category-card,
+.store-card,
+.ad-banner,
+.banner-carousel {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(79, 107, 92, 0.08);
+}
+.category-card:hover,
+.store-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+.store-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.category-icon-circle {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(143, 158, 139, 0.1);
+}
+.store-icon {
+  width: 48px;
+  height: 48px;
+  fill: var(--accent-sage);
+}
+.store-name {
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+.store-category {
+  color: var(--accent-sage);
+}
+.lovii-badge {
+  background-color: var(--accent-terra);
+  color: white;
+}
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--modal-bg);
+  border-radius: 16px 16px 0 0;
+  padding: 20px;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+  z-index: 1001;
+}
+.modal-item {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--modal-border);
+  font-size: 16px;
+  color: var(--modal-text);
+  cursor: pointer;
+}
+.modal-item:last-child {
+  border-bottom: none;
+}
+.logout-item {
+  color: var(--accent-terra);
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="logo-container" id="logoContainer">
+    <img src="img/logo512.png" alt="LOVII" class="app-logo">
+    <span style="font-size: 20px; font-weight: bold; color: var(--text-primary);">LOVII</span>
+  </div>
+  <button class="notification-btn" id="notificationBtn">
+    <svg id="bellIconWithDot" class="notification-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+      <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.7295 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="18" cy="6" r="2" fill="#FF0000"/>
+    </svg>
+    <svg id="bellIconWithoutDot" class="notification-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.7295 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</header>
+
+<!-- Screen 1: Main -->
+<div id="mainScreen" class="screen active">
+  <div class="main-screen">
+    <img src="img/logo512.png" alt="LOVII" class="hero-logo">
+    <button class="catch-colors-btn" id="catchColorsBtn">Лови</button>
+  </div>
+</div>
+
+<!-- Screen 2: Authorization -->
+<div id="authScreen" class="screen">
+  <div class="auth-screen">
+    <div class="input-group">
+      <label for="phoneInput">Номер телефона</label>
+      <input type="tel" id="phoneInput" placeholder="+7 (___) ___-__-__">
+    </div>
+    <div class="input-group">
+      <label for="promoInput">Промокод (4 символа)</label>
+      <input type="text" id="promoInput" placeholder="ABCD" maxlength="4">
+    </div>
+    <button class="login-btn" id="loginBtn">Войти</button>
+  </div>
+</div>
+
+<!-- Screen 3: SMS Code -->
+<div id="smsScreen" class="screen">
+  <div class="sms-screen">
+    <h2 class="sms-title">Введите код из SMS</h2>
+    <input type="text" class="code-input" id="codeInput" placeholder="____" maxlength="4">
+    <button class="confirm-btn" id="confirmBtn">Подтвердить</button>
+  </div>
+</div>
+
+<!-- Screen 4: Stores -->
+<div id="storesScreen" class="screen">
+  <div class="stores-screen">
+    <div class="categories-section">
+      <div class="categories-row two-categories" id="twoCategoriesRow"></div>
+      <div class="categories-row three-categories" id="threeCategoriesRow"></div>
+    </div>
+    <div class="banner-carousel">
+      <div class="banner-track">
+        <div class="banner-card"><img src="img/banner1.png" alt="Баннер 1"></div>
+        <div class="banner-card"><img src="img/banner2.png" alt="Баннер 2"></div>
+        <div class="banner-card"><img src="img/banner3.png" alt="Баннер 3"></div>
+        <div class="banner-card"><img src="img/banner4.png" alt="Баннер 4"></div>
+        <div class="banner-card"><img src="img/banner5.png" alt="Баннер 5"></div>
+        <div class="banner-card"><img src="img/banner6.png" alt="Баннер 6"></div>
+        <div class="banner-card"><img src="img/banner8.png" alt="Баннер 8"></div>
+      </div>
+    </div>
+    <div class="stores-section">
+      <h2 class="stores-title">Торговые точки рядом</h2>
+      <div class="stores-grid" id="storesGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 5: Categories -->
+<div id="categoriesScreen" class="screen">
+  <div class="categories-screen">
+    <h2 class="categories-title">Категории заведений</h2>
+    <div class="categories-grid" id="categoriesGrid"></div>
+  </div>
+</div>
+
+<!-- Footer Navigation -->
+<footer class="footer-nav" id="footerNav">
+  <div class="nav-item" data-target="mainScreen">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="#C97C5D" stroke-width="2"/>
+      <path d="M12 8L8 12L12 16L16 12L12 8Z" fill="#C97C5D"/>
+    </svg>
+    <span class="nav-label">Главная</span>
+  </div>
+  <div class="nav-item" data-target="categoriesScreen">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+      <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="nav-label">Поиск</span>
+  </div>
+  <div class="nav-item center" data-target="categoriesScreen">
+    <div class="nav-icon-wrapper">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5V19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+  <div class="nav-item" data-target="giftsScreen">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2L14 6H20L16 10L18 14L12 11L6 14L8 10L4 6H10L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="nav-label">Подарки</span>
+  </div>
+  <div class="nav-item" id="profileNavItem">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+      <path d="M20 20C20 17.5 18 15.5 15.5 15.5H8.5C6 15.5 4 17.5 4 20" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span class="nav-label">Профиль</span>
+  </div>
+</footer>
+
+<!-- Gifts Screen -->
+<div id="giftsScreen" class="screen">
+  <div class="categories-screen">
+    <h2 class="categories-title">Онлайн-предложения</h2>
+    <div class="categories-grid" id="giftsGrid">
+      <div class="category-card"><h3>Банки</h3><p>Сбербанк — 5% кэшбэк</p></div>
+      <div class="category-card"><h3>Операторы</h3><p>Мегафон — обмен ГБ на баллы</p></div>
+      <div class="category-card"><h3>Косметика</h3><p>Л'Этуаль — бонусы за покупки</p></div>
+      <div class="category-card"><h3>Страховки</h3><p>ИНГОССТРАХ — баллы за полис</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- Profile Modal -->
+<div id="profileModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-close" style="text-align: right; margin-bottom: 10px; cursor: pointer; font-size: 24px;">×</div>
+    <div class="modal-item">Профиль</div>
+    <div class="modal-item">История операций</div>
+    <div class="modal-item">Баланс</div>
+    <div class="modal-item">QR код</div>
+    <div class="modal-item">Избранное</div>
+    <div class="modal-item">Корзина</div>
+    <div class="modal-item">Безопасность</div>
+    <div class="modal-item">Конфиденциальность</div>
+    <div class="modal-item" id="themeToggleItem">🌙 Тёмная тема</div>
+    <div class="modal-item logout-item" id="logoutItem">Выйти</div>
+  </div>
+</div>
+
+<script>
+// === ДАННЫЕ ===
+const categories = ["Итальянская кухня","Свежая рыба","Уличная еда","Японская кухня","Пекарни и кондитерские","Цветочные магазины","Кофейни","Фермерские лавки","Барбершопы","Салоны красоты","Массаж и спа","Репетиторы и обучение","Фотографы","Авторские ювелирные изделия","Домашние повара","Мастера маникюра","Фитнес и йога","Ателье и ремонт одежды","Зоотовары и груминг","Клининг и уборка"];
+const stores = [
+  {name:'Рыбный прилавок "У причала"',category:'Свежая рыба',icon:'<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12C18 12 15 15 12 15C9 15 6 12 6 12C6 12 9 9 12 9C15 9 18 12 18 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',points:100},
+  {name:'Пиццерия "Маргарита"',category:'Итальянская кухня',icon:'<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',points:150},
+  {name:'Шаверма на углу',category:'Уличная еда',icon:'<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11H20C20 16 17 20 12 20C7 20 4 16 4 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 22H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',points:80},
+  {name:'Японская лавка "Харуши"',category:'Японская кухня',icon:'<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',points:200},
+  {name:'Булочная "Ржаное счастье"',category:'Пекарни и кондитерские',icon:'<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 15C2 15 4 13 8 13C12 13 16 17 22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 13V9C10 7.34315 11.3431 6 13 6C14.6569 6 16 7.34315 16 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',points:120},
+  {name:'Кофейня "Уютный угол"',category:'Кофейни',icon:'<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 12C17 14.2091 15.2091 16 13 16C10.7909 16 9 14.2091 9 12C9 9.79086 10.7909 8 13 8C15.2091 8 17 9.79086 17 12Z" stroke="currentColor" stroke-width="2"/><path d="M18 22C18 20.8954 17.1046 20 16 20H10C8.89543 20 8 20.8954 8 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 16V12C20 8.68629 17.3137 6 14 6H10C6.68629 6 4 8.68629 4 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',points:110}
+];
+const categoryIcons = {
+  "Итальянская кухня": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="16" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 12L28 20L24 24L20 20L24 12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 8L26 12" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 16L22 18" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 16L26 18" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Свежая рыба": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24C16 24 20 14 28 18C36 22 36 26 28 30C20 34 16 24 16 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 22C20 24 22 26 24 26C26 26 28 24 28 22C28 20 26 18 24 18C22 18 20 20 20 22Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 22L26 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M26 26L28 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Уличная еда": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 28C12 28 16 20 24 20C32 20 36 28 36 28C36 28 34 36 24 36C14 36 12 28 12 28Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 24L30 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Японская кухня": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="16" y="20" width="16" height="12" rx="2" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="16" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 24L28 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Пекарни и кондитерские": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 28C14 32 20 34 24 34C28 34 34 32 38 28C38 24 34 20 24 20C14 20 10 24 10 28Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 26L20 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M32 26L28 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Цветочные магазины": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="26" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="26" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 30C20 30 24 34 28 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Кофейни": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 30H32C34 30 36 32 36 34V38H12V34C12 32 14 30 16 30Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20C20 16 22 14 24 14C26 14 28 16 28 20" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 24C22 26 24 28 26 26" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Фермерские лавки": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26C14 26 18 16 24 16C30 16 34 26 34 26C34 26 38 34 24 34C10 34 14 26 14 26Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 24L22 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 24L26 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 20L24 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Барбершопы": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 16L28 24M28 16L20 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M18 36L30 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Салоны красоты": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 20C24 20 28 16 30 18C32 20 32 24 30 26C28 28 24 28 24 28C24 28 20 28 18 26C16 24 16 20 18 18C20 16 24 20 24 20Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M26 36L22 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Массаж и спа": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 24L24 20L28 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 32C18 32 20 36 24 36C28 36 30 32 30 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 28L26 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Репетиторы и обучение": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 12H32V36H16V12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 20H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 24H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 8C26 10 26 14 24 16C22 14 22 10 24 8Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Фотографы": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="20" width="24" height="12" rx="2" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="26" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="26" r="1" fill="#8F9E8B"/><path d="M32 20L36 16" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Авторские ювелирные изделия": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="1" fill="#8F9E8B"/></svg>',
+  "Домашние повара": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32C34 24 36 26 36 28V36C36 38 34 40 32 40H16C14 40 12 38 12 36V28C12 26 14 24 16 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20C20 16 22 14 24 14C26 14 28 16 28 20" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 24C22 26 24 28 26 26" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32V34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 30V32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 32V34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Мастера маникюра": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 16C24 16 28 12 30 14C32 16 32 20 30 22C28 24 24 24 24 24C24 24 20 24 18 22C16 20 16 16 18 14C20 12 24 16 24 16Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 32L26 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 24L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 36L24 38" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Фитнес и йога": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 36L24 28L28 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 30L20 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 30L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Ателье и ремонт одежды": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12L26 16L24 20L22 16L24 12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 34C22 34 24 38 26 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Зоотовары и груминг": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 24C24 24 30 18 32 22C34 26 34 30 32 34C30 38 24 36 24 36C24 36 18 38 16 34C14 30 14 26 16 22C18 18 24 24 24 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 30C22 30 24 34 26 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32C20 32 22 36 24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 32C24 32 26 36 28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Клининг и уборка": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 28L26 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 36L22 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 34L28 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 36L24 40" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+// === DOM ===
+const mainScreen = document.getElementById('mainScreen');
+const authScreen = document.getElementById('authScreen');
+const smsScreen = document.getElementById('smsScreen');
+const storesScreen = document.getElementById('storesScreen');
+const categoriesScreen = document.getElementById('categoriesScreen');
+const giftsScreen = document.getElementById('giftsScreen');
+const catchColorsBtn = document.getElementById('catchColorsBtn');
+const loginBtn = document.getElementById('loginBtn');
+const confirmBtn = document.getElementById('confirmBtn');
+const profileNavItem = document.getElementById('profileNavItem');
+const footerNav = document.getElementById('footerNav');
+const categoriesGrid = document.getElementById('categoriesGrid');
+const storesGrid = document.getElementById('storesGrid');
+const profileModal = document.getElementById('profileModal');
+const modalContent = profileModal.querySelector('.modal-content');
+const themeToggleItem = document.getElementById('themeToggleItem');
+const logoutItem = document.getElementById('logoutItem');
+
+// === ФУНКЦИИ ===
+function generateCategoriesGrid() {
+  categoriesGrid.innerHTML = '';
+  categories.forEach(category => {
+    const card = document.createElement('div');
+    card.className = 'category-card';
+    card.innerHTML = `<div class="category-icon">${categoryIcons[category] || '🏷️'}</div><div class="category-name">${category}</div>`;
+    card.addEventListener('click', () => console.log(`Category clicked: ${category}`));
+    categoriesGrid.appendChild(card);
+  });
+}
+
+function generateMainScreenCategories() {
+  const shuffled = [...categories].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 5);
+  const twoRow = document.getElementById('twoCategoriesRow');
+  twoRow.innerHTML = '';
+  selected.slice(0, 2).forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'category-card two-cols';
+    card.innerHTML = `<div class="category-icon-svg">${categoryIcons[cat] || '🏷️'}</div><div class="category-name">${cat}</div>`;
+    card.addEventListener('click', () => window.location.hash = 'categories');
+    twoRow.appendChild(card);
+  });
+  const threeRow = document.getElementById('threeCategoriesRow');
+  threeRow.innerHTML = '';
+  selected.slice(2, 5).forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'category-card three-cols';
+    card.innerHTML = `<div class="category-icon-svg">${categoryIcons[cat] || '🏷️'}</div><div class="category-name">${cat}</div>`;
+    card.addEventListener('click', () => window.location.hash = 'categories');
+    threeRow.appendChild(card);
+  });
+}
+
+function generateStoresGrid() {
+  storesGrid.innerHTML = '';
+  const shuffled = [...stores].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, Math.floor(Math.random() * 5) + 6);
+  selected.forEach(store => {
+    const card = document.createElement('div');
+    card.className = 'store-card';
+    card.innerHTML = `
+      <div class="store-header">
+        <div class="category-icon-circle">${store.icon}</div>
+        <div class="store-info">
+          <div class="store-name">${store.name}</div>
+          <div class="store-category">${store.category}</div>
+        </div>
+      </div>
+      <div class="lovii-badge">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 12C7 12 2 9 2 5C2 3.34315 3.34315 2 5 2C5.75 2 6.5 2.25 7 2.75C7.5 2.25 8.25 2 9 2C10.6569 2 12 3.34315 12 5C12 9 7 12 7 12Z" fill="white"/>
+          <path d="M5 5C4 6 5 8 6 8C7 8 8 6 7 5C6 4 5 5 5 5Z" fill="white"/>
+          <path d="M9 5C10 6 9 8 8 8C7 8 6 6 7 5C8 4 9 5 9 5Z" fill="white"/>
+        </svg>
+        +${store.points} баллов за покупку
+      </div>
+    `;
+    card.addEventListener('click', () => console.log(`Store clicked: ${store.name}`));
+    storesGrid.appendChild(card);
+  });
+}
+
+function showScreen(screenId) {
+  [mainScreen, authScreen, smsScreen, storesScreen, categoriesScreen, giftsScreen].forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  updateHeaderFooterVisibility();
+}
+
+function updateHeaderFooterVisibility() {
+  const authenticated = !['#start', '#auth', '#sms', ''].includes(window.location.hash);
+  footerNav.classList.toggle('show', authenticated);
+  document.getElementById('header').classList.toggle('hidden', !authenticated);
+  profileNavItem.classList.toggle('hidden', window.location.hash === '#start');
+}
+
+function handleHashChange() {
+  const hash = window.location.hash.substring(1) || 'start';
+  let screen = 'mainScreen';
+  if (hash === 'auth') screen = 'authScreen';
+  else if (hash === 'sms') screen = 'smsScreen';
+  else if (hash === 'main') screen = 'storesScreen';
+  else if (hash === 'categories') screen = 'categoriesScreen';
+  else if (hash === 'gifts') screen = 'giftsScreen';
+  showScreen(screen);
+  if (hash === 'main') generateMainScreenCategories();
+}
+
+function navigateTo(hash) {
+  window.location.hash = hash;
+}
+
+// === СОБЫТИЯ ===
+catchColorsBtn?.addEventListener('click', () => navigateTo('auth'));
+loginBtn?.addEventListener('click', () => navigateTo('sms'));
+confirmBtn?.addEventListener('click', () => navigateTo('main'));
+logoutItem?.addEventListener('click', () => { navigateTo('start'); profileModal.style.display = 'none'; });
+
+document.querySelectorAll('.nav-item[data-target]').forEach(item => {
+  item.addEventListener('click', () => {
+    const t = item.getAttribute('data-target');
+    if (t === 'categoriesScreen') navigateTo('categories');
+    else if (t === 'storesScreen' || t === 'mainScreen') navigateTo('main');
+    else if (t === 'giftsScreen') navigateTo('gifts');
+  });
+});
+
+document.querySelector('.nav-item.center')?.addEventListener('click', e => e.preventDefault());
+document.getElementById('logoContainer')?.addEventListener('click', () => navigateTo('main'));
+
+document.getElementById('notificationBtn')?.addEventListener('click', () => {
+  const withDot = document.getElementById('bellIconWithDot');
+  const without = document.getElementById('bellIconWithoutDot');
+  [withDot.style.display, without.style.display] = [without.style.display, withDot.style.display];
+});
+
+// === ПРОФИЛЬНОЕ МЕНЮ ===
+profileNavItem?.addEventListener('click', () => {
+  profileModal.style.display = profileModal.style.display === 'block' ? 'none' : 'block';
+});
+
+function handleClickOutside(e) {
+  if (!modalContent.contains(e.target)) profileModal.style.display = 'none';
+}
+profileModal.addEventListener('mousedown', handleClickOutside);
+profileModal.addEventListener('touchstart', handleClickOutside, { passive: true });
+
+document.querySelectorAll('#profileModal .modal-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (item.id !== 'themeToggleItem') profileModal.style.display = 'none';
+  });
+});
+
+// === ТЕМИЗАЦИЯ ===
+if (themeToggleItem) {
+  const saved = localStorage.getItem('lovii-theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggleItem.textContent = '☀️ Светлая тема';
+  }
+  themeToggleItem.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.removeItem('lovii-theme');
+      themeToggleItem.textContent = '🌙 Тёмная тема';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('lovii-theme', 'dark');
+      themeToggleItem.textContent = '☀️ Светлая тема';
+    }
+  });
+}
+
+// === ИНИЦИАЛИЗАЦИЯ ===
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.location.hash) window.location.hash = 'start';
+  generateCategoriesGrid();
+  generateStoresGrid();
+  handleHashChange();
+  window.addEventListener('hashchange', handleHashChange);
+
+  // Карусель
+  const track = document.querySelector('.banner-track');
+  const slides = document.querySelectorAll('.banner-card');
+  let current = 0, interval;
+  const update = () => track.style.transform = `translateX(-${current * 100}%)`;
+  const next = () => { current = (current + 1) % slides.length; update(); };
+  interval = setInterval(next, 3000);
+  document.querySelector('.banner-carousel').addEventListener('touchstart', () => clearInterval(interval), { passive: true });
+});
+</script>
+</body>
+</html>
