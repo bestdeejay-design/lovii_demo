@@ -518,18 +518,6 @@
           color: var(--accent-terra);
           font-weight: 600;
         }
-
-        /* Анимация появления карточек */
-        .category-card, .store-card {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .category-card.animate-in,
-        .store-card.animate-in {
-          opacity: 1;
-          transform: translateY(0);
-        }
         </style>
 </head>
 <body>
@@ -1024,17 +1012,6 @@ document.addEventListener('DOMContentLoaded', () =>
     carousel.addEventListener('mousedown', pauseAndScheduleResume);
 });
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('animate-in');
-            }
-          });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('.category-card, .store-card').forEach(card => {
-          observer.observe(card);
-        });
 </script>
 </body>
 </html>
