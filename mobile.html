@@ -964,21 +964,49 @@ if (themeToggleItem) {
 }
 
 // === ИНИЦИАЛИЗАЦИЯ ===
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => 
+    {
   if (!window.location.hash) window.location.hash = 'start';
   generateCategoriesGrid();
   generateStoresGrid();
   handleHashChange();
   window.addEventListener('hashchange', handleHashChange);
 
-  // Карусель
-  const track = document.querySelector('.banner-track');
-  const slides = document.querySelectorAll('.banner-card');
-  let current = 0, interval;
-  const update = () => track.style.transform = `translateX(-${current * 100}%)`;
-  const next = () => { current = (current + 1) % slides.length; update(); };
-  interval = setInterval(next, 3000);
-  document.querySelector('.banner-carousel').addEventListener('touchstart', () => clearInterval(interval), { passive: true });
+  // === КАРУСЕЛЬ С АВТОВОЗОБНОВЛЕНИЕМ ===
+    const carousel = document.querySelector('.banner-carousel');
+    const track = document.querySelector('.banner-track');
+    const slides = document.querySelectorAll('.banner-card');
+    let current = 0;
+    let autoInterval;
+    let resumeTimeout;
+    
+    const update = () => {
+      track.style.transform = `translateX(-${current * 100}%)`;
+    };
+    
+    const next = () => {
+      current = (current + 1) % slides.length;
+      update();
+    };
+    
+    const startAuto = () => {
+      clearInterval(autoInterval);
+      clearTimeout(resumeTimeout);
+      autoInterval = setInterval(next, 3000);
+    };
+    
+    const pauseAndScheduleResume = () => {
+      clearInterval(autoInterval);
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(startAuto, 5000); // возобновить через 5 сек
+    };
+    
+    // Запуск
+    startAuto();
+    
+    // Остановить и запланировать возобновление при тапе/клике
+    carousel.addEventListener('touchstart', pauseAndScheduleResume, { passive: true });
+    carousel.addEventListener('mousedown', pauseAndScheduleResume);
 });
 </script>
 </body>
