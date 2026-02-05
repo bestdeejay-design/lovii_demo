@@ -693,541 +693,288 @@
     </div>
 
     <script>
-        // Categories list
-        const categories = [
-            "Итальянская кухня",
-            "Свежая рыба",
-            "Уличная еда",
-            "Японская кухня",
-            "Пекарни и кондитерские",
-            "Цветочные магазины",
-            "Кофейни",
-            "Фермерские лавки",
-            "Барбершопы",
-            "Салоны красоты",
-            "Массаж и спа",
-            "Репетиторы и обучение",
-            "Фотографы",
-            "Авторские ювелирные изделия",
-            "Домашние повара",
-            "Мастера маникюра",
-            "Фитнес и йога",
-            "Ателье и ремонт одежды",
-            "Зоотовары и груминг",
-            "Клининг и уборка"
-        ];
+// === ДАННЫЕ ===
+const categories = [
+  "Итальянская кухня", "Свежая рыба", "Уличная еда", "Японская кухня",
+  "Пекарни и кондитерские", "Цветочные магазины", "Кофейни", "Фермерские лавки",
+  "Барбершопы", "Салоны красоты", "Массаж и спа", "Репетиторы и обучение",
+  "Фотографы", "Авторские ювелирные изделия", "Домашние повара", "Мастера маникюра",
+  "Фитнес и йога", "Ателье и ремонт одежды", "Зоотовары и груминг", "Клининг и уборка"
+];
 
-        // Stores data for the main screen after auth
-        const stores = [
-            {
-                name: 'Рыбный прилавок "У причала"',
-                category: 'Свежая рыба',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12C18 12 15 15 12 15C9 15 6 12 6 12C6 12 9 9 12 9C15 9 18 12 18 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 100
-            },
-            {
-                name: 'Пиццерия "Маргарита"',
-                category: 'Итальянская кухня',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 150
-            },
-            {
-                name: 'Шаверма на углу',
-                category: 'Уличная еда',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11H20C20 16 17 20 12 20C7 20 4 16 4 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 22H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 80
-            },
-            {
-                name: 'Японская лавка "Харуши"',
-                category: 'Японская кухня',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 200
-            },
-            {
-                name: 'Булочная "Ржаное счастье"',
-                category: 'Пекарни и кондитерские',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 15C2 15 4 13 8 13C12 13 16 17 22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 13V9C10 7.34315 11.3431 6 13 6C14.6569 6 16 7.34315 16 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                points: 120
-            },
-            {
-                name: 'Кофейня "Уютный угол"',
-                category: 'Кофейни',
-                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 12C17 14.2091 15.2091 16 13 16C10.7909 16 9 14.2091 9 12C9 9.79086 10.7909 8 13 8C15.2091 8 17 9.79086 17 12Z" stroke="currentColor" stroke-width="2"/><path d="M18 22C18 20.8954 17.1046 20 16 20H10C8.89543 20 8 20.8954 8 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 16V12C20 8.68629 17.3137 6 14 6H10C6.68629 6 4 8.68629 4 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-                points: 110
-            }
-        ];
+const stores = [
+  {
+    name: 'Рыбный прилавок "У причала"',
+    category: 'Свежая рыба',
+    icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 12C18 12 15 15 12 15C9 15 6 12 6 12C6 12 9 9 12 9C15 9 18 12 18 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    points: 100
+  },
+  {
+    name: 'Пиццерия "Маргарита"',
+    category: 'Итальянская кухня',
+    icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    points: 150
+  },
+  {
+    name: 'Шаверма на углу',
+    category: 'Уличная еда',
+    icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11H20C20 16 17 20 12 20C7 20 4 16 4 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 22H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    points: 80
+  },
+  {
+    name: 'Японская лавка "Харуши"',
+    category: 'Японская кухня',
+    icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    points: 200
+  },
+  {
+    name: 'Булочная "Ржаное счастье"',
+    category: 'Пекарни и кондитерские',
+    icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 15C2 15 4 13 8 13C12 13 16 17 22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 13V9C10 7.34315 11.3431 6 13 6C14.6569 6 16 7.34315 16 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    points: 120
+  },
+  {
+    name: 'Кофейня "Уютный угол"',
+    category: 'Кофейни',
+    icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 12C17 14.2091 15.2091 16 13 16C10.7909 16 9 14.2091 9 12C9 9.79086 10.7909 8 13 8C15.2091 8 17 9.79086 17 12Z" stroke="currentColor" stroke-width="2"/><path d="M18 22C18 20.8954 17.1046 20 16 20H10C8.89543 20 8 20.8954 8 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 16V12C20 8.68629 17.3137 6 14 6H10C6.68629 6 4 8.68629 4 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    points: 110
+  }
+];
 
-        // Category icons mapping (using SVG as required)
-        const categoryIcons = {
-            "Итальянская кухня": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="16" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 12L28 20L24 24L20 20L24 12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 8L26 12" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 16L22 18" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 16L26 18" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Свежая рыба": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24C16 24 20 14 28 18C36 22 36 26 28 30C20 34 16 24 16 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 22C20 24 22 26 24 26C26 26 28 24 28 22C28 20 26 18 24 18C22 18 20 20 20 22Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 22L26 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M26 26L28 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Уличная еда": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 28C12 28 16 20 24 20C32 20 36 28 36 28C36 28 34 36 24 36C14 36 12 28 12 28Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 24L30 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Японская кухня": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="16" y="20" width="16" height="12" rx="2" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="16" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 24L28 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Пекарни и кондитерские": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 28C14 32 20 34 24 34C28 34 34 32 38 28C38 24 34 20 24 20C14 20 10 24 10 28Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 26L20 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M32 26L28 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Цветочные магазины": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="26" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="26" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 30C20 30 24 34 28 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-            "Кофейни": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 30H32C34 30 36 32 36 34V38H12V34C12 32 14 30 16 30Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20C20 16 22 14 24 14C26 14 28 16 28 20" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 24C22 26 24 28 26 26" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Фермерские лавки": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26C14 26 18 16 24 16C30 16 34 26 34 26C34 26 38 34 24 34C10 34 14 26 14 26Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 24L22 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 24L26 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 20L24 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Барбершопы": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 16L28 24M28 16L20 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M18 36L30 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Салоны красоты": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 20C24 20 28 16 30 18C32 20 32 24 30 26C28 28 24 28 24 28C24 28 20 28 18 26C16 24 16 20 18 18C20 16 24 20 24 20Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M26 36L22 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Массаж и спа": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 24L24 20L28 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 32C18 32 20 36 24 36C28 36 30 32 30 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 28L26 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Репетиторы и обучение": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 12H32V36H16V12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 20H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 24H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 8C26 10 26 14 24 16C22 14 22 10 24 8Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-            "Фотографы": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="20" width="24" height="12" rx="2" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="26" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="26" r="1" fill="#8F9E8B"/><path d="M32 20L36 16" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-            "Авторские ювелирные изделия": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="1" fill="#8F9E8B"/></svg>',
-            "Домашние повара": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32C34 24 36 26 36 28V36C36 38 34 40 32 40H16C14 40 12 38 12 36V28C12 26 14 24 16 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20C20 16 22 14 24 14C26 14 28 16 28 20" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 24C22 26 24 28 26 26" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32V34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 30V32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 32V34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Мастера маникюра": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 16C24 16 28 12 30 14C32 16 32 20 30 22C28 24 24 24 24 24C24 24 20 24 18 22C16 20 16 16 18 14C20 12 24 16 24 16Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 32L26 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 24L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 36L24 38" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
-            "Фитнес и йога": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 36L24 28L28 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 30L20 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 30L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-            "Ателье и ремонт одежды": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12L26 16L24 20L22 16L24 12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 34C22 34 24 38 26 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-            "Зоотовары и груминг": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 24C24 24 30 18 32 22C34 26 34 30 32 34C30 38 24 36 24 36C24 36 18 38 16 34C14 30 14 26 16 22C18 18 24 24 24 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 30C22 30 24 34 26 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32C20 32 22 36 24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 32C24 32 26 36 28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-            "Клининг и уборка": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 28L26 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 36L22 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 34L28 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 36L24 40" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-        };
+const categoryIcons = {
+  "Итальянская кухня": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="16" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 12L28 20L24 24L20 20L24 12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 8L26 12" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 16L22 18" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 16L26 18" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Свежая рыба": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24C16 24 20 14 28 18C36 22 36 26 28 30C20 34 16 24 16 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 22C20 24 22 26 24 26C26 26 28 24 28 22C28 20 26 18 24 18C22 18 20 20 20 22Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 22L26 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M26 26L28 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Уличная еда": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 28C12 28 16 20 24 20C32 20 36 28 36 28C36 28 34 36 24 36C14 36 12 28 12 28Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 24L30 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Японская кухня": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="16" y="20" width="16" height="12" rx="2" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="16" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 24L28 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Пекарни и кондитерские": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 28C14 32 20 34 24 34C28 34 34 32 38 28C38 24 34 20 24 20C14 20 10 24 10 28Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 26L20 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M32 26L28 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Цветочные магазины": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="26" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="26" r="3" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 30C20 30 24 34 28 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Кофейни": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 30H32C34 30 36 32 36 34V38H12V34C12 32 14 30 16 30Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20C20 16 22 14 24 14C26 14 28 16 28 20" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 24C22 26 24 28 26 26" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 34V36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Фермерские лавки": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 26C14 26 18 16 24 16C30 16 34 26 34 26C34 26 38 34 24 34C10 34 14 26 14 26Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 24L22 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 24L26 22" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 20L24 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Барбершопы": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 16L28 24M28 16L20 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M18 36L30 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Салоны красоты": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 20C24 20 28 16 30 18C32 20 32 24 30 26C28 28 24 28 24 28C24 28 20 28 18 26C16 24 16 20 18 18C20 16 24 20 24 20Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M26 36L22 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Массаж и спа": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 24L24 20L28 24" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 32C18 32 20 36 24 36C28 36 30 32 30 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 28L26 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Репетиторы и обучение": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 12H32V36H16V12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 20H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 24H28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 8C26 10 26 14 24 16C22 14 22 10 24 8Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Фотографы": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="20" width="24" height="12" rx="2" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="26" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="26" r="1" fill="#8F9E8B"/><path d="M32 20L36 16" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Авторские ювелирные изделия": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="12" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="1" fill="#8F9E8B"/></svg>',
+  "Домашние повара": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 24H32C34 24 36 26 36 28V36C36 38 34 40 32 40H16C14 40 12 38 12 36V28C12 26 14 24 16 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20C20 16 22 14 24 14C26 14 28 16 28 20" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 24C22 26 24 28 26 26" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32V34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 30V32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M28 32V34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Мастера маникюра": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 16C24 16 28 12 30 14C32 16 32 20 30 22C28 24 24 24 24 24C24 24 20 24 18 22C16 20 16 16 18 14C20 12 24 16 24 16Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 32L26 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 24L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 32L24 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 36L24 38" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/></svg>',
+  "Фитнес и йога": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="4" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 36L24 28L28 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 30L20 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 30L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Ателье и ремонт одежды": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12L26 16L24 20L22 16L24 12Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 20L24 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M20 28L28 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M24 28L24 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round"/><path d="M22 34C22 34 24 38 26 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Зоотовары и груминг": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 24C24 24 30 18 32 22C34 26 34 30 32 34C30 38 24 36 24 36C24 36 18 38 16 34C14 30 14 26 16 22C18 18 24 24 24 24Z" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 30C22 30 24 34 26 30" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32C20 32 22 36 24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 32C24 32 26 36 28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "Клининг и уборка": '<svg class="category-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12L24 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 32L28 32" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 28L26 28" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 36L22 34" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 34L28 36" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 36L24 40" stroke="#8F9E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
 
-        // Stores data for the main screen after auth
+// === DOM ===
+const mainScreen = document.getElementById('mainScreen');
+const authScreen = document.getElementById('authScreen');
+const smsScreen = document.getElementById('smsScreen');
+const storesScreen = document.getElementById('storesScreen');
+const categoriesScreen = document.getElementById('categoriesScreen');
+const giftsScreen = document.getElementById('giftsScreen');
+const catchColorsBtn = document.getElementById('catchColorsBtn');
+const loginBtn = document.getElementById('loginBtn');
+const confirmBtn = document.getElementById('confirmBtn');
+const profileNavItem = document.getElementById('profileNavItem');
+const footerNav = document.getElementById('footerNav');
+const categoriesGrid = document.getElementById('categoriesGrid');
+const storesGrid = document.getElementById('storesGrid');
+const profileModal = document.getElementById('profileModal');
+const modalContent = profileModal.querySelector('.modal-content');
+const themeToggleItem = document.getElementById('themeToggleItem');
+const logoutItem = document.getElementById('logoutItem');
 
-        // DOM elements
-        const mainScreen = document.getElementById('mainScreen');
-        const authScreen = document.getElementById('authScreen');
-        const smsScreen = document.getElementById('smsScreen');
-        const storesScreen = document.getElementById('storesScreen');
-        const categoriesScreen = document.getElementById('categoriesScreen');
-        const giftsScreen = document.getElementById('giftsScreen');
-        
-        const catchColorsBtn = document.getElementById('catchColorsBtn');
-        const loginBtn = document.getElementById('loginBtn');
-        const confirmBtn = document.getElementById('confirmBtn');
-        const profileNavItem = document.getElementById('profileNavItem');
-        
-        const footerNav = document.getElementById('footerNav');
-        const categoriesGrid = document.getElementById('categoriesGrid');
+// === ГЕНЕРАЦИЯ КАТЕГОРИЙ ===
+function generateCategoriesGrid() {
+  categoriesGrid.innerHTML = '';
+  categories.forEach(category => {
+    const card = document.createElement('div');
+    card.className = 'category-card';
+    card.innerHTML = `
+      <div class="category-icon">${categoryIcons[category] || '🏷️'}</div>
+      <div class="category-name">${category}</div>
+    `;
+    card.addEventListener('click', () => console.log(`Category clicked: ${category}`));
+    categoriesGrid.appendChild(card);
+  });
+}
 
-        // Generate categories grid
-        function generateCategoriesGrid() {
-            categoriesGrid.innerHTML = '';
-            categories.forEach(category => {
-                const categoryCard = document.createElement('div');
-                categoryCard.className = 'category-card';
-                categoryCard.innerHTML = `
-                    <div class="category-icon">${categoryIcons[category] || '🏷️'}</div>
-                    <div class="category-name">${category}</div>
-                `;
-                categoryCard.addEventListener('click', () => {
-                    // For now just log the click - in future implementation could navigate somewhere
-                    console.log(`Category clicked: ${category}`);
-                });
-                categoriesGrid.appendChild(categoryCard);
-            });
-        }
-        
-        // Generate main screen categories
-        function generateMainScreenCategories() {
-            // Create shuffled array of categories for randomness
-            const shuffledCategories = [...categories].sort(() => 0.5 - Math.random());
-            
-            // Get first 5 unique categories for the main screen
-            const selectedCategories = shuffledCategories.slice(0, 5);
-            
-            // Populate two categories row
-            const twoCategoriesRow = document.getElementById('twoCategoriesRow');
-            twoCategoriesRow.innerHTML = '';
-            selectedCategories.slice(0, 2).forEach(category => {
-                const categoryCard = document.createElement('div');
-                categoryCard.className = 'category-card two-cols';
-                categoryCard.innerHTML = `
-                    <div class="category-icon-svg">${categoryIcons[category] || '🏷️'}</div>
-                    <div class="category-name">${category}</div>
-                `;
-                categoryCard.addEventListener('click', () => {
-                    // Navigate to categories screen with filter
-                    window.location.hash = 'categories';
-                    console.log(`Category clicked: ${category}`);
-                });
-                twoCategoriesRow.appendChild(categoryCard);
-            });
-            
-            // Populate three categories row
-            const threeCategoriesRow = document.getElementById('threeCategoriesRow');
-            threeCategoriesRow.innerHTML = '';
-            selectedCategories.slice(2, 5).forEach(category => {
-                const categoryCard = document.createElement('div');
-                categoryCard.className = 'category-card three-cols';
-                categoryCard.innerHTML = `
-                    <div class="category-icon-svg">${categoryIcons[category] || '🏷️'}</div>
-                    <div class="category-name">${category}</div>
-                `;
-                categoryCard.addEventListener('click', () => {
-                    // Navigate to categories screen with filter
-                    window.location.hash = 'categories';
-                    console.log(`Category clicked: ${category}`);
-                });
-                threeCategoriesRow.appendChild(categoryCard);
-            });
-        }
+// === ГЕНЕРАЦИЯ КАТЕГОРИЙ НА ГЛАВНОЙ ===
+function generateMainScreenCategories() {
+  const shuffled = [...categories].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 5);
 
-        // Function to show a specific screen and hide others
-        function showScreen(screenId) {
-            // Hide all screens
-            mainScreen.classList.remove('active');
-            authScreen.classList.remove('active');
-            smsScreen.classList.remove('active');
-            storesScreen.classList.remove('active');
-            categoriesScreen.classList.remove('active');
-            giftsScreen.classList.remove('active');
-            
-            // Show selected screen
-            document.getElementById(screenId).classList.add('active');
-            
-            // Update header and footer visibility based on authentication status
-            updateHeaderFooterVisibility();
-        }
+  const twoRow = document.getElementById('twoCategoriesRow');
+  twoRow.innerHTML = '';
+  selected.slice(0, 2).forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'category-card two-cols';
+    card.innerHTML = `
+      <div class="category-icon-svg">${categoryIcons[cat] || '🏷️'}</div>
+      <div class="category-name">${cat}</div>
+    `;
+    card.addEventListener('click', () => window.location.hash = 'categories');
+    twoRow.appendChild(card);
+  });
 
-        // Update header and footer visibility based on current screen
-        function updateHeaderFooterVisibility() {
-            const isAuthenticated = window.location.hash !== '#start' && 
-                                  window.location.hash !== '' && 
-                                  !window.location.hash.includes('auth') && 
-                                  !window.location.hash.includes('sms');
-                                  
-            if (isAuthenticated) {
-                footerNav.classList.add('show');
-                document.getElementById('header').classList.remove('hidden');
-            } else {
-                footerNav.classList.remove('show');
-                document.getElementById('header').classList.add('hidden');
-            }
-        }
+  const threeRow = document.getElementById('threeCategoriesRow');
+  threeRow.innerHTML = '';
+  selected.slice(2, 5).forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'category-card three-cols';
+    card.innerHTML = `
+      <div class="category-icon-svg">${categoryIcons[cat] || '🏷️'}</div>
+      <div class="category-name">${cat}</div>
+    `;
+    card.addEventListener('click', () => window.location.hash = 'categories');
+    threeRow.appendChild(card);
+  });
+}
 
-        // Handle hash change
-        function handleHashChange() {
-            const hash = window.location.hash.substring(1);
-            let targetScreen = 'mainScreen'; // default
-            
-            switch(hash) {
-                case 'start':
-                    targetScreen = 'mainScreen';
-                    // Hide profile button on start screen
-                    profileNavItem.classList.add('hidden');
-                    break;
-                case 'auth':
-                    targetScreen = 'authScreen';
-                    // Show profile button on other screens
-                    profileNavItem.classList.remove('hidden');
-                    break;
-                case 'sms':
-                    targetScreen = 'smsScreen';
-                    // Show profile button on other screens
-                    profileNavItem.classList.remove('hidden');
-                    break;
-                case 'main':
-                    targetScreen = 'storesScreen';
-                    // Show profile button on other screens
-                    profileNavItem.classList.remove('hidden');
-                    break;
-                case 'categories':
-                    targetScreen = 'categoriesScreen';
-                    // Show profile button on other screens
-                    profileNavItem.classList.remove('hidden');
-                    break;
-                case 'gifts':
-                    targetScreen = 'giftsScreen';
-                    // Show profile button on other screens
-                    profileNavItem.classList.remove('hidden');
-                    break;
-                default:
-                    // Show profile button on other screens
-                    profileNavItem.classList.remove('hidden');
-                    break;
-            }
-            
-            showScreen(targetScreen);
-        }
+// === ГЕНЕРАЦИЯ ТОЧЕК ===
+function generateStoresGrid() {
+  storesGrid.innerHTML = '';
+  const shuffled = [...stores].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, Math.floor(Math.random() * 5) + 6);
+  selected.forEach(store => {
+    const card = document.createElement('div');
+    card.className = 'store-card';
+    card.innerHTML = `
+      <div class="store-header">
+        <div class="category-icon-circle">${store.icon}</div>
+        <div class="store-info">
+          <div class="store-name">${store.name}</div>
+          <div class="store-category">${store.category}</div>
+        </div>
+      </div>
+      <div class="lovii-badge">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 12C7 12 2 9 2 5C2 3.34315 3.34315 2 5 2C5.75 2 6.5 2.25 7 2.75C7.5 2.25 8.25 2 9 2C10.6569 2 12 3.34315 12 5C12 9 7 12 7 12Z" fill="white"/>
+          <path d="M5 5C4 6 5 8 6 8C7 8 8 6 7 5C6 4 5 5 5 5Z" fill="white"/>
+          <path d="M9 5C10 6 9 8 8 8C7 8 6 6 7 5C8 4 9 5 9 5Z" fill="white"/>
+        </svg>
+        +${store.points} баллов за покупку
+      </div>
+    `;
+    card.addEventListener('click', () => console.log(`Store clicked: ${store.name}`));
+    storesGrid.appendChild(card);
+  });
+}
 
-        // Navigate to a specific screen via hash
-        function navigateTo(screenHash) {
-            window.location.hash = screenHash;
-        }
+// === НАВИГАЦИЯ ===
+function showScreen(screenId) {
+  [mainScreen, authScreen, smsScreen, storesScreen, categoriesScreen, giftsScreen].forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  updateHeaderFooterVisibility();
+}
 
-        // Event listeners for screen transitions
-        catchColorsBtn.addEventListener('click', () => {
-            navigateTo('auth');
-        });
+function updateHeaderFooterVisibility() {
+  const authenticated = !['#start', '#auth', '#sms', ''].includes(window.location.hash);
+  footerNav.classList.toggle('show', authenticated);
+  document.getElementById('header').classList.toggle('hidden', !authenticated);
+  profileNavItem.classList.toggle('hidden', window.location.hash === '#start');
+}
 
-        loginBtn.addEventListener('click', () => {
-            navigateTo('sms');
-        });
+function handleHashChange() {
+  const hash = window.location.hash.substring(1) || 'start';
+  let screen = 'mainScreen';
+  if (hash === 'auth') screen = 'authScreen';
+  else if (hash === 'sms') screen = 'smsScreen';
+  else if (hash === 'main') screen = 'storesScreen';
+  else if (hash === 'categories') screen = 'categoriesScreen';
+  else if (hash === 'gifts') screen = 'giftsScreen';
+  showScreen(screen);
+  if (hash === 'main') generateMainScreenCategories();
+}
 
-        confirmBtn.addEventListener('click', () => {
-            navigateTo('main');
-        });
+function navigateTo(hash) {
+  window.location.hash = hash;
+}
 
+// === ОБРАБОТЧИКИ КЛИКОВ ===
+catchColorsBtn?.addEventListener('click', () => navigateTo('auth'));
+loginBtn?.addEventListener('click', () => navigateTo('sms'));
+confirmBtn?.addEventListener('click', () => navigateTo('main'));
+logoutItem?.addEventListener('click', () => {
+  navigateTo('start');
+  profileModal.style.display = 'none';
+});
 
+document.querySelectorAll('.nav-item[data-target]').forEach(item => {
+  item.addEventListener('click', () => {
+    const t = item.getAttribute('data-target');
+    if (t === 'categoriesScreen') navigateTo('categories');
+    else if (t === 'storesScreen' || t === 'mainScreen') navigateTo('main');
+    else if (t === 'giftsScreen') navigateTo('gifts');
+  });
+});
 
-        // Add event listeners to footer nav items
-        document.querySelectorAll('.nav-item[data-target]').forEach(item => {
-            item.addEventListener('click', () => {
-                const target = item.getAttribute('data-target');
-                
-                if(target === 'categoriesScreen') {
-                    navigateTo('categories');
-                } else if(target === 'storesScreen') {
-                    navigateTo('main');
-                } else if(target === 'mainScreen') {
-                    navigateTo('main');
-                } else if(target === 'giftsScreen') {
-                    navigateTo('gifts');
-                }
-            });
-        });
+document.querySelector('.nav-item.center')?.addEventListener('click', e => e.preventDefault());
+document.getElementById('logoContainer')?.addEventListener('click', () => navigateTo('main'));
 
-        // Center button - currently without specific action as per requirements
-        document.querySelector('.nav-item.center').addEventListener('click', (e) => {
-            // Currently no action for the '+' button as per requirements
-            e.preventDefault();
-            return false;
-        });
-        
-        // Add click event to logo container to navigate to main screen
-        document.getElementById('logoContainer').addEventListener('click', () => {
-            navigateTo('main');
-        });
-        
-        // Add click event to notification button to toggle bell icons
-        document.getElementById('notificationBtn').addEventListener('click', () => {
-            const bellWithDot = document.getElementById('bellIconWithDot');
-            const bellWithoutDot = document.getElementById('bellIconWithoutDot');
-            
-            if(bellWithDot.style.display !== 'none') {
-                bellWithDot.style.display = 'none';
-                bellWithoutDot.style.display = 'block';
-            } else {
-                bellWithDot.style.display = 'block';
-                bellWithoutDot.style.display = 'none';
-            }
-        });
-        
-        // Profile navigation item click handler
-        document.getElementById('profileNavItem').addEventListener('click', () => {
-            const modal = document.getElementById('profileModal');
-            if(modal.style.display === 'none' || modal.style.display === '') {
-                modal.style.display = 'block';
-            } else {
-                modal.style.display = 'none';
-            }
-        });
-        
-        // Logout item click handler
-        document.getElementById('logoutItem').addEventListener('click', () => {
-            navigateTo('start');
-            document.getElementById('profileModal').style.display = 'none';
-        });
-        
-        // Handle hash change to include gifts screen
+document.getElementById('notificationBtn')?.addEventListener('click', () => {
+  const withDot = document.getElementById('bellIconWithDot');
+  const without = document.getElementById('bellIconWithoutDot');
+  [withDot.style.display, without.style.display] = [without.style.display, withDot.style.display];
+});
 
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set initial hash if none exists
-            if (!window.location.hash) {
-                window.location.hash = 'start';
-            }
-            
-            // Generate categories grid
-            generateCategoriesGrid();
-            
-            // Generate stores grid
-            function generateStoresGrid() {
-                storesGrid.innerHTML = '';
-                // Show 6-10 stores randomly
-                const shuffledStores = [...stores].sort(() => 0.5 - Math.random());
-                const selectedStores = shuffledStores.slice(0, Math.floor(Math.random() * 5) + 6); // Random count between 6-10
-                
-                selectedStores.forEach(store => {
-                    const storeCard = document.createElement('div');
-                    storeCard.className = 'store-card';
-                    storeCard.innerHTML = `
-                        <div class="store-header">
-                            <div class="category-icon-circle">
-                                ${store.icon}
-                            </div>
-                            <div class="store-info">
-                                <div class="store-name">${store.name}</div>
-                                <div class="store-category">${store.category}</div>
-                            </div>
-                        </div>
-                        <div class="lovii-badge">
-                            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 12C7 12 2 9 2 5C2 3.34315 3.34315 2 5 2C5.75 2 6.5 2.25 7 2.75C7.5 2.25 8.25 2 9 2C10.6569 2 12 3.34315 12 5C12 9 7 12 7 12Z" fill="white"/>
-                                <path d="M5 5C4 6 5 8 6 8C7 8 8 6 7 5C6 4 5 5 5 5Z" fill="white"/>
-                                <path d="M9 5C10 6 9 8 8 8C7 8 6 6 7 5C8 4 9 5 9 5Z" fill="white"/>
-                            </svg>
-                            +${store.points} баллов за покупку
-                        </div>
-                    `;
-                    storeCard.addEventListener('click', () => {
-                        // On click, stay on main screen
-                        console.log(`Store clicked: ${store.name}`);
-                    });
-                    storesGrid.appendChild(storeCard);
-                });
-            }
-            
-            // Generate stores grid on page load
-            generateStoresGrid();
-            
-            // Handle initial hash
-            handleHashChange();
-            
-            // Listen for hash changes
-            window.addEventListener('hashchange', handleHashChange);
-            
-            // When on main screen, also generate main screen categories
-            window.addEventListener('hashchange', function() {
-                if (window.location.hash === '#main') {
-                    generateMainScreenCategories();
-                }
-            });
-            
-            // Generate main screen categories on initial load if we're on main screen
-            if (window.location.hash === '#main' || window.location.hash === '') {
-                generateMainScreenCategories();
-            }
-            
-            // Add animation to store cards when they become visible
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            // Observe store cards
-            document.querySelectorAll('.store-card').forEach(card => {
-                observer.observe(card);
-            });
+// === ПРОФИЛЬНОЕ МЕНЮ ===
+profileNavItem?.addEventListener('click', () => {
+  profileModal.style.display = profileModal.style.display === 'block' ? 'none' : 'block';
+});
 
-            // Banner carousel functionality
-            const carousel = document.querySelector('.banner-carousel');
-            const track = document.querySelector('.banner-track');
-            const slides = document.querySelectorAll('.banner-card');
-            
-            let currentSlide = 0;
-            let autoSlideInterval;
-    let userInteractionTimeout;
+// Закрытие по клику вне
+function handleClickOutside(e) {
+  if (!modalContent.contains(e.target)) profileModal.style.display = 'none';
+}
+profileModal.addEventListener('mousedown', handleClickOutside);
+profileModal.addEventListener('touchstart', handleClickOutside, { passive: true });
 
-            const updateCarousel = () => {
-                track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            };
+// Закрытие по выбору пункта (кроме темы)
+document.querySelectorAll('#profileModal .modal-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (item.id !== 'themeToggleItem') profileModal.style.display = 'none';
+  });
+});
 
-            const nextSlide = () => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                updateCarousel();
-            };
+// === ТЕМИЗАЦИЯ ===
+if (themeToggleItem) {
+  const saved = localStorage.getItem('lovii-theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggleItem.textContent = '☀️ Светлая тема';
+  }
 
-            const resetAutoSlide = () => {
-                clearInterval(autoSlideInterval);
-                autoSlideInterval = setInterval(nextSlide, 3000);
-            };
+  themeToggleItem.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.removeItem('lovii-theme');
+      themeToggleItem.textContent = '🌙 Тёмная тема';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('lovii-theme', 'dark');
+      themeToggleItem.textContent = '☀️ Светлая тема';
+    }
+  });
+}
 
-            // Initialize auto sliding
-            resetAutoSlide();
+// === ИНИЦИАЛИЗАЦИЯ ===
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.location.hash) window.location.hash = 'start';
+  generateCategoriesGrid();
+  generateStoresGrid();
+  handleHashChange();
+  window.addEventListener('hashchange', handleHashChange);
 
-            // Pause auto slide on user interaction and resume after 5 seconds
-            const pauseAutoSlide = () => {
-                clearInterval(autoSlideInterval);
-                clearTimeout(userInteractionTimeout);
-                
-                userInteractionTimeout = setTimeout(() => {
-                    resetAutoSlide();
-                }, 5000);
-            };
-
-            // Touch events for swipe support
-            let touchStartX = 0;
-            let touchEndX = 0;
-
-            carousel.addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-                pauseAutoSlide();
-            }, { passive: true });
-
-            carousel.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
-
-            const handleSwipe = () => {
-                const swipeThreshold = 50;
-                
-                if (touchStartX - touchEndX > swipeThreshold) {
-                    // Swipe left - next slide
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    updateCarousel();
-                    resetAutoSlide();
-                } else if (touchEndX - touchStartX > swipeThreshold) {
-                    // Swipe right - previous slide
-                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    updateCarousel();
-                    resetAutoSlide();
-                }
-            };
-        });
-        
-
-        // === ЛОГИКА ПРОФИЛЬНОГО МЕНЮ ===
-        document.getElementById('profileNavItem').addEventListener('click', () => {
-          const modal = document.getElementById('profileModal');
-          modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-        });
-        
-        // Крестик закрытия
-        document.querySelector('.modal-close').addEventListener('click', () => {
-          document.getElementById('profileModal').style.display = 'none';
-        });
-        
-        // Закрытие по клику/тапу вне контента (работает на iOS/Android)
-        const profileModal = document.getElementById('profileModal');
-        const modalContent = profileModal.querySelector('.modal-content');
-        
-        function handleClickOutside(e) {
-          if (!modalContent.contains(e.target)) {
-            profileModal.style.display = 'none';
-          }
-        }
-        
-        profileModal.addEventListener('mousedown', handleClickOutside);     // десктоп
-        profileModal.addEventListener('touchstart', handleClickOutside, { passive: true }); // мобильные
-        
-        // Обработка пунктов меню
-        document.querySelectorAll('#profileModal .modal-item').forEach(item => {
-          item.addEventListener('click', function() {
-            if (this.id === 'themeToggleItem') return; // не закрываем при переключении темы
-            profileModal.style.display = 'none';
-          });
-        });
-        
-        // === ПЕРЕКЛЮЧЕНИЕ ТЁМНОЙ ТЕМЫ ===
-        const themeToggleItem = document.getElementById('themeToggleItem');
-        if (themeToggleItem) {
-          const saved = localStorage.getItem('lovii-theme');
-          if (saved === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggleItem.textContent = '☀️ Светлая тема';
-          }
-        
-          themeToggleItem.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-              document.documentElement.removeAttribute('data-theme');
-              localStorage.removeItem('lovii-theme');
-              themeToggleItem.textContent = '🌙 Тёмная тема';
-            } else {
-              document.documentElement.setAttribute('data-theme', 'dark');
-              localStorage.setItem('lovii-theme', 'dark');
-              themeToggleItem.textContent = '☀️ Светлая тема';
-            }
-          });
-        }
-
-
-    </script>
+  // Карусель
+  const track = document.querySelector('.banner-track');
+  const slides = document.querySelectorAll('.banner-card');
+  let current = 0, interval;
+  const update = () => track.style.transform = `translateX(-${current * 100}%)`;
+  const next = () => { current = (current + 1) % slides.length; update(); };
+  interval = setInterval(next, 3000);
+  document.querySelector('.banner-carousel').addEventListener('touchstart', () => clearInterval(interval), { passive: true });
+});
+</script>
 </body>
 </html>
