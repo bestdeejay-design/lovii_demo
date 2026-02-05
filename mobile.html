@@ -430,6 +430,86 @@
             font-family: 'Inter', sans-serif;
         }
 
+        .categories-section {
+            margin-bottom: 20px;
+        }
+
+        .categories-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .categories-row.two-categories {
+            width: 100%;
+        }
+
+        .categories-row.three-categories {
+            width: 100%;
+        }
+
+        .category-card {
+            background-color: #F0EDDE;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(79, 107, 92, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .category-card.two-cols {
+            flex: 1 1 calc(50% - 5px);
+        }
+
+        .category-card.three-cols {
+            flex: 1 1 calc(33.333% - 6.67px);
+        }
+
+        .category-icon-svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+
+        .category-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4A5447;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .ad-banner {
+            width: 100%;
+            height: 200px;
+            background-color: #C97C5D;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(79, 107, 92, 0.08);
+        }
+
+        .ad-content {
+            text-align: center;
+            color: white;
+        }
+
+        .ad-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .ad-content p {
+            font-size: 16px;
+        }
+
         @keyframes fadeInSlideUp {
             to {
                 opacity: 1;
@@ -533,9 +613,29 @@
     <!-- Screen 4: Stores (Main screen after auth) -->
     <div id="storesScreen" class="screen">
         <div class="stores-screen">
-            <h2 class="stores-title">Торговые точки рядом</h2>
-            <div class="stores-grid" id="storesGrid">
-                <!-- Store cards will be populated by JavaScript -->
+            <div class="categories-section">
+                <div class="categories-row two-categories" id="twoCategoriesRow">
+                    <!-- Two category cards will be populated by JavaScript -->
+                </div>
+                <div class="categories-row three-categories" id="threeCategoriesRow">
+                    <!-- Three category cards will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Ad Banner -->
+            <div class="ad-banner">
+                <div class="ad-content">
+                    <h3>Реклама</h3>
+                    <p>Партнер: Royal Canin</p>
+                </div>
+            </div>
+            
+            <!-- Stores Section -->
+            <div class="stores-section">
+                <h2 class="stores-title">Торговые точки рядом</h2>
+                <div class="stores-grid" id="storesGrid">
+                    <!-- Store cards will be populated by JavaScript -->
+                </div>
             </div>
         </div>
     </div>
@@ -753,6 +853,51 @@
                 categoriesGrid.appendChild(categoryCard);
             });
         }
+        
+        // Generate main screen categories
+        function generateMainScreenCategories() {
+            // Create shuffled array of categories for randomness
+            const shuffledCategories = [...categories].sort(() => 0.5 - Math.random());
+            
+            // Get first 5 unique categories for the main screen
+            const selectedCategories = shuffledCategories.slice(0, 5);
+            
+            // Populate two categories row
+            const twoCategoriesRow = document.getElementById('twoCategoriesRow');
+            twoCategoriesRow.innerHTML = '';
+            selectedCategories.slice(0, 2).forEach(category => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card two-cols';
+                categoryCard.innerHTML = `
+                    <div class="category-icon-svg">${categoryIcons[category] || '🏷️'}</div>
+                    <div class="category-name">${category}</div>
+                `;
+                categoryCard.addEventListener('click', () => {
+                    // Navigate to categories screen with filter
+                    window.location.hash = 'categories';
+                    console.log(`Category clicked: ${category}`);
+                });
+                twoCategoriesRow.appendChild(categoryCard);
+            });
+            
+            // Populate three categories row
+            const threeCategoriesRow = document.getElementById('threeCategoriesRow');
+            threeCategoriesRow.innerHTML = '';
+            selectedCategories.slice(2, 5).forEach(category => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card three-cols';
+                categoryCard.innerHTML = `
+                    <div class="category-icon-svg">${categoryIcons[category] || '🏷️'}</div>
+                    <div class="category-name">${category}</div>
+                `;
+                categoryCard.addEventListener('click', () => {
+                    // Navigate to categories screen with filter
+                    window.location.hash = 'categories';
+                    console.log(`Category clicked: ${category}`);
+                });
+                threeCategoriesRow.appendChild(categoryCard);
+            });
+        }
 
         // Function to show a specific screen and hide others
         function showScreen(screenId) {
@@ -934,7 +1079,11 @@
             // Generate stores grid
             function generateStoresGrid() {
                 storesGrid.innerHTML = '';
-                stores.forEach(store => {
+                // Show 6-10 stores randomly
+                const shuffledStores = [...stores].sort(() => 0.5 - Math.random());
+                const selectedStores = shuffledStores.slice(0, Math.floor(Math.random() * 5) + 6); // Random count between 6-10
+                
+                selectedStores.forEach(store => {
                     const storeCard = document.createElement('div');
                     storeCard.className = 'store-card';
                     storeCard.innerHTML = `
@@ -955,8 +1104,11 @@
                             </svg>
                             +${store.points} баллов за покупку
                         </div>
-                        <button class="open-btn">Открыть</button>
                     `;
+                    storeCard.addEventListener('click', () => {
+                        // On click, stay on main screen
+                        console.log(`Store clicked: ${store.name}`);
+                    });
                     storesGrid.appendChild(storeCard);
                 });
             }
@@ -969,6 +1121,18 @@
             
             // Listen for hash changes
             window.addEventListener('hashchange', handleHashChange);
+            
+            // When on main screen, also generate main screen categories
+            window.addEventListener('hashchange', function() {
+                if (window.location.hash === '#main') {
+                    generateMainScreenCategories();
+                }
+            });
+            
+            // Generate main screen categories on initial load if we're on main screen
+            if (window.location.hash === '#main' || window.location.hash === '') {
+                generateMainScreenCategories();
+            }
             
             // Add animation to store cards when they become visible
             const observer = new IntersectionObserver((entries) => {
