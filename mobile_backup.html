@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOVII - Мобильное приложение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E9E4D4; /* --bg-main */
+            color: #4A5447; /* --text-primary */
+            width: 375px;
+            min-height: 100vh;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .screen {
+            display: none;
+            padding: 20px;
+            height: calc(100vh - 120px); /* Account for header and footer */
+            overflow-y: auto;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #E9E4D4;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(74, 84, 71, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4A5447;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .profile-icon {
+            width: 28px;
+            height: 28px;
+            fill: #4A5447;
+        }
+
+        /* Footer navigation */
+        .footer-nav {
+            display: none; /* Initially hidden until authenticated */
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 10px;
+            background-color: #E9E4D4;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 375px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(74, 84, 71, 0.1);
+        }
+
+        .footer-nav.show {
+            display: flex;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            fill: #4A5447;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            margin-top: 2px;
+            color: #4A5447;
+        }
+
+        .nav-item.center {
+            position: relative;
+        }
+
+        .nav-item.center .nav-icon-wrapper {
+            background-color: #C97C5D; /* --accent-terra */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -20px;
+            border: 3px solid #E9E4D4;
+        }
+
+        .nav-item.center .nav-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Screen 1 - Main */
+        .main-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        .main-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+        }
+
+        .catch-colors-btn {
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(201, 124, 93, 0.3);
+        }
+
+        /* Screen 2 - Authorization */
+        .auth-screen {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #8F9E8B; /* --accent-sage */
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        .login-btn {
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(201, 124, 93, 0.3);
+        }
+
+        /* Screen 3 - SMS Code */
+        .sms-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .sms-title {
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .code-input {
+            width: 100%;
+            max-width: 200px;
+            padding: 14px;
+            text-align: center;
+            font-size: 24px;
+            border: 1px solid #8F9E8B; /* --accent-sage */
+            border-radius: 8px;
+            letter-spacing: 8px;
+        }
+
+        .confirm-btn {
+            background-color: #C97C5D; /* --accent-terra */
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(201, 124, 93, 0.3);
+        }
+
+        /* Categories screen styles */
+        .categories-screen {
+            padding-top: 20px;
+        }
+
+        .categories-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4A5447; /* --text-primary */
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .category-card {
+            background-color: #F0EDDE;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(201, 124, 93, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover, .category-card:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+
+        .category-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4A5447;
+        }
+
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <svg class="logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Heart shape -->
+                <path d="M16 26C16 26 6 20 6 12C6 8.68629 8.68629 6 12 6C13.5 6 15 7 16 8C17 7 18.5 6 20 6C23.3137 6 26 8.68629 26 12C26 20 16 26 16 26Z" fill="#C97C5D"/>
+                <!-- Left leaf -->
+                <path d="M10 10C8 12 10 16 12 16C14 16 16 12 14 10C12 8 10 10 10 10Z" fill="#8F9E8B"/>
+                <!-- Right leaf -->
+                <path d="M22 10C24 12 22 16 20 16C18 16 16 12 18 10C20 8 22 10 22 10Z" fill="#8F9E8B"/>
+            </svg>
+            <span class="logo-text">LOVII</span>
+        </div>
+        <button class="profile-btn" id="profileBtn">
+            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 20C20 17.5 18 15.5 15.5 15.5H8.5C6 15.5 4 17.5 4 20" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Screen 1: Main -->
+    <div id="mainScreen" class="screen active">
+        <div class="main-screen">
+            <svg class="main-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Large heart shape -->
+                <path d="M60 100C60 100 20 80 20 50C20 30 35 15 55 15C65 15 80 20 90 30C100 20 115 15 125 15C145 15 160 30 160 50C160 80 120 100 120 100L60 100Z" fill="#C97C5D"/>
+                <!-- Left large leaf -->
+                <path d="M40 40C30 50 35 70 50 75C65 80 80 60 70 50C60 40 40 40 40 40Z" fill="#8F9E8B"/>
+                <!-- Right large leaf -->
+                <path d="M100 40C120 50 115 70 100 75C85 80 70 60 80 50C90 40 100 40 100 40Z" fill="#8F9E8B"/>
+            </svg>
+            <button class="catch-colors-btn" id="catchColorsBtn">Лови</button>
+        </div>
+    </div>
+
+    <!-- Screen 2: Authorization -->
+    <div id="authScreen" class="screen">
+        <div class="auth-screen">
+            <div class="input-group">
+                <label for="phoneInput">Номер телефона</label>
+                <input type="tel" id="phoneInput" placeholder="+7 (___) ___-__-__">
+            </div>
+            <div class="input-group">
+                <label for="promoInput">Промокод (4 символа)</label>
+                <input type="text" id="promoInput" placeholder="ABCD" maxlength="4">
+            </div>
+            <button class="login-btn" id="loginBtn">Войти</button>
+        </div>
+    </div>
+
+    <!-- Screen 3: SMS Code -->
+    <div id="smsScreen" class="screen">
+        <div class="sms-screen">
+            <h2 class="sms-title">Введите код из SMS</h2>
+            <input type="text" class="code-input" id="codeInput" placeholder="____" maxlength="4">
+            <button class="confirm-btn" id="confirmBtn">Подтвердить</button>
+        </div>
+    </div>
+
+    <!-- Screen 4: Stores (Main screen after auth) -->
+    <div id="storesScreen" class="screen">
+        <div class="stores-screen">
+            <h2 class="stores-title">Торговые точки рядом</h2>
+            <div class="stores-grid" id="storesGrid">
+                <!-- Store cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 5: Categories -->
+    <div id="categoriesScreen" class="screen">
+        <div class="categories-screen">
+            <h2 class="categories-title">Категории заведений</h2>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Navigation -->
+    <footer class="footer-nav" id="footerNav">
+        <div class="nav-item" data-target="storesScreen">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-label">Главная</span>
+        </div>
+        <div class="nav-item" data-target="categoriesScreen">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-label">Поиск</span>
+        </div>
+        <div class="nav-item center" data-target="categoriesScreen">
+            <div class="nav-icon-wrapper">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        <div class="nav-item" data-target="storesScreen">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6982 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-label">Уведомления</span>
+        </div>
+        <div class="nav-item" data-target="storesScreen">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 20C20 17.5 18 15.5 15.5 15.5H8.5C6 15.5 4 17.5 4 20" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <span class="nav-label">Профиль</span>
+        </div>
+    </footer>
+
+    <script>
+        // Categories list
+        const categories = [
+            "Итальянская кухня",
+            "Свежая рыба",
+            "Уличная еда",
+            "Японская кухня",
+            "Пекарни и кондитерские",
+            "Цветочные магазины",
+            "Кофейни",
+            "Фермерские лавки",
+            "Барбершопы",
+            "Салоны красоты",
+            "Массаж и спа",
+            "Репетиторы и обучение",
+            "Фотографы",
+            "Авторские ювелирные изделия",
+            "Домашние повара",
+            "Мастера маникюра",
+            "Фитнес и йога",
+            "Ателье и ремонт одежды",
+            "Зоотовары и груминг",
+            "Клининг и уборка"
+        ];
+
+        // Category icons mapping (using SVG as required)
+        const categoryIcons = {
+            "Итальянская кухня": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Свежая рыба": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Уличная еда": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Японская кухня": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Пекарни и кондитерские": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Цветочные магазины": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Кофейни": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Фермерские лавки": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Барбершопы": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Салоны красоты": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Массаж и спа": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Репетиторы и обучение": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Фотографы": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Авторские ювелирные изделия": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Домашние повара": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Мастера маникюра": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Фитнес и йога": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+            "Ателье и ремонт одежды": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Зоотовары и груминг": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+            "Клининг и уборка": '<svg class="category-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        };
+
+        // Stores data for the main screen after auth
+        const stores = [
+            {
+                name: 'Рыбный прилавок \"У причала\"',
+                category: 'Свежая рыба',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 100
+            },
+            {
+                name: 'Пиццерия \"Маргарита\"',
+                category: 'Итальянская кухня',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 150
+            },
+            {
+                name: 'Шаверма на углу',
+                category: 'Уличная еда',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 80
+            },
+            {
+                name: 'Японская лавка \"Харуши\"',
+                category: 'Японская кухня',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 200
+            },
+            {
+                name: 'Булочная \"Ржаное счастье\"',
+                category: 'Пекарни и кондитерские',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 120
+            },
+            {
+                name: 'Цветочный дворик',
+                category: 'Цветочные магазины',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 90
+            },
+            {
+                name: 'Кофейня \"Уютный угол\"',
+                category: 'Кофейни',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 110
+            },
+            {
+                name: 'Фермерский рынок \"Сезонный\"',
+                category: 'Фермерские лавки',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 130
+            },
+            {
+                name: 'Барбершоп \"Классический стиль\"',
+                category: 'Барбершопы',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17 22 20 19 20 15C20 12.5 18.5 10 12 3C5.5 10 4 12.5 4 15C4 19 7 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 14C8.5 13 9.5 13 10 14C10.5 15 11.5 15 12 14C12.5 13 13.5 13 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 160
+            },
+            {
+                name: 'Салон красоты \"Элегантность\"',
+                category: 'Салоны красоты',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><line x1="12" y1="7" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 180
+            },
+            {
+                name: 'SPA-салон \"Расслабление\"',
+                category: 'Массаж и спа',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19V9C4 7.89543 4.89543 7 6 7H18C19.1046 7 20 7.89543 20 9V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19Z" stroke="currentColor" stroke-width="2"/><path d="M12 12V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+                points: 210
+            },
+            {
+                name: 'Центр репетиторства \"Гений\"',
+                category: 'Репетиторы и обучение',
+                icon: '<svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 15C16 14.2044 15.8424 13.4178 15.5355 12.7002C15.2286 11.9825 14.7804 11.3504 14.2222 10.8508C13.664 10.3512 12.999 10.0006 12.28 9.8293C11.561 9.65801 10.8072 9.67147 10.0797 9.8689C9.35213 10.0663 8.67053 10.4422 8.0918 10.9666C7.51307 11.491 7.0549 12.1476 6.75595 12.8847C6.457 13.6219 6.3262 14.4169 6.37538 15.2074C6.42456 15.9979 6.65222 16.7598 7 17.435" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                points: 140
+            }
+        ];
+
+        // DOM elements
+        const mainScreen = document.getElementById('mainScreen');
+        const authScreen = document.getElementById('authScreen');
+        const smsScreen = document.getElementById('smsScreen');
+        const storesScreen = document.getElementById('storesScreen');
+        const categoriesScreen = document.getElementById('categoriesScreen');
+        
+        const catchColorsBtn = document.getElementById('catchColorsBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const profileBtn = document.getElementById('profileBtn');
+        
+        const footerNav = document.getElementById('footerNav');
+        const categoriesGrid = document.getElementById('categoriesGrid');
+
+        // Generate categories grid
+        function generateCategoriesGrid() {
+            categoriesGrid.innerHTML = '';
+            categories.forEach(category => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+                categoryCard.innerHTML = `
+                    <div class="category-icon">${categoryIcons[category] || '🏷️'}</div>
+                    <div class="category-name">${category}</div>
+                `;
+                categoryCard.addEventListener('click', () => {
+                    // For now just log the click - in future implementation could navigate somewhere
+                    console.log(`Category clicked: ${category}`);
+                });
+                categoriesGrid.appendChild(categoryCard);
+            });
+        }
+
+        // Function to show a specific screen and hide others
+        function showScreen(screenId) {
+            // Hide all screens
+            mainScreen.classList.remove('active');
+            authScreen.classList.remove('active');
+            smsScreen.classList.remove('active');
+            storesScreen.classList.remove('active');
+            categoriesScreen.classList.remove('active');
+            
+            // Show selected screen
+            document.getElementById(screenId).classList.add('active');
+            
+            // Update footer visibility based on authentication status
+            updateFooterVisibility();
+        }
+
+        // Update footer visibility based on current screen
+        function updateFooterVisibility() {
+            const isAuthenticated = window.location.hash !== '#start' && 
+                                  window.location.hash !== '' && 
+                                  !window.location.hash.includes('auth') && 
+                                  !window.location.hash.includes('sms');
+                                  
+            if (isAuthenticated) {
+                footerNav.classList.add('show');
+            } else {
+                footerNav.classList.remove('show');
+            }
+        }
+
+        // Handle hash change
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            let targetScreen = 'mainScreen'; // default
+            
+            switch(hash) {
+                case 'start':
+                    targetScreen = 'mainScreen';
+                    break;
+                case 'auth':
+                    targetScreen = 'authScreen';
+                    break;
+                case 'sms':
+                    targetScreen = 'smsScreen';
+                    break;
+                case 'main':
+                    targetScreen = 'storesScreen';
+                    break;
+                case 'categories':
+                    targetScreen = 'categoriesScreen';
+                    break;
+            }
+            
+            showScreen(targetScreen);
+        }
+
+        // Navigate to a specific screen via hash
+        function navigateTo(screenHash) {
+            window.location.hash = screenHash;
+        }
+
+        // Event listeners for screen transitions
+        catchColorsBtn.addEventListener('click', () => {
+            navigateTo('auth');
+        });
+
+        loginBtn.addEventListener('click', () => {
+            navigateTo('sms');
+        });
+
+        confirmBtn.addEventListener('click', () => {
+            navigateTo('main');
+        });
+
+        profileBtn.addEventListener('click', () => {
+            // Go back to start screen
+            navigateTo('start');
+        });
+
+        // Add event listeners to footer nav items
+        document.querySelectorAll('.nav-item[data-target]').forEach(item => {
+            item.addEventListener('click', () => {
+                const target = item.getAttribute('data-target');
+                
+                if(target === 'categoriesScreen') {
+                    navigateTo('categories');
+                } else if(target === 'storesScreen') {
+                    navigateTo('main');
+                }
+            });
+        });
+
+        // Center button specifically navigates to categories
+        document.querySelector('.nav-item.center').addEventListener('click', () => {
+            navigateTo('categories');
+        });
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial hash if none exists
+            if (!window.location.hash) {
+                window.location.hash = 'start';
+            }
+            
+            // Generate categories grid
+            generateCategoriesGrid();
+            
+            // Generate stores grid
+            function generateStoresGrid() {
+                storesGrid.innerHTML = '';
+                stores.forEach(store => {
+                    const storeCard = document.createElement('div');
+                    storeCard.className = 'store-card';
+                    storeCard.innerHTML = `
+                        <div class="store-header">
+                            <div class="category-icon-circle">
+                                ${store.icon}
+                            </div>
+                            <div class="store-info">
+                                <div class="store-name">${store.name}</div>
+                                <div class="store-category">${store.category}</div>
+                            </div>
+                        </div>
+                        <div class="lovii-badge">
+                            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 12C7 12 2 9 2 5C2 3.34315 3.34315 2 5 2C5.75 2 6.5 2.25 7 2.75C7.5 2.25 8.25 2 9 2C10.6569 2 12 3.34315 12 5C12 9 7 12 7 12Z" fill="white"/>
+                                <path d="M5 5C4 6 5 8 6 8C7 8 8 6 7 5C6 4 5 5 5 5Z" fill="white"/>
+                                <path d="M9 5C10 6 9 8 8 8C7 8 6 6 7 5C8 4 9 5 9 5Z" fill="white"/>
+                            </svg>
+                            +${store.points} баллов за покупку
+                        </div>
+                        <button class="open-btn">Открыть</button>
+                    `;
+                    storesGrid.appendChild(storeCard);
+                });
+            }
+            
+            // Generate stores grid on page load
+            generateStoresGrid();
+            
+            // Handle initial hash
+            handleHashChange();
+            
+            // Listen for hash changes
+            window.addEventListener('hashchange', handleHashChange);
+            
+            // Add animation to store cards when they become visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe store cards
+            document.querySelectorAll('.store-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

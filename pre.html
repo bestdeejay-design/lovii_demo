@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лови 2.0: Цифровая инфраструктура локальной экономики</title>
+    <meta name="description" content="SaaS-платформа и оператор лояльности для микробизнеса. Цифровая инфраструктура локальной экономики.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Default (dark) theme */
+            --bg-color: #0A0F1F;
+            --text-color: #FFFFFF;
+            --accent-color: #FF6B35;
+            --card-bg: #1A2238;
+            --border-color: #2D3748;
+            --icon-color: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--accent-color), #ff9a8b);
+            --card-bg-alt: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --accent-color: #F97316;
+            --card-bg: #F3F4F6;
+            --border-color: #E5E7EB;
+            --icon-color: #000000;
+            --card-bg-alt: rgba(0, 0, 0, 0.03);
+        }
+
+        [data-theme="vibrant"] {
+            --bg-color: linear-gradient(135deg, #0f0c29, #302b63);
+            --text-color: #FFFFFF;
+            --accent-color: #ff7e5f;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --border-color: rgba(255, 255, 255, 0.2);
+            --icon-color: #FFFFFF;
+            --card-bg-alt: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="casual"] {
+            --bg-color: #F5F7FA;
+            --text-color: #4A5447;
+            --accent-color: #C97C5D;
+            --card-bg: #FFFFFF;
+            --border-color: #E0E6ED;
+            --icon-color: #8F9E8B;
+            --shadow: 0 4px 12px rgba(201, 124, 93, 0.1);
+            --gradient-primary: linear-gradient(135deg, #C97C5D, #C9A66B);
+            --card-bg-alt: rgba(201, 124, 93, 0.05);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Roboto, system-ui, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 100px 0;
+        }
+
+        .section-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 0 20px;
+        }
+
+        .text-content {
+            flex: 1;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .image-content {
+            flex: 1;
+            max-width: 600px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-content img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+            min-height: 50px;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Specific section styles */
+        #hero {
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #hero .section-content {
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #hero .text-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        #hero .image-content {
+            display: none;
+        }
+
+        #hero .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        #hero .section-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Contact section */
+        #contact .section-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #contact .text-content {
+            max-width: 100%;
+        }
+
+        #contact .image-content {
+            margin-top: 30px;
+        }
+
+        .contact-info {
+            margin: 30px 0;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .section-content {
+                flex-direction: row;
+            }
+            
+            .text-content {
+                padding-right: 40px;
+            }
+            
+            #hero .section-title {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            section {
+                min-height: 100vh;
+                padding: 60px 0;
+            }
+            
+            .section-content {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .text-content, .image-content {
+                max-width: 100%;
+                padding: 10px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <!-- Section 1: Hero -->
+    <section id="hero">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h1 class="section-title">Лови 2.0: Цифровая инфраструктура локальной экономики</h1>
+                    <p class="section-subtitle">SaaS-платформа и оператор лояльности для микробизнеса</p>
+                    <a href="mailto:hello@lovii.ru" class="btn">Получить демо-доступ</a>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_01a6e9ff-cf07-4453-9135-b2385dc7c59a.png" alt="Общий вид приложения с картой локации">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Problem -->
+    <section id="problem">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Малый бизнес теряет клиентов</h2>
+                    <p class="section-text">Гиганты забирают трафик, локальные поставщики не видны, баллы лояльности «заморожены».</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_054ce0a2-4099-44ed-834e-133864dea3f4.png" alt="Проблема малого бизнеса">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Solution -->
+    <section id="solution">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Замкнутая локальная экосистема</h2>
+                    <p class="section-text">Единое приложение для жителей района: товары, услуги, кэшбэк, чаевые — всё рядом.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_193e25e7-6fd7-4bde-8f4f-f756f67605c9.png" alt="Пользователь выбирает товар из локального каталога">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: For Microbusiness -->
+    <section id="tsp">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Цифровая витрина без затрат</h2>
+                    <p class="section-text">Подключайся за 5 минут — получай клиентов, лояльность и чаевые. Без маркетинга и IT.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_1b6f75de-ca4f-4a1f-86f5-c542f05075a5.png" alt="ИП с QR-кодом на прилавке">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: For Customers -->
+    <section id="loyalty">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Трать баллы как деньги</h2>
+                    <p class="section-text">Обменивай баллы от Билайна, банков, HR-программ — и плати ими за еду, товары, услуги.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_2ed199c8-7588-47f0-9277-6110563bd7f3.png" alt="Скриншот обмена баллов в приложении">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: City Franchise -->
+    <section id="franchisee">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Управляй локальной экономикой</h2>
+                    <p class="section-text">Стань франчайзи — подключай 50+ точек, зарабатывай на комиссиях, логистике и рекламе.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_3ad0fd98-aa4e-445d-b7f7-79589642be87.png" alt="Владелец рынка с планшетом, общающийся с поставщиками">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Mobiap Advertising -->
+    <section id="mobiap">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Рекламные бюджеты — тебе</h2>
+                    <p class="section-text">Бренды платят за доступ к твоей аудитории. До 80% дохода — франчайзи.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_5213c7ab-c1cb-4b0f-889f-2708f8d178d2.png" alt="Баннер Ozon или Фотостраны в ленте приложения">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: HR and Corporate Motivation -->
+    <section id="hr">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Мотивируй сотрудников реально</h2>
+                    <p class="section-text">Начисляй баллы за KPI — сотрудники тратят их на такси, еду, выводят на карту.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_6f71d03c-25fd-4565-8e86-261bbfb057d7.png" alt="HR-менеджер в кабинете, схема начисления">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Technologies and Security -->
+    <section id="tech">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Безопасно, надёжно, масштабируемо</h2>
+                    <p class="section-text">Bare Metal, Kubernetes, шифрование, ФЗ-152, ФЗ-54 — всё в одном решении.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_7a001f5a-575c-40eb-9456-3162ad7e7610.png" alt="Схема архитектуры с серверами и API">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: Logistics and Delivery -->
+    <section id="logistics">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Логистика и доставка от самозанятых</h2>
+                    <p class="section-text">Доставка от самозанятых, работа с ПВЗ, интеграция с логистическими операторами.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_8631860f-01c9-4c7d-bf54-5382fa27c02f.png" alt="Доставка от самозанятого">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 11: Partnerships -->
+    <section id="partnerships">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Партнерские интеграции</h2>
+                    <p class="section-text">Интеграция с Яндекс, Мобиап, Igoods, билайн и другими платформами.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_1cc99972-fd8a-401b-b256-47d5cdddb3ca.png" alt="Партнерские интеграции">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 12: Analytics and Data -->
+    <section id="analytics">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Аналитика и данные</h2>
+                    <p class="section-text">Расширенная аналитика для бизнеса, инсайты по поведению клиентов, прогнозирование спроса.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_a31fc0fd-3fc3-47b9-852c-536253a7248f.png" alt="Аналитика и данные">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 13: Support and Development -->
+    <section id="support">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Поддержка и развитие</h2>
+                    <p class="section-text">Техническая поддержка, обучение, маркетинговая поддержка для франчайзи и партнеров.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_b05f2ccf-151c-44ab-ac4e-dca30253d994.png" alt="Поддержка и развитие">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 14: Compliance and Legal -->
+    <section id="compliance">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Соответствие нормативным требованиям</h2>
+                    <p class="section-text">Полное соответствие ФЗ-152, ФЗ-54, требованиям ЦБ и другим нормативным актам.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_ccc32949-ee8e-4bff-a819-51b3747ccc27.png" alt="Соответствие нормативным требованиям">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 15: Future Vision -->
+    <section id="future">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Видение будущего</h2>
+                    <p class="section-text">Масштабирование на 100+ городов, интеграция с государственными сервисами, развитие локальной экономики.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_d2d2a784-f14b-4695-b76f-c5b557336b66.png" alt="Видение будущего">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 16: Ecosystem Growth -->
+    <section id="ecosystem">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Рост экосистемы</h2>
+                    <p class="section-text">Механизмы роста числа участников, привлечения новых бизнесов и клиентов.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_855d5a8c-d0a6-4dc7-b0be-c8268332bcfe.png" alt="Рост экосистемы">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 17: Team and Operations -->
+    <section id="team">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Команда и операции</h2>
+                    <p class="section-text">Организация работы команды, управление проектами, масштабирование операций.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_9962ac60-06c8-447c-983b-0e503e6969ef.png" alt="Команда проекта">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 18: Innovation and Technology -->
+    <section id="innovation">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Инновации и технологии</h2>
+                    <p class="section-text">Использование современных технологий, внедрение инноваций, развитие продукта.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_a7b824f9-9083-4acc-83d5-da6b1b5551a1.png" alt="Инновации и технологии">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 19: Contacts and CTA -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">Готовы запустить цифровую экономику в вашем городе?</h2>
+                    <div class="contact-info">
+                        <p>Email: <a href="mailto:hello@lovii.ru">hello@lovii.ru</a></p>
+                        <p>Телефон: <a href="tel:+79119287478">+7 (911) 928-74-78</a></p>
+                        <p>Сайт: <a href="https://lovii.ru" target="_blank">lovii.ru</a></p>
+                    </div>
+                    <a href="mailto:hello@lovii.ru?subject=Хочу стать франчайзи Лови 2.0" class="btn btn-secondary">Стать франчайзи</a>
+                </div>
+                <div class="image-content">
+                    <img src="img/generated_image_d47fb216-ff34-4f0d-a43a-7bb48d3e60a6.png" alt="Команда или абстрактная иллюстрация сотрудничества">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simple smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Basic theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if(currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+            } else if(currentTheme === 'light') {
+                body.setAttribute('data-theme', 'vibrant');
+            } else if(currentTheme === 'vibrant') {
+                body.setAttribute('data-theme', 'casual');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+            }
+            
+            // Save theme preference
+            localStorage.setItem('theme', body.getAttribute('data-theme'));
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if(savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+            }
+        });
+    </script>
+</body>
+</html>

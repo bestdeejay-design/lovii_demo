@@ -1,0 +1,688 @@
+/* Sections */
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+/* Asymmetrical section design */
+.section-wrapper {
+    position: relative;
+    overflow: visible; /* Changed from hidden to visible to prevent card cutoff */
+}
+
+.section-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(255, 107, 53, 0.1), transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.section-content {
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 70px;
+    opacity: 0.8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 150px 0 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+    z-index: 0;
+    animation: rotate 20s linear infinite;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    background: linear-gradient(to right, var(--text-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 50px;
+    opacity: 0.9;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+    min-height: 50px; /* Обеспечиваем минимальную высоту для удобства нажатия */
+    opacity: 1; /* Ensure buttons are visible by default */
+    transform: translateY(0); /* Ensure buttons are in correct position by default */
+}
+
+/* Animation starting state - only applied when GSAP is working */
+/* Ensure buttons are visible even if GSAP fails to load */
+.btn.animate-init {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Animation starting state that will be applied only when GSAP is ready */
+.gsap-loaded .btn.animate-init {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--accent-color), #ff9a8b);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+}
+
+.btn:hover::before {
+    width: 100%;
+}
+
+/* Cards Section */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Standardized section header z-index system - applies to all sections with cards */
+section .section-title {
+    position: relative;
+    z-index: 6; /* Higher than cards-grid to prevent overlap */
+}
+
+section .section-subtitle {
+    position: relative;
+    z-index: 5; /* Higher than cards-grid to prevent overlap */
+}
+
+section .section-content {
+    position: relative;
+    z-index: 3;
+}
+
+section .cards-grid {
+    position: relative;
+    z-index: 4;
+    overflow: visible; /* Allow for hover effects */
+    margin-top: 80px; /* Increase margin to prevent overlap with section title */
+}
+
+/* Special handling for business section which has asymmetrical layout */
+#business .cards-grid {
+    margin-top: 0; /* Business section has special asymmetrical layout */
+}
+
+/* Special handling for features section which has asymmetrical layout */
+#features .cards-grid {
+    margin-top: 0; /* Features section has special asymmetrical layout */
+}
+
+/* For sections with special layouts, ensure section titles are still visible */
+#business .section-title,
+#business .section-subtitle {
+    position: relative;
+    z-index: 6; /* Ensure visibility in special layouts */
+}
+
+/* For features section with special layout, ensure section titles are still visible */
+#features .section-title,
+#features .section-subtitle {
+    position: relative;
+    z-index: 6; /* Ensure visibility in special layouts */
+}
+
+/* Specific margin for cards in sections to prevent overlap */
+section .card {
+    margin-top: 20px; /* Add some space to prevent overlap */
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    min-height: 200px; /* Обеспечиваем минимальную высоту для лучшего отображения на мобильных */
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--card-bg-alt);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Only vertical movement, no rotation */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover::before {
+    height: 100%;
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 25px;
+    filter: drop-shadow(0 5px 10px rgba(255, 107, 53, 0.2));
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    opacity: 0.8;
+    line-height: 1.7;
+}
+
+/* Business Section - Asymmetrical Layout */
+#business .section-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+#business .content {
+    flex: 1;
+    padding-right: 40px;
+}
+
+#business .cards-grid {
+    flex: 1;
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Features Section - Same Asymmetrical Layout as Business */
+#features .section-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+#features .content {
+    flex: 1;
+    padding-right: 40px;
+}
+
+#features .cards-grid {
+    flex: 1;
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Business Stats */
+.business-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 25px 15px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, var(--text-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Benefits List */
+.benefits-list {
+    margin: 30px 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.benefit-item {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--accent-color);
+}
+
+.benefit-icon {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    fill: var(--accent-color);
+    opacity: 0.2;
+}
+
+.benefit-item h4 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--accent-color);
+    margin-right: 30px;
+}
+
+.benefit-item p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Testimonial */
+.business-testimonial {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 30px 0;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.business-testimonial::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 4rem;
+    color: var(--accent-color);
+    opacity: 0.2;
+    font-family: serif;
+}
+
+.testimonial-content p {
+    font-style: italic;
+    margin: 0 0 15px 0;
+    position: relative;
+    z-index: 1;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.testimonial-author {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Business Pricing */
+.business-pricing {
+    flex: 1;
+    min-width: 300px;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.pricing-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.pricing-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.pricing-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-card.popular {
+    border: 2px solid var(--accent-color);
+    transform: scale(1.03);
+}
+
+.pricing-card.popular:hover {
+    transform: scale(1.03) translateY(-10px);
+}
+
+.card-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    color: var(--accent-color);
+}
+
+.card-price {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.card-desc {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin: 0 0 20px 0;
+}
+
+.card-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.card-features li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0.9;
+}
+
+.feature-icon {
+    width: 18px;
+    height: 18px;
+    fill: var(--accent-color);
+}
+
+/* About Section - Staggered Layout */
+#about .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+#about .card:nth-child(1) {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#about .card:nth-child(3) {
+    grid-column: span 2;
+}
+
+/* Metrics Section */
+.metrics {
+    padding: 80px 0;
+    background: var(--section-bg);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.metric-card {
+    background: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.metric-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.metric-number {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, var(--text-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metric-label {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.metric-desc {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Updated button styles */
+.btn-primary {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+    min-height: 50px;
+    margin-right: 15px;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--accent-color);
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid var(--accent-color);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    min-height: 50px;
+}
+
+.btn-secondary:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+
+/* Animation for background */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
