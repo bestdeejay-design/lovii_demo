@@ -25,9 +25,10 @@ const LOVII = {
   },
 
   render() {
-    const hash = window.location.hash.slice(1) || 'home'
-    this.renderScreen(hash)
-    this.renderNav()
+    const full = window.location.hash.slice(1) || 'home'
+    const hash = full.split('?')[0]
+    this.renderScreen(full)
+    this.renderNav(hash)
   },
 
   renderNav() {
@@ -40,8 +41,10 @@ const LOVII = {
   renderScreen(hash) {
     const content = document.getElementById('app-content')
     if (!content) return
+    const base = hash.split('?')[0]
 
-    switch (hash) {
+    switch (base) {
+      case 'product':      content.innerHTML = screenProduct(); break
       case 'home':         content.innerHTML = screenHome(); break
       case 'search':       content.innerHTML = screenSearch(); break
       case 'orders':       content.innerHTML = screenOrders(); break
@@ -58,6 +61,10 @@ const LOVII = {
       case 'ambassador/reps':  content.innerHTML = screenAmbassadorReps(); break
       case 'ambassador/income': content.innerHTML = screenAmbassadorIncome(); break
       case 'ambassador/training': content.innerHTML = screenAmbassadorTraining(); break
+      case 'promo':
+      case 'city-select':
+      case 'bonus-info':
+        content.innerHTML = screenHome(); break
       default:
         window.location.hash = 'home'
     }
@@ -93,6 +100,21 @@ const LOVII = {
         roleCard.classList.add('active')
         return
       }
+      const catChip = e.target.closest('.cat-chip')
+      if (catChip) {
+        const row = catChip.closest('.cat-row')
+        if (row) row.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'))
+        catChip.classList.add('active')
+        return
+      }
+      const pOrder = e.target.closest('.p-order')
+      if (pOrder) {
+        const id = pOrder.dataset.store
+        if (id) {
+          this.navigate('store/' + id)
+          return
+        }
+      }
       const dashBtn = e.target.closest('#go-to-dashboard')
       if (dashBtn) {
         const activeRole = document.querySelector('.role-card.active')
@@ -108,9 +130,30 @@ const LOVII = {
         }
         return
       }
+      const addBtn = e.target.closest('.add-btn, .add-big')
+      if (addBtn) {
+        e.stopPropagation()
+        changeCart(addBtn.dataset.id, 1)
+        this.renderScreen(window.location.hash.slice(1) || 'home')
+        return
+      }
+      const qtyBtn = e.target.closest('.qty-btn')
+      if (qtyBtn) {
+        e.stopPropagation()
+        const delta = qtyBtn.dataset.act === 'inc' ? 1 : -1
+        changeCart(qtyBtn.dataset.id, delta)
+        this.renderScreen(window.location.hash.slice(1) || 'home')
+        return
+      }
+      const card = e.target.closest('.product-card')
+      if (card) {
+        window.location.hash = 'product?id=' + card.dataset.id
+        return
+      }
     })
 
     this.render()
+    updateCartPill()
   }
 }
 

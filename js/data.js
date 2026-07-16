@@ -2,19 +2,19 @@
 
 const MOCK = {
   stores: [
-    { id: 1, name: 'Пекарня #23', category: 'bakery', emoji: '🍞', rating: 4.8, distance: '1.2км', address: 'ул. Тверская, 23', orders: 45, revenue: 54000, active: true },
-    { id: 2, name: 'Цветы Fresh', category: 'flowers', emoji: '💐', rating: 4.9, distance: '2.3км', address: 'ул. Арбат, 12', orders: 28, revenue: 33600, active: true },
-    { id: 3, name: 'Кофе daily', category: 'coffee', emoji: '☕', rating: 4.7, distance: '0.8км', address: 'ул. Пушкина, 5', orders: 62, revenue: 37200, active: true },
-    { id: 4, name: 'Суши Мия', category: 'restaurant', emoji: '🍣', rating: 4.6, distance: '3.1км', address: 'ул. Новая, 42', orders: 18, revenue: 21600, active: false }
+    { id: 1, name: 'Пекарня #23', category: 'bakery', emoji: '🍞', rating: 4.8, distance: '1.2км', eta: '25 мин', address: 'ул. Тверская, 23', orders: 45, revenue: 54000, active: true },
+    { id: 2, name: 'Цветы Fresh', category: 'flowers', emoji: '💐', rating: 4.9, distance: '2.3км', eta: '40 мин', address: 'ул. Арбат, 12', orders: 28, revenue: 33600, active: true },
+    { id: 3, name: 'Кофе daily', category: 'coffee', emoji: '☕', rating: 4.7, distance: '0.8км', eta: '15 мин', address: 'ул. Пушкина, 5', orders: 62, revenue: 37200, active: true },
+    { id: 4, name: 'Суши Мия', category: 'restaurant', emoji: '🍣', rating: 4.6, distance: '3.1км', eta: '50 мин', address: 'ул. Новая, 42', orders: 18, revenue: 21600, active: false }
   ],
 
   products: [
-    { id: 1, storeId: 1, name: 'Круассан классический', price: 190, active: true, orders: 142 },
-    { id: 2, storeId: 1, name: 'Багет на закваске', price: 120, active: true, orders: 89 },
-    { id: 3, storeId: 1, name: 'Эклер шоколадный', price: 250, active: true, orders: 67 },
-    { id: 4, storeId: 1, name: 'Чизкейк Нью-Йорк', price: 390, active: false, orders: 34 },
-    { id: 5, storeId: 2, name: 'Букет "Нежность"', price: 2900, active: true, orders: 56 },
-    { id: 6, storeId: 2, name: 'Букет "Яркий день"', price: 3500, active: true, orders: 42 }
+    { id: 1, storeId: 1, name: 'Круассан классический', price: 190, oldPrice: 250, active: true, orders: 142, image: 'assets/img/croissant.jpg', badges: [{ type: 'top', label: 'Топ' }, { type: 'discount', label: '−20%' }] },
+    { id: 2, storeId: 1, name: 'Багет на закваске', price: 120, active: true, orders: 89, image: 'assets/img/baguette.jpg', badges: [{ type: 'season', label: 'Сезон' }, { type: 'sugarfree', label: 'Без сахара' }] },
+    { id: 3, storeId: 1, name: 'Эклер шоколадный', price: 250, oldPrice: 390, active: true, orders: 67, image: 'assets/img/eclai.jpg', badges: [{ type: 'hit', label: 'Хит' }, { type: 'eco', label: 'Эко' }] },
+    { id: 4, storeId: 1, name: 'Чизкейк Нью-Йорк', price: 390, active: false, orders: 34, image: 'assets/img/cheesecake.jpg', badges: [{ type: 'new', label: 'Новинка' }] },
+    { id: 5, storeId: 2, name: 'Букет "Нежность"', price: 2900, oldPrice: 3500, active: true, orders: 56, image: 'assets/img/bouquet-tenderness.jpg', badges: [{ type: 'sale', label: 'Акция' }, { type: 'new', label: 'Новинка' }] },
+    { id: 6, storeId: 2, name: 'Букет "Яркий день"', price: 3500, active: true, orders: 42, image: 'assets/img/bouquet-passion.jpg', badges: [{ type: 'hit', label: 'Хит' }] }
   ],
 
   orders: [
@@ -98,4 +98,13 @@ function getPartnerOrders() {
 
 function getStoreProducts(storeId) {
   return MOCK.products.filter(p => p.storeId === storeId)
+}
+
+function getProducts() {
+  return MOCK.products
+}
+
+function getProductStoreName(storeId) {
+  const s = MOCK.stores.find(s => s.id === storeId)
+  return s ? s.name : ''
 }
