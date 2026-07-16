@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Badges — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+:root {
+  --pink:#f64a8a; --tiffany:#0ABAB5; --gold:#D4A854; --dark:#1a1a1a;
+  --radius:100px; --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:#fff; color:#1a1a1a; padding:24px 16px; -webkit-font-smoothing:antialiased; }
+.page-header { max-width:680px; margin:0 auto 22px; }
+.page-header h1 { font-size:20px; font-weight:700; display:flex; align-items:center; gap:10px; }
+.page-header h1 .badge { font-size:10px; font-weight:600; background:rgba(246,74,138,0.12); color:var(--pink); padding:2px 8px; border-radius:100px; }
+.page-header p { font-size:13px; color:#888; margin-top:6px; line-height:1.5; }
+.section { max-width:680px; margin:0 auto 26px; }
+.section h2 { font-size:14px; font-weight:600; margin-bottom:12px; color:#1a1a1a; }
+.wrap { display:flex; flex-wrap:wrap; gap:10px; }
+/* badge styles — only palette colors */
+.badge { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.4px; padding:4px 10px; border-radius:var(--radius); color:#fff; box-shadow:0 3px 8px rgba(0,0,0,0.12); white-space:nowrap; }
+.b-pink { background:var(--pink); }
+.b-tiffany { background:var(--tiffany); }
+.b-gold { background:var(--gold); }
+.b-dark { background:var(--dark); }
+
+/* demo card with multiple badges stacked top-right */
+.phone { max-width:380px; margin:0 auto; background:#fff; border-radius:20px; padding:14px 12px 18px; box-shadow:0 0 0 1px rgba(0,0,0,0.06),0 4px 12px rgba(0,0,0,0.05); position:relative; overflow:hidden; }
+.phone::before { content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:80px; height:4px; background:rgba(0,0,0,0.1); border-radius:100px; }
+.product-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.pc { position:relative; border-radius:12px; overflow:hidden; background:#fff; border:1px solid #EEE; box-shadow:0 1px 4px rgba(0,0,0,0.05); display:flex; flex-direction:column; }
+.pc .media { position:relative; width:100%; height:140px; }
+.pc .thumb { width:100%; height:100%; object-fit:cover; display:block; }
+.pc .badges { position:absolute; top:8px; right:8px; z-index:3; display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
+.pc .overlay { position:absolute; left:0; right:0; bottom:0; z-index:2; padding:22px 10px 10px; background:linear-gradient(to top, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0) 100%); color:#fff; pointer-events:none; }
+.pc .store { font-size:9px; font-weight:600; opacity:0.9; text-transform:uppercase; letter-spacing:0.4px; }
+.pc .pname { font-size:13px; font-weight:600; line-height:1.25; margin-top:2px; }
+.pc .price { font-size:14px; font-weight:700; margin-top:3px; }
+.pc .add-btn { margin:8px 10px 10px; padding:8px; border-radius:100px; background:var(--pink); color:#fff; font-size:11px; font-weight:600; text-align:center; }
+</style>
+</head>
+<body>
+<header class="page-header">
+  <h1>Badges <span class="badge">LOVII</span></h1>
+  <p>Бейджи только из палитры базы: pink / tiffany / gold / dark. На карточке — несколько бейджей стопкой справа-сверху.</p>
+</header>
+
+<div class="section">
+  <h2>Все бейджи (цвета из палитры)</h2>
+  <div class="wrap">
+    <span class="badge b-pink">Хит</span>
+    <span class="badge b-tiffany">Новинка</span>
+    <span class="badge b-gold">Эко</span>
+    <span class="badge b-gold">Акция</span>
+    <span class="badge b-dark">Топ</span>
+    <span class="badge b-tiffany">Сезон</span>
+    <span class="badge b-pink">−20%</span>
+    <span class="badge b-dark">Без сахара</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Карточки с несколькими бейджами (справа-сверху)</h2>
+  <div class="phone">
+    <div class="product-grid">
+      <div class="pc">
+        <div class="media">
+          <div class="badges"><span class="badge b-pink">Хит</span><span class="badge b-gold">Эко</span></div>
+          <img class="thumb" src="../assets/img/eclai.jpg" alt="">
+          <div class="overlay"><div class="store">Пекарня #23</div><div class="pname">Эклер шоколадный</div><div class="price">250₽</div></div>
+        </div>
+        <div class="add-btn">+ В корзину</div>
+      </div>
+      <div class="pc">
+        <div class="media">
+          <div class="badges"><span class="badge b-gold">Акция</span><span class="badge b-tiffany">Новинка</span></div>
+          <img class="thumb" src="../assets/img/bouquet-tenderness.jpg" alt="">
+          <div class="overlay"><div class="store">Цветы Fresh</div><div class="pname">Букет «Нежность»</div><div class="price">2 900₽</div></div>
+        </div>
+        <div class="add-btn">+ В корзину</div>
+      </div>
+      <div class="pc">
+        <div class="media">
+          <div class="badges"><span class="badge b-dark">Топ</span><span class="badge b-pink">−20%</span></div>
+          <img class="thumb" src="../assets/img/croissant.jpg" alt="">
+          <div class="overlay"><div class="store">Пекарня #23</div><div class="pname">Круассан классический</div><div class="price">190₽</div></div>
+        </div>
+        <div class="add-btn">+ В корзину</div>
+      </div>
+      <div class="pc">
+        <div class="media">
+          <div class="badges"><span class="badge b-tiffany">Сезон</span><span class="badge b-dark">Без сахара</span></div>
+          <img class="thumb" src="../assets/img/baguette.jpg" alt="">
+          <div class="overlay"><div class="store">Пекарня #23</div><div class="pname">Багет на закваске</div><div class="price">120₽</div></div>
+        </div>
+        <div class="add-btn">+ В корзину</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Card — Price on Photo — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+:root { --pink:#f64a8a; --text-secondary:#888; --text-primary:#1a1a1a; --border:#EEE; --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:#fff; color:var(--text-primary); padding:24px 16px; -webkit-font-smoothing:antialiased; }
+.page-header { max-width:760px; margin:0 auto 22px; }
+.page-header h1 { font-size:20px; font-weight:700; display:flex; align-items:center; gap:10px; }
+.page-header h1 .badge { font-size:10px; font-weight:600; background:rgba(246,74,138,0.12); color:var(--pink); padding:2px 8px; border-radius:100px; }
+.page-header p { font-size:13px; color:var(--text-secondary); margin-top:6px; line-height:1.5; }
+.grid { max-width:760px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.pc { position:relative; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+.pc .media { position:relative; width:100%; }
+.pc .thumb { width:100%; aspect-ratio:1/1; height:auto; object-fit:cover; display:block; background:#f8f8f8; }
+.pc .badges { position:absolute; top:6px; right:6px; z-index:3; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.pc .price-tag { position:absolute; top:6px; left:6px; z-index:3; padding:3px 9px; border-radius:8px; background:rgba(0,0,0,0.45); color:#fff; font-size:13px; font-weight:800; letter-spacing:-0.3px; }
+.pc .price-tag .old { font-size:9px; font-weight:500; opacity:0.8; text-decoration:line-through; margin-left:4px; }
+.pc .caption { position:absolute; left:0; right:0; bottom:0; z-index:2; padding:8px 9px; color:#fff; background:rgba(0,0,0,0.45); }
+.pc .caption.glass-edge { padding-top:11px; }
+.pc .caption.glass-edge::after {
+  content:''; position:absolute; left:0; right:0; top:0; height:2px;
+  background:rgba(255,255,255,0.18); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+}
+.pc .store { font-size:8px; font-weight:600; opacity:0.9; text-transform:uppercase; letter-spacing:0.3px; }
+.pc .pname { font-size:12px; font-weight:700; line-height:1.2; margin-top:1px; }
+.badge { display:inline-flex; align-items:center; font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:0.3px; padding:2px 6px; border-radius:100px; color:#fff; }
+.b-pink { background:var(--pink); } .b-gold { background:#D4A854; } .b-tiffany { background:#0ABAB5; } .b-dark { background:var(--text-primary); }
+.pc .foot { padding:9px 9px 10px; }
+.pc .add-btn { padding:7px; border-radius:100px; background:var(--pink); color:#fff; font-size:10px; font-weight:700; text-align:center; }
+</style>
+</head>
+<body>
+<header class="page-header">
+  <h1>Price on Photo <span class="badge">LOVII</span></h1>
+  <p>Цена — в верхний левый угол фото, с тёмной подложкой (как бейдж). Бейджи — верхний правый. Низ — магазин+название на подложке с мутной полосой. Под фото — только кнопка.</p>
+</header>
+<div class="grid" id="grid"></div>
+<script>
+const DATA = [
+  { img:'../assets/img/eclai.jpg', name:'Эклер шоколадный', store:'Пекарня #23', tag:['Хит','Эко'], price:'250₽', old:'390₽' },
+  { img:'../assets/img/croissant.jpg', name:'Круассан классический', store:'Пекарня #23', tag:['Топ'], price:'190₽', old:'' },
+  { img:'../assets/img/baguette.jpg', name:'Багет на закваске', store:'Пекарня #23', tag:['Сезон'], price:'120₽', old:'' },
+  { img:'../assets/img/cheesecake.jpg', name:'Чизкейк Нью-Йорк', store:'Пекарня #23', tag:['Новинка'], price:'390₽', old:'' },
+  { img:'../assets/img/bouquet-tenderness.jpg', name:'Букет «Нежность»', store:'Цветы Fresh', tag:['Акция','Новинка'], price:'2 900₽', old:'3 500₽' },
+  { img:'../assets/img/bouquet-passion.jpg', name:'Букет «Яркий день»', store:'Цветы Fresh', tag:['Хит'], price:'3 500₽', old:'' },
+];
+const cls = t => t==='Хит'?'b-pink':(t==='Эко'||t==='Акция')?'b-gold':(t==='Новинка'||t==='Сезон')?'b-tiffany':'b-dark';
+const card = d => `
+  <div class="pc">
+    <div class="media">
+      <div class="price-tag">${d.price}${d.old?`<span class="old">${d.old}</span>`:''}</div>
+      <div class="badges">${d.tag.map(t=>`<span class="badge ${cls(t)}">${t}</span>`).join('')}</div>
+      <img class="thumb" src="${d.img}" alt="">
+      <div class="caption glass-edge">
+        <div class="store">${d.store}</div>
+        <div class="pname">${d.name}</div>
+      </div>
+    </div>
+    <div class="foot"><div class="add-btn">+ В корзину</div></div>
+  </div>`;
+document.getElementById('grid').innerHTML = DATA.map(card).join('');
+</script>
+</body>
+</html>

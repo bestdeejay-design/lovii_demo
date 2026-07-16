@@ -1,3 +1,6 @@
 .DS_Store
 *.log
 .omo/
+node_modules/
+.playwright-mcp/
+screenshots/

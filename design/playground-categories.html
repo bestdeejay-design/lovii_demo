@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category Menu — 8 variants — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+:root {
+  --pink:#f64a8a; --pink-light:rgba(246,74,138,0.12); --pink-mid:rgba(246,74,138,0.06); --pink-dark:#c92a6a;
+  --tiffany:#0ABAB5; --tiffany-light:rgba(10,186,181,0.10);
+  --gold:#D4A854; --gold-light:rgba(212,168,84,0.14);
+  --chiffon:#F5E6CC; --sand:#E8D5B7;
+  --bg:#fff; --border:#EEE; --border-strong:#DDD;
+  --text-primary:#1a1a1a; --text-secondary:#888; --text-dim:#bbb;
+  --shadow:rgba(0,0,0,0.06); --shadow-sm:rgba(0,0,0,0.04);
+  --pink-shadow:rgba(246,74,138,0.2); --tiffany-shadow:rgba(10,186,181,0.2); --gold-shadow:rgba(212,168,84,0.25);
+  --radius-sm:6px; --radius-md:10px; --radius-lg:12px; --radius-xl:16px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:#fff; color:var(--text-primary); padding:24px 0 48px; -webkit-font-smoothing:antialiased; }
+.page-header { max-width:760px; margin:0 auto 8px; padding:0 16px; }
+.page-header h1 { font-size:20px; font-weight:700; }
+.page-header p { font-size:13px; color:var(--text-secondary); margin-top:6px; line-height:1.5; }
+.variant { max-width:420px; margin:0 auto 36px; padding:0; }
+.variant > .vh { font-size:13px; font-weight:700; color:var(--text-primary); padding:14px 16px 10px; display:flex; align-items:baseline; gap:8px; border-top:1px solid var(--border); margin-top:14px; }
+.variant > .vh small { font-size:11px; font-weight:500; color:var(--text-secondary); }
+.phone { max-width:375px; margin:0 auto; border:1px solid var(--border); border-radius:20px; overflow:hidden; background:#fff; }
+.icon { width:22px; height:22px; flex-shrink:0; display:block; }
+.icon-sm { width:16px; height:16px; }
+
+/* ===== Shared category data as JS-driven render ===== */
+.cat-label { font-size:12px; font-weight:600; }
+
+/* V1 — Icon-tile pills (horizontal scroll, square colored tile + label under) */
+.v1-row { display:flex; gap:14px; overflow-x:auto; padding:8px 16px 14px; scrollbar-width:none; }
+.v1-row::-webkit-scrollbar { display:none; }
+.v1-item { flex:0 0 auto; width:64px; display:flex; flex-direction:column; align-items:center; gap:7px; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
+.v1-tile { width:56px; height:56px; border-radius:var(--radius-lg); display:flex; align-items:center; justify-content:center; transition:transform .12s, box-shadow .12s; }
+.v1-tile .icon { width:26px; height:26px; }
+.v1-item:active .v1-tile { transform:scale(0.94); }
+.v1-item .cat-label { font-size:11px; text-align:center; color:var(--text-secondary); }
+.v1-item.active .cat-label { color:var(--text-primary); font-weight:700; }
+/* tile colors */
+.t-pink { background:var(--pink-light); } .t-pink .icon { color:var(--pink); }
+.t-tiffany { background:var(--tiffany-light); } .t-tiffany .icon { color:var(--tiffany); }
+.t-gold { background:var(--gold-light); } .t-gold .icon { color:var(--gold); }
+/* active = solid color tile */
+.v1-item.active .t-pink { background:var(--pink); box-shadow:0 4px 10px var(--pink-shadow); } .v1-item.active .t-pink .icon { color:#fff; }
+.v1-item.active .t-tiffany { background:var(--tiffany); box-shadow:0 4px 10px var(--tiffany-shadow); } .v1-item.active .t-tiffany .icon { color:#fff; }
+.v1-item.active .t-gold { background:var(--gold); box-shadow:0 4px 10px var(--gold-shadow); } .v1-item.active .t-gold .icon { color:#fff; }
+
+/* V2 — 2-col grid cards (icon rail left + label, active = pink-mid bg + pink border) */
+.v2-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding:8px 16px 14px; }
+.v2-card { display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--border); border-radius:var(--radius-lg); cursor:pointer; user-select:none; background:#fff; transition:all .15s ease; }
+.v2-card:active { transform:scale(0.985); }
+.v2-card .iw { width:38px; height:38px; border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.v2-card.active { background:var(--pink-mid); border-color:var(--pink); }
+.iw-pink { background:var(--pink-light); } .iw-pink .icon { color:var(--pink); }
+.iw-tiffany { background:var(--tiffany-light); } .iw-tiffany .icon { color:var(--tiffany); }
+.iw-gold { background:var(--gold-light); } .iw-gold .icon { color:var(--gold); }
+.v2-card .cat-label { font-size:13px; }
+
+/* V3 — Vertical list rail (left colored icon + selected highlight) */
+.v3-list { padding:8px 16px 14px; display:flex; flex-direction:column; gap:8px; }
+.v3-item { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:var(--radius-lg); cursor:pointer; user-select:none; position:relative; border:1px solid transparent; }
+.v3-item .iw { width:36px; height:36px; border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.v3-item .cat-label { font-size:14px; flex:1; }
+.v3-item:active { background:rgba(0,0,0,0.03); }
+.v3-item.active { background:var(--pink-mid); border-color:var(--pink); }
+.v3-item.active::before { content:''; position:absolute; left:0; top:10px; bottom:10px; width:3px; border-radius:3px; background:var(--pink); }
+
+/* V4 — Segmented control (tab bar, active = pink text + underline) */
+.v4-bar { display:flex; padding:6px 16px 12px; gap:4px; overflow-x:auto; scrollbar-width:none; }
+.v4-bar::-webkit-scrollbar { display:none; }
+.v4-tab { flex:0 0 auto; padding:8px 12px; font-size:12px; font-weight:600; color:var(--text-secondary); border-bottom:2px solid transparent; cursor:pointer; user-select:none; white-space:nowrap; }
+.v4-tab.active { color:var(--pink); border-bottom-color:var(--pink); }
+
+/* V5 — Large color tiles (big tile, category color bg + white icon) */
+.v5-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:8px 16px 14px; }
+.v5-tile { aspect-ratio:1/1; border-radius:var(--radius-lg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; cursor:pointer; user-select:none; transition:transform .12s; color:#fff; }
+.v5-tile:active { transform:scale(0.96); }
+.v5-tile .icon { width:28px; height:28px; }
+.v5-tile .cat-label { color:#fff; font-size:11px; font-weight:600; }
+.v5-tile.pink { background:var(--pink); box-shadow:0 4px 12px var(--pink-shadow); }
+.v5-tile.tiffany { background:var(--tiffany); box-shadow:0 4px 12px var(--tiffany-shadow); }
+.v5-tile.gold { background:var(--gold); box-shadow:0 4px 12px var(--gold-shadow); }
+.v5-tile.active { outline:3px solid rgba(26,26,26,0.12); outline-offset:-3px; }
+
+/* V6 — Chip cloud single-select */
+.v6-cloud { display:flex; flex-wrap:wrap; gap:8px; padding:8px 16px 14px; }
+.v6-chip { display:inline-flex; align-items:center; gap:6px; padding:9px 14px; border-radius:100px; border:1px solid var(--border); background:#fff; font-size:12px; font-weight:600; cursor:pointer; user-select:none; transition:all .15s ease; }
+.v6-chip:active { transform:scale(0.97); }
+.v6-chip .icon { width:16px; height:16px; color:var(--text-dim); }
+.v6-chip.active { background:var(--pink-mid); border-color:var(--pink); color:var(--pink-dark); }
+.v6-chip.active .icon { color:var(--pink); }
+
+/* V7 — Bottom-sheet trigger + sheet grid */
+.v7-wrap { padding:8px 16px 14px; }
+.v7-trigger { display:flex; align-items:center; justify-content:space-between; width:100%; padding:14px; border:1px solid var(--border); border-radius:var(--radius-lg); background:#fff; cursor:pointer; font-size:14px; font-weight:600; }
+.v7-trigger .chev { color:var(--text-secondary); }
+.v7-sheet { position:fixed; left:0; right:0; bottom:0; background:#fff; border-radius:20px 20px 0 0; box-shadow:0 -4px 24px rgba(0,0,0,0.12); padding:18px 16px calc(18px + env(safe-area-inset-bottom)); transform:translateY(100%); transition:transform .28s cubic-bezier(0.16,1,0.3,1); z-index:50; max-width:420px; margin:0 auto; }
+.v7-sheet.open { transform:translateY(0); }
+.v7-sheet h4 { font-size:15px; font-weight:700; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; }
+.v7-sheet .close { color:var(--text-secondary); cursor:pointer; font-size:13px; font-weight:600; }
+.v7-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.v7-cell { display:flex; flex-direction:column; align-items:center; gap:8px; padding:14px 6px; border:1px solid var(--border); border-radius:var(--radius-lg); cursor:pointer; user-select:none; }
+.v7-cell:active { background:rgba(0,0,0,0.03); }
+.v7-cell .iw { width:40px; height:40px; border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; }
+.v7-cell .cat-label { font-size:11px; }
+.v7-cell.active { background:var(--pink-mid); border-color:var(--pink); }
+.v7-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.35); opacity:0; pointer-events:none; transition:opacity .28s; z-index:40; }
+.v7-backdrop.open { opacity:1; pointer-events:auto; }
+
+/* V8 — Radial / fan menu */
+.v8-wrap { padding:120px 16px 14px; position:relative; height:300px; }
+.v8-center { position:absolute; left:50%; top:130px; transform:translate(-50%,-50%); width:60px; height:60px; border-radius:50%; background:var(--pink); box-shadow:0 6px 18px var(--pink-shadow); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:5; }
+.v8-center .icon { width:26px; height:26px; color:#fff; }
+.v8-item { position:absolute; left:50%; top:130px; width:52px; height:52px; margin:-26px 0 0 -26px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:transform .3s cubic-bezier(0.16,1,0.3,1), opacity .3s; opacity:0; transform:translate(0,0) scale(0.4); cursor:pointer; }
+.v8-item .icon { width:24px; height:24px; color:#fff; }
+.v8-item.pink { background:var(--pink); box-shadow:0 4px 12px var(--pink-shadow); }
+.v8-item.tiffany { background:var(--tiffany); box-shadow:0 4px 12px var(--tiffany-shadow); }
+.v8-item.gold { background:var(--gold); box-shadow:0 4px 12px var(--gold-shadow); }
+.v8-wrap.open .v8-item { opacity:1; }
+.v8-wrap.open .v8-item:nth-child(2) { transform:translate(0px,-90px) scale(1); }
+.v8-wrap.open .v8-item:nth-child(3) { transform:translate(78px,-45px) scale(1); }
+.v8-wrap.open .v8-item:nth-child(4) { transform:translate(78px,45px) scale(1); }
+.v8-wrap.open .v8-item:nth-child(5) { transform:translate(0px,90px) scale(1); }
+.v8-wrap.open .v8-item:nth-child(6) { transform:translate(-78px,45px) scale(1); }
+.v8-wrap.open .v8-item:nth-child(7) { transform:translate(-78px,-45px) scale(1); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Меню категорий — 8 вариантов</h1>
+  <p>Кликните по любому элементу, чтобы увидеть выделение выбранного. Без серых фонов — только палитра базы LOVII.</p>
+</div>
+
+<!-- V1 -->
+<div class="variant">
+  <div class="vh">V1 · Icon-tile pills <small>горизонтальный скролл, цветная плитка + подпись</small></div>
+  <div class="phone">
+    <div class="v1-row" data-group="v1">
+      <div class="v1-item active" data-cat="Выпечка"><div class="v1-tile t-pink"><svg class="icon"><use href="#i-shopping-bag"/></svg></div><div class="cat-label">Выпечка</div></div>
+      <div class="v1-item" data-cat="Цветы"><div class="v1-tile t-tiffany"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Цветы</div></div>
+      <div class="v1-item" data-cat="Кофе"><div class="v1-tile t-pink"><svg class="icon"><use href="#i-store"/></svg></div><div class="cat-label">Кофе</div></div>
+      <div class="v1-item" data-cat="Суши"><div class="v1-tile t-tiffany"><svg class="icon"><use href="#i-package"/></svg></div><div class="cat-label">Суши</div></div>
+      <div class="v1-item" data-cat="Подарки"><div class="v1-tile t-gold"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Подарки</div></div>
+      <div class="v1-item" data-cat="Акции"><div class="v1-tile t-gold"><svg class="icon"><use href="#i-zap"/></svg></div><div class="cat-label">Акции</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- V2 -->
+<div class="variant">
+  <div class="vh">V2 · 2-col grid cards <small>карточки с icon-rail, выбранная = pink-mid</small></div>
+  <div class="phone">
+    <div class="v2-grid" data-group="v2">
+      <div class="v2-card active" data-cat="Выпечка"><div class="iw iw-pink"><svg class="icon"><use href="#i-shopping-bag"/></svg></div><div class="cat-label">Выпечка</div></div>
+      <div class="v2-card" data-cat="Цветы"><div class="iw iw-tiffany"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Цветы</div></div>
+      <div class="v2-card" data-cat="Кофе"><div class="iw iw-pink"><svg class="icon"><use href="#i-store"/></svg></div><div class="cat-label">Кофе</div></div>
+      <div class="v2-card" data-cat="Суши"><div class="iw iw-tiffany"><svg class="icon"><use href="#i-package"/></svg></div><div class="cat-label">Суши</div></div>
+      <div class="v2-card" data-cat="Подарки"><div class="iw iw-gold"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Подарки</div></div>
+      <div class="v2-card" data-cat="Акции"><div class="iw iw-gold"><svg class="icon"><use href="#i-zap"/></svg></div><div class="cat-label">Акции</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- V3 -->
+<div class="variant">
+  <div class="vh">V3 · Vertical list rail <small>вертикальный список, выделение слева-направо</small></div>
+  <div class="phone">
+    <div class="v3-list" data-group="v3">
+      <div class="v3-item active" data-cat="Выпечка"><div class="iw iw-pink"><svg class="icon"><use href="#i-shopping-bag"/></svg></div><div class="cat-label">Выпечка</div></div>
+      <div class="v3-item" data-cat="Цветы"><div class="iw iw-tiffany"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Цветы</div></div>
+      <div class="v3-item" data-cat="Кофе"><div class="iw iw-pink"><svg class="icon"><use href="#i-store"/></svg></div><div class="cat-label">Кофе</div></div>
+      <div class="v3-item" data-cat="Суши"><div class="iw iw-tiffany"><svg class="icon"><use href="#i-package"/></svg></div><div class="cat-label">Суши</div></div>
+      <div class="v3-item" data-cat="Подарки"><div class="iw iw-gold"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Подарки</div></div>
+      <div class="v3-item" data-cat="Акции"><div class="iw iw-gold"><svg class="icon"><use href="#i-zap"/></svg></div><div class="cat-label">Акции</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- V4 -->
+<div class="variant">
+  <div class="vh">V4 · Segmented control <small>таб-бар, активный = pink + подчёркивание</small></div>
+  <div class="phone">
+    <div class="v4-bar" data-group="v4">
+      <div class="v4-tab active" data-cat="Выпечка">Выпечка</div>
+      <div class="v4-tab" data-cat="Цветы">Цветы</div>
+      <div class="v4-tab" data-cat="Кофе">Кофе</div>
+      <div class="v4-tab" data-cat="Суши">Суши</div>
+      <div class="v4-tab" data-cat="Подарки">Подарки</div>
+      <div class="v4-tab" data-cat="Акции">Акции</div>
+    </div>
+  </div>
+</div>
+
+<!-- V5 -->
+<div class="variant">
+  <div class="vh">V5 · Large color tiles <small>крупные плитки, цвет категории + белая иконка</small></div>
+  <div class="phone">
+    <div class="v5-grid" data-group="v5">
+      <div class="v5-tile pink active" data-cat="Выпечка"><svg class="icon"><use href="#i-shopping-bag"/></svg><div class="cat-label">Выпечка</div></div>
+      <div class="v5-tile tiffany" data-cat="Цветы"><svg class="icon"><use href="#i-gift"/></svg><div class="cat-label">Цветы</div></div>
+      <div class="v5-tile pink" data-cat="Кофе"><svg class="icon"><use href="#i-store"/></svg><div class="cat-label">Кофе</div></div>
+      <div class="v5-tile tiffany" data-cat="Суши"><svg class="icon"><use href="#i-package"/></svg><div class="cat-label">Суши</div></div>
+      <div class="v5-tile gold" data-cat="Подарки"><svg class="icon"><use href="#i-gift"/></svg><div class="cat-label">Подарки</div></div>
+      <div class="v5-tile gold" data-cat="Акции"><svg class="icon"><use href="#i-zap"/></svg><div class="cat-label">Акции</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- V6 -->
+<div class="variant">
+  <div class="vh">V6 · Chip cloud <small>облако чипов, одиночный выбор</small></div>
+  <div class="phone">
+    <div class="v6-cloud" data-group="v6">
+      <div class="v6-chip active" data-cat="Выпечка"><svg class="icon"><use href="#i-shopping-bag"/></svg>Выпечка</div>
+      <div class="v6-chip" data-cat="Цветы"><svg class="icon"><use href="#i-gift"/></svg>Цветы</div>
+      <div class="v6-chip" data-cat="Кофе"><svg class="icon"><use href="#i-store"/></svg>Кофе</div>
+      <div class="v6-chip" data-cat="Суши"><svg class="icon"><use href="#i-package"/></svg>Суши</div>
+      <div class="v6-chip" data-cat="Подарки"><svg class="icon"><use href="#i-gift"/></svg>Подарки</div>
+      <div class="v6-chip" data-cat="Акции"><svg class="icon"><use href="#i-zap"/></svg>Акции</div>
+    </div>
+  </div>
+</div>
+
+<!-- V7 -->
+<div class="variant">
+  <div class="vh">V7 · Bottom-sheet grid <small>кнопка открывает sheet с гридом</small></div>
+  <div class="phone" style="position:relative; overflow:hidden;">
+    <div class="v7-wrap">
+      <div class="v7-trigger" onclick="v7open()">
+        <span>Категория: <strong id="v7cur">Выпечка</strong></span>
+        <svg class="chev icon"><use href="#i-chevron-right"/></svg>
+      </div>
+    </div>
+    <div class="v7-backdrop" id="v7bd" onclick="v7close()"></div>
+    <div class="v7-sheet" id="v7sh">
+      <h4>Выберите категорию <span class="close" onclick="v7close()">Закрыть</span></h4>
+      <div class="v7-grid" data-group="v7">
+        <div class="v7-cell active" data-cat="Выпечка"><div class="iw iw-pink"><svg class="icon"><use href="#i-shopping-bag"/></svg></div><div class="cat-label">Выпечка</div></div>
+        <div class="v7-cell" data-cat="Цветы"><div class="iw iw-tiffany"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Цветы</div></div>
+        <div class="v7-cell" data-cat="Кофе"><div class="iw iw-pink"><svg class="icon"><use href="#i-store"/></svg></div><div class="cat-label">Кофе</div></div>
+        <div class="v7-cell" data-cat="Суши"><div class="iw iw-tiffany"><svg class="icon"><use href="#i-package"/></svg></div><div class="cat-label">Суши</div></div>
+        <div class="v7-cell" data-cat="Подарки"><div class="iw iw-gold"><svg class="icon"><use href="#i-gift"/></svg></div><div class="cat-label">Подарки</div></div>
+        <div class="v7-cell" data-cat="Акции"><div class="iw iw-gold"><svg class="icon"><use href="#i-zap"/></svg></div><div class="cat-label">Акции</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V8 -->
+<div class="variant">
+  <div class="vh">V8 · Radial / fan menu <small>круглая кнопка раскрывает веер</small></div>
+  <div class="phone">
+    <div class="v8-wrap" id="v8" onclick="if(event.target.classList.contains('v8-center')||event.target.closest('.v8-center')){document.getElementById('v8').classList.toggle('open')}">
+      <div class="v8-center"><svg class="icon"><use href="#i-shopping-bag"/></svg></div>
+      <div class="v8-item pink" data-cat="Выпечка"><svg class="icon"><use href="#i-shopping-bag"/></svg></div>
+      <div class="v8-item tiffany" data-cat="Цветы"><svg class="icon"><use href="#i-gift"/></svg></div>
+      <div class="v8-item pink" data-cat="Кофе"><svg class="icon"><use href="#i-store"/></svg></div>
+      <div class="v8-item tiffany" data-cat="Суши"><svg class="icon"><use href="#i-package"/></svg></div>
+      <div class="v8-item gold" data-cat="Подарки"><svg class="icon"><use href="#i-gift"/></svg></div>
+      <div class="v8-item gold" data-cat="Акции"><svg class="icon"><use href="#i-zap"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- SVG sprite (same as app) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-shopping-bag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 7h12l-1 13H7L6 7Zm3 0a3 3 0 0 1 6 0"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 11h16v9H4zM4 11l8-7 8 7M12 11v9"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 9l1-4h14l1 4M5 9v10h14V9M9 19v-5h6v5"/></symbol>
+    <symbol id="i-package" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v10l-8 4-8-4V7l8-4Zm8 4l-8 4-8-4m8 4v10"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13 3L4 14h7l-1 7 9-11h-7l1-7Z"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<script>
+// Generic single-select for groups v1..v6 and v7 sheet
+document.querySelectorAll('[data-group]').forEach(group => {
+  group.addEventListener('click', e => {
+    const item = e.target.closest('[data-cat]')
+    if (!item) return
+    group.querySelectorAll('[data-cat]').forEach(el => el.classList.remove('active'))
+    item.classList.add('active')
+    if (group.dataset.group === 'v7') {
+      document.getElementById('v7cur').textContent = item.dataset.cat
+      v7close()
+    }
+  })
+})
+function v7open(){ document.getElementById('v7sh').classList.add('open'); document.getElementById('v7bd').classList.add('open'); }
+function v7close(){ document.getElementById('v7sh').classList.remove('open'); document.getElementById('v7bd').classList.remove('open'); }
+</script>
+</body>
+</html>

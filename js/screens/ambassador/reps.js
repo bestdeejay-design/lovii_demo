@@ -6,18 +6,19 @@ function screenAmbassadorReps() {
   let html = ''
   a.repList.forEach(r => {
     html += `
-      <div class="p-order" style="cursor:default;">
+      <div class="p-order">
         <div class="left">
+          <!-- avatar -->
           <div style="width:28px;height:28px;border-radius:50%;background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--pink);flex-shrink:0;">
             ${r.name.charAt(0)}
           </div>
           <div>
             <div class="oname">${r.name}</div>
-            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">${r.stores} точек</div>
+            <div class="or-meta">${r.stores} точек</div>
           </div>
         </div>
         <div class="right">
-          <span style="font-size:11px;font-weight:600;">${r.income.toLocaleString()}₽</span>
+          <span class="oprice">${r.income.toLocaleString()}₽</span>
         </div>
       </div>`
   })

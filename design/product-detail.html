@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Товар — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+:root { --pink:#f64a8a; --pink-light:rgba(246,74,138,0.12); --text-primary:#1a1a1a; --text-secondary:#888; --border:#EEE; --radius-lg:12px; --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:#fff; color:var(--text-primary); -webkit-font-smoothing:antialiased; }
+.phone { max-width:380px; margin:0 auto; min-height:100vh; }
+.top { display:flex; align-items:center; gap:12px; padding:14px 16px; position:sticky; top:0; background:#fff; z-index:5; border-bottom:1px solid var(--border); }
+.back { width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:#fff; font-size:18px; cursor:pointer; color:var(--text-primary); }
+.top .ttl { font-size:15px; font-weight:600; }
+.hero { width:100%; height:300px; object-fit:cover; display:block; background:#f8f8f8; }
+.badge-top { display:inline-block; margin:14px 16px 0; background:var(--pink); color:#fff; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.4px; padding:4px 10px; border-radius:100px; }
+.info { padding:12px 16px 24px; }
+.store { font-size:11px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.4px; }
+.name { font-size:22px; font-weight:700; margin-top:4px; letter-spacing:-0.3px; }
+.price { font-size:20px; font-weight:700; color:var(--pink); margin-top:8px; }
+.desc { font-size:13px; line-height:1.6; color:var(--text-secondary); margin-top:14px; }
+.qty-row { display:flex; align-items:center; justify-content:center; gap:20px; margin:20px 16px; border:1px solid var(--pink); border-radius:100px; padding:8px; max-width:200px; }
+.qty-row button { width:36px; height:36px; border:none; background:transparent; color:var(--pink); font-size:20px; font-weight:700; cursor:pointer; }
+.qty-row .count { font-size:16px; font-weight:700; color:var(--pink); min-width:24px; text-align:center; }
+.add-big { margin:0 16px; padding:14px; border-radius:14px; background:var(--pink); color:#fff; font-size:14px; font-weight:700; text-align:center; cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="top">
+    <button class="back" onclick="history.back()">‹</button>
+    <span class="ttl">Товар</span>
+  </div>
+  <div id="content"></div>
+</div>
+<script>
+const PRODUCTS = {
+  'eclai': { img:'../assets/img/eclai.jpg', name:'Эклер шоколадный', price:250, priceLabel:'250₽', store:'Пекарня #23', tag:'Хит', desc:'Нежное заварное тесто, щедрая начинка из ванильного крема и глянцевая шоколадная глазурь. Готовится каждое утро.' },
+  'croissant': { img:'../assets/img/croissant.jpg', name:'Круассан классический', price:190, priceLabel:'190₽', store:'Пекарня #23', tag:'Хит', desc:'Слоёный, воздушный, с хрустящей корочкой. 27 слоёв масляного теста по классической французской рецептуре.' },
+  'bouquet-tenderness': { img:'../assets/img/bouquet-tenderness.jpg', name:'Букет «Нежность»', price:2900, priceLabel:'2 900₽', store:'Цветы Fresh', tag:'', desc:'Мягкая композиция из розовых роз, эустомы и зелени. Идеален для деликатных поводов.' },
+  'baguette': { img:'../assets/img/baguette.jpg', name:'Багет на закваске', price:120, priceLabel:'120₽', store:'Пекарня #23', tag:'', desc:'Хрустящая корочка, пористый мякиш, натуральная закваска — без дрожжей и добавок.' },
+};
+const KEY='lovii_cart_v9';
+function getCart(){ try { return JSON.parse(localStorage.getItem(KEY))||{}; } catch { return {}; } }
+function setCart(c){ localStorage.setItem(KEY, JSON.stringify(c)); }
+const id = new URLSearchParams(location.search).get('id');
+const p = PRODUCTS[id];
+if (!p) { document.getElementById('content').innerHTML = '<p style="padding:20px">Товар не найден</p>'; }
+else {
+  const qty = getCart()[id]||0;
+  document.getElementById('content').innerHTML = `
+    ${p.tag ? `<span class="badge-top">${p.tag}</span>` : ''}
+    <img class="hero" src="${p.img}" alt="${p.name}">
+    <div class="info">
+      <div class="store">${p.store}</div>
+      <div class="name">${p.name}</div>
+      <div class="price">${p.priceLabel}</div>
+      <div class="desc">${p.desc}</div>
+      <div class="qty-row">
+        <button onclick="chg(-1)">−</button>
+        <span class="count" id="c">${qty}</span>
+        <button onclick="chg(1)">+</button>
+      </div>
+      <div class="add-big" onclick="add()">${qty>0 ? 'Обновить корзину' : '+ В корзину'}</div>
+    </div>`;
+  window.chg = (d) => { const el=document.getElementById('c'); let n=Math.max(0,(+el.textContent)+d); el.textContent=n; };
+  window.add = () => { const c=getCart(); c[id]=+document.getElementById('c').textContent; setCart(c); history.back(); };
+}
+</script>
+</body>
+</html>

@@ -13,7 +13,7 @@ function screenAmbassadorTraining() {
   ).join('')
 
   return `
-    <div style="padding:16px;text-align:center;background:var(--surface-secondary);margin:0 16px;border-radius:var(--radius-lg);border:1px solid var(--border);">
+    <div class="card" style="text-align:center;margin:0 16px;">
       <div style="font-size:24px;margin-bottom:4px;">📚</div>
       <div style="font-size:13px;font-weight:600;">База знаний</div>
       <div style="font-size:10px;color:var(--text-secondary);margin-top:2px;">${materials.length} материалов для изучения</div>

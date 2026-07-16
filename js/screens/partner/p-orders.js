@@ -13,7 +13,7 @@ function screenPartnerOrders() {
       <div class="p-order">
         <div>
           <div class="oname">Заказ №${o.id}</div>
-          <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">${o.items}</div>
+          <div class="or-meta">${o.items}</div>
         </div>
         <div class="right">
           <span class="oprice">${o.amount}₽</span>

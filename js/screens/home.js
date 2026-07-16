@@ -54,10 +54,10 @@ function clientHomeBlock() {
     <div class="balance-card">
       <div>
         <div class="balance-label">Бонусный баланс</div>
-        <span class="balance-amount"><span class="pink">${MOCK.user.bonusBalance.toLocaleString()}</span> <span class="unit">баллов</span></span>
+        <span class="balance-amount"><span class="pink">${(MOCK?.user?.bonusBalance ?? 0).toLocaleString()}</span> <span class="unit">баллов</span></span>
         <div class="balance-sub">до статуса Digital Representative</div>
       </div>
-      <span class="balance-link">Как получить?</span>
+      <span class="balance-link" data-nav="bonus-info">Как получить?</span>
     </div>
   `
 }

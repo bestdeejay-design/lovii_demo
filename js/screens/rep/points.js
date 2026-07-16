@@ -7,19 +7,19 @@ function screenRepPoints() {
   stores.forEach(s => {
     const store = MOCK.stores.find(st => st.id === s.id)
     html += `
-      <div class="p-order" style="cursor:default;">
+      <div class="p-order">
         <div class="left">
-          <span style="font-size:16px;margin-right:4px;">${store ? store.emoji : '🏪'}</span>
+          <span style="font-size:16px;">${store ? store.emoji : '🏪'}</span>
           <div>
             <div class="oname">${s.name}</div>
-            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">
+            <div class="or-meta">
               ${store ? '★' + store.rating + ' · ' + store.address : ''}
             </div>
           </div>
         </div>
-        <div style="text-align:right;">
-          <div style="font-size:11px;font-weight:600;">${s.revenue.toLocaleString()}₽</div>
-          <div style="font-size:9px;color:var(--text-secondary);">${s.orders} заказов</div>
+        <div class="right" style="flex-direction:column;align-items:flex-end;gap:1px;">
+          <span style="font-size:11px;font-weight:600;">${s.revenue.toLocaleString()}₽</span>
+          <span class="store-meta">${s.orders} заказов</span>
         </div>
       </div>`
   })

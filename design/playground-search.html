@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search — Dense canonical (по базе главной) — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+/* ===== TOKENS (mirror css/demo.css :root) ===== */
+:root {
+  --pink: #f64a8a; --pink-light: rgba(246,74,138,0.12); --pink-mid: rgba(246,74,138,0.06);
+  --pink-dark: #c92a6a; --tiffany: #0ABAB5; --tiffany-light: rgba(10,186,181,0.10);
+  --gold: #D4A854; --star: #FBBF24;
+  --bg: #ffffff; --surface-secondary: #F8F8F8;
+  --border: #EEEEEE; --border-strong: #DDDDDD;
+  --text-primary: #1a1a1a; --text-secondary: #888888; --text-dim: #bbbbbb;
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 12px; --radius-xl: 16px;
+  --shadow-sm: rgba(0,0,0,0.04); --shadow: rgba(0,0,0,0.06);
+  --pink-shadow: rgba(246,74,138,0.2); --tiffany-shadow: rgba(10,186,181,0.2);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: var(--font); background: #fff; color: var(--text-primary); padding: 24px 16px; -webkit-font-smoothing: antialiased; }
+
+.page-header { max-width: 420px; margin: 0 auto 20px; }
+.page-header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; display:flex; align-items:center; gap:10px; }
+.page-header h1 .badge { font-size: 10px; font-weight: 600; background: var(--pink-light); color: var(--pink); padding: 2px 8px; border-radius: 100px; }
+.page-header p { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
+
+/* ===== PHONE ===== */
+.phone {
+  max-width: 380px; margin: 0 auto; background: var(--bg);
+  border-radius: 20px; padding: 14px 0 18px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.05);
+  position: relative; overflow: hidden;
+}
+.phone::before { content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:80px; height:4px; background: rgba(0,0,0,0.1); border-radius:100px; }
+.phone-status { display:flex; justify-content:space-between; padding:2px 14px 10px; font-size:9px; font-weight:600; color: var(--text-dim); }
+
+/* ===== SHARED DESIGN-SYSTEM CLASSES (1:1 from css/demo.css) ===== */
+.icon { width:20px; height:20px; display:block; flex-shrink:0; }
+.section-label {
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:11px; font-weight:600; color: var(--text-dim);
+  text-transform:uppercase; letter-spacing:0.5px; padding:0 16px; margin-bottom:6px;
+}
+.section-label a { color: var(--pink); text-transform:none; font-weight:500; font-size:10px; }
+.section-pad { padding:0 16px; }
+
+/* Search bar */
+.search-bar { display:flex; align-items:center; gap:8px; margin:0 16px 8px; padding:10px 14px; background: var(--surface-secondary); border-radius: var(--radius-lg); box-shadow:0 1px 3px var(--shadow); }
+.search-bar .icon { color: var(--text-dim); width:16px; height:16px; }
+.search-bar input { flex:1; border:none; background:none; outline:none; font-size:13px; font-family:inherit; color: var(--text-primary); }
+.search-bar input::placeholder { color: var(--text-dim); }
+
+/* Category chips — white+border, 10px radius, SVG icon in colored box */
+.chip-row { display:flex; gap:8px; overflow-x:auto; padding:8px 16px; scrollbar-width:none; }
+.chip-row::-webkit-scrollbar { display:none; }
+.chip {
+  display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius: var(--radius-md);
+  background:#fff; border:1px solid var(--border);
+  font-size:11px; font-weight:600; color: var(--text-primary);
+  white-space:nowrap; cursor:pointer; transition: all 0.15s; flex-shrink:0;
+}
+.chip:hover { border-color: var(--border-strong); }
+.chip .iw { width:22px; height:22px; border-radius: var(--radius-sm); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.chip .iw .icon { width:14px; height:14px; }
+.chip .iw.pink { background: var(--pink); box-shadow:0 3px 8px var(--pink-shadow); }
+.chip .iw.pink .icon { color:#fff; }
+.chip .iw.tiffany { background: var(--tiffany); box-shadow:0 3px 8px var(--tiffany-shadow); }
+.chip .iw.tiffany .icon { color:#fff; }
+.chip .iw.chiffon { background: var(--gold); box-shadow:0 3px 8px rgba(212,168,84,0.25); }
+.chip .iw.chiffon .icon { color:#fff; }
+.chip.active { background: var(--pink-mid); border-color: var(--pink); }
+
+/* Recent searches — menu-item rows (home technique) */
+.recent-list { padding:0 16px; }
+.menu-item {
+  display:flex; align-items:center; gap:10px; padding:12px;
+  background:#fff; border:1px solid var(--border); border-radius: var(--radius-lg);
+  margin-bottom:8px; cursor:pointer; box-shadow:0 1px 3px var(--shadow); transition: border-color 0.15s;
+}
+.menu-item:hover { border-color: var(--border-strong); }
+.menu-item .icon-box { width:32px; height:32px; border-radius: var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.menu-item .icon-box.tiffany { background: var(--tiffany-light); }
+.menu-item .icon-box.tiffany .icon { color: var(--tiffany); }
+.menu-item .text { flex:1; min-width:0; }
+.menu-item .text .title { font-size:13px; font-weight:500; color: var(--text-primary); }
+.menu-item .arrow { color: var(--text-dim); width:16px; height:16px; flex-shrink:0; }
+
+/* ===== NEW: Product Card (mirrors grid-menu / store card) ===== */
+.product-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; padding:0 16px; }
+.product-card {
+  display:flex; flex-direction:column; gap:8px; padding:12px;
+  background:#fff; border:1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow:0 1px 3px var(--shadow); transition: all 0.15s;
+}
+.product-card:hover { border-color: var(--border-strong); box-shadow:0 4px 12px var(--shadow); transform: translateY(-1px); }
+.product-card .emoji-box { width:40px; height:40px; border-radius: var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.product-card .emoji-box.pink { background: var(--pink-light); }
+.product-card .emoji-box.tiffany { background: var(--tiffany-light); }
+.product-card .emoji-box .store-emoji { font-size:20px; line-height:1; }
+.product-card .thumb { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; border-radius: var(--radius-md); background: var(--surface-secondary); }
+.product-card .pname { font-size:13px; font-weight:600; color: var(--text-primary); line-height:1.25; }
+.product-card .pmeta { font-size:10px; color: var(--text-secondary); margin-top:auto; }
+.product-card .pfoot { display:flex; align-items:center; justify-content:space-between; margin-top:2px; }
+.product-card .price { font-size:14px; font-weight:700; color: var(--pink); }
+.product-card .orders { font-size:10px; font-weight:600; color: var(--text-secondary); }
+
+/* Store card — white+border 12px, emoji avatar in colored box */
+.p-order {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px; background:#fff; border:1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom:8px; box-shadow:0 1px 3px var(--shadow); transition: all 0.15s;
+}
+.p-order:hover { border-color: var(--border-strong); box-shadow:0 4px 12px var(--shadow); transform: translateY(-1px); }
+.p-order .left { display:flex; align-items:center; gap:10px; min-width:0; flex:1; }
+.p-order .emoji-box { width:40px; height:40px; border-radius: var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.p-order .emoji-box.pink { background: var(--pink-light); }
+.p-order .emoji-box.tiffany { background: var(--tiffany-light); }
+.p-order .emoji-box .store-emoji { font-size:20px; line-height:1; }
+.p-order .oname { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:140px; display:block; }
+.p-order .or-meta { font-size:10px; color: var(--text-secondary); margin-top:1px; }
+.p-order .or-meta .star { color: var(--star); }
+.p-order .right { display:flex; flex-direction:column; align-items:flex-end; gap:2px; flex-shrink:0; }
+.p-order .store-orders { font-size:10px; font-weight:600; color: var(--text-secondary); }
+.p-order .store-rev { font-size:13px; font-weight:700; color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Search — насыщенный <span class="badge">LOVII</span></h1>
+  <p>Секции как на главной: белые карточки + <code>1px border</code>, радиусы <code>10–14px</code>, SVG-иконки в цветных квадратах, эмодзи — только аватар. Добавлена <strong>Карточка товара</strong> (его и заказывают) + больше категорий / истории / магазинов.</p>
+</header>
+
+<div class="phone">
+  <div class="phone-status"><span>9:41</span><span>🔋 85%</span></div>
+
+  <!-- Search bar -->
+  <div class="search-bar">
+    <svg class="icon"><use href="#i-search"/></svg>
+    <input type="text" placeholder="Поиск магазинов и товаров...">
+  </div>
+
+  <!-- Category chips (6) -->
+  <div class="section-label">Категории</div>
+  <div class="chip-row">
+    <span class="chip active"><span class="iw pink"><svg class="icon"><use href="#i-shopping-bag"/></svg></span>Выпечка</span>
+    <span class="chip"><span class="iw tiffany"><svg class="icon"><use href="#i-gift"/></svg></span>Цветы</span>
+    <span class="chip"><span class="iw pink"><svg class="icon"><use href="#i-store"/></svg></span>Кофе</span>
+    <span class="chip"><span class="iw tiffany"><svg class="icon"><use href="#i-package"/></svg></span>Суши</span>
+    <span class="chip"><span class="iw chiffon"><svg class="icon"><use href="#i-gift"/></svg></span>Подарки</span>
+    <span class="chip"><span class="iw chiffon"><svg class="icon"><use href="#i-zap"/></svg></span>Акции</span>
+  </div>
+
+  <!-- Recent searches (6) -->
+  <div class="section-label">Недавние поиски <a href="#">Очистить</a></div>
+  <div class="recent-list">
+    <div class="menu-item"><div class="icon-box tiffany"><svg class="icon"><use href="#i-clock"/></svg></div><div class="text"><div class="title">Пекарня #23</div></div><svg class="arrow"><use href="#i-chevron-right"/></svg></div>
+    <div class="menu-item"><div class="icon-box tiffany"><svg class="icon"><use href="#i-clock"/></svg></div><div class="text"><div class="title">Букет «Нежность»</div></div><svg class="arrow"><use href="#i-chevron-right"/></svg></div>
+    <div class="menu-item"><div class="icon-box tiffany"><svg class="icon"><use href="#i-clock"/></svg></div><div class="text"><div class="title">Капучино</div></div><svg class="arrow"><use href="#i-chevron-right"/></svg></div>
+    <div class="menu-item"><div class="icon-box tiffany"><svg class="icon"><use href="#i-clock"/></svg></div><div class="text"><div class="title">Суши Мия</div></div><svg class="arrow"><use href="#i-chevron-right"/></svg></div>
+    <div class="menu-item"><div class="icon-box tiffany"><svg class="icon"><use href="#i-clock"/></svg></div><div class="text"><div class="title">Эклер шоколадный</div></div><svg class="arrow"><use href="#i-chevron-right"/></svg></div>
+    <div class="menu-item"><div class="icon-box tiffany"><svg class="icon"><use href="#i-clock"/></svg></div><div class="text"><div class="title">Чизкейк Нью-Йорк</div></div><svg class="arrow"><use href="#i-chevron-right"/></svg></div>
+  </div>
+
+  <!-- Product cards (NEW — what users actually order) -->
+  <div class="section-label">Популярные товары <a href="#">Все</a></div>
+  <div class="product-grid">
+    <div class="product-card"><img class="thumb" src="../assets/img/croissant.jpg" alt="Круассан классический"><div class="pname">Круассан классический</div><div class="pfoot"><span class="price">190₽</span><span class="orders">142</span></div><div class="pmeta">Пекарня #23</div></div>
+    <div class="product-card"><img class="thumb" src="../assets/img/baguette.jpg" alt="Багет на закваске"><div class="pname">Багет на закваске</div><div class="pfoot"><span class="price">120₽</span><span class="orders">89</span></div><div class="pmeta">Пекарня #23</div></div>
+    <div class="product-card"><img class="thumb" src="../assets/img/eclai.jpg" alt="Эклер шоколадный"><div class="pname">Эклер шоколадный</div><div class="pfoot"><span class="price">250₽</span><span class="orders">67</span></div><div class="pmeta">Пекарня #23</div></div>
+    <div class="product-card"><img class="thumb" src="../assets/img/bouquet-tenderness.jpg" alt="Букет «Нежность»"><div class="pname">Букет «Нежность»</div><div class="pfoot"><span class="price">2 900₽</span><span class="orders">56</span></div><div class="pmeta">Цветы Fresh</div></div>
+    <div class="product-card"><img class="thumb" src="../assets/img/bouquet-passion.jpg" alt="Букет «Яркий день»"><div class="pname">Букет «Яркий день»</div><div class="pfoot"><span class="price">3 500₽</span><span class="orders">42</span></div><div class="pmeta">Цветы Fresh</div></div>
+    <div class="product-card"><img class="thumb" src="../assets/img/cheesecake.jpg" alt="Чизкейк Нью-Йорк"><div class="pname">Чизкейк Нью-Йорк</div><div class="pfoot"><span class="price">390₽</span><span class="orders">34</span></div><div class="pmeta">Пекарня #23</div></div>
+  </div>
+
+  <!-- Store cards (all 4 from MOCK) -->
+  <div class="section-label">Магазины рядом · 4</div>
+  <div class="section-pad">
+    <div class="p-order"><div class="left"><div class="emoji-box pink"><span class="store-emoji">🥐</span></div><div><div class="oname">Пекарня #23</div><div class="or-meta"><span class="star">★</span> 4.8 · 1.2 км</div><div class="or-meta">ул. Тверская, 23</div></div></div><div class="right"><span class="store-orders">45 заказов</span><span class="store-rev">54 000₽</span></div></div>
+    <div class="p-order"><div class="left"><div class="emoji-box tiffany"><span class="store-emoji">💐</span></div><div><div class="oname">Цветы Fresh</div><div class="or-meta"><span class="star">★</span> 4.9 · 2.3 км</div><div class="or-meta">ул. Арбат, 12</div></div></div><div class="right"><span class="store-orders">28 заказов</span><span class="store-rev">33 600₽</span></div></div>
+    <div class="p-order"><div class="left"><div class="emoji-box pink"><span class="store-emoji">☕</span></div><div><div class="oname">Кофе daily</div><div class="or-meta"><span class="star">★</span> 4.7 · 0.8 км</div><div class="or-meta">ул. Пушкина, 5</div></div></div><div class="right"><span class="store-orders">62 заказа</span><span class="store-rev">37 200₽</span></div></div>
+    <div class="p-order"><div class="left"><div class="emoji-box tiffany"><span class="store-emoji">🍣</span></div><div><div class="oname">Суши Мия</div><div class="or-meta"><span class="star">★</span> 4.6 · 3.1 км</div><div class="or-meta">ул. Новая, 42</div></div></div><div class="right"><span class="store-orders">18 заказов</span><span class="store-rev">21 600₽</span></div></div>
+  </div>
+</div>
+
+<!-- ===== SVG SPRITE (from index.html) ===== -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></symbol>
+  <symbol id="i-shopping-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4L7.55 4.24"/><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+</svg>
+
+</body>
+</html>

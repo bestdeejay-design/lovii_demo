@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stores Nearby — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+:root {
+  --pink:#f64a8a; --pink-light:rgba(246,74,138,0.12);
+  --tiffany:#0ABAB5; --tiffany-light:rgba(10,186,181,0.10);
+  --bg:#ffffff; --surface-secondary:#F8F8F8; --border:#EEEEEE; --border-strong:#ddd;
+  --text-primary:#1a1a1a; --text-secondary:#888888;
+  --radius-lg:12px; --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',system-ui,sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:#fff; color:var(--text-primary); padding:24px; }
+h1 { font-size:20px; margin-bottom:4px; letter-spacing:-0.4px; }
+.sub { color:var(--text-secondary); font-size:13px; margin-bottom:16px; }
+.toggle { display:inline-flex; background:var(--surface-secondary); border:1px solid var(--border); border-radius:100px; padding:3px; }
+.toggle button { border:none; background:none; font-family:inherit; font-size:12px; font-weight:600; color:var(--text-secondary); padding:6px 16px; border-radius:100px; cursor:pointer; }
+.toggle button.on { background:var(--pink); color:#fff; }
+
+.phone-preview { background:var(--surface-secondary); padding:16px; display:flex; justify-content:center; }
+.phone { width:240px; background:#fff; border:1px solid var(--border-strong); border-radius:24px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+.phone-status { display:flex; align-items:center; justify-content:space-between; padding:8px 14px 4px; font-size:11px; }
+.phone-status .icons { display:flex; gap:4px; color:var(--text-secondary); }
+.phone-content { padding:12px 16px; min-height:420px; }
+.section-label { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:12px; font-weight:700; margin-bottom:8px; }
+.seg { position:relative; width:34px; height:34px; border:1px solid var(--border); background:var(--surface-secondary); border-radius:9px; cursor:pointer; flex-shrink:0; padding:0; color:var(--text-secondary); }
+.seg:hover { border-color:var(--pink); }
+.seg .ic { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); transition:opacity .18s ease; }
+.seg .ic-list { opacity:1; }
+.seg .ic-grid { opacity:0; }
+.seg[data-layout="list"] .ic-list { opacity:0; }
+.seg[data-layout="list"] .ic-grid { opacity:1; }
+.star { color:#ffb400; }
+.tag { display:inline-flex; align-items:center; padding:2px 8px; border-radius:100px; font-size:9px; font-weight:600; }
+.tag-pink { background:var(--pink-light); color:var(--pink); }
+.tag-tiffany { background:var(--tiffany-light); color:var(--tiffany); }
+
+/* list view (photos) */
+.list .p-order { display:flex; align-items:center; gap:10px; padding:8px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-lg); margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.list .p-order .thumb { width:48px; height:48px; border-radius:10px; object-fit:cover; flex-shrink:0; }
+.list .p-order .info { min-width:0; flex:1; }
+.list .p-order .oname { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.list .p-order .meta { font-size:9px; color:var(--text-secondary); margin-top:1px; }
+.list .p-order .right { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
+.list .p-order .eta { font-size:11px; font-weight:600; color:var(--text-primary); }
+
+/* grid view (photos) */
+.grid2 { display:none; }
+.grid2 .store-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.grid2 .store-card { position:relative; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.grid2 .store-card .cover { width:100%; aspect-ratio:1 / 1; height:auto; object-fit:cover; display:block; background:var(--surface-secondary); }
+.grid2 .store-card .cat-badge { position:absolute; top:8px; right:8px; z-index:3; display:inline-flex; align-items:center; padding:3px 8px; border-radius:100px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.4px; color:#fff; box-shadow:0 3px 8px rgba(0,0,0,0.18); white-space:nowrap; }
+.grid2 .store-card .cat-badge.pink { background:var(--pink); }
+.grid2 .store-card .cat-badge.tiffany { background:var(--tiffany); }
+.grid2 .store-card .body { padding:10px; }
+.grid2 .store-card .head { display:flex; align-items:baseline; justify-content:space-between; gap:6px; }
+.grid2 .store-card .oname { font-size:13px; font-weight:600; line-height:1.2; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.grid2 .store-card .eta { font-size:11px; font-weight:600; color:var(--text-primary); flex-shrink:0; }
+.grid2 .store-card .meta { font-size:9px; color:var(--text-secondary); margin-top:5px; line-height:1.35; }
+.grid2 .store-card .eta { font-size:11px; font-weight:600; color:var(--text-primary); }
+</style>
+</head>
+<body>
+<h1>Stores Nearby</h1>
+<div class="sub">Один экран, свитчер Список/Сетка в строке заголовка. Везде фото заведений (assets/img).</div>
+
+<div class="phone-preview"><div class="phone">
+  <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+  <div class="phone-content">
+    <div class="section-label">
+      <span>Магазины рядом · 4</span>
+      <button class="seg" id="layoutToggle" data-layout="list" aria-label="Показать сеткой">
+        <svg class="ic ic-grid" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
+        <svg class="ic ic-list" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      </button>
+    </div>
+
+    <div class="list" id="viewList">
+      <div class="p-order"><img class="thumb" src="../assets/img/bakery.jpg" alt="Пекарня"><div class="info"><div class="oname">Пекарня #23</div><div class="meta"><span class="star">★</span> 4.8 · 1.2 км · ул. Тверская, 23</div></div><div class="right"><span class="tag tag-pink">Выпечка</span><span class="eta">25 мин</span></div></div>
+      <div class="p-order"><img class="thumb" src="../assets/img/floristica.jpg" alt="Цветы"><div class="info"><div class="oname">Цветы Fresh</div><div class="meta"><span class="star">★</span> 4.9 · 2.3 км · ул. Арбат, 12</div></div><div class="right"><span class="tag tag-tiffany">Цветы</span><span class="eta">40 мин</span></div></div>
+      <div class="p-order"><img class="thumb" src="../assets/img/cafe.jpg" alt="Кофе"><div class="info"><div class="oname">Кофе daily</div><div class="meta"><span class="star">★</span> 4.7 · 0.8 км · ул. Пушкина, 5</div></div><div class="right"><span class="tag tag-pink">Кофе</span><span class="eta">15 мин</span></div></div>
+      <div class="p-order"><img class="thumb" src="../assets/img/sushi-rolls.jpg" alt="Суши"><div class="info"><div class="oname">Суши Мия</div><div class="meta"><span class="star">★</span> 4.6 · 3.1 км · ул. Новая, 42</div></div><div class="right"><span class="tag tag-tiffany">Суши</span><span class="eta">50 мин</span></div></div>
+    </div>
+
+    <div class="grid2" id="viewGrid">
+      <div class="store-grid">
+        <div class="store-card"><img class="cover" src="../assets/img/bakery.jpg" alt="Пекарня"><span class="cat-badge pink">Выпечка</span><div class="body"><div class="head"><div class="oname">Пекарня #23</div><span class="eta">25 мин</span></div><div class="meta"><span class="star">★</span> 4.8 · 1.2 км<br>ул. Тверская, 23</div></div></div>
+        <div class="store-card"><img class="cover" src="../assets/img/floristica.jpg" alt="Цветы"><span class="cat-badge tiffany">Цветы</span><div class="body"><div class="head"><div class="oname">Цветы Fresh</div><span class="eta">40 мин</span></div><div class="meta"><span class="star">★</span> 4.9 · 2.3 км<br>ул. Арбат, 12</div></div></div>
+        <div class="store-card"><img class="cover" src="../assets/img/cafe.jpg" alt="Кофе"><span class="cat-badge pink">Кофе</span><div class="body"><div class="head"><div class="oname">Кофе daily</div><span class="eta">15 мин</span></div><div class="meta"><span class="star">★</span> 4.7 · 0.8 км<br>ул. Пушкина, 5</div></div></div>
+        <div class="store-card"><img class="cover" src="../assets/img/sushi-rolls.jpg" alt="Суши"><span class="cat-badge tiffany">Суши</span><div class="body"><div class="head"><div class="oname">Суши Мия</div><span class="eta">50 мин</span></div><div class="meta"><span class="star">★</span> 4.6 · 3.1 км<br>ул. Новая, 42</div></div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<script>
+document.getElementById('layoutToggle').addEventListener('click', () => {
+  const t = document.getElementById('layoutToggle');
+  const grid = t.dataset.layout === 'grid';
+  const next = grid ? 'list' : 'grid';
+  t.dataset.layout = next;
+  t.setAttribute('aria-label', grid ? 'Показать списком' : 'Показать сеткой');
+  document.getElementById('viewList').style.display = next === 'grid' ? 'none' : 'block';
+  document.getElementById('viewGrid').style.display = next === 'grid' ? 'block' : 'none';
+});
+</script>
+</body>
+</html>

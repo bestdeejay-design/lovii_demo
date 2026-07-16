@@ -2,10 +2,10 @@
 
 const MOCK = {
   stores: [
-    { id: 1, name: 'Пекарня #23', category: 'bakery', emoji: '🍞', rating: 4.8, distance: '1.2км', eta: '25 мин', address: 'ул. Тверская, 23', orders: 45, revenue: 54000, active: true },
-    { id: 2, name: 'Цветы Fresh', category: 'flowers', emoji: '💐', rating: 4.9, distance: '2.3км', eta: '40 мин', address: 'ул. Арбат, 12', orders: 28, revenue: 33600, active: true },
-    { id: 3, name: 'Кофе daily', category: 'coffee', emoji: '☕', rating: 4.7, distance: '0.8км', eta: '15 мин', address: 'ул. Пушкина, 5', orders: 62, revenue: 37200, active: true },
-    { id: 4, name: 'Суши Мия', category: 'restaurant', emoji: '🍣', rating: 4.6, distance: '3.1км', eta: '50 мин', address: 'ул. Новая, 42', orders: 18, revenue: 21600, active: false }
+    { id: 1, name: 'Пекарня #23', category: 'bakery', emoji: '🍞', rating: 4.8, distance: '1.2км', eta: '25 мин', address: 'ул. Тверская, 23', orders: 45, revenue: 54000, active: true, image: 'assets/img/bakery.jpg' },
+    { id: 2, name: 'Цветы Fresh', category: 'flowers', emoji: '💐', rating: 4.9, distance: '2.3км', eta: '40 мин', address: 'ул. Арбат, 12', orders: 28, revenue: 33600, active: true, image: 'assets/img/floristica.jpg' },
+    { id: 3, name: 'Кофе daily', category: 'coffee', emoji: '☕', rating: 4.7, distance: '0.8км', eta: '15 мин', address: 'ул. Пушкина, 5', orders: 62, revenue: 37200, active: true, image: 'assets/img/cafe.jpg' },
+    { id: 4, name: 'Суши Мия', category: 'restaurant', emoji: '🍣', rating: 4.6, distance: '3.1км', eta: '50 мин', address: 'ул. Новая, 42', orders: 18, revenue: 21600, active: false, image: 'assets/img/sushi-rolls.jpg' }
   ],
 
   products: [

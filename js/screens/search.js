@@ -43,22 +43,38 @@ function screenSearch() {
     coffee: 'Кофе',
     restaurant: 'Суши',
   }
-  const storeHtml = stores.map(s => {
-    const color = s.category === 'flowers' || s.category === 'restaurant' ? 'tiffany' : 'pink'
-    const catLabel = STORE_CAT[s.category] || 'Магазин'
+  const storeColor = s => (s.category === 'flowers' || s.category === 'restaurant') ? 'tiffany' : 'pink'
+  const catLabel = s => STORE_CAT[s.category] || 'Магазин'
+
+  const storeListHtml = stores.map(s => {
+    const color = storeColor(s)
     return `
       <div class="p-order" data-store="${s.id}" data-nav="store">
-        <div class="left">
-          <div class="store-badge ${color}">${s.emoji}</div>
-          <div class="store-info">
-            <div class="oname">${s.name}</div>
-            <div class="or-meta"><span class="star">★</span> ${s.rating} · ${s.distance}</div>
-            <div class="or-meta">${s.address}</div>
-          </div>
+        <img class="thumb" src="${s.image}" alt="${s.name}">
+        <div class="store-info">
+          <div class="oname">${s.name}</div>
+          <div class="or-meta"><span class="star">★</span> ${s.rating} · ${s.distance}</div>
+          <div class="or-meta">${s.address}</div>
         </div>
         <div class="right">
-          <span class="tag tag-${color}">${catLabel}</span>
+          <span class="tag tag-${color}">${catLabel(s)}</span>
           <span class="store-eta">${s.eta}</span>
+        </div>
+      </div>`
+  }).join('')
+
+  const storeGridHtml = stores.map(s => {
+    const color = storeColor(s)
+    return `
+      <div class="store-card" data-store="${s.id}" data-nav="store">
+        <img class="cover" src="${s.image}" alt="${s.name}">
+        <span class="cat-badge ${color}">${catLabel(s)}</span>
+        <div class="body">
+          <div class="head">
+            <div class="oname">${s.name}</div>
+            <span class="eta">${s.eta}</span>
+          </div>
+          <div class="meta"><span class="star">★</span> ${s.rating} · ${s.distance}<br>${s.address}</div>
         </div>
       </div>`
   }).join('')
@@ -71,7 +87,14 @@ function screenSearch() {
     <div class="recent-list">${recentHtml}</div>
     <div class="section-label">Популярные товары <a href="#">Все</a></div>
     <div class="product-grid">${productHtml}</div>
-    <div class="section-label">Магазины рядом · ${stores.length}</div>
-    <div class="section-pad">${storeHtml}</div>
+    <div class="section-label">
+      <span>Магазины рядом · ${stores.length}</span>
+      <button class="store-view-toggle" id="storeViewToggle" data-layout="list" aria-label="Показать сеткой">
+        <svg class="ic ic-grid" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
+        <svg class="ic ic-list" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      </button>
+    </div>
+    <div class="section-pad" id="storeViewList">${storeListHtml}</div>
+    <div class="section-pad store-grid2" id="storeViewGrid" hidden>${storeGridHtml}</div>
   `
 }

@@ -115,6 +115,16 @@ const LOVII = {
           return
         }
       }
+      const storeToggle = e.target.closest('#storeViewToggle')
+      if (storeToggle) {
+        const grid = storeToggle.dataset.layout === 'grid'
+        const next = grid ? 'list' : 'grid'
+        storeToggle.dataset.layout = next
+        storeToggle.setAttribute('aria-label', grid ? 'Показать списком' : 'Показать сеткой')
+        document.getElementById('storeViewList').hidden = next === 'grid'
+        document.getElementById('storeViewGrid').hidden = next === 'list'
+        return
+      }
       const dashBtn = e.target.closest('#go-to-dashboard')
       if (dashBtn) {
         const activeRole = document.querySelector('.role-card.active')
