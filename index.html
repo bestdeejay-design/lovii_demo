@@ -23,16 +23,16 @@
   <header id="app-header">
     <a href="#home" id="app-logo-link"><img id="app-logo" src="assets/lovii-logo-light.svg" alt="LOVII"></a>
     <div class="header-actions">
-      <div class="cart-pill" id="cartPill" style="display:none">
-        <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="#fff"/><circle cx="18" cy="20" r="1.4" fill="#fff"/></svg>
-        <span id="cartPillCount">0</span>
+      <div class="cart-btn" id="cartPill" style="display:none">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="#fff"/><circle cx="18" cy="20" r="1.4" fill="#fff"/></svg>
+        <span class="cart-num" id="cartPillCount">0</span>
       </div>
       <div class="avatar-wrap">
         <svg class="avatar-icon" viewBox="0 0 512 512" fill="none">
-          <rect width="512" height="512" rx="80" fill="var(--pink)"/>
-          <path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round" fill="none"/>
-          <circle cx="256" cy="200" r="60" fill="#fff"/>
-          <path d="M210 320l-38-44-24 20 62 66 100-106-30-28-70 77z" fill="#fff" transform="translate(0,-15)"/>
+          <rect width="512" height="512" rx="80" fill="var(--bg)" stroke="var(--border)" stroke-width="8"/>
+          <path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="var(--pink)" stroke-width="24" stroke-linecap="round" fill="none"/>
+          <circle cx="256" cy="200" r="60" fill="var(--pink)"/>
+          <path d="M210 320l-38-44-24 20 62 66 100-106-30-28-70 77z" fill="var(--pink)" transform="translate(0,-15)"/>
         </svg>
         <span class="notif-dot"></span>
       </div>

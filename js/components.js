@@ -56,7 +56,7 @@ function TopCard(city, promoTitle, promoSub, timer) {
       <div class="top-card-loc">
         ${Icon('map-pin', 'icon-sm')}
         <span>${city}</span>
-        <span class="top-card-change">Сменить</span>
+        <span class="top-card-change" data-nav="city-select">Сменить</span>
       </div>
       <div class="top-card-divider"></div>
       <div class="top-card-body">
@@ -68,7 +68,7 @@ function TopCard(city, promoTitle, promoSub, timer) {
         <span class="top-card-timer">${Icon('clock', 'icon-sm')}${timer}</span>
       </div>
       <div class="top-card-action">
-        <span class="top-card-link">Подробнее ${Icon('chevron-right', 'icon-sm')}</span>
+        <span class="top-card-link" data-nav="promo">Подробнее ${Icon('chevron-right', 'icon-sm')}</span>
       </div>
     </div>`
 }
@@ -161,6 +161,60 @@ function Chip(text, iconName = '', active = false) {
   return `<span class="chip${active ? ' active' : ''}">${iconName ? Icon(iconName, 'icon-sm') : ''}${text}</span>`
 }
 
+function CategoryChip(iconName, label, color, active = false) {
+  return `
+    <span class="chip${active ? ' active' : ''}">
+      <span class="iw ${color}"><svg class="icon icon-sm"><use href="#i-${iconName}"/></svg></span>${label}
+    </span>`
+}
+
+const BADGE_COLORS = {
+  hit: 'pink',
+  new: 'tiffany',
+  eco: 'gold',
+  sale: 'gold',
+  top: 'dark',
+  season: 'tiffany',
+  discount: 'pink',
+  sugarfree: 'dark',
+}
+
+function Badge(type, label) {
+  const color = BADGE_COLORS[type] || 'pink'
+  return `<span class="badge b-${color}">${label}</span>`
+}
+
+function ProductCard(product, opts = {}) {
+  const { id, image, name, price, oldPrice, storeName, badges = [] } = product
+  const priceLabel = `${price.toLocaleString('ru-RU')}₽`
+  const oldLabel = oldPrice ? `${oldPrice.toLocaleString('ru-RU')}₽` : ''
+  const badgesHtml = badges.length
+    ? `<div class="badges">${badges.map(b => Badge(b.type, b.label)).join('')}</div>`
+    : ''
+  const priceHtml = `<div class="price-tag">${priceLabel}${oldLabel ? `<span class="old">${oldLabel}</span>` : ''}</div>`
+  const qty = (opts.cart && opts.cart[id]) || 0
+  const foot = qty > 0
+    ? `<div class="qty" data-id="${id}">
+         <button class="qty-btn" data-act="dec" data-id="${id}">−</button>
+         <span class="count">${qty}</span>
+         <button class="qty-btn" data-act="inc" data-id="${id}">+</button>
+       </div>`
+    : `<div class="add-btn" data-act="add" data-id="${id}">+ В корзину</div>`
+  return `
+    <div class="product-card" data-id="${id}">
+      <div class="media">
+        ${priceHtml}
+        ${badgesHtml}
+        <img class="thumb" src="${image}" alt="${name}" loading="lazy">
+        <div class="caption glass-edge">
+          <div class="store">${storeName}</div>
+          <div class="pname">${name}</div>
+        </div>
+      </div>
+      ${foot}
+    </div>`
+}
+
 function SearchBar(placeholder = 'Поиск магазинов...') {
   return `
     <div class="search-bar">
@@ -171,4 +225,37 @@ function SearchBar(placeholder = 'Поиск магазинов...') {
 
 function TabBar(tabs, activeIndex = 0) {
   return `<div class="tab-bar">${tabs.map((t, i) => `<span class="tab-item${i === activeIndex ? ' active' : ''}">${t}</span>`).join('')}</div>`
+}
+
+const CART_KEY = 'lovii_cart'
+
+function getCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY)) || {} }
+  catch { return {} }
+}
+
+function setCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart))
+  updateCartPill()
+}
+
+function cartCount() {
+  return Object.values(getCart()).reduce((a, b) => a + b, 0)
+}
+
+function updateCartPill() {
+  const pill = document.getElementById('cartPill')
+  const count = document.getElementById('cartPillCount')
+  if (pill && count) {
+    const n = cartCount()
+    count.textContent = n > 0 ? `${n}` : '0'
+    pill.style.display = n > 0 ? 'flex' : 'none'
+  }
+}
+
+function changeCart(id, delta) {
+  const cart = getCart()
+  cart[id] = (cart[id] || 0) + delta
+  if (cart[id] <= 0) delete cart[id]
+  setCart(cart)
 }

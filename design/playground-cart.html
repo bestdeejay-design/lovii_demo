@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart Icon Playground — LOVII (based on V11)</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+:root {
+  --pink:#f64a8a; --pink-light:rgba(246,74,138,0.12);
+  --bg:#ffffff; --surface-secondary:#F8F8F8; --border:#EEEEEE; --border-strong:#ddd;
+  --text-primary:#1a1a1a; --text-secondary:#888888;
+  --radius-lg:12px; --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',system-ui,sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:#fff; color:var(--text-primary); padding:24px; }
+h1 { font-size:20px; margin-bottom:4px; letter-spacing:-0.4px; }
+.sub { color:var(--text-secondary); font-size:13px; margin-bottom:20px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:20px; }
+.variant { border:1px solid var(--border); border-radius:var(--radius-lg); background:#fff; overflow:hidden; }
+.variant-header { display:flex; align-items:center; gap:8px; padding:12px 14px; border-bottom:1px solid var(--border); }
+.variant-header h2 { font-size:14px; display:flex; align-items:center; gap:8px; }
+.variant-header h2 .num { background:var(--pink); color:#fff; font-size:11px; font-weight:700; padding:2px 7px; border-radius:6px; }
+.variant-header .tag { margin-left:auto; font-size:11px; font-weight:600; padding:3px 9px; border-radius:100px; }
+.tag.pink { background:var(--pink-light); color:var(--pink); }
+.variant-note { padding:10px 14px 14px; font-size:12px; color:var(--text-secondary); line-height:1.4; }
+.phone-preview { background:var(--surface-secondary); padding:16px; display:flex; justify-content:center; }
+.phone { width:240px; background:#fff; border:1px solid var(--border-strong); border-radius:24px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+.phone-status { display:flex; align-items:center; justify-content:space-between; padding:8px 14px 4px; font-size:11px; }
+.phone-status .icons { display:flex; gap:4px; color:var(--text-secondary); }
+.phone-content { min-height:200px; }
+.header { display:flex; align-items:center; height:44px; padding:8px; border-bottom:1px solid var(--border); }
+.header-logo { height:28px; display:block; }
+.header-actions { margin-left:auto; display:flex; align-items:center; gap:12px; }
+.avatar-wrap { position:relative; display:flex; align-items:center; }
+.avatar-icon { width:28px; height:28px; border-radius:8px; display:block; }
+.notif-dot { position:absolute; top:-2px; right:-2px; width:10px; height:10px; background:var(--pink); border:2px solid var(--bg); border-radius:50%; }
+.cart-btn { position:relative; display:flex; align-items:center; justify-content:center; width:28px; height:28px; background:#fff; border:1px solid var(--border); border-radius:8px; }
+.cart-icon { width:18px; height:18px; display:block; }
+.cart-btn .cart-icon path { stroke:var(--pink); fill:none; }
+.cart-btn .cart-icon circle { fill:var(--pink); stroke:none; }
+.cart-badge { position:absolute; top:-4px; right:-4px; min-width:16px; height:16px; padding:0 4px; background:var(--pink); color:#fff; font-size:10px; line-height:16px; font-weight:700; text-align:center; border:2px solid var(--bg); border-radius:100px; box-sizing:content-box; }
+.cart-num { font-size:13px; font-weight:700; color:var(--pink); margin-left:2px; }
+.cart-under { position:absolute; bottom:-13px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:700; color:var(--pink); }
+.cart-flat { position:relative; display:flex; align-items:center; justify-content:center; width:28px; height:28px; }
+.cart-flat .cart-icon { width:22px; height:22px; }
+.cart-flat .cart-icon path { stroke:var(--pink); fill:none; }
+.cart-flat .cart-icon circle { fill:var(--pink); stroke:none; }
+.cart-combo { position:relative; display:flex; align-items:center; gap:4px; height:28px; padding:0 9px 0 7px; background:#fff; border:1px solid var(--border); border-radius:8px; }
+.cart-combo .cart-icon { width:16px; height:16px; }
+.cart-combo .cart-icon path { stroke:var(--pink); fill:none; }
+.cart-combo .cart-icon circle { fill:var(--pink); stroke:none; }
+.cart-combo .cart-num { margin-left:0; }
+</style>
+</head>
+<body>
+<h1>Cart Icon — 8 placements</h1>
+<div class="sub">Base: V11 Correct (logo left, avatar right, 44px header, 8px padding, no bell). Only cart+count layouts below.</div>
+<div class="grid">
+
+<!--V1-->
+<div class="variant" id="variant-1">
+  <div class="variant-header"><h2><span class="num">V1</span>Cart · badge</h2><span class="tag pink">cart+avatar</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions">
+        <div class="cart-btn"><svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span class="cart-badge">3</span></div>
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="notif-dot"></span></div>
+      </div>
+    </div></div>
+  </div></div>
+  </div>
+  <div class="variant-note">Корзина слева от аватара. Число — розовый badge в углу корзины (как notif-dot у аватара).</div>
+</div>
+
+<!--V2-->
+<div class="variant" id="variant-2">
+  <div class="variant-header"><h2><span class="num">V2</span>Avatar · cart</h2><span class="tag pink">avatar+cart</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions">
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="notif-dot"></span></div>
+        <div class="cart-btn"><svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span class="cart-badge">3</span></div>
+      </div>
+    </div></div>
+  </div></div>
+  </div>
+  <div class="variant-note">Аватар слева, корзина справа (ближе к краю). Badge в углу.</div>
+</div>
+
+<!--V3-->
+<div class="variant" id="variant-3">
+  <div class="variant-header"><h2><span class="num">V3</span>Grouped</h2><span class="tag pink">group</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions" style="gap:8px;">
+        <div class="cart-btn"><svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span class="cart-badge">3</span></div>
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="notif-dot"></span></div>
+      </div>
+    </div></div>
+  </div></div>
+  </div>
+  <div class="variant-note">Иконки в группе, уменьшенный gap (8px). Обе с угловыми badges.</div>
+</div>
+
+<!--V4-->
+<div class="variant" id="variant-4">
+  <div class="variant-header"><h2><span class="num">V4</span>Tile + number</h2><span class="tag pink">inline count</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions">
+        <div class="cart-btn"><svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg></div>
+        <span class="cart-num">3</span>
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="notif-dot"></span></div>
+      </div>
+    </div></div>
+  </div></div>
+  </div>
+  <div class="variant-note">Число — розовая цифра рядом с плиткой (не в углу). Читается как «3 товара».</div>
+</div>
+
+<!--V5-->
+<div class="variant" id="variant-5">
+  <div class="variant-header"><h2><span class="num">V5</span>Flat icon</h2><span class="tag pink">no tile</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions">
+        <div class="cart-flat"><svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span class="cart-badge">3</span></div>
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="notif-dot"></span></div>
+      </div>
+    </div></div>
+  </div></div>
+  </div>
+  <div class="variant-note">Корзина — плоская иконка без плитки/рамки (как уведомления). Badge в углу.</div>
+</div>
+
+<!--V6-->
+<div class="variant" id="variant-6">
+  <div class="variant-header"><h2><span class="num">V6</span>Combo button</h2><span class="tag pink">icon+count</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions">
+        <div class="cart-combo"><svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span class="cart-num">3</span></div>
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="notif-dot"></span></div>
+      </div>
+    </div></div>
+  </div></div>
+  </div>
+  <div class="variant-note">Иконка + число внутри одной квадратной кнопки (radius 8, НЕ пилюля).</div>
+</div>
+
+<!--V7-->
+<div class="variant" id="variant-7">
+  <div class="variant-header"><h2><span class="num">V7</span>Number under</h2><span class="tag pink">below</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header" style="align-items:flex-end;">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions" style="align-items:flex-end;">
+        <div class="cart-btn" style="margin-bottom:12px;"><svg class="cart-icon" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span class="cart-under">3</span></div>
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="notif-dot"></span></div>
+      </div>
+    </div></div>
+  </div></div>
+  </div>
+  <div class="variant-note">Число под иконкой корзины (вертикально). Требует места под хедером.</div>
+</div>
+
+<!--V8-->
+<div class="variant" id="variant-8">
+  <div class="variant-header"><h2><span class="num">V8</span>Badge on avatar</h2><span class="tag pink">profile count</span></div>
+  <div class="variant-body"><div class="phone-preview"><div class="phone">
+    <div class="phone-status"><span class="time">9:41</span><span class="icons">●●●</span></div>
+    <div class="phone-content"><div class="header">
+      <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII">
+      <div class="header-actions">
+        <div class="avatar-wrap"><svg class="avatar-icon" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="80" fill="var(--pink)"/><path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round"/><circle cx="256" cy="200" r="60" fill="#fff"/></svg><span class="cart-badge">3</span></div>
+      </div>
+    </div></div>
+  </div></div>
+  <div class="variant-note">Без отдельной корзины: число заказов = badge на аватаре (как будто уведомление = заказы). Самая компактная.</div>
+</div>
+
+</div>
+</body>
+</html>

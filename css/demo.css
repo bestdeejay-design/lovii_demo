@@ -91,19 +91,23 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
+  padding: 8px 16px;
   height: var(--header-h);
   flex-shrink: 0;
   background: var(--bg);
 }
 #app-logo { height: 28px; display: block; }
-.header-actions { display: flex; align-items: center; }
+.header-actions { display: flex; align-items: center; gap: 12px; }
 .avatar-wrap {
   position: relative;
   display: flex;
   align-items: center;
 }
-.avatar-icon { width: 28px; height: 28px; border-radius: 8px; display: block; }
+.avatar-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--bg); border: 1px solid var(--border);
+  display: block;
+}
 .notif-dot {
   position: absolute; top: -2px; right: -2px;
   width: 10px; height: 10px;
@@ -725,14 +729,22 @@ body {
   100% { width: 0; }
 }
 
-.cart-pill {
-  display: flex; align-items: center; gap: 6px;
-  background: var(--pink); color: #fff;
-  font-size: 12px; font-weight: 700;
-  padding: 6px 12px; border-radius: 100px;
-  box-shadow: 0 3px 8px var(--pink-shadow);
+.cart-btn {
+  position: relative;
+  display: flex; align-items: center; gap: 5px;
+  height: 28px;
+  padding: 0 11px 0 9px;
+  background: var(--pink);
+  border: 1px solid var(--pink);
+  border-radius: 8px;
+  cursor: pointer;
 }
-.cart-pill .icon { width: 14px; height: 14px; }
+.cart-btn:active { box-shadow: 0 0 0 3px var(--pink-shadow); }
+.cart-icon { width: 22px; height: 28px; display: block; flex-shrink: 0; }
+.cart-num {
+  font-size: 13px; font-weight: 700; color: #fff;
+  line-height: 1; white-space: nowrap;
+}
 
 .top-bar {
   display: flex; align-items: center; gap: 12px;
