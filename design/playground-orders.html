@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Playground — Orders + Balance</title>
+<style>
+  :root {
+    --pink: #f64a8a;
+    --pink-light: rgba(246,74,138,0.12);
+    --tiffany: #0ABAB5;
+    --tiffany-light: rgba(10,186,181,0.10);
+    --chiffon: #F5E6CC;
+    --sand: #E8D5B7;
+    --gold: #D4A854;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --border: #EEEEEE;
+    --border-strong: #DDDDDD;
+    --text-primary: #1a1a1a;
+    --text-secondary: #888888;
+    --text-dim: #bbbbbb;
+    --success: #34D399;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 16px;
+  }
+  .playground-title {
+    font-size: 20px; font-weight: 700; margin-bottom: 24px;
+    padding-bottom: 12px; border-bottom: 2px solid #eee;
+  }
+  .variant {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .variant-title {
+    font-size: 13px; font-weight: 600; color: var(--text-secondary);
+    margin-bottom: 12px; letter-spacing: 0.3px;
+  }
+  .phone-frame {
+    width: 375px; background: #fff;
+    border: 1px solid #e8e8e8; border-radius: 20px;
+    padding: 16px; box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+
+  /* ===== Shared component styles ===== */
+  .section-label {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11px; font-weight: 600; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 0 0 6px 0;
+  }
+  .section-label a { color: var(--pink); text-transform: none; font-weight: 500; font-size: 10px; }
+
+  .tag {
+    display: inline-flex; align-items: center;
+    padding: 2px 8px; border-radius: 100px;
+    font-size: 9px; font-weight: 600;
+  }
+  .tag-pink { background: var(--pink-light); color: var(--pink); }
+  .tag-tiffany { background: var(--tiffany-light); color: var(--tiffany); }
+  .tag-gray { background: #f0f0f0; color: var(--text-secondary); }
+
+  .order-row {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .order-row .left { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+  .order-row .name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .order-row .price { font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .order-row .right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+  /* Mock data styling */
+  .order-emoji { font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="playground-title">🧾 Активные заказы + Баланс — варианты</div>
+
+<!-- ===== V1 ===== -->
+<div class="variant">
+  <div class="variant-title">V1 — White Card + Border (matching grid-menu)</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы <a href="#">Все</a></div>
+    <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px 12px;">
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:14px;">🥐</div>
+          <div class="name">Пекарня #23</div>
+        </div>
+        <div class="right">
+          <span class="price">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);"></div>
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--tiffany-light);display:flex;align-items:center;justify-content:center;font-size:14px;">🍕</div>
+          <div class="name">Pizza Romano</div>
+        </div>
+        <div class="right">
+          <span class="price">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; padding:12px 14px; background:#fff; border:1px solid var(--border); border-radius:14px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span style="font-size:17px;font-weight:700;"><span style="color:var(--pink);">4 500</span> баллов</span>
+        <div style="font-size:10px;color:var(--text-secondary);margin-top:2px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:var(--tiffany);font-weight:500;flex-shrink:0;cursor:pointer;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V2 ===== -->
+<div class="variant">
+  <div class="variant-title">V2 ☆ — Shadow Card (refined)</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы <a href="#">Все</a></div>
+
+    <div style="background:#fff; border-radius:14px; padding:4px 14px; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+      <div class="order-row" style="padding:13px 0;">
+        <div class="left">
+          <div style="width:32px;height:32px;border-radius:10px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 8px rgba(246,74,138,0.2);">🥐</div>
+          <div>
+            <div class="name" style="font-size:13px;font-weight:600;">Пекарня #23</div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">№2384 · 15 мин</div>
+          </div>
+        </div>
+        <div class="right">
+          <span class="price" style="font-size:13px;font-weight:700;">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div class="order-row" style="padding:13px 0;border-top:1px solid #f0f0f0;">
+        <div class="left">
+          <div style="width:32px;height:32px;border-radius:10px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 8px rgba(10,186,181,0.2);">🍕</div>
+          <div>
+            <div class="name" style="font-size:13px;font-weight:600;">Pizza Romano</div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">№4512 · курьер на месте</div>
+          </div>
+        </div>
+        <div class="right">
+          <span class="price" style="font-size:13px;font-weight:700;">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:10px; padding:14px 16px; background:#fff; border-radius:14px; box-shadow:0 2px 12px rgba(0,0,0,0.06); display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px;">Бонусный баланс</div>
+        <span style="font-size:22px;font-weight:700;"><span style="color:var(--pink);">4 500</span> <span style="font-size:13px;font-weight:500;color:var(--text-secondary);">баллов</span></span>
+        <div style="font-size:10px;color:var(--text-secondary);margin-top:4px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:var(--tiffany);font-weight:600;flex-shrink:0;cursor:pointer;white-space:nowrap;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V3 ===== -->
+<div class="variant">
+  <div class="variant-title">V3 — Solid accent icons + integrated balance</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы</div>
+    <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px 12px;">
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:32px;height:32px;border-radius:10px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 8px rgba(246,74,138,0.2);">🥐</div>
+          <div class="name">Пекарня #23</div>
+        </div>
+        <div class="right">
+          <span class="price">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);"></div>
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:32px;height:32px;border-radius:10px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 8px rgba(10,186,181,0.2);">🍕</div>
+          <div class="name">Pizza Romano</div>
+        </div>
+        <div class="right">
+          <span class="price">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);margin-top:2px;"></div>
+      <div style="padding:10px 0;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <span style="font-size:15px;font-weight:700;"><span style="color:var(--pink);">4 500</span> баллов</span>
+          <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">до статуса Digital Representative</div>
+        </div>
+        <span style="font-size:10px;color:var(--tiffany);font-weight:500;cursor:pointer;">Как получить?</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V4 ===== -->
+<div class="variant">
+  <div class="variant-title">V4 — Rows as mini-cards + gold balance</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы <a href="#">Все</a></div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;">
+          <div style="width:24px;height:24px;border-radius:6px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:12px;">🥐</div>
+          <div>
+            <div style="font-size:12px;font-weight:500;">Пекарня #23</div>
+            <div style="font-size:9px;color:var(--text-secondary);">Заказ готовится</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+          <span style="font-size:13px;font-weight:700;">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;">
+          <div style="width:24px;height:24px;border-radius:6px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:12px;">🍕</div>
+          <div>
+            <div style="font-size:12px;font-weight:500;">Pizza Romano</div>
+            <div style="font-size:9px;color:var(--text-secondary);">Курьер в пути</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+          <span style="font-size:13px;font-weight:700;">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; padding:12px 14px; background:var(--gold); border-radius:14px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span style="font-size:17px;font-weight:700;color:#fff;"><span>4 500</span> баллов</span>
+        <div style="font-size:10px;color:rgba(255,255,255,0.8);margin-top:2px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:#fff;font-weight:600;flex-shrink:0;cursor:pointer;opacity:0.9;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V5 ===== -->
+<div class="variant">
+  <div class="variant-title">V5 — Side accent + dot status</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы <a href="#">Все</a></div>
+    <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:0 0 0 0;">
+      <div style="display:flex;align-items:stretch;">
+        <div style="width:3px;background:var(--pink);border-radius:3px 0 0 0;flex-shrink:0;"></div>
+        <div style="flex:1;padding:12px 14px 12px 10px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;">
+            <div style="font-size:18px;">🥐</div>
+            <div class="name">Пекарня #23</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span style="font-size:12px;font-weight:600;">540₽</span>
+            <span style="display:inline-flex;align-items:center;gap:3px;font-size:9px;color:var(--pink);font-weight:600;">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--pink);display:inline-block;"></span>
+              Готовится
+            </span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:stretch;">
+        <div style="width:3px;background:var(--tiffany);flex-shrink:0;"></div>
+        <div style="flex:1;padding:12px 14px 12px 10px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;">
+            <div style="font-size:18px;">🍕</div>
+            <div class="name">Pizza Romano</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span style="font-size:12px;font-weight:600;">1 280₽</span>
+            <span style="display:inline-flex;align-items:center;gap:3px;font-size:9px;color:var(--tiffany);font-weight:600;">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--tiffany);display:inline-block;"></span>
+              В пути
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; padding:12px 14px; background:#fff; border:1px solid var(--border); border-radius:14px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span style="font-size:17px;font-weight:700;"><span style="color:var(--pink);">4 500</span> баллов</span>
+        <div style="font-size:10px;color:var(--text-secondary);margin-top:2px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:var(--tiffany);font-weight:500;flex-shrink:0;cursor:pointer;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V6 ===== -->
+<div class="variant">
+  <div class="variant-title">V6 — Compact with progress bar balance</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы</div>
+    <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px 12px;">
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;">🥐</div>
+          <div style="flex:1;min-width:0;">
+            <div class="name">Пекарня #23</div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">№2384 · 15 мин</div>
+          </div>
+        </div>
+        <div class="right">
+          <span class="price">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);"></div>
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;">🍕</div>
+          <div style="flex:1;min-width:0;">
+            <div class="name">Pizza Romano</div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">№4512 · курьер на месте</div>
+          </div>
+        </div>
+        <div class="right">
+          <span class="price">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; padding:12px 14px; background:#fff; border:1px solid var(--border); border-radius:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <span style="font-size:15px;font-weight:700;"><span style="color:var(--pink);">4 500</span> баллов</span>
+        </div>
+        <span style="font-size:10px;color:var(--tiffany);font-weight:500;cursor:pointer;">Как получить?</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-secondary);margin-bottom:4px;">
+        <span>Digital Candidate</span>
+        <span>Digital Representative</span>
+      </div>
+      <div style="height:4px;background:#f0f0f0;border-radius:100px;overflow:hidden;">
+        <div style="height:100%;width:60%;background:var(--pink);border-radius:100px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V7 ===== -->
+<div class="variant">
+  <div class="variant-title">V7 — Chiffon-tinted balance card</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы <a href="#">Все</a></div>
+    <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px 12px;">
+      <div class="order-row" style="padding:11px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:13px;">🥐</div>
+          <div class="name">Пекарня #23</div>
+        </div>
+        <div class="right">
+          <span class="price">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);"></div>
+      <div class="order-row" style="padding:11px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:13px;">🍕</div>
+          <div class="name">Pizza Romano</div>
+        </div>
+        <div class="right">
+          <span class="price">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; padding:10px 14px; background:var(--chiffon); border-radius:14px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span style="font-size:15px;font-weight:700;color:var(--text-primary);"><span style="color:var(--gold);">4 500</span> баллов</span>
+        <div style="font-size:10px;color:var(--text-secondary);margin-top:1px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0;cursor:pointer;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V8 ===== -->
+<div class="variant">
+  <div class="variant-title">V8 — Full-bleed balance strip</div>
+  <div class="phone-frame" style="padding:16px 0;">
+    <div class="section-label" style="padding:0 16px;">Активные заказы <a href="#">Все</a></div>
+    <div style="margin:0 16px; background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px 12px;">
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;">🥐</div>
+          <div class="name">Пекарня #23</div>
+        </div>
+        <div class="right">
+          <span class="price">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);"></div>
+      <div class="order-row" style="padding:10px 0;">
+        <div class="left">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;">🍕</div>
+          <div class="name">Pizza Romano</div>
+        </div>
+        <div class="right">
+          <span class="price">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:12px; padding:12px 16px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:#fff; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span style="font-size:15px;font-weight:700;">Баланс: <span style="color:var(--pink);">4 500</span> баллов</span>
+        <div style="font-size:10px;color:var(--text-secondary);margin-top:1px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:var(--tiffany);font-weight:500;flex-shrink:0;cursor:pointer;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V9 ===== -->
+<div class="variant">
+  <div class="variant-title">V9 — Glass balance overlay + no dividers</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы</div>
+    <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px 14px;">
+      <div class="order-row" style="padding:12px 0;">
+        <div class="left">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 3px 10px rgba(246,74,138,0.2);">🥐</div>
+          <div>
+            <div class="name" style="font-size:13px;">Пекарня #23</div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">Заказ #2384</div>
+          </div>
+        </div>
+        <div class="right">
+          <span class="price" style="font-size:13px;">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div style="height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);"></div>
+      <div class="order-row" style="padding:12px 0;">
+        <div class="left">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 3px 10px rgba(10,186,181,0.2);">🍕</div>
+          <div>
+            <div class="name" style="font-size:13px;">Pizza Romano</div>
+            <div style="font-size:9px;color:var(--text-secondary);margin-top:1px;">Курьер в пути</div>
+          </div>
+        </div>
+        <div class="right">
+          <span class="price" style="font-size:13px;">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; padding:12px 14px; background:linear-gradient(135deg,rgba(246,74,138,0.06),rgba(10,186,181,0.06)); border:1px solid var(--border); border-radius:14px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span style="font-size:15px;font-weight:700;"><span style="color:var(--pink);">4 500</span> баллов</span>
+        <div style="font-size:10px;color:var(--text-secondary);margin-top:1px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:var(--tiffany);font-weight:500;flex-shrink:0;cursor:pointer;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== V10 ===== -->
+<div class="variant">
+  <div class="variant-title">V10 — Hybrid (best ideas selected)</div>
+  <div class="phone-frame">
+    <div class="section-label">Активные заказы <a href="#">Все</a></div>
+    <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px 12px;">
+      <div class="order-row" style="padding:12px 0;">
+        <div class="left">
+          <div style="width:32px;height:32px;border-radius:10px;background:var(--pink);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;box-shadow:0 3px 8px rgba(246,74,138,0.2);">🥐</div>
+          <div class="name" style="font-size:13px;">Пекарня #23</div>
+        </div>
+        <div class="right">
+          <span class="price" style="font-size:13px;">540₽</span>
+          <span class="tag tag-pink">Готовится</span>
+        </div>
+      </div>
+      <div class="order-row" style="padding:12px 0;border-top:1px solid var(--border);">
+        <div class="left">
+          <div style="width:32px;height:32px;border-radius:10px;background:var(--tiffany);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;box-shadow:0 3px 8px rgba(10,186,181,0.2);">🍕</div>
+          <div class="name" style="font-size:13px;">Pizza Romano</div>
+        </div>
+        <div class="right">
+          <span class="price" style="font-size:13px;">1 280₽</span>
+          <span class="tag tag-tiffany">В пути</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; padding:12px 14px; background:#fff; border:1px solid var(--border); border-radius:14px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:4px;">Ваш баланс</div>
+        <span style="font-size:20px;font-weight:700;"><span style="color:var(--pink);">4 500</span> <span style="font-size:13px;font-weight:500;color:var(--text-secondary);">баллов</span></span>
+        <div style="font-size:10px;color:var(--text-secondary);margin-top:4px;">до статуса Digital Representative</div>
+      </div>
+      <span style="font-size:10px;color:var(--tiffany);font-weight:600;flex-shrink:0;cursor:pointer;white-space:nowrap;">Как получить?</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Hover effects for realistic feel */
+  .order-row { cursor: default; }
+  .order-row:hover .name { color: var(--text-primary); }
+  .tag-tiffany { background: var(--tiffany-light); color: var(--tiffany); }
+  .tag-pink { background: var(--pink-light); color: var(--pink); }
+</style>
+
+<p style="font-size:11px;color:var(--text-dim);margin-top:32px;text-align:center;">← скролль варианты →</p>
+</body>
+</html>

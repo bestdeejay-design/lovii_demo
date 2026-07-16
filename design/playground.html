@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid Menu Playground — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --pink: #f64a8a;
+  --pink-light: rgba(246,74,138,0.12);
+  --pink-mid: rgba(246,74,138,0.06);
+  --tiffany: #0ABAB5;
+  --tiffany-light: rgba(10,186,181,0.10);
+  --chiffon: #F5E6CC;
+  --bg: #ffffff;
+  --surface-secondary: #F8F8F8;
+  --border: #EEEEEE;
+  --border-strong: #ddd;
+  --text-primary: #1a1a1a;
+  --text-secondary: #888888;
+  --text-dim: #bbbbbb;
+  --radius-lg: 12px;
+  --radius-md: 6px;
+  --radius-sm: 4px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --page-bg: #fff;
+  --card-bg: #fff;
+  --label-bg: #f4f5f6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--page-bg);
+  color: var(--text-primary);
+  padding: 24px 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  max-width: 640px;
+  margin: 0 auto 28px;
+}
+.page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-header h1 .badge {
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--pink-light);
+  color: var(--pink);
+  padding: 2px 8px;
+  border-radius: 100px;
+  letter-spacing: 0;
+}
+.page-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.page-header .tabs {
+  display: flex;
+  gap: 6px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.page-header .tabs a {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--label-bg);
+  padding: 4px 10px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.page-header .tabs a:hover {
+  background: var(--pink-light);
+  color: var(--pink);
+}
+
+/* ===== VARIANT SECTIONS ===== */
+.variant {
+  max-width: 640px;
+  margin: 0 auto 20px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03);
+  transition: box-shadow 0.15s;
+}
+.variant:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.variant-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+.variant-header h2 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+.variant-header h2 .num {
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-right: 4px;
+}
+.variant-header .tag {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: var(--label-bg);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.variant-header .tag.pink { background: var(--pink-light); color: var(--pink); }
+.variant-header .tag.tiffany { background: var(--tiffany-light); color: var(--tiffany); }
+
+.variant-body {
+  padding: 20px;
+}
+
+/* ===== PHONE FRAME ===== */
+.phone-preview {
+  max-width: 380px;
+  margin: 0 auto;
+  background: #f5f5f7;
+  border-radius: 20px;
+  padding: 14px 12px 18px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.06),
+    0 4px 12px rgba(0,0,0,0.05);
+  position: relative;
+}
+.phone-preview::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 100px;
+}
+
+.phone-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 4px 10px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+/* ===== NOTE ===== */
+.variant-note {
+  max-width: 380px;
+  margin: 10px auto 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 8px 12px;
+  background: var(--label-bg);
+  border-radius: 8px;
+}
+.variant-note code {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  background: rgba(0,0,0,0.04);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--text-primary);
+}
+
+/* ===== GRID MENU — BASE ===== */
+.grid-menu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  text-decoration: none;
+}
+.grid-item .iw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+}
+.grid-item .iw .icon { width: 16px; height: 16px; color: #999; }
+.grid-item .iw.pink { background: var(--pink-light); }
+.grid-item .iw.pink .icon { color: var(--pink); }
+.grid-item .iw.tiffany { background: var(--tiffany-light); }
+.grid-item .iw.tiffany .icon { color: var(--tiffany); }
+.grid-item .label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ========================================== */
+/* V1 — Current (baseline)                   */
+/* ========================================== */
+.v1 .grid-item {
+  padding: 12px 4px;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: box-shadow 0.15s;
+}
+
+/* ========================================== */
+/* V2 — Border Clean                         */
+/* ========================================== */
+.v2 .grid-item {
+  padding: 12px 4px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.15s;
+}
+.v2 .grid-item:hover {
+  border-color: #ccc;
+}
+
+/* ========================================== */
+/* V3 — Elevated                             */
+/* ========================================== */
+.v3 .grid-item {
+  padding: 12px 4px;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.v3 .grid-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* ========================================== */
+/* V4 — Contained                            */
+/* ========================================== */
+.v4 .grid-item {
+  padding: 16px 6px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.15s;
+}
+.v4 .grid-item .iw {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+.v4 .grid-item .iw .icon {
+  width: 20px;
+  height: 20px;
+}
+.v4 .grid-item .label {
+  font-size: 10px;
+  font-weight: 600;
+}
+.v4 .grid-item:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* ========================================== */
+/* V5 — Minimal / Ghost                      */
+/* ========================================== */
+.v5 .grid-item {
+  padding: 8px 2px;
+  background: transparent;
+  border-radius: 0;
+}
+.v5 .grid-item .iw {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.v5 .grid-item .iw .icon {
+  width: 18px;
+  height: 18px;
+}
+.v5 .grid-item .label {
+  font-size: 9px;
+  font-weight: 400;
+  color: #999;
+}
+
+/* ========================================== */
+/* V6 — Rounded Pill                         */
+/* ========================================== */
+.v6 .grid-item {
+  padding: 14px 6px;
+  background: var(--surface-secondary);
+  border-radius: 100px;
+  transition: background 0.15s;
+}
+.v6 .grid-item .iw {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.v6 .grid-item .iw .icon {
+  width: 18px;
+  height: 18px;
+}
+.v6 .grid-item .label {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.v6 .grid-item:hover {
+  background: #f0f0f0;
+}
+
+/* ========================================== */
+/* V7 — Glassmorphism                        */
+/* ========================================== */
+.v7 .grid-item {
+  padding: 14px 6px;
+  background: rgba(255,255,255,0.65);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s;
+}
+.v7 .grid-item:hover {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+.v7-phone-bg {
+  position: relative;
+  overflow: hidden;
+}
+.v7-phone-bg::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(246,74,138,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.v7-phone-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -10px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(10,186,181,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.v7-phone-bg .phone-preview {
+  background: rgba(245,245,247,0.6);
+  backdrop-filter: blur(4px);
+}
+
+/* ========================================== */
+/* V8 — Bottom-Line Accent                   */
+/* ========================================== */
+.v8 .grid-item {
+  padding: 14px 6px 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  position: relative;
+  overflow: hidden;
+}
+.v8 .grid-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.v8 .grid-item.pink-item::after { background: var(--pink); }
+.v8 .grid-item.tiffany-item::after { background: var(--tiffany); }
+.v8 .grid-item .iw {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-md);
+}
+.v8 .grid-item .iw .icon {
+  width: 17px;
+  height: 17px;
+}
+.v8 .grid-item .label {
+  font-size: 10px;
+  font-weight: 500;
+}
+.v8 .grid-item:hover::after {
+  height: 3px;
+  left: 10%;
+  width: 80%;
+}
+
+/* ========================================== */
+/* V9 — Bold / Filled (creative)             */
+/* ========================================== */
+.v9 .grid-item {
+  padding: 16px 6px;
+  border-radius: 14px;
+  transition: all 0.2s;
+  position: relative;
+}
+.v9 .grid-item .iw {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+.v9 .grid-item .iw .icon {
+  width: 22px;
+  height: 22px;
+}
+.v9 .grid-item .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+.v9 .grid-item.pink-item {
+  background: linear-gradient(145deg, #fff5f9, #ffe8f0);
+}
+.v9 .grid-item.tiffany-item {
+  background: linear-gradient(145deg, #f0fcfb, #e0f7f5);
+}
+.v9 .grid-item.pink-item .iw {
+  background: var(--pink);
+  box-shadow: 0 4px 10px rgba(246,74,138,0.2);
+}
+.v9 .grid-item.pink-item .iw .icon { color: #fff; }
+.v9 .grid-item.tiffany-item .iw {
+  background: var(--tiffany);
+  box-shadow: 0 4px 10px rgba(10,186,181,0.2);
+}
+.v9 .grid-item.tiffany-item .iw .icon { color: #fff; }
+.v9 .grid-item:hover {
+  transform: scale(1.02);
+}
+
+/* ========================================== */
+/* V10 — Hybrid (V9+V2+V4+V7/V4+Chiffon)     */
+/* ========================================== */
+.v10 .grid-item {
+  padding: 16px 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.v10 .grid-item .iw {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+.v10 .grid-item .iw .icon {
+  width: 22px;
+  height: 22px;
+}
+.v10 .grid-item .label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.v10 .grid-item:hover {
+  border-color: #ddd;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transform: translateY(-1px);
+}
+/* Override base pink/tiffany tinted bg → solid colored bg + white icon */
+.v10 .grid-item .iw.pink {
+  background: var(--pink);
+  box-shadow: 0 4px 10px rgba(246,74,138,0.2);
+}
+.v10 .grid-item .iw.pink .icon { color: #fff; }
+.v10 .grid-item .iw.tiffany {
+  background: var(--tiffany);
+  box-shadow: 0 4px 10px rgba(10,186,181,0.2);
+}
+.v10 .grid-item .iw.tiffany .icon { color: #fff; }
+/* Chiffon accent: items 7 (Акции) and 8 (Настройки) */
+.v10 .grid-item:nth-child(7) .iw,
+.v10 .grid-item:nth-child(8) .iw {
+  background: #D4A854;
+  box-shadow: 0 4px 10px rgba(212,168,84,0.25);
+}
+.v10 .grid-item:nth-child(7) .iw .icon,
+.v10 .grid-item:nth-child(8) .iw .icon {
+  color: #fff;
+}
+
+/* V10 phone preview — white background */
+.v10-phone-bg .phone-preview {
+  background: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  body { padding: 12px 8px; }
+  .page-header h1 { font-size: 18px; }
+  .variant-body { padding: 14px; }
+  .phone-preview { padding: 12px 10px 16px; }
+  .variant-header { padding: 12px 14px; }
+  .variant-header h2 { font-size: 13px; }
+}
+
+/* ===== SCROLL ANCHOR ===== */
+.scroll-anchor { scroll-margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- ===== HIDDEN SVG SPRITE ===== -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-shopping-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <path d="M16 10a4 4 0 01-8 0"/>
+  </symbol>
+  <symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16.5 9.4L7.55 4.24"/>
+    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+    <polyline points="3.29 7 12 12 20.71 7"/>
+    <line x1="12" y1="22" x2="12" y2="12"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </symbol>
+  <symbol id="i-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="20" x2="12" y2="10"/>
+    <line x1="18" y1="20" x2="18" y2="4"/>
+    <line x1="6" y1="20" x2="6" y2="16"/>
+  </symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+    <path d="M16 3.13a4 4 0 010 7.75"/>
+  </symbol>
+  <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+    <path d="M9 22v-4h6v4"/>
+    <line x1="8" y1="6" x2="10" y2="6"/>
+    <line x1="14" y1="6" x2="16" y2="6"/>
+  </symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+  </symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+  </symbol>
+</svg>
+
+<!-- ===== PAGE HEADER ===== -->
+<header class="page-header">
+  <h1>
+    Grid Menu Playground
+    <span class="badge">LOVII</span>
+  </h1>
+  <p>
+    Exploring card design variants for the home screen 4-column grid menu.
+    Hover over cards to see interactive states.
+  </p>
+  <nav class="tabs">
+    <a href="#v1">V1 Current</a>
+    <a href="#v2">V2 Border</a>
+    <a href="#v3">V3 Elevated</a>
+    <a href="#v4">V4 Contained</a>
+    <a href="#v5">V5 Ghost</a>
+    <a href="#v6">V6 Pill</a>
+    <a href="#v7">V7 Glass</a>
+    <a href="#v8">V8 Accent</a>
+    <a href="#v9">V9 Bold</a>
+    <a href="#v10">V10 Hybrid</a>
+  </nav>
+</header>
+
+<!-- Helper: reusable grid items template built via JS -->
+<div id="app"></div>
+
+<script>
+// ===== DATA =====
+const items = [
+  { name: 'Каталог', icon: 'i-shopping-bag', color: 'pink' },
+  { name: 'Заказы',  icon: 'i-package',       color: 'tiffany' },
+  { name: 'Бонусы',  icon: 'i-star',          color: 'pink' },
+  { name: 'Отчёты',  icon: 'i-bar-chart',     color: 'tiffany' },
+  { name: 'Команда', icon: 'i-users',         color: 'tiffany' },
+  { name: 'Города',  icon: 'i-building',      color: 'pink' },
+  { name: 'Акции',   icon: 'i-zap',           color: 'pink' },
+  { name: 'Настройки', icon: 'i-settings',    color: 'tiffany' },
+];
+
+function renderGrid(extraClass, itemExtraClass) {
+  return items.map((item, i) => {
+    const extra = typeof itemExtraClass === 'function' ? itemExtraClass(item, i) : (itemExtraClass || '');
+    return `<div class="grid-item ${extra}">
+      <div class="iw ${item.color}">
+        <svg class="icon"><use href="#${item.icon}"/></svg>
+      </div>
+      <span class="label">${item.name}</span>
+    </div>`;
+  }).join('');
+}
+
+function phoneFrame(content) {
+  return `<div class="phone-preview">
+    <div class="phone-status">
+      <span>9:41</span>
+      <span>🔋 85%</span>
+    </div>
+    ${content}
+  </div>`;
+}
+
+// ===== VARIANTS =====
+const variants = [
+  {
+    id: 'v1',
+    title: 'V1 — Current',
+    tag: 'baseline',
+    tagClass: '',
+    note: 'Current implementation: <code>var(--surface-secondary)</code> background (<code>#F8F8F8</code>), soft <code>0 1px 3px</code> shadow, <code>12px</code> border radius.',
+    gridClass: 'grid-menu v1',
+    itemExtra: ''
+  },
+  {
+    id: 'v2',
+    title: 'V2 — Border Clean',
+    tag: 'clean',
+    tagClass: 'tiffany',
+    note: 'White card background, <code>1px solid #eee</code> border replacing shadow. No elevation. Border darkens on hover.',
+    gridClass: 'grid-menu v2',
+    itemExtra: ''
+  },
+  {
+    id: 'v3',
+    title: 'V3 — Elevated',
+    tag: 'elevated',
+    tagClass: '',
+    note: 'Stronger resting shadow (<code>0 4px 12px</code>). Card lifts <code>-3px</code> on hover with deeper shadow — tactile feel.',
+    gridClass: 'grid-menu v3',
+    itemExtra: ''
+  },
+  {
+    id: 'v4',
+    title: 'V4 — Contained',
+    tag: 'spacious',
+    tagClass: 'pink',
+    note: 'Larger icon container (<code>36px</code>), more padding (<code>16px 6px</code>), bolder label weight. Feels more substantial.',
+    gridClass: 'grid-menu v4',
+    itemExtra: ''
+  },
+  {
+    id: 'v5',
+    title: 'V5 — Minimal / Ghost',
+    tag: 'ghost',
+    tagClass: '',
+    note: 'No card background at all. Circular icon container, lighter label. Maximum air, minimum chrome.',
+    gridClass: 'grid-menu v5',
+    itemExtra: ''
+  },
+  {
+    id: 'v6',
+    title: 'V6 — Rounded Pill',
+    tag: 'pill',
+    tagClass: 'tiffany',
+    note: 'Pill-shaped cards (<code>border-radius: 100px</code>). Circular icon area. Compact, playful feel.',
+    gridClass: 'grid-menu v6',
+    itemExtra: ''
+  },
+  {
+    id: 'v7',
+    title: 'V7 — Glassmorphism',
+    tag: 'glass',
+    tagClass: 'pink',
+    note: 'Frosted glass effect: semi-transparent white background, <code>backdrop-filter: blur(12px)</code>, subtle border. Background gradient blobs add depth.',
+    gridClass: 'grid-menu v7',
+    itemExtra: '',
+    phoneExtraClass: 'v7-phone-bg'
+  },
+  {
+    id: 'v8',
+    title: 'V8 — Bottom-Line Accent',
+    tag: 'accent',
+    tagClass: '',
+    note: 'Minimal white card with a colored bottom border accent matching the icon theme (pink / tiffany). Accent widens on hover.',
+    gridClass: 'grid-menu v8',
+    itemExtra: function(item) { return item.color + '-item'; }
+  },
+  {
+    id: 'v9',
+    title: 'V9 — Bold / Filled',
+    tag: 'creative',
+    tagClass: 'pink',
+    note: 'Tinted gradient backgrounds per theme, solid white icons in colored containers with glow shadow. Larger scale. Slight hover scale-up.',
+    gridClass: 'grid-menu v9',
+    itemExtra: function(item) { return item.color + '-item'; }
+  },
+  {
+    id: 'v10',
+    title: 'V10 — Hybrid',
+    tag: 'hybrid',
+    tagClass: '',
+    note: 'Hybrid: V9-style solid colored icon containers (pink/tiffany/gold) with white SVG icons and glow shadow, V2 white card background with visible border, plus <strong>chiffon</strong> (<code>#F5E6CC</code>) as third accent for Акции and Настройки.',
+    gridClass: 'grid-menu v10',
+    itemExtra: '',
+    phoneExtraClass: 'v10-phone-bg'
+  },
+];
+
+// ===== RENDER =====
+const app = document.getElementById('app');
+app.innerHTML = variants.map(v => {
+  const phoneExtra = v.phoneExtraClass || '';
+  return `<section id="${v.id}" class="variant scroll-anchor">
+    <div class="variant-header">
+      <h2><span class="num">${v.id.toUpperCase().replace('V', '')}.</span> ${v.title}</h2>
+      <span class="tag ${v.tagClass}">${v.tag}</span>
+    </div>
+    <div class="variant-body">
+      <div class="${phoneExtra}">
+        ${phoneFrame(`<div class="${v.gridClass}">${renderGrid(v.gridClass, v.itemExtra)}</div>`)}
+      </div>
+      <div class="variant-note">${v.note}</div>
+    </div>
+  </section>`;
+}).join('');
+</script>
+
+</body>
+</html>

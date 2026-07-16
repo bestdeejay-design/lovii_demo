@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Playground — Location + Promo</title>
+<style>
+  :root {
+    --pink: #f64a8a;
+    --pink-light: rgba(246,74,138,0.12);
+    --pink-mid: rgba(246,74,138,0.06);
+    --tiffany: #0ABAB5;
+    --tiffany-light: rgba(10,186,181,0.10);
+    --chiffon: #F5E6CC;
+    --gold: #D4A854;
+    --bg: #ffffff;
+    --border: #EEEEEE;
+    --border-strong: #DDDDDD;
+    --text-primary: #1a1a1a;
+    --text-secondary: #888888;
+    --text-dim: #bbbbbb;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --font: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: #f5f5f7;
+    -webkit-font-smoothing: antialiased;
+    padding: 16px;
+  }
+  .playground-title {
+    font-size: 20px; font-weight: 700; margin-bottom: 24px; color: #1a1a1a;
+    padding-bottom: 12px; border-bottom: 2px solid #e0e0e0;
+  }
+  .variant {
+    margin-bottom: 40px; padding-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .variant-title {
+    font-size: 12px; font-weight: 600; color: var(--text-secondary);
+    margin-bottom: 10px; letter-spacing: 0.3px;
+  }
+  .phone-frame {
+    width: 375px; background: #fff;
+    border: 1px solid #e8e8e8; border-radius: 24px;
+    overflow: hidden; box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+  }
+  .phone-top {
+    height: 44px; padding: 0 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #eee;
+  }
+  .phone-top .logo { height: 24px; font-weight: 800; font-size: 18px; color: #1a1a1a; letter-spacing: -0.5px; }
+  .phone-top .avatar { width: 28px; height: 28px; border-radius: 8px; background: var(--pink); }
+
+  .icon { width: 16px; height: 16px; display: block; }
+  .icon-sm { width: 14px; height: 14px; }
+
+  /* Demo pin icon */
+  .pin-icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--text-dim); }
+  .pin-icon svg { display: block; }
+</style>
+</head>
+<body>
+
+<div class="playground-title">📍 Location + Promo Banner — варианты</div>
+
+<!-- ===== V1 ===== -->
+<div class="variant">
+  <div class="variant-title">V1 — Baseline refined</div>
+  <div class="phone-frame">
+    <div class="phone-top">
+      <div class="logo">LOVII</div>
+      <div class="avatar"></div>
+    </div>
+    <!-- Location -->
+    <div style="display:flex;align-items:center;gap:4px;padding:2px 16px;height:26px;font-size:11px;color:var(--text-dim);">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span style="font-weight:600;color:var(--text-primary);">Москва</span>
+    </div>
+    <!-- Promo -->
+    <div style="margin:6px 16px;padding:14px 16px;background:linear-gradient(135deg,var(--pink) 0%,#c92a6a 100%);border-radius:14px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:2px;">−20% на выпечку</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.85);">В Пекарне #23 до конца дня</div>
+      </div>
+      <span style="display:flex;align-items:center;gap:4px;padding:4px 8px;background:rgba(255,255,255,0.15);border-radius:100px;font-size:9px;font-weight:600;color:#fff;flex-shrink:0;margin-left:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        4 ч
+      </span>
+    </div>
+    <div style="padding:16px 16px;font-size:12px;color:var(--text-dim);text-align:center;border-top:1px solid #f0f0f0;">...</div>
+  </div>
+</div>
+
+<!-- ===== V2 ===== -->
+<div class="variant">
+  <div class="variant-title">V2 — Location + Promo in one card</div>
+  <div class="phone-frame">
+    <div class="phone-top">
+      <div class="logo">LOVII</div>
+      <div class="avatar"></div>
+    </div>
+    <!-- Integrated card -->
+    <div style="margin:8px 16px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;">
+      <!-- Location row -->
+      <div style="display:flex;align-items:center;gap:4px;padding:10px 14px 0;font-size:11px;color:var(--text-dim);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-weight:600;color:var(--text-primary);">Москва</span>
+        <span style="margin-left:auto;color:var(--pink);font-weight:500;cursor:pointer;">Сменить</span>
+      </div>
+      <!-- Divider -->
+      <div style="margin:8px 14px 0;height:1px;background:var(--border);"></div>
+      <!-- Promo content -->
+      <div style="padding:12px 14px 14px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="padding:2px 6px;background:var(--pink-light);color:var(--pink);font-size:8px;font-weight:700;border-radius:100px;text-transform:uppercase;letter-spacing:0.3px;">Акция</span>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:2px;">−20% на выпечку</div>
+          <div style="font-size:10px;color:var(--text-secondary);">В Пекарне #23 до конца дня</div>
+        </div>
+        <span style="display:flex;align-items:center;gap:4px;padding:5px 10px;background:var(--pink-light);border-radius:100px;font-size:9px;font-weight:600;color:var(--pink);flex-shrink:0;margin-left:8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          4 ч
+        </span>
+      </div>
+    </div>
+    <div style="padding:16px 16px;font-size:12px;color:var(--text-dim);text-align:center;border-top:1px solid #f0f0f0;">...</div>
+  </div>
+</div>
+
+<!-- ===== V3 ===== -->
+<div class="variant">
+  <div class="variant-title">V3 — Location chip + soft promo tint</div>
+  <div class="phone-frame">
+    <div class="phone-top">
+      <div class="logo">LOVII</div>
+      <div class="avatar"></div>
+    </div>
+    <!-- Location chip -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 16px 2px;">
+      <div style="display:flex;align-items:center;gap:4px;padding:3px 10px 3px 6px;background:#f5f5f7;border-radius:100px;font-size:11px;color:var(--text-secondary);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-weight:600;color:var(--text-primary);">Москва</span>
+      </div>
+      <span style="font-size:10px;color:var(--pink);font-weight:500;cursor:pointer;">Сменить</span>
+    </div>
+    <!-- Soft promo -->
+    <div style="margin:6px 16px;padding:14px 16px;background:linear-gradient(135deg,rgba(246,74,138,0.08) 0%,rgba(246,74,138,0.03) 100%);border:1px solid rgba(246,74,138,0.15);border-radius:14px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:2px;">−20% на выпечку</div>
+        <div style="font-size:10px;color:var(--text-secondary);">В Пекарне #23 до конца дня</div>
+      </div>
+      <span style="display:flex;align-items:center;gap:4px;padding:4px 8px;background:rgba(246,74,138,0.12);border-radius:100px;font-size:9px;font-weight:600;color:var(--pink);flex-shrink:0;margin-left:8px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        4 ч
+      </span>
+    </div>
+    <div style="padding:16px 16px;font-size:12px;color:var(--text-dim);text-align:center;border-top:1px solid #f0f0f0;">...</div>
+  </div>
+</div>
+
+<!-- ===== V4 ===== -->
+<div class="variant">
+  <div class="variant-title">V4 — Apple-style: subtle location, white card promo</div>
+  <div class="phone-frame">
+    <div class="phone-top">
+      <div class="logo">LOVII</div>
+      <div class="avatar"></div>
+    </div>
+    <!-- Location inline -->
+    <div style="display:flex;align-items:center;gap:4px;padding:4px 16px;font-size:12px;color:var(--text-dim);">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span style="font-weight:600;color:var(--text-primary);">Москва</span>
+      <span style="margin-left:12px;font-size:10px;color:var(--pink);font-weight:500;cursor:pointer;">Сменить</span>
+    </div>
+    <!-- White card promo -->
+    <div style="margin:6px 16px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+            <span style="padding:3px 8px;background:var(--pink);color:#fff;font-size:8px;font-weight:700;border-radius:100px;text-transform:uppercase;letter-spacing:0.3px;">−20%</span>
+            <span style="font-size:10px;color:var(--text-secondary);">Пекарня #23</span>
+          </div>
+          <div style="font-size:16px;font-weight:700;color:var(--text-primary);">На выпечку</div>
+        </div>
+        <span style="display:flex;align-items:center;gap:3px;padding:4px 8px;background:#f5f5f7;border-radius:100px;font-size:9px;font-weight:600;color:var(--text-secondary);flex-shrink:0;margin-left:8px;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          4 ч
+        </span>
+      </div>
+      <div style="margin-top:12px;display:flex;align-items:center;gap:6px;">
+        <span style="font-size:10px;color:var(--tiffany);font-weight:600;cursor:pointer;">Подробнее</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--tiffany)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+    <div style="padding:16px 16px;font-size:12px;color:var(--text-dim);text-align:center;border-top:1px solid #f0f0f0;">...</div>
+  </div>
+</div>
+
+<!-- ===== V5 ===== -->
+<div class="variant">
+  <div class="variant-title">V5 — Bold gradient with location inside</div>
+  <div class="phone-frame">
+    <div class="phone-top">
+      <div class="logo">LOVII</div>
+      <div class="avatar"></div>
+    </div>
+    <!-- Promo card with location integrated -->
+    <div style="margin:8px 16px;background:linear-gradient(135deg,var(--pink) 0%,#d6336c 100%);border-radius:16px;overflow:hidden;">
+      <!-- Location bar on top -->
+      <div style="display:flex;align-items:center;gap:4px;padding:10px 16px 0;font-size:10px;color:rgba(255,255,255,0.7);">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-weight:600;color:#fff;">Москва</span>
+        <span style="margin-left:auto;color:rgba(255,255,255,0.8);font-weight:500;cursor:pointer;">Сменить</span>
+      </div>
+      <div style="padding:12px 16px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:2px;">−20%</div>
+          <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:2px;">на всю выпечку</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.8);">В Пекарне #23 до конца дня</div>
+        </div>
+        <div style="text-align:center;flex-shrink:0;margin-left:12px;">
+          <div style="padding:6px 10px;background:rgba(255,255,255,0.2);border-radius:12px;">
+            <div style="font-size:16px;font-weight:700;color:#fff;">4</div>
+            <div style="font-size:7px;font-weight:600;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.3px;">часа</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:16px 16px;font-size:12px;color:var(--text-dim);text-align:center;border-top:1px solid #f0f0f0;">...</div>
+  </div>
+</div>
+
+<!-- ===== V6 ===== -->
+<div class="variant">
+  <div class="variant-title">V6 — Chiffon/gold accent + chip location</div>
+  <div class="phone-frame">
+    <div class="phone-top">
+      <div class="logo">LOVII</div>
+      <div class="avatar"></div>
+    </div>
+    <!-- Location chip -->
+    <div style="display:flex;align-items:center;gap:4px;padding:4px 16px 2px;">
+      <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 5px;background:var(--chiffon);border-radius:100px;font-size:10px;color:#8a7a5c;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-weight:600;">Москва</span>
+      </span>
+    </div>
+    <!-- Gold promo -->
+    <div style="margin:6px 16px;padding:16px;background:linear-gradient(135deg,var(--gold) 0%,#c49a3c 100%);border-radius:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Акция</div>
+          <div style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.5px;margin-bottom:2px;">−20% на выпечку</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.85);">Пекарня #23 · до конца дня</div>
+        </div>
+        <span style="display:flex;flex-direction:column;align-items:center;padding:6px 10px;background:rgba(255,255,255,0.2);border-radius:10px;flex-shrink:0;margin-left:12px;">
+          <span style="font-size:18px;font-weight:700;color:#fff;line-height:1;">4</span>
+          <span style="font-size:7px;font-weight:600;color:rgba(255,255,255,0.8);text-transform:uppercase;">ч</span>
+        </span>
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.2);display:flex;gap:8px;">
+        <span style="flex:1;padding:6px 0;text-align:center;background:rgba(255,255,255,0.15);border-radius:100px;font-size:10px;font-weight:600;color:#fff;cursor:pointer;">Подробнее</span>
+        <span style="flex:1;padding:6px 0;text-align:center;background:#fff;border-radius:100px;font-size:10px;font-weight:600;color:var(--gold);cursor:pointer;">Заказать</span>
+      </div>
+    </div>
+    <div style="padding:16px 16px;font-size:12px;color:var(--text-dim);text-align:center;border-top:1px solid #f0f0f0;">...</div>
+  </div>
+</div>
+
+<!-- ===== V7 ===== -->
+<div class="variant">
+  <div class="variant-title">V7 ☆ — V2 + V4 hybrid</div>
+  <div class="phone-frame">
+    <div class="phone-top">
+      <div class="logo">LOVII</div>
+      <div class="avatar"></div>
+    </div>
+    <div style="margin:8px 16px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;">
+      <div style="display:flex;align-items:center;gap:4px;padding:10px 14px 0;font-size:11px;color:var(--text-dim);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-weight:600;color:var(--text-primary);">Москва</span>
+        <span style="margin-left:auto;color:var(--pink);font-weight:500;cursor:pointer;">Сменить</span>
+      </div>
+      <div style="margin:8px 14px 0;height:1px;background:var(--border);"></div>
+      <div style="padding:12px 14px 8px;display:flex;justify-content:space-between;align-items:flex-start;">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+            <span style="padding:2px 6px;background:var(--pink-light);color:var(--pink);font-size:8px;font-weight:700;border-radius:100px;text-transform:uppercase;letter-spacing:0.3px;">Акция</span>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:2px;">−20% на выпечку</div>
+          <div style="font-size:10px;color:var(--text-secondary);">В Пекарне #23 до конца дня</div>
+        </div>
+        <span style="display:flex;align-items:center;gap:4px;padding:5px 10px;background:var(--pink-light);border-radius:100px;font-size:9px;font-weight:600;color:var(--pink);flex-shrink:0;margin-left:8px;margin-top:2px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          4 ч
+        </span>
+      </div>
+      <div style="padding:4px 14px 12px;">
+        <span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--tiffany);font-weight:600;cursor:pointer;">
+          Подробнее
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </div>
+    <div style="padding:16px 16px;font-size:12px;color:var(--text-dim);text-align:center;border-top:1px solid #f0f0f0;">...</div>
+  </div>
+</div>
+
+<style>
+  .phone-top .logo { display: flex; align-items: center; gap: 6px; }
+  .phone-top .logo::before { content: ''; display: block; width: 24px; height: 24px; background: var(--pink); border-radius: 6px; }
+</style>
+
+<p style="font-size:11px;color:var(--text-dim);margin-top:32px;text-align:center;">← скролль варианты →</p>
+</body>
+</html>

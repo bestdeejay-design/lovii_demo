@@ -1,0 +1,142 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" },
+        { "model": "opencode/mimo-v2.5-free" },
+        { "model": "opencode/nemotron-3-ultra-free" },
+        { "model": "deepseek/deepseek-v4-flash" }
+      ]
+    },
+    "hephaestus": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" },
+        { "model": "opencode/mimo-v2.5-free" }
+      ]
+    },
+    "oracle": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/nemotron-3-ultra-free" },
+        { "model": "opencode/hy3-free" }
+      ]
+    },
+    "explore": {
+      "model": "opencode/hy3-free",
+      "fallback_models": [
+        { "model": "opencode/mimo-v2.5-free" },
+        { "model": "opencode/north-mini-code-free" }
+      ]
+    },
+    "multimodal-looker": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" }
+      ]
+    },
+    "prometheus": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/nemotron-3-ultra-free" },
+        { "model": "opencode/hy3-free" }
+      ]
+    },
+    "metis": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/nemotron-3-ultra-free" },
+        { "model": "opencode/hy3-free" }
+      ]
+    },
+    "momus": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/nemotron-3-ultra-free" },
+        { "model": "opencode/hy3-free" }
+      ]
+    },
+    "atlas": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" },
+        { "model": "opencode/mimo-v2.5-free" }
+      ]
+    },
+    "sisyphus-junior": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" },
+        { "model": "opencode/mimo-v2.5-free" },
+        { "model": "opencode/nemotron-3-super-free" }
+      ]
+    }
+  },
+  "team_mode": {
+    "enabled": true,
+    "max_parallel_members": 4,
+    "tmux_visualization": false
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" },
+        { "model": "opencode/mimo-v2.5-free" },
+        { "model": "opencode/qwen3.6-plus-free" }
+      ]
+    },
+    "ultrabrain": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/nemotron-3-ultra-free" },
+        { "model": "opencode/hy3-free" }
+      ]
+    },
+    "deep": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/nemotron-3-ultra-free" },
+        { "model": "opencode/hy3-free" }
+      ]
+    },
+    "artistry": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" },
+        { "model": "opencode/mimo-v2.5-free" },
+        { "model": "opencode/nemotron-3-ultra-free" }
+      ]
+    },
+    "quick": {
+      "model": "opencode/hy3-free",
+      "fallback_models": [
+        { "model": "opencode/mimo-v2.5-free" },
+        { "model": "opencode/north-mini-code-free" }
+      ]
+    },
+    "unspecified-low": {
+      "model": "opencode/hy3-free",
+      "fallback_models": [
+        { "model": "opencode/mimo-v2.5-free" },
+        { "model": "opencode/north-mini-code-free" }
+      ]
+    },
+    "unspecified-high": {
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        { "model": "opencode/hy3-free" },
+        { "model": "opencode/mimo-v2.5-free" }
+      ]
+    },
+    "writing": {
+      "model": "opencode/nemotron-3-ultra-free",
+      "fallback_models": [
+        { "model": "opencode/deepseek-v4-flash-free" },
+        { "model": "opencode/hy3-free" }
+      ]
+    }
+  }
+}

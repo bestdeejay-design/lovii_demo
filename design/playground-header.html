@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Header Playground — LOVII</title>
+<link rel="icon" type="image/svg+xml" href="../assets/lovii-icon.svg">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --pink: #f64a8a;
+  --pink-light: rgba(246,74,138,0.12);
+  --pink-mid: rgba(246,74,138,0.06);
+  --tiffany: #0ABAB5;
+  --tiffany-light: rgba(10,186,181,0.10);
+  --chiffon: #F5E6CC;
+  --bg: #ffffff;
+  --surface-secondary: #F8F8F8;
+  --border: #EEEEEE;
+  --border-strong: #ddd;
+  --text-primary: #1a1a1a;
+  --text-secondary: #888888;
+  --text-dim: #bbbbbb;
+  --radius-lg: 12px;
+  --radius-md: 6px;
+  --radius-sm: 4px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --page-bg: #fff;
+  --card-bg: #fff;
+  --label-bg: #f4f5f6;
+  --header-h: 44px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--page-bg);
+  color: var(--text-primary);
+  padding: 24px 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  max-width: 640px;
+  margin: 0 auto 28px;
+}
+.page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-header h1 .badge {
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--pink-light);
+  color: var(--pink);
+  padding: 2px 8px;
+  border-radius: 100px;
+  letter-spacing: 0;
+}
+.page-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.page-header .tabs {
+  display: flex;
+  gap: 6px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.page-header .tabs a {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--label-bg);
+  padding: 4px 10px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.page-header .tabs a:hover {
+  background: var(--pink-light);
+  color: var(--pink);
+}
+
+/* ===== VARIANT SECTIONS ===== */
+.variant {
+  max-width: 640px;
+  margin: 0 auto 20px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03);
+  transition: box-shadow 0.15s;
+}
+.variant:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.variant-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+.variant-header h2 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+.variant-header h2 .num {
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-right: 4px;
+}
+.variant-header .tag {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: var(--label-bg);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.variant-header .tag.pink { background: var(--pink-light); color: var(--pink); }
+.variant-header .tag.tiffany { background: var(--tiffany-light); color: var(--tiffany); }
+
+.variant-body {
+  padding: 20px;
+}
+
+/* ===== PHONE FRAME ===== */
+.phone-preview {
+  max-width: 380px;
+  margin: 0 auto;
+  background: #f5f5f7;
+  border-radius: 20px;
+  padding: 14px 12px 18px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.06),
+    0 4px 12px rgba(0,0,0,0.05);
+  position: relative;
+}
+.phone-preview::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 100px;
+}
+
+.phone-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 4px 10px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.phone-status .time { font-weight: 700; color: #555; }
+.phone-status .icons { display: flex; gap: 4px; align-items: center; }
+
+.phone-content {
+  background: var(--bg);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.phone-content .header-placeholder {
+  height: 120px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.3px;
+}
+
+/* ===== HEADER VARIANTS ===== */
+
+/* -- Shared header classes -- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 0;
+  flex-shrink: 0;
+  background: var(--bg);
+  position: relative;
+}
+.header-logo {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  text-decoration: none;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-actions .icon {
+  color: var(--text-dim);
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.avatar-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* V1 — Current (baseline) */
+#variant-1 .header {
+  height: 44px;
+  padding: 8px 16px 0;
+}
+#variant-1 .header-logo { height: 16px; font-size: 16px; }
+
+/* V2 — Tall & Airy */
+#variant-2 .header {
+  height: 52px;
+  padding: 10px 20px 0;
+}
+#variant-2 .header-logo { height: 22px; font-size: 22px; letter-spacing: -0.8px; }
+#variant-2 .header-actions { gap: 16px; }
+#variant-2 .header-actions .icon { width: 22px; height: 22px; }
+#variant-2 .avatar-icon { width: 28px; height: 28px; border-radius: 7px; }
+
+/* V3 — With Bottom Border */
+#variant-3 .header {
+  height: 44px;
+  padding: 8px 16px 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+#variant-3 .phone-content .header-placeholder {
+  height: 100px;
+}
+
+/* V4 — Elevated */
+#variant-4 .header {
+  height: 44px;
+  padding: 8px 16px 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  z-index: 1;
+}
+#variant-4 .phone-content .header-placeholder {
+  height: 100px;
+}
+
+/* V5 — Centered Logo */
+#variant-5 .header {
+  height: 44px;
+  padding: 8px 56px 0;
+  position: relative;
+}
+#variant-5 .header-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+#variant-5 .header-actions { margin-left: auto; }
+
+/* V6 — Notification Dot */
+#variant-6 .header {
+  height: 44px;
+  padding: 8px 16px 0;
+}
+#variant-6 .icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+#variant-6 .notification-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--pink);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+
+/* V7 — Avatars Instead of Icon */
+#variant-7 .header {
+  height: 44px;
+  padding: 8px 16px 0;
+}
+#variant-7 .user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink), #ff8fab);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  flex-shrink: 0;
+}
+
+/* V8 — Short & Compact */
+#variant-8 .header {
+  height: 40px;
+  padding: 6px 12px 0;
+}
+#variant-8 .header-logo { height: 14px; font-size: 14px; letter-spacing: -0.3px; }
+#variant-8 .header-actions { gap: 10px; }
+#variant-8 .header-actions .icon { width: 18px; height: 18px; }
+#variant-8 .phone-content .avatar-icon { display: none; }
+
+/* V9 — With Search */
+#variant-9 .header {
+  height: 52px;
+  padding: 8px 16px 0;
+}
+#variant-9 .header-logo { font-size: 16px; }
+#variant-9 .search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--surface-secondary);
+  border-radius: 8px;
+  padding: 0 10px;
+  height: 32px;
+  flex: 1;
+  margin: 0 12px;
+  gap: 6px;
+}
+#variant-9 .search-bar svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+#variant-9 .search-bar input {
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text-primary);
+  width: 100%;
+}
+#variant-9 .search-bar input::placeholder {
+  color: var(--text-dim);
+}
+
+/* V10 — Accent Bottom Line */
+#variant-10 .header {
+  height: 44px;
+  padding: 8px 16px 0;
+  border-bottom: 2px solid var(--pink);
+  padding-bottom: 8px;
+}
+#variant-10 .phone-content .header-placeholder {
+  height: 100px;
+}
+
+/* V11 — Correct: logo left + avatar right with notif dot, no bell */
+#variant-11 .header {
+  height: 44px;
+  padding: 8px;
+}
+#variant-11 .header-logo { height: 28px; }
+#variant-11 .avatar-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+#variant-11 .avatar-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: block;
+}
+#variant-11 .notif-dot {
+  position: absolute; top: -2px; right: -2px;
+  width: 10px; height: 10px;
+  background: var(--pink);
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+}
+#variant-11 .phone-content .header-placeholder {
+  height: 100px;
+}
+
+/* ===== NOTE ===== */
+.variant-note {
+  max-width: 380px;
+  margin: 10px auto 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 8px 12px;
+  background: var(--label-bg);
+  border-radius: 8px;
+}
+.variant-note code {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  background: rgba(0,0,0,0.04);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--text-primary);
+}
+.variant-note strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Header Playground <span class="badge">11 variants</span></h1>
+  <p>Mobile app header design explorations for LOVII — all variants shown at 380px phone width</p>
+  <div class="tabs">
+    <a href="#variant-1">V1 Current</a>
+    <a href="#variant-2">V2 Tall &amp; Airy</a>
+    <a href="#variant-3">V3 Bottom Border</a>
+    <a href="#variant-4">V4 Elevated</a>
+    <a href="#variant-5">V5 Centered</a>
+    <a href="#variant-6">V6 Notification Dot</a>
+    <a href="#variant-7">V7 Avatars</a>
+    <a href="#variant-8">V8 Compact</a>
+    <a href="#variant-9">V9 Search</a>
+    <a href="#variant-10">V10 Accent Line</a>
+    <a href="#variant-11">V11 Correct</a>
+  </div>
+</div>
+
+<!-- ===== V1 — Current (Baseline) ===== -->
+<div class="variant" id="variant-1">
+  <div class="variant-header">
+    <h2><span class="num">V1</span>Current Baseline</h2>
+    <span class="tag">44px</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:44px;padding:8px 16px 0;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:16px">
+          <div class="header-actions">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+            <svg class="avatar-icon" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+              <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="8" r="3" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      The <strong>current</strong> production header. <code>height: 44px</code>, <code>padding: 8px 16px 0</code>.
+      Logo is 16px, actions have <code>gap: 12px</code>. Minimal and compact.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V2 — Tall & Airy ===== -->
+<div class="variant" id="variant-2">
+  <div class="variant-header">
+    <h2><span class="num">V2</span>Tall &amp; Airy</h2>
+    <span class="tag">52px</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:52px;padding:10px 20px 0;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:22px">
+          <div class="header-actions" style="gap:16px;">
+            <svg class="icon" style="width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+            <svg class="avatar-icon" style="width:28px;height:28px;border-radius:7px;" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+              <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="8" r="3" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      <strong>More breathing room.</strong> <code>height: 52px</code>, larger 22px logo, <code>padding: 10px 20px</code>,
+      wider <code>gap: 16px</code> between actions, bigger icons (22px) and avatar (28px). Feels more premium.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V3 — With Bottom Border ===== -->
+<div class="variant" id="variant-3">
+  <div class="variant-header">
+    <h2><span class="num">V3</span>With Bottom Border</h2>
+    <span class="tag">separator</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:44px;padding:8px 16px 0;border-bottom:1px solid var(--border);padding-bottom:8px;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:16px">
+          <div class="header-actions">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+            <svg class="avatar-icon" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+              <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="8" r="3" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      Same as baseline but adds <code>border-bottom: 1px solid var(--border)</code>. Creates clear
+      <strong>visual separation</strong> between the header and content below. Useful when header bg matches content bg.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V4 — Elevated ===== -->
+<div class="variant" id="variant-4">
+  <div class="variant-header">
+    <h2><span class="num">V4</span>Elevated</h2>
+    <span class="tag">shadow</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div style="position:relative;">
+          <div class="header" style="height:44px;padding:8px 16px 0;box-shadow:0 1px 4px rgba(0,0,0,0.06);position:relative;z-index:2;">
+            <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:16px">
+            <div class="header-actions">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+              </svg>
+              <svg class="avatar-icon" viewBox="0 0 24 24" fill="none">
+                <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+                <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="12" cy="8" r="3" fill="#fff"/>
+              </svg>
+            </div>
+          </div>
+          <div class="header-placeholder" style="position:relative;z-index:1;">content area</div>
+        </div>
+      </div>
+    </div>
+    <div class="variant-note">
+      White header <strong>floats above content</strong> with <code>box-shadow: 0 1px 4px rgba(0,0,0,0.06)</code>.
+      Creates depth without being heavy. Good for feeds with scrollable content underneath.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V5 — Centered Logo ===== -->
+<div class="variant" id="variant-5">
+  <div class="variant-header">
+    <h2><span class="num">V5</span>Centered Logo</h2>
+    <span class="tag">iOS-style</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:44px;padding:8px 16px 0;position:relative;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="position:absolute;left:50%;transform:translateX(-50%);height:18px">
+          <div class="header-actions" style="margin-left:auto;">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+            <svg class="avatar-icon" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+              <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="8" r="3" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      <strong>iOS-style navigation bar.</strong> Logo is <code>position: absolute; left: 50%; transform: translateX(-50%)</code>
+      to center it, while actions remain right-aligned. Common in native apps.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V6 — Notification Dot ===== -->
+<div class="variant" id="variant-6">
+  <div class="variant-header">
+    <h2><span class="num">V6</span>Notification Dot</h2>
+    <span class="tag pink">unread</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:44px;padding:8px 16px 0;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:16px">
+          <div class="header-actions">
+            <div class="icon-wrapper" style="position:relative;display:flex;align-items:center;">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+              </svg>
+              <span style="position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:var(--pink);border-radius:50%;border:2px solid var(--bg);"></span>
+            </div>
+            <svg class="avatar-icon" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+              <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="8" r="3" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      Baseline + <strong>pink notification dot</strong> (<code>8px</code> circle at <code>top: -2px; right: -2px</code>
+      of the bell icon wrapper). The <code>2px solid white</code> border prevents bleed into the icon. Signals
+      unread activity at a glance.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V7 — Avatars Instead of Icon ===== -->
+<div class="variant" id="variant-7">
+  <div class="variant-header">
+    <h2><span class="num">V7</span>Avatars Instead of Icon</h2>
+    <span class="tag tiffany">user</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:44px;padding:8px 16px 0;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:16px">
+          <div class="header-actions">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+            <div class="user-avatar" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#ff8fab);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;letter-spacing:-0.3px;flex-shrink:0;">JD</div>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      Replaces the brand avatar icon with a <strong>user avatar</strong> — initials in a pink gradient circle
+      (<code>border-radius: 50%</code>). More personal, suitable for social or multi-user apps. The <strong>28px</strong>
+      size balances visibility with header height.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V8 — Short & Compact ===== -->
+<div class="variant" id="variant-8">
+  <div class="variant-header">
+    <h2><span class="num">V8</span>Short &amp; Compact</h2>
+    <span class="tag">40px</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:40px;padding:6px 12px 0;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:14px">
+          <div class="header-actions" style="gap:10px;">
+            <svg class="icon" style="width:18px;height:18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      <strong>Ultra-compact.</strong> <code>height: 40px</code>, tighter <code>padding: 6px 12px</code>, smaller logo
+      (14px), smaller icons (18px). No avatar — bell only. <strong>Maximizes content space</strong> for dense screens
+      like feeds or chats.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V9 — With Search ===== -->
+<div class="variant" id="variant-9">
+  <div class="variant-header">
+    <h2><span class="num">V9</span>With Search</h2>
+    <span class="tag">52px</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:52px;padding:8px 16px 0;">
+          <div class="header-actions" style="gap:8px;width:100%;">
+            <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:16px;flex-shrink:0">
+            <div class="search-bar" style="display:flex;align-items:center;background:var(--surface-secondary);border-radius:8px;padding:0 10px;height:32px;flex:1;margin:0 12px;gap:6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-dim);flex-shrink:0;">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <input type="text" placeholder="Search" style="border:none;background:none;outline:none;font-size:13px;font-family:var(--font);color:var(--text-primary);width:100%;" value="">
+            </div>
+            <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+              <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+              <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="8" r="3" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      <strong>Search-integrated header.</strong> Logo stays on the left, a <code>search bar</code> sits in the middle
+      (flex: 1), avatar on the right. The search bar uses <code>var(--surface-secondary)</code> bg and a subtle
+      8px radius. Bell icon is removed — search replaces it as the primary action.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V10 — Accent Bottom Line ===== -->
+<div class="variant" id="variant-10">
+  <div class="variant-header">
+    <h2><span class="num">V10</span>Accent Bottom Line</h2>
+    <span class="tag pink">brand</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:44px;padding:8px 16px 0;border-bottom:2px solid var(--pink);padding-bottom:calc(8px - 1px);">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:16px">
+          <div class="header-actions">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+            <svg class="avatar-icon" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="6" fill="var(--pink)"/>
+              <path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="8" r="3" fill="#fff"/>
+            </svg>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      Baseline + <code>border-bottom: 2px solid var(--pink)</code>. A <strong>brand accent line</strong> that ties the
+      header to LOVII's identity. The pink line is subtle but unmistakable — works well for branded experiences
+      without overwhelming the UI.
+    </div>
+  </div>
+</div>
+
+<!-- ===== V11 — Correct: Logo + Avatar with Notif Dot ===== -->
+<div class="variant" id="variant-11">
+  <div class="variant-header">
+    <h2><span class="num">V11</span>Correct</h2>
+    <span class="tag pink">selected</span>
+  </div>
+  <div class="variant-body">
+    <div class="phone-preview">
+      <div class="phone-status">
+        <span class="time">9:41</span>
+        <span class="icons">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2s-2-.9-2-2a2 2 0 0 1 2-2z"/><path d="M2 22c0-4.4 3.6-8 8-8h4c4.4 0 8 3.6 8 8H2z"/><path d="M18 8a6 6 0 0 0-12 0"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4h16v12H4z"/></svg>
+        </span>
+      </div>
+      <div class="phone-content">
+        <div class="header" style="height:44px;padding:8px;">
+          <img class="header-logo" src="../assets/lovii-logo-light.svg" alt="LOVII" style="height:28px">
+          <div class="header-actions">
+            <div class="avatar-wrap">
+              <svg class="avatar-icon" viewBox="0 0 512 512" fill="none" style="width:28px;height:28px;border-radius:8px;">
+                <rect width="512" height="512" rx="80" fill="var(--pink)"/>
+                <path d="M160 360c0-50 43-90 96-90s96 40 96 90" stroke="#fff" stroke-width="24" stroke-linecap="round" fill="none"/>
+                <circle cx="256" cy="200" r="60" fill="#fff"/>
+                <path d="M210 320l-38-44-24 20 62 66 100-106-30-28-70 77z" fill="#fff" transform="translate(0,-15)"/>
+              </svg>
+              <span class="notif-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="header-placeholder">content area</div>
+      </div>
+    </div>
+    <div class="variant-note">
+      <strong>Финальный вариант.</strong> Высота хедера 44px, паддинг 8px со всех сторон. Логотип 28px и аватар 28×28px — одинаковые отступы везде.
+      справа только аватар профиля 28×28px с розовой точкой уведомлений. Колокольчик убран.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
