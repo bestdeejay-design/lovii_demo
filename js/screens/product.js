@@ -5,14 +5,14 @@ function screenProduct() {
 
   if (!product) {
     return `
-      <div class="top-bar">
-        <button class="back-btn" data-nav="search">‹</button>
-        <span class="top-title">Товар</span>
+      <div class="screen-head">
+        <button class="back-btn" data-nav="search" aria-label="Назад">${Icon('arrow-left', 'icon-sm')}</button>
+        <span class="screen-title">Товар</span>
       </div>
       <div class="empty-state">Товар не найден</div>`
   }
 
-  const storeName = getProductStoreName(product.storeId)
+  const storeName = escapeHtml(getProductStoreName(product.storeId))
   const priceLabel = `${product.price.toLocaleString('ru-RU')}₽`
   const badges = product.badges || []
   const badgesHtml = badges.length
@@ -29,18 +29,18 @@ function screenProduct() {
     : `<div class="add-big" data-act="add" data-id="${product.id}">+ В корзину</div>`
 
   return `
-    <div class="top-bar">
-      <button class="back-btn" data-nav="search">‹</button>
-      <span class="top-title">Товар</span>
+    <div class="screen-head">
+      <button class="back-btn" data-nav="search" aria-label="Назад">${Icon('arrow-left', 'icon-sm')}</button>
+      <span class="screen-title">${escapeHtml(product.name)}</span>
     </div>
     <div class="product-detail">
       <div class="hero">
         ${badgesHtml}
-        <img class="hero-img" src="${product.image}" alt="${product.name}">
+        <img class="hero-img" src="${product.image}" alt="${escapeHtml(product.name)}">
       </div>
       <div class="detail-info">
         <div class="store">${storeName}</div>
-        <div class="name">${product.name}</div>
+        <div class="name">${escapeHtml(product.name)}</div>
         <div class="price">${priceLabel}</div>
         <div class="desc">Свежая поставка от проверенного партнёра LOVII. Доставка в течение часа по выбранному адресу.</div>
         ${btn}

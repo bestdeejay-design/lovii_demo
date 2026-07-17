@@ -11,7 +11,8 @@ const LOVII = {
     this.state.role = role
     localStorage.setItem('lovii_role', role)
     this.renderNav()
-    this.navigate('home')
+    window.location.hash = 'home'
+    this.render()
   },
 
   setTheme(theme) {
@@ -41,32 +42,41 @@ const LOVII = {
   renderScreen(hash) {
     const content = document.getElementById('app-content')
     if (!content) return
-    const base = hash.split('?')[0]
+    const base = hash.replace(/^#/, '').split('?')[0]
 
+    // Exact matches for multi-segment routes first
     switch (base) {
-      case 'product':      content.innerHTML = screenProduct(); break
-      case 'home':         content.innerHTML = screenHome(); break
-      case 'search':       content.innerHTML = screenSearch(); break
-      case 'orders':       content.innerHTML = screenOrders(); break
-      case 'profile':      content.innerHTML = screenProfile(); break
-      case 'partner':      content.innerHTML = screenPartnerDashboard(); break
       case 'partner/products':  content.innerHTML = screenPartnerProducts(); break
       case 'partner/orders':    content.innerHTML = screenPartnerOrders(); break
       case 'partner/reports':   content.innerHTML = screenPartnerReports(); break
-      case 'rep':          content.innerHTML = screenRepDashboard(); break
-      case 'rep/points':   content.innerHTML = screenRepPoints(); break
-      case 'rep/income':   content.innerHTML = screenRepIncome(); break
-      case 'rep/profile':  content.innerHTML = screenRepProfile(); break
-      case 'ambassador':       content.innerHTML = screenAmbassadorDashboard(); break
-      case 'ambassador/reps':  content.innerHTML = screenAmbassadorReps(); break
+      case 'rep/points':        content.innerHTML = screenRepPoints(); break
+      case 'rep/income':        content.innerHTML = screenRepIncome(); break
+      case 'rep/profile':       content.innerHTML = screenRepProfile(); break
+      case 'rep/map':           content.innerHTML = screenRepMap(); break
+      case 'ambassador/reps':   content.innerHTML = screenAmbassadorReps(); break
       case 'ambassador/income': content.innerHTML = screenAmbassadorIncome(); break
       case 'ambassador/training': content.innerHTML = screenAmbassadorTraining(); break
-      case 'promo':
-      case 'city-select':
-      case 'bonus-info':
-        content.innerHTML = screenHome(); break
-      default:
-        window.location.hash = 'home'
+      default: {
+        // Prefix matches for single-segment routes with dynamic IDs
+        const route = base.split('/')[0]
+        switch (route) {
+          case 'partner':           content.innerHTML = screenPartnerDashboard(); break
+          case 'rep':               content.innerHTML = screenRepDashboard(); break
+          case 'ambassador':        content.innerHTML = screenAmbassadorDashboard(); break
+          case 'store':             content.innerHTML = screenStore(); break
+          case 'product':           content.innerHTML = screenProduct(); break
+          case 'home':              content.innerHTML = screenHome(); break
+          case 'search':            content.innerHTML = screenSearch(); break
+          case 'orders':            content.innerHTML = screenOrders(); break
+          case 'profile':           content.innerHTML = screenProfile(); break
+          case 'cart':              content.innerHTML = screenCart(); break
+          case 'promo':             content.innerHTML = screenPromo(); break
+          case 'city-select':       content.innerHTML = screenCitySelect(); break
+          case 'bonus-info':        content.innerHTML = screenBonusInfo(); break
+          default:
+            window.location.hash = 'home'
+        }
+      }
     }
   },
 
@@ -74,11 +84,32 @@ const LOVII = {
     const onHash = () => { this.render() }
     window.addEventListener('hashchange', onHash)
 
+    document.getElementById('app').addEventListener('input', e => {
+      const searchInput = e.target.closest('[data-act="search-input"]')
+      if (searchInput) {
+        searchState.query = searchInput.value
+        if (typeof renderSearchResults === 'function') renderSearchResults()
+        return
+      }
+    })
+
     document.getElementById('app').addEventListener('click', e => {
+      const anchor = e.target.closest('a[href="#"]')
+      if (anchor) { e.preventDefault(); return }
+
       const gridItem = e.target.closest('[data-nav]')
       if (gridItem) {
         e.preventDefault()
-        this.navigate(gridItem.dataset.nav)
+        const storeId = gridItem.dataset.store
+        if (storeId != null && (gridItem.dataset.nav === 'store' || gridItem.classList.contains('p-order') || gridItem.classList.contains('store-card'))) {
+          this.navigate('store/' + storeId)
+        } else if (gridItem.dataset.city) {
+          localStorage.setItem('lovii_city', gridItem.dataset.city)
+          showToast('Город изменён')
+          this.navigate(gridItem.dataset.nav || 'home')
+        } else {
+          this.navigate(gridItem.dataset.nav)
+        }
         return
       }
       const tabItem = e.target.closest('.tab-item')
@@ -105,15 +136,17 @@ const LOVII = {
         const row = catChip.closest('.cat-row')
         if (row) row.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'))
         catChip.classList.add('active')
+        searchState.category = catChip.dataset.cat || null
+        if (typeof renderSearchResults === 'function') renderSearchResults()
         return
       }
-      const pOrder = e.target.closest('.p-order')
-      if (pOrder) {
-        const id = pOrder.dataset.store
-        if (id) {
-          this.navigate('store/' + id)
-          return
-        }
+      const searchClear = e.target.closest('[data-act="search-clear"]')
+      if (searchClear) {
+        searchState.query = ''
+        const input = document.querySelector('[data-act="search-input"]')
+        if (input) input.value = ''
+        if (typeof renderSearchResults === 'function') renderSearchResults()
+        return
       }
       const storeToggle = e.target.closest('#storeViewToggle')
       if (storeToggle) {
@@ -138,6 +171,32 @@ const LOVII = {
         if (window.location.hash === '#home' || window.location.hash === '') {
           this.render()
         }
+        return
+      }
+      const checkoutBtn = e.target.closest('[data-act="checkout"]')
+      if (checkoutBtn) {
+        e.stopPropagation()
+        const cart = getCart()
+        if (Object.keys(cart).length === 0) return
+        const orderNum = Date.now().toString(36).toUpperCase()
+        const orders = JSON.parse(localStorage.getItem('lovii_orders') || '[]')
+        const items = Object.entries(cart).map(([id, qty]) => {
+          const p = getProducts().find(x => x.id === Number(id))
+          return p ? { id: p.id, name: p.name, price: p.price, qty, storeId: p.storeId } : null
+        }).filter(Boolean)
+        orders.unshift({
+          id: orderNum,
+          date: new Date().toLocaleDateString('ru-RU'),
+          time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+          amount: items.reduce((s, i) => s + i.price * i.qty, 0),
+          status: 'preparing',
+          items
+        })
+        localStorage.setItem('lovii_orders', JSON.stringify(orders))
+        localStorage.setItem('lovii_cart', '{}')
+        updateCartPill()
+        showToast(`Заказ ${orderNum} оформлен`)
+        this.navigate('orders')
         return
       }
       const addBtn = e.target.closest('.add-btn, .add-big')

@@ -18,12 +18,12 @@ function clientOrders() {
   active.forEach(o => {
     const statusText = o.status === 'preparing' ? 'Готовится' : 'В пути'
     const color = o.status === 'preparing' ? 'pink' : 'tiffany'
-    activeHtml += OrderRow(o.emoji || 'package', o.store, o.amount.toLocaleString() + '₽', statusText, color)
+    activeHtml += OrderRow(o, escapeHtml(o.store), o.amount.toLocaleString() + '₽', statusText, color)
   })
 
   let historyHtml = ''
   history.forEach(o => {
-    historyHtml += OrderRow(o.emoji || 'package', o.store, o.amount.toLocaleString() + '₽', o.date, 'gray')
+    historyHtml += OrderRow(o, escapeHtml(o.store), o.amount.toLocaleString() + '₽', o.date, 'gray')
   })
 
   return `

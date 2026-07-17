@@ -18,7 +18,7 @@ function screenAmbassadorIncome() {
     </div>
     <div class="section-label">Доход по представителям</div>
     <div class="section-pad">
-      ${a.repList.map(r => TableRow(r.name, r.stores + ' точек', r.income.toLocaleString() + '₽')).join('')}
+      ${a.repList.map(r => TableRow(escapeHtml(r.name), r.stores + ' точек', r.income.toLocaleString() + '₽')).join('')}
     </div>
   `
 }

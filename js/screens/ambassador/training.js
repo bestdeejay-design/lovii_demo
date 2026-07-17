@@ -14,7 +14,7 @@ function screenAmbassadorTraining() {
 
   return `
     <div class="card" style="text-align:center;margin:0 16px;">
-      <div style="font-size:24px;margin-bottom:4px;">📚</div>
+      <div style="font-size:24px;margin-bottom:4px;">${Icon('star')}</div>
       <div style="font-size:13px;font-weight:600;">База знаний</div>
       <div style="font-size:10px;color:var(--text-secondary);margin-top:2px;">${materials.length} материалов для изучения</div>
     </div>

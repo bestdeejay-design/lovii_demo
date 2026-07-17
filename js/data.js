@@ -2,26 +2,26 @@
 
 const MOCK = {
   stores: [
-    { id: 1, name: 'Пекарня #23', category: 'bakery', emoji: '🍞', rating: 4.8, distance: '1.2км', eta: '25 мин', address: 'ул. Тверская, 23', orders: 45, revenue: 54000, active: true, image: 'assets/img/bakery.jpg' },
-    { id: 2, name: 'Цветы Fresh', category: 'flowers', emoji: '💐', rating: 4.9, distance: '2.3км', eta: '40 мин', address: 'ул. Арбат, 12', orders: 28, revenue: 33600, active: true, image: 'assets/img/floristica.jpg' },
-    { id: 3, name: 'Кофе daily', category: 'coffee', emoji: '☕', rating: 4.7, distance: '0.8км', eta: '15 мин', address: 'ул. Пушкина, 5', orders: 62, revenue: 37200, active: true, image: 'assets/img/cafe.jpg' },
-    { id: 4, name: 'Суши Мия', category: 'restaurant', emoji: '🍣', rating: 4.6, distance: '3.1км', eta: '50 мин', address: 'ул. Новая, 42', orders: 18, revenue: 21600, active: false, image: 'assets/img/sushi-rolls.jpg' }
+    { id: 1, name: 'Пекарня #23', category: 'bakery', icon: 'bread', rating: 4.8, distance: '1.2км', eta: '25 мин', address: 'ул. Тверская, 23', orders: 45, revenue: 54000, active: true, image: 'assets/img/bakery.jpg' },
+    { id: 2, name: 'Цветы Fresh', category: 'flowers', icon: 'flower', rating: 4.9, distance: '2.3км', eta: '40 мин', address: 'ул. Арбат, 12', orders: 28, revenue: 33600, active: true, image: 'assets/img/floristica.jpg' },
+    { id: 3, name: 'Кофе daily', category: 'coffee', icon: 'coffee', rating: 4.7, distance: '0.8км', eta: '15 мин', address: 'ул. Пушкина, 5', orders: 62, revenue: 37200, active: true, image: 'assets/img/cafe.jpg' },
+    { id: 4, name: 'Суши Мия', category: 'restaurant', icon: 'sushi', rating: 4.6, distance: '3.1км', eta: '50 мин', address: 'ул. Новая, 42', orders: 18, revenue: 21600, active: false, image: 'assets/img/sushi-rolls.jpg' }
   ],
 
   products: [
     { id: 1, storeId: 1, name: 'Круассан классический', price: 190, oldPrice: 250, active: true, orders: 142, image: 'assets/img/croissant.jpg', badges: [{ type: 'top', label: 'Топ' }, { type: 'discount', label: '−20%' }] },
     { id: 2, storeId: 1, name: 'Багет на закваске', price: 120, active: true, orders: 89, image: 'assets/img/baguette.jpg', badges: [{ type: 'season', label: 'Сезон' }, { type: 'sugarfree', label: 'Без сахара' }] },
-    { id: 3, storeId: 1, name: 'Эклер шоколадный', price: 250, oldPrice: 390, active: true, orders: 67, image: 'assets/img/eclai.jpg', badges: [{ type: 'hit', label: 'Хит' }, { type: 'eco', label: 'Эко' }] },
+    { id: 3, storeId: 1, name: 'Эклер шоколадный', price: 250, oldPrice: 390, active: true, orders: 67, image: 'assets/img/eclair.jpg', badges: [{ type: 'hit', label: 'Хит' }, { type: 'eco', label: 'Эко' }] },
     { id: 4, storeId: 1, name: 'Чизкейк Нью-Йорк', price: 390, active: false, orders: 34, image: 'assets/img/cheesecake.jpg', badges: [{ type: 'new', label: 'Новинка' }] },
     { id: 5, storeId: 2, name: 'Букет "Нежность"', price: 2900, oldPrice: 3500, active: true, orders: 56, image: 'assets/img/bouquet-tenderness.jpg', badges: [{ type: 'sale', label: 'Акция' }, { type: 'new', label: 'Новинка' }] },
     { id: 6, storeId: 2, name: 'Букет "Яркий день"', price: 3500, active: true, orders: 42, image: 'assets/img/bouquet-passion.jpg', badges: [{ type: 'hit', label: 'Хит' }] }
   ],
 
   orders: [
-    { id: 312, storeId: 1, store: 'Пекарня #23', emoji: '🍞', amount: 1200, status: 'preparing', items: ['Круассан ×2', 'Багет ×1'], time: '15 мин', date: 'сегодня' },
-    { id: 311, storeId: 2, store: 'Цветы Fresh', emoji: '💐', amount: 2300, status: 'delivering', items: ['Букет "Нежность" ×1'], time: '20 мин', date: 'сегодня' },
-    { id: 310, storeId: 3, store: 'Кофе daily', emoji: '☕', amount: 560, status: 'delivered', items: ['Капучино ×2', 'Круассан ×1'], time: null, date: 'вчера' },
-    { id: 309, storeId: 1, store: 'Пекарня #23', emoji: '🍞', amount: 890, status: 'delivered', items: ['Эклер ×1', 'Багет ×2'], time: null, date: 'вчера' }
+    { id: 312, storeId: 1, store: 'Пекарня #23', icon: 'bread', amount: 1200, status: 'preparing', items: ['Круассан ×2', 'Багет ×1'], time: '15 мин', date: 'сегодня' },
+    { id: 311, storeId: 2, store: 'Цветы Fresh', icon: 'flower', amount: 2300, status: 'delivering', items: ['Букет "Нежность" ×1'], time: '20 мин', date: 'сегодня' },
+    { id: 310, storeId: 3, store: 'Кофе daily', icon: 'coffee', amount: 560, status: 'delivered', items: ['Капучино ×2', 'Круассан ×1'], time: null, date: 'вчера' },
+    { id: 309, storeId: 1, store: 'Пекарня #23', icon: 'bread', amount: 890, status: 'delivered', items: ['Эклер ×1', 'Багет ×2'], time: null, date: 'вчера' }
   ],
 
   partners: {
@@ -38,11 +38,11 @@ const MOCK = {
     name: 'Александра',
     phone: '+7 (999) 123-45-67',
     status: 'representative',
-    statusEmoji: '🥈',
+    statusIcon: 'star',
     points: 24,
     pointsToNext: 30,
     nextStatus: 'mayor',
-    nextEmoji: '🥇',
+    nextIcon: 'award',
     monthlyIncome: 46500,
     totalRevenue: 124800,
     stores: [
@@ -76,6 +76,11 @@ const MOCK = {
     name: 'Александра',
     phone: '+7 (999) 123-45-67',
     bonusBalance: 1250
+  },
+
+  governor: {
+    cities: ['Москва', 'Санкт-Петербург', 'Казань', 'Екатеринбург', 'Новосибирск'],
+    metrics: {}
   }
 }
 

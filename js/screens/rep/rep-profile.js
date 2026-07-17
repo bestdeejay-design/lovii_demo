@@ -9,7 +9,7 @@ function screenRepProfile() {
     <div class="section-pad" style="padding-top:8px;">
       <div class="card">
         <div style="display:flex;align-items:center;gap:8px;">
-          <div style="font-size:28px;">${r.statusEmoji}</div>
+          <div style="font-size:28px;">${Icon(r.statusIcon)}</div>
           <div>
             <div style="font-size:13px;font-weight:600;">${statusName}</div>
             <div style="font-size:10px;color:var(--text-secondary);">${r.points} баллов · код: LOVII-${String(r.points).padStart(4, '0')}</div>

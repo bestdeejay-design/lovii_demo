@@ -23,14 +23,14 @@ function screenHome() {
   return `
     ${promoBlock}
     <div class="grid-menu">
-      ${GridMenuItem('🛍', 'shopping-bag', 'pink', 'Каталог', '', 'home')}
-      ${GridMenuItem('📦', 'package', 'tiffany', 'Заказы', '3', 'orders')}
-      ${GridMenuItem('⭐', 'star', 'pink', 'Бонусы', '', 'profile')}
-      ${GridMenuItem('📊', 'bar-chart', 'tiffany', 'Отчёты', '', role === 'client' ? 'search' : role + '/reports')}
-      ${GridMenuItem('👥', 'users', 'tiffany', 'Команда', '', role === 'client' ? 'profile' : role + '/points')}
-      ${GridMenuItem('🏙', 'building', 'pink', 'Города', '', 'search')}
-      ${GridMenuItem('⚡', 'zap', 'chiffon', 'Акции', '', 'search')}
-      ${GridMenuItem('⚙', 'settings', 'chiffon', 'Настройки', '', 'profile')}
+      ${GridMenuItem('shopping-bag', 'pink', 'Каталог', '', 'search')}
+      ${GridMenuItem('package', 'tiffany', 'Заказы', '3', 'orders')}
+      ${GridMenuItem('star', 'pink', 'Бонусы', '', 'bonus-info')}
+      ${GridMenuItem('bar-chart', 'tiffany', 'Отчёты', '', role === 'client' ? 'search' : role + '/reports')}
+      ${GridMenuItem('users', 'tiffany', 'Команда', '', role === 'client' ? 'profile' : role + '/points')}
+      ${GridMenuItem('building', 'pink', 'Города', '', 'city-select')}
+      ${GridMenuItem('zap', 'chiffon', 'Акции', '', 'promo')}
+      ${GridMenuItem('settings', 'chiffon', 'Настройки', '', 'profile')}
     </div>
     ${contextBlock}
   `
@@ -43,7 +43,7 @@ function clientHomeBlock() {
     const color = o.status === 'preparing' ? 'pink' : 'tiffany'
     const statusText = o.status === 'preparing' ? 'Готовится' : 'В пути'
     const meta = `№${o.id} · ${o.time || 'скоро'}`
-    ordersHtml += OrderRow(o.emoji, o.store, o.amount.toLocaleString() + '₽', statusText, color, meta)
+    ordersHtml += OrderRow(o, escapeHtml(o.store), o.amount.toLocaleString() + '₽', statusText, color, meta)
   })
 
   return `
@@ -96,17 +96,17 @@ function repHomeBlock() {
   const statusName = 'Цифровой ' + r.status.charAt(0).toUpperCase() + r.status.slice(1)
 
   return `
-    ${StatusBanner(r.statusEmoji, statusName, r.points + ' точек · до Мэра ' + (r.pointsToNext - r.points), r.monthlyIncome.toLocaleString() + '₽', 'доход / мес')}
-    ${ProgressBlock('Прогресс до ' + r.nextEmoji + ' Цифровой Мэр', r.points, r.pointsToNext, pct)}
+    ${StatusBanner(r.statusIcon, statusName, r.points + ' точек · до Мэра ' + (r.pointsToNext - r.points), r.monthlyIncome.toLocaleString() + '₽', 'доход / мес')}
+    ${ProgressBlock('Прогресс до ' + Icon(r.nextIcon === 'award' ? 'star' : r.nextIcon) + ' Цифровой Мэр', r.points, r.pointsToNext, pct)}
     <div class="stats-grid-2">
       ${StatBlock(r.points, 'Торговых точек', 'pink')}
-      ${StatBlock('18', 'Активных', 'tiffany')}
+      ${StatBlock(MOCK.stores.filter(s => s.active).length, 'Активных', 'tiffany')}
       ${StatBlock(r.monthlyIncome.toLocaleString() + '₽', 'Доход в месяц', 'pink')}
       ${StatBlock('4.8', 'Средний рейтинг')}
     </div>
     <div class="section-label">Мои точки <a href="#rep/points">Подробнее</a></div>
     <div class="section-pad">
-      ${r.stores.slice(0, 3).map(s => TableRow(s.name, s.orders + ' зак.', s.revenue.toLocaleString() + '₽')).join('')}
+      ${r.stores.slice(0, 3).map(s => TableRow(escapeHtml(s.name), s.orders + ' зак.', s.revenue.toLocaleString() + '₽')).join('')}
     </div>
     <div style="padding:4px 16px 4px;">
       <a href="#rep" class="btn btn-ghost btn-block btn-sm">Перейти в дашборд представителя</a>
@@ -117,7 +117,7 @@ function repHomeBlock() {
 function ambassadorHomeBlock() {
   const a = MOCK.ambassador
   return `
-    ${StatusBanner('🤝', 'Амбасадор', a.reps + ' представителей · ' + a.storesTotal + ' точек', a.monthlyIncome.toLocaleString() + '₽', 'доход / мес')}
+    ${StatusBanner('users', 'Амбасадор', a.reps + ' представителей · ' + a.storesTotal + ' точек', a.monthlyIncome.toLocaleString() + '₽', 'доход / мес')}
     <div class="stats-grid-2">
       ${StatBlock(a.reps, 'Представителей', 'pink')}
       ${StatBlock(a.storesTotal, 'Точек в сети', 'tiffany')}
@@ -126,7 +126,7 @@ function ambassadorHomeBlock() {
     </div>
     <div class="section-label">Топ представителей <a href="#ambassador/reps">Все</a></div>
     <div class="section-pad">
-      ${a.repList.slice(0, 3).map(r => TableRow(r.name, r.stores + ' точек', r.income.toLocaleString() + '₽')).join('')}
+      ${a.repList.slice(0, 3).map(r => TableRow(escapeHtml(r.name), r.stores + ' точек', r.income.toLocaleString() + '₽')).join('')}
     </div>
     <div style="padding:4px 16px 4px;">
       <a href="#ambassador" class="btn btn-ghost btn-block btn-sm">Перейти в дашборд амбасадора</a>

@@ -8,7 +8,7 @@ function screenPartnerDashboard() {
   orders.forEach(o => {
     const color = o.status === 'new' ? 'pink' : o.status === 'preparing' ? 'tiffany' : 'success'
     const statusText = o.status === 'new' ? 'Новый' : o.status === 'preparing' ? 'Готовится' : 'Готов'
-    ordersHtml += POrder(o.id, o.items, o.amount + '₽', statusText, color)
+    ordersHtml += POrder(o.id, escapeHtml(o.items), o.amount + '₽', statusText, color)
   })
 
   return `

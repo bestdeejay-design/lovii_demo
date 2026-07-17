@@ -5,10 +5,10 @@ function screenProfile() {
   const u = MOCK.user
 
   const roles = [
-    { emoji: '👤', name: 'Клиент', desc: 'Покупайте в магазинах', value: 'client' },
-    { emoji: '🏪', name: 'Партнёр', desc: 'Управляйте точкой', value: 'partner' },
-    { emoji: '🏙️', name: 'Представитель', desc: 'Развивайте сеть', value: 'rep' },
-    { emoji: '🤝', name: 'Амбасадор', desc: 'Управляйте регионом', value: 'ambassador' }
+    { iconName: 'user', name: 'Клиент', desc: 'Покупайте в магазинах', value: 'client' },
+    { iconName: 'store', name: 'Партнёр', desc: 'Управляйте точкой', value: 'partner' },
+    { iconName: 'building', name: 'Представитель', desc: 'Развивайте сеть', value: 'rep' },
+    { iconName: 'users', name: 'Амбасадор', desc: 'Управляйте регионом', value: 'ambassador' }
   ]
 
   let roleCards = ''
@@ -16,7 +16,7 @@ function screenProfile() {
     const isActive = currentRole === r.value
     roleCards += `
       <div class="role-card${isActive ? ' active' : ''}" data-role="${r.value}">
-        <div class="role-icon">${r.emoji}</div>
+        <div class="role-icon">${Icon(r.iconName)}</div>
         <div class="role-name">${r.name}</div>
         <div class="role-desc">${r.desc}</div>
       </div>`

@@ -9,11 +9,11 @@ function screenRepPoints() {
     html += `
       <div class="p-order">
         <div class="left">
-          <span style="font-size:16px;">${store ? store.emoji : '🏪'}</span>
+          <span style="font-size:16px;">${store ? Icon(store.icon || 'store') : Icon('store')}</span>
           <div>
-            <div class="oname">${s.name}</div>
+            <div class="oname">${escapeHtml(s.name)}</div>
             <div class="or-meta">
-              ${store ? '★' + store.rating + ' · ' + store.address : ''}
+              ${store ? Icon('star') + ' ' + store.rating + ' · ' + escapeHtml(store.address) : ''}
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@ function screenRepPoints() {
   return `
     <div class="stats-grid-2">
       ${StatBlock(stores.length, 'Всего точек', 'pink')}
-      ${StatBlock('18', 'Активных', 'tiffany')}
+      ${StatBlock(MOCK.stores.filter(s => s.active).length, 'Активных', 'tiffany')}
     </div>
     <div style="height:8px;"></div>
     <div class="section-label">Все точки</div>

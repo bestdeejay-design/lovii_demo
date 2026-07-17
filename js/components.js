@@ -4,22 +4,24 @@ function Icon(name, cls = '') {
   return `<svg class="icon ${cls}"><use href="#i-${name}"/></svg>`
 }
 
-function Card(content, cls = '') {
-  return `<div class="card ${cls}">${content}</div>`
-}
-
-function SectionLabel(label, link = '') {
-  return `<div class="section-label">${label}${link ? `<a href="${link}">Подробнее</a>` : ''}</div>`
+function escapeHtml(str) {
+  if (str == null) return ''
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 }
 
 function MetricBlock(val, label, color = '') {
   return `<div class="metric-block"><div class="val ${color}">${val}</div><div class="lbl">${label}</div></div>`
 }
 
-function StatusBanner(emoji, title, sub, incomeVal, incomeLabel) {
+function StatusBanner(iconName, title, sub, incomeVal, incomeLabel) {
   return `
     <div class="status-banner">
-      <div class="rank-icon">${emoji}</div>
+      <div class="rank-icon">${Icon(iconName)}</div>
       <div class="info">
         <div class="title">${title}</div>
         <div class="sub">${sub}</div>
@@ -73,11 +75,11 @@ function TopCard(city, promoTitle, promoSub, timer) {
     </div>`
 }
 
-function OrderRow(emoji, name, price, tag, tagColor = 'pink', meta = '') {
+function OrderRow(item, name, price, tag, tagColor = 'pink', meta = '') {
   return `
     <div class="order-row">
       <div class="left">
-        <div class="icon-box ${tagColor}"><span class="or-emoji">${emoji}</span></div>
+        <div class="icon-box ${tagColor}">${Icon(item.icon || 'package')}</div>
         <div>
           <div class="or-name">${name}</div>
           ${meta ? `<div class="or-meta">${meta}</div>` : ''}
@@ -106,20 +108,11 @@ function MenuItem(iconName, iconColor, title, sub) {
     </div>`
 }
 
-function GridMenuItem(emoji, iconName, iconColor, label, badge = '', nav = '') {
+function GridMenuItem(iconName, iconColor, label, badge = '', nav = '') {
   return `
     <div class="grid-item"${nav ? ` data-nav="${nav}"` : ''}>
       <div class="iw ${iconColor}">${Icon(iconName)}</div>
       ${label}${badge ? `<span class="badge">${badge}</span>` : ''}
-    </div>`
-}
-
-function RoleCard(emoji, name, desc, active = false) {
-  return `
-    <div class="role-card${active ? ' active' : ''}" data-role="${name === 'Клиент' ? 'client' : name === 'Партнёр' ? 'partner' : name === 'Представитель' ? 'rep' : 'ambassador'}">
-      <div class="role-icon">${emoji}</div>
-      <div class="role-name">${name}</div>
-      <div class="role-desc">${desc}</div>
     </div>`
 }
 
@@ -153,21 +146,6 @@ function ProfileBanner(name, sub) {
     </div>`
 }
 
-function Tag(text, color = 'gray') {
-  return `<span class="tag tag-${color}">${text}</span>`
-}
-
-function Chip(text, iconName = '', active = false) {
-  return `<span class="chip${active ? ' active' : ''}">${iconName ? Icon(iconName, 'icon-sm') : ''}${text}</span>`
-}
-
-function CategoryChip(iconName, label, color, active = false) {
-  return `
-    <span class="chip${active ? ' active' : ''}">
-      <span class="iw ${color}"><svg class="icon icon-sm"><use href="#i-${iconName}"/></svg></span>${label}
-    </span>`
-}
-
 const BADGE_COLORS = {
   hit: 'pink',
   new: 'tiffany',
@@ -186,6 +164,8 @@ function Badge(type, label) {
 
 function ProductCard(product, opts = {}) {
   const { id, image, name, price, oldPrice, storeName, badges = [] } = product
+  const safeName = escapeHtml(name)
+  const safeStore = escapeHtml(storeName)
   const priceLabel = `${price.toLocaleString('ru-RU')}₽`
   const oldLabel = oldPrice ? `${oldPrice.toLocaleString('ru-RU')}₽` : ''
   const badgesHtml = badges.length
@@ -205,10 +185,10 @@ function ProductCard(product, opts = {}) {
       <div class="media">
         ${priceHtml}
         ${badgesHtml}
-        <img class="thumb" src="${image}" alt="${name}" loading="lazy">
+        <img class="thumb" src="${image}" alt="${safeName}" loading="lazy">
         <div class="caption glass-edge">
-          <div class="store">${storeName}</div>
-          <div class="pname">${name}</div>
+          <div class="store">${safeStore}</div>
+          <div class="pname">${safeName}</div>
         </div>
       </div>
       ${foot}
@@ -258,4 +238,18 @@ function changeCart(id, delta) {
   cart[id] = (cart[id] || 0) + delta
   if (cart[id] <= 0) delete cart[id]
   setCart(cart)
+}
+
+function showToast(message) {
+  const existing = document.querySelector('.toast')
+  if (existing) existing.remove()
+  const toast = document.createElement('div')
+  toast.className = 'toast'
+  toast.textContent = message
+  document.body.appendChild(toast)
+  setTimeout(() => toast.classList.add('show'), 10)
+  setTimeout(() => {
+    toast.classList.remove('show')
+    setTimeout(() => toast.remove(), 300)
+  }, 2500)
 }

@@ -1,1004 +1,534 @@
 # LOVII Design System
 
-## App Header (`#app-header`)
-
-| Property | Value |
-|---|---|
-| Height | `44px` |
-| Padding | `8px` (all sides, box-sizing border-box) |
-| Layout | Flex, `align-items: center`, `justify-content: space-between` |
-| Background | `var(--bg)` → `#ffffff` |
-
-### Logo (`#app-logo`)
-
-| Property | Value |
-|---|---|
-| Height | `28px` |
-| Position | Left side |
-| Padding from edge | `8px` (via header padding) |
-| File | `assets/lovii-logo-light.svg` |
-
-### Avatar / Profile Icon (`.avatar-icon`)
-
-| Property | Value |
-|---|---|
-| Size | `28×28px` |
-| Border radius | `8px` |
-| Implementation | Inline SVG (not an image file) |
-| Background | `var(--pink)` → `#f64a8a` |
-| Icon content | White person silhouette (head + body) with checkmark |
-| Position | Right side |
-| Padding from edge | `8px` (via header padding) |
-| Wrapper | `.avatar-wrap` — `position: relative` |
-
-### Notification Dot (`.notif-dot`)
-
-| Property | Value |
-|---|---|
-| Position | Absolute on `.avatar-wrap`: `top: -2px; right: -2px` |
-| Size | `10×10px` |
-| Color | `var(--pink)` → `#f64a8a` |
-| Border | `2px solid var(--bg)` (prevents bleed into icon) |
-| Shape | Circle (`border-radius: 50%`) |
-
-### Rules
-- No bell icon — only logo (left) + profile avatar (right)
-- Logo and avatar must be the same height/size (`28px`)
-- Equal spacing: `8px` from all edges
-- Notification dot on avatar only, not on a separate bell
+> Canonical, source-of-truth design language for the LOVII demo app (fake phone-frame SPA).
+> This document MUST match `css/demo.css` exactly. Where the code diverges from a
+> recommended convention, the divergence is called out explicitly under
+> **"Use this, not that"** and listed in **Known Gaps To Fix**.
+>
+> Downstream consumers: CSS, JS, UI/UX, and data agents all build from this file.
+> It is self-contained — do not infer tokens that are not listed here.
 
 ---
 
-# Top Card (Location + Promo)
+## 0. Base Rules (non-negotiable)
 
-```
-┌─ top-card ────────────────────────────────────┐
-│  📍 Москва                      Сменить       │
-│  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│
-│  [Акция]                                       │
-│  −20% на выпечку                     🕐 4 ч   │
-│  В Пекарне #23 до конца дня                    │
-│  Подробнее ›                                    │
-└────────────────────────────────────────────────┘
-```
+These are the project's stated base rules. They override any local convenience in the code.
 
-## Container (`.top-card`)
-
-| Property | Value |
-|---|---|
-| Background | `#fff` (white) |
-| Border | `1px solid var(--border)` |
-| Border radius | `14px` |
-| Shadow | `0 2px 12px rgba(0,0,0,0.04)` |
-| Margin | `8px 16px` |
-| Overflow | `hidden` |
-
-## Location Row (`.top-card-loc`)
-
-| Property | Value |
-|---|---|
-| Layout | Flex, `align-items: center`, `gap: 4px` |
-| Padding | `10px 14px 0` |
-| Font size | `11px` |
-| Color | `var(--text-dim)` |
-| City name | `<span>` — `font-weight: 600`, `color: var(--text-primary)` |
-| Сменить link | `.top-card-change` — `margin-left: auto`, `color: var(--pink)`, `font-weight: 500`, `cursor: pointer` |
-
-## Divider (`.top-card-divider`)
-
-| Property | Value |
-|---|---|
-| Margin | `8px 14px 0` |
-| Height | `1px` |
-| Background | `var(--border)` |
-
-## Body (`.top-card-body`)
-
-| Property | Value |
-|---|---|
-| Layout | Flex, `justify-content: space-between`, `align-items: flex-start` |
-| Padding | `12px 14px 8px` |
-
-### Badge (`.top-card-badge`)
-
-| Property | Value |
-|---|---|
-| Background | `var(--pink-light)` |
-| Text color | `var(--pink)` |
-| Font size | `8px` |
-| Font weight | `700` |
-| Border radius | `100px` |
-| Text transform | `uppercase`, `letter-spacing: 0.3px` |
-
-### Title (`.top-card-title`)
-
-| Property | Value |
-|---|---|
-| Font size | `15px` |
-| Font weight | `700` |
-| Color | `var(--text-primary)` |
-| Margin bottom | `2px` |
-
-### Subtitle (`.top-card-sub`)
-
-| Property | Value |
-|---|---|
-| Font size | `10px` |
-| Color | `var(--text-secondary)` |
-
-### Timer (`.top-card-timer`)
-
-| Property | Value |
-|---|---|
-| Display | Flex, `align-items: center`, `gap: 4px` |
-| Padding | `5px 10px` |
-| Background | `var(--pink-light)` |
-| Border radius | `100px` |
-| Font size | `9px` |
-| Font weight | `600` |
-| Color | `var(--pink)` |
-
-## Action Row (`.top-card-action`)
-
-| Property | Value |
-|---|---|
-| Padding | `4px 14px 12px` |
-
-### Link (`.top-card-link`)
-
-| Property | Value |
-|---|---|
-| Display | Inline flex, `align-items: center`, `gap: 2px` |
-| Font size | `10px` |
-| Font weight | `600` |
-| Color | `var(--tiffany)` → `#0ABAB5` |
-| Cursor | `pointer` |
+1. **No gray page backgrounds.** The app page background is `--bg` (`#ffffff`). The only
+   "gray" token, `--surface-secondary` (`#F8F8F8`), is a *card fill*, never a page/section
+   background. Do not introduce gray page backgrounds.
+2. **Spacing follows the home-screen rules.** Horizontal content padding is `16px` everywhere
+   (see `--space-*` scale). Do not invent ad-hoc horizontal insets.
+3. **Emoji icons are banned.** All icons are Tabler-style SVG `<symbol>` sprites using
+   `currentColor`. Emoji currently appear in `.or-emoji`, `.role-icon`, `.store-badge`, and
+   `.status-banner .rank-icon` — these are **legacy and must be replaced** (see Known Gaps).
+4. **One canonical card radius.** `12px` via `--radius-lg`. The ad-hoc `14px` literals in the
+   code are drift and must be unified (see Known Gaps).
+5. **One elevation token.** Card shadow is `0 1px 3px var(--shadow)` (soft). The heavier
+   `0 2px 12px` shadows on the home-screen cards are legacy and should converge (see Known Gaps).
 
 ---
 
-# Grid Menu Cards
+## 1. Design Tokens (every custom property in `demo.css`)
 
-## Card (`.grid-item`)
+This is the complete, verbatim list of CSS custom properties currently defined in
+`css/demo.css` `:root`. **Do not invent tokens that are not in this table.**
 
-| Property | Value |
-|---|---|
-| Background | `#fff` (white) |
-| Border | `1px solid var(--border)` → `#ddd` on hover |
-| Border radius | `14px` |
-| Padding | `16px 6px` |
-| Shadow (default) | none |
-| Shadow (hover) | `0 4px 12px rgba(0,0,0,0.06)` |
-| Hover lift | `translateY(-1px)` |
-| Transition | `all 0.2s cubic-bezier(0.16, 1, 0.3, 1)` |
+### 1.1 Brand / Accent
 
-## Icon Container (`.grid-item .iw`)
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--pink` | `#f64a8a` | yes | Primary brand accent |
+| `--pink-light` | `rgba(246,74,138,0.12)` | yes | Pink tint (badges, soft fills) |
+| `--pink-mid` | `rgba(246,74,138,0.06)` | yes | Faint pink (role-card.active bg) |
+| `--pink-dark` | `#c92a6a` | yes | Pink gradient end (banners) |
+| `--tiffany` | `#0ABAB5` | yes | Secondary accent (teal) |
+| `--tiffany-light` | `rgba(10,186,181,0.10)` | yes | Tiffany tint |
+| `--chiffon` | `#F5E6CC` | yes | Gold tint fill (menu-item icon-box) |
+| `--sand` | `#E8D5B7` | yes | Gold-family text on chiffon |
+| `--gold` | `#D4A854` | yes | Gold accent (grid-item .iw.chiffon, cat-tile.t-gold) |
+| `--gold-light` | `rgba(212,168,84,0.12)` | yes | Gold tint |
 
-| Property | Value |
-|---|---|
-| Size | `40×40px` |
-| Border radius | `12px` |
-| Icon size | `22×22px` (white SVG) |
-| Icon color | `#fff` |
+### 1.2 Shadows (color-only rgba — paired with a blur/offset at use site)
 
-### Accent Colors
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--shadow-sm` | `rgba(0,0,0,0.04)` | yes | Used as `0 2px 12px var(--shadow-sm)` (top-card) |
+| `--shadow` | `rgba(0,0,0,0.06)` | yes | Canonical soft shadow: `0 1px 3px var(--shadow)` |
+| `--pink-shadow` | `rgba(246,74,138,0.2)` | yes | Glow on pink icon boxes |
+| `--tiffany-shadow` | `rgba(10,186,181,0.2)` | yes | Glow on tiffany icon boxes |
+| `--gold-shadow` | `rgba(212,168,84,0.25)` | yes | Glow on gold icon boxes |
 
-| Class | Background | Glow Shadow |
+### 1.3 On-colored overlays
+
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--on-pink-text` | `rgba(255,255,255,0.9)` | yes | Text on pink gradient |
+| `--on-pink-overlay` | `rgba(255,255,255,0.15)` | yes | Circle bg / timer bg on pink gradient |
+
+### 1.4 Semantic extras
+
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--star` | `#FBBF24` | **NO** | Dead token — defined, never referenced. Remove. |
+
+### 1.5 Surfaces
+
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--bg` | `#ffffff` | yes | Page + white card background |
+| `--surface` | `#ffffff` | **NO** | Dead token — defined, never referenced as a value. Remove. |
+| `--surface-secondary` | `#F8F8F8` | yes (9×) | Light-gray card fill. Allowed as card fill ONLY, never page bg. |
+| `--border` | `#EEEEEE` | yes | Hairline border |
+| `--border-strong` | `#DDDDDD` | yes | Hover/active border |
+
+### 1.6 Text
+
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--text-primary` | `#1a1a1a` | yes | Headings, primary text |
+| `--text-secondary` | `#888888` | yes | Secondary/meta text |
+| `--text-dim` | `#bbbbbb` | yes | Dim labels, inactive nav |
+
+### 1.7 Semantic status
+
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--success` | `#34D399` | yes | Success text/icon |
+| `--success-light` | `rgba(52,211,153,0.12)` | yes | Success tint |
+| `--warning` | `#FBBF24` | **NO** | Dead token — defined, never referenced. Remove. |
+| `--danger` | `#EF4444` | **NO** | Dead token — defined, never referenced. Remove. |
+| `--danger-light` | `rgba(239,68,68,0.12)` | **NO** | Dead token — defined, never referenced. Remove. |
+
+### 1.8 Radii
+
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--radius-sm` | `6px` | yes | Small chips, price-tag, store-view-toggle |
+| `--radius-md` | `10px` | yes | Icon boxes (menu-item, chip), order-row icon-box |
+| `--radius-lg` | `12px` | yes | **CANONICAL card radius** |
+| `--radius-xl` | `16px` | yes | Banner radius (status-banner, profile-banner) |
+
+### 1.9 Layout
+
+| Token | Value | Used? | Notes |
+|---|---|---|---|
+| `--header-h` | `44px` | yes | App header height |
+| `--nav-h` | `50px` | yes | Bottom nav height |
+| `--safe-bottom` | `env(safe-area-inset-bottom, 0px)` | yes | iOS safe area |
+
+---
+
+## 2. Canonical Scales (recommended set + drift corrections)
+
+The code has drifted in four scales. Below is the **recommended canonical set** the team
+should converge on, with explicit "use this, not that" guidance.
+
+### 2.1 Radius Scale — **ONE canonical card radius: 12px**
+
+| Purpose | Use | Avoid |
 |---|---|---|
-| `.iw.pink` | `var(--pink)` → `#f64a8a` | `0 4px 10px rgba(246,74,138,0.2)` |
-| `.iw.tiffany` | `var(--tiffany)` → `#0ABAB5` | `0 4px 10px rgba(10,186,181,0.2)` |
-| `.iw.chiffon` | `#D4A854` (gold) | `0 4px 10px rgba(212,168,84,0.25)` |
+| Card / tile / panel | `var(--radius-lg)` = **12px** | `border-radius: 14px` (ad-hoc literal) |
+| Banner (gradient blocks) | `var(--radius-xl)` = 16px | — |
+| Icon box (32px) | `var(--radius-md)` = 10px | — |
+| Small chip / price-tag | `var(--radius-sm)` = 6px | — |
+| Pill (buttons, tags, badges) | `border-radius: 100px` | — |
 
-## Label (`.grid-item`)
+**Use this, not that:** Every card in the code should use `var(--radius-lg)` (12px).
+Currently **5 rules hardcode `border-radius: 14px`** (`.top-card`, `.orders-card`,
+`.promo-banner`, `.grid-item`, `.balance-card`). These are drift — replace with
+`var(--radius-lg)`. See Known Gaps §K2.
 
-| Property | Value |
-|---|---|
-| Font size | `10px` |
-| Font weight | `600` (semibold) |
-| Color | `var(--text-secondary)` → `#888888` |
-| Text align | `center` |
-| Gap above icon | `5px` |
+### 2.2 Shadow / Elevation Scale — **ONE elevation token**
 
-## Badge (`.grid-item .badge`)
-
-| Property | Value |
-|---|---|
-| Position | Absolute, `top: 6px; right: 6px` |
-| Background | `var(--pink)` → `#f64a8a` |
-| Text | White, `9px`, `font-weight: 700` |
-| Shape | Pill (`border-radius: 100px`) |
-
-## Layout (`.grid-menu`)
-
-| Property | Value |
-|---|---|
-| Columns | `repeat(4, 1fr)` |
-| Gap | `8px` |
-| Padding | `8px 16px` |
-
-## Color Mapping (8 items)
-
-| Item | Accent |
-|---|---|
-| Каталог | Pink |
-| Заказы | Tiffany |
-| Бонусы | Pink |
-| Отчёты | Tiffany |
-| Команда | Tiffany |
-| Города | Pink |
-| Акции | Chiffon/Gold |
-| Настройки | Chiffon/Gold |
-
----
-
-# Active Orders Block
-
-```
-section-label "Активные заказы"
-┌─ orders-card (shadow card) ───────────────────┐
-│  [icon]  Store Name              540₽  [tag]  │
-│         #2384 · 15 мин                        │
-│  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│
-│  [icon]  Store Name             1 280₽  [tag] │
-│         #4512 · курьер на месте               │
-└───────────────────────────────────────────────┘
-```
-
-## Container (`.orders-card`)
-
-| Property | Value |
-|---|---|
-| Background | `#fff` (white) |
-| Border radius | `14px` |
-| Shadow | `0 2px 12px rgba(0,0,0,0.06)` |
-| Margin | `0 16px` (aligns with `section-label` padding and `balance-card` margin) |
-| Padding | `4px 14px` |
-
-## Order Row (`.order-row`)
-
-| Property | Value |
-|---|---|
-| Padding | `13px 0` |
-| Layout | Flex, `align-items: center`, `justify-content: space-between` |
-| Divider | `border-top: 1px solid #f0f0f0` (between rows) |
-
-### Left Section
-| Property | Value |
-|---|---|
-| Layout | Flex, `align-items: center`, `gap: 8px`, `flex: 1` |
-
-### Icon Box
-
-| Property | Value |
-|---|---|
-| Size | `32×32px` |
-| Border radius | `10px` |
-| Display | Flex, centered |
-| Background | Solid accent color (`var(--pink)` / `var(--tiffany)`) |
-| Shadow | Glow: `0 3px 8px rgba(accent, 0.2)` |
-| Emoji | `<span class="or-emoji">` — plain text, `font-size: 15px` |
-
-### Name (`.or-name`)
-
-| Property | Value |
-|---|---|
-| Font size | `13px` |
-| Font weight | `600` (semibold) |
-| Color | `var(--text-primary)` |
-| Overflow | `ellipsis`, `white-space: nowrap` |
-
-### Meta (`.or-meta`)
-
-| Property | Value |
-|---|---|
-| Font size | `9px` |
-| Color | `var(--text-secondary)` |
-| Margin top | `1px` |
-
-### Right Section
-
-| Property | Value |
-|---|---|
-| Layout | Flex, `align-items: center`, `gap: 6px`, `flex-shrink: 0` |
-
-### Price (`.or-price`)
-
-| Property | Value |
-|---|---|
-| Font size | `13px` |
-| Font weight | `700` (bold) |
-| Color | `var(--text-primary)` |
-
-### Tag (`.tag`)
-
-| Property | Value |
-|---|---|
-| Padding | `2px 8px` |
-| Border radius | `100px` |
-| Font size | `9px` |
-| Font weight | `600` |
-
-| Class | Background | Text Color |
+| Level | Declaration | Use |
 |---|---|---|
-| `.tag-pink` | `var(--pink-light)` | `var(--pink)` |
-| `.tag-tiffany` | `var(--tiffany-light)` | `var(--tiffany)` |
+| Soft (canonical card) | `0 1px 3px var(--shadow)` | `.card`, `.metric-block`, `.stat-block`, `.menu-item`, `.p-order`, `.store-card`, `.search-bar`, `.progress-block` |
+| Glow (accent icon box) | `0 4px 10px var(--pink-shadow \| --tiffany-shadow \| --gold-shadow)` | `.grid-item .iw`, `.chip .iw`, `.cat-tile.active` |
+| Hover lift | `0 4px 12px var(--shadow)` + `translateY(-1px)` | `.grid-item:hover` |
+
+**Use this, not that:** The home-screen cards (`.top-card`, `.orders-card`, `.balance-card`)
+currently use the heavier `0 2px 12px var(--shadow)` (or `var(--shadow-sm)`). This is a
+second, inconsistent elevation. Converge all cards to `0 1px 3px var(--shadow)` unless a
+deliberate "raised" treatment is approved. See Known Gaps §K3.
+
+### 2.3 Spacing Scale — **recommended `--space-*` tokens**
+
+The code uses raw `px` values consistently. Map them to these recommended tokens so future
+work shares one vocabulary:
+
+| Token | Value | Where it appears in code |
+|---|---|---|
+| `--space-1` | `4px` | `.top-card-divider` margin-top, `.order-row + .order-row` gaps, `.tab-bar` margin, `.chip-row` padding |
+| `--space-2` | `8px` | Grid gap, `.card + .card` margin, `.metric-row` gap, `.section-top`, horizontal card padding insets |
+| `--space-3` | `12px` | `.card` padding, `.p-order` padding, `.menu-item` padding, `.progress-block` padding |
+| `--space-4` | `16px` | **Canonical horizontal content padding** (every screen), `.top-card`/`.orders-card`/`.balance-card` margins |
+| `--space-5` | `22px` | `.section-label` top/bottom margin (22px / 12px) |
+
+**Rule:** Horizontal content padding is **always 16px** (`--space-4`). Vertical rhythm uses
+`--space-2` (8px) and `--space-3` (12px). Do not introduce other horizontal insets.
+
+### 2.4 Typography Ramp
+
+Base: `font-family: 'Inter', -apple-system, sans-serif;` `font-size: 14px; line-height: 1.4;`
+Weights loaded: 400, 500, 600, 700, 800.
+
+| Role | Size | Weight | Color | Example class |
+|---|---|---|---|---|
+| Display / hero name | `22px` | 700 | `--text-primary` / `--pink` | `.balance-amount`, `.detail-info .name` |
+| Section title | `15px` | 700 | `--text-primary` | `.section-label`, `.top-card-title`, `.top-title` |
+| Banner strong | `15px` | 700 | white / `--bg` | `.promo-banner .text strong`, `.status-banner .income .val` |
+| Body / input | `13px` | 400–600 | `--text-primary` | `.or-name`, `.search-bar input`, `.oname` |
+| Sub-body | `11px` | 500–600 | `--text-secondary` | `.table-row .name`, `.menu-item .text .sub`, `.cat-name` |
+| Small / meta | `10px` | 500–600 | `--text-secondary` / `--text-dim` | `.top-card-sub`, `.balance-label`, `.or-meta` |
+| Tiny / caption | `9px` | 600–700 | `--text-secondary` / accent | `.tag`, `.top-card-timer`, `.grid-item` label |
+| Micro badge | `8px` | 700 | accent | `.top-card-badge` |
+
+**Weight convention:** 700 = emphasis/headline, 600 = semibold label, 500 = normal-medium,
+400 = body. Buttons: 600. Tags/badges: 600–700.
 
 ---
 
-# Balance Card
+## 3. Icon System
 
+### 3.1 Policy (MANDATORY)
+
+- **All icons are SVG `<symbol>` sprites** rendered via `<svg class="icon"><use href="#i-{name}"/></svg>`.
+- **Source:** Tabler Icons (outline, 24×24, `stroke="currentColor"`, `stroke-width="2"`,
+  round caps). Repo: `tabler/tabler-icons`, raw: `https://raw.githubusercontent.com/tabler/tabler-icons/master/icons/outline/{name}.svg`.
+- **Exception — Sushi:** No major set ships a sushi glyph. `i-sushi` is sourced from
+  **Lucide Lab** (`lucide-icons/lucide-lab`, `icons/sushi-2.svg`) — same 24×24 stroke style.
+- **Color:** always `currentColor`. Never hardcode `fill`/`stroke` hex in a symbol.
+- **Banned:** emoji, hardcoded colors (`fill="#141B34"` etc.), non-24×24 viewBox without normalization.
+- **Sprite location:** `#app-sprite` in `index.html`. JS helper: `Icon(name, cls)`.
+
+### 3.2 Size-pairing table (icon size ↔ text size)
+
+Icons are paired to the type size of their context. Use this table — do not free-size.
+
+| Text size | Paired icon size | Class / context |
+|---|---|---|
+| `12px` | **16px** | `.icon-sm`, `.section-label a`, `.menu-item .arrow`, `.search-bar .icon`, `.chip .icon` |
+| `14px` | **20px** | `.icon` (default), `.nav-item` base context |
+| `16px` | **24px** | `.icon-lg`, `.profile-banner .avatar .icon` |
+| `10–11px` | **14px** | `.top-card-loc .icon`, `.top-card-timer .icon`, `.promo-banner .timer .icon`, `.quick-btn .icon` |
+| `22px` tile | **22px** | `.grid-item .iw .icon`, `.nav-item .icon` |
+| `26px` tile | **26px** | `.cat-tile .icon` |
+
+> Note: `.nav-item .icon` is 22px (paired to the 9px nav label by visual weight, not the
+> 14px rule) — this is intentional and matches the bottom-nav spec.
+
+### 3.3 Available symbols in `#app-sprite` (30 total, current)
+
+Utility: `i-home`, `i-search`, `i-package`, `i-user`, `i-bell` (reserved, unused in nav),
+`i-store` (reserved), `i-star`, `i-bar-chart`, `i-users`, `i-building`, `i-zap` (utility,
+unused in UI), `i-settings`, `i-map-pin`, `i-shopping-bag`, `i-gift` (defined twice — see
+Known Gaps §K5), `i-clock`, `i-wallet`, `i-trending-up`, `i-chevron-right`, `i-chevron-left`,
+`i-plus`, `i-check`, `i-arrow-left`, `i-log-out`, `i-bread`, `i-flower`, `i-sushi`,
+`i-coffee`, `i-discount`.
+
+### 3.4 SVG sprite convention (a11y)
+
+Each `<symbol>` MUST carry a `<title>` child for accessibility. **Current state: ALL 30
+symbols lack `<title>`** — this triggers the pre-existing LSP `noSvgWithoutTitle` warning.
+Fix pattern:
+
+```html
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <title>Home</title>
+  <path .../>
+</symbol>
 ```
-┌─ balance-card (shadow card) ──────────────────┐
-│  БОНУСНЫЙ БАЛАНС                              │
-│  4 500 баллов                    Как получить? │
-│  до статуса Digital Representative            │
-└───────────────────────────────────────────────┘
-```
 
-## Container (`.balance-card`)
-
-| Property | Value |
-|---|---|
-| Background | `#fff` (white) |
-| Border radius | `14px` |
-| Shadow | `0 2px 12px rgba(0,0,0,0.06)` |
-| Padding | `14px 16px` |
-| Margin | `10px 16px 0` |
-| Layout | Flex, `justify-content: space-between`, `align-items: center` |
-
-### Balance Label (`.balance-label`)
-
-| Property | Value |
-|---|---|
-| Content | `Бонусный баланс` |
-| Font size | `10px` |
-| Color | `var(--text-dim)` → `#bbbbbb` |
-| Text transform | `uppercase` |
-| Letter spacing | `0.4px` |
-| Margin bottom | `4px` |
-
-### Balance Amount (`.balance-amount`)
-
-| Property | Value |
-|---|---|
-| Font size | `22px` |
-| Font weight | `700` (bold) |
-| Value color | `var(--pink)` → `#f64a8a` |
-
-#### "баллов" label
-
-| Property | Value |
-|---|---|
-| Font size | `13px` |
-| Font weight | `500` |
-| Color | `var(--text-secondary)` → `#888888` |
-
-### Balance Subtitle (`.balance-sub`)
-
-| Property | Value |
-|---|---|
-| Content | `до статуса Digital Representative` |
-| Font size | `10px` |
-| Color | `var(--text-secondary)` → `#888888` |
-| Margin top | `4px` |
-
-### Balance Link (`.balance-link`)
-
-| Property | Value |
-|---|---|
-| Content | `Как получить?` |
-| Font size | `10px` |
-| Font weight | `600` |
-| Color | `var(--tiffany)` → `#0ABAB5` |
-| Cursor | `pointer` |
-| White space | `nowrap` |
-| Flex shrink | `0` |
+See Known Gaps §K4.
 
 ---
 
-# Shared Tokens
+## 4. Component Library
 
-## Colors
+Every component below is implemented in `demo.css` (+ `js/components.js` where noted).
+Class names are the contract — use them as written.
 
-| Token | Value |
-|---|---|
-| `--bg` | `#ffffff` |
-| `--surface` | `#ffffff` |
-| `--surface-secondary` | `#F8F8F8` (avoid — gray, user rejected) |
-| `--pink` | `#f64a8a` |
-| `--pink-light` | `rgba(246,74,138,0.12)` |
-| `--tiffany` | `#0ABAB5` |
-| `--tiffany-light` | `rgba(10,186,181,0.10)` |
-| `--chiffon` | `#F5E6CC` |
-| `--gold` | `#D4A854` |
-| `--gold-light` | `rgba(212,168,84,0.12)` |
-| `--border` | `#EEEEEE` |
-| `--border-strong` | `#DDDDDD` |
-| `--text-primary` | `#1a1a1a` |
-| `--text-secondary` | `#888888` |
-| `--text-dim` | `#bbbbbb` |
+### 4.1 Shell & Layout
 
-## Sizing
+#### App Shell `#app`
+Flex column, `height: 100dvh`, `max-width: 480px`, centered. Contains header, `#app-content`, `#app-nav`.
 
-| Token | Value |
-|---|---|
-| `--header-h` | `44px` |
-| `--radius-lg` | `12px` |
-| `--radius-xl` | `16px` |
+#### Header `#app-header`
+`height: var(--header-h)` (44px); `padding: 8px 16px`; flex space-between; `background: var(--bg)`.
+- `#app-logo` — `height: 28px` (left).
+- `.header-actions` — flex, `gap: 12px` (right). Contains `.cart-btn` and `.avatar-wrap`.
+- `.avatar-wrap` — `position: relative`.
+- `.avatar-icon` — `28×28px`, `border-radius: 8px`, `background: var(--bg)`, `1px solid var(--border)`; inline SVG (person + checkmark).
+- `.notif-dot` — `10×10px`, `background: var(--pink)`, `2px solid var(--bg)`, `border-radius: 50%`, absolute `top:-2px; right:-2px`.
+- `.cart-btn` — `height: 28px`, `background: var(--pink)`, `border-radius: 8px`, contains `.cart-icon` (22×28px) + `.cart-num` (13px/700, white).
 
-## Layout
+**Rules:** No bell icon in header — logo (left) + cart + avatar (right) only. Logo and avatar equal 28px. 8px edge spacing.
 
-| Token | Value |
-|---|---|
-| Horizontal padding (content) | `16px` |
-| Grid menu padding | `8px 16px` |
-| Grid gap | `8px` |
-| Section label bottom margin | `6px` |
-| Shadow (soft) | `0 2px 12px rgba(0,0,0,0.06)` |
-| Shadow (glow, pink) | `0 4px 10px rgba(246,74,138,0.2)` |
-| Shadow (glow, tiffany) | `0 4px 10px rgba(10,186,181,0.2)` |
-| Shadow (glow, gold) | `0 4px 10px rgba(212,168,84,0.25)` |
+#### Content Area `#app-content`
+`flex: 1; overflow-y: auto; padding: 8px 0 0`. InnerHTML swapped on navigation.
+
+#### Bottom Nav `#app-nav` + `.nav-item`
+`height: calc(var(--nav-h) + var(--safe-bottom))`; `padding: 4px 0 calc(4px + var(--safe-bottom))`; `border-top: 1px solid var(--border)`; `background: var(--bg)`.
+- `.nav-item` — flex column, `gap: 2px`, `font-size: 9px`, `font-weight: 500`, `color: var(--text-dim)`; `.icon` 22×22px.
+- `.nav-item.active` — `color: var(--pink)`; icon `color: var(--pink)`.
+- Tabs: `home` (`i-home`), `search` (`i-search`), `orders` (`i-package`), `profile` (`i-user`).
+
+#### Splash `#splash`
+`position: fixed; inset: 0; z-index: 9999; background: var(--bg)`. `.splash-cover` animates
+`slide-cover 1.2s cubic-bezier(0.16,1,0.3,1)`. `.hidden` → opacity 0. JS: `showSplash()`.
+
+### 4.2 Shared UI Components
+
+#### Icons `.icon` / `.icon-sm` / `.icon-lg`
+See §3. Base: `.icon` 20×20, `.icon-sm` 16×16, `.icon-lg` 24×24.
+
+#### Card `.card`
+`background: var(--surface-secondary)`; `border-radius: var(--radius-lg)`; `padding: 12px`;
+`box-shadow: 0 1px 3px var(--shadow)`. `.card + .card { margin-top: 8px }`.
+> **Drift note:** `.card` uses `--surface-secondary` (gray) as fill. Per base rule #1 this is
+> allowed *only* as a card fill, not a page bg. If a white card is wanted, use `--bg`.
+
+#### Section Label `.section-label`
+Flex space-between; `font-size: 15px`, `font-weight: 700`, `color: var(--text-primary)`,
+`letter-spacing: -0.2px`; `padding: 0 16px`; `margin: 22px 0 12px` (first-of-type `margin-top: 4px`).
+Optional `a` link: `color: var(--pink)`, `font-weight: 600`, `font-size: 12px`.
+
+#### Buttons `.btn` + variants
+`display: inline-flex`; `padding: 8px 16px`; `border-radius: 100px`; `font-size: 12px`;
+`font-weight: 600`. Variants: `.btn-primary` (`--pink` bg, `--bg` text), `.btn-ghost`
+(transparent, `1px solid var(--border)`, `--text-secondary` text), `.btn-tiffany` (`--tiffany`
+bg, `--bg` text), `.btn-sm` (`padding: 6px 12px; font-size: 10px; min-height: 36px`),
+`.btn-block` (`display: flex; width: 100%`).
+
+#### Tags `.tag` + `.tag-*`
+`display: inline-flex`; `padding: 2px 8px`; `border-radius: 100px`; `font-size: 9px`;
+`font-weight: 600`. Variants: `.tag-pink` (`--pink-light`/`--pink`), `.tag-tiffany`
+(`--tiffany-light`/`--tiffany`), `.tag-success` (`--success-light`/`--success`), `.tag-gray`
+(`--surface-secondary` + `1px solid var(--border)` / `--text-secondary`).
+
+#### Badge `.badge` + `.b-*`
+`display: inline-flex`; `gap: 4px`; `font-size: 9px`; `font-weight: 700`; `text-transform: uppercase`;
+`letter-spacing: 0.4px`; `padding: 3px 8px`; `border-radius: 100px`; `color: #fff`;
+`box-shadow: 0 3px 8px rgba(0,0,0,0.18)`. Variants: `.b-pink`, `.b-tiffany`, `.b-gold`, `.b-dark`
+(`--text-primary`). Used in `.store-card .cat-badge` and `.product-card .badges`.
+
+### 4.3 Data Display
+
+#### Metric Block `.metric-row` / `.metric-block`
+Grid 3 cols, `gap: 8px`, `padding: 0 16px`. `.metric-block`: `background: var(--surface-secondary)`,
+`border-radius: var(--radius-lg)`, `padding: 10px`, `box-shadow: 0 1px 3px var(--shadow)`,
+text-align center. `.val` 17px/700 (`.pink`/`.tiffany` color), `.lbl` 10px uppercase `--text-secondary`.
+
+#### Stats Grid `.stats-grid-2` / `.stat-block`
+Grid 2 cols, `gap: 8px`, `padding: 0 16px`. `.stat-block`: `background: var(--surface-secondary)`,
+`border-radius: var(--radius-lg)`, `padding: 10px`, `box-shadow: 0 1px 3px var(--shadow)`.
+`.val` 16px/700, `.lbl` 10px uppercase `--text-secondary`.
+
+#### Status Banner `.status-banner`
+`margin: 0 16px; padding: 12px`; pink→`--pink-dark` gradient; `border-radius: var(--radius-xl)`;
+flex align-center `gap: 10px`. `.rank-icon` 36×36px circle, `background: var(--on-pink-overlay)`,
+**currently emoji** (legacy — replace with SVG). `.info .title` 13px/700 white, `.info .sub`
+10px opacity 0.8. `.income .val` 15px/700, `.income .lbl` 9px opacity 0.8.
+
+#### Progress Block `.progress-block` / `.bar` / `.bar-fill`
+`margin: 8px 16px; padding: 12px`; `background: var(--surface-secondary)`;
+`border-radius: var(--radius-lg)`; `box-shadow: 0 1px 3px var(--shadow)`. `.bar` 4px,
+`--border` bg, pill; `.bar-fill` `--pink`, transition width 0.3s.
+
+#### Table Row `.table-row` (in `.table-list`)
+Flex space-between; `padding: 8px 0`; `border-bottom: 1px solid var(--border)` (last child none).
+`.name` 11px/500, `.meta` 10px `--text-secondary`, `.value` 11px/600.
+
+#### Profile Banner `.profile-banner`
+`margin: 0 16px; padding: 16px`; pink→`--pink-dark` gradient; `border-radius: var(--radius-xl)`;
+text-align center; `color: var(--bg)`. `.avatar` 48×48px circle, `background: var(--on-pink-overlay)`,
+`.icon` 24×24px white. `.name` 16px/700, `.sub` 11px opacity 0.8.
+
+### 4.4 Interactive / Navigation
+
+#### Menu Item `.menu-item` (in `.menu-list`)
+Flex align-center `gap: 10px`; `padding: 12px`; `background: var(--bg)`; `1px solid var(--border)`;
+`border-radius: var(--radius-lg)`; `margin-bottom: 8px`; `box-shadow: 0 1px 3px var(--shadow)`.
+`.icon-box` 32×32px, `border-radius: var(--radius-md)`. Variants: `.pink` (`--pink-light` bg,
+`--pink` icon), `.tiffany` (`--tiffany-light` bg, `--tiffany` icon), `.chiffon-bg` (`--chiffon`
+bg, `--sand` icon), `.dim` (`--tiffany-light` bg, `--tiffany` icon). `.text .title` 13px/500,
+`.text .sub` 11px `--text-secondary`. `.arrow` 16×16px `--text-dim`.
+
+#### Quick Actions Bar `.quick-bar` / `.quick-btn`
+`.quick-bar` flex `gap: 6px`, `padding: 0 16px`. `.quick-btn` flex:1, `padding: 8px 12px`,
+`border-radius: 100px`, `min-height: 36px`, `background: var(--pink-light)`, `font-size: 10px`,
+`font-weight: 600`, `color: var(--pink)`, `.icon` 14×14px `--pink`. `.quick-btn.ghost`
+(transparent, `1px solid var(--border)`, `--text-secondary`).
+
+#### Tab Bar `.tab-bar` / `.tab-item`
+Flex; `padding: 0 16px`; `margin-bottom: 10px`; `border-bottom: 1px solid var(--border)`.
+`.tab-item` `padding: 10px 0 8px`, `font-size: 12px`, `font-weight: 500`, `color: var(--text-dim)`,
+`border-bottom: 2px solid transparent`. `.tab-item + .tab-item { margin-left: 16px }`.
+`.tab-item.active` → `--pink` text + `--pink` bottom border.
+
+#### Search Bar `.search-bar`
+Flex align-center `gap: 8px`; `margin: 0 16px 8px`; `padding: 10px 14px`;
+`background: var(--surface-secondary)`; `border-radius: var(--radius-lg)`;
+`box-shadow: 0 1px 3px var(--shadow)`. `.icon` 16×16px `--text-dim`. `input` 13px, no border.
+
+#### Category Chips `.cat-row` / `.cat-chip` / `.cat-tile`
+`.cat-row` flex, `gap: 14px`, `overflow-x: auto`, `padding: 4px 16px 14px`. `.cat-chip` flex
+column `gap: 7px`, `width: 64px`. `.cat-tile` 56×56px, `border-radius: var(--radius-lg)`,
+`.icon` 26×26px. `.cat-name` 11px/600 `--text-secondary`. Active: `.cat-tile.t-pink/t-tiffany/
+t-gold` fills solid accent + `0 4px 10px` glow, icon white, `.cat-name` → `--text-primary`/700.
+Tile variants: `.t-pink` (`--pink-light`/`--pink`), `.t-tiffany` (`--tiffany-light`/`--tiffany`),
+`.t-gold` (`--gold-light`/`--gold`).
+
+#### Chip `.chip` / `.chip .iw`
+`.chip` flex align-center `gap: 6px`; `padding: 8px 14px`; `border-radius: var(--radius-md)`;
+`min-height: 32px`; `background: #fff` (hardcoded — see Known Gaps §K1); `1px solid var(--border)`;
+`font-size: 11px`, `font-weight: 600`, `--text-primary`. `.chip .iw` 22×22px,
+`border-radius: var(--radius-sm)`, variants `.pink`/`.tiffany`/`.chiffon` (solid accent + glow,
+white icon). `.chip.active` → `--pink-mid` bg, `--pink` border.
+
+#### Role Card `.role-grid` / `.role-card`
+`.role-grid` grid 2 cols, `gap: 8px`, `padding: 0 16px`. `.role-card` flex column `gap: 6px`,
+`padding: 14px 8px`, `border-radius: var(--radius-lg)`, `border: 2px solid var(--border)`,
+`background: var(--bg)`. `.role-icon` **24px emoji (legacy — replace with SVG)**. `.role-name`
+11px/600 `--text-primary`, `.role-desc` 9px `--text-secondary`. `.role-card.active` → `--pink`
+border + `--pink-mid` bg.
+
+#### Top Card (location + promo) `.top-card`
+`margin: 8px 16px`; `background: var(--bg)`; `1px solid var(--border)`; **`border-radius: 14px`
+(drift — should be `--radius-lg`)**; `box-shadow: 0 2px 12px var(--shadow-sm)` (drift — should
+be `0 1px 3px var(--shadow)`); `overflow: hidden`. Sub-parts: `.top-card-loc` (11px `--text-dim`,
+`.icon` 14×14px, city `span` 600 `--text-primary`), `.top-card-change` (`--pink`, 500, margin-left
+auto), `.top-card-divider` (1px `--border`), `.top-card-body` (flex space-between, `padding: 12px
+14px 8px`), `.top-card-badge` (8px/700 `--pink` on `--pink-light`, pill, uppercase), `.top-card-title`
+(15px/700), `.top-card-sub` (10px `--text-secondary`), `.top-card-timer` (`--pink-light` pill, 9px/600,
+`.icon` 12×12px), `.top-card-action`, `.top-card-link` (`--tiffany`, 10px/600, `.icon` 12×12px).
+
+#### Orders Card `.orders-card`
+`margin: 0 16px`; `background: var(--bg)`; **`border-radius: 14px` (drift)**; `padding: 4px 14px`;
+`box-shadow: 0 2px 12px var(--shadow)` (drift). Contains `.order-row` (flex space-between,
+`padding: 13px 0`, divider `1px solid var(--border)` between rows). `.order-row .icon-box` 32×32px,
+`border-radius: 10px`, `.pink`/`tiffany` bg + glow, **`.or-emoji` 15px emoji (legacy — replace)**.
+`.or-name` 13px/600, `.or-meta` 9px `--text-secondary`, `.or-price` 13px/700, `.right` gap 6px.
+
+#### Balance Card `.balance-card`
+`margin: 10px 16px 0`; `padding: 14px 16px`; `background: var(--bg)`; **`border-radius: 14px`
+(drift)**; `box-shadow: 0 2px 12px var(--shadow)` (drift); flex space-between. `.balance-label`
+10px uppercase `--text-dim`, `.balance-amount` 22px/700 (`.pink` → `--pink`), `.unit` 13px/500
+`--text-secondary`, `.balance-sub` 10px `--text-secondary`, `.balance-link` 10px/600 `--tiffany`.
+
+#### Promo Banner `.promo-banner`
+`margin: 0 16px`; pink→`--pink-dark` gradient; **`border-radius: 14px` (drift — should be
+`--radius-xl` or `--radius-lg`)**; `padding: 12px 14px`; flex space-between. `.text` 11px/500
+`--on-pink-text`, `.text strong` 15px/700 `--bg`. `.timer` `--on-pink-overlay` pill, 9px/600
+`--bg`, `.icon` 14×14px.
+
+#### Partner Order Card `.p-order`
+Flex space-between `gap: 8px`; `padding: 10px`; `background: var(--bg)`; `1px solid var(--border)`;
+`border-radius: var(--radius-lg)`; `margin-bottom: 8px`; `box-shadow: 0 1px 3px var(--shadow)`;
+`:active` → `--pink` border + `0 2px 8px var(--pink-shadow)`. `.left` (`.store-badge` 40×40px,
+`border-radius: 12px`, **`.store-badge` uses 20px emoji (legacy — replace)**; `.store-info`,
+`.oname` 13px/600, `.or-meta` 9px `--text-secondary`). `.right` (`.store-eta` 11px/600, `.tag`).
+Also `.thumb` 48×48px `border-radius: 12px`.
+
+#### Store Card `.store-grid2 .store-card`
+Grid 2 cols (`--store-grid2`), `gap: 10px`. `.store-card` `background: var(--bg)`, `1px solid
+var(--border)`, `border-radius: var(--radius-lg)`, `overflow: hidden`, `box-shadow: 0 1px 3px
+var(--shadow)`. `.cover` 1:1 `--surface-secondary` bg. `.cat-badge` absolute top/right 8px, pill,
+9px/700 uppercase, `color: #fff` (hardcoded), `.b-pink`/`.b-tiffany` bg. `.body` `padding: 10px`,
+`.oname` 13px/600, `.eta` 11px/600, `.meta` 9px `--text-secondary`. Toggle: `.store-view-toggle`
+34×34px, `border-radius: 9px`, `--surface-secondary` bg, swaps `.ic-list`/`.ic-grid` by
+`data-layout`.
+
+#### Product Card `.product-card`
+Grid 2 cols (`.product-grid`), `gap: 10px`. `.product-card` flex column, `background: #fff`
+(hardcoded — see §K1), `1px solid var(--border)`, `border-radius: var(--radius-lg)`,
+`box-shadow: 0 1px 4px var(--shadow)`, `overflow: hidden`. `.media`/`.thumb` 1:1
+`--surface-secondary` bg. `.badges` (top-right), `.price-tag` (top-left, `border-radius: 8px`,
+`background: rgba(0,0,0,0.45)`, `color: #fff`, 14px/800, `.old` 9px strike), `.caption`
+(bottom, `rgba(0,0,0,0.45)`, `.glass-edge` top hairline), `.store` 9px uppercase, `.pname` 13px/600,
+`.add-btn` (`--pink` bg, `color: #fff`, pill), `.qty`/`.qty-btn`/`.count` (pink pill stepper).
+
+#### Section Padding Helpers
+`.section-pad` (`padding: 0 16px`), `.section-margin` (`margin: 0 16px`), `.section-top`
+(`padding-top: 8px`).
+
+#### Top Bar (detail screens) `.top-bar` / `.back-btn` / `.top-title`
+`.top-bar` flex `gap: 12px`, `padding: 14px 16px`, sticky top, `background: var(--bg)`,
+`border-bottom: 1px solid var(--border)`. `.back-btn` 36×36px circle, `1px solid var(--border)`,
+`background: #fff` (hardcoded), 20px `--text-primary`. `.top-title` 15px/600.
+
+#### Product Detail `.product-detail` / `.hero` / `.detail-info`
+`.product-detail` `max-width: 520px; margin: 0 auto`. `.hero` 300px, `.hero-img` cover
+`--surface-secondary` bg. `.detail-info` `padding: 14px 16px 24px`: `.store` 11px uppercase
+`--text-secondary`, `.name` 22px/700, `.price` 20px/700 `--pink`, `.desc` 13px/1.6
+`--text-secondary`. `.qty-detail` pink pill stepper. `.add-big` (`--pink` bg, `color: #fff`,
+14px/700, `border-radius: var(--radius-lg)`). `.empty-state` centered 14px `--text-secondary`.
 
 ---
 
-# Component Library (Pending Documentation)
+## 5. Known Gaps To Fix (drift backlog)
 
-> Ниже — компоненты, существующие в коде (`demo.css` + `components.js`), но ещё не задокументированные в DESIGN.md.
-> **Свойства не финализированы** — будут заполнены после обсуждения.
-> Сейчас — структура, назначение, схема.
+These are concrete divergences from the canonical scales above. They are the action items for
+the CSS/JS agents before the build agent finishes.
 
----
+### K1. Hardcoded `#fff` instead of `--bg` token
+**16 hardcoded `#fff`/`#ffffff` usages** in component rules (2 more are the `--bg`/`--surface`
+token definitions themselves). Replace with `var(--bg)`:
+- `.store-grid2 .store-card .cat-badge` (color: #fff)
+- `.cat-chip.active .cat-tile.t-pink/.t-tiffany/.t-gold .icon` (color: #fff)
+- `.chip` (background: #fff)
+- `.chip .iw.pink/.tiffany/.chiffon .icon` (color: #fff)
+- `.product-card` (background: #fff)
+- `.product-card .price-tag` / `.caption` (color: #fff)
+- `.product-card .add-btn` / `.add-big` (color: #fff)
+- `.badge` (color: #fff)
+- `.cart-num` (color: #fff)
+- `.back-btn` (background: #fff)
 
-## 1. Shell & Layout
+### K2. 14px radius must become 12px (`--radius-lg`)
+5 rules hardcode `border-radius: 14px`: `.top-card`, `.orders-card`, `.promo-banner`,
+`.grid-item`, `.balance-card`. Replace with `var(--radius-lg)`.
 
----
+### K3. Dual elevation — converge to one card shadow
+Home-screen cards (`.top-card`, `.orders-card`, `.balance-card`) use `0 2px 12px var(--shadow)`
+/ `var(--shadow-sm)`. Canonical card shadow is `0 1px 3px var(--shadow)`. Unify unless a
+deliberate raised treatment is approved.
 
-### Bottom Navigation (`#app-nav`, `.nav-item`)
+### K4. SVG `<title>` missing on all 30 symbols
+Every `<symbol>` in `#app-sprite` lacks a `<title>` child → LSP `noSvgWithoutTitle` warning.
+Add `<title>{Name}</title>` inside each symbol (see §3.4).
 
-**Назначение:** Нижняя панель навигации, 4 таба, всегда видна.
+### K5. Dead tokens to remove
+`--surface`, `--warning`, `--danger`, `--danger-light`, `--star` are defined but never
+referenced. Remove from `:root` (or wire them in if a future component needs them).
 
-**Где используется:** Все экраны (кроме сплэша).
+### K6. Emoji icons are banned — replace legacy emoji
+Emoji still appear in: `.or-emoji` (order-row icon-box), `.role-icon` (role-card),
+`.store-badge` (p-order), `.status-banner .rank-icon`. Replace each with a Tabler SVG symbol
+(`Icon(name)`) per §3.1.
 
-**JS:** `renderNav()` в `demo.js` — подсвечивает активный таб по `data-tab`.
+### K7. Duplicate `i-gift` symbol
+`index.html` defines `i-gift` twice (lines 84 and 98) with different paths. De-duplicate to a
+single canonical `i-gift`.
 
-**Структура:**
-```
-#app-nav
-├── .nav-item (data-tab="home")     — Главная / 🏠
-├── .nav-item (data-tab="search")   — Поиск / 🔍
-├── .nav-item (data-tab="orders")   — Заказы / 📦
-└── .nav-item (data-tab="profile")  — Профиль / 👤
-```
-
-**Состояния:** `.nav-item` → `.nav-item.active` (подсветка `--pink`).
-
-**Зависимости:** `--nav-h: 50px`, `--safe-bottom`.
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Content Area (`#app-content`)
-
-**Назначение:** Основная область контента, скролляемая, между хедером и bottom nav.
-
-**Где используется:** Всегда.
-
-**Структура:** Единственный контейнер, innerHTML заменяется при навигации.
-
-**Зависимости:** `flex: 1`, `overflow-y: auto`.
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Splash Screen (`#splash`)
-
-**Назначение:** Загрузочный экран с анимацией открытия логотипа.
-
-**Где используется:** При загрузке страницы, показывается 1.8с.
-
-**JS:** `showSplash()` в `demo.js` — добавляет класс `.hidden` через 1.8с.
-
-**Структура:**
-```
-#splash
-├── .splash-visual
-│   ├── img.splash-logo (assets/lovii-logo-light.svg)
-│   └── .splash-cover (анимация slide-cover)
-```
-
-**Анимация:** `.splash-cover` — slide-cover 1.2s, cubic-bezier(0.16, 1, 0.3, 1).
-
-**Состояния:** `#splash` (visible) → `#splash.hidden` (fade out 0.5s).
-
-> **Свойства:** TBD — awaiting review.
+### K8. `--surface-secondary` as card fill
+`--surface-secondary` (`#F8F8F8`) is used as the fill for `.card`, `.metric-block`,
+`.stat-block`, `.progress-block`, `.search-bar`, `.p-order .store-badge` context, covers, and
+`.tag-gray`. This is permitted *only* as a card fill (base rule #1), never a page background.
+If white cards are desired for consistency, switch these to `var(--bg)`.
 
 ---
 
-## 2. Shared UI Components
-
----
-
-### Icons (`.icon`, `.icon-sm`, `.icon-lg`)
-
-**JS:** `Icon(name, cls)` → `<svg class="icon ${cls}"><use href="#i-${name}"/></svg>`
-
-**Назначение:** Система иконок через SVG спрайт (определён в `index.html`, `#app-sprite`).
-
-**Где используется:** Повсеместно.
-
-**Типоразмеры:**
-| Class | Size |
-|-------|------|
-| `.icon` (default) | 20×20px |
-| `.icon-sm` | 16×16px |
-| `.icon-lg` | 24×24px |
-
-**Специальные переопределения (контекстные):**
-- `.top-card-loc .icon` → 14×14px
-- `.top-card-timer .icon` → 12×12px
-- `.grid-item .iw .icon` → 22×22px
-- `.nav-item .icon` → 22×22px
-
-#### Icon Source (ЕДИНЫЙ ИСТОЧНИК)
-
-**Правило:** Все иконки берём из **одного** набора — **Tabler Icons** (outline, 24×24, `stroke="currentColor"`, `stroke-width="2"`, round caps). Репозиторий: `tabler/tabler-icons`, путь к файлам: `icons/outline/{name}.svg`. Сырые SVG: `https://raw.githubusercontent.com/tabler/tabler-icons/master/icons/outline/{name}.svg`.
-
-**Исключение — Суши:** Ни один крупный набор (Tabler 6146, MDI 7200+, Remix 3200+, MingCute 3324, Bootstrap 2000+, Lucide, Phosphor, Iconoir) НЕ содержит суши-иконки. Поэтому суши берётся из **Lucide Lab** (`lucide-icons/lucide-lab`, `icons/sushi-2.svg`) — тот же stroke-стиль 24×24, чтобы не выбиваться. Сырой SVG: `https://raw.githubusercontent.com/lucide-icons/lucide-lab/main/icons/sushi-2.svg`. Альтернативы в Lucide Lab: `sushi`, `sushi-3`, `sushi-chopsticks`.
-
-**Как добавлять новую иконку:**
-1. Найти имя в Tabler: `curl -sI "https://raw.githubusercontent.com/tabler/tabler-icons/master/icons/outline/{name}.svg"` (200 = есть).
-2. Скопировать содержимое `<svg>` в `<symbol id="i-{name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">…</symbol>` в `#app-sprite` (`index.html`).
-3. Использовать: `<svg class="icon"><use href="#i-{name}"/></svg>` или `Icon('{name}')`.
-4. НЕ использовать: emoji, жёстко прописанные цвета (`fill="#141B34"` и т.п.), наборы с viewBox ≠ 24×24 без нормализации.
-
-**Доступные иконки в спрайте (актуально):**
-- Утилитарные: `i-arrow-left`, `i-chevron-right`, `i-chevron-left`, `i-clock`, `i-home`, `i-map-pin`, `i-package`, `i-plus`, `i-search`, `i-settings`, `i-shopping-bag`, `i-star`, `i-user`, `i-bar-chart`, `i-building`, `i-users`, `i-check`, `i-log-out`, `i-zap` (не используется в UI, оставлен как утилита).
-- Категории поиска: `i-bread` (Выпечка), `i-flower` (Цветы), `i-coffee` (Кофе), `i-sushi` (Суши, из Lucide Lab), `i-gift` (Подарки), `i-discount` (Акции).
-- Товары/магазины: `i-store` (резерв), `i-croissant` (удалён — заменён на `i-bread`).
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Card (`.card`)
-
-**JS:** `Card(content, cls)` → `<div class="card ${cls}">${content}</div>`
-
-**Назначение:** Базовый контейнер для grouped content.
-
-**Где используется:** Различные экраны (profile, search).
-
-**Структура:**
-```
-.card
-└── (content)
-.card + .card { margin-top: 8px }
-```
-
-**Зависимости:** `--surface-secondary`, `--radius-lg`.
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Section Label (`.section-label`)
-
-**JS:** `SectionLabel(label, link)` → заголовок секции с опциональной ссылкой.
-
-**Назначение:** Заголовок раздела контента.
-
-**Где используется:** Главная (активные заказы), экраны ролей.
-
-**Структура:**
-```
-.section-label
-├── text (капсом, 11px)
-└── a (опционально, ссылка "Все" / "Подробнее")
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Buttons (`.btn`, `.btn-primary`, `.btn-ghost`, `.btn-tiffany`, `.btn-sm`, `.btn-block`)
-
-**Назначение:** Система кнопок.
-
-**Где используется:** Экран выбора роли, экраны дашбордов.
-
-**Варианты:**
-| Class | Стиль |
-|-------|-------|
-| `.btn-primary` | `--pink` bg, white text |
-| `.btn-ghost` | transparent, `--border` stroke, `--text-secondary` text |
-| `.btn-tiffany` | `--tiffany` bg, white text |
-| `.btn-sm` | compact (5px 10px, 10px font) |
-| `.btn-block` | `display: flex; width: 100%` |
-
-**Все кнопки:** pill shape (`border-radius: 100px`), 12px font, 600 weight.
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Tags (`.tag`, `.tag-pink`, `.tag-tiffany`, `.tag-success`, `.tag-gray`)
-
-**JS:** `Tag(text, color)` → `<span class="tag tag-${color}">${text}</span>`
-
-**Назначение:** Статусные метки.
-
-**Где используется:** Order rows, partner orders, таблицы.
-
-**Варианты:**
-| Class | Background | Text |
-|-------|-----------|------|
-| `.tag-pink` | `--pink-light` | `--pink` |
-| `.tag-tiffany` | `--tiffany-light` | `--tiffany` |
-| `.tag-success` | `--success-light` | `--success` |
-| `.tag-gray` | `--surface-secondary` | `--text-secondary` |
-
-**Все тэги:** pill shape, 9px font, 600 weight, padding 2px 8px.
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-## 3. Data Display
-
----
-
-### Metric Block (`.metric-row`, `.metric-block`)
-
-**JS:** `MetricBlock(val, label, color)` 
-
-**Назначение:** Сетка из 3 ключевых метрик (заказы, выручка, новые клиенты).
-
-**Где используется:** Главная для роли Партнёр.
-
-**Структура:**
-```
-.metric-row (grid 3 колонки)
-├── .metric-block
-│   ├── .val (17px, 700, опционально .pink/.tiffany)
-│   └── .lbl (10px, uppercase, --text-secondary)
-├── .metric-block
-└── .metric-block
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Status Banner (`.status-banner`)
-
-**JS:** `StatusBanner(emoji, title, sub, incomeVal, incomeLabel)`
-
-**Назначение:** Баннер статуса представителя/амбасадора с доходом.
-
-**Где используется:** Главная (роль rep, ambassador), дашборды.
-
-**Структура:**
-```
-.status-banner (pink gradient)
-├── .rank-icon (36×36px, круг, emoji)
-├── .info
-│   ├── .title (13px, 700, white)
-│   └── .sub (10px, opacity 0.8)
-└── .income
-    ├── .val (15px, 700, white)
-    └── .lbl (9px, opacity 0.8)
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Progress Block (`.progress-block`, `.bar`, `.bar-fill`)
-
-**JS:** `ProgressBlock(label, current, target, pct)`
-
-**Назначение:** Прогресс-бар для отображения статуса представителя (точки до следующего ранга).
-
-**Где используется:** Главная (роль rep).
-
-**Структура:**
-```
-.progress-block
-├── .row
-│   ├── .lbl (10px, --text-secondary)
-│   └── .count (.pink /target)
-├── .bar (4px height, --border, pill)
-│   └── .bar-fill (--pink, transition width)
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Table Row (`.table-row`)
-
-**JS:** `TableRow(name, meta, value)`
-
-**Назначение:** Строка таблицы с названием, мета-информацией и значением.
-
-**Где используется:** rep points, ambassador reps, различные списки.
-
-**Структура:**
-```
-.table-row
-├── .name (11px, 500, ellipsis)
-├── .meta (10px, --text-secondary)
-└── .value (11px, 600)
-```
-
-**Разделитель:** `border-bottom: 1px solid var(--border)`.
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Profile Banner (`.profile-banner`)
-
-**JS:** `ProfileBanner(name, sub)`
-
-**Назначение:** Баннер профиля пользователя с аватаром.
-
-**Где используется:** Экран профиля.
-
-**Структура:**
-```
-.profile-banner (pink gradient, center)
-├── .avatar (48×48px круг, white icon)
-├── .name (16px, 700, white)
-└── .sub (11px, opacity 0.8)
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Stats Grid (`.stats-grid-2`, `.stat-block`)
-
-**JS:** `StatBlock(val, label, color)`
-
-**Назначение:** Сетка из 2 колонок статистических показателей.
-
-**Где используется:** rep dashboard, ambassador dashboard.
-
-**Структура:**
-```
-.stats-grid-2 (grid 2 колонки)
-├── .stat-block
-│   ├── .val (16px, 700, опционально .pink/.tiffany)
-│   └── .lbl (10px, uppercase, --text-secondary)
-├── .stat-block
-├── .stat-block
-└── .stat-block
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Partner Order Card (`.p-order`)
-
-**JS:** `POrder(id, items, amount, status, statusColor)`
-
-**Назначение:** Карточка входящего заказа для партнёра.
-
-**Где используется:** Главная партнёра, экран заказов партнёра.
-
-**Структура:**
-```
-.p-order
-├── .left
-│   └── .oname (11px, 500)
-├── .right
-│   ├── .oprice (12px, 600)
-│   └── .tag (.tag-pink/.tag-tiffany/.tag-success)
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-## 4. Interactive / Navigation
-
----
-
-### Menu Item (`.menu-item`)
-
-**JS:** `MenuItem(iconName, iconColor, title, sub)`
-
-**Назначение:** Строка меню с иконкой, заголовком, подзаголовком и стрелкой.
-
-**Где используется:** Экраны настроек, списки.
-
-**Структура:**
-```
-.menu-item
-├── .icon-box (32×32px, accent bg)
-│   └── .icon
-├── .text
-│   ├── .title (13px, 500)
-│   └── .sub (11px, --text-secondary)
-└── .arrow (chevron-right, --text-dim)
-```
-
-**Варианты `.icon-box`:** `.pink`, `.tiffany`, `.chiffon-bg`.
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Quick Actions Bar (`.quick-bar`, `.quick-btn`)
-
-**JS:** `QuickBtn(iconName, label, cls)`
-
-**Назначение:** Горизонтальный ряд быстрых действий (кнопки-пилюли).
-
-**Где используется:** Главная партнёра (+Товар, Акция).
-
-**Структура:**
-```
-.quick-bar (flex, gap 6px)
-├── .quick-btn (pill, --pink-light, 10px)
-│   └── .icon + label
-└── .quick-btn.ghost
-    └── .icon + label
-```
-
-**Варианты:** `.quick-btn` (pink), `.quick-btn.ghost` (transparent).
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Tab Bar (`.tab-bar`, `.tab-item`)
-
-**JS:** `TabBar(tabs, activeIndex)`
-
-**Назначение:** Горизонтальные вкладки для переключения между подразделами.
-
-**Где используется:** Экран заказов (Активные / История), экраны ролей.
-
-**Структура:**
-```
-.tab-bar (border-bottom)
-├── .tab-item (padding 8px 0, 12px, 500)
-│   └── .active → --pink underline
-└── .tab-item + .tab-item (margin-left: 16px)
-```
-
-**Состояния:** `.tab-item` → `.tab-item.active` (pink text + pink bottom border).
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Search Bar (`.search-bar`)
-
-**JS:** `SearchBar(placeholder)`
-
-**Назначение:** Поле поиска с иконкой.
-
-**Где используется:** Экран поиска.
-
-**Структура:**
-```
-.search-bar
-├── .icon (search, 16px, --text-dim)
-└── input (13px, без бордера, flex: 1)
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Category Chips (`.cat-row`, `.cat-chip`)
-
-**JS:** `screenSearch()` → `categoryHtml` рендерит `.cat-chip` в `.cat-row` (`js/screens/search.js`).
-
-**Назначение:** Горизонтальный скроллящийся ряд категорий-тегов с цветной плиткой-иконкой и подписью. Единый визуальный язык с `.grid-item .iw` (иконка на цветном фоне).
-
-**Где используется:** Экран поиска (`#search`), секция «Категории».
-
-**Структура:**
-```
-.cat-row (flex, overflow-x: auto, hide scrollbar, padding 0 16px)
-└── .cat-chip (flex column, gap 5px, cursor pointer)
-    ├── .cat-tile.t-{pink|tiffany|gold} (40×40px, radius 12px, icon 26×26px)
-    └── .cat-name (11px, 600, --text-secondary)
-```
-
-**Акцентные цвета (`.cat-tile`):**
-| Class | Background (default) | Background (active) | Icon color |
-|-------|----------------------|-----------------------|-------------|
-| `.t-pink` | `--pink-light` | `--pink` | `--pink` → `#fff` |
-| `.t-tiffany` | `--tiffany-light` | `--tiffany` | `--tiffany` → `#fff` |
-| `.t-gold` | `--gold-light` | `--gold` | `--gold` → `#fff` |
-
-**Состояния:**
-- `.cat-chip:active` → `.cat-tile` scale(0.94) (нажатие).
-- `.cat-chip.active` → плитка заливается сплошным акцентом, иконка белеет, `.cat-name` → `--text-primary` + 700.
-- Выбор — **single** (как `.role-card`): клик по `.cat-chip` в `demo.js` снимает `.active` с соседей, вешает на выбранный.
-
-**Иконки:** берутся из спрайта по `data-*` → `Icon(name)`: `bread` (Выпечка), `flower` (Цветы), `coffee` (Кофе), `sushi` (Суши), `gift` (Подарки), `discount` (Акции). См. раздел **Icon Source** выше.
-
-> **Свойства:** Зафиксированы (V1, выбран пользователем из 8 вариантов в `design/playground-categories.html`).
-
----
-
-### Role Card (`.role-card`)
-
-**JS:** `RoleCard(emoji, name, desc, active)`
-
-**Назначение:** Карточка выбора роли на экране профиля.
-
-**Где используется:** Экран смены роли (profile).
-
-**Структура:**
-```
-.role-grid (grid 2 колонки)
-├── .role-card
-│   ├── .role-icon (24px emoji)
-│   ├── .role-name (11px, 600)
-│   └── .role-desc (9px, --text-secondary)
-└── .role-card.active (--pink border, --pink-mid bg)
-```
-
-**Состояния:** `.role-card` → `.role-card.active` (pink border), `:active` (pink border flash).
-
-**Роли:** Клиент (`client`), Партнёр (`partner`), Представитель (`rep`), Амбасадор (`ambassador`).
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Section Padding Helpers (`.section-pad`, `.section-margin`, `.section-top`)
-
-**Назначение:** Вспомогательные классы для единообразных отступов.
-
-| Class | Value |
-|-------|-------|
-| `.section-pad` | `padding: 0 16px` |
-| `.section-margin` | `margin: 0 16px` |
-| `.section-top` | `padding-top: 8px` |
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Promo Banner (`.promo-banner`)
-
-**JS:** `PromoBanner(title, sub, timer)`
-
-**Назначение:** Промо-баннер для роли партнёр (альтернатива TopCard для client).
-
-**Где используется:** Главная партнёра.
-
-**Структура:**
-```
-.promo-banner (pink gradient)
-├── .text
-│   ├── strong (15px, 700, white)
-│   └── sub text (11px, 500, white 0.9)
-└── .timer (white 0.15 bg, 9px, 600)
-    └── .icon + text
-```
-
-> **Свойства:** TBD — awaiting review.
-
----
-
-### Tag Statuses (расширение)
-
-**Дополнительные варианты `.tag` (уже в коде, помимо pink/tiffany):**
-
-| Class | Background | Text | Использование |
-|-------|-----------|------|---------------|
-| `.tag-success` | `--success-light` | `--success` | Статус "Готов" |
-| `.tag-gray` | `--surface-secondary` + `1px solid --border` | `--text-secondary` | Дефолтный/нейтральный |
-
-> **Свойства:** TBD — awaiting review.
+## 6. Color Summary (the real design language)
+
+- **Brand pink:** `--pink` `#f64a8a` (primary), with `--pink-light` / `--pink-mid` / `--pink-dark`.
+- **Tiffany teal:** `--tiffany` `#0ABAB5` (secondary), with `--tiffany-light`.
+- **Gold:** `--gold` `#D4A854` (tertiary, used for "Акции"/"Настройки" accents), with `--gold-light`, `--chiffon`, `--sand`.
+- **Neutrals:** `--bg` `#ffffff`, `--surface-secondary` `#F8F8F8` (card fill only), `--border`
+  `#EEEEEE`, `--border-strong` `#DDDDDD`, text `--text-primary` `#1a1a1a` / `--text-secondary`
+  `#888888` / `--text-dim` `#bbbbbb`.
+- **Status:** `--success` `#34D399` (used); `--warning`/`--danger` defined but dead.
+
+Accent assignment (grid menu): Каталог/Бонусы/Города = pink; Заказы/Отчёты/Команда = tiffany;
+Акции/Настройки = gold (`.iw.chiffon` maps to `--gold`).

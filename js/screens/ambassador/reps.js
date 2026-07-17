@@ -10,10 +10,10 @@ function screenAmbassadorReps() {
         <div class="left">
           <!-- avatar -->
           <div style="width:28px;height:28px;border-radius:50%;background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--pink);flex-shrink:0;">
-            ${r.name.charAt(0)}
+            ${escapeHtml(r.name.charAt(0))}
           </div>
           <div>
-            <div class="oname">${r.name}</div>
+            <div class="oname">${escapeHtml(r.name)}</div>
             <div class="or-meta">${r.stores} точек</div>
           </div>
         </div>

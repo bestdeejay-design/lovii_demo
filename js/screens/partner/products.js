@@ -5,7 +5,7 @@ function screenPartnerProducts() {
 
   let html = ''
   products.forEach(p => {
-    html += POrder(p.id, p.name, p.price + '₽', p.active ? 'Активен' : 'Скрыт', p.active ? 'success' : 'gray')
+    html += POrder(p.id, escapeHtml(p.name), p.price + '₽', p.active ? 'Активен' : 'Скрыт', p.active ? 'success' : 'gray')
   })
 
   return `
