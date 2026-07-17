@@ -87,8 +87,8 @@ const LOVII = {
     document.getElementById('app').addEventListener('input', e => {
       const searchInput = e.target.closest('[data-act="search-input"]')
       if (searchInput) {
-        searchState.query = searchInput.value
-        if (typeof renderSearchResults === 'function') renderSearchResults()
+        homeState.query = searchInput.value
+        if (typeof renderHomeResults === 'function') renderHomeResults()
         return
       }
     })
@@ -134,28 +134,66 @@ const LOVII = {
       const catChip = e.target.closest('.cat-chip')
       if (catChip) {
         const row = catChip.closest('.cat-row')
+        const wasActive = catChip.classList.contains('active')
         if (row) row.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'))
-        catChip.classList.add('active')
-        searchState.category = catChip.dataset.cat || null
-        if (typeof renderSearchResults === 'function') renderSearchResults()
+        if (!wasActive) {
+          catChip.classList.add('active')
+          homeState.category = catChip.dataset.cat || null
+        } else {
+          homeState.category = null
+        }
+        if (typeof renderHomeResults === 'function') renderHomeResults()
         return
       }
       const searchClear = e.target.closest('[data-act="search-clear"]')
       if (searchClear) {
-        searchState.query = ''
+        homeState.query = ''
         const input = document.querySelector('[data-act="search-input"]')
         if (input) input.value = ''
-        if (typeof renderSearchResults === 'function') renderSearchResults()
+        if (typeof renderHomeResults === 'function') renderHomeResults()
         return
       }
-      const storeToggle = e.target.closest('#storeViewToggle')
-      if (storeToggle) {
-        const grid = storeToggle.dataset.layout === 'grid'
+      const tabBtn = e.target.closest('.tab-btn')
+      if (tabBtn) {
+        const tab = tabBtn.dataset.tab
+        if (!tab || tab === homeView.contentType) return
+        homeView.contentType = tab
+        localStorage.setItem('lovii_tab', tab)
+        document.querySelectorAll('.tab-btn').forEach(t => t.classList.toggle('active', t.dataset.tab === tab))
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.toggle('hidden', t.id !== tab + 'Content'))
+        if (typeof updateCollapse === 'function') updateCollapse()
+        return
+      }
+      const viewToggle = e.target.closest('#mainViewToggle')
+      if (viewToggle) {
+        const grid = viewToggle.dataset.layout === 'grid'
         const next = grid ? 'list' : 'grid'
-        storeToggle.dataset.layout = next
-        storeToggle.setAttribute('aria-label', grid ? 'Показать списком' : 'Показать сеткой')
-        document.getElementById('storeViewList').hidden = next === 'grid'
-        document.getElementById('storeViewGrid').hidden = next === 'list'
+        viewToggle.dataset.layout = next
+        viewToggle.setAttribute('aria-label', grid ? 'Показать списком' : 'Показать сеткой')
+        homeView.layout = next
+        localStorage.setItem('lovii_layout', next)
+        const isGrid = next === 'grid'
+        document.querySelector('.product-grid-wrap')?.classList.toggle('hidden', !isGrid)
+        document.querySelector('.product-list-wrap')?.classList.toggle('hidden', isGrid)
+        document.querySelector('#storesContent .store-view-list')?.classList.toggle('hidden', isGrid)
+        document.querySelector('#storesContent .store-grid2')?.classList.toggle('hidden', !isGrid)
+        return
+      }
+      const collBtn = e.target.closest('#mainCollapseBtn')
+      if (collBtn) {
+        const isProduct = homeView.contentType === 'products'
+        const wrap = document.getElementById(isProduct ? 'productSection' : 'storeSection')
+        if (!wrap) return
+        const collapsed = wrap.classList.toggle('collapsed')
+        if (isProduct) homeView.productExpanded = !collapsed
+        else homeView.storeExpanded = !collapsed
+        if (typeof renderHomeResults === 'function') renderHomeResults()
+        if (collapsed && typeof _scheduleCollapseReset === 'function') {
+          _scheduleCollapseReset()
+        } else if (typeof _collapseTimer !== 'undefined' && _collapseTimer) {
+          clearTimeout(_collapseTimer)
+          _collapseTimer = null
+        }
         return
       }
       const dashBtn = e.target.closest('#go-to-dashboard')

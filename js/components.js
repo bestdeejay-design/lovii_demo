@@ -52,7 +52,8 @@ function PromoBanner(title, sub, timer) {
     </div>`
 }
 
-function TopCard(city, promoTitle, promoSub, timer) {
+function TopCard(city, promoTitle, promoSub, timer, storeId, tag) {
+  const promoNav = storeId ? `store/${storeId}?tag=${tag || 'sale'}` : 'promo'
   return `
     <div class="top-card">
       <div class="top-card-loc">
@@ -70,7 +71,7 @@ function TopCard(city, promoTitle, promoSub, timer) {
         <span class="top-card-timer">${Icon('clock', 'icon-sm')}${timer}</span>
       </div>
       <div class="top-card-action">
-        <span class="top-card-link" data-nav="promo">Подробнее ${Icon('chevron-right', 'icon-sm')}</span>
+        <span class="top-card-link" data-nav="${promoNav}">Подробнее ${Icon('chevron-right', 'icon-sm')}</span>
       </div>
     </div>`
 }
@@ -163,7 +164,7 @@ function Badge(type, label) {
 }
 
 function ProductCard(product, opts = {}) {
-  const { id, image, name, price, oldPrice, storeName, badges = [] } = product
+  const { id, image, name, price, oldPrice, storeName, badges = [], tags = [] } = product
   const safeName = escapeHtml(name)
   const safeStore = escapeHtml(storeName)
   const priceLabel = `${price.toLocaleString('ru-RU')}₽`
@@ -180,6 +181,27 @@ function ProductCard(product, opts = {}) {
          <button class="qty-btn" data-act="inc" data-id="${id}">+</button>
        </div>`
     : `<div class="add-btn" data-act="add" data-id="${id}">+ В корзину</div>`
+
+  const tagsHtml = tags.length
+    ? `<div class="pc-tags">${tags.map(t => `<span class="pc-tag">${escapeHtml(t)}</span>`).join('')}</div>`
+    : ''
+
+  if (opts.layout === 'list') {
+    return `
+      <div class="product-card card-list" data-id="${id}">
+        <img class="thumb" src="${image}" alt="${safeName}" loading="lazy">
+        <div class="list-body">
+          <div class="list-store">${safeStore}</div>
+          <div class="list-name">${safeName}</div>
+          ${tagsHtml}
+          <div class="list-price">
+            ${priceLabel}${oldLabel ? `<span class="old">${oldLabel}</span>` : ''}
+          </div>
+        </div>
+        ${foot}
+      </div>`
+  }
+
   return `
     <div class="product-card" data-id="${id}">
       <div class="media">
@@ -193,6 +215,10 @@ function ProductCard(product, opts = {}) {
       </div>
       ${foot}
     </div>`
+}
+
+function StoreTag(label, color = 'pink') {
+  return `<span class="store-tag tag-${color}">${Icon('check', 'icon-xs')}${escapeHtml(label)}</span>`
 }
 
 function SearchBar(placeholder = 'Поиск магазинов...') {
